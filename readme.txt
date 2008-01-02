@@ -13,9 +13,9 @@ Returns a list of the related entries based on keyword matches, limited by a cer
 
 == Description ==
 
-Yet Another Related Posts Plugin (YARPP) is the result of some tinkering with [John Bowyer's version](http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin) of [Alexander Malov & Mike Lu's Related Entries plugin](http://wasabi.pbwiki.com/Related%20Entries). Modifications made include:
+Yet Another Related Posts Plugin (YARPP) is the result of some tinkering with [Peter Bowyer's version](http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin) of [Alexander Malov & Mike Lu's Related Entries plugin](http://wasabi.pbwiki.com/Related%20Entries). Modifications made include:
 
-1. *Limiting by a threshold*: John Bowyer did the great work of making the algorithm use [[mysql]]'s [fulltext search](dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it currently just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all similar. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts. Ha!
+1. *Limiting by a threshold*: Peter Bowyer did the great work of making the algorithm use MySQL's [fulltext search](dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it currently just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all similar. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts. Ha!
 2. *Being a better plugin citizen*: now it doesn't require the user to click some sketchy button to `alter` the database and enable a `fulltext key`. Using [`register_activation_hook`](http://codex.wordpress.org/Function_Reference/register_activation_hook), it does it automagically on plugin activation. Just install and go!
 3. *Miscellany*: a nicer options screen, displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
 
@@ -25,13 +25,13 @@ Just put it in your `/wp-content/plugins/` directory, activate, and then drop th
 
 You can override any options in an individual instance of `related_posts` using the following syntax:
 
->`related_posts(limit, threshold, before title, after title, show excerpt, len, before excerpt, after excerpt, show pass posts, past only, show score);
+> `related_posts(limit, threshold, before title, after title, show excerpt, len, before excerpt, after excerpt, show pass posts, past only, show score);`
 
 Most of these should be self-explanatory. They're also in the same order as the options on the YARPP Options pane.
 
 Example: `related_posts(10, null, 'title: ')` changes the maximum related posts number to 10, keeps the default threshold from the Options pane, and adds `title:` to the beginning of every title.
 
-There's also a `related_posts_exist)` function. It has three optional arguments to override the defaults: a threshold, the past only boolean, and the show password-protected posts boolean.
+There's also a `related_posts_exist()` function. It has three optional arguments to override the defaults: a threshold, the past only boolean, and the show password-protected posts boolean.
 
 == Examples ==
 
