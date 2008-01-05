@@ -65,7 +65,7 @@ function current_post_keywords($num_to_ret = 20) {
 	// weighting, changing this may give you better results
 	$string = str_repeat($post->post_title, $w['title'].' ').
 			  str_repeat(str_replace('-', ' ', $post->post_name).' ', $w['name']).
-			  str_repeat(strip_tags((isset(MARKDOWN_WP_POSTS)) ? Markdown($post->post_content) : $post->post_content), $w['content'].' ');//mitcho: strip_tags
+			  str_repeat(strip_tags((defined(MARKDOWN_WP_POSTS)) ? Markdown($post->post_content) : $post->post_content), $w['content'].' ');//mitcho: strip_tags
 	
 	// Cat names don't help with the current query: the category names of other
 	// posts aren't retrieved by the query to be matched against (and can't be
