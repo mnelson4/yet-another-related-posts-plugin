@@ -3,13 +3,13 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code
 Description: Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. Like the tried and true Related Posts plugins—just better!
-Version: 1.0.1
+Version: 1.1
 Author: Alexander Malov, Mike Lu, Peter Bowyer, mitcho (Michael Erlewine)
 */
 
 // Begin setup
 
-$yarpp_version = "1.0.1";
+$yarpp_version = "1.1";
 
 function yarpp_enabled() {
 	global $wpdb;
@@ -22,6 +22,7 @@ function yarpp_enabled() {
 
 function yarpp_activate() {
 	global $wpdb;
+	add_option('cross_relate',false);
 	add_option('threshold',5);
 	add_option('limit',5);
 	add_option('lim',10);
@@ -65,7 +66,7 @@ function current_post_keywords($num_to_ret = 20) {
 	// weighting, changing this may give you better results
 	$string = str_repeat($post->post_title, $w['title'].' ').
 			  str_repeat(str_replace('-', ' ', $post->post_name).' ', $w['name']).
-			  str_repeat(strip_tags((defined(MARKDOWN_WP_POSTS)) ? Markdown($post->post_content) : $post->post_content), $w['content'].' ');//mitcho: strip_tags
+			  str_repeat(strip_tags(apply_filters('the_content',$post->post_content)), $w['content'].' ');//mitcho: strip_tags
 	
 	// Cat names don't help with the current query: the category names of other
 	// posts aren't retrieved by the query to be matched against (and can't be
@@ -99,13 +100,46 @@ function current_post_keywords($num_to_ret = 20) {
 	
 }
 
+// Here are the related_WHATEVER functions, as introduced in 1.1, which actually just use the yarpp_related and yarpp_related_exist functions.
+
 function related_posts() {
-   
+	$a = func_get_args();
+	return yarpp_related(array('post'),$a);
+}
+
+function related_pages() {
+	$a = func_get_args();
+	return yarpp_related(array('page'),$a);
+}
+
+function related_entries() {
+	$a = func_get_args();
+	return yarpp_related(array('page','post'),$a);
+}
+
+function related_posts_exist() {
+	$a = func_get_args();
+	return yarpp_related_exist(array('post'),$a);
+}
+
+function related_pages_exist() {
+	$a = func_get_args();
+	return yarpp_related_exist(array('page'),$a);
+}
+
+function related_entries_exist() {
+	$a = func_get_args();
+	return yarpp_related_exist(array('page','post'),$a);
+}
+
+function yarpp_related($type,$args) {
 	global $wpdb, $post, $user_level;
 	get_currentuserinfo();
 
+	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
+	if (get_option('cross_relate')) $type = array('post','page');
+
 	// Get option values from the options page--this can be overwritten: see readme
-	$args = func_get_args();
 	$options = array('limit','threshold','before_title','after_title','show_excerpt','len','before_post','after_post','show_pass_post','past_only','show_score');
 	$optvals = array();
 	foreach (array_keys($options) as $index) {
@@ -130,7 +164,8 @@ function related_posts() {
          . "MATCH (post_name, post_content) "
          . "AGAINST ('$terms') AS score "
          . "FROM $wpdb->posts WHERE "
-         . "MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
+		 . "post_type IN ('".implode("', '",$type)."') "
+         . "AND MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
 		 . "AND (post_status IN ( 'publish',  'static' ) && ID != '$post->ID') ";
 	if (past_only) { $sql .= "AND post_date <= '$now' "; }
     if ($show_pass_post=='false') { $sql .= "AND post_password ='' "; }
@@ -157,12 +192,22 @@ function related_posts() {
     }
 }
 
-function related_posts_exist($threshold = 0,$past_only = 2,$show_pass_post = 2) {
+function yarpp_related_exist($type,$args) {
 	global $wpdb, $post;
 
-	if ($threshold == 0) $threshold = get_option('threshold');
-	if ($past_only == 2) $past_only = get_option('past_only');
-	if ($show_pass_post == 2) $past_only = get_option('show_pass_post');
+	if (get_option('cross_relate')) $type = array('post','page');
+
+	$options = array('threshold','show_pass_post','past_only');
+	$optvals = array();
+	foreach (array_keys($options) as $index) {
+		if (isset($args[$index+1])) {
+			$optvals[$options[$index]] = stripslashes($args[$index+1]);
+		} else {
+			$optvals[$options[$index]] = stripslashes(get_option($options[$index]));
+		}
+	}
+	extract($optvals);
+
     $terms = current_post_keywords();
 
 	$time_difference = get_settings('gmt_offset');
@@ -170,10 +215,12 @@ function related_posts_exist($threshold = 0,$past_only = 2,$show_pass_post = 2) 
 	
     $sql = "SELECT COUNT(*) as count "
          . "FROM $wpdb->posts WHERE "
-         . "MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
+		 . "post_type IN ('".implode("', '",$type)."') "
+		 . "AND MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
 		 . "AND (post_status IN ( 'publish',  'static' ) && ID != '$post->ID') ";
 	if (past_only) { $sql .= "AND post_date <= '$now' "; }
     if ($show_pass_post=='false') { $sql .= "AND post_password ='' "; }
+
     $result = $wpdb->get_var($sql);
 	return $result > 0 ? true: false;
 }
@@ -195,7 +242,7 @@ function yarpp_subpanel() {
 		foreach ($valueoptions as $option) {
 			update_option($option,$_POST[$option]);
 		}
-		$checkoptions = array('past_only','show_score','show_excerpt','show_pass_post');
+		$checkoptions = array('past_only','show_score','show_excerpt','show_pass_post','cross_relate');
 		foreach ($checkoptions as $option) {
 			(isset($_POST[$option])) ? update_option($option,true) : update_option($option,false);
 		}		
@@ -220,21 +267,24 @@ function yarpp_subpanel() {
 	if (get_option('threshold') == '') update_option('threshold',5);
 	if (get_option('length') == '') update_option('length',5);
 	if (get_option('len') == '') update_option('len',10);
+	if (get_option('cross_relate') == '') update_option('cross_relate',false);
 	?>
 
 	<div class="wrap">
 		<h2>Yet Another Related Posts Plugin Options <small><?php echo $yarpp_version; ?></small></h2>
-		<p><small>by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a> and based on the fabulous work of <a href="http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin">Peter Bower</a>, <a href="http://wasabi.pbwiki.com/Related%20Entries">Alexander Malov & Mike Lu</a>.</small></p>
+		<p><small>by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a> and based on the fabulous work of <a href="http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin">Peter Bower</a>, <a href="http://wasabi.pbwiki.com/Related%20Entries">Alexander Malov & Mike Lu</a>. If you appreciate this plugin, please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">donating to the author, mitcho</a>.</small></p>
 		<form method="post">
 		<fieldset class="options">
 		<h3>"Relatedness" options</h3>
 		<p>YARPP is different than the <a href="http://wasabi.pbwiki.com/Related%20Entries">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>. <a href="#" onclick="javascript:document.getElementById('yarpp_match_explanation').style.display = 'inline';this.style.display='none'" id="yarpp_match_explanation_trigger">Tell me more.</a></p>
 		
-		<p id="yarpp_match_explanation" style="display:none;">The higher the match threshold, the more restrictive, and you get less related posts overall. By default, the match threshold is 5. If you want to find an appropriate match score, I recommend you turn on the "show admins the match scores" setting below. That way, you can see what kinds of related posts are being picked up and	 with what kind of match scores, and determine an apprpriate threshold for your site. <a href="#" onclick="javascript:document.getElementById('yarpp_match_explanation_trigger').style.display = 'inline';this.parentNode.style.display='none'" id="yarpp_match_explanation_trigger">Tell me less now.</a></p>
+		<p id="yarpp_match_explanation" style="display:none;">The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, I recommend you turn on the "show admins the match scores" setting below. That way, you can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site. <a href="#" onclick="javascript:document.getElementById('yarpp_match_explanation_trigger').style.display = 'inline';this.parentNode.style.display='none'" id="yarpp_match_explanation_trigger">Tell me less now.</a></p>
 		
 		<table>
 <?php textbox('limit','Maximum number of related posts:')?>
 <?php textbox('threshold','Match threshold:')?>
+<?php checkbox('cross_relate',"Cross-relate posts and pages? <a href='#' onclick=\"javascript:document.getElementById('yarpp_cross_relate_explanation').style.display = 'table-row';this.style.display='none'\" id='yarpp_cross_relate_explanation_trigger'>Tell me more.</a>"); ?>
+			<tr id="yarpp_cross_relate_explanation" style="display:none;"><td style='background-color: gray; width: 3px;'>&nbsp;</td><td colspan = '2'>When the "Cross-relate posts and pages" option is selected, the <code>related_posts()</code>, <code>related_pagaes()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts. <a href="#" onclick="javascript:document.getElementById('yarpp_cross_relate_explanation_trigger').style.display = 'inline';this.parentNode.parentNode.style.display='none'" id="yarpp_cross_relate_explanation_trigger">Tell me less now.</a></td></tr>
 		</table>
 		<h3>Display options</h3>
 		<table>
@@ -257,7 +307,6 @@ function yarpp_subpanel() {
 <?php checkbox('show_past_post',"Show password protected posts?"); ?>
 <?php checkbox('past_only',"Show only previous posts?"); ?>
 <?php checkbox('show_score',"Show admins (user level > 8) the match scores?"); ?>
-
 		</table>
 		</fieldset>
 
