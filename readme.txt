@@ -72,3 +72,5 @@ Of course, if you change all the instances of `posts` above to `pages`, you'll g
 1.0.1 Bugfix: 1.0 assumed you had Markdown installed
 
 1.1   Related pages support! Also, uses `apply_filters` to apply whatever content text transformation you use (Wikipedia link, Markdown, etc.) before computing similarity.
+
+1.2
