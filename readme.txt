@@ -40,7 +40,11 @@ By default, `related_posts()` gives you back posts only, `related_pages()` gives
 
 *Every page just says "no related posts"! What's up with that?*
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Make sure the last option "show admins the match scores" is on. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold:
+1. lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5.
+2. Make sure the last option "show admins the match scores" is on.
+3. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores.
+4. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives. Set this new match threshold in the Options.
 
 *Why doesn't YARPP use tags to find related posts?*
 
