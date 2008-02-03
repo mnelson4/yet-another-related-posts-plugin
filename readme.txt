@@ -44,7 +44,7 @@ Most likely you have "no related posts" right now as the default "match threshol
 
 *Why doesn't YARPP use tags to find related posts?*
 
-YARPP currently doesn't use tags to compare posts—it uses the actual content of the posts. Tag comparison as part of the "relatedness algorithm" will come soon but, in the mean time, I've found the current algorithm to work very well for many situations.
+YARPP currently doesn't use tags to compare posts--it uses the actual content of the posts. Tag comparison as part of the "relatedness algorithm" will come soon but, in the mean time, I've found the current algorithm to work very well for many situations.
 
 *Things are weird after I upgraded. Ack!*
 
