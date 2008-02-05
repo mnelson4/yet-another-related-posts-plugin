@@ -36,7 +36,8 @@ function yarpp_activate() {
 	if (!yarpp_enabled()) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `post_related` ( `post_name` , `post_content` )");
 	}
-	add_option('yarpp_version',1.5.1);
+	add_option('yarpp_version','1.5.1');
+	update_option('yarpp_version','1.5.1');
 	return 1;
 }
 
