@@ -36,7 +36,7 @@ function yarpp_activate() {
 	if (!yarpp_enabled()) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `post_related` ( `post_name` , `post_content` )");
 	}
-	add_option('yarpp_version',1.5);
+	add_option('yarpp_version',1.5.1);
 	return 1;
 }
 
@@ -49,7 +49,7 @@ function yarpp_upgrade_check() {
 }
 
 function yarpp_admin_menu() {
-   if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', __('Related Posts (YARPP)','yarpp'), __('Related Posts (YARPP)','yarpp'), 8, 'yet-another-related-posts-plugin/options.php');
+   if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', 'Related Posts (YARPP)', 'Related Posts (YARPP)', 8, 'yet-another-related-posts-plugin/options.php');
 }
 
 function yarpp_default($content) {
