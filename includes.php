@@ -49,7 +49,7 @@ function yarpp_upgrade_check() {
 }
 
 function yarpp_admin_menu() {
-   if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', __('Related Posts (YARPP)'), __('Related Posts (YARPP)'), 8, 'yarpp/options.php');
+   if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', __('Related Posts (YARPP)'), __('Related Posts (YARPP)'), 8, 'yet-another-related-posts-plugin/options.php');
 }
 
 function yarpp_default($content) {

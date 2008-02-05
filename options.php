@@ -39,7 +39,7 @@ function textbox($option,$desc,$size=2,$tr="<tr>
 var css=document.createElement("link");
 css.setAttribute("rel", "stylesheet");
 css.setAttribute("type", "text/css");
-css.setAttribute("href", "../wp-content/plugins/yarpp/options.css");
+css.setAttribute("href", "../wp-content/plugins/yet-another-related-posts-plugin/options.css");
 document.getElementsByTagName("head")[0].appendChild(css);
 </script>
 
