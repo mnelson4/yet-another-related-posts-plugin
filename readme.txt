@@ -6,25 +6,27 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: related, posts, post, pages, page
 Requires at least: 2.1
-Tested up to: 2.3.2
-Stable tag: 1.5.1
+Tested up to: 2.5.1
+Stable tag: 2.0
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. Like the tried and true Related Posts plugins—just better!
 
 ## Description
 
-Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. YARPP is based on the work of [Peter Bowyer](http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin), [Alexander Malov, and Mike Lu](http://wasabi.pbwiki.com/Related%20Entries). Key features include:
+Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
 1. *Limiting by a threshold*: Peter Bowyer did the great work of making the algorithm use MySQL's [fulltext search](dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all relevant. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts and less if there are less. Ha!
-2. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
-3. *Simple installation*: **New in 1.5!** Automatically displays related posts after content on single entry pages without any theme tinkering.
-4. *Miscellany*: a nicer options screen, displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
+2. *Using tags and categories*: **New in 2.0!** The new 2.0 algorithm uses tags and categories. The new options screen puts you in control of how these factors should be used.
+3. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
+4. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
+5. *Simple installation*: **New in 1.5!** Automatically displays related posts after content on single entry pages without any theme tinkering.
+6. *Miscellany*: a nicer options screen (including a sample display of the code that is produced **New in 2.0**), displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
 
 ## Installation
 
 ### Auto display
 
-With YARPP 1.5, you can just put the `yarpp` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
+Since YARPP 1.5, you can just put the `yarpp` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
 
 ### Manual installation
 
@@ -38,22 +40,23 @@ By default, `related_posts()` gives you back posts only, `related_pages()` gives
 
 ## FAQ
 
+If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
+
 ### Every page just says "no related posts"! What's up with that?
 
 Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Make sure the last option "show admins the match scores" is on. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
-### Why doesn't YARPP use tags to find related posts?
+### A weird number is displayed after each related post. What is this?
 
-YARPP currently doesn't use tags to compare posts—it uses the actual content of the posts. Tag comparison as part of the "relatedness algorithm" will come soon but, in the mean time, I've found the current algorithm to work very well for many situations.
+This is the match score for each of those entries, relative to the current entry. Don't worry, though--this is just being displayed because the "show admins the match scores" option is on (as it is by default) and only blog admins can see those scores. Your readers will not see these values. See above for how to use these values.
+
+### XXX plugin stopped working after I installed YARPP!
+
+Please submit such bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
 
 ### Things are weird after I upgraded. Ack!
 
 I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
-
-## Coming soon
-
-1. Incorporation of tags and categories in the algorithm. I've gotten the code working, but I still need to think about what the most natural algorithm would be for weighing these factors against the mysql fulltext score currently used (and works pretty well, I must say).
-2. Um, something else! Let me know if you have any suggestions for improvement. ^^
 
 ## Version log
 
@@ -70,3 +73,25 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* FAQ in the documentation
 * 1.5.1
 	* Bugfix: standardized directory references to `yet-another-related-posts-plugin`
+* 2.0
+	* New algorithm which considers tags and categories, by frequent request
+	* Order by score, date, or title, [by request](http://wordpress.org/support/topic/158459)
+	* Excluding certain tags or categories, [by request](http://wordpress.org/support/topic/161263)
+	* Sample output displayed in the options screen
+	* Bugfix: [an excerpt length bug](http://wordpress.org/support/topic/155034?replies=5)
+	* Bugfix: now compatible with the following plugins:
+		- diggZEt
+		- WP-Syntax
+		- Viper's Video Quicktags
+		- WP-CodeBox
+		- WP shortcodes
+	
+## Future versions
+
+The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
+
+* User-defineable stopwords, especially to support other languages, [by request](http://wordpress.org/support/topic/159359)
+* Widgetization, [by request](http://wordpress.org/support/topic/160459)
+* Date and comment count in excerpt, [by request](http://wordpress.org/support/topic/156231)
+* RSS feed support: an option to automagically show related posts in RSS feeds, [by request](http://wordpress.org/support/topic/151766).
+* Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)

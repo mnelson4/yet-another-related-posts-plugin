@@ -1,7 +1,29 @@
 <?php
 
-// current_post_keywords()
-// This function was more or less completely written by Peter Bowyer
+$overusedwords = array( '', 'a', 'an', 'the', 'and', 'of', 'i', 'to', 'is', 'in', 'with', 'for', 'as', 'that', 'on', 'at', 'this', 'my', 'was', 'our', 'it', 'you', 'we', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '10', 'about', 'after', 'all', 'almost', 'along', 'also', 'amp', 'another', 'any', 'are', 'area', 'around', 'available', 'back', 'be', 'because', 'been', 'being', 'best', 'better', 'big', 'bit', 'both', 'but', 'by', 'c', 'came', 'can', 'capable', 'control', 'could', 'course', 'd', 'dan', 'day', 'decided', 'did', 'didn', 'different', 'div', 'do', 'doesn', 'don', 'down', 'drive', 'e', 'each', 'easily', 'easy', 'edition', 'end', 'enough', 'even', 'every', 'example', 'few', 'find', 'first', 'found', 'from', 'get', 'go', 'going', 'good', 'got', 'gt', 'had', 'hard', 'has', 'have', 'he', 'her', 'here', 'how', 'if', 'into', 'isn', 'just', 'know', 'last', 'left', 'li', 'like', 'little', 'll', 'long', 'look', 'lot', 'lt', 'm', 'made', 'make', 'many', 'mb', 'me', 'menu', 'might', 'mm', 'more', 'most', 'much', 'name', 'nbsp', 'need', 'new', 'no', 'not', 'now', 'number', 'off', 'old', 'one', 'only', 'or', 'original', 'other', 'out', 'over', 'part', 'place', 'point', 'pretty', 'probably', 'problem', 'put', 'quite', 'quot', 'r', 're', 'really', 'results', 'right', 's', 'same', 'saw', 'see', 'set', 'several', 'she', 'sherree', 'should', 'since', 'size', 'small', 'so', 'some', 'something', 'special', 'still', 'stuff', 'such', 'sure', 'system', 't', 'take', 'than', 'their', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'think', 'those', 'though', 'through', 'time', 'today', 'together', 'too', 'took', 'two', 'up', 'us', 'use', 'used', 'using', 've', 'very', 'want', 'way', 'well', 'went', 'were', 'what', 'when', 'where', 'which', 'while', 'white', 'who', 'will', 'would', 'your');
+
+function post_title_keywords($num_to_ret = 20) {
+	global $post, $overusedwords;
+	$wordlist = preg_split('/\s*[\s+\.|\?|,|(|)|\-+|\'|\"|=|;|&#0215;|\$|\/|:|{|}]\s*/i', strtolower($post->post_title));
+
+	// Build an array of the unique words and number of times they occur.
+	$a = array_count_values($wordlist);
+	
+	// Remove the stop words from the list.
+	foreach ($overusedwords as $word) {
+		 unset($a[$word]);
+	}
+	arsort($a, SORT_NUMERIC);
+	
+	$num_words = count($a);
+	$num_to_ret = $num_words > $num_to_ret ? $num_to_ret : $num_words;
+	
+	$outwords = array_slice($a, 0, $num_to_ret);
+	return implode(' ', array_keys($outwords));
+}
+
+// post_body_keywords()
+// Based on create_post_keywords by Peter Bowyer with major changes by mitcho
 /**
  * Builds a word frequency list from the Wordpress post, and returns a string
  * to be used in matching against the MySQL full-text index.
@@ -10,44 +32,16 @@
  * 							  the database.
  * @return string The words
  */
-function current_post_keywords($num_to_ret = 20) {
-	global $post;
-	// An array of weightings, to make adjusting them easier.
-	$w = array(
-			   'title' => 2,
-			   'name' => 2,
-			   'content' => 1,
-			   'cat_name' => 3
-		      );
+function post_body_keywords($num_to_ret = 20) {
+	global $post, $overusedwords;
 	
-	/*
-	Thanks to http://www.eatdrinksleepmovabletype.com/tutorials/building_a_weighted_keyword_list/
-	for the basics for this code.  It saved me much typing (or thinking) :)
-	*/
+	$string = strip_tags(apply_filters_if_white('the_content',$post->post_content));
 	
-	// This needs experimenting with.  I've given post title and url a double
-	// weighting, changing this may give you better results
-	$string = str_repeat($post->post_title, $w['title'].' ').
-			  str_repeat(str_replace('-', ' ', $post->post_name).' ', $w['name']).
-			  str_repeat(strip_tags(apply_filters_without('the_content',$post->post_content,'yarpp_default')), $w['content'].' ');//mitcho: strip_tags
-	
-	// Cat names don't help with the current query: the category names of other
-	// posts aren't retrieved by the query to be matched against (and can't be
-	// indexed)
-	// But I've left this in just in case...
-	$post_categories = get_the_category();
-	foreach ($post_categories as $cat) {
-		$string .= str_repeat($cat->cat_name.' ', $w['cat_name']);
-	}
-	
-	// Remove punctuation.
+	// Remove punctuation and split
 	$wordlist = preg_split('/\s*[\s+\.|\?|,|(|)|\-+|\'|\"|=|;|&#0215;|\$|\/|:|{|}]\s*/i', strtolower($string));
 	
 	// Build an array of the unique words and number of times they occur.
 	$a = array_count_values($wordlist);
-	
-	//Remove words that don't matter--"stop words."
-	$overusedwords = array( '', 'a', 'an', 'the', 'and', 'of', 'i', 'to', 'is', 'in', 'with', 'for', 'as', 'that', 'on', 'at', 'this', 'my', 'was', 'our', 'it', 'you', 'we', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '10', 'about', 'after', 'all', 'almost', 'along', 'also', 'amp', 'another', 'any', 'are', 'area', 'around', 'available', 'back', 'be', 'because', 'been', 'being', 'best', 'better', 'big', 'bit', 'both', 'but', 'by', 'c', 'came', 'can', 'capable', 'control', 'could', 'course', 'd', 'dan', 'day', 'decided', 'did', 'didn', 'different', 'div', 'do', 'doesn', 'don', 'down', 'drive', 'e', 'each', 'easily', 'easy', 'edition', 'end', 'enough', 'even', 'every', 'example', 'few', 'find', 'first', 'found', 'from', 'get', 'go', 'going', 'good', 'got', 'gt', 'had', 'hard', 'has', 'have', 'he', 'her', 'here', 'how', 'if', 'into', 'isn', 'just', 'know', 'last', 'left', 'li', 'like', 'little', 'll', 'long', 'look', 'lot', 'lt', 'm', 'made', 'make', 'many', 'mb', 'me', 'menu', 'might', 'mm', 'more', 'most', 'much', 'name', 'nbsp', 'need', 'new', 'no', 'not', 'now', 'number', 'off', 'old', 'one', 'only', 'or', 'original', 'other', 'out', 'over', 'part', 'place', 'point', 'pretty', 'probably', 'problem', 'put', 'quite', 'quot', 'r', 're', 'really', 'results', 'right', 's', 'same', 'saw', 'see', 'set', 'several', 'she', 'sherree', 'should', 'since', 'size', 'small', 'so', 'some', 'something', 'special', 'still', 'stuff', 'such', 'sure', 'system', 't', 'take', 'than', 'their', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'think', 'those', 'though', 'through', 'time', 'today', 'together', 'too', 'took', 'two', 'up', 'us', 'use', 'used', 'using', 've', 'very', 'want', 'way', 'well', 'went', 'were', 'what', 'when', 'where', 'which', 'while', 'white', 'who', 'will', 'would', 'your');
 	
 	// Remove the stop words from the list.
 	foreach ($overusedwords as $word) {
@@ -63,45 +57,100 @@ function current_post_keywords($num_to_ret = 20) {
 	
 }
 
-function yarpp_related($type,$args,$echo = true) {
-	global $wpdb, $post, $user_level;
-	get_currentuserinfo();
+function yarpp_sql($options_array,$giveresults = true) {
+	global $wpdb, $post;
+
+	extract($options_array);
 
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
 	if (get_option('yarpp_cross_relate')) $type = array('post','page');
 
-	// Get option values from the options page--this can be overwritten: see readme
+	// Fetch keywords
+    $body_terms = post_body_keywords();
+    $title_terms = post_title_keywords();
+    
+	// Make sure the post is not from the future
+	$time_difference = get_settings('gmt_offset');
+	$now = gmdate("Y-m-d H:i:s",(time()+($time_difference*3600)));
+	
+	// get weights
+	
+	$bodyweight = ((get_option('yarpp_body') == 3)?3:((get_option('yarpp_body') == 2)?1:0));
+	$titleweight = ((get_option('yarpp_title') == 3)?3:((get_option('yarpp_title') == 2)?1:0));
+	$tagweight = ((get_option('yarpp_tags') != 1)?1:0);
+	$catweight = ((get_option('yarpp_categories') != 1)?1:0);
+	
+	$totalweight = $bodyweight + $titleweight + $tagweight + $catweight;
+	
+	$weightedthresh = $threshold/$totalweight;
+	
+	// get disallowed categories and tags
+	
+	$disterms = implode(',', array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'));
+
+
+	$sql = "SELECT *, (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) AS score
+	from (
+		select ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('udon yilan great diner pizza steak soup taipei store aaron meal real american 0 night half market classic taiwanese recommended')) as bodyscore, (MATCH (post_title) AGAINST ('ate food')) as titlescore, ifnull(catscore,0) as catscore, ifnull(tagscore,0) as tagscore
+		from $wpdb->posts 
+		left join (
+			select count(*) as block, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy natural join $wpdb->terms
+			where $wpdb->terms.term_id in ($disterms)
+			group by object_id
+		) as poolblock on ($wpdb->posts.ID = poolblock.object_id)
+		left join (
+			select count(*) as tagscore, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy
+			where $wpdb->term_taxonomy.taxonomy = 'post_tag'
+			and $wpdb->term_taxonomy.term_taxonomy_id in (select term_taxonomy_id from $wpdb->term_relationships where object_id = '$post->ID')
+			group by object_id
+		) as matchtags on ($wpdb->posts.ID = matchtags.object_id)
+		left join (
+			select count(*) as catscore, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy
+			where $wpdb->term_taxonomy.taxonomy = 'category'
+			and $wpdb->term_taxonomy.term_taxonomy_id in (select term_taxonomy_id from $wpdb->term_relationships where object_id = '$post->ID')
+			group by object_id
+		) as matchcats on ($wpdb->posts.ID = matchcats.object_id)
+		where ((post_status IN ( 'publish',  'static' ) && ID != '$post->ID')"
+.($past_only ?" and post_date <= '$now' ":' ')
+.((!$show_pass_post)?" and post_password ='' ":' ')
+."			and post_type IN ('".implode("', '",$type)."')
+			and block IS NULL
+		)
+	) as rawscores
+	where (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) >= $threshold"
+.((get_option('yarpp_categories') == 3)?' and catscore >= 1':'')
+.((get_option('yarpp_categories') == 4)?' and catscore >= 2':'')
+.((get_option('yarpp_tags') == 3)?' and tagscore >= 1':'')
+.((get_option('yarpp_tags') == 4)?' and tagscore >= 2':'')
+." order by ".((get_option('yarpp_order')?get_option('yarpp_order'):"score desc"))." limit $limit";
+
+	if (!$giveresults) {
+		$sql = 'select count(*) from ('.$sql.')';
+	}
+
+	return $sql;
+}
+
+function yarpp_related($type,$args,$echo = true) {
+	global $wpdb, $post, $user_level;
+	get_currentuserinfo();
+
+	// get options
 	$options = array('limit','threshold','before_title','after_title','show_excerpt','excerpt_length','before_post','after_post','show_pass_post','past_only','show_score');
 	$optvals = array();
 	foreach (array_keys($options) as $index) {
 		if (isset($args[$index+1])) {
 			$optvals[$options[$index]] = stripslashes($args[$index+1]);
 		} else {
-			$optvals[$options[$index]] = stripslashes(get_option('yarpp_'.$options[$index]));
+			$optvals[$options[$index]] = stripslashes(stripslashes(get_option('yarpp_'.$options[$index])));
 		}
 	}
 	extract($optvals);
-			
-	// Fetch keywords
-    $terms = current_post_keywords();
-
-	// Make sure the post is not from the future
-	$time_difference = get_settings('gmt_offset');
-	$now = gmdate("Y-m-d H:i:s",(time()+($time_difference*3600)));
+	$optvals['type'] = $type;
 	
 	// Primary SQL query
 	
-    $sql = "SELECT ID, post_title, post_content,"
-         . "MATCH (post_name, post_content) "
-         . "AGAINST ('$terms') AS score "
-         . "FROM $wpdb->posts WHERE "
-		 . "post_type IN ('".implode("', '",$type)."') "
-         . "AND MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
-		 . "AND (post_status IN ( 'publish',  'static' ) && ID != '$post->ID') ";
-	if (past_only) { $sql .= "AND post_date <= '$now' "; }
-    if ($show_pass_post=='false') { $sql .= "AND post_password ='' "; }
-    $sql .= "ORDER BY score DESC LIMIT $limit";
-    $results = $wpdb->get_results($sql);
+    $results = $wpdb->get_results(yarpp_sql($optvals));
     $output = '';
     if ($results) {
 		foreach ($results as $result) {
@@ -109,15 +158,16 @@ function yarpp_related($type,$args,$echo = true) {
 			$permalink = get_permalink($result->ID);
 			$post_content = strip_tags($result->post_content);
 			$post_content = stripslashes($post_content);
-			$output .= $before_title .'<a href="'. $permalink .'" rel="bookmark" title="Permanent Link: ' . $title . '">' . $title . (($show_score and $user_level >= 8)? ' ('.round($result->score,3).')':'') . '</a>' . $after_title;
+			$output .= $before_title .'<a href="'. $permalink .'" rel="bookmark" title="Permanent Link: ' . $title . '">' . $title . (($show_score and $user_level >= 8)? ' ('.round($result->score,3).')':'') . '</a>';
 			if ($show_excerpt) {
-				$ze = substr($post_content, 0, $excerpt_length);
-				$ze = substr($ze, 0, strrpos($ze,' '));
-				$ze .= '...';
-				$output .= $before_post . $ze . $after_post;
+				$output .= $before_post . yarpp_excerpt($post_content,$excerpt_length) . $after_post;
 			}
+			$output .=  $after_title;
 		}
-		$output = get_option('yarpp_before_related').$output.get_option('yarpp_after_related');
+		$output = stripslashes(stripslashes(get_option('yarpp_before_related'))).$output.stripslashes(stripslashes(get_option('yarpp_after_related')));
+		if (get_option('yarpp_promote_yarpp'))
+			$output .= "\n<p>Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.</p>";
+
 	} else {
 		$output = get_option('yarpp_no_results');
     }
@@ -127,33 +177,19 @@ function yarpp_related($type,$args,$echo = true) {
 function yarpp_related_exist($type,$args) {
 	global $wpdb, $post;
 
-	if (get_option('yarpp_cross_relate')) $type = array('post','page');
-
 	$options = array('threshold','show_pass_post','past_only');
 	$optvals = array();
 	foreach (array_keys($options) as $index) {
 		if (isset($args[$index+1])) {
 			$optvals[$options[$index]] = stripslashes($args[$index+1]);
 		} else {
-			$optvals[$options[$index]] = stripslashes(get_option('yarpp_'.$options[$index]));
+			$optvals[$options[$index]] = stripslashes(stripslashes(get_option('yarpp_'.$options[$index])));
 		}
 	}
 	extract($optvals);
+	$optvals['type'] = $type;
 
-    $terms = current_post_keywords();
-
-	$time_difference = get_settings('gmt_offset');
-	$now = gmdate("Y-m-d H:i:s",(time()+($time_difference*3600)));
-	
-    $sql = "SELECT COUNT(*) as count "
-         . "FROM $wpdb->posts WHERE "
-		 . "post_type IN ('".implode("', '",$type)."') "
-		 . "AND MATCH (post_name, post_content) AGAINST ('$terms') >= $threshold "
-		 . "AND (post_status IN ( 'publish',  'static' ) && ID != '$post->ID') ";
-	if (past_only) { $sql .= "AND post_date <= '$now' "; }
-    if ($show_pass_post=='false') { $sql .= "AND post_password ='' "; }
-
-    $result = $wpdb->get_var($sql);
+    $result = $wpdb->get_var(yarpp_sql($optvals,false));
 	return $result > 0 ? true: false;
 }
 
