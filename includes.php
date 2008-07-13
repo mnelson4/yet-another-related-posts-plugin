@@ -51,6 +51,7 @@ function yarpp_activate() {
 }
 
 function yarpp_upgrade_check() {
+	global $yarpp_value_options, $yarpp_binary_options;
 
 	if (get_option('threshold') and get_option('limit') and get_option('len')) {
 		yarpp_activate(); // just to make sure, in case the plugin was just replaced and not deactivated / activated
