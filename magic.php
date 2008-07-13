@@ -82,7 +82,7 @@ function yarpp_sql($options_array,$giveresults = true) {
 	
 	$totalweight = $bodyweight + $titleweight + $tagweight + $catweight;
 	
-	$weightedthresh = $threshold/$totalweight;
+	$weightedthresh = $threshold/($totalweight + 0.1);
 	
 	// get disallowed categories and tags
 	
