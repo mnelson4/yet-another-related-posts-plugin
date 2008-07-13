@@ -26,7 +26,7 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 = Auto display =
 
-Since YARPP 1.5, you can just put the `yarpp` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
+Since YARPP 1.5, you can just put the `yet-another-related-posts-plugin` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
 
 = Manual installation =
 
