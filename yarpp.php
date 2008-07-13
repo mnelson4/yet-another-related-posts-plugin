@@ -11,7 +11,7 @@ require_once('includes.php');
 require_once('magic.php');
 require_once('related-functions.php');
 
-add_action('admin_head','yarpp_admin_menu');
+add_action('admin_menu','yarpp_admin_menu');
 add_action('admin_print_scripts','yarpp_upgrade_check');
 add_filter('the_content','yarpp_default',1200);
 register_activation_hook(__FILE__,'yarpp_activate');
