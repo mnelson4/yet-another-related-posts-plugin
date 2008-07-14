@@ -1,7 +1,7 @@
 <?php
 // Begin Related Posts Options
 
-global $yarpp_value_options, $yarpp_binary_options;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 if (!yarpp_enabled()) {
 	echo '<div class="updated">';
 	if (yarpp_activate()) echo 'The YARPP database had an error but has been fixed.';

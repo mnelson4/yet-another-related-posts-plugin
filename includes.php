@@ -86,7 +86,7 @@ function yarpp_admin_menu() {
 }
 
 function yarpp_options_page() {
-	require('yet-another-related-posts-plugin/options.php');
+	require(str_replace('includes.php','options.php',__FILE__));
 }
 
 // This function was written by tyok
