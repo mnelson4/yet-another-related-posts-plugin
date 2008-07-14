@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page
 Requires at least: 2.1
 Tested up to: 2.5.1
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
 
@@ -88,6 +88,9 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 * 2.0.1
 	* Bugfix: [`admin_menu` instead of `admin_head`](http://konstruktors.com/blog/wordpress/277-fixing-postpost-and-ozh-absolute-comments-plugins/)
 	* Bugfix: [a variable scope issue](http://wordpress.org/support/topic/188550) crucial for 2.0 upgrading
+* 2.0.2
+	* Versioning bugfix (rerelease of 2.0.1)
+
 
 == Future versions ==
 

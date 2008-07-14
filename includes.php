@@ -45,8 +45,8 @@ function yarpp_activate() {
 	if (!yarpp_enabled()) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `post_related` ( `post_name` , `post_content` )");
 	}
-	add_option('yarpp_version','2.0.1');
-	update_option('yarpp_version','2.0.1');
+	add_option('yarpp_version','2.02');
+	update_option('yarpp_version','2.02');
 	return 1;
 }
 
@@ -60,7 +60,7 @@ function yarpp_upgrade_check() {
 		update_option('yarpp_version','1.5');
 	}
 	
-	if (get_option('yarpp_version') < 2.0.1) {
+	if (get_option('yarpp_version') < 2) {
 		foreach (array_keys($yarpp_value_options) as $option) {
 			if (!get_option('yarpp_'.$option))
 			add_option('yarpp_'.$option,$yarpp_value_options[$option]);
@@ -71,7 +71,11 @@ function yarpp_upgrade_check() {
 		}
 
 		echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2.0. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
-		update_option('yarpp_version','2.0.1');
+		update_option('yarpp_version','2.0');
+	}
+	
+	if (get_option('yarpp_version') < 2.02) {
+		update_option('yarpp_version','2.02');	
 	}
 	
 }
