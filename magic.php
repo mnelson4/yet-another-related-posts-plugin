@@ -123,8 +123,6 @@ function yarpp_sql($options_array,$giveresults = true) {
 .((get_option('yarpp_tags') == 4)?' and tagscore >= 2':'')
 ." order by ".((get_option('yarpp_order')?get_option('yarpp_order'):"score desc"))." limit $limit";
 
-	echo $sql;
-
 	if (!$giveresults) {
 		$sql = 'select count(*) from ('.$sql.')';
 	}
