@@ -5,7 +5,7 @@ Author URI: http://mitcho.com/
 Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: related, posts, post, pages, page
-Requires at least: 2.1
+Requires at least: 2.3
 Tested up to: 2.5.1
 Stable tag: 2.0.2
 
