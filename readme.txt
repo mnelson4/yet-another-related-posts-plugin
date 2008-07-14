@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page
 Requires at least: 2.1
 Tested up to: 2.5.1
-Stable tag: 2.0
+Stable tag: 2.0.1
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
 
@@ -85,7 +85,10 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 		- Viper's Video Quicktags
 		- WP-CodeBox
 		- WP shortcodes
-	
+* 2.0.1
+	* Bugfix: [`admin_menu` instead of `admin_head`](http://konstruktors.com/blog/wordpress/277-fixing-postpost-and-ozh-absolute-comments-plugins/)
+	* Bugfix: [a variable scope issue](http://wordpress.org/support/topic/188550) crucial for 2.0 upgrading
+
 == Future versions ==
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
