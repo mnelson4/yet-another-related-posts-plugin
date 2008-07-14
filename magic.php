@@ -88,17 +88,16 @@ function yarpp_sql($options_array,$giveresults = true) {
 	
 	$disterms = implode(',', array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'));
 
-
 	$sql = "SELECT *, (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) AS score
 	from (
 		select ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('udon yilan great diner pizza steak soup taipei store aaron meal real american 0 night half market classic taiwanese recommended')) as bodyscore, (MATCH (post_title) AGAINST ('ate food')) as titlescore, ifnull(catscore,0) as catscore, ifnull(tagscore,0) as tagscore
-		from $wpdb->posts 
-		left join (
+		from $wpdb->posts "
+	.(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"	left join (
 			select count(*) as block, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy natural join $wpdb->terms
 			where $wpdb->terms.term_id in ($disterms)
 			group by object_id
-		) as poolblock on ($wpdb->posts.ID = poolblock.object_id)
-		left join (
+		) as poolblock on ($wpdb->posts.ID = poolblock.object_id)":'')
+	."	left join (
 			select count(*) as tagscore, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy
 			where $wpdb->term_taxonomy.taxonomy = 'post_tag'
 			and $wpdb->term_taxonomy.term_taxonomy_id in (select term_taxonomy_id from $wpdb->term_relationships where object_id = '$post->ID')
@@ -113,9 +112,9 @@ function yarpp_sql($options_array,$giveresults = true) {
 		where ((post_status IN ( 'publish',  'static' ) && ID != '$post->ID')"
 .($past_only ?" and post_date <= '$now' ":' ')
 .((!$show_pass_post)?" and post_password ='' ":' ')
-."			and post_type IN ('".implode("', '",$type)."')
-			and block IS NULL
-		)
+."			and post_type IN ('".implode("', '",$type)."')"
+.(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"			and block IS NULL":'').
+"		)
 	) as rawscores
 	where (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) >= $threshold"
 .((get_option('yarpp_categories') == 3)?' and catscore >= 1':'')
@@ -123,6 +122,8 @@ function yarpp_sql($options_array,$giveresults = true) {
 .((get_option('yarpp_tags') == 3)?' and tagscore >= 1':'')
 .((get_option('yarpp_tags') == 4)?' and tagscore >= 2':'')
 ." order by ".((get_option('yarpp_order')?get_option('yarpp_order'):"score desc"))." limit $limit";
+
+	echo $sql;
 
 	if (!$giveresults) {
 		$sql = 'select count(*) from ('.$sql.')';

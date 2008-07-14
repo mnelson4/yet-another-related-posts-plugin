@@ -31,7 +31,7 @@ function yarpp_enabled() {
 	global $wpdb;
 	$indexdata = $wpdb->get_results("show index from $wpdb->posts");
 	foreach ($indexdata as $index) {
-		if ($index->Key_name == 'post_related') return 1;
+		if ($index->Key_name == 'yarpp_cache') return 1;
 	}
 	return 0;
 }
@@ -43,15 +43,15 @@ function yarpp_activate() {
 		add_option('yarpp_'.$option,$yarpp_options[$option]);
 	}
 	if (!yarpp_enabled()) {
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `post_related` ( `post_name` , `post_content` )");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
 	}
-	add_option('yarpp_version','2.02');
-	update_option('yarpp_version','2.02');
+	add_option('yarpp_version','2.03');
+	update_option('yarpp_version','2.03');
 	return 1;
 }
 
 function yarpp_upgrade_check() {
-	global $yarpp_value_options, $yarpp_binary_options;
+	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 
 	if (get_option('threshold') and get_option('limit') and get_option('len')) {
 		yarpp_activate(); // just to make sure, in case the plugin was just replaced and not deactivated / activated
@@ -75,7 +75,12 @@ function yarpp_upgrade_check() {
 	}
 	
 	if (get_option('yarpp_version') < 2.02) {
-		update_option('yarpp_version','2.02');	
+		update_option('yarpp_version','2.02');
+	}
+
+	if (get_option('yarpp_version') < 2.03) {	
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
+		update_option('yarpp_version','2.03');
 	}
 	
 }
