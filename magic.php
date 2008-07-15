@@ -90,7 +90,7 @@ function yarpp_sql($options_array,$giveresults = true) {
 
 	$sql = "SELECT *, (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) AS score
 	from (
-		select ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('udon yilan great diner pizza steak soup taipei store aaron meal real american 0 night half market classic taiwanese recommended')) as bodyscore, (MATCH (post_title) AGAINST ('ate food')) as titlescore, ifnull(catscore,0) as catscore, ifnull(tagscore,0) as tagscore
+		select ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('".post_body_keywords()."')) as bodyscore, (MATCH (post_title) AGAINST ('".post_title_keywords()."')) as titlescore, ifnull(catscore,0) as catscore, ifnull(tagscore,0) as tagscore
 		from $wpdb->posts "
 	.(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"	left join (
 			select count(*) as block, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy natural join $wpdb->terms
@@ -115,8 +115,9 @@ function yarpp_sql($options_array,$giveresults = true) {
 ."			and post_type IN ('".implode("', '",$type)."')"
 .(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"			and block IS NULL":'').
 "		)
-	) as rawscores
-	where (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) >= $threshold"
+	) as rawscores";
+
+	$sql .= " where (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) >= $threshold"
 .((get_option('yarpp_categories') == 3)?' and catscore >= 1':'')
 .((get_option('yarpp_categories') == 4)?' and catscore >= 2':'')
 .((get_option('yarpp_tags') == 3)?' and tagscore >= 1':'')

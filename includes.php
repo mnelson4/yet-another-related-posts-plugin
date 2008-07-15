@@ -82,6 +82,11 @@ function yarpp_upgrade_check() {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
 		update_option('yarpp_version','2.03');
 	}
+
+	// just in case, try to add the index one more time.	
+	if (!yarpp_enabled()) {
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
+	}
 	
 }
 
