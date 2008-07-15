@@ -6,8 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: related, posts, post, pages, page
 Requires at least: 2.3
-Tested up to: 2.5.1
-Stable tag: 2.0.3
+Tested up to: 2.6
+Stable tag: 2.0.4
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
 
@@ -92,7 +92,9 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* Versioning bugfix (rerelease of 2.0.1)
 * 2.0.3
 	* Bugfix: [2.0.2 accidentally required some tags or categories to be disabled](http://wordpress.org/support/topic/188745)
-
+* 2.0.4 - what 2.0 should have been
+	* Bugfix: new fulltext query for MySQL 5 compatibility
+	* Bugfix: updated apply_filters to work with WP 2.6
 
 == Future versions ==
 

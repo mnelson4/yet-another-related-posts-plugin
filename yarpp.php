@@ -3,7 +3,7 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
-Version: 2.0.3
+Version: 2.0.4
 Author: mitcho (Michael Yoshitaka Erlewine)
 */
 

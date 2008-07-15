@@ -47,8 +47,8 @@ function yarpp_activate() {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
 	}
-	add_option('yarpp_version','2.03');
-	update_option('yarpp_version','2.03');
+	add_option('yarpp_version','2.04');
+	update_option('yarpp_version','2.04');
 	return 1;
 }
 
@@ -83,6 +83,10 @@ function yarpp_upgrade_check() {
 	if (get_option('yarpp_version') < 2.03) {	
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
+	}
+
+	if (get_option('yarpp_version') < 2.04) {	
+		update_option('yarpp_version','2.04');
 	}
 
 	// just in case, try to add the index one more time.	
@@ -157,32 +161,49 @@ function yarpp_white($filter) {
 
 /* FYI, apply_filters_if_white was used here to avoid a loop in apply_filters('the_content') > yarpp_default() > yarpp_related() > current_post_keywords() > apply_filters('the_content').*/
 
-function apply_filters_if_white($tag, $string) {
-	global $wp_filter, $merged_filters, $yarpp_blacklist;
+function apply_filters_if_white($tag, $value) {
+	global $wp_filter, $merged_filters, $wp_current_filter;
 
-	if ( !isset( $merged_filters[ $tag ] ) )
-		merge_filters($tag);
+	$args = array();
+	$wp_current_filter[] = $tag;
 
-	if ( !isset($wp_filter[$tag]) )
-		return $string;
+	// Do 'all' actions first
+	if ( isset($wp_filter['all']) ) {
+		$args = func_get_args();
+		_wp_call_all_hook($args);
+	}
+
+	if ( !isset($wp_filter[$tag]) ) {
+		array_pop($wp_current_filter);
+		return $value;
+	}
+
+	// Sort
+	if ( !isset( $merged_filters[ $tag ] ) ) {
+		ksort($wp_filter[$tag]);
+		$merged_filters[ $tag ] = true;
+	}
 
 	reset( $wp_filter[ $tag ] );
 
-	$args = func_get_args();
+	if ( empty($args) )
+		$args = func_get_args();
+
 
 	do{
 		foreach( (array) current($wp_filter[$tag]) as $the_ ) {
 			if ( !is_null($the_['function'])
 			and yarpp_white($the_['function'])){ // HACK
-				$args[1] = $string;
-				$oldstring = $string;
-				$string = call_user_func_array($the_['function'], array_slice($args, 1, (int) $the_['accepted_args']));
+				$args[1] = $value;
+				$value = call_user_func_array($the_['function'], array_slice($args, 1, (int) $the_['accepted_args']));
 			}
 		}
 
 	} while ( next($wp_filter[$tag]) !== false );
 
-	return $string;
+	array_pop( $wp_current_filter );
+
+	return $value;
 }
 
 // upgrade to 1.5!
