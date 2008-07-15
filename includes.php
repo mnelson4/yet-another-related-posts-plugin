@@ -31,7 +31,7 @@ function yarpp_enabled() {
 	global $wpdb;
 	$indexdata = $wpdb->get_results("show index from $wpdb->posts");
 	foreach ($indexdata as $index) {
-		if ($index->Key_name == 'yarpp_cache') return 1;
+		if ($index->Key_name == 'yarpp_title') return 1;
 	}
 	return 0;
 }
@@ -43,7 +43,9 @@ function yarpp_activate() {
 		add_option('yarpp_'.$option,$yarpp_options[$option]);
 	}
 	if (!yarpp_enabled()) {
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
+		//		$wpdb->query("ALTER TABLE `wp_posts` DROP INDEX `yarpp_cache`");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
 	}
 	add_option('yarpp_version','2.03');
 	update_option('yarpp_version','2.03');
@@ -79,13 +81,14 @@ function yarpp_upgrade_check() {
 	}
 
 	if (get_option('yarpp_version') < 2.03) {	
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
-		update_option('yarpp_version','2.03');
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
 	// just in case, try to add the index one more time.	
 	if (!yarpp_enabled()) {
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_cache` ( `post_title` , `post_content` )");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
 	}
 	
 }
