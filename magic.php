@@ -127,7 +127,7 @@ function yarpp_sql($options_array,$giveresults = true) {
 	//echo $sql;
 
 	if (!$giveresults) {
-		$sql = 'select count(*) from ('.$sql.')';
+		$sql = 'select count(*) from ('.$sql.') as related';
 	}
 
 	return $sql;
