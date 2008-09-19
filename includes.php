@@ -6,7 +6,7 @@ $yarpp_value_options = array('threshold' => 5,
 				'excerpt_length' => 10,
 				'before_title' => '<li>',
 				'after_title' => '</li>',
-				'before_post' => '<small>',
+				'before_post' => ' <small>',
 				'after_post' => '</small>',
 				'before_related' => '<p>Related posts:<ol>',
 				'after_related' => '</ol></p>',
@@ -36,43 +36,62 @@ function yarpp_enabled() {
 	return 0;
 }
 
+function yarpp_reinforce() {
+	if (!get_option('yarpp_version'))
+		yarpp_activate();
+	yarpp_upgrade_check(true);
+}
+
 function yarpp_activate() {
 	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options;
-	$yarpp_options = array_merge($yarpp_binary_options, $yarpp_value_options);
-	foreach (array_keys($yarpp_options) as $option) {
-		add_option('yarpp_'.$option,$yarpp_options[$option]);
+	foreach (array_keys($yarpp_value_options) as $option) {
+		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
+		add_option("yarpp_$option",$yarpp_value_options[$option]);
+	}
+	foreach (array_keys($yarpp_binary_options) as $option) {
+		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
+		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
 	}
 	if (!yarpp_enabled()) {
 		//		$wpdb->query("ALTER TABLE `wp_posts` DROP INDEX `yarpp_cache`");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
 	}
-	add_option('yarpp_version','2.04');
-	update_option('yarpp_version','2.04');
+	add_option('yarpp_version','2.05');
+	update_option('yarpp_version','2.05');
 	return 1;
 }
 
-function yarpp_upgrade_check() {
+function yarpp_upgrade_check($inuse = false) {
 	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 
+	foreach (array_keys($yarpp_value_options) as $option) {
+		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
+		add_option("yarpp_$option",$yarpp_value_options[$option].' ');
+	}
+	foreach (array_keys($yarpp_binary_options) as $option) {
+		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
+		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
+	}
+
 	if (get_option('threshold') and get_option('limit') and get_option('len')) {
-		yarpp_activate(); // just to make sure, in case the plugin was just replaced and not deactivated / activated
-		echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 1.5. YARPP 1.5 adds "simple installation" which automagically prints a simple related posts display at the end of each single entry (permalink) page without tinkering with any theme files. As a previous YARPP user, you probably have already edited your theme files to your liking, so this "automatic display" feature has been turned off.</p><p>If you would like to use "automatic display," remove <code>related_posts</code> from your <code>single.php</code> file and turn on automatic display in the YARPP options. Make sure to adjust the new prefix and suffix preferences to your liking as well.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
+		yarpp_activate();
 		yarpp_upgrade_one_five();
 		update_option('yarpp_version','1.5');
 	}
 	
 	if (get_option('yarpp_version') < 2) {
 		foreach (array_keys($yarpp_value_options) as $option) {
-			if (!get_option('yarpp_'.$option))
-			add_option('yarpp_'.$option,$yarpp_value_options[$option]);
+			if (!get_option("yarpp_$option"))
+			add_option("yarpp_$option",$yarpp_value_options[$option].' ');
 		}
 		foreach (array_keys($yarpp_binary_options) as $option) {
-			if (!get_option('yarpp_'.$option))
-			add_option('yarpp_'.$option,$yarpp_binary_options[$option]);
+			if (!get_option("yarpp_$option"))
+			add_option("yarpp_$option",$yarpp_binary_options[$option]);
 		}
 
-		echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2.0. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
+		if (!$inuse)
+			echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2.0. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
 		update_option('yarpp_version','2.0');
 	}
 	
@@ -80,14 +99,15 @@ function yarpp_upgrade_check() {
 		update_option('yarpp_version','2.02');
 	}
 
-	if (get_option('yarpp_version') < 2.03) {	
+	if (get_option('yarpp_version') < 2.03) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.04) {	
-		update_option('yarpp_version','2.04');
+	if (get_option('yarpp_version') < 2.05) {
+		update_option('yarpp_version','2.05');
 	}
+
 
 	// just in case, try to add the index one more time.	
 	if (!yarpp_enabled()) {
@@ -115,11 +135,11 @@ function widget_yarpp_init() {
 	function widget_yarpp($args) {
 		extract($args);
 		global $wpdb, $post, $user_level;
-		if (get_option('yarpp_auto_display') and is_single()) {
-				echo $before_widget;
-				    	echo $before_title . 'Related Posts' . $after_title;
-					echo yarpp_related(array('post'),array());
-				echo $after_widget;
+		if (is_single()) {
+			echo $before_widget;
+		 	echo $before_title . 'Related Posts' . $after_title;
+			echo yarpp_related(array('post'),array());
+			echo $after_widget;
 		}
 	}
 	register_sidebar_widget(__('YARPP'), 'widget_yarpp');
@@ -212,7 +232,7 @@ function yarpp_upgrade_one_five() {
 	$migrate_options = array('past_only','show_score','show_excerpt','show_pass_post','cross_relate','limit','threshold','before_title','after_title','before_post','after_post');
 	foreach ($migrate_options as $option) {
 		if (get_option($option)) {
-			update_option('yarpp_'.$option,get_option($option));
+			update_option("yarpp_$option",get_option($option));
 			delete_option($option);
 		}
 	}
@@ -237,6 +257,25 @@ define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. C
 function yarpp_excerpt($content,$length) {
 	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
 	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
+}
+
+function yarpp_set_option($option,$value) {
+	global $yarpp_value_options;
+	if (array_search($option,array_keys($yarpp_value_options)) === true)
+		update_option("yarpp_$option",$value.' ');
+	else
+		update_option("yarpp_$option",$value);
+}
+
+function yarpp_get_option($option,$escapehtml = false) {
+	global $yarpp_value_options;
+	if (!(array_search($option,array_keys($yarpp_value_options)) === false))
+		$return = chop(get_option("yarpp_$option"));
+	else
+		$return = get_option("yarpp_$option");
+	if ($escapehtml)
+		$return = htmlspecialchars(stripslashes($return));
+	return $return;
 }
 
 ?>

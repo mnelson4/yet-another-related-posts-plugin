@@ -6,8 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: related, posts, post, pages, page
 Requires at least: 2.3
-Tested up to: 2.6
-Stable tag: 2.0.4
+Tested up to: 2.6.2
+Stable tag: 2.0.5
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
 
@@ -27,6 +27,10 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 = Auto display =
 
 Since YARPP 1.5, you can just put the `yet-another-related-posts-plugin` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
+
+= Widget =
+
+Related posts can also be displayed as a widget. Go to the Design > Widgets options page and add the Related Posts widget. The widget will only be displayed on single entry (permalink) pages. The widget can be used even if the "auto display" option is turned off.
 
 = Manual installation =
 
@@ -95,13 +99,20 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 * 2.0.4 - what 2.0 should have been
 	* Bugfix: new fulltext query for MySQL 5 compatibility
 	* Bugfix: updated apply_filters to work with WP 2.6
+* 2.0.5
+	* Further optimized algorithm - should be faster on most systems. Good bye [subqueries](http://dev.mysql.com/doc/refman/5.0/en/unnamed-views.html)!
+	* Bugfix: restored MySQL 4.0 support
+	* Bugfix: [widgets required the "auto display" option](http://wordpress.org/support/topic/190454)
+	* Bugfix: sometimes default values were not set properly on (re)activation
+	* Bugfix: [quotes in HTML tag options would get escaped](http://wordpress.org/support/topic/199139)
+	* Bugfix: `user_level` was being checked in a deprecated manner
+	* A helpful little tooltip for the admin-only threshold display
 
 == Future versions ==
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
 
 * User-defineable stopwords, especially to support other languages, [by request](http://wordpress.org/support/topic/159359)
-* Widgetization, [by request](http://wordpress.org/support/topic/160459)
 * Date and comment count in excerpt, [by request](http://wordpress.org/support/topic/156231)
-* RSS feed support: an option to automagically show related posts in RSS feeds, [by request](http://wordpress.org/support/topic/151766).
+* RSS feed support: an option to automagically show related posts in RSS feeds, [by popular request](http://wordpress.org/support/topic/151766).
 * Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)

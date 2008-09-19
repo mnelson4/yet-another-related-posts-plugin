@@ -63,7 +63,7 @@ function yarpp_sql($options_array,$giveresults = true) {
 	extract($options_array);
 
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
-	if (get_option('yarpp_cross_relate')) $type = array('post','page');
+	if (yarpp_get_option('cross_relate')) $type = array('post','page');
 
 	// Fetch keywords
     $body_terms = post_body_keywords();
@@ -75,10 +75,10 @@ function yarpp_sql($options_array,$giveresults = true) {
 	
 	// get weights
 	
-	$bodyweight = ((get_option('yarpp_body') == 3)?3:((get_option('yarpp_body') == 2)?1:0));
-	$titleweight = ((get_option('yarpp_title') == 3)?3:((get_option('yarpp_title') == 2)?1:0));
-	$tagweight = ((get_option('yarpp_tags') != 1)?1:0);
-	$catweight = ((get_option('yarpp_categories') != 1)?1:0);
+	$bodyweight = ((yarpp_get_option('body') == 3)?3:((yarpp_get_option('body') == 2)?1:0));
+	$titleweight = ((yarpp_get_option('title') == 3)?3:((yarpp_get_option('title') == 2)?1:0));
+	$tagweight = ((yarpp_get_option('tags') != 1)?1:0);
+	$catweight = ((yarpp_get_option('categories') != 1)?1:0);
 	
 	$totalweight = $bodyweight + $titleweight + $tagweight + $catweight;
 	
@@ -86,55 +86,52 @@ function yarpp_sql($options_array,$giveresults = true) {
 	
 	// get disallowed categories and tags
 	
-	$disterms = implode(',', array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'));
+	$disterms = implode(',', array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'));
 
-	$sql = "SELECT *, (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) AS score
-	from (
-		select ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('".post_body_keywords()."')) as bodyscore, (MATCH (post_title) AGAINST ('".post_title_keywords()."')) as titlescore, ifnull(catscore,0) as catscore, ifnull(tagscore,0) as tagscore
-		from $wpdb->posts "
-	.(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"	left join (
-			select count(*) as block, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy natural join $wpdb->terms
-			where $wpdb->terms.term_id in ($disterms)
-			group by object_id
-		) as poolblock on ($wpdb->posts.ID = poolblock.object_id)":'')
-	."	left join (
-			select count(*) as tagscore, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy
-			where $wpdb->term_taxonomy.taxonomy = 'post_tag'
-			and $wpdb->term_taxonomy.term_taxonomy_id in (select term_taxonomy_id from $wpdb->term_relationships where object_id = '$post->ID')
-			group by object_id
-		) as matchtags on ($wpdb->posts.ID = matchtags.object_id)
-		left join (
-			select count(*) as catscore, object_id from $wpdb->term_relationships natural join $wpdb->term_taxonomy
-			where $wpdb->term_taxonomy.taxonomy = 'category'
-			and $wpdb->term_taxonomy.term_taxonomy_id in (select term_taxonomy_id from $wpdb->term_relationships where object_id = '$post->ID')
-			group by object_id
-		) as matchcats on ($wpdb->posts.ID = matchcats.object_id)
-		where ((post_status IN ( 'publish',  'static' ) && ID != '$post->ID')"
-.($past_only ?" and post_date <= '$now' ":' ')
-.((!$show_pass_post)?" and post_password ='' ":' ')
-."			and post_type IN ('".implode("', '",$type)."')"
-.(count(array_filter(array_merge(explode(',',get_option('yarpp_discats')),explode(',',get_option('yarpp_distags'))),'is_numeric'))?"			and block IS NULL":'').
-"		)
-	) as rawscores";
+	$newsql = "SELECT ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('".post_body_keywords()."')) as bodyscore, (MATCH (post_title) AGAINST ('".post_title_keywords()."')) as titlescore, COUNT( DISTINCT tagtax.term_taxonomy_id ) AS tagscore, COUNT( DISTINCT cattax.term_taxonomy_id ) AS catscore, ((MATCH (post_content) AGAINST ('".post_body_keywords()."')) * $bodyweight + (MATCH (post_title) AGAINST ('".post_title_keywords()."')) * $titleweight + COUNT( DISTINCT tagtax.term_taxonomy_id ) * $tagweight + COUNT( DISTINCT cattax.term_taxonomy_id ) * $catweight) AS score".(count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?", count(blockterm.term_id) as block":"")."
+ FROM $wpdb->posts ";
 
-	$sql .= " where (bodyscore * $bodyweight + titlescore * $titleweight + tagscore * $tagweight + catscore * $catweight) >= $threshold"
-.((get_option('yarpp_categories') == 3)?' and catscore >= 1':'')
-.((get_option('yarpp_categories') == 4)?' and catscore >= 2':'')
-.((get_option('yarpp_tags') == 3)?' and tagscore >= 1':'')
-.((get_option('yarpp_tags') == 4)?' and tagscore >= 2':'')
-." order by ".((get_option('yarpp_order')?get_option('yarpp_order'):"score desc"))." limit $limit";
+	$newsql .= (count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?"left join $wpdb->term_relationships as blockrel on (wp_posts.ID = blockrel.object_id)
+	left join $wpdb->term_taxonomy as blocktax using (`term_taxonomy_id`)
+	left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))":"");
 
-	//echo $sql;
+	$newsql .= "left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $post->ID ) 
+	left JOIN $wpdb->term_relationships AS tagrel on (tagrel.term_taxonomy_id = thistag.term_taxonomy_id
+	AND tagrel.object_id = $wpdb->posts.ID)
+	left JOIN $wpdb->term_taxonomy AS tagtax ON ( tagrel.term_taxonomy_id = tagtax.term_taxonomy_id
+	AND tagtax.taxonomy = 'post_tag') 
+
+	left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $post->ID ) 
+	left JOIN $wpdb->term_relationships AS catrel on (catrel.term_taxonomy_id = thiscat.term_taxonomy_id
+	AND catrel.object_id = $wpdb->posts.ID)
+	left JOIN $wpdb->term_taxonomy AS cattax ON ( catrel.term_taxonomy_id = cattax.term_taxonomy_id
+	AND cattax.taxonomy = 'category') 
+
+	where (post_status IN ( 'publish',  'static' ) && ID != '$post->ID')";
+
+	$newsql .= ($past_only ?" and post_date <= '$now' ":' ');
+	$newsql .= ((!$show_pass_post)?" and post_password ='' ":' ');
+	$newsql .= "			and post_type IN ('".implode("', '",$type)."')";
+
+	$newsql .= " GROUP BY id ";
+	$newsql .= " having "; 	$newsql .= (count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?" block = 0 and ":'');
+	$newsql .= " score >= $threshold";
+
+	$newsql .= ((yarpp_get_option('categories') == 3)?' and catscore >= 1':'');
+	$newsql .= ((yarpp_get_option('categories') == 4)?' and catscore >= 2':'');
+	$newsql .= ((yarpp_get_option('tags') == 3)?' and tagscore >= 1':'');
+	$newsql .= ((yarpp_get_option('tags') == 4)?' and tagscore >= 2':'');
+	$newsql .= " order by ".((yarpp_get_option('order')?yarpp_get_option('order'):"score desc"))." limit ".yarpp_get_option('limit');
 
 	if (!$giveresults) {
-		$sql = 'select count(related.ID) from ('.$sql.') as related';
+		$sql = "select count(*) from ($sql)";
 	}
 
-	return $sql;
+	return $newsql;
 }
 
 function yarpp_related($type,$args,$echo = true) {
-	global $wpdb, $post, $user_level;
+	global $wpdb, $post, $userdata;
 	get_currentuserinfo();
 
 	// get options
@@ -144,7 +141,7 @@ function yarpp_related($type,$args,$echo = true) {
 		if (isset($args[$index+1])) {
 			$optvals[$options[$index]] = stripslashes($args[$index+1]);
 		} else {
-			$optvals[$options[$index]] = stripslashes(stripslashes(get_option('yarpp_'.$options[$index])));
+			$optvals[$options[$index]] = stripslashes(stripslashes(yarpp_get_option($options[$index])));
 		}
 	}
 	extract($optvals);
@@ -160,18 +157,18 @@ function yarpp_related($type,$args,$echo = true) {
 			$permalink = get_permalink($result->ID);
 			$post_content = strip_tags($result->post_content);
 			$post_content = stripslashes($post_content);
-			$output .= $before_title .'<a href="'. $permalink .'" rel="bookmark" title="Permanent Link: ' . $title . '">' . $title . (($show_score and $user_level >= 8)? ' ('.round($result->score,3).')':'') . '</a>';
+			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title" . (($show_score and $userdata->user_level >= 8)? ' <abbr title="'.round($result->score,3).' is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.">('.round($result->score,3).')</abbr>':'') . '</a>';
 			if ($show_excerpt) {
 				$output .= $before_post . yarpp_excerpt($post_content,$excerpt_length) . $after_post;
 			}
 			$output .=  $after_title;
 		}
-		$output = stripslashes(stripslashes(get_option('yarpp_before_related'))).$output.stripslashes(stripslashes(get_option('yarpp_after_related')));
-		if (get_option('yarpp_promote_yarpp'))
+		$output = stripslashes(stripslashes(yarpp_get_option('before_related'))).$output.stripslashes(stripslashes(yarpp_get_option('after_related')));
+		if (yarpp_get_option('promote_yarpp'))
 			$output .= "\n<p>Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.</p>";
 
 	} else {
-		$output = get_option('yarpp_no_results');
+		$output = yarpp_get_option('no_results');
     }
 	if ($echo) echo $output; else return $output;
 }
@@ -185,7 +182,7 @@ function yarpp_related_exist($type,$args) {
 		if (isset($args[$index+1])) {
 			$optvals[$options[$index]] = stripslashes($args[$index+1]);
 		} else {
-			$optvals[$options[$index]] = stripslashes(stripslashes(get_option('yarpp_'.$options[$index])));
+			$optvals[$options[$index]] = stripslashes(stripslashes(yarpp_get_option($options[$index])));
 		}
 	}
 	extract($optvals);
