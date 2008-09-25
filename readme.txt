@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page
 Requires at least: 2.3
 Tested up to: 2.6.2
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 
 Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
 
@@ -98,7 +98,7 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* Bugfix: [2.0.2 accidentally required some tags or categories to be disabled](http://wordpress.org/support/topic/188745)
 * 2.0.4 - what 2.0 should have been
 	* Bugfix: new fulltext query for MySQL 5 compatibility
-	* Bugfix: updated apply_filters to work with WP 2.6
+	* Bugfix: updated `apply_filters` to work with WP 2.6
 * 2.0.5
 	* Further optimized algorithm - should be faster on most systems. Good bye [subqueries](http://dev.mysql.com/doc/refman/5.0/en/unnamed-views.html)!
 	* Bugfix: restored MySQL 4.0 support
@@ -107,6 +107,8 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* Bugfix: [quotes in HTML tag options would get escaped](http://wordpress.org/support/topic/199139)
 	* Bugfix: `user_level` was being checked in a deprecated manner
 	* A helpful little tooltip for the admin-only threshold display
+* 2.0.6
+	* A quick emergency bugfix (In one instance, assumed existence of `wp_posts`)
 
 == Future versions ==
 

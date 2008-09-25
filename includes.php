@@ -54,11 +54,22 @@ function yarpp_activate() {
 	}
 	if (!yarpp_enabled()) {
 		//		$wpdb->query("ALTER TABLE `wp_posts` DROP INDEX `yarpp_cache`");
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
+		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)")) {
+			echo "<!--MySQL error on adding yarpp_title: ";
+			$wpdb->print_error();
+			echo "-->";
+		}
+		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)")) {
+			echo "<!--MySQL error on adding yarpp_content: ";
+			$wpdb->print_error();
+			echo "-->";
+		}
+		if (!yarpp_enabled()) {
+			return 0;
+		}
 	}
-	add_option('yarpp_version','2.05');
-	update_option('yarpp_version','2.05');
+	add_option('yarpp_version','2.06');
+	update_option('yarpp_version','2.06');
 	return 1;
 }
 
@@ -94,20 +105,15 @@ function yarpp_upgrade_check($inuse = false) {
 			echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2.0. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
 		update_option('yarpp_version','2.0');
 	}
-	
-	if (get_option('yarpp_version') < 2.02) {
-		update_option('yarpp_version','2.02');
-	}
 
 	if (get_option('yarpp_version') < 2.03) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.05) {
-		update_option('yarpp_version','2.05');
+	if (get_option('yarpp_version') < 2.06) {
+		update_option('yarpp_version','2.06');
 	}
-
 
 	// just in case, try to add the index one more time.	
 	if (!yarpp_enabled()) {

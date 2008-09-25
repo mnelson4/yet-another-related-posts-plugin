@@ -91,7 +91,7 @@ function yarpp_sql($options_array,$giveresults = true) {
 	$newsql = "SELECT ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('".post_body_keywords()."')) as bodyscore, (MATCH (post_title) AGAINST ('".post_title_keywords()."')) as titlescore, COUNT( DISTINCT tagtax.term_taxonomy_id ) AS tagscore, COUNT( DISTINCT cattax.term_taxonomy_id ) AS catscore, ((MATCH (post_content) AGAINST ('".post_body_keywords()."')) * $bodyweight + (MATCH (post_title) AGAINST ('".post_title_keywords()."')) * $titleweight + COUNT( DISTINCT tagtax.term_taxonomy_id ) * $tagweight + COUNT( DISTINCT cattax.term_taxonomy_id ) * $catweight) AS score".(count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?", count(blockterm.term_id) as block":"")."
  FROM $wpdb->posts ";
 
-	$newsql .= (count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?"left join $wpdb->term_relationships as blockrel on (wp_posts.ID = blockrel.object_id)
+	$newsql .= (count(array_filter(array_merge(explode(',',yarpp_get_option('discats')),explode(',',yarpp_get_option('distags'))),'is_numeric'))?"left join $wpdb->term_relationships as blockrel on ($wpdb->posts.ID = blockrel.object_id)
 	left join $wpdb->term_taxonomy as blocktax using (`term_taxonomy_id`)
 	left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))":"");
 
