@@ -109,6 +109,17 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* A helpful little tooltip for the admin-only threshold display
 * 2.0.6
 	* A quick emergency bugfix (In one instance, assumed existence of `wp_posts`)
+* 2.1 - The RSS edition!
+	* RSS feed support!: the option to automagically show related posts in RSS feeds and to customize their display, [by popular request](http://wordpress.org/support/topic/151766).
+	* A link to [the Yet Another Related Posts Plugin RSS feed](http://wordpress.org/support/topic/208469).
+	* A new format for pushing arguments to the `related_posts()` functions.
+	* Bugfix: [compatibility](http://wordpress.org/support/topic/207286) with the [dzoneZ-Et](http://wordpress.org/extend/plugins/dzonez-et/) and [reddZ-Et](http://wordpress.org/extend/plugins/reddz-et/) plugins.
+	* Bugfix: `related_*_exist()` functions produced invalid queries
+
+* 2.1 - to do
+	* warning for `wp_posts` with non-MyISAM engines
+	* further modularize sql query
+	* warning for people who use an excerpt-feed
 
 == Future versions ==
 
@@ -116,5 +127,4 @@ The following feature requests have been made and may be incorporated into a fut
 
 * User-defineable stopwords, especially to support other languages, [by request](http://wordpress.org/support/topic/159359)
 * Date and comment count in excerpt, [by request](http://wordpress.org/support/topic/156231)
-* RSS feed support: an option to automagically show related posts in RSS feeds, [by popular request](http://wordpress.org/support/topic/151766).
 * Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)
