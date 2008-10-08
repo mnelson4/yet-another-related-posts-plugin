@@ -109,6 +109,7 @@ rss.setAttribute("rel", "alternate");
 rss.setAttribute("type", "application/rss+xml");
 rss.setAttribute('title',"Yet Another Related Posts Plugin version history (RSS 2.0)");
 rss.setAttribute("href", "http://mitcho.com/code/yarpp/yarpp.rss");
+document.getElementsByTagName("head")[0].appendChild(rss);
 
 var css=document.createElement("link");
 css.setAttribute("rel", "stylesheet");
