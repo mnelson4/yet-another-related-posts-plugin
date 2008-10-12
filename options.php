@@ -1,11 +1,37 @@
 <?php
 // Begin Related Posts Options
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options;
-if (!yarpp_enabled()) {
-	echo '<div class="updated">';
-	if (yarpp_activate()) echo 'The YARPP database had an error but has been fixed.';
-	echo '</div>';
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
+
+$yarpp_myisam = true;
+if (!yarpp_myisam_check()) {
+	echo "<div class='updated'>Your database's <code>$wpdb->posts</code> table is not set up to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a> which is required for YARPP to use the \"consider titles\" and \"consider bodies\" criteria. These two options have been disabled.<br />
+	
+	To restore these features, please update your <code>$wpdb->posts</code> by executing the following SQL directive: <code>ALTER TABLE `$wpdb->posts` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications.</div>";
+
+	yarpp_set_option('title',1);
+	yarpp_set_option('body',1);
+	$yarpp_myisam = false;
+}
+
+$yarpp_twopointfive = true;
+if (substr($wp_version,0,3) < 2.5) {
+	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
+
+	yarpp_set_option('categories',1);
+	yarpp_set_option('tags',1);
+	$yarpp_twopointfive = false;
+}
+
+if ($yarpp_myisam) {
+	if (!yarpp_enabled()) {
+		echo '<div class="updated">';
+		if (yarpp_activate())
+			echo 'The YARPP database had an error but has been fixed.';
+		else 
+			echo 'The YARPP database has an error which could not be fixed.';
+		echo '</div>';
+	}
 }
 
 yarpp_reinforce(); // just in case, set default options, etc.
@@ -29,6 +55,9 @@ function yarpp_unmapthetag($name) {
 if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_value_options) as $option) {
 		yarpp_set_option($option,addslashes($_POST[$option]));
+	}
+	foreach (array('title','body','tags','categories') as $key) {
+		if (!isset($_POST[$key])) yarpp_set_option($key,1);
 	}
 	if (isset($_POST['discats'])) { 
 		yarpp_set_option('discats',implode(',',array_keys($_POST['discats']))); // discats is different
@@ -190,10 +219,14 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 	</div>-->
 	
 	<?php textbox('threshold','Match threshold:')?>
-	<?php importance2('title',"Titles: ")?>
-	<?php importance2('body',"Bodies: ")?>
-	<?php importance('tags',"Tags: ",'tag')?>
-	<?php importance('categories',"Categories: ",'category')?>
+	<?php importance2('title',"Titles: ",'word',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''))?>
+	<?php importance2('body',"Bodies: ",'word',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''))?>
+	<?php importance('tags',"Tags: ",'tag',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
+	<?php importance('categories',"Categories: ",'category',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
 	<?php checkbox('cross_relate',"Cross-relate posts and pages? <a href='#' class='info'>more&gt;<span>When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pagaes()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.</span></a>"); ?>
 			</tbody>
 		</table>
@@ -312,7 +345,7 @@ if (yarpp_get_option('rss_promote_yarpp'))
 	$democode .= htmlspecialchars("\n<p>Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.</p>");
 
 checkbox('rss_display',"Display related posts in feeds? <a href='#' class='info'>more&gt;<span>This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.</span></a>","<tr valign='top'><th colspan='3'>",' onclick="javascript:do_rss_display();"');
-checkbox('rss_excerpt_display',"Display related posts in the descriptions? <a href='#' class='info'>more&gt;<span>This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to use excerpts, however, only the description field is used, so this option is required for any display at all.</span></a>","<tr name='rss_displayed' valign='top'>
+checkbox('rss_excerpt_display',"Display related posts in the descriptions? <a href='#' class='info'>more&gt;<span>This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.</span></a>","<tr name='rss_displayed' valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="10" style="border-left:8px white solid;"><b>RSS display code example</b><br /><small>(Update options to reload.)</small><br/>'
 ."<code><pre style='overflow:auto;width:350px;'>".($democode)."</pre></code></td>"); ?>
 	<?php textbox('rss_limit','Maximum number of related posts:',2,"<tr valign='top' name='rss_displayed'>

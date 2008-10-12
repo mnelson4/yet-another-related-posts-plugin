@@ -2,8 +2,8 @@
 /*
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
-Description: Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
-Version: 2.0.6
+Description: Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
+Version: 2.1
 Author: mitcho (Michael Yoshitaka Erlewine)
 */
 

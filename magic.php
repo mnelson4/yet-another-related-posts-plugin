@@ -71,7 +71,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 		'threshold'=>'threshold',
 		'show_excerpt'=>"${domainprefix}show_excerpt",
 		'excerpt_length'=>"${domainprefix}excerpt_length",
-		'show_past_post'=>'show_pass_post',
+		'show_pass_post'=>'show_pass_post',
 		'past_only'=>'past_only',
 		'cross_relate'=>'cross_relate',
 		'body'=>'body',
@@ -108,6 +108,11 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	$titleweight = (($title == 3)?3:(($title == 2)?1:0));
 	$tagweight = (($tags != 1)?1:0);
 	$catweight = (($categories != 1)?1:0);
+	$weights = array();
+	$weights['body'] = $bodyweight;
+	$weights['title'] = $titleweight;
+	$weights['cat'] = $catweight;
+	$weights['tag'] = $tagweight;
 	
 	$totalweight = $bodyweight + $titleweight + $tagweight + $catweight;
 	
@@ -117,34 +122,71 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	
 	$disterms = implode(',', array_filter(array_merge(explode(',',$discats),explode(',',$distags)),'is_numeric'));
 
-	$newsql = "SELECT ID, post_title, post_date, post_content, (MATCH (post_content) AGAINST ('".post_body_keywords()."')) as bodyscore, (MATCH (post_title) AGAINST ('".post_title_keywords()."')) as titlescore, COUNT( DISTINCT tagtax.term_taxonomy_id ) AS tagscore, COUNT( DISTINCT cattax.term_taxonomy_id ) AS catscore, ((MATCH (post_content) AGAINST ('".post_body_keywords()."')) * $bodyweight + (MATCH (post_title) AGAINST ('".post_title_keywords()."')) * $titleweight + COUNT( DISTINCT tagtax.term_taxonomy_id ) * $tagweight + COUNT( DISTINCT cattax.term_taxonomy_id ) * $catweight) AS score".(count(array_filter(array_merge(explode(',',$discats),explode(',',$distags)),'is_numeric'))?", count(blockterm.term_id) as block":"")."
- FROM $wpdb->posts ";
+	$usedisterms = count(array_filter(array_merge(explode(',',$discats),explode(',',$distags)),'is_numeric'));
 
-	$newsql .= (count(array_filter(array_merge(explode(',',$discats),explode(',',$distags)),'is_numeric'))?"left join $wpdb->term_relationships as blockrel on ($wpdb->posts.ID = blockrel.object_id)
-	left join $wpdb->term_taxonomy as blocktax using (`term_taxonomy_id`)
-	left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))":"");
+	$criteria = array();
+	if ($bodyweight)
+		$criteria['body'] = "(MATCH (post_content) AGAINST ('".post_body_keywords()."'))";
+	if ($titleweight)
+		$criteria['title'] = "(MATCH (post_title) AGAINST ('".post_title_keywords()."'))";
+	if ($tagweight)
+		$criteria['tag'] = "COUNT( DISTINCT tagtax.term_taxonomy_id )";
+	if ($catweight)
+		$criteria['cat'] = "COUNT( DISTINCT cattax.term_taxonomy_id )";
 
-	$newsql .= "left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $post->ID ) 
-	left JOIN $wpdb->term_relationships AS tagrel on (tagrel.term_taxonomy_id = thistag.term_taxonomy_id
-	AND tagrel.object_id = $wpdb->posts.ID)
-	left JOIN $wpdb->term_taxonomy AS tagtax ON ( tagrel.term_taxonomy_id = tagtax.term_taxonomy_id
-	AND tagtax.taxonomy = 'post_tag') 
+	$newsql = "SELECT ID, post_title, post_date, post_content, ";
 
-	left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $post->ID ) 
-	left JOIN $wpdb->term_relationships AS catrel on (catrel.term_taxonomy_id = thiscat.term_taxonomy_id
-	AND catrel.object_id = $wpdb->posts.ID)
-	left JOIN $wpdb->term_taxonomy AS cattax ON ( catrel.term_taxonomy_id = cattax.term_taxonomy_id
-	AND cattax.taxonomy = 'category') 
+	foreach ($criteria as $key => $value) {
+		$newsql .= "$value as ${key}score, ";
+	}
 
-	where (post_status IN ( 'publish',  'static' ) && ID != '$post->ID')";
+	$newsql .= '(0';
+	foreach ($criteria as $key => $value) {
+		$newsql .= "+ $value * ".$weights[$key];
+	}
+	$newsql .= ') as score';
 
-	$newsql .= ($past_only ?" and post_date <= '$now' ":' ');
-	$newsql .= ((!$show_pass_post)?" and post_password ='' ":' ');
-	$newsql .= "			and post_type IN ('".implode("', '",$type)."')";
+	if ($usedisterms)
+	$newsql .= ", count(blockterm.term_id) as block";
+	
+	$newsql .= "\n from $wpdb->posts \n";
 
-	$newsql .= " GROUP BY id ";
-	$newsql .= " having "; 	$newsql .= (count(array_filter(array_merge(explode(',',$discats),explode(',',$distags)),'is_numeric'))?" block = 0 and ":'');
-	$newsql .= " score >= $threshold";
+	if ($usedisterms)
+		$newsql .= " left join $wpdb->term_relationships as blockrel on ($wpdb->posts.ID = blockrel.object_id)
+		left join $wpdb->term_taxonomy as blocktax using (`term_taxonomy_id`)
+		left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))\n";
+
+	if ($tagweight)
+		$newsql .= " left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $post->ID ) 
+		left JOIN $wpdb->term_relationships AS tagrel on (tagrel.term_taxonomy_id = thistag.term_taxonomy_id
+		AND tagrel.object_id = $wpdb->posts.ID)
+		left JOIN $wpdb->term_taxonomy AS tagtax ON ( tagrel.term_taxonomy_id = tagtax.term_taxonomy_id
+		AND tagtax.taxonomy = 'post_tag')\n";
+
+	if ($catweight)
+		$newsql .= " left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $post->ID ) 
+		left JOIN $wpdb->term_relationships AS catrel on (catrel.term_taxonomy_id = thiscat.term_taxonomy_id
+		AND catrel.object_id = $wpdb->posts.ID)
+		left JOIN $wpdb->term_taxonomy AS cattax ON ( catrel.term_taxonomy_id = cattax.term_taxonomy_id
+		AND cattax.taxonomy = 'category')\n";
+
+	// WHERE
+	
+	$newsql .= " where (post_status IN ( 'publish',  'static' ) and ID != '$post->ID')";
+
+	if ($past_only)
+		$newsql .= " and post_date <= '$now' ";
+	if (!$show_pass_post)
+		$newsql .= " and post_password ='' ";
+
+	$newsql .= " and post_type IN ('".implode("', '",$type)."')";
+
+	// GROUP BY
+	$newsql .= "\n group by id \n";
+	// HAVING
+	$newsql .= " having score >= $threshold";
+	if ($usedisterms)
+		$newsql .= " and block = 0";
 
 	$newsql .= (($categories == 3)?' and catscore >= 1':'');
 	$newsql .= (($categories == 4)?' and catscore >= 2':'');
@@ -156,6 +198,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
 
+	//echo "<!--$newsql-->";
 	return $newsql;
 }
 
@@ -194,8 +237,6 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 		}
 	}
 	extract($optvals);
-	
-	// Primary SQL query
 	
     $results = $wpdb->get_results(yarpp_sql($type,$args,true,$domain));
     $output = '';

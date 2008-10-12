@@ -81,9 +81,18 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','2.06');
-	update_option('yarpp_version','2.06');
+	add_option('yarpp_version','2.1');
+	update_option('yarpp_version','2.1');
 	return 1;
+}
+
+function yarpp_myisam_check() {
+	global $wpdb;
+	$tables = $wpdb->get_results("show table status like '$wpdb->posts'");
+	foreach ($tables as $table) {
+		if ($table->Engine == 'MyISAM') return 1;
+	}
+	return 0;
 }
 
 function yarpp_upgrade_check($inuse = false) {
@@ -97,6 +106,8 @@ function yarpp_upgrade_check($inuse = false) {
 		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
 		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
 	}
+
+	// upgrade check
 
 	if (get_option('threshold') and get_option('limit') and get_option('len')) {
 		yarpp_activate();
@@ -124,8 +135,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.06) {
-		update_option('yarpp_version','2.06');
+	if (get_option('yarpp_version') < 2.1) {
+		update_option('yarpp_version','2.1');
 	}
 
 	// just in case, try to add the index one more time.	
