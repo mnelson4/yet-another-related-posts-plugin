@@ -4,29 +4,36 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
-Tags: related, posts, post, pages, page
+Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
-Tested up to: 2.6.2
-Stable tag: 2.0.6
+Tested up to: 2.7
+Stable tag: 2.1
 
-Returns a list of the related entries based on keyword matches, limited by a certain relatedness threshold. New and improved, version 2.0!
+Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
 
 == Description ==
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
-1. *Limiting by a threshold*: Peter Bowyer did the great work of making the algorithm use MySQL's [fulltext search](dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all relevant. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts and less if there are less. Ha!
+1. *Limiting by a threshold*: Peter Bowyer did the great work of making the algorithm use MySQL's [fulltext search](http://dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all relevant. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts and less if there are less. Ha!
 2. *Using tags and categories*: **New in 2.0!** The new 2.0 algorithm uses tags and categories. The new options screen puts you in control of how these factors should be used.
-3. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
-4. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
-5. *Simple installation*: **New in 1.5!** Automatically displays related posts after content on single entry pages without any theme tinkering.
-6. *Miscellany*: a nicer options screen (including a sample display of the code that is produced **New in 2.0**), displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
+3. *Related posts in RSS feeds*: **New in 2.1!** Display related posts in your RSS and Atom feeds with custom display options.
+4. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
+5. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
+6. *Simple installation*: **New in 1.5!** Automatically displays related posts after content on single entry pages without any theme tinkering.
+7. *Miscellany*: a nicer options screen (including a sample display of the code that is produced **New in 2.0**), displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
 
 == Installation ==
 
-= Auto display =
+= Auto display on your website =
 
 Since YARPP 1.5, you can just put the `yet-another-related-posts-plugin` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
+
+= Auto display in your feeds =
+
+Since YARPP 2.1, you can turn on the "display related posts in feeds" option to show related posts in your RSS and Atom feeds.
+
+The "display related posts in feeds" option can be used regardless of whether you auto display them on your website (and vice versa).
 
 = Widget =
 
@@ -34,13 +41,64 @@ Related posts can also be displayed as a widget. Go to the Design > Widgets opti
 
 = Manual installation =
 
+**This is an advanced feature for those comfortable with PHP.** 97% of users will be better served by the auto display options above.
+
 If you would like to put the related posts display in another part of your theme, or display them in pages other than single entry pages, turn off "auto display" in the YARPP Options, then drop `related_posts()`, `related_pages()`, or `related_entries()` (see below) in your [WP loop](http://codex.wordpress.org/The_Loop). Change any options in the Related Posts (YARPP) Options pane in Admin > Plugins. See Examples in Other Notes for sample code you can drop into your theme.
 
 There're also `related_posts_exist()`, `related_pages_exist()`, and `related_entries_exist()` functions, which return a boolean as expected.
 
-= The "related" functions =
+**The `related_` functions**
 
-By default, `related_posts()` gives you back posts only, `related_pages()` gives you pages, and there's `related_entries()` gives you posts and pages. When the "cross-relate posts and pages" option is checked in the YARPP options panel, `related_posts()`, `related_pages()`, and `related_entries()` will give you exactly the same output.
+By default, `related_posts()` gives you back posts only, `related_pages()` gives you pages, and there's `related_entries()` which gives you posts and pages. When the "cross-relate posts and pages" option is checked in the YARPP options panel, `related_posts()`, `related_pages()`, and `related_entries()` will give you exactly the same output.
+
+The `related` functions can be used in conjunction to the regular "auto display" option.
+
+**Customizing the `related_` functions**
+
+Since YARPP 2.1, you can specify some custom options for each instance of `related_*()`. The arguments are specified as a single array argument (`related_*(array(key=>value, key=>value, ...))`).
+
+The available keys in version 2.1 are (roughly in the same order as in the options page):
+
+* The Pool:
+	* `distags` => comma-delimited list of tag numbers which should be disallowed
+	* `discats` => comma-delimited list of category numbers which should be disallowed
+* Relatedness options:
+	* `threshold` => the match threshold
+	* `show_pass_post` => (`bool`) show password-protected posts
+	* `past_only` => (`bool`) only past posts
+	* `title` => 1 for "do not consider", 2 for "consider", 3 for "consider with extra weight"
+	* `body` => 1 for "do not consider", 2 for "consider", 3 for "consider with extra weight"
+	* `tags` => 1 for "do not consider", 2 for "consider", 3 for "require one common tag", 4 for "require multiple common tags"
+	* `categories` => 1 for "do not consider", 2 for "consider", 3 for "require one common category", 4 for "require multiple common categories"
+	* `cross_relate` => (`bool`) cross-relate posts and pages
+* Display options:
+	* `limit` => (`int`) maximum number of results
+	* `before_related` => before related entries text
+	* `after_related` => after related entries text
+	* `before_title` => before related entry title text
+	* `after_title` => after related entry title text
+	* `show_excerpt` => (`bool`) show excerpt
+	* `excerpt_length` => (`int`) the excerpt length
+	* `before_post` => before each related entry text
+	* `after_post` => after each related entry text
+	* `order` => MySQL `ORDER BY ` field and direction
+	* `no_results` => "no results" text
+	* `promote_yarpp` => (`bool`) promote YARPP?
+	* `show_score` => (`bool`) show the match score to admins
+
+**Examples**
+
+Customized `related_*()` functions can be used to build specialized related-post functionality into your WordPress-enabled site. Here are some examples to get you started:
+
+* `related_posts(array('title'=>1,'body'=>1,'tags'=>1,'categories'=>3))`
+	* This example will return posts with at least one common category (with no other considerations).
+* `related_posts(array('show_pass_post'=>1))`
+	* This example will return password-protected posts.
+	* This is useful for a site with some members-only content. This command can be run within a `if ($membership == true)` type of conditional.
+* `related_posts(array('order'=>'rand() asc','limit'=>1))`
+	* This example will link to one random related post.
+* `related_posts(array('discats'=>'`(all categories except one)`'))`
+	* This example will give you related posts from only a certain category. (Although there are certainly much better ways to do this with other plugins or custom code.)
 
 == Frequently Asked Questions ==
 
@@ -49,6 +107,12 @@ If your question isn't here, ask your own question at [the Wordpress.org forums]
 = Every page just says "no related posts"! What's up with that? =
 
 Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Make sure the last option "show admins the match scores" is on. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+
+= I turned off one of the relatedness criteria (titles, bodies, tags, or categories) and now every page says "no related posts"! =
+
+This has to do with the way the "match score" is computed. Every entry's match score is the weighted sum of its title-score, body-score, tag-score, and category-score. If you turn off one of the relatedness criteria, you will no doubt have to lower your match threshold to get the same number of related entries to show up. Alternatively, you can consider one of the other criteria "with extra weight".
+
+It is recommended that you tweak your match threshold whenever you make changes to the "makeup" of your match score (i.e., the settings for the titles, bodies, tags, and categories items).
 
 = A weird number is displayed after each related post. What is this? =
 
@@ -109,12 +173,21 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* A helpful little tooltip for the admin-only threshold display
 * 2.0.6
 	* A quick emergency bugfix (In one instance, assumed existence of `wp_posts`)
+* 2.1 - The RSS edition!
+	* RSS feed support!: the option to automagically show related posts in RSS feeds and to customize their display, [by popular request](http://wordpress.org/support/topic/151766).
+	* A link to [the Yet Another Related Posts Plugin RSS feed](http://wordpress.org/support/topic/208469).
+	* Further optimization of the main SQL query in cases where not all of the match criteria (title, body, tags, categories) are chosen.
+	* A new format for pushing arguments to the `related_posts()` functions.
+	* Bugfix: [compatibility](http://wordpress.org/support/topic/207286) with the [dzoneZ-Et](http://wordpress.org/extend/plugins/dzonez-et/) and [reddZ-Et](http://wordpress.org/extend/plugins/reddz-et/) plugins.
+	* Bugfix: `related_*_exist()` functions produced invalid queries
+	* A warning for `wp_posts` with non-MyISAM engines and semi-compatibility with non-MyISAM setups.
+	* Bugfix: [a better notice for users of Wordpress < 2.5](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/#comment-131194) regarding the "compare tags" and "compare categories" features.
 
 == Future versions ==
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
 
 * User-defineable stopwords, especially to support other languages, [by request](http://wordpress.org/support/topic/159359)
+* Localization
 * Date and comment count in excerpt, [by request](http://wordpress.org/support/topic/156231)
-* RSS feed support: an option to automagically show related posts in RSS feeds, [by popular request](http://wordpress.org/support/topic/151766).
 * Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)
