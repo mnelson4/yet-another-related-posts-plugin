@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7
-Stable tag: 2.1
+Stable tag: 2.1.1
 
 Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
 
@@ -53,7 +53,7 @@ By default, `related_posts()` gives you back posts only, `related_pages()` gives
 
 The `related` functions can be used in conjunction to the regular "auto display" option.
 
-**Customizing the `related_` functions**
+**Customizing the "related" functions**
 
 Since YARPP 2.1, you can specify some custom options for each instance of `related_*()`. The arguments are specified as a single array argument (`related_*(array(key=>value, key=>value, ...))`).
 
@@ -108,15 +108,29 @@ If your question isn't here, ask your own question at [the Wordpress.org forums]
 
 Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Make sure the last option "show admins the match scores" is on. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
+= Does YARPP work with full-width characters or languages that don't use spaces between words? =
+
+YARPP works fine with full-width (double-byte) characters, assuming your WordPress database is set up with Unicode support. 99% of the time, if you're able to write blog posts with full-width characters and they're displayed correctly, YARPP will work on your blog.
+
+However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
+
+= Does YARPP slow down my blog/server? =
+
+A little bit, yes. Every time you display a post with automatic display of related posts (or one of the `related_*()` functions) it will calculate the related posts, which can be a database-intensive operation. *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).* For the majority of users, this type of caching will be enough to stem the performance issues.
+
+If you have a large blog with many (>1000) posts or have many tags or categories, YARPP may noticibly affect your blog's performance, even with a caching plugin. For these large blogs, for the time being I recommend you disable the "consider tags" and "consider categories" options. Turning off any "disallow" tags or categories will also speed things up.
+
+In the future I will be building a YARPP-internal cache system so that YARPP can calculate all the post-relations at one time and then re-use those results every time, rather than calculating them on the fly.
+
+= I get a PHP error saying "Cannot redeclare `related_posts()`" =
+
+You most likely have another related posts plugin activated at the same time. Please disactivate those other plugins first before using YARPP.
+
 = I turned off one of the relatedness criteria (titles, bodies, tags, or categories) and now every page says "no related posts"! =
 
 This has to do with the way the "match score" is computed. Every entry's match score is the weighted sum of its title-score, body-score, tag-score, and category-score. If you turn off one of the relatedness criteria, you will no doubt have to lower your match threshold to get the same number of related entries to show up. Alternatively, you can consider one of the other criteria "with extra weight".
 
 It is recommended that you tweak your match threshold whenever you make changes to the "makeup" of your match score (i.e., the settings for the titles, bodies, tags, and categories items).
-
-= A weird number is displayed after each related post. What is this? =
-
-This is the match score for each of those entries, relative to the current entry. Don't worry, though--this is just being displayed because the "show admins the match scores" option is on (as it is by default) and only blog admins can see those scores. Your readers will not see these values. See above for how to use these values.
 
 = XXX plugin stopped working after I installed YARPP! =
 
@@ -125,6 +139,12 @@ Please submit such bugs by starting a new thread on [the Wordpress.org forums](h
 = Things are weird after I upgraded. Ack! =
 
 I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
+
+= Does YARPP come in different languages? =
+
+YARPP has been [internationalized](http://codex.wordpress.org/Writing_a_Plugin#Internationalizing_Your_Plugin) as of version 2.1.1. No localizations have been made yet, but they are coming.
+
+If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Version log ==
 
@@ -182,6 +202,11 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 	* Bugfix: `related_*_exist()` functions produced invalid queries
 	* A warning for `wp_posts` with non-MyISAM engines and semi-compatibility with non-MyISAM setups.
 	* Bugfix: [a better notice for users of Wordpress < 2.5](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/#comment-131194) regarding the "compare tags" and "compare categories" features.
+* 2.1.1
+	* Bugfix: keywords with forward slashes (\) could make the main SQL query ill-formed.
+	* Bugfix: Added an override option for the [false MyISAM warnings](http://wordpress.org/support/topic/211043).
+	* Preparing for localization! (See note at the bottom of the FAQ.)
+	* Adding a debug mode--just try adding `&yarpp_debug=1` to your URL's and look at the HTML source.
 
 == Future versions ==
 

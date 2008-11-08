@@ -1,64 +1,40 @@
 <?php
 
-$overusedwords = array( '', 'a', 'an', 'the', 'and', 'of', 'i', 'to', 'is', 'in', 'with', 'for', 'as', 'that', 'on', 'at', 'this', 'my', 'was', 'our', 'it', 'you', 'we', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '10', 'about', 'after', 'all', 'almost', 'along', 'also', 'amp', 'another', 'any', 'are', 'area', 'around', 'available', 'back', 'be', 'because', 'been', 'being', 'best', 'better', 'big', 'bit', 'both', 'but', 'by', 'c', 'came', 'can', 'capable', 'control', 'could', 'course', 'd', 'dan', 'day', 'decided', 'did', 'didn', 'different', 'div', 'do', 'doesn', 'don', 'down', 'drive', 'e', 'each', 'easily', 'easy', 'edition', 'end', 'enough', 'even', 'every', 'example', 'few', 'find', 'first', 'found', 'from', 'get', 'go', 'going', 'good', 'got', 'gt', 'had', 'hard', 'has', 'have', 'he', 'her', 'here', 'how', 'if', 'into', 'isn', 'just', 'know', 'last', 'left', 'li', 'like', 'little', 'll', 'long', 'look', 'lot', 'lt', 'm', 'made', 'make', 'many', 'mb', 'me', 'menu', 'might', 'mm', 'more', 'most', 'much', 'name', 'nbsp', 'need', 'new', 'no', 'not', 'now', 'number', 'off', 'old', 'one', 'only', 'or', 'original', 'other', 'out', 'over', 'part', 'place', 'point', 'pretty', 'probably', 'problem', 'put', 'quite', 'quot', 'r', 're', 'really', 'results', 'right', 's', 'same', 'saw', 'see', 'set', 'several', 'she', 'sherree', 'should', 'since', 'size', 'small', 'so', 'some', 'something', 'special', 'still', 'stuff', 'such', 'sure', 'system', 't', 'take', 'than', 'their', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'think', 'those', 'though', 'through', 'time', 'today', 'together', 'too', 'took', 'two', 'up', 'us', 'use', 'used', 'using', 've', 'very', 'want', 'way', 'well', 'went', 'were', 'what', 'when', 'where', 'which', 'while', 'white', 'who', 'will', 'would', 'your');
+/* yarpp_cache_keywords is EXPERIMENTAL and not used.
+*  Don't worry about it. ^^ 
+*/
+function yarpp_cache_keywords() {
+	global $wpdb, $post, $yarpp_debug;
+    $body_terms = post_body_keywords();
+    $title_terms = post_title_keywords();
+	/*
+	CREATE TABLE `mitcho_wrdp1`.`wp_yarpp_keyword_cache` (
+	`ID` BIGINT( 20 ) UNSIGNED NOT NULL ,
+	`body` TEXT NOT NULL ,
+	`title` TEXT NOT NULL ,
+	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	PRIMARY KEY ( `ID` )
+	) ENGINE = MYISAM COMMENT = 'YARPP''s keyword cache table' 
+	*/
+	$timeout = 400;
 
-function post_title_keywords($num_to_ret = 20) {
-	global $post, $overusedwords;
-	$wordlist = preg_split('/\s*[\s+\.|\?|,|(|)|\-+|\'|\"|=|;|&#0215;|\$|\/|:|{|}]\s*/i', strtolower($post->post_title));
+	if ($yarpp_debug) echo '<!--'.$wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)").'-->';
 
-	// Build an array of the unique words and number of times they occur.
-	$a = array_count_values($wordlist);
+	if ($wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)") == 0) {
+		$wpdb->query('set names utf8');
 	
-	// Remove the stop words from the list.
-	foreach ($overusedwords as $word) {
-		 unset($a[$word]);
+		$wpdb->query("insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'");
+	
+		if ($yarpp_debug) echo "<!--"."insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'"."-->";
 	}
-	arsort($a, SORT_NUMERIC);
-	
-	$num_words = count($a);
-	$num_to_ret = $num_words > $num_to_ret ? $num_to_ret : $num_words;
-	
-	$outwords = array_slice($a, 0, $num_to_ret);
-	return implode(' ', array_keys($outwords));
-}
-
-// post_body_keywords()
-// Based on create_post_keywords by Peter Bowyer with major changes by mitcho
-/**
- * Builds a word frequency list from the Wordpress post, and returns a string
- * to be used in matching against the MySQL full-text index.
- *
- * @param integer $num_to_ret The number of words to use when matching against
- * 							  the database.
- * @return string The words
- */
-function post_body_keywords($num_to_ret = 20) {
-	global $post, $overusedwords;
-	
-	$string = strip_tags(apply_filters_if_white('the_content',$post->post_content));
-	
-	// Remove punctuation and split
-	$wordlist = preg_split('/\s*[\s+\.|\?|,|(|)|\-+|\'|\"|=|;|&#0215;|\$|\/|:|{|}]\s*/i', strtolower($string));
-	
-	// Build an array of the unique words and number of times they occur.
-	$a = array_count_values($wordlist);
-	
-	// Remove the stop words from the list.
-	foreach ($overusedwords as $word) {
-		 unset($a[$word]);
-	}
-	arsort($a, SORT_NUMERIC);
-	
-	$num_words = count($a);
-	$num_to_ret = $num_words > $num_to_ret ? $num_to_ret : $num_words;
-	
-	$outwords = array_slice($a, 0, $num_to_ret);
-	return implode(' ', array_keys($outwords));
-	
 }
 
 function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
-	global $wpdb, $post;
+	global $wpdb, $post, $yarpp_debug;
+
+	// set $yarpp_debug
+	if (isset($_REQUEST['yarpp_debug']))
+		$yarpp_debug = true;
 
 	// set the "domain prefix", used for all the preferences.
 	if ($domain == 'rss')
@@ -94,9 +70,14 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
 	if ($cross_relate) $type = array('post','page');
 
+	yarpp_cache_keywords();
+
 	// Fetch keywords
     $body_terms = post_body_keywords();
     $title_terms = post_title_keywords();
+    
+    if ($yarpp_debug) echo "<!--TITLE TERMS: $title_terms-->"; // debug
+    if ($yarpp_debug) echo "<!--BODY TERMS: $body_terms-->"; // debug
     
 	// Make sure the post is not from the future
 	$time_difference = get_settings('gmt_offset');
@@ -126,9 +107,9 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 
 	$criteria = array();
 	if ($bodyweight)
-		$criteria['body'] = "(MATCH (post_content) AGAINST ('".post_body_keywords()."'))";
+		$criteria['body'] = "(MATCH (post_content) AGAINST ('$body_terms'))";
 	if ($titleweight)
-		$criteria['title'] = "(MATCH (post_title) AGAINST ('".post_title_keywords()."'))";
+		$criteria['title'] = "(MATCH (post_title) AGAINST ('$title_terms'))";
 	if ($tagweight)
 		$criteria['tag'] = "COUNT( DISTINCT tagtax.term_taxonomy_id )";
 	if ($catweight)
@@ -198,7 +179,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
 
-	//echo "<!--$newsql-->";
+	if ($yarpp_debug) echo "<!--$newsql-->";
 	return $newsql;
 }
 
@@ -248,7 +229,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 			$post_content = stripslashes($post_content);
 			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
 			if ($show_score and $userdata->user_level >= 8 and $domain != 'rss')
-				$output .= ' <abbr title="'.round($result->score,3).' is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.">('.round($result->score,3).')</abbr>';
+				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
 			$output .= '</a>';
 			if ($show_excerpt) {
 				$output .= $before_post . yarpp_excerpt($post_content,$excerpt_length) . $after_post;
@@ -257,7 +238,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 		}
 		$output = stripslashes(stripslashes($before_related)).$output.stripslashes(stripslashes($after_related));
 		if ($promote_yarpp)
-			$output .= "\n<p>Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.</p>";
+			$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 
 	} else {
 		$output = $no_results;

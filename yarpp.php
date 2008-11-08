@@ -3,12 +3,11 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
-Version: 2.1
+Version: 2.1.1
 Author: mitcho (Michael Yoshitaka Erlewine)
 */
 
 require_once('includes.php');
-require_once('magic.php');
 require_once('related-functions.php');
 
 add_action('admin_menu','yarpp_admin_menu');
