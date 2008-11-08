@@ -84,8 +84,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','2.11');
-	update_option('yarpp_version','2.11');
+	add_option('yarpp_version','2.12');
+	update_option('yarpp_version','2.12');
 	return 1;
 }
 
@@ -138,8 +138,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.11) {
-		update_option('yarpp_version','2.11');
+	if (get_option('yarpp_version') < 2.12) {
+		update_option('yarpp_version','2.12');
 	}
 
 	// just in case, try to add the index one more time.	

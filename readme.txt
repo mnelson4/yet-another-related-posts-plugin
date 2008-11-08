@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 
 Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
 
@@ -207,6 +207,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Bugfix: Added an override option for the [false MyISAM warnings](http://wordpress.org/support/topic/211043).
 	* Preparing for localization! (See note at the bottom of the FAQ.)
 	* Adding a debug mode--just try adding `&yarpp_debug=1` to your URL's and look at the HTML source.
+* 2.1.2
+	* Bugfix: MyISAM override handling bug
 
 == Future versions ==
 
