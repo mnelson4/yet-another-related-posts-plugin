@@ -1,7 +1,7 @@
 <?php
 
 require_once('magic.php');
-require_once('keywords');
+require_once('keywords.php');
 
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 $yarpp_value_options = array('threshold' => 5,
@@ -84,8 +84,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','2.11');
-	update_option('yarpp_version','2.11');
+	add_option('yarpp_version','2.12');
+	update_option('yarpp_version','2.12');
 	return 1;
 }
 
@@ -93,9 +93,10 @@ function yarpp_myisam_check() {
 	global $wpdb;
 	$tables = $wpdb->get_results("show table status like '$wpdb->posts'");
 	foreach ($tables as $table) {
-		if ($table->Engine == 'MyISAM') return 1;
+		if ($table->Engine == 'MyISAM') return true;
+		else return $table->Engine;
 	}
-	return 0;
+	return 'UNKNOWN';
 }
 
 function yarpp_upgrade_check($inuse = false) {
@@ -137,8 +138,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.11) {
-		update_option('yarpp_version','2.11');
+	if (get_option('yarpp_version') < 2.12) {
+		update_option('yarpp_version','2.12');
 	}
 
 	// just in case, try to add the index one more time.	
@@ -150,7 +151,7 @@ function yarpp_upgrade_check($inuse = false) {
 }
 
 function yarpp_admin_menu() {
-	add_options_page('Related Posts (YARPP)', 'Related Posts (YARPP)', 8, 'yet-another-related-posts-plugin/options.php', 'yarpp_options_page');
+	add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 8, 'yet-another-related-posts-plugin/options.php', 'yarpp_options_page');
    //if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', 'Related Posts (YARPP)', 'Related Posts (YARPP)', 8, 'yet-another-related-posts-plugin/options.php');
 }
 
