@@ -1,5 +1,8 @@
 <?php
 
+require_once('magic.php');
+require_once('keywords');
+
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 $yarpp_value_options = array('threshold' => 5,
 				'limit' => 5,
@@ -11,21 +14,34 @@ $yarpp_value_options = array('threshold' => 5,
 				'before_related' => '<p>Related posts:<ol>',
 				'after_related' => '</ol></p>',
 				'no_results' => '<p>No related posts.</p>',
+				'order' => 'score DESC',
+				'rss_limit' => 3,
+				'rss_excerpt_length' => 10,
+				'rss_before_title' => '<li>',
+				'rss_after_title' => '</li>',
+				'rss_before_post' => ' <small>',
+				'rss_after_post' => '</small>',
+				'rss_before_related' => '<p>Related posts:<ol>',
+				'rss_after_related' => '</ol></p>',
+				'rss_no_results' => '<p>No related posts.</p>',
+				'rss_order' => 'score DESC',
 				'title' => '2',
 				'body' => '2',
 				'categories' => '2',
 				'tags' => '2',
 				'distags' => '',
-				'discats' => '',
-				'order' => 'score DESC'
-				);
+				'discats' => '');
 $yarpp_binary_options = array('past_only' => true,
 				'show_score' => true,
 				'show_excerpt' => false,
+				'rss_show_excerpt' => false,
 				'show_pass_post' => false,
 				'cross_relate' => false,
 				'auto_display' => true,
-				'promote_yarpp' => false);
+				'rss_display' => true,
+				'rss_excerpt_display' => true,
+				'promote_yarpp' => false,
+				'rss_promote_yarpp' => false);
 
 function yarpp_enabled() {
 	global $wpdb;
@@ -55,12 +71,12 @@ function yarpp_activate() {
 	if (!yarpp_enabled()) {
 		//		$wpdb->query("ALTER TABLE `wp_posts` DROP INDEX `yarpp_cache`");
 		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)")) {
-			echo "<!--MySQL error on adding yarpp_title: ";
+			echo "<!--".__('MySQL error on adding yarpp_title','yarpp').": ";
 			$wpdb->print_error();
 			echo "-->";
 		}
 		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)")) {
-			echo "<!--MySQL error on adding yarpp_content: ";
+			echo "<!--".__('MySQL error on adding yarpp_content','yarpp').": ";
 			$wpdb->print_error();
 			echo "-->";
 		}
@@ -68,9 +84,18 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','2.06');
-	update_option('yarpp_version','2.06');
+	add_option('yarpp_version','2.11');
+	update_option('yarpp_version','2.11');
 	return 1;
+}
+
+function yarpp_myisam_check() {
+	global $wpdb;
+	$tables = $wpdb->get_results("show table status like '$wpdb->posts'");
+	foreach ($tables as $table) {
+		if ($table->Engine == 'MyISAM') return 1;
+	}
+	return 0;
 }
 
 function yarpp_upgrade_check($inuse = false) {
@@ -84,6 +109,8 @@ function yarpp_upgrade_check($inuse = false) {
 		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
 		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
 	}
+
+	// upgrade check
 
 	if (get_option('threshold') and get_option('limit') and get_option('len')) {
 		yarpp_activate();
@@ -102,8 +129,7 @@ function yarpp_upgrade_check($inuse = false) {
 		}
 
 		if (!$inuse)
-			echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2.0. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p></div>';
-		update_option('yarpp_version','2.0');
+			echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
 	}
 
 	if (get_option('yarpp_version') < 2.03) {
@@ -111,8 +137,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (get_option('yarpp_version') < 2.06) {
-		update_option('yarpp_version','2.06');
+	if (get_option('yarpp_version') < 2.11) {
+		update_option('yarpp_version','2.11');
 	}
 
 	// just in case, try to add the index one more time.	
@@ -132,7 +158,7 @@ function yarpp_options_page() {
 	require(str_replace('includes.php','options.php',__FILE__));
 }
 
-// This function was written by tyok
+// This function was written by @tyok
 function widget_yarpp_init() {
 
 	if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
@@ -140,37 +166,57 @@ function widget_yarpp_init() {
 
 	function widget_yarpp($args) {
 		extract($args);
-		global $wpdb, $post, $user_level;
+		global $wpdb, $post;
 		if (is_single()) {
 			echo $before_widget;
-		 	echo $before_title . 'Related Posts' . $after_title;
+		 	echo $before_title . __('Related Posts','yarpp') . $after_title;
 			echo yarpp_related(array('post'),array());
 			echo $after_widget;
 		}
 	}
-	register_sidebar_widget(__('YARPP'), 'widget_yarpp');
+	register_sidebar_widget(__('YARPP','yarpp'), 'widget_yarpp');
 }
 
 function yarpp_default($content) {
-	global $wpdb, $post, $user_level;
-	if (get_option('yarpp_auto_display') and is_single()) {
-		return $content."\n\n".yarpp_related(array('post'),array(),false);
-	} else {
+	global $wpdb, $post;
+	if (is_feed())
+		return yarpp_rss($content);
+	elseif (yarpp_get_option('auto_display') and is_single())
+		return $content.yarpp_related(array('post'),array(),false,'website');
+	else
 		return $content;
-	}
 }
+
+function yarpp_rss($content) {
+	global $wpdb, $post;
+	if (yarpp_get_option('rss_display'))
+		return $content.yarpp_related(array('post'),array(),false,'rss');
+	else
+		return $content;
+}
+
+function yarpp_rss_excerpt($content) {
+	global $wpdb, $post;
+	if (yarpp_get_option('rss_excerpt_display'))
+		return $content.clean_pre(yarpp_related(array('post'),array(),false,'rss'));
+	else
+		return $content;
+}
+
 
 /* new in 2.0! apply_filters_if_white (previously apply_filters_without) now has a blacklist. It's defined here. */
 
 /* blacklisted so far:
-	- diggZEt
+	- diggZ-Et
+	- reddZ-Et
+	- dzoneZ-Et
 	- WP-Syntax
 	- Viper's Video Quicktags
 	- WP-CodeBox
 	- WP shortcodes
 */
 
-$yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');
+$yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','reddZEt_AddBut','dzoneZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');
 $yarpp_blackmethods = array(null,'addinlinejs','replacebbcode');
 
 function yarpp_white($filter) {
@@ -251,11 +297,6 @@ function yarpp_upgrade_one_five() {
 	update_option('yarpp_before_related','');
 	update_option('yarpp_after_related','');
 	unset($yarpp_version);
-}
-
-// upgrade to 1.5!
-function yarpp_upgrade_one_six() {
-	global $wpdb;
 }
 
 define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
