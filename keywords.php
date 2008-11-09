@@ -5,10 +5,11 @@ $overusedwords = array( '', 'a', 'an', 'the', 'and', 'of', 'i', 'to', 'is', 'in'
 function yarpp_extract_keywords($source,$num_to_ret = 20) {
 	global $post, $overusedwords;
 	
-	if (function_exists('mb_split'))
-		$wordlist = mb_split('\s*[^\w]+\s*', strtolower($source));
-	else
-		$wordlist = split('\s*[^\w]+\s*', strtolower($source));	
+	if (function_exists('mb_split')) {
+		mb_regex_encoding(get_option('blog_charset'));
+		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source));
+	} else
+		$wordlist = split('\s*\W+\s*', strtolower($source));	
 
 	// Build an array of the unique words and number of times they occur.
 	$a = array_count_values($wordlist);
