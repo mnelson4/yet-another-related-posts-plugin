@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%4
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 
 Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
 
@@ -209,6 +209,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Adding a debug mode--just try adding `&yarpp_debug=1` to your URL's and look at the HTML source.
 * 2.1.2
 	* Bugfix: MyISAM override handling bug
+* 2.1.3
+	* Bugfix: Turned off [the experimental caching](http://wordpress.org/support/topic/216194#post-894440) which shouldn't have been on in this release...
+	* Bugfix: an issue with the [keywords algorithm for non-ASCII characters](http://wordpress.org/support/topic/216078)
+	* Bugfix: [Option sumbmission took you to PayPal](http://wordpress.org/support/topic/214090)
 
 == Future versions ==
 
