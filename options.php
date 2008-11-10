@@ -179,21 +179,10 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 </script>
 
 <div class="wrap">
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-		<input type="hidden" name="cmd" value="_donations" />
-		<input type="hidden" name="business" value="mitcho@mitcho.com" />
-		<input type="hidden" name="item_name" value="Yet Another Related Posts Plugin" />
-		<input type="hidden" name="no_shipping" value="1" />
-		<input type="hidden" name="return" value="http://mitcho.com/code/yarpp/" />
-		<input type="hidden" name="cancel_return" value="http://mitcho.com/code/yarpp/" />
-		<input type="hidden" name="cn" value="Optional Comment" />
-		<input type="hidden" name="currency_code" value="USD" />
-		<input type="hidden" name="tax" value="0" />
-		<input type="hidden" name="lc" value="US" />
-		<input type="hidden" name="bn" value="PP-DonationsBF" />
-
 		<h2>
-			<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" style="float:right" />
+			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" style="float:right" /></a>
+			
+			
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
 			$display_version = yarpp_get_option('version');
@@ -206,7 +195,6 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 			}
 			?></small>
 		</h2>
-	</form>
 
 	<form method="post">
 
