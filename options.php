@@ -180,7 +180,7 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 
 <div class="wrap">
 		<h2>
-			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" style="float:right" /></a>
+			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" style="float:right" /></a>
 			
 			
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
@@ -234,7 +234,7 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 
 	<!-- Relatedness -->
 	<h3><?php _e('"Relatedness" options','yarpp');?></h3>
-	<p><?php _e('YARPP is different than the <a href="http://wasabi.pbwiki.com/Related%20Entries">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <a href="#" class='info'>more&gt;<span><?php _e('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, I recommend you turn on the "show admins the match scores" setting below. That way, you can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp');?></span></a></p>
+	<p><?php _e('YARPP is different than the <a href="http://wasabi.pbwiki.com/Related%20Entries">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <a href="#" class='info'><?php _e('more&gt;','yarpp');?><span><?php _e('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, I recommend you turn on the "show admins the match scores" setting below. That way, you can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp');?></span></a></p>
 	
 	<table class="form-table" style="margin-top: 0">
 		<tbody>
@@ -248,7 +248,7 @@ document.getElementsByTagName("body")[0].setAttribute('onload',"excerpt();rss_ex
 			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
 	<?php importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
-	<?php checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>more&gt;<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>"); ?>
+	<?php checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>"); ?>
 			</tbody>
 		</table>
 
@@ -306,7 +306,7 @@ $democode .= stripslashes(yarpp_get_option('after_related',true));
 if (yarpp_get_option('promote_yarpp'))
 	$democode .= htmlspecialchars("\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>");
 
-checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a href='#' class='info'>more&gt;<span>".__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')."</span></a>","<tr valign='top'>
+checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')."</span></a>","<tr valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="11" style="border-left:8px white solid;"><b>'.__("Website display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<code><pre style='overflow:auto;width:350px;'>".($democode)."</pre></code></td>"); ?>
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
@@ -344,9 +344,9 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 			</tr>
 	
 	<?php textbox('no_results',__('Default display if no results:','yarpp'),'40')?>
-	<?php checkbox('show_score',__("Show admins (user level > 8) the match scores?",'yarpp')." <a href='#' class='info'>more&gt;<span>".__("With this option on, each related entry's total 'match score' (all above the threshold, set above) are displayed after each entry title, <em>if you are an administrator and logged in.</em> Even if you see these values, your visitors will not.",'yarpp')."</span></a>"); ?>
+	<?php checkbox('show_score',__("Show admins (user level > 8) the match scores?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("With this option on, each related entry's total 'match score' (all above the threshold, set above) are displayed after each entry title, <em>if you are an administrator and logged in.</em> Even if you see these values, your visitors will not.",'yarpp')."</span></a>"); ?>
 	<?php checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
-	." <a href='#' class='info'>more&gt;<span>"
+	." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
 	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")
 	."</span></a>"); ?>
 		</table>
@@ -368,8 +368,8 @@ $democode .= stripslashes(yarpp_get_option('rss_after_related',true));
 if (yarpp_get_option('rss_promote_yarpp'))
 	$democode .= htmlspecialchars("\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>");
 
-checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='#' class='info'>more&gt;<span>".__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')."</span></a>","<tr valign='top'><th colspan='3'>",' onclick="javascript:do_rss_display();"');
-checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>more&gt;<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>","<tr name='rss_displayed' valign='top'>
+checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')."</span></a>","<tr valign='top'><th colspan='3'>",' onclick="javascript:do_rss_display();"');
+checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>","<tr name='rss_displayed' valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="10" style="border-left:8px white solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<code><pre style='overflow:auto;width:350px;'>".($democode)."</pre></code></td>"); ?>
 	<?php textbox('rss_limit','Maximum number of related posts:',2,"<tr valign='top' name='rss_displayed'>
@@ -409,7 +409,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	
 	<?php textbox('rss_no_results',__('Default display if no results:','yarpp'),'40',"<tr valign='top' name='rss_displayed'>
 			<th scope='row'>")?>
-	<?php checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>more&gt;<span>"
+	<?php checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
 	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")
 	."</span></a>","<tr valign='top' name='rss_displayed'>
 			<th class='th-full' colspan='2' scope='row'>"); ?>

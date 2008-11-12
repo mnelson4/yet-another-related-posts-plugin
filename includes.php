@@ -2,6 +2,7 @@
 
 require_once('magic.php');
 require_once('keywords.php');
+require_once('intl.php');
 
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 $yarpp_value_options = array('threshold' => 5,

@@ -3,7 +3,7 @@ Contributors: mitchoyoshitaka
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://mitcho.com/code/yarpp/
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mitcho%40mitcho%2ecom&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7
@@ -212,7 +212,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 2.1.3
 	* Bugfix: Turned off [the experimental caching](http://wordpress.org/support/topic/216194#post-894440) which shouldn't have been on in this release...
 	* Bugfix: an issue with the [keywords algorithm for non-ASCII characters](http://wordpress.org/support/topic/216078)
+* 2.1.4
 	* Bugfix: [Option sumbmission took you to PayPal](http://wordpress.org/support/topic/214090)
+	* Further internationalization (including the donate button)
+	* Bugfix: `title` attributes were not properly encoded
 
 == Future versions ==
 

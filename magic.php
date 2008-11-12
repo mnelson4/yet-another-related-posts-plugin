@@ -227,7 +227,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 			$permalink = get_permalink($result->ID);
 			$post_content = strip_tags($result->post_content);
 			$post_content = stripslashes($post_content);
-			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
+			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: ".htmlspecialchars($title,ENT_QUOTES)."'>$title";
 			if ($show_score and $userdata->user_level >= 8 and $domain != 'rss')
 				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
 			$output .= '</a>';
