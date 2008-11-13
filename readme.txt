@@ -55,7 +55,9 @@ The `related` functions can be used in conjunction to the regular "auto display"
 
 **Customizing the "related" functions**
 
-Since YARPP 2.1, you can specify some custom options for each instance of `related_*()`. The arguments are specified as a single array argument (`related_*(array(key=>value, key=>value, ...))`).
+Since YARPP 2.1, you can specify some custom options for each instance of `related_*()`. The functions take two arguments: 1. an array with key-value pairs of options, and 2. a boolean called `echo`, with default value of `true`. If `echo` is set to `false`, the result will simply be returned back instead of echoed. 
+
+For example: `related_*(array(key=>value, key=>value, ...),`(`true` or `false`)`)`.
 
 The available keys in version 2.1 are (roughly in the same order as in the options page):
 
@@ -216,6 +218,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Bugfix: [Option sumbmission took you to PayPal](http://wordpress.org/support/topic/214090)
 	* Further internationalization (including the donate button)
 	* Bugfix: `title` attributes were not properly encoded
+	* Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
+	* Added support for the [AllWebMenus Pro](http://www.likno.com/allwebmenusinfo.html) plugin
 
 == Future versions ==
 

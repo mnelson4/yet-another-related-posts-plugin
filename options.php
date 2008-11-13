@@ -5,7 +5,7 @@ global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 if ($_POST['myisam_override']) {
 	yarpp_set_option('myisam_override',1);
 	echo "<div class='updated'>"
-	.__("The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria.")
+	.__("The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria.",'yarpp')
 	."</div>";
 }
 
@@ -92,7 +92,7 @@ if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_binary_options) as $option) {
 		(isset($_POST[$option])) ? yarpp_set_option($option,true) : yarpp_set_option($option,false);
 	}		
-	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><p>Options saved!</p></div>';
+	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__("Options saved!",'yarpp').'</p></div>';
 }
 
 function checkbox($option,$desc,$tr="<tr valign='top'>
@@ -111,19 +111,24 @@ function importance($option,$desc,$type='word',$tr="<tr valign='top'>
 			<th scope='row'>",$inputplus = '') {
 	$value = yarpp_get_option($option);
 	
-	// $type could be...
-	__('word','yarpp');
-	__('tag','yarpp');
-	__('category','yarpp');
+	// $type could be {word, tag, category}
+	// so the sentences to translate could be...
+	__("require at least one word in common",'yarpp');
+	__("require at least one tag in common",'yarpp');
+	__("require at least one category in common",'yarpp');
+	__("require more than one word in common",'yarpp');
+	__("require more than one tag in common",'yarpp');
+	__("require more than one category in common",'yarpp');
+
 	
 	echo "		$tr$desc</th>
 			<td>
 			<input $inputplus type='radio' name='$option' value='1'". (($value == 1) ? ' checked="checked"': '' )."  /> ".__("do not consider",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='2'". (($value == 2) ? ' checked="checked"': '' )."  /> ".__("consider",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='3'". (($value == 3) ? ' checked="checked"': '' )."  /> 
-			".sprintf(__("require at least one %s in common",'yarpp'),__($type,'yarpp'))."
+			".__("require at least one $type in common",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='4'". (($value == 4) ? ' checked="checked"': '' )."  /> 
-			".sprintf(__("require more than one %s in common",'yarpp'),__($type,'yarpp'))."
+			".__("require more than one $type in common",'yarpp')."
 			</td>
 		</tr>";
 }
@@ -151,9 +156,9 @@ function select($option,$desc,$type='word',$tr="<tr valign='top'>
 			<input $inputplus type='radio' name='$option' value='2'". ((yarpp_get_option($option) == 2) ? ' checked="checked"': '' )."  />
 			".__("consider",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='3'". ((yarpp_get_option($option) == 3) ? ' checked="checked"': '' )."  />
-			".sprintf(__("require at least one %s in common",'yarpp'),__($type,'yarpp'))."
+			".__("require at least one $type in common",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='4'". ((yarpp_get_option($option) == 4) ? ' checked="checked"': '' )."  />
-			".sprintf(__("require more than one %s in common",'yarpp'),__($type,'yarpp'))."
+			".__("require more than one $type in common",'yarpp')."
 			</td>
 		</tr>";
 }
