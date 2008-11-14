@@ -9,7 +9,7 @@ function yarpp_extract_keywords($source,$num_to_ret = 20) {
 		mb_regex_encoding(get_option('blog_charset'));
 		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source));
 	} else
-		$wordlist = split('\s*\W+\s*', strtolower($source));	
+		$wordlist = preg_split('%\s*\W+\s*%', strtolower($source));	
 
 	// Build an array of the unique words and number of times they occur.
 	$a = array_count_values($wordlist);

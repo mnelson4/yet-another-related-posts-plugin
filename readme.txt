@@ -220,6 +220,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Bugfix: `title` attributes were not properly encoded
 	* Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
 	* Added support for the [AllWebMenus Pro](http://www.likno.com/allwebmenusinfo.html) plugin
+	* Bugfix: Fixed [keyword algorithm for users without `mbstring`](http://wordpress.org/support/topic/216420)
 
 == Future versions ==
 
