@@ -41,7 +41,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
 	if ($cross_relate) $type = array('post','page');
 
-	yarpp_cache_keywords(); /* TEST */
+	//yarpp_cache_keywords(); /* TEST */
 
 	// Fetch keywords
     $body_terms = post_body_keywords();
