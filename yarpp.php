@@ -17,8 +17,7 @@ add_filter('the_content_rss','yarpp_rss',600);
 add_filter('the_excerpt_rss','yarpp_rss_excerpt',600);
 register_activation_hook(__FILE__,'yarpp_activate');
 
-load_plugin_textdomain('yarpp', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)), dirname(plugin_basename(__FILE__)));
-
+load_plugin_textdomain('yarpp', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)), dirname(plugin_basename(__FILE__)).'/lang',dirname(plugin_basename(__FILE__)).'/lang');
 
 // new in 2.0: add as a widget
 add_action('plugins_loaded', 'widget_yarpp_init');
