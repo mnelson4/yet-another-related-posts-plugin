@@ -1,34 +1,5 @@
 <?php
 
-/* yarpp_cache_keywords is EXPERIMENTAL and not used.
-*  Don't worry about it. ^^ 
-*/
-function yarpp_cache_keywords() {
-	global $wpdb, $post, $yarpp_debug;
-    $body_terms = post_body_keywords();
-    $title_terms = post_title_keywords();
-	/*
-	CREATE TABLE `mitcho_wrdp1`.`wp_yarpp_keyword_cache` (
-	`ID` BIGINT( 20 ) UNSIGNED NOT NULL ,
-	`body` TEXT NOT NULL ,
-	`title` TEXT NOT NULL ,
-	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-	PRIMARY KEY ( `ID` )
-	) ENGINE = MYISAM COMMENT = 'YARPP''s keyword cache table' 
-	*/
-	$timeout = 400;
-
-	if ($yarpp_debug) echo '<!--'.$wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)").'-->';
-
-	if ($wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)") == 0) {
-		$wpdb->query('set names utf8');
-	
-		$wpdb->query("insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'");
-	
-		if ($yarpp_debug) echo "<!--"."insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'"."-->";
-	}
-}
-
 function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	global $wpdb, $post, $yarpp_debug;
 
@@ -70,7 +41,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
 	if ($cross_relate) $type = array('post','page');
 
-	//yarpp_cache_keywords();
+	yarpp_cache_keywords(); /* TEST */
 
 	// Fetch keywords
     $body_terms = post_body_keywords();
@@ -219,7 +190,14 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 	}
 	extract($optvals);
 	
-    $results = $wpdb->get_results(yarpp_sql($type,$args,true,$domain));
+	$sql = yarpp_sql($type,$args,true,$domain);
+    $results = $wpdb->get_results($sql);
+    
+	/*if (!yarpp_cache_exists($post->ID)) {
+		$related_posts = implode(',',$wpdb->get_cols($sql,0));
+		yarpp_cache_set($post->ID,$related_posts);
+	}*/
+    
     $output = '';
     if ($results) {
 		foreach ($results as $result) {
@@ -227,7 +205,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 			$permalink = get_permalink($result->ID);
 			$post_content = strip_tags($result->post_content);
 			$post_content = stripslashes($post_content);
-			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: ".htmlspecialchars($title,ENT_QUOTES)."'>$title";
+			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
 			if ($show_score and $userdata->user_level >= 8 and $domain != 'rss')
 				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
 			$output .= '</a>';
@@ -263,5 +241,31 @@ function yarpp_related_exist($type,$args) {
     $result = $wpdb->get_var(yarpp_sql($type,$args,false,$domain));
 	return $result > 0 ? true: false;
 }
+
+/* yarpp_cache_* are EXPERIMENTAL and not used.
+*  Don't worry about it. ^^ 
+*/
+function yarpp_cache_exists($post_id) {
+	global $wpdb;
+	/*
+	CREATE TABLE `wp_yarpp_keyword_cache` (
+	`ID` BIGINT( 20 ) UNSIGNED NOT NULL ,
+	`body` TEXT NOT NULL ,
+	`title` TEXT NOT NULL ,
+	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	PRIMARY KEY ( `ID` )
+	) ENGINE = MYISAM COMMENT = 'YARPP\'s keyword cache table' 
+	*/
+	$timeout = 400;
+
+	if (!$wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)")) {
+		$wpdb->query('set names utf8');
+	
+		$wpdb->query("insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'");
+	
+		if ($yarpp_debug) echo "<!--"."insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'"."-->";
+	}
+}
+
 
 ?>

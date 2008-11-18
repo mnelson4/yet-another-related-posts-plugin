@@ -1,7 +1,5 @@
 <?php
 
-$overusedwords = array( '', 'a', 'an', 'the', 'and', 'of', 'i', 'to', 'is', 'in', 'with', 'for', 'as', 'that', 'on', 'at', 'this', 'my', 'was', 'our', 'it', 'you', 'we', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '10', 'about', 'after', 'all', 'almost', 'along', 'also', 'amp', 'another', 'any', 'are', 'area', 'around', 'available', 'back', 'be', 'because', 'been', 'being', 'best', 'better', 'big', 'bit', 'both', 'but', 'by', 'c', 'came', 'can', 'capable', 'control', 'could', 'course', 'd', 'dan', 'day', 'decided', 'did', 'didn', 'different', 'div', 'do', 'doesn', 'don', 'down', 'drive', 'e', 'each', 'easily', 'easy', 'edition', 'end', 'enough', 'even', 'every', 'example', 'few', 'find', 'first', 'found', 'from', 'get', 'go', 'going', 'good', 'got', 'gt', 'had', 'hard', 'has', 'have', 'he', 'her', 'here', 'how', 'if', 'into', 'isn', 'just', 'know', 'last', 'left', 'li', 'like', 'little', 'll', 'long', 'look', 'lot', 'lt', 'm', 'made', 'make', 'many', 'mb', 'me', 'menu', 'might', 'mm', 'more', 'most', 'much', 'name', 'nbsp', 'need', 'new', 'no', 'not', 'now', 'number', 'off', 'old', 'one', 'only', 'or', 'original', 'other', 'out', 'over', 'part', 'place', 'point', 'pretty', 'probably', 'problem', 'put', 'quite', 'quot', 'r', 're', 'really', 'results', 'right', 's', 'same', 'saw', 'see', 'set', 'several', 'she', 'sherree', 'should', 'since', 'size', 'small', 'so', 'some', 'something', 'special', 'still', 'stuff', 'such', 'sure', 'system', 't', 'take', 'than', 'their', 'them', 'then', 'there', 'these', 'they', 'thing', 'things', 'think', 'those', 'though', 'through', 'time', 'today', 'together', 'too', 'took', 'two', 'up', 'us', 'use', 'used', 'using', 've', 'very', 'want', 'way', 'well', 'went', 'were', 'what', 'when', 'where', 'which', 'while', 'white', 'who', 'will', 'would', 'your');
-
 function yarpp_extract_keywords($source,$num_to_ret = 20) {
 	global $post, $overusedwords;
 	
@@ -27,14 +25,42 @@ function yarpp_extract_keywords($source,$num_to_ret = 20) {
 	return implode(' ', array_keys($outwords));
 }
 
-function post_title_keywords($num_to_ret = 20) {
+function post_title_keywords($max = 20) {
 	global $post;
-	return yarpp_extract_keywords($post->post_title);
+	return yarpp_extract_keywords($post->post_title,$max);
 }
 
-function post_body_keywords($num_to_ret = 20) {
+function post_body_keywords($max = 20) {
 	global $post;
-	return yarpp_extract_keywords($post->post_content);
+	$content = strip_tags(apply_filters_if_white('the_content',$post->post_content));
+	return yarpp_extract_keywords($content,$max);
+}
+
+/* yarpp_cache_keywords is EXPERIMENTAL and not used.
+*  Don't worry about it. ^^ 
+*/
+function yarpp_cache_keywords() {
+	global $wpdb, $post, $yarpp_debug;
+    $body_terms = post_body_keywords();
+    $title_terms = post_title_keywords();
+	/*
+	CREATE TABLE `wp_yarpp_keyword_cache` (
+	`ID` BIGINT( 20 ) UNSIGNED NOT NULL ,
+	`body` TEXT NOT NULL ,
+	`title` TEXT NOT NULL ,
+	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	PRIMARY KEY ( `ID` )
+	) ENGINE = MYISAM COMMENT = 'YARPP\'s keyword cache table' 
+	*/
+	$timeout = 400;
+
+	if (!$wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)")) {
+		$wpdb->query('set names utf8');
+	
+		$wpdb->query("insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'");
+	
+		if ($yarpp_debug) echo "<!--"."insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'"."-->";
+	}
 }
 
 ?>

@@ -1,5 +1,16 @@
 <?php
 
+include('lang/words-'.word_file_lang().'.php');
+
+function word_file_lang() {
+	if (!defined('WPLANG'))
+		return 'en_US';
+	switch (true) {
+		default:
+			return 'en_US';
+	}
+}
+
 function paypal_directory() {
 	if (!defined('WPLANG'))
 		return 'en_US/';
@@ -25,7 +36,7 @@ function paypal_directory() {
 		case preg_match("/^zh_TW/i",WPLANG):
 			return 'zh_HK/';
 		default:
-			return 'en_US/';			
+			return 'en_US/';
 	}
 }
 
