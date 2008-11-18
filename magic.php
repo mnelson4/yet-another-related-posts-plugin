@@ -86,7 +86,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	if ($catweight)
 		$criteria['cat'] = "COUNT( DISTINCT cattax.term_taxonomy_id )";
 
-	$newsql = "SELECT ID, post_title, post_date, post_content, ";
+	$newsql = "SELECT ID, post_title, post_date, post_content, post_excerpt, ";
 
 	foreach ($criteria as $key => $value) {
 		$newsql .= "$value as ${key}score, ";
@@ -203,14 +203,20 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 		foreach ($results as $result) {
 			$title = stripslashes(apply_filters('the_title', $result->post_title));
 			$permalink = get_permalink($result->ID);
-			$post_content = strip_tags($result->post_content);
-			$post_content = stripslashes($post_content);
+
+			$post_content = strip_tags(apply_filters_if_white('the_content',$result->post_content));
+			//$post_content = stripslashes($post_content);
+
+			$post_excerpt = strip_tags($result->post_excerpt);
+			if ($post_excerpt == '')
+				$post_excerpt = $post_content; //this is okay because it will be clipped later anyway.
+				
 			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
 			if ($show_score and $userdata->user_level >= 8 and $domain != 'rss')
 				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
 			$output .= '</a>';
 			if ($show_excerpt) {
-				$output .= $before_post . yarpp_excerpt($post_content,$excerpt_length) . $after_post;
+				$output .= $before_post . yarpp_excerpt($post_excerpt,$excerpt_length) . $after_post;
 			}
 			$output .=  $after_title;
 		}

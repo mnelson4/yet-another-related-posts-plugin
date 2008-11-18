@@ -215,7 +215,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Bugfix: Turned off [the experimental caching](http://wordpress.org/support/topic/216194#post-894440) which shouldn't have been on in this release...
 	* Bugfix: an issue with the [keywords algorithm for non-ASCII characters](http://wordpress.org/support/topic/216078)
 * 2.1.4
-	* Bugfix: [Option sumbmission took you to PayPal](http://wordpress.org/support/topic/214090)
+	* Bugfix: [Settings' sumbmit button took you to PayPal](http://wordpress.org/support/topic/214090)
 	* Bugfix: Fixed [keyword algorithm for users without `mbstring`](http://wordpress.org/support/topic/216420)
 	* Bugfix: `title` attributes were not properly escaped
 	* Bugfix: [keywords did not filter tags](http://wordpress.org/support/topic/218211). (This bugfix may vastly improve "relatedness" on some blogs.)
@@ -225,13 +225,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* The "show excerpt" option now shows the first `n` words of the excerpt, rather than the content ([by request](http://wordpress.org/support/topic/212577))
 	* Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
 	* Added support for the [AllWebMenus Pro](http://wordpress.org/extend/plugins/allwebmenus-wordpress-menu-plugin/) plugin
-	* Further internationalization (including the donate button)
+	* Further internationalization (including the donate button and overused words lists ([by request](http://wordpress.org/support/topic/159359)))
 
 == Future versions ==
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
 
-* User-defineable stopwords, especially to support other languages, [by request](http://wordpress.org/support/topic/159359)
-* Localization
-* Date and comment count in excerpt, [by request](http://wordpress.org/support/topic/156231)
+* More customizeable displays so that you can, for example, add the date and comment count in the excerpt ([by request](http://wordpress.org/support/topic/156231))
+* More localizations
 * Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)
