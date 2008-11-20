@@ -372,7 +372,7 @@ checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='
 checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>","<tr name='rss_displayed' valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="10" style="border-left:8px white solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<code><pre style='overflow:auto;width:350px;'>".($democode)."</pre></code></td>"); ?>
-	<?php textbox('rss_limit','Maximum number of related posts:',2,"<tr valign='top' name='rss_displayed'>
+	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2,"<tr valign='top' name='rss_displayed'>
 			<th scope='row'>")?>
 			<tr name='rss_displayed' valign='top'>
 				<th><?php _e("Before / after related entries display:",'yarpp');?></th>

@@ -6,6 +6,8 @@ function word_file_lang() {
 	if (!defined('WPLANG'))
 		return 'en_US';
 	switch (true) {
+		case preg_match("/^de/i",WPLANG):
+			return 'de_DE';
 		default:
 			return 'en_US';
 	}
