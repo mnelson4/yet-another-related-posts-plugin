@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 
 Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
 
@@ -142,9 +142,11 @@ Please submit such bugs by starting a new thread on [the Wordpress.org forums](h
 
 I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
 
-= Does YARPP come in different languages? =
+== Localizations ==
 
-YARPP has been [internationalized](http://codex.wordpress.org/Writing_a_Plugin#Internationalizing_Your_Plugin) as of version 2.1.1. No localizations have been made yet, but they are coming.
+YARPP is currently localized in the following languages:
+	* Simplified Chinese (`zh_CN`) by [Jor Wang](mailto:mail@jorwang.com) of [jorwang.com](http://jorwang.com)
+	* German (`de_DE`) by [Michael K.](mailto:yarpp-de@mitcho.com) of [3th.be](http://3th.be)
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -225,7 +227,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* The "show excerpt" option now shows the first `n` words of the excerpt, rather than the content ([by request](http://wordpress.org/support/topic/212577))
 	* Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
 	* Added support for the [AllWebMenus Pro](http://wordpress.org/extend/plugins/allwebmenus-wordpress-menu-plugin/) plugin
-	* Further internationalization (including the donate button and overused words lists ([by request](http://wordpress.org/support/topic/159359)))
+	* Further internationalization: 
+		* the donate button! ^^
+		* overused words lists ([by request](http://wordpress.org/support/topic/159359))), with a German word list.
 
 == Future versions ==
 

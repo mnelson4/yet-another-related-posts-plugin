@@ -193,11 +193,6 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 	$sql = yarpp_sql($type,$args,true,$domain);
     $results = $wpdb->get_results($sql);
     
-	/*if (!yarpp_cache_exists($post->ID)) {
-		$related_posts = implode(',',$wpdb->get_cols($sql,0));
-		yarpp_cache_set($post->ID,$related_posts);
-	}*/
-    
     $output = '';
     if ($results) {
 		foreach ($results as $result) {
