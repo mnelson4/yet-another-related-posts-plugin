@@ -220,8 +220,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Bugfix: `title` attributes were not properly escaped
 	* Bugfix: [keywords did not filter tags](http://wordpress.org/support/topic/218211). (This bugfix may vastly improve "relatedness" on some blogs.)
 	* Localizations:
-		* Simplified Chinese (`zh_CN`)
-		* Danish (`da_DK`)
+		* Simplified Chinese (`zh_CN`) by [Jor Wang](mailto:mail@jorwang.com) of [jorwang.com](http://jorwang.com)
+		* German (`de_DE`) by [Michael K.](mailto:yarpp-de@mitcho.com) of [3th.be](http://3th.be)
 	* The "show excerpt" option now shows the first `n` words of the excerpt, rather than the content ([by request](http://wordpress.org/support/topic/212577))
 	* Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
 	* Added support for the [AllWebMenus Pro](http://wordpress.org/extend/plugins/allwebmenus-wordpress-menu-plugin/) plugin
