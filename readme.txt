@@ -75,18 +75,8 @@ The available keys in version 2.1 are (roughly in the same order as in the optio
 	* `cross_relate` => (`bool`) cross-relate posts and pages
 * Display options:
 	* `limit` => (`int`) maximum number of results
-	* `before_related` => before related entries text
-	* `after_related` => after related entries text
-	* `before_title` => before related entry title text
-	* `after_title` => after related entry title text
-	* `show_excerpt` => (`bool`) show excerpt
-	* `excerpt_length` => (`int`) the excerpt length
-	* `before_post` => before each related entry text
-	* `after_post` => after each related entry text
 	* `order` => MySQL `ORDER BY ` field and direction
-	* `no_results` => "no results" text
 	* `promote_yarpp` => (`bool`) promote YARPP?
-	* `show_score` => (`bool`) show the match score to admins
 
 **Examples**
 
@@ -230,7 +220,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Further internationalization: 
 		* the donate button! ^^
 		* overused words lists ([by request](http://wordpress.org/support/topic/159359))), with a German word list.
-
+* 2.1.5
+	* Bugfix: In certain scenarios, [related posts would be displayed in RSS feeds even when that option was off](http://wordpress.org/support/topic/216145)
+	* Bugfix: The `related_*()` functions were missing the `echo` parameter
+	* Some localization bugfixes
+	* Localizations:
+		* Japanese (`ja`) by myself ([mitcho (Michael Yoshitaka Erlewine)](http://mitcho.com))
+		
 == Future versions ==
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).

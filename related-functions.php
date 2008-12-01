@@ -4,16 +4,16 @@
 
 // Since YARPP 2.1, these functions receive (optionally) one array argument. See the documentation for instructions on how to customize their output.
 
-function related_posts($a = array()) {
-	return yarpp_related(array('post'),$a);
+function related_posts($a = array(),$echo=true) {
+	return yarpp_related(array('post'),$a,$echo);
 }
 
-function related_pages($a = array()) {
-	return yarpp_related(array('page'),$a);
+function related_pages($a = array(),$echo=true) {
+	return yarpp_related(array('page'),$a,$echo);
 }
 
-function related_entries($a = array()) {
-	return yarpp_related(array('page','post'),$a);
+function related_entries($a = array(),$echo=true) {
+	return yarpp_related(array('page','post'),$a,$echo);
 }
 
 function related_posts_exist($a = array()) {

@@ -178,8 +178,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 		'before_post'=>"${domainprefix}before_post",
 		'after_post'=>"${domainprefix}after_post",
 		'no_results'=>"${domainprefix}no_results",
-		'promote_yarpp'=>"${domainprefix}promote_yarpp",
-		'show_score'=>'show_score');
+		'promote_yarpp'=>"${domainprefix}promote_yarpp");
 	$optvals = array();
 	foreach (array_keys($options) as $option) {
 		if (isset($args[$option])) {
@@ -207,7 +206,7 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 				$post_excerpt = $post_content; //this is okay because it will be clipped later anyway.
 				
 			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
-			if ($show_score and $userdata->user_level >= 8 and $domain != 'rss')
+			if ($userdata->user_level >= 8 and $domain != 'rss')
 				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
 			$output .= '</a>';
 			if ($show_excerpt) {
