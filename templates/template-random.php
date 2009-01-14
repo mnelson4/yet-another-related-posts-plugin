@@ -1,5 +1,5 @@
 <?php /*
-Example template
+Example template: random
 This template gives you some random other post in case there are no related posts
 Author: mitcho (Michael Yoshitaka Erlewine)
 */ ?>
@@ -11,10 +11,8 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 	<?php endwhile; ?>
 </ol>
 
-<?php else: ?>
-<?php
+<?php else: 
 $related_query->query("orderby=rand&order=asc&limit=1");
-$related_query->the_post();
-?>
+$related_query->the_post();?>
 <p>No related posts were found, so here's a consolation prize: <a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>.</p>
 <?php endif; ?>
