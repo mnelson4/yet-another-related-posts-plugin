@@ -1,8 +1,12 @@
 <?php
 
-function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
+function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='website') {
 	global $wpdb, $post, $yarpp_debug;
 
+	if (is_object($post) and !$reference_ID) {
+		$reference_ID = $post->ID;
+	}
+	
 	// set $yarpp_debug
 	if (isset($_REQUEST['yarpp_debug']))
 		$yarpp_debug = true;
@@ -14,10 +18,7 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 		$domainprefix = '';
 
 	$options = array('limit'=>"${domainprefix}limit",
-		'order'=>"${domainprefix}order",
 		'threshold'=>'threshold',
-		'show_excerpt'=>"${domainprefix}show_excerpt",
-		'excerpt_length'=>"${domainprefix}excerpt_length",
 		'show_pass_post'=>'show_pass_post',
 		'past_only'=>'past_only',
 		'cross_relate'=>'cross_relate',
@@ -41,18 +42,12 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
 	if ($cross_relate) $type = array('post','page');
 
-	//yarpp_cache_keywords(); /* TEST */
-
 	// Fetch keywords
-    $body_terms = post_body_keywords();
-    $title_terms = post_title_keywords();
+    $body_terms = yarpp_get_cached_keywords($reference_ID,'body');
+    $title_terms = yarpp_get_cached_keywords($reference_ID,'title');
     
     if ($yarpp_debug) echo "<!--TITLE TERMS: $title_terms-->"; // debug
     if ($yarpp_debug) echo "<!--BODY TERMS: $body_terms-->"; // debug
-    
-	// Make sure the post is not from the future
-	$time_difference = get_settings('gmt_offset');
-	$now = gmdate("Y-m-d H:i:s",(time()+($time_difference*3600)));
 	
 	// get weights
 	
@@ -67,8 +62,6 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	$weights['tag'] = $tagweight;
 	
 	$totalweight = $bodyweight + $titleweight + $tagweight + $catweight;
-	
-	$weightedthresh = $threshold/($totalweight + 0.1);
 	
 	// get disallowed categories and tags
 	
@@ -86,20 +79,17 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	if ($catweight)
 		$criteria['cat'] = "COUNT( DISTINCT cattax.term_taxonomy_id )";
 
-	$newsql = "SELECT ID, post_title, post_date, post_content, post_excerpt, ";
+	$newsql = "SELECT $reference_ID, ID, "; //post_title, post_date, post_content, post_excerpt, 
 
-	foreach ($criteria as $key => $value) {
-		$newsql .= "$value as ${key}score, ";
-	}
+	//foreach ($criteria as $key => $value) {
+	//	$newsql .= "$value as ${key}score, ";
+	//}
 
 	$newsql .= '(0';
 	foreach ($criteria as $key => $value) {
 		$newsql .= "+ $value * ".$weights[$key];
 	}
 	$newsql .= ') as score';
-
-	if ($usedisterms)
-	$newsql .= ", count(blockterm.term_id) as block";
 	
 	$newsql .= "\n from $wpdb->posts \n";
 
@@ -109,14 +99,14 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 		left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))\n";
 
 	if ($tagweight)
-		$newsql .= " left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $post->ID ) 
+		$newsql .= " left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $reference_ID ) 
 		left JOIN $wpdb->term_relationships AS tagrel on (tagrel.term_taxonomy_id = thistag.term_taxonomy_id
 		AND tagrel.object_id = $wpdb->posts.ID)
 		left JOIN $wpdb->term_taxonomy AS tagtax ON ( tagrel.term_taxonomy_id = tagtax.term_taxonomy_id
 		AND tagtax.taxonomy = 'post_tag')\n";
 
 	if ($catweight)
-		$newsql .= " left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $post->ID ) 
+		$newsql .= " left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $reference_ID ) 
 		left JOIN $wpdb->term_relationships AS catrel on (catrel.term_taxonomy_id = thiscat.term_taxonomy_id
 		AND catrel.object_id = $wpdb->posts.ID)
 		left JOIN $wpdb->term_taxonomy AS cattax ON ( catrel.term_taxonomy_id = cattax.term_taxonomy_id
@@ -124,10 +114,10 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 
 	// WHERE
 	
-	$newsql .= " where (post_status IN ( 'publish',  'static' ) and ID != '$post->ID')";
+	$newsql .= " where (post_status IN ( 'publish',  'static' ) and ID != '$reference_ID')";
 
 	if ($past_only)
-		$newsql .= " and post_date <= '$now' ";
+		$newsql .= " and post_date <= NOW() ";
 	if (!$show_pass_post)
 		$newsql .= " and post_password ='' ";
 
@@ -136,15 +126,16 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 	// GROUP BY
 	$newsql .= "\n group by id \n";
 	// HAVING
-	$newsql .= " having score >= $threshold";
+	$safethreshold = max($threshold/2,0.1); // this is so the new calibration system works.
+	$newsql .= " having score >= $safethreshold";
 	if ($usedisterms)
-		$newsql .= " and block = 0";
+		$newsql .= " and count(blockterm.term_id) = 0";
 
-	$newsql .= (($categories == 3)?' and catscore >= 1':'');
-	$newsql .= (($categories == 4)?' and catscore >= 2':'');
-	$newsql .= (($tags == 3)?' and tagscore >= 1':'');
-	$newsql .= (($tags == 4)?' and tagscore >= 2':'');
-	$newsql .= " order by ".(($order?$order:"score desc"))." limit ".$limit;
+	$newsql .= (($categories == 3)?' and '.$criteria['cat'].' >= 1':'');
+	$newsql .= (($categories == 4)?' and '.$criteria['cat'].' >= 2':'');
+	$newsql .= (($tags == 3)?' and '.$criteria['tag'].' >= 1':'');
+	$newsql .= (($tags == 4)?' and '.$criteria['tag'].' >= 2':'');
+	$newsql .= " order by score desc limit ".$limit;
 
 	if (!$giveresults) {
 		$newsql = "select count(t.ID) from ($newsql) as t";
@@ -156,8 +147,15 @@ function yarpp_sql($type,$args,$giveresults = true,$domain='website') {
 
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
-function yarpp_related($type,$args,$echo = true,$domain = 'website') {
-	global $wpdb, $post, $userdata;
+function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
+	global $wpdb, $post, $userdata, $yarpp_time, $wp_query, $id, $page, $pages;
+	
+	if ($yarpp_time) // if we're already in a YARPP loop, stop now.
+		return false;
+	
+	if (is_object($post) and !$reference_ID)
+		$reference_ID = $post->ID;
+	
 	get_currentuserinfo();
 
 	// set the "domain prefix", used for all the preferences.
@@ -169,15 +167,9 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 	// get options
 	// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
 	$options = array(
-		'before_related'=>"${domainprefix}before_related",
-		'after_related'=>"${domainprefix}after_related",
-		'before_title'=>"${domainprefix}before_title",
-		'after_title'=>"${domainprefix}after_title",
-		'show_excerpt'=>"${domainprefix}show_excerpt",
-		'excerpt_length'=>"${domainprefix}excerpt_length",
-		'before_post'=>"${domainprefix}before_post",
-		'after_post'=>"${domainprefix}after_post",
-		'no_results'=>"${domainprefix}no_results",
+		'use_template'=>"${domainprefix}use_template",
+		'order'=>"${domainprefix}order",
+		'template_file'=>"${domainprefix}template_file",
 		'promote_yarpp'=>"${domainprefix}promote_yarpp");
 	$optvals = array();
 	foreach (array_keys($options) as $option) {
@@ -189,44 +181,59 @@ function yarpp_related($type,$args,$echo = true,$domain = 'website') {
 	}
 	extract($optvals);
 	
-	$sql = yarpp_sql($type,$args,true,$domain);
-    $results = $wpdb->get_results($sql);
-    
+	if (yarpp_get_option('ad_hoc_caching') == 1)
+		yarpp_cache_enforce($type,$reference_ID);
+	
     $output = '';
-    if ($results) {
-		foreach ($results as $result) {
-			$title = stripslashes(apply_filters('the_title', $result->post_title));
-			$permalink = get_permalink($result->ID);
+	
+	$yarpp_time = true; // get ready for YARPP TIME!
+	// just so we can return to normal later
+	$current_query = $wp_query;
+	$current_post = $post;
+	$current_id = $id;
+	$current_page = $page;
+	$current_pages = $pages;
 
-			$post_content = strip_tags(apply_filters_if_white('the_content',$result->post_content));
-			//$post_content = stripslashes($post_content);
+	$related_query = new WP_Query();
+	$orders = split(' ',$order);
+	$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]);
 
-			$post_excerpt = strip_tags($result->post_excerpt);
-			if ($post_excerpt == '')
-				$post_excerpt = $post_content; //this is okay because it will be clipped later anyway.
-				
-			$output .= "$before_title<a href='$permalink' rel='bookmark' title='Permanent Link: $title'>$title";
-			if ($userdata->user_level >= 8 and $domain != 'rss')
-				$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round($result->score,3)).'">('.round($result->score,3).')</abbr>';
-			$output .= '</a>';
-			if ($show_excerpt) {
-				$output .= $before_post . yarpp_excerpt($post_excerpt,$excerpt_length) . $after_post;
-			}
-			$output .=  $after_title;
-		}
-		$output = stripslashes(stripslashes($before_related)).$output.stripslashes(stripslashes($after_related));
-		if ($promote_yarpp)
-			$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
-
+	if ($domain == 'metabox') {
+		include('template-metabox.php');
+	} elseif ($use_template) {
+		ob_start();
+		include('templates/'.$template_file);
+		$output = ob_get_contents();
+		ob_end_clean();
 	} else {
-		$output = $no_results;
-    }
+		include('template-builtin.php');
+	}
+		
+	unset($related_query);
+	$yarpp_time = false; // YARPP time is over... :(
+	
+	// restore the older wp_query.
+	$wp_query = null; $wp_query = $current_query; unset($current_query);
+	$post = null; $post = $current_post; unset($current_post);
+	$pages = null; $pages = $current_pages; unset($current_pages);
+	$id = $current_id; unset($current_id);
+	$page = $current_page; unset($current_page);
+	
+	if ($promote_yarpp and $domain != 'metabox')
+		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
+	
 	if ($echo) echo $output; else return ((!empty($output))?"\n\n":'').$output;
 }
 
-function yarpp_related_exist($type,$args) {
-	global $wpdb, $post;
+function yarpp_related_exist($type,$args,$reference_ID=false) {
+	global $wpdb, $post, $yarpp_time;
 
+	if (is_object($post) and !$reference_ID)
+		$reference_ID = $post->ID;
+	
+	if ($yarpp_time) // if we're already in a YARPP loop, stop now.
+		return false;
+	
 	$options = array('threshold'=>'threshold','show_pass_post'=>'show_pass_post','past_only'=>'past_only');
 	$optvals = array();
 	foreach (array_keys($options) as $option) {
@@ -238,34 +245,38 @@ function yarpp_related_exist($type,$args) {
 	}
 	extract($optvals);
 
-    $result = $wpdb->get_var(yarpp_sql($type,$args,false,$domain));
+    $result = $wpdb->get_var(yarpp_sql($type,$args,false,$reference_ID));
 	return $result > 0 ? true: false;
 }
 
-/* yarpp_cache_* are EXPERIMENTAL and not used.
-*  Don't worry about it. ^^ 
-*/
-function yarpp_cache_exists($post_id) {
-	global $wpdb;
-	/*
-	CREATE TABLE `wp_yarpp_keyword_cache` (
-	`ID` BIGINT( 20 ) UNSIGNED NOT NULL ,
-	`body` TEXT NOT NULL ,
-	`title` TEXT NOT NULL ,
-	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-	PRIMARY KEY ( `ID` )
-	) ENGINE = MYISAM COMMENT = 'YARPP\'s keyword cache table' 
-	*/
-	$timeout = 400;
-
-	if (!$wpdb->get_var("select count(*) as count from wp_yarpp_keyword_cache where ID = $post->ID and date > date_sub(now(),interval $timeout minute)")) {
-		$wpdb->query('set names utf8');
+function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
+	global $wpdb, $yarpp_debug;
 	
-		$wpdb->query("insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'");
+	$timeout = 600;
 	
-		if ($yarpp_debug) echo "<!--"."insert into wp_yarpp_keyword_cache (ID,body,title) values ($post->ID,'$body_terms','$title_terms') on duplicate key update body = '$body_terms', title = '$title_terms'"."-->";
+	if (!$force) {
+		if ($wpdb->get_var("select count(*) as count from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and date > date_sub(now(),interval $timeout minute)")) {
+			if ($yarpp_debug) echo "<!--YARPP is using the cache right now.-->";
+			return false;
+		}
 	}
+	
+	yarpp_cache_keywords($reference_ID);
+	
+	$wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID");
+	
+	$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) ".yarpp_sql($type,array(),true,$reference_ID)." on duplicate key update date = now()");
+	if ($wpdb->rows_affected and $yarpp_debug) echo "<!--YARPP just set the cache.-->";
+	if (!$wpdb->rows_affected) {
+		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0)");
+		if (!$wpdb->rows_affected)
+			return false;
+	}
+	//$wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where date <= date_sub(now(),interval $timeout minute)");
+	//if ($wpdb->rows_affected)
+	//	if ($yarpp_debug) echo "<!--$wpdb->rows_affected rows were cleared as they had expired.-->";
+	
+	return true;
+	
 }
 
-
-?>

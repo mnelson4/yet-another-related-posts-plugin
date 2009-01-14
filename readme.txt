@@ -15,13 +15,12 @@ Returns a list of the related entries based on a unique algorithm using titles, 
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
-1. *Limiting by a threshold*: Peter Bowyer did the great work of making the algorithm use MySQL's [fulltext search](http://dev.mysql.com/doc/en/Fulltext_Search.html) score to identify related posts. But it just displayed, for example, the top 5 most "relevant" entries, even if some of them weren't at all relevant. Now you can set a threshold limit for relevance, and you get more related posts if there are more related posts and less if there are less. Ha!
-2. *Using tags and categories*: **New in 2.0!** The new 2.0 algorithm uses tags and categories. The new options screen puts you in control of how these factors should be used.
-3. *Related posts in RSS feeds*: **New in 2.1!** Display related posts in your RSS and Atom feeds with custom display options.
-4. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
-5. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
-6. *Simple installation*: **New in 1.5!** Automatically displays related posts after content on single entry pages without any theme tinkering.
-7. *Miscellany*: a nicer options screen (including a sample display of the code that is produced **New in 2.0**), displaying the fulltext match score on output for admins, an option to allow related posts from the future, a couple bug fixes, etc.
+1. *An advanced and versatile algorithm*: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
+2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templatesyarpp-3-templates/) puts you in charge of how your posts are displayed.
+3. *Caching*: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
+4. *Related posts in RSS feeds*: **New in 2.1!** Display related posts in your RSS and Atom feeds with custom display options.
+5. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
+6. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
 
 == Installation ==
 
@@ -233,6 +232,5 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
 
-* More customizeable displays so that you can, for example, add the date and comment count in the excerpt ([by request](http://wordpress.org/support/topic/156231))
 * More localizations
 * Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)
