@@ -1,0 +1,380 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v2.1.3\n"
+"PO-Revision-Date: 2008-11-10 08:40-0600\n"
+"Last-Translator: Jor <mail@jorwang.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: PEOPLE'S REPUBLIC OF CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-SearchPath-0: ."
+
+#: includes.php:74
+msgid "MySQL error on adding yarpp_title"
+msgstr "在添加 yarpp_title 时 MySQL 发生错误"
+
+#: includes.php:79
+msgid "MySQL error on adding yarpp_content"
+msgstr "在添加 yarpp_content 时 MySQL 发生错误"
+
+#: includes.php:133
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>关于 YARPP 的重要信息:</h3><p>感谢您升级到 YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>更多信息，请查阅 <a href=\"http://mitcho.com/code/yarpp/\">YARPP 官方手册</a>. (本条信息不会再次出现。)</p>"
+
+#: includes.php:154
+#: includes.php:154
+msgid "Related Posts (YARPP)"
+msgstr "关联文章 (YARPP)"
+
+#: includes.php:173
+msgid "Related Posts"
+msgstr "Related Posts"
+
+#: includes.php:178
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:210
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "YARPP 中的 %f 是指当前文章和关联文章之间的匹配程度。当您以管理员的身份登录时才能查阅，游客等其他权限是不能查阅的。"
+
+#: options.php:307
+#: options.php:349
+#: options.php:368
+#: options.php:412
+#: magic.php:219
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:8
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+
+#: options.php:17
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+
+#: options.php:19
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "如果要恢复这些功能，请在您的 <code>%s</code> 表执行下列SQL指令： <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> 。该操作将修改数据库，但不会损坏您的其它设置。"
+
+#: options.php:21
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "同意后 <code>%s</code> 将使用 MyISAM 引擎："
+
+#: options.php:24
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Trust me. Let me use MyISAM features."
+
+#: options.php:47
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP 数据库中的错误已被修复。"
+
+#: options.php:49
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP 数据库中出现一个错误，无法修复。"
+
+#: options.php:121
+#: options.php:138
+#: options.php:150
+msgid "do not consider"
+msgstr "不参考"
+
+#: options.php:122
+#: options.php:139
+#: options.php:152
+msgid "consider"
+msgstr "参考"
+
+#: options.php:140
+msgid "consider with extra weight"
+msgstr "作为主要参考指标"
+
+#: options.php:168
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Related Posts Plugin 版本历史 (RSS 2.0)"
+
+#: options.php:183
+#: options.php:183
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "通过 PayPal 给插件作者 mitcho (Michael Yoshitaka Erlewine) 捐赠"
+
+#: options.php:186
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Plugin 设置"
+
+#: options.php:202
+#, php-format
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> and based on the fabulous work of <a href=\"http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin\">Peter Bower</a>, <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">Alexander Malov &amp; Mike Lu</a>."
+msgstr "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> and based on the fabulous work of <a href=\"http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin\">Peter Bower</a>, <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">Alexander Malov &amp; Mike Lu</a>. 简体中文翻译：<a href=\"http://jorwang.com/\">Jor Wang</a>."
+
+#: options.php:206
+msgid "\"The Pool\""
+msgstr "全局设置"
+
+#: options.php:207
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "您可以在“全局设置”里排除某特定分类或标签，今后 YARPP 在筛选关联文章时将不列出已排除项目中的文章。"
+
+#: options.php:212
+msgid "Disallow by category:"
+msgstr "禁止关联以下分类："
+
+#: options.php:221
+msgid "Disallow by tag:"
+msgstr "禁止关联以下标签："
+
+#: options.php:230
+msgid "Show password protected posts?"
+msgstr "显示加密日志？"
+
+#: options.php:231
+msgid "Show only previous posts?"
+msgstr "只显示以前的日志？"
+
+#: options.php:236
+msgid "\"Relatedness\" options"
+msgstr "关联设置"
+
+#: options.php:237
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "关联文章（YARPP）不同于<a href=\"http://wasabi.pbwiki.com/Related%20Entries\">以往的关联文章插件</a>，它有更先进的关联算法。您可以通过设置最大显示条目和匹配值使文章之间的匹配度更为精准。"
+
+#: options.php:242
+msgid "Match threshold:"
+msgstr "匹配值："
+
+#: options.php:243
+msgid "Titles: "
+msgstr "标题："
+
+#: options.php:245
+msgid "Bodies: "
+msgstr "正文："
+
+#: options.php:247
+msgid "Tags: "
+msgstr "标签："
+
+#: options.php:249
+msgid "Categories: "
+msgstr "分类："
+
+#: options.php:251
+msgid "Cross-relate posts and pages?"
+msgstr "固定页面参与关联？"
+
+#: options.php:251
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "选中该项后，<code>related_posts()</code>, <code>related_pages()</code>, 和 <code>related_entries()</code> 这些代码的输出结果相同。"
+
+#: options.php:293
+msgid "Display options <small>for your website</small>"
+msgstr "显示设置"
+
+#: options.php:302
+msgid "PERMALINK"
+msgstr "PERMALINK"
+
+#: options.php:302
+#: options.php:363
+#: options.php:363
+msgid "RELATED TITLE"
+msgstr "RELATED TITLE"
+
+#: options.php:309
+msgid "Automatically display related posts?"
+msgstr "自动插入关联文章？"
+
+#: options.php:309
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "根据右侧的代码示例，自动插入关联文章到您的页面中，当您取消该选项时，需要通过手工加入代码 <code>related_posts()</code> 或者根据需求插入 (<code>related_pages()</code> and <code>related_entries()</code>) 到您的模板文件中。"
+
+#: options.php:310
+msgid "Website display code example"
+msgstr "网站显示的代码示例"
+
+#: options.php:310
+#: options.php:372
+msgid "(Update options to reload.)"
+msgstr "（更新设置后生效。）"
+
+#: options.php:312
+#: options.php:374
+msgid "Maximum number of related posts:"
+msgstr "最多关联篇数"
+
+#: options.php:314
+msgid "Before / after related entries:"
+msgstr "主体起止标签"
+
+#: options.php:315
+#: options.php:320
+#: options.php:329
+#: options.php:378
+#: options.php:383
+#: options.php:392
+msgid "For example:"
+msgstr "例如："
+
+#: options.php:319
+#: options.php:382
+msgid "Before / after each related entry:"
+msgstr "条目起止标签"
+
+#: options.php:323
+#: options.php:386
+msgid "Show excerpt?"
+msgstr "显示摘要？"
+
+#: options.php:324
+#: options.php:387
+msgid "Excerpt length (No. of words):"
+msgstr "摘要字符数"
+
+#: options.php:328
+msgid "Before / after (Excerpt):"
+msgstr "摘要起止标签："
+
+#: options.php:334
+#: options.php:397
+msgid "Order results:"
+msgstr "排序方式："
+
+#: options.php:336
+#: options.php:399
+msgid "score (high relevance to low)"
+msgstr "匹配值（有高到低）"
+
+#: options.php:337
+#: options.php:400
+msgid "score (low relevance to high)"
+msgstr "匹配值（由低到高）"
+
+#: options.php:338
+#: options.php:401
+msgid "date (new to old)"
+msgstr "日期（由新到旧）"
+
+#: options.php:339
+#: options.php:402
+msgid "date (old to new)"
+msgstr "日期（由旧到新）"
+
+#: options.php:340
+#: options.php:403
+msgid "title (alphabetical)"
+msgstr "标题（按字母顺序排列）"
+
+#: options.php:341
+#: options.php:404
+msgid "title (reverse alphabetical)"
+msgstr "标题（按逆向字母排列）"
+
+#: options.php:346
+#: options.php:409
+msgid "Default display if no results:"
+msgstr "无匹配时："
+
+#: options.php:347
+#: options.php:411
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "帮助推广关联文章（YARPP）插件？"
+
+#: options.php:349
+#: options.php:412
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "选中该项后会在模板中加入以下代码：%s. 设置更新后可以在右侧的代码示例看到。真诚地感谢您的推广或捐赠。"
+
+#: options.php:354
+msgid "Display options <small>for RSS</small>"
+msgstr "RSS 相关设置"
+
+#: options.php:370
+msgid "Display related posts in feeds?"
+msgstr "在文章底部显示？"
+
+#: options.php:371
+msgid "Display related posts in the descriptions?"
+msgstr "在摘要中显示？(当RSS只输出摘要时)"
+
+#: options.php:371
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "该选项将会在 RSS 的摘要区中插入关联文章，而不是在正文区中。如果您的 RSS 只输出摘要，请选择该项。"
+
+#: options.php:372
+msgid "RSS display code example"
+msgstr "RSS 显示的代码示例"
+
+#: options.php:377
+msgid "Before / after related entries display:"
+msgstr "主体起止标签："
+
+#: options.php:391
+msgid "Before / after (excerpt):"
+msgstr "摘要起止标签："
+
+#: options.php:237
+#: options.php:251
+#: options.php:309
+#: options.php:348
+#: options.php:371
+#: options.php:411
+msgid "more&gt;"
+msgstr "更多&gt;"
+
+#: options.php:115
+msgid "word"
+msgstr "字符"
+
+#: options.php:116
+msgid "tag"
+msgstr "标签"
+
+#: options.php:117
+msgid "category"
+msgstr "分类"
+
+#: options.php:124
+#: options.php:154
+#, php-format
+msgid "require at least one %s in common"
+msgstr "至少从一个%s中考虑关联"
+
+#: options.php:126
+#: options.php:156
+#, php-format
+msgid "require more than one %s in common"
+msgstr "至少从一个以上%s中考虑关联"
+
+#: options.php:95
+msgid "Options saved!"
+msgstr "保存成功！"
+
+#: options.php:237
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "只简单的几步设置，就能精准得到您想要的关联文章。这里默认的匹配值为5 。如果你想找到合适您网站的的匹配值，我建议你打开 ”对管理员（权限>8的用户）显示匹配值” 这个设置，这样可以更容易找到适合您网站的匹配值。"
+
+#: options.php:419
+msgid "Update options"
+msgstr "保存设置"
+
+#: options.php:420
+msgid "Do you really want to reset your configuration?"
+msgstr "请注意！您确定重置所有的设置吗？"
+
+#: options.php:420
+msgid "Reset options"
+msgstr "重置设置"
+
