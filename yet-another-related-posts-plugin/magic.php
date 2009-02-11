@@ -1,5 +1,55 @@
 <?php
 
+//=TEMPLATING/DISPLAY===========
+
+function yarpp_set_score_override_flag($q) {
+	global $yarpp_time, $yarpp_score_override;
+	if ($yarpp_time) {
+		if ($q->query_vars['orderby'] == 'score')
+			$yarpp_score_override = true;
+		else
+			$yarpp_score_override = false;
+	}
+}
+
+function yarpp_join_filter($arg) {
+	global $wpdb, $yarpp_time;
+	if ($yarpp_time) {
+		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp using (ID)";
+	}
+	return $arg;
+}
+
+function yarpp_where_filter($arg) {
+	global $wpdb, $yarpp_time;
+	$threshold = yarpp_get_option('threshold');
+	if ($yarpp_time) {
+		$arg = str_replace("$wpdb->posts.ID = ","yarpp.score > $threshold and yarpp.reference_ID = ",$arg);
+		if (yarpp_get_option("recent_only"))
+			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
+		echo "<!--YARPP TEST: $arg-->";
+	}
+	return $arg;
+}
+
+function yarpp_orderby_filter($arg) {
+	global $wpdb, $yarpp_time, $yarpp_score_override;
+	if ($yarpp_time and $yarpp_score_override) {
+		$arg = str_replace("$wpdb->posts.post_date","yarpp.score",$arg);
+	}
+	return $arg;
+}
+
+function yarpp_fields_filter($arg) {
+	global $wpdb, $yarpp_time;
+	if ($yarpp_time) {
+		$arg .= ", yarpp.score";
+	}
+	return $arg;
+}
+
+//=CACHING===========
+
 function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='website') {
 	global $wpdb, $post, $yarpp_debug;
 
@@ -254,8 +304,38 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	return $result > 0 ? true: false;
 }
 
+// these are the post ID's which have been updated in this caching cycle
+$yarpp_updated_posts = array();
+// here's a queue of posts whose related posts should be enforced
+$yarpp_caching_queue = array();
+
+function yarpp_save_cache($post_ID,$force=true) {
+	global $wpdb, $yarpp_caching_queue, $yarpp_updated_posts;
+	$parent_ID = $wpdb->get_var("select post_parent from $wpdb->posts where ID='$post_ID'");
+	if ($parent_ID != $post_ID and $parent_ID)
+		$post_ID = $parent_ID;
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+	else
+		$type = array('post');
+
+	// add it to the queue
+	array_push($yarpp_caching_queue,$post_ID);
+	
+	// go through the queue
+	while ($ID = array_pop($yarpp_caching_queue)) {
+		if (array_search($ID,$yarpp_updated_posts) === false) {
+			//echo "YARPP updating $ID<br/>";
+			//echo "YARPP QUEUE: ".print_r($yarpp_caching_queue,true)."<br/>";
+			//echo "YARPP UPDATED: ".print_r($yarpp_updated_posts,true)."<br/>";
+			yarpp_cache_enforce($type,$ID,$force);
+			array_push($yarpp_updated_posts,$ID);
+		}
+	}
+}
+
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
-	global $wpdb, $yarpp_debug;
+	global $wpdb, $yarpp_debug, $yarpp_caching_queue;
 	
 	$timeout = 600;
 	
@@ -268,10 +348,25 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	
 	yarpp_cache_keywords($reference_ID);
 	
+	// let's first record the current related posts for this reference ID
+	$old_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID != 0");
+	array_push($old_relations,0);
+
+	// now clear out the cruft	
 	$wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID");
 	
+	// let's update the related posts
 	$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) ".yarpp_sql($type,array(),true,$reference_ID)." on duplicate key update date = now()");
-	if ($wpdb->rows_affected and $yarpp_debug) echo "<!--YARPP just set the cache.-->";
+	
+	if ($wpdb->rows_affected and $yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+	
+	// if changes were made, let's find out which ones are new. We'll want to then add add these to the queue so their related posts can also be updated.
+	if ($wpdb->rows_affected) {
+		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID not in (".implode(',',$old_relations).")");
+		//echo "YARPP added (select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID not in (".implode(',',$old_relations).")): ".print_r($new_relations,true)."<br/>";
+		$yarpp_caching_queue = array_merge($yarpp_caching_queue,$new_relations);
+	}
+	
 	if (!$wpdb->rows_affected) {
 		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0)");
 		if (!$wpdb->rows_affected)

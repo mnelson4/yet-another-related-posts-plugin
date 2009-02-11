@@ -3,7 +3,7 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
-Version: 3.0b2
+Version: 3.0b3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 */
@@ -39,66 +39,9 @@ function yarpp_metabox() {
 }
 
 add_action('save_post','yarpp_save_cache');
-function yarpp_save_cache($post_ID,$force=true) {
-	global $wpdb;
-	$parent_ID = $wpdb->get_var("select post_parent from $wpdb->posts where ID='$post_ID'");
-	if ($parent_ID != $post_ID and $parent_ID)
-		$post_ID = $parent_ID;
-	if (yarpp_get_option('cross_relate'))
-		$type = array('post','page');
-	else
-		$type = array('post');
-	yarpp_cache_enforce($type,$post_ID,$force);
-}
-
-//==TEMPLATING
 
 add_filter('posts_join','yarpp_join_filter');
 add_filter('posts_where','yarpp_where_filter');
 add_filter('posts_orderby','yarpp_orderby_filter');
 add_filter('posts_fields','yarpp_fields_filter');
 add_action('parse_query','yarpp_set_score_override_flag'); // sets the score override flag. 
-
-function yarpp_set_score_override_flag($q) {
-	global $yarpp_time, $yarpp_score_override;
-	if ($yarpp_time) {
-		if ($q->query_vars['orderby'] == 'score')
-			$yarpp_score_override = true;
-		else
-			$yarpp_score_override = false;
-	}
-}
-
-function yarpp_join_filter($arg) {
-	global $wpdb, $yarpp_time;
-	if ($yarpp_time) {
-		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp using (ID)";
-	}
-	return $arg;
-}
-
-function yarpp_where_filter($arg) {
-	global $wpdb, $yarpp_time;
-	$threshold = yarpp_get_option('threshold');
-	if ($yarpp_time) {
-		$arg = str_replace("$wpdb->posts.ID = ","yarpp.score > $threshold and yarpp.reference_ID = ",$arg);
-	}
-	return $arg;
-}
-
-function yarpp_orderby_filter($arg) {
-	global $wpdb, $yarpp_time, $yarpp_score_override;
-	if ($yarpp_time and $yarpp_score_override) {
-		$arg = str_replace("$wpdb->posts.post_date","yarpp.score",$arg);
-	}
-	return $arg;
-}
-
-function yarpp_fields_filter($arg) {
-	global $wpdb, $yarpp_time;
-	if ($yarpp_time) {
-		$arg .= ", yarpp.score";
-	}
-	return $arg;
-}
-
