@@ -48,6 +48,18 @@ function yarpp_fields_filter($arg) {
 	return $arg;
 }
 
+function yarpp_demo_request_filter($arg) {
+	global $wpdb, $yarpp_demo_time, $yarpp_limit;
+	if ($yarpp_demo_time) {
+		$wpdb->query("set @count = 0;");
+		$arg = "SELECT SQL_CALC_FOUND_ROWS ID + $yarpp_limit as ID, post_author, post_date, post_date_gmt, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' as post_content,
+		concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
+		FROM wp_posts
+		ORDER BY ID DESC LIMIT 0, $yarpp_limit";
+	}
+	return $arg;
+}
+
 //=CACHING===========
 
 function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='website') {
@@ -203,18 +215,23 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $wpdb, $post, $userdata, $yarpp_time, $wp_query, $id, $page, $pages;
+	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages;
 	
-	if ($yarpp_time) // if we're already in a YARPP loop, stop now.
-		return false;
-	
-	if (is_object($post) and !$reference_ID)
-		$reference_ID = $post->ID;
+	if ($domain != 'demo_web' and $domain != 'demo_rss') {
+		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
+			return false;
+		
+		if (is_object($post) and !$reference_ID)
+			$reference_ID = $post->ID;
+	} else {
+		if ($yarpp_demo_time) // if we're already in a YARPP loop, stop now.
+			return false;
+	}
 	
 	get_currentuserinfo();
 
 	// set the "domain prefix", used for all the preferences.
-	if ($domain == 'rss')
+	if ($domain == 'rss' or $domain == 'demo_rss')
 		$domainprefix = 'rss_';
 	else
 		$domainprefix = '';
@@ -241,7 +258,10 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	
     $output = '';
 	
-	$yarpp_time = true; // get ready for YARPP TIME!
+	if ($domain != 'demo_web' and $domain != 'demo_rss')
+		$yarpp_time = true; // get ready for YARPP TIME!
+	else
+		$yarpp_demo_time = true;
 	// just so we can return to normal later
 	$current_query = $wp_query;
 	$current_post = $post;
@@ -251,13 +271,16 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
-	$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]);
-
+	if ($domain != 'demo_web' and $domain != 'demo_rss')
+		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]);
+	else
+		$related_query->query('');
+		
 	if ($domain == 'metabox') {
 		include('template-metabox.php');
 	} elseif ($use_template) {
 		ob_start();
-		include('../yarpp-templates/'.$template_file);
+		include(WP_CONTENT_DIR.'/plugins/yarpp-templates/'.$template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
 	} else {
@@ -265,7 +288,10 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 		
 	unset($related_query);
-	$yarpp_time = false; // YARPP time is over... :(
+	if ($domain != 'demo_web' and $domain != 'demo_rss')
+		$yarpp_time = false; // YARPP time is over... :(
+	else
+		$yarpp_demo_time = false;
 	
 	// restore the older wp_query.
 	$wp_query = null; $wp_query = $current_query; unset($current_query);

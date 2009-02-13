@@ -30,26 +30,26 @@ function yarpp_ajax_display_distags() {
 }
 	
 function yarpp_ajax_display_demo_web() {
-	$democode = stripslashes(yarpp_get_option('before_related',true))."\n";
-	for ($i=1;$i<=yarpp_get_option('limit');$i++) {
-		$democode .= stripslashes(yarpp_get_option('before_title',true)).stripslashes(htmlspecialchars("<a href='".__("PERMALINK",'yarpp')."$i'>".__("RELATED TITLE",'yarpp')." $i</a>")).(yarpp_get_option('show_excerpt')?"\r\t".stripslashes(yarpp_get_option('before_post',true)).yarpp_excerpt(LOREMIPSUM,yarpp_get_option('excerpt_length')).stripslashes(yarpp_get_option('before_post',true)):'').stripslashes(yarpp_get_option('after_title',true))."\n";
-	}
-	$democode .= stripslashes(yarpp_get_option('after_related',true));
-	if (yarpp_get_option('promote_yarpp'))
-		$democode .= htmlspecialchars("\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>");
-	echo $democode;
+	global $wpdb, $post, $userdata, $yarpp_demo_time, $wp_query, $id, $page, $pages, $yarpp_limit;
+	
+	header("Content-Type: text/html; charset=UTF-8");
+	
+	$yarpp_limit = yarpp_get_option('limit');
+	$return = yarpp_related(array('post'),array(),false,false,'demo_web');
+	unset($yarpp_limit);
+	echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
 	exit;
 }
 
 function yarpp_ajax_display_demo_rss() {
-	$democode = stripslashes(yarpp_get_option('rss_before_related',true))."\n";
-	for ($i=1;$i<=yarpp_get_option('rss_limit');$i++) {
-		$democode .= stripslashes(yarpp_get_option('rss_before_title',true)).stripslashes(htmlspecialchars("<a href='".__("RELATED TITLE",'yarpp')."$i'>".__("RELATED TITLE",'yarpp')." $i</a>")).(yarpp_get_option('rss_show_excerpt')?"\r\t".stripslashes(yarpp_get_option('rss_before_post',true)).yarpp_excerpt(LOREMIPSUM,yarpp_get_option('rss_excerpt_length')).stripslashes(yarpp_get_option('rss_before_post',true)):'').stripslashes(yarpp_get_option('rss_after_title',true))."\n";
-	}
-	$democode .= stripslashes(yarpp_get_option('rss_after_related',true));
-	if (yarpp_get_option('rss_promote_yarpp'))
-		$democode .= htmlspecialchars("\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>");
-	echo $democode;
+	global $wpdb, $post, $userdata, $yarpp_demo_time, $wp_query, $id, $page, $pages, $yarpp_limit;
+	
+	header("Content-Type: text/html; charset=utf-8");
+	
+	$yarpp_limit = yarpp_get_option('rss_limit');
+	$return = yarpp_related(array('post'),array(),false,false,'demo_rss');
+	unset($yarpp_limit);
+	echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
 	exit;
 }
 
