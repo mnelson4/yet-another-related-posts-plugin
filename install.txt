@@ -4,7 +4,7 @@ Twitter: http://twitter.com/yarpp/
 
 == INSTALLATION ==
 
-1. Copy the folders `yet-another-related-posts-plugin` and `yarpp-templates` into the directory `wp-content/plugins/`.
+1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and the `yarpp-templates` folder into `wp-content/`. **`yarpp-templates` should be a sister of `plugins`.**
 
 2. Activate the plugin.
 

@@ -111,7 +111,7 @@ function yarpp_activate() {
 			$wpdb->print_error();
 			echo "-->";
 		}
-		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `wp_yarpp_related_cache` (
+		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}yarpp_related_cache` (
 			`reference_ID` bigint(20) unsigned NOT NULL default '0',
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`score` float unsigned NOT NULL default '0',
@@ -126,8 +126,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','3.0b4');
-	update_option('yarpp_version','3.0b4');
+	add_option('yarpp_version','3.0b5');
+	update_option('yarpp_version','3.0b5');
 	return 1;
 }
 
@@ -178,8 +178,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.0 or get_option('yarpp_version') != '3.0b4') {
-		update_option('yarpp_version','3.0b4');
+	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.0 or get_option('yarpp_version') != '3.0b5') {
+		update_option('yarpp_version','3.0b5');
 		
 		//if (!$inuse)
 		//	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
