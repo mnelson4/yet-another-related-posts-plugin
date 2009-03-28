@@ -2,10 +2,28 @@
 
 global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 
+// check to see that templates are in the right place
+
+if (!count(glob(TEMPLATEPATH . '/yarpp-template-*.php'))) {
+  if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugin/yarpp-templates/yarpp-template-*.php')))
+  	echo "<div class='updated'>"
+	  .str_replace("TEMPLATEPATH",TEMPLATEPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
+	  ."</div>";
+
+  else 
+  	echo "<div class='updated'>"
+  	.str_replace('TEMPLATEPATH',TEMPLATEPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
+  	."</div>";
+  
+  yarpp_set_option('use_template',false);
+  yarpp_set_option('rss_use_template',false);
+  
+}
+
 if ($_POST['myisam_override']) {
 	yarpp_set_option('myisam_override',1);
 	echo "<div class='updated'>"
-	.__("The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria.")
+	.__("The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria.",'yarpp')
 	."</div>";
 }
 
@@ -243,7 +261,6 @@ function load_display_discats() {
 </script>
 
 <div class="wrap">
-			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>" style="float:right" /></a>
 		<h2>
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
@@ -262,6 +279,7 @@ function load_display_discats() {
 		
 	<form method="post">
 
+			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>" style="float:right" /></a>
 
 	<p><small><?php _e('by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a>','yarpp');?>. <?php _e('Follow <a href="http://twitter.com/yarpp/">Yet Another Related Posts Plugin on Twitter</a>','yarpp');?>.</small></p>
 
@@ -400,12 +418,12 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/plugins/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
+	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(WP_CONTENT_DIR.'/plugins/yarpp-templates/*.php') as $template): ?>
+						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -465,12 +483,12 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="9" style="border-left:8px transparent solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_rss' style='overflow:auto;width:350px;max-height:500px;'></div></td>"); ?>
 	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
-	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/plugins/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
+	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
 			<tr valign='top' class='rss_templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(WP_CONTENT_DIR.'/plugins/yarpp-templates/*.php') as $template): ?>
+						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -532,13 +550,14 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	<script type='text/javascript'>
 	//<!--
 	time=0;i=0;m=0;id=0;
+  timeout = 10000;
 	function yarppBuildRequest() {
 		jQuery.ajax({
 			url:'admin-ajax.php',
 			type: 'post',
 			data: {action:'yarpp_build_cache_action',i:i,m:m,id:id},
 			dataType: 'json',
-			timeout: 10000,
+			timeout: timeout,
 			success: function (json) {
 				if (json.result == 'success') {
 					i = json.i;
@@ -568,11 +587,13 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 					m = json.m;
 					id = json.id;
 				}
+				timeout += 5000;
 				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
 				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
 			},
 			error: function(json) {
 				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
+				timeout += 5000;
 				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
 			}
 		});
