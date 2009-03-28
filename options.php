@@ -4,15 +4,15 @@ global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 
 // check to see that templates are in the right place
 
-if (!count(glob(WP_CONTENT_DIR.'/yarpp-templates/*.php'))) {
-  if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugins/yarpp-templates/*.php')))
+if (!count(glob(TEMPLATEPATH . '/yarpp-template-*.php'))) {
+  if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugin/yarpp-templates/yarpp-template-*.php')))
   	echo "<div class='updated'>"
-	  .__("Please move the YARPP template files into their proper location to complete installation. Simply move the <code>yarpp-templates</code> folder (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/</code>) to the <code>wp-content/</code> directory.",'yarpp')
+	  .str_replace("TEMPLATEPATH",TEMPLATEPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
 	  ."</div>";
 
   else 
   	echo "<div class='updated'>"
-  	.__("No YARPP template files were found (in <code>wp-content/yarpp-templates</code>) and so the templating feature has been turned off.",'yarpp')
+  	.str_replace('TEMPLATEPATH',TEMPLATEPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
   	."</div>";
   
   yarpp_set_option('use_template',false);
@@ -423,7 +423,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(WP_CONTENT_DIR.'/yarpp-templates/*.php') as $template): ?>
+						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -488,7 +488,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(WP_CONTENT_DIR.'/yarpp-templates/*.php') as $template): ?>
+						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -550,13 +550,14 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	<script type='text/javascript'>
 	//<!--
 	time=0;i=0;m=0;id=0;
+  timeout = 10000;
 	function yarppBuildRequest() {
 		jQuery.ajax({
 			url:'admin-ajax.php',
 			type: 'post',
 			data: {action:'yarpp_build_cache_action',i:i,m:m,id:id},
 			dataType: 'json',
-			timeout: 10000,
+			timeout: timeout,
 			success: function (json) {
 				if (json.result == 'success') {
 					i = json.i;
@@ -586,11 +587,13 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 					m = json.m;
 					id = json.id;
 				}
+				timeout += 5000;
 				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
 				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
 			},
 			error: function(json) {
 				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
+				timeout += 5000;
 				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
 			}
 		});

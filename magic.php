@@ -280,7 +280,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		include('template-metabox.php');
 	} elseif ($use_template) {
 		ob_start();
-		include(WP_CONTENT_DIR.'/yarpp-templates/'.$template_file);
+		include(TEMPLATEPATH . '/' . $template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
 	} else {
