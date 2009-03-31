@@ -14,367 +14,525 @@ msgstr ""
 "X-Poedit-Basepath: \n"
 "X-Poedit-SearchPath-0: ."
 
-#: includes.php:74
+#: includes.php:94
 msgid "MySQL error on adding yarpp_title"
 msgstr "yarpp_title インデックス作成時にエラー発生。"
 
-#: includes.php:79
+#: includes.php:99
 msgid "MySQL error on adding yarpp_content"
 msgstr "yarpp_content インデックス作成時にエラー発生。"
 
-#: includes.php:133
+#: includes.php:185
 msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
 msgstr ""
 
-#: includes.php:173
+#: yarpp.php:29
+#: yarpp.php:29
+#: includes.php:224
 msgid "Related Posts"
 msgstr "関連記事"
 
-#: includes.php:178
+#: includes.php:229
 msgid "YARPP"
 msgstr ""
 
-#: options.php:17
+#: options.php:35
 #, php-format
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "YARPPの関連スコア計算の「タイトルを検討する」、「内容を検討する」オプションはデータベースの<code>%s</code>テーブルが <a href='http://dev.mysql.com/doc/refman/4.1/ja/myisam.html'>MyISAM</a> でなければ使用できません。 <code>%s</code>テーブルは現在<code>%s</code>ストーレージエンジンを使用しているので、このふたつのオプションは使えません。"
 
-#: options.php:19
+#: options.php:37
 #, php-format
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "このオプションを使用したければ、<code>%s</code>テーブルに対してこのようなクエリを実行してください：<code>ALTER TABLE `%s` ENGINE = MyISAM;</code>。このクエリはデータは一切消しません。"
 
-#: options.php:21
+#: options.php:39
 #, php-format
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "<code>%s</code>テーブルが絶対MyISAMを使用していると思う方はこちらの魔法のボタンをどうぞ："
 
-#: options.php:24
+#: options.php:42
 msgid "Trust me. Let me use MyISAM features."
 msgstr "MyISAM を使ってます。嘘じゃないから。"
 
-#: options.php:47
+#: options.php:65
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPPのデータベースは修正されました。"
 
-#: options.php:49
+#: options.php:67
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPPのデータベースに修正できないエラーが発生しました。"
 
-#: options.php:115
+#: options.php:147
 msgid "word"
 msgstr ""
 
-#: options.php:116
+#: options.php:148
 msgid "tag"
 msgstr "タグ"
 
-#: options.php:117
+#: options.php:149
 msgid "category"
 msgstr "カテゴリー"
 
-#: options.php:121
-#: options.php:138
-#: options.php:150
+#: options.php:153
+#: options.php:170
+#: options.php:182
 msgid "do not consider"
 msgstr "検討しない"
 
-#: options.php:122
-#: options.php:139
-#: options.php:152
+#: options.php:154
+#: options.php:171
+#: options.php:184
 msgid "consider"
 msgstr "検討する"
 
-#: options.php:124
-#: options.php:154
+#: options.php:156
+#: options.php:186
 #, php-format
 msgid "require at least one %s in common"
 msgstr "共有の%sをひとつ以上必要とする"
 
-#: options.php:126
-#: options.php:156
+#: options.php:158
+#: options.php:188
 #, php-format
 msgid "require more than one %s in common"
 msgstr "共有の%sをふたつ以上必要とする"
 
-#: options.php:140
+#: options.php:172
 msgid "consider with extra weight"
 msgstr "検討する（重要視）"
 
-#: options.php:168
+#: options.php:211
 msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
 msgstr "関連記事プラグイン （YARPP） 更新履歴 （RSS 2.0）"
 
-#: options.php:183
-#: options.php:183
+#: options.php:282
+#: options.php:282
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "YARPPの作成者（ミッチョ）にPayPalで寄付をする"
 
-#: options.php:186
+#: options.php:265
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "関連記事 (YARPP) 設定"
 
-#: options.php:202
-#, php-format
-msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> and based on the fabulous work of <a href=\"http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-posts-plugin\">Peter Bower</a>, <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">Alexander Malov &amp; Mike Lu</a>."
-msgstr "作成者： <a href=\"http://mitcho.com/\">ミッチョ (アーリーワイン・マイケル芳貴)</a>"
-
-#: options.php:206
+#: options.php:289
 msgid "\"The Pool\""
 msgstr "フィルター設定"
 
-#: options.php:207
+#: options.php:290
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
 msgstr "関連記事として表示したい記事を制限します。"
 
-#: options.php:212
+#: options.php:295
 msgid "Disallow by category:"
 msgstr "このカテゴリーの記事を表示しない"
 
-#: options.php:221
+#: options.php:297
 msgid "Disallow by tag:"
 msgstr "このタグの記事を表示しない"
 
-#: options.php:230
+#: options.php:299
 msgid "Show password protected posts?"
 msgstr "パスワードで保護されている記事も表示"
 
-#: options.php:231
+#: options.php:300
 msgid "Show only previous posts?"
 msgstr "過去の記事だけを表示"
 
-#: options.php:236
+#: options.php:317
 msgid "\"Relatedness\" options"
 msgstr "関連スコア設定"
 
-#: options.php:237
+#: options.php:319
 #, php-format
 msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr "この関連記事プラグイン（YARPP）は各対象記事の関連スコアを計算し、ある関連スコア以上の記事だけを表示します。"
 
-#: options.php:242
+#: options.php:324
 msgid "Match threshold:"
 msgstr "表示する最低関連スコア"
 
-#: options.php:243
+#: options.php:325
 msgid "Titles: "
 msgstr "タイトル:"
 
-#: options.php:245
+#: options.php:327
 msgid "Bodies: "
 msgstr "内容:"
 
-#: options.php:247
+#: options.php:329
 msgid "Tags: "
 msgstr "タグ:"
 
-#: options.php:249
+#: options.php:331
 msgid "Categories: "
 msgstr "カテゴリー:"
 
-#: options.php:251
+#: options.php:333
 msgid "Cross-relate posts and pages?"
 msgstr "記事とページを関連づける"
 
-#: options.php:251
+#: options.php:333
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
 msgstr "「記事とページを関連づける」が有効の場合は <code>related_posts()</code>、 <code>related_pages()</code> と <code>related_entries()</code> は全て記事とページを両方「関連記事／ページ」として表示します。"
 
-#: options.php:293
+#: options.php:412
 msgid "Display options <small>for your website</small>"
 msgstr "表示設定 <small>ウェブサイト用</small>"
 
-#: options.php:302
-#: options.php:363
-#: options.php:363
-msgid "RELATED TITLE"
-msgstr "関連記事タイトル"
-
-#: options.php:307
-#: options.php:349
-#: options.php:368
-#: options.php:412
-#: magic.php:219
+#: magic.php:304
+#: options.php:469
+#: options.php:533
 msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
 msgstr "関連記事は<a href='http://mitcho.com/code/yarpp/'>YARPP関連記事プラグイン</a>によって表示されています。"
 
-#: options.php:309
+#: options.php:416
 msgid "Automatically display related posts?"
 msgstr "自動的に関連記事を表示する"
 
-#: options.php:309
+#: options.php:416
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
 msgstr "単体記事表示時に自動的に関連記事を表示します。この自動表示を無効にすると、テーマファイルに<code>related_posts()</code>を入れる必要があります。"
 
-#: options.php:310
+#: options.php:417
 msgid "Website display code example"
 msgstr "ウェブサイト表示のソース例"
 
-#: options.php:310
-#: options.php:372
+#: options.php:417
+#: options.php:483
 msgid "(Update options to reload.)"
 msgstr "（設定保存時に更新されます）"
 
-#: options.php:312
-#: options.php:374
+#: options.php:420
+#: options.php:485
 msgid "Maximum number of related posts:"
 msgstr "一度に表示する関連記事数"
 
-#: options.php:314
+#: options.php:433
 msgid "Before / after related entries:"
 msgstr "関連記事表示を囲むタグ:"
 
-#: options.php:315
-#: options.php:320
-#: options.php:329
-#: options.php:378
-#: options.php:383
-#: options.php:392
+#: options.php:434
+#: options.php:439
+#: options.php:448
+#: options.php:499
+#: options.php:504
+#: options.php:513
 msgid "For example:"
 msgstr "例:"
 
-#: options.php:319
-#: options.php:382
+#: options.php:438
+#: options.php:503
 msgid "Before / after each related entry:"
 msgstr "各関連記事を囲むタグ:"
 
-#: options.php:323
-#: options.php:386
+#: options.php:442
+#: options.php:507
 msgid "Show excerpt?"
 msgstr "抜粋を表示？"
 
-#: options.php:324
-#: options.php:387
+#: options.php:443
+#: options.php:508
 msgid "Excerpt length (No. of words):"
 msgstr "抜粋の長さ（単語数）:"
 
-#: options.php:328
+#: options.php:447
 msgid "Before / after (Excerpt):"
 msgstr "抜粋を囲むタグ:"
 
-#: options.php:334
-#: options.php:397
+#: options.php:453
+#: options.php:518
 msgid "Order results:"
 msgstr "表示順番:"
 
-#: options.php:336
-#: options.php:399
+#: options.php:455
+#: options.php:520
 msgid "score (high relevance to low)"
 msgstr "関連スコアの高い順"
 
-#: options.php:337
-#: options.php:400
+#: options.php:456
+#: options.php:521
 msgid "score (low relevance to high)"
 msgstr "関連スコアの低い順"
 
-#: options.php:338
-#: options.php:401
+#: options.php:457
+#: options.php:522
 msgid "date (new to old)"
 msgstr "新しい日付順（降順）"
 
-#: options.php:339
-#: options.php:402
+#: options.php:458
+#: options.php:523
 msgid "date (old to new)"
 msgstr "古い日付順（昇順）"
 
-#: options.php:340
-#: options.php:403
+#: options.php:459
+#: options.php:524
 msgid "title (alphabetical)"
 msgstr "タイトル順（昇順）"
 
-#: options.php:341
-#: options.php:404
+#: options.php:460
+#: options.php:525
 msgid "title (reverse alphabetical)"
 msgstr "タイトル順（降順）"
 
-#: options.php:346
-#: options.php:409
+#: options.php:465
+#: options.php:530
 msgid "Default display if no results:"
 msgstr "関連記事がない時のメッセージ"
 
-#: options.php:347
-#: options.php:411
+#: options.php:467
+#: options.php:532
 msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "この関連記事プラグイン(YARPP)を宣伝しますか？"
 
-#: options.php:349
-#: options.php:412
+#: options.php:469
+#: options.php:533
 #, php-format
 msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
 msgstr "関連記事表示の下に「%s」というコードを挿入します。"
 
-#: options.php:354
+#: options.php:476
 msgid "Display options <small>for RSS</small>"
 msgstr "表示設定 <small>RSS/Atom フィード用</small>"
 
-#: options.php:370
+#: options.php:481
 msgid "Display related posts in feeds?"
 msgstr "自動的にフィードで関連記事を表示する"
 
-#: options.php:371
+#: options.php:482
 msgid "Display related posts in the descriptions?"
 msgstr "フィード内の抜粋にも自動的に関連記事を表示する"
 
-#: options.php:371
+#: options.php:482
 msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
 msgstr "フィード内の全文表示に関連記事を表示するだけでなく、フィード内の抜粋でも関連記事が表示されます。WordPressの設定によりフィードに抜粋のみを表示している場合は、このオプションが無効の場合関連記事がフィード内で表示されません。"
 
-#: options.php:372
+#: options.php:483
 msgid "RSS display code example"
 msgstr "RSS表示のソース例"
 
-#: options.php:377
+#: options.php:498
 msgid "Before / after related entries display:"
 msgstr "関連記事表示を囲むタグ:"
 
-#: options.php:391
+#: options.php:512
 msgid "Before / after (excerpt):"
 msgstr "抜粋を囲むタグ:"
 
-#: magic.php:210
+#: template-builtin.php:35
 #, php-format
 msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%fは現在表示の記事とこの関連記事の関連スコアです。この関連スコアはログイン済みのサイト管理者のみに表示されます。"
 
-#: includes.php:154
-#: includes.php:154
+#: includes.php:197
+#: includes.php:197
 msgid "Related Posts (YARPP)"
 msgstr "関連記事 (YARPP)"
 
-#: options.php:8
+#: options.php:26
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "MyISAM専用機能を強制的に有効にしました。「タイトルを検討」と「内容を検討」機能が使えるようになりました。"
 
-#: options.php:302
-msgid "PERMALINK"
-msgstr "パーマリンク"
-
-#: options.php:237
-#: options.php:251
-#: options.php:309
-#: options.php:348
-#: options.php:371
-#: options.php:411
+#: options.php:319
+#: options.php:333
+#: options.php:416
+#: options.php:421
+#: options.php:468
+#: options.php:481
+#: options.php:482
+#: options.php:486
+#: options.php:532
+#: options.php:544
 msgid "more&gt;"
 msgstr "(説明)"
 
-#: options.php:95
+#: options.php:125
 msgid "Options saved!"
 msgstr "設定の変更は保存されました。"
 
-#: options.php:420
+#: options.php:616
 msgid "Do you really want to reset your configuration?"
 msgstr "本当に初期設定に戻りますか？"
 
-#: options.php:419
+#: options.php:615
 msgid "Update options"
 msgstr "変更を保存"
 
-#: options.php:237
+#: options.php:319
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "より関連性の高い記事だけを表示したい場合は、最低関連スコアを上げてください。初期設定は5です。"
 
-#: options.php:420
+#: options.php:616
 msgid "Reset options"
 msgstr "初期設定に戻る"
+
+#: magic.php:56
+msgid "Example post "
+msgstr ""
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr ""
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr ""
+
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "関連記事はありません。"
+
+#: options.php:10
+msgid "Please move the YARPP template files into their proper location to complete installation. Simply move the <code>yarpp-templates</code> folder (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/</code>) to the <code>wp-content/</code> directory."
+msgstr ""
+
+#: options.php:15
+msgid "No YARPP template files were found (in <code>wp-content/yarpp-templates</code>) and so the templating feature has been turned off."
+msgstr ""
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:543
+msgid "Related posts cache status"
+msgstr ""
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr ""
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr ""
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr ""
+
+#: options.php:198
+msgid "Edit Catalog Entry"
+msgstr ""
+
+#: options.php:199
+msgid "close"
+msgstr "閉じる"
+
+#: options.php:284
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr ""
+
+#: options.php:284
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Twitter で <a href=\"http://twitter.com/yarpp/\">YARPP をフォロー</a>。"
+
+#: options.php:305
+msgid "day(s)"
+msgstr "日間"
+
+#: options.php:306
+msgid "week(s)"
+msgstr "週間"
+
+#: options.php:307
+msgid "month(s)"
+msgstr "ヶ月間"
+
+#: options.php:309
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "過去 NUMBER UNITS の記事だけを表示"
+
+#: options.php:398
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "関連記事プラグイン（YARPP）の新しいベータ（VERSION）があります。是非<A>ダウンロード</a>してみてください。"
+
+#: options.php:400
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "関連記事プラグイン（YARPP）の新しいバージョン（VERSION）があります。是非<A>ダウンロード</a>してみてください。"
+
+#: options.php:421
+#: options.php:486
+msgid "Display using a custom template file"
+msgstr ""
+
+#: options.php:421
+#: options.php:486
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/yarpp-templates</code> directory) are written in PHP."
+msgstr ""
+
+#: options.php:423
+#: options.php:488
+msgid "Template file:"
+msgstr ""
+
+#: options.php:481
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr ""
+
+#: options.php:540
+msgid "Advanced"
+msgstr "詳細"
+
+#: options.php:543
+msgid "Show cache status"
+msgstr ""
+
+#: options.php:544
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr ""
+
+#: options.php:545
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr ""
+
+#: options.php:574
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'残りMIN分SEC秒'"
+
+#: options.php:576
+msgid "'SEC second(s) remaining'"
+msgstr "'残りSEC秒'"
+
+#: options.php:580
+msgid "Your related posts cache is now complete."
+msgstr ""
+
+#: options.php:580
+msgid "The SQL queries took SEC seconds."
+msgstr "SQLクエリは計SEC秒かかりました。"
+
+#: options.php:589
+#: options.php:593
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr ""
+
+#: options.php:590
+#: options.php:594
+msgid "try to continue"
+msgstr ""
+
+#: options.php:602
+msgid "Your related posts cache is PERCENT% complete."
+msgstr ""
+
+#: options.php:608
+msgid "starting..."
+msgstr ""
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr ""
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr ""
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr ""
+
+#: services.php:90
+#, php-format
+msgid "You do not have the permission to write the file '%s'."
+msgstr ""
 
