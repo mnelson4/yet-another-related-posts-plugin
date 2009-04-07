@@ -3,7 +3,7 @@
 //=TEMPLATING/DISPLAY===========
 
 function yarpp_set_score_override_flag($q) {
-	global $yarpp_time, $yarpp_score_override, $yarpp_limit;
+	global $yarpp_time, $yarpp_score_override, $yarpp_online_limit;
 	if ($yarpp_time) {
 		if ($q->query_vars['orderby'] == 'score')
 			$yarpp_score_override = true;
@@ -11,9 +11,9 @@ function yarpp_set_score_override_flag($q) {
 			$yarpp_score_override = false;
 
 		if ($q->query_vars['showposts'] != '') {
-			$yarpp_limit = $q->query_vars['showposts'];
+			$yarpp_online_limit = $q->query_vars['showposts'];
 		} else {
-			$yarpp_limit = false;
+			$yarpp_online_limit = false;
     }
 
 	}
@@ -48,9 +48,9 @@ function yarpp_orderby_filter($arg) {
 }
 
 function yarpp_limit_filter($arg) {
-	global $wpdb, $yarpp_time, $yarpp_limit;
-	if ($yarpp_time and $yarpp_limit) {
-		return " limit $yarpp_limit ";
+	global $wpdb, $yarpp_time, $yarpp_online_limit;
+	if ($yarpp_time and $yarpp_online_limit) {
+		return " limit $yarpp_online_limit ";
 	}
 	return $arg;
 }
@@ -313,7 +313,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// restore the older wp_query.
 	$wp_query = null; $wp_query = $current_query; unset($current_query);
 	$post = null; $post = $current_post; unset($current_post);
-	$authordata = null; $post = $current_authordata; unset($current_authordata);
+  $authordata = null; $authordata = $current_authordata; unset($current_authordata);
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);
