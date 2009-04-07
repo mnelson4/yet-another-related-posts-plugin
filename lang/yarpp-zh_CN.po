@@ -50,7 +50,7 @@ msgstr "YARPP 中的 %f 是指当前文章和关联文章之间的匹配程度�
 #: options.php:469
 #: options.php:533
 msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
-msgstr "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "以上关联文章由 <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a> 提供支持。"
 
 #: options.php:26
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
@@ -192,7 +192,7 @@ msgstr "网站显示的代码示例"
 #: options.php:417
 #: options.php:483
 msgid "(Update options to reload.)"
-msgstr "（更新设置后生效。）"
+msgstr "（保存设置后生效。）"
 
 #: options.php:420
 #: options.php:485
@@ -355,15 +355,15 @@ msgstr "保存成功！"
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr ""
 
-#: options.php:615
+#: options.php:618
 msgid "Update options"
 msgstr "保存设置"
 
-#: options.php:616
+#: options.php:619
 msgid "Do you really want to reset your configuration?"
 msgstr "请注意！您确定重置所有的设置吗？"
 
-#: options.php:616
+#: options.php:619
 msgid "Reset options"
 msgstr "重置设置"
 
@@ -377,22 +377,14 @@ msgstr "创建 yarpp_related_cache 表时错误"
 
 #: magic.php:56
 msgid "Example post "
-msgstr "范文"
-
-#: options.php:10
-msgid "Please move the YARPP template files into their proper location to complete installation. Simply move the <code>yarpp-templates</code> folder (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/</code>) to the <code>wp-content/</code> directory."
 msgstr ""
-
-#: options.php:15
-msgid "No YARPP template files were found (in <code>wp-content/yarpp-templates</code>) and so the templating feature has been turned off."
-msgstr "没有在（<code>wp-content/yarpp-templates</code>）下找到相应的关联文章（YARPP）自定义模板文件。"
 
 #: options.php:81
 #: options.php:84
 #: options.php:126
 #: options.php:543
 msgid "Related posts cache status"
-msgstr "关联文章缓存状态"
+msgstr "关联文章缓存"
 
 #: options.php:81
 msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
@@ -404,7 +396,7 @@ msgstr "您还尚未建立关联文章缓存， <A>立即重建</a>。"
 
 #: options.php:127
 msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
-msgstr ""
+msgstr "如果您刚刚修改了“全局设置”或者“关联设置”等选项后，建议您<A>重建下关联文章缓存</a>。"
 
 #: options.php:198
 msgid "Edit Catalog Entry"
@@ -481,37 +473,37 @@ msgstr "当缓存不完整时，由插件自行匹配关联文章？"
 msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
 msgstr ""
 
-#: options.php:574
+#: options.php:575
 msgid "'MIN minute(s) and SEC second(s) remaining'"
 msgstr ""
 
-#: options.php:576
+#: options.php:577
 msgid "'SEC second(s) remaining'"
 msgstr ""
 
-#: options.php:580
+#: options.php:581
 msgid "Your related posts cache is now complete."
 msgstr "恭喜！您的关联文章缓存已成功完成。"
 
-#: options.php:580
+#: options.php:581
 msgid "The SQL queries took SEC seconds."
 msgstr ""
 
-#: options.php:589
-#: options.php:593
+#: options.php:591
+#: options.php:595
 msgid "There was an error while constructing the related posts for TITLE"
 msgstr ""
 
-#: options.php:590
-#: options.php:594
+#: options.php:592
+#: options.php:597
 msgid "try to continue"
 msgstr "重试"
 
-#: options.php:602
+#: options.php:605
 msgid "Your related posts cache is PERCENT% complete."
 msgstr "您的关联文章（YARPP）缓存完整率为：PERCENT% "
 
-#: options.php:608
+#: options.php:611
 msgid "starting..."
 msgstr "开始建立……"
 
@@ -535,4 +527,12 @@ msgstr ""
 #: template-metabox.php:27
 msgid "No related posts."
 msgstr "无关联文章"
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "如果您需要使用关联文章（YARPP）插件的自定义模板，请手动将文件夹（<code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>）的文件移动到您的主题文件夹（<code>TEMPLATEPATH</code>）内。"
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "未在您的主题文件夹 (<code>TEMPLATEPATH</code>) 内找到关联文章（YARPP）的自定义模板文件。"
 

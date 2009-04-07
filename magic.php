@@ -3,12 +3,19 @@
 //=TEMPLATING/DISPLAY===========
 
 function yarpp_set_score_override_flag($q) {
-	global $yarpp_time, $yarpp_score_override;
+	global $yarpp_time, $yarpp_score_override, $yarpp_limit;
 	if ($yarpp_time) {
 		if ($q->query_vars['orderby'] == 'score')
 			$yarpp_score_override = true;
 		else
 			$yarpp_score_override = false;
+
+		if ($q->query_vars['showposts'] != '') {
+			$yarpp_limit = $q->query_vars['showposts'];
+		} else {
+			$yarpp_limit = false;
+    }
+
 	}
 }
 
@@ -36,6 +43,14 @@ function yarpp_orderby_filter($arg) {
 	global $wpdb, $yarpp_time, $yarpp_score_override;
 	if ($yarpp_time and $yarpp_score_override) {
 		$arg = str_replace("$wpdb->posts.post_date","yarpp.score",$arg);
+	}
+	return $arg;
+}
+
+function yarpp_limit_filter($arg) {
+	global $wpdb, $yarpp_time, $yarpp_limit;
+	if ($yarpp_time and $yarpp_limit) {
+		return " limit $yarpp_limit ";
 	}
 	return $arg;
 }
@@ -215,7 +230,7 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages;
+	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata;
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -239,6 +254,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// get options
 	// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
 	$options = array(
+    'limit'=>"${domainprefix}limit",
 		'use_template'=>"${domainprefix}use_template",
 		'order'=>"${domainprefix}order",
 		'template_file'=>"${domainprefix}template_file",
@@ -268,17 +284,18 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_id = $id;
 	$current_page = $page;
 	$current_pages = $pages;
+	$current_authordata = $authordata;
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
-		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]);
+		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]."&showposts=$limit");
 	else
 		$related_query->query('');
-		
+				
 	if ($domain == 'metabox') {
 		include('template-metabox.php');
-	} elseif ($use_template) {
+	} elseif ($use_template and file_exists(TEMPLATEPATH . '/' . $template_file)) {
 		ob_start();
 		include(TEMPLATEPATH . '/' . $template_file);
 		$output = ob_get_contents();
@@ -296,6 +313,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// restore the older wp_query.
 	$wp_query = null; $wp_query = $current_query; unset($current_query);
 	$post = null; $post = $current_post; unset($current_post);
+	$authordata = null; $post = $current_authordata; unset($current_authordata);
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);

@@ -191,17 +191,6 @@ function select($option,$desc,$type='word',$tr="<tr valign='top'>
 }
 
 ?>
-<div id="yarpp-dialog-container" style="display:none;">
-	<div>
-		<h3 id="yarpp-dialog-header">
-			<!--<img alt="" id="yarpp-dialog-icon" class="alignleft" src="<?php echo CSP_PO_BASE_URL; ?>/images/gettext.gif" />-->
-			<span id="yarpp-dialog-caption" class="alignleft"><?php _e('Edit Catalog Entry','yarpp'); ?></span>
-			<img alt="" id="yarpp-dialog-cancel" class="alignright clickable" title="<?php _e('close', 'yarpp'); ?>" src="<?php echo WP_CONTENT_DIR."/plugins/yet-another-related-posts-plugin/i/close.gif"; ?>" onclick="yarpp_cancel_dialog();" />
-			<br class="clear" />
-		</h3>	
-		<div id="yarpp-dialog-body"></div>
-	</div>
-</div><!-- yarpp-dialog-container closed -->
 <script type="text/javascript">
 //<!--
 
@@ -418,7 +407,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
+	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>".__('NEW!','yarpp')."</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -466,8 +455,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				<th>")?>
 	<?php checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
 	." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")
-	."</span></a>"); ?>
+	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>"); ?>
 		</table>
 		</div>
 
@@ -483,7 +471,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="9" style="border-left:8px transparent solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_rss' style='overflow:auto;width:350px;max-height:500px;'></div></td>"); ?>
 	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
-	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>NEW!</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (in the <code>wp-content/yarpp-templates</code> directory) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
+	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>".__('NEW!','yarpp')."</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
 			<tr valign='top' class='rss_templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -530,14 +518,13 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	<?php textbox('rss_no_results',__('Default display if no results:','yarpp'),'40',"<tr valign='top' class='rss_not_templated'>
 			<th scope='row'>")?>
 	<?php checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")
-	."</span></a>","<tr valign='top' class='rss_displayed'>
+	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>","<tr valign='top' class='rss_displayed'>
 			<th class='th-full' colspan='2' scope='row'>"); ?>
 		</table>
 		</div>
 
 	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('Advanced','yarpp');?> <span style='color:red;'>NEW!</span></h3>
+	<h3><?php _e('Advanced','yarpp');?> <span style='color:red;'><?php _e('NEW!','yarpp')?></span></h3>
 	
 	<table class="form-table" style="margin-top: 0">
 	<tr valign='top' colspan='2'><td><input class="thickbox button" type="button" value="<?php _e("Show cache status",'yarpp');?>" title="<?php _e('Related posts cache status','yarpp');?>" alt="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status"/>

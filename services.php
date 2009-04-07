@@ -85,10 +85,6 @@ function yarpp_build_cache() {
 		$i++;
 	}
 
-	//header('Status: 404 Not Found');
-	//header('HTTP/1.1 404 Not Found');
-	//echo sprintf(__("You do not have the permission to write the file '%s'.", CSP_PO_TEXTDOMAIN), $_POST['pofile']);
-
 	header('Content-Type: application/json');	
 	echo "{result:'success',time:'".(yarpp_microtime_float() - $start)."', id: '$id', title: '".addslashes($title)."', i: $i, m: $m, percent: '".(floor(1000 * $i/$m)/10)."'}";
 	exit();
