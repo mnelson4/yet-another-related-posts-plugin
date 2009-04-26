@@ -101,6 +101,7 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 == Localizations ==
 
 YARPP is currently localized in the following languages:
+
 	* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
 	* French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
 	* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
@@ -109,6 +110,7 @@ YARPP is currently localized in the following languages:
 	* Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
 	
 We already have localizers lined up for the following languages:
+
   * Danish
   * Spanish
   * Catalan
