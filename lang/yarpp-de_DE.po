@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-17 14:23+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Michael Kalina <m.kalina@3th.be>\n"
+"Last-Translator: Michael Kalina <yarpp-de@mitcho.com>\n"
 "Language-Team: Michael Kalina <m.kalina@3th.be>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
+": \n"
 "X-Poedit-SearchPath-0: .\n"
-": "
 
 #: includes.php:74
 msgid "MySQL error on adding yarpp_title"
@@ -29,7 +29,6 @@ msgstr "MySQL-Fehler beim Hinzufügen von \"yarpp_content\""
 msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
 msgstr "<h3>Nachricht von YARPP</h3><p>Danke fürs Upgrade auf YARPP 2. Diese Version bringt Verbesserungen im magischen Algorithmus, lässt Sie Einstellungen in der Gewichtung der verschiedenen Stichwörter oder Kategorien vornehmen, berücksichtigt Einstellungen zum Gebrauch bestimmter Ausschlussregeln und lässt Sie bestimmen, wie stark die Variablen \"Inhalt\", \"Überschrift\", \"Stichwörter\" und \"Kategorien\" berücksichtigt werden. Mehr Informationen gibt es in der <a href=\"http://mitcho.com/code/yarpp/\">YARPP Dokumentation</a>.</p><p>Diese Nachricht erscheint nie wieder!</p>"
 
-#: includes.php:154
 #: includes.php:154
 msgid "Related Posts (YARPP)"
 msgstr "Related Posts (YARPP)"
@@ -107,7 +106,6 @@ msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
 msgstr "YARPP-Versionsverlauf (RSS 2.0)"
 
 #: options.php:183
-#: options.php:183
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "An mitcho (Michael Yoshitaka Erlewine) für die Entwicklung des Plugins via PayPal spenden"
 
@@ -162,7 +160,6 @@ msgstr "YARPP funktioniert ein wenig anders als <a href=\"http://wasabi.pbwiki.c
 msgid "more&gt;"
 msgstr "?"
 
-
 #: options.php:242
 msgid "Match threshold:"
 msgstr "Relevanz:"
@@ -200,7 +197,6 @@ msgid "PERMALINK"
 msgstr "PERMALINK"
 
 #: options.php:302
-#: options.php:363
 #: options.php:363
 msgid "RELATED TITLE"
 msgstr "ÄHNLICHER TITEL"
@@ -299,8 +295,6 @@ msgstr "Überschrift (Z-A)"
 msgid "Default display if no results:"
 msgstr "Quellcode bei 0 relevanten Artikeln:"
 
-
-
 #: options.php:347
 #: options.php:411
 msgid "Help promote Yet Another Related Posts Plugin?"
@@ -319,7 +313,6 @@ msgstr "Darstellung <small>(RSS)</small>"
 #: options.php:370
 msgid "Display related posts in feeds?"
 msgstr "Ähnliche Beiträge in Newsfeeds anzeigen?"
-
 
 #: options.php:371
 msgid "Display related posts in the descriptions?"
@@ -343,31 +336,31 @@ msgstr "Quellcode vor/nach dem Exzerpt:"
 
 #: options.php:115
 msgid "word"
-msgstr ""
+msgstr "Wort"
 
 #: options.php:116
 msgid "tag"
-msgstr ""
+msgstr "Tag"
 
 #: options.php:117
 msgid "category"
-msgstr ""
+msgstr "Kategorie"
 
 #: options.php:124
 #: options.php:154
 #, php-format
 msgid "require at least one %s in common"
-msgstr ""
+msgstr "zumindest ein %s gleich"
 
 #: options.php:126
 #: options.php:156
 #, php-format
 msgid "require more than one %s in common"
-msgstr ""
+msgstr "mehr als ein %s gleich"
 
 #: options.php:95
 msgid "Options saved!"
-msgstr ""
+msgstr "Einstellungen gespeichert!"
 
 #: options.php:237
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
@@ -375,15 +368,15 @@ msgstr ""
 
 #: options.php:419
 msgid "Update options"
-msgstr ""
+msgstr "Einstellungen aktualisieren"
 
 #: options.php:420
 msgid "Do you really want to reset your configuration?"
-msgstr ""
+msgstr "Einstellungen tatsächlich zurücksetzen?"
 
 #: options.php:420
 msgid "Reset options"
-msgstr ""
+msgstr "Einstellungen zurücksetzen"
 
 #~ msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, I recommend you turn on the \"show admins the match scores\" setting below. That way, you can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 #~ msgstr "Je höher Sie den Wert \"Relevanz\" setzen, desto restriktiver arbeitet YARPP. Der Standardwert liegt bei 5. Wenn gar keine oder zuwenige Artikel angezeigt werden, setzen Sie ihn auf 3.5 oder gar 1 herunter. Für die Feinabstimmung aktivieren Sie die Option \"Administratoren den Wert der Relevanz anzeigen\" und stimmen den Wert auf Ihre Anforderungen ab."
@@ -393,3 +386,4 @@ msgstr ""
 #~ msgstr "Wenn aktiviert, sehen nur eingeloggte Administratoren (nicht die Besucher!) neben jeder Beitragsüberschrift den Übereinstimmungswert."
 #~ msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
 #~ msgstr "Zeigt ähnliche Beiträge in RSS- und Atom-Feeds an."
+

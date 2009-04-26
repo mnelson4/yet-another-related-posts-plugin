@@ -80,7 +80,7 @@ function yarpp_build_cache() {
 			exit();
 		}
 		
-		$id = $wpdb->get_var("select ID, post_title from $wpdb->posts where ID > $id and post_status = 'publish' order by ID asc limit 1",0);
+		$id = $wpdb->get_var("select ID, post_title from $wpdb->posts where ID > $id and post_status = 'publish' and ifnull(post_title,'') != '' order by ID asc limit 1",0);
 		$title = $wpdb->get_var(null,1);
 		$i++;
 	}
