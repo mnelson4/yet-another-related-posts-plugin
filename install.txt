@@ -1,21 +1,22 @@
 === Yet Another Related Posts Plugin ===
 by mitcho (Michael Yoshitaka Erlewine)
 Twitter: http://twitter.com/yarpp/
+Support forum: http://wordpress.org/tags/yet-another-related-posts-plugin
 
 == INSTALLATION ==
 
-1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and the sample templates inside `yarpp-templates` folder into your active theme.
+1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and (optionally) the sample templates inside `yarpp-templates` folder into your active theme.
 
 2. Activate the plugin.
 
 3. Find the Related Posts (YARPP) settings page in your `wp-admin`. If you see a message telling you to build your cache, please build your cache. Otherwise, you will see no related posts anywhere.
 
-4. (optional) If you run a relatively low-traffic site (=most blogs), it is recommended that you enable the "compute related posts on the fly" option at the bottom of the Related Posts (YARPP) settings page.
+NOTE: If you run a large and complex site and/or worry about your SQL query volume, it may be better to simply make sure the "compute related posts on the fly" option is turned on and *not* try to build the cache all at once.
 
 == SUPPORT ==
 
 Read the FAQ:
-http://mitcho.com/code/yarpp
+http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/
 
 If it's not in the FAQ, find it or ask it in the forum:
 http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/

@@ -568,20 +568,21 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 						jQuery('#build-display').html('<p><?php _e("Your related posts cache is now complete.",'yarpp');?><br/><small><?php echo str_replace('SEC',"'+(Math.floor(time*10)/10)+'",__('The SQL queries took SEC seconds.','yarpp'));?></small></p>');
 					}
 					return;
-				}
-				if (json.result == 'error') {
+				} else if (json.result == 'error') {
 					i = json.i;
 					m = json.m;
 					id = json.id;
+          jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
+				} else {
+          jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
 				}
 				timeout += 5000;
-				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
-				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
+				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
 			},
 			error: function(json) {
-				jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
+				jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
 				timeout += 5000;
-				jQuery('#build-cache-button').show().val('<?php _e("try to continue");?>');
+				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
 			}
 		});
 		return false;

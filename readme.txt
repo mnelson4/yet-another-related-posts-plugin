@@ -6,10 +6,10 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
-Tested up to: 2.7.1
-Stable tag: 2.1.6
+Tested up to: 2.7.2
+Stable tag: 3.0.1
 
-Returns a list of the related entries based on a unique algorithm using titles, post bodies, tags, and categories. Now with RSS feed support!
+Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
 == Description ==
 
@@ -18,78 +18,37 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 1. *An advanced and versatile algorithm*: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
 2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templatesyarpp-3-templates/) puts you in charge of how your posts are displayed.
 3. *Caching*: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
-4. *Related posts in RSS feeds*: **New in 2.1!** Display related posts in your RSS and Atom feeds with custom display options.
-5. *Disallowing certain tags or categories*: **New in 2.0!** You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
-6. *Related posts and pages*: **New in 1.1!** Puts you in control of pulling up related posts, pages, or both.
+4. *Related posts in RSS feeds*: Display related posts in your RSS and Atom feeds with custom display options.
+5. *Disallowing certain tags or categories*: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
+6. *Related posts and pages*: Puts you in control of pulling up related posts, pages, or both.
 
 == Installation ==
 
 = Auto display on your website =
 
-Since YARPP 1.5, you can just put the `yet-another-related-posts-plugin` directory in your `/wp-content/plugins/` directory, activate the plugin, and you're set! You'll see related posts in single entry (permalink) pages. If all your pages say "no related posts," see the FAQ.
+1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and (optionally) the sample templates inside `yarpp-templates` folder into your active theme.
+
+2. Activate the plugin.
+
+3. Find the Related Posts (YARPP) settings page in your `wp-admin`. If you see a message telling you to build your cache, please build your cache. Otherwise, you will see no related posts anywhere.
+
+NOTE: If you run a large and complex site and/or worry about your SQL query volume, it may be better to simply make sure the "compute related posts on the fly" option is turned on and *not* try to build the cache all at once.
 
 = Auto display in your feeds =
 
-Since YARPP 2.1, you can turn on the "display related posts in feeds" option to show related posts in your RSS and Atom feeds.
-
-The "display related posts in feeds" option can be used regardless of whether you auto display them on your website (and vice versa).
+Make sure the "display related posts in feeds" option is turned on if you would like to show related posts in your RSS and Atom feeds. The "display related posts in feeds" option can be used regardless of whether you auto display them on your website (and vice versa).
 
 = Widget =
 
 Related posts can also be displayed as a widget. Go to the Design > Widgets options page and add the Related Posts widget. The widget will only be displayed on single entry (permalink) pages. The widget can be used even if the "auto display" option is turned off.
 
+= Custom display through templates = 
+
+New in version 3.0, YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
+
 = Manual installation =
 
-**This is an advanced feature for those comfortable with PHP.** 97% of users will be better served by the auto display options above.
-
-If you would like to put the related posts display in another part of your theme, or display them in pages other than single entry pages, turn off "auto display" in the YARPP Options, then drop `related_posts()`, `related_pages()`, or `related_entries()` (see below) in your [WP loop](http://codex.wordpress.org/The_Loop). Change any options in the Related Posts (YARPP) Options pane in Admin > Plugins. See Examples in Other Notes for sample code you can drop into your theme.
-
-There're also `related_posts_exist()`, `related_pages_exist()`, and `related_entries_exist()` functions, which return a boolean as expected.
-
-**The `related_` functions**
-
-By default, `related_posts()` gives you back posts only, `related_pages()` gives you pages, and there's `related_entries()` which gives you posts and pages. When the "cross-relate posts and pages" option is checked in the YARPP options panel, `related_posts()`, `related_pages()`, and `related_entries()` will give you exactly the same output.
-
-The `related` functions can be used in conjunction to the regular "auto display" option.
-
-**Customizing the "related" functions**
-
-Since YARPP 2.1, you can specify some custom options for each instance of `related_*()`. The functions take two arguments: 1. an array with key-value pairs of options, and 2. a boolean called `echo`, with default value of `true`. If `echo` is set to `false`, the result will simply be returned back instead of echoed. 
-
-For example: `related_*(array(key=>value, key=>value, ...),`(`true` or `false`)`)`.
-
-The available keys in version 2.1 are (roughly in the same order as in the options page):
-
-* The Pool:
-	* `distags` => comma-delimited list of tag numbers which should be disallowed
-	* `discats` => comma-delimited list of category numbers which should be disallowed
-* Relatedness options:
-	* `threshold` => the match threshold
-	* `show_pass_post` => (`bool`) show password-protected posts
-	* `past_only` => (`bool`) only past posts
-	* `title` => 1 for "do not consider", 2 for "consider", 3 for "consider with extra weight"
-	* `body` => 1 for "do not consider", 2 for "consider", 3 for "consider with extra weight"
-	* `tags` => 1 for "do not consider", 2 for "consider", 3 for "require one common tag", 4 for "require multiple common tags"
-	* `categories` => 1 for "do not consider", 2 for "consider", 3 for "require one common category", 4 for "require multiple common categories"
-	* `cross_relate` => (`bool`) cross-relate posts and pages
-* Display options:
-	* `limit` => (`int`) maximum number of results
-	* `order` => MySQL `ORDER BY ` field and direction
-	* `promote_yarpp` => (`bool`) promote YARPP?
-
-**Examples**
-
-Customized `related_*()` functions can be used to build specialized related-post functionality into your WordPress-enabled site. Here are some examples to get you started:
-
-* `related_posts(array('title'=>1,'body'=>1,'tags'=>1,'categories'=>3))`
-	* This example will return posts with at least one common category (with no other considerations).
-* `related_posts(array('show_pass_post'=>1))`
-	* This example will return password-protected posts.
-	* This is useful for a site with some members-only content. This command can be run within a `if ($membership == true)` type of conditional.
-* `related_posts(array('order'=>'rand() asc','limit'=>1))`
-	* This example will link to one random related post.
-* `related_posts(array('discats'=>'`(all categories except one)`'))`
-	* This example will give you related posts from only a certain category. (Although there are certainly much better ways to do this with other plugins or custom code.)
+For advanced users with knowledge of PHP, there is also an [advanced manual installation option](http://mitcho.com/code/yarpp/manual.php).
 
 == Frequently Asked Questions ==
 
@@ -97,7 +56,15 @@ If your question isn't here, ask your own question at [the Wordpress.org forums]
 
 = Every page just says "no related posts"! What's up with that? =
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Make sure the last option "show admins the match scores" is on. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+1. Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+
+2. It is also possible that your related posts cache has not been built and the "compute related posts on the fly" option is also turned off. Please go to the Related Posts (YARPP) options page and either build the cache or turn on the "compute related posts on the fly" option.
+
+= How do I turn off the match score next to the related posts? =
+
+The match score display is only for administrators... you can log out of `wp-admin` and check out the post again and you will see that the score is gone.
+
+If you would like more flexibility in changing the display of your related posts, please see the [templating tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
 
 = Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
@@ -127,15 +94,32 @@ It is recommended that you tweak your match threshold whenever you make changes 
 
 Please submit such bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
 
-= Things are weird after I upgraded. Ack! =
+= Things are weird after I upgraded. =
 
-I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
+I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it. If you continue to have trouble, please find 
 
 == Localizations ==
 
 YARPP is currently localized in the following languages:
-	* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
-	* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
+
+  * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+  * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
+  * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
+  * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+  * Japanese (`ja`) by myself (yarpp at mitcho dot com)
+  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+	
+We already have localizers lined up for the following languages:
+
+  * Danish
+  * Spanish
+  * Catalan
+  * Indonesian
+  * Brazilian Portuguese
+  * Hungarian
+  * Romanian
+  * Russian
+  * Hebrew
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -227,10 +211,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 		* Japanese (`ja`) by myself ([mitcho (Michael Yoshitaka Erlewine)](http://mitcho.com))
 * 2.1.6
 	* Versioning bugfix - same as 2.1.5
-
-== Future versions ==
-
-The following feature requests have been made and may be incorporated into a future release. If you have a bug fix, please start a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin).
-
-* More localizations
-* Sentece-aware excerpts, [by request](http://wordpress.org/support/topic/162465)
+* 3.0
+  * Major new release!
+  * Caching for better SQL performance
+  * A new [templating feature](http://mitcho.com/blog/projects/yarpp-3-templates/) for custom related posts displays
+  * Cleaned up options page
+  * New and updated localizations
+* 3.0.1
+  * Bugfix: In some situations before YARPP options were updated, an `include` PHP error was displayed.
