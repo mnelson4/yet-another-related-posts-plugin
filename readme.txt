@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -219,3 +219,6 @@ If you are a bilingual speaker of English and another language and an avid user 
   * New and updated localizations
 * 3.0.1
   * Bugfix: In some situations before YARPP options were updated, an `include` PHP error was displayed.
+* 3.0.2
+  * Bugfix: [Templating wasn't working with child templates.](http://wordpress.org/support/topic/265515)
+  * Bugfix: In some situations, [SQL errors were printed in the AJAX preview displays](http://wordpress.org/support/topic/265728).

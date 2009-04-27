@@ -295,9 +295,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 				
 	if ($domain == 'metabox') {
 		include('template-metabox.php');
-	} elseif ($use_template and file_exists(TEMPLATEPATH . '/' . $template_file)) {
+	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file)) {
 		ob_start();
-		include(TEMPLATEPATH . '/' . $template_file);
+		include(STYLESHEETPATH . '/' . $template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
 	} else {
@@ -380,6 +380,9 @@ function yarpp_save_cache($post_ID,$force=true) {
 
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	global $wpdb, $yarpp_debug, $yarpp_caching_queue;
+	
+	if ($reference_ID === '' || $reference_ID === false)
+	  return false;
 	
 	$timeout = 600;
 	
