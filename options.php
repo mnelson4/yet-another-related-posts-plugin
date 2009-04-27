@@ -4,15 +4,15 @@ global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 
 // check to see that templates are in the right place
 
-if (!count(glob(TEMPLATEPATH . '/yarpp-template-*.php'))) {
+if (!count(glob(STYLESHEETPATH . '/yarpp-template-*.php'))) {
   if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugin/yarpp-templates/yarpp-template-*.php')))
   	echo "<div class='updated'>"
-	  .str_replace("TEMPLATEPATH",TEMPLATEPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
+	  .str_replace("TEMPLATEPATH",STYLESHEETPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
 	  ."</div>";
 
   else 
   	echo "<div class='updated'>"
-  	.str_replace('TEMPLATEPATH',TEMPLATEPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
+  	.str_replace('TEMPLATEPATH',STYLESHEETPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
   	."</div>";
   
   yarpp_set_option('use_template',false);
@@ -412,7 +412,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
+						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -476,7 +476,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
+						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
