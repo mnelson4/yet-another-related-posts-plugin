@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0
+Stable tag: 3.0.1
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -217,3 +217,5 @@ If you are a bilingual speaker of English and another language and an avid user 
   * A new [templating feature](http://mitcho.com/blog/projects/yarpp-3-templates/) for custom related posts displays
   * Cleaned up options page
   * New and updated localizations
+* 3.0.1
+  * Bugfix: In some situations before YARPP options were updated, an `include` PHP error was displayed.
