@@ -3,7 +3,7 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.0.1
+Version: 3.0.3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
@@ -27,7 +27,9 @@ add_action('plugins_loaded', 'widget_yarpp_init');
 // new in 3.0: add meta box
 add_action( 'admin_menu', 'yarpp_add_metabox');
 function yarpp_add_metabox() {
-	add_meta_box( __( 'Related Posts' , 'yarpp'), __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+	if (function_exists('add_meta_box')) {
+    add_meta_box( __( 'Related Posts' , 'yarpp'), __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+	}
 }
 function yarpp_metabox() {
 	global $post;
