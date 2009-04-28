@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -80,6 +80,10 @@ If you have a large blog with many (>1000) posts or have many tags or categories
 
 In the future I will be building a YARPP-internal cache system so that YARPP can calculate all the post-relations at one time and then re-use those results every time, rather than calculating them on the fly.
 
+= I use DISQUS for comments. I can't access the YARPP options page! =
+
+The DISQUS plugin loads some JavaScript voodoo which is interacting in weird ways with the AJAX in YARPP's options page. You can fix this by going to the DISQUS plugin advanced settings and turning on the "Check this if you have a problem with comment counts not showing on permalinks" option.
+
 = I get a PHP error saying "Cannot redeclare `related_posts()`" =
 
 You most likely have another related posts plugin activated at the same time. Please disactivate those other plugins first before using YARPP.
@@ -108,6 +112,7 @@ YARPP is currently localized in the following languages:
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
 	
 We already have localizers lined up for the following languages:
 
@@ -222,3 +227,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.2
   * Bugfix: [Templating wasn't working with child templates.](http://wordpress.org/support/topic/265515)
   * Bugfix: In some situations, [SQL errors were printed in the AJAX preview displays](http://wordpress.org/support/topic/265728).
+* 3.0.3
+  * Reinstated the 3.0.1 bugfix for includes
+  * Bugfix: Fixed encoding issue in keyword caching algorithm
+  * Bugfix: One SQL query assumed `wp_` prefix on tables
+  * Adding Polish localization
+  * Added note on DISQUS in readme
+  * Making some extra strings localizable
+  * Bugfix: [a problem with the Italian localization](http://wordpress.org/support/topic/265952)
+  

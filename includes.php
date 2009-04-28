@@ -21,9 +21,9 @@ $yarpp_value_options = array('threshold' => 5,
 				'after_title' => '</li>',
 				'before_post' => ' <small>',
 				'after_post' => '</small>',
-				'before_related' => '<p>Related posts:<ol>',
+				'before_related' => '<p>'.__('Related posts:','yarpp').'<ol>',
 				'after_related' => '</ol></p>',
-				'no_results' => '<p>No related posts.</p>',
+				'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 				'order' => 'score DESC',
 				'rss_limit' => 3,
 				'rss_template_file' => '', // new in 2.2
@@ -32,9 +32,9 @@ $yarpp_value_options = array('threshold' => 5,
 				'rss_after_title' => '</li>',
 				'rss_before_post' => ' <small>',
 				'rss_after_post' => '</small>',
-				'rss_before_related' => '<p>Related posts:<ol>',
+				'rss_before_related' => '<p>'.__('Related posts:','yarpp').'<ol>',
 				'rss_after_related' => '</ol></p>',
-				'rss_no_results' => '<p>No related posts.</p>',
+				'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 				'rss_order' => 'score DESC',
 				'title' => '2',
 				'body' => '2',
@@ -126,8 +126,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','3.02');
-	update_option('yarpp_version','3.02');
+	add_option('yarpp_version','3.03');
+	update_option('yarpp_version','3.03');
 	return 1;
 }
 
@@ -178,8 +178,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.02 or get_option('yarpp_version') != '3.02') {
-		update_option('yarpp_version','3.02');
+	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.03 or get_option('yarpp_version') != '3.03') {
+		update_option('yarpp_version','3.03');
 		
 		//if (!$inuse)
 		//	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
@@ -266,9 +266,10 @@ function yarpp_rss_excerpt($content) {
 	- Viper's Video Quicktags
 	- WP-CodeBox
 	- WP shortcodes
+	//- Tweet This - could not reproduce problem.
 */
 
-$yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','reddZEt_AddBut','dzoneZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');
+$yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','reddZEt_AddBut','dzoneZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');//,'insert_tweet_this'
 $yarpp_blackmethods = array(null,'addinlinejs','replacebbcode');
 
 function yarpp_white($filter) {

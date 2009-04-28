@@ -69,7 +69,7 @@ function yarpp_demo_request_filter($arg) {
 		$wpdb->query("set @count = 0;");
 		$arg = "SELECT SQL_CALC_FOUND_ROWS ID + $yarpp_limit as ID, post_author, post_date, post_date_gmt, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' as post_content,
 		concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
-		FROM wp_posts
+		FROM $wpdb->posts
 		ORDER BY ID DESC LIMIT 0, $yarpp_limit";
 	}
 	return $arg;
@@ -295,7 +295,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 				
 	if ($domain == 'metabox') {
 		include('template-metabox.php');
-	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file)) {
+	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
 		$output = ob_get_contents();
@@ -355,6 +355,7 @@ $yarpp_caching_queue = array();
 
 function yarpp_save_cache($post_ID,$force=true) {
 	global $wpdb, $yarpp_caching_queue, $yarpp_updated_posts;
+
 	$parent_ID = $wpdb->get_var("select post_parent from $wpdb->posts where ID='$post_ID'");
 	if ($parent_ID != $post_ID and $parent_ID)
 		$post_ID = $parent_ID;
