@@ -16,7 +16,7 @@ Returns a list of related entries based on a unique algorithm for display on you
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
 1. *An advanced and versatile algorithm*: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
-2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templatesyarpp-3-templates/) puts you in charge of how your posts are displayed.
+2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
 3. *Caching*: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
 4. *Related posts in RSS feeds*: Display related posts in your RSS and Atom feeds with custom display options.
 5. *Disallowing certain tags or categories*: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
