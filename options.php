@@ -255,12 +255,11 @@ function load_display_discats() {
 			
 			$display_version = yarpp_get_option('version');
 			$split = explode('.',$display_version);
-			if (strlen($split[1]) == 1)
-				echo $display_version;
-			else {
+			if (strlen($split[1]) != 1) {
 				$pos = strpos($display_version,'.')+2;
-				echo substr($display_version,0,$pos).'.'.substr($display_version,$pos);
+				$display_version = substr($display_version,0,$pos).'.'.substr($display_version,$pos);
 			}
+      echo $display_version;
 			?></small>
 		</h2>
 
@@ -382,12 +381,12 @@ function load_display_discats() {
 		});
 		
 		version = jQuery('#yarpp-version').html();
-		jQuery.post('http://mitcho.com/code/yarpp/checkversion.php',{version:version,referrer:window.location.href},function(json){
+
+		var json = <?php echo yarpp_check_version_json($display_version); ?>;
 		if (json.result == 'newbeta')
 		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",addslashes(__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp"))))."</p>'"?>).show();
 		if (json.result == 'new')
 		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>).show();
-		},'json');
 	}
 	
 	jQuery(document).ready(yarpp_js_init);
