@@ -4,15 +4,15 @@ global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 
 // check to see that templates are in the right place
 
-if (!count(glob(TEMPLATEPATH . '/yarpp-template-*.php'))) {
+if (!count(glob(STYLESHEETPATH . '/yarpp-template-*.php'))) {
   if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugin/yarpp-templates/yarpp-template-*.php')))
   	echo "<div class='updated'>"
-	  .str_replace("TEMPLATEPATH",TEMPLATEPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
+	  .str_replace("TEMPLATEPATH",STYLESHEETPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
 	  ."</div>";
 
   else 
   	echo "<div class='updated'>"
-  	.str_replace('TEMPLATEPATH',TEMPLATEPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
+  	.str_replace('TEMPLATEPATH',STYLESHEETPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
   	."</div>";
   
   yarpp_set_option('use_template',false);
@@ -382,11 +382,11 @@ function load_display_discats() {
 		});
 		
 		version = jQuery('#yarpp-version').html();
-		jQuery.post('http://mitcho.com/code/yarpp/checkversion.php',{version:version},function(json){
+		jQuery.post('http://mitcho.com/code/yarpp/checkversion.php',{version:version,referrer:window.location.href},function(json){
 		if (json.result == 'newbeta')
-		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp")))."</p>'"?>).show();
+		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",addslashes(__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp"))))."</p>'"?>).show();
 		if (json.result == 'new')
-		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp")))."</p>'"?>).show();
+		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>).show();
 		},'json');
 	}
 	
@@ -412,7 +412,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
+						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -420,12 +420,12 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 			</tr>
 			<tr valign='top' class='not_templated'>
 				<th><?php _e("Before / after related entries:",'yarpp');?></th>
-				<td><input name="before_related" type="text" id="before_related" value="<?php echo stripslashes(yarpp_get_option('before_related',true)); ?>" size="10" /> / <input name="after_related" type="text" id="after_related" value="<?php echo stripslashes(yarpp_get_option('after_related',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;ol&gt;&lt;/ol&gt; or &lt;div&gt;&lt;/div&gt;</small></em>
+				<td><input name="before_related" type="text" id="before_related" value="<?php echo stripslashes(yarpp_get_option('before_related',true)); ?>" size="10" /> / <input name="after_related" type="text" id="after_related" value="<?php echo stripslashes(yarpp_get_option('after_related',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;ol&gt;&lt;/ol&gt;<?php _e(' or ','yarpp');?>&lt;div&gt;&lt;/div&gt;</small></em>
 				</td>
 			</tr>
 			<tr valign='top' class='not_templated'>
 				<th><?php _e("Before / after each related entry:",'yarpp');?></th>
-				<td><input name="before_title" type="text" id="before_title" value="<?php echo stripslashes(yarpp_get_option('before_title',true)); ?>" size="10" /> / <input name="after_title" type="text" id="after_title" value="<?php echo stripslashes(yarpp_get_option('after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt; or &lt;dl&gt;&lt;/dl&gt;</small></em>
+				<td><input name="before_title" type="text" id="before_title" value="<?php echo stripslashes(yarpp_get_option('before_title',true)); ?>" size="10" /> / <input name="after_title" type="text" id="after_title" value="<?php echo stripslashes(yarpp_get_option('after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
 	<?php checkbox('show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='not_templated' valign='top'><th colspan='2'>",' class="show_excerpt" onclick="javascript:excerpt()"'); ?>
@@ -434,7 +434,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 	
 			<tr class="excerpted" valign='top'>
 				<th><?php _e("Before / after (Excerpt):",'yarpp');?></th>
-				<td><input name="before_post" type="text" id="before_post" value="<?php echo stripslashes(yarpp_get_option('before_post',true)); ?>" size="10" /> / <input name="after_post" type="text" id="after_post" value="<?php echo stripslashes(yarpp_get_option('after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt; or &lt;dl&gt;&lt;/dl&gt;</small></em>
+				<td><input name="before_post" type="text" id="before_post" value="<?php echo stripslashes(yarpp_get_option('before_post',true)); ?>" size="10" /> / <input name="after_post" type="text" id="after_post" value="<?php echo stripslashes(yarpp_get_option('after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
 
@@ -476,7 +476,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(TEMPLATEPATH . '/yarpp-template-*.php') as $template): ?>
+						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
 						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
@@ -484,12 +484,12 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			</tr>
 			<tr class='rss_not_templated' valign='top'>
 				<th><?php _e("Before / after related entries display:",'yarpp');?></th>
-				<td><input name="rss_before_related" type="text" id="rss_before_related" value="<?php echo stripslashes(yarpp_get_option('rss_before_related',true)); ?>" size="10" /> / <input name="rss_after_related" type="text" id="rss_after_related" value="<?php echo stripslashes(yarpp_get_option('rss_after_related',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;ol&gt;&lt;/ol&gt; or &lt;div&gt;&lt;/div&gt;</small></em>
+				<td><input name="rss_before_related" type="text" id="rss_before_related" value="<?php echo stripslashes(yarpp_get_option('rss_before_related',true)); ?>" size="10" /> / <input name="rss_after_related" type="text" id="rss_after_related" value="<?php echo stripslashes(yarpp_get_option('rss_after_related',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;ol&gt;&lt;/ol&gt;<?php _e(' or ','yarpp');?>&lt;div&gt;&lt;/div&gt;</small></em>
 				</td>
 			</tr>
 			<tr class='rss_not_templated' valign='top'>
 				<th><?php _e("Before / after each related entry:",'yarpp');?></th>
-				<td><input name="rss_before_title" type="text" id="rss_before_title" value="<?php echo stripslashes(yarpp_get_option('rss_before_title',true)); ?>" size="10" /> / <input name="rss_after_title" type="text" id="rss_after_title" value="<?php echo stripslashes(yarpp_get_option('rss_after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt; or &lt;dl&gt;&lt;/dl&gt;</small></em>
+				<td><input name="rss_before_title" type="text" id="rss_before_title" value="<?php echo stripslashes(yarpp_get_option('rss_before_title',true)); ?>" size="10" /> / <input name="rss_after_title" type="text" id="rss_after_title" value="<?php echo stripslashes(yarpp_get_option('rss_after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
 	<?php checkbox('rss_show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='rss_not_templated' valign='top'><th colspan='2'>",' class="rss_show_excerpt" onclick="javascript:rss_excerpt()"'); ?>
@@ -498,7 +498,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	
 			<tr class="rss_excerpted" valign='top'>
 				<th><?php _e("Before / after (excerpt):",'yarpp');?></th>
-				<td><input name="rss_before_post" type="text" id="rss_before_post" value="<?php echo stripslashes(yarpp_get_option('rss_before_post',true)); ?>" size="10" /> / <input name="rss_after_post" type="text" id="rss_after_post" value="<?php echo stripslashes(yarpp_get_option('rss_after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt; or &lt;dl&gt;&lt;/dl&gt;</small></em>
+				<td><input name="rss_before_post" type="text" id="rss_before_post" value="<?php echo stripslashes(yarpp_get_option('rss_before_post',true)); ?>" size="10" /> / <input name="rss_after_post" type="text" id="rss_after_post" value="<?php echo stripslashes(yarpp_get_option('rss_after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
 

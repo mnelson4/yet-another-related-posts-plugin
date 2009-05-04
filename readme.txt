@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0.1
+Stable tag: 3.0.4
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -16,7 +16,7 @@ Returns a list of related entries based on a unique algorithm for display on you
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
 1. *An advanced and versatile algorithm*: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
-2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templatesyarpp-3-templates/) puts you in charge of how your posts are displayed.
+2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
 3. *Caching*: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
 4. *Related posts in RSS feeds*: Display related posts in your RSS and Atom feeds with custom display options.
 5. *Disallowing certain tags or categories*: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
@@ -80,6 +80,10 @@ If you have a large blog with many (>1000) posts or have many tags or categories
 
 In the future I will be building a YARPP-internal cache system so that YARPP can calculate all the post-relations at one time and then re-use those results every time, rather than calculating them on the fly.
 
+= I use DISQUS for comments. I can't access the YARPP options page! =
+
+The DISQUS plugin loads some JavaScript voodoo which is interacting in weird ways with the AJAX in YARPP's options page. You can fix this by going to the DISQUS plugin advanced settings and turning on the "Check this if you have a problem with comment counts not showing on permalinks" option.
+
 = I get a PHP error saying "Cannot redeclare `related_posts()`" =
 
 You most likely have another related posts plugin activated at the same time. Please disactivate those other plugins first before using YARPP.
@@ -108,6 +112,8 @@ YARPP is currently localized in the following languages:
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
+  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
 	
 We already have localizers lined up for the following languages:
 
@@ -219,3 +225,17 @@ If you are a bilingual speaker of English and another language and an avid user 
   * New and updated localizations
 * 3.0.1
   * Bugfix: In some situations before YARPP options were updated, an `include` PHP error was displayed.
+* 3.0.2
+  * Bugfix: [Templating wasn't working with child templates.](http://wordpress.org/support/topic/265515)
+  * Bugfix: In some situations, [SQL errors were printed in the AJAX preview displays](http://wordpress.org/support/topic/265728).
+* 3.0.3
+  * Reinstated the 3.0.1 bugfix for includes
+  * Bugfix: Fixed encoding issue in keyword caching algorithm
+  * Bugfix: One SQL query assumed `wp_` prefix on tables
+  * Added Polish localization
+  * Added note on DISQUS in readme
+  * Making some extra strings localizable
+  * Bugfix: [a problem with the Italian localization](http://wordpress.org/support/topic/265952)
+* 3.0.4
+  * A fix to the version checking in the options page - now uses Snoopy
+  * Adding Dutch localization

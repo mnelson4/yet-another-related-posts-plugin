@@ -71,7 +71,9 @@ function yarpp_cache_keywords($ID) {
 	) ENGINE = MYISAM COMMENT = 'YARPP\'s keyword cache table' 
 	*/
 	
-	$wpdb->query('set names utf8');
+	if (defined('DB_CHARSET')) {
+  	$wpdb->query('set names '.DB_CHARSET);
+	}
 	
 	$wpdb->query("insert into {$wpdb->prefix}yarpp_keyword_cache (ID,body,title) values ($ID,'$body_terms ','$title_terms ') on duplicate key update date = now(), body = '$body_terms ', title = '$title_terms '");
 	
@@ -85,11 +87,12 @@ function yarpp_get_cached_keywords($ID,$type='body') {
 	if ($out === false or $out == '')
 		yarpp_cache_keywords($ID);
 	$out = $wpdb->get_var("select $type from {$wpdb->prefix}yarpp_keyword_cache where ID = $ID");
-	if ($out === false or $out == '')
-		echo "<!--YARPP ERROR: couldn't select/create yarpp $type keywords for $ID-->";
-	else
+	if ($out === false or $out == '') {
+		//echo "<!--YARPP ERROR: couldn't select/create yarpp $type keywords for $ID-->";
+    return false;
+	} else {
 		return $out;
-	return false;
+  }
 }
 
 // replacement html_entity_decode code from php.net
