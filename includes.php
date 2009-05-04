@@ -126,8 +126,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','3.03');
-	update_option('yarpp_version','3.03');
+	add_option('yarpp_version','3.04');
+	update_option('yarpp_version','3.04');
 	return 1;
 }
 
@@ -178,8 +178,8 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.03 or get_option('yarpp_version') != '3.03') {
-		update_option('yarpp_version','3.03');
+	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.04 or get_option('yarpp_version') != '3.04') {
+		update_option('yarpp_version','3.04');
 		
 		//if (!$inuse)
 		//	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
@@ -382,6 +382,19 @@ function yarpp_microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
+}
+
+function yarpp_check_version_json($version) {
+  include_once(ABSPATH . WPINC . '/class-snoopy.php');
+  if (class_exists('Snoopy')) {
+    $snoopy = new Snoopy;
+    $snoopy->referer = get_bloginfo('siteurl');
+    $result = $snoopy->fetch("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
+    if ($result) {
+      return $snoopy->results;
+    }
+  }
+  return '{}';
 }
 
 ?>

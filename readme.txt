@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -113,6 +113,7 @@ YARPP is currently localized in the following languages:
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
+  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
 	
 We already have localizers lined up for the following languages:
 
@@ -231,8 +232,10 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Reinstated the 3.0.1 bugfix for includes
   * Bugfix: Fixed encoding issue in keyword caching algorithm
   * Bugfix: One SQL query assumed `wp_` prefix on tables
-  * Adding Polish localization
+  * Added Polish localization
   * Added note on DISQUS in readme
   * Making some extra strings localizable
   * Bugfix: [a problem with the Italian localization](http://wordpress.org/support/topic/265952)
-  
+* 3.0.4
+  * A fix to the version checking in the options page - now uses Snoopy
+  * Adding Dutch localization

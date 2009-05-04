@@ -1,0 +1,551 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.2\n"
+"PO-Revision-Date: 2009-04-27 21:12+0200\n"
+"Last-Translator: admin <werf75@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: ."
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "MySQL fout bij toevoegen yarpp_title"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "MySQL fout bij toevoegen yarpp_content"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "MySQL fout bij aanmaken yarpp_keyword_cache tabel"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "MySQL fout bij aanmaken yarpp_related_cache tabel"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>Een belangrijk bericht van YARPP:</h3><p>Bedankt voor het bijwerken naar YARPP 2. YARPP 2.0 heeft de veelgevraagde mogelijkheid om gerelateerde bijdragen te beperken door labels en categorieën. 2.0 brengt ook betere controle van het magische algoritme, die de mogelijkheid biedt hoe het algoritme al dan niet moet overwegen vanuit de inhoud, titels, labels en categorieën. Wees zeker om de nieuwe instellingen naar wens te gebruiken en misschien enkele instellingen bijstellen.</p><p>Voor meer informatie kijk op <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentatie</a>.(Dit bericht wordt niet weer getoond.)</p>"
+
+#: includes.php:197
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Gerelateerde bijdragen (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:31
+#: yarpp.php:31
+msgid "Related Posts"
+msgstr "Gerelateerde bijdragen"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
+msgid "Example post "
+msgstr "Voorbeeld bijdrage"
+
+#: magic.php:322
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Gerelateerde bijdragen mogelijk gemaakt door <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Alsjeblieft: verplaats de YARPP sjabloonbestanden naar de map waar je thema staat, om de installatie te voltooien. De sjabloonbestanden (nu in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) kunnen verplaatst worden naar de <code>TEMPLATEPATH</code> map."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Er zijn geen YARPP sjabloonbestanden gevonden in je thema (<code>TEMPLATEPATH</code>) met als gevolg dat de sjabloonmogelijkheid uitgeschakeld is."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "De MyISAM controle is overgeslagen. Je kunt nu de \"overweeg titels\" en \"overweeg bijdrage\" criteria relateren."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP's \"Overweeg titels\" en \"overweeg bijdragen\" gerelateerdheidscriteria vereisen je <code>%s</code> tabel om de <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM engine</a> te gebruiken, maar de tabel lijkt de <code>%s</code> engine te gebruiken. Deze twee opties zijn uitgeschakeld."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Om de mogelijkheden te herstellen, werk je <code>%s</code> tabel bij door het volgende SQL uit te voeren:<code>ALTER TABLE `%s` ENGINE = MyISAM;</code> .Er zullen geen gegevens gewist worden door de tabel-engine te wijzigen, maar er kunnen snelheidsproblemen optreden. "
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Als, ondanks deze controle, je zeker bent dat <code>%s</code> gebruikt maakt van de MyISAM engine, klik op de magische knop:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Vertrouw me. Laat mij MyISAM mogelijkheden gebruiken."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "De YARPP database had een foutje maar is hersteld."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "De YARPP database heeft en fout die niet opgelost kon worden."
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Gerelateerde bijdragen cache status"
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Je gerelateerde bijdrage cache is niet compleet. Alsjeblieft herbouw je cache vanuit het <A>gerelateerde bijdragen status paneel<A>."
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Je gerelateerde bijdragen cache is leeg. Alsjeblieft bouw de cache op vanuit het <A>gerelateerde bijdrage status paneel</a>."
+
+#: options.php:125
+msgid "Options saved!"
+msgstr "Instellingen opgeslagen!"
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Als je de getoonde \"zwembad\" opties of \"gerelateerdheid\" opties bijwerkt, bouw de cache dan ook opnieuw op vanuit het <A>gerelateerde bijdrage status paneel</a>."
+
+#: options.php:147
+msgid "word"
+msgstr "woord"
+
+#: options.php:148
+msgid "tag"
+msgstr "label"
+
+#: options.php:149
+msgid "category"
+msgstr "categorie"
+
+#: options.php:153
+#: options.php:170
+#: options.php:182
+msgid "do not consider"
+msgstr "overweeg niet"
+
+#: options.php:154
+#: options.php:171
+#: options.php:184
+msgid "consider"
+msgstr "overweeg"
+
+#: options.php:156
+#: options.php:186
+#, php-format
+msgid "require at least one %s in common"
+msgstr "ten minste een % s overeenkomstig"
+
+#: options.php:158
+#: options.php:188
+#, php-format
+msgid "require more than one %s in common"
+msgstr "vereist meer dan een % s overeenkomstig"
+
+#: options.php:172
+msgid "consider with extra weight"
+msgstr "overweeg met extra gewicht"
+
+#: options.php:200
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Posts Plugin versie geschiedenis (RSS 2.0)"
+
+#: options.php:254
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Plugin opties"
+
+#: options.php:271
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Doneer mitcho (Michael Yoshitaka Erlewine) voor deze plugin via PayPal"
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "door <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Volg <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin op Twitter</a>"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "\"Het zwembad\""
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "\"Het zwembad\" verwijst naar het bad met bijdragen en pagina's die kandidaat zijn voor het vertonen als gerelateerd."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Uitschakelen per categorie:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Uitschakelen bij label:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Toon paswoordbeveiligde bijdragen?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Toon alleen vorige bijdragen?"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "dag (en)"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "we(e)k(en)"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "maand (en)"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Toon alleen bijdragen van de afgelopen AANTAL EENHEDEN"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "\"Gerelateerdheid\" opties"
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP is anders dan waar de <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">vorige plugins op gebaseerd zijn</a> omdat het de gerelateerde bijdragen sorteert door (1) een maximum aantal en (2) een <em>overeenkomst-drempel</em>."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "meer&gt;"
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Hoe hoger de overeenkomstdrempel hoe meer restricties en hoe minder gerelateerde bijdragen. De standaard overeenkomstdrempel is 5. Als je zoekt naar een goede drempel bekijk dan enkele gerelateerde  bijdragen van de bijdragen en de scores. Je kunt zien wat voor soort gerelateerde er zijn opgepikt, wat de soort overeenkomst is en zo een juiste drempel instellen voor je website."
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "Overeenkomst-drempel:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Titels:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Bijdragen:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Labels:"
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Categorieën:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Kruislinken van  bijdragen en pagina&#39;s?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Wanneer de \"Kruislinken van bijdragen en pagina&#39;s\" optie is ingeschakeld <code>related_posts()</code>, <code>related_pages()</code> en <code>related_entries()</code> zullen allemaal dezelfde uitkomst geven en zowel gerelateerde pagina&#39;s a;s bijdragen tonen."
+
+#: options.php:387
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Er is een nieuwe beta (VERSION) van Yet Another Related Posts Plugin. Je kunt het <A>Hier downloaden</a> op eigen risico."
+
+#: options.php:389
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Er is een nieuwe versie (VERSION) van Yet Another Related Posts Plugin beschikbaar! Je kunt het <A>hier downloaden</a>. "
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "Toon opties <small> voor je website </small>"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "Automatisch gerelateerde bijdragen tonen?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Deze optie toont automatisch gerelateerde bijdragen meteen na de inhoud van een bijdrage op een enkele pagina. Als deze optie is uitgeschakeld zul je de voglende code handmatig in moeten voegen: <code>related_posts()</code> of variaties (<code>related_pages()</code> en <code>related_entries()</code>) in je themabestanden."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Websitevertoning code voorbeeld"
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Bewaar opties om te herladen.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Maximum aantal gerelateerde bijdragen:"
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Toon met een eigen sjabloonbestand"
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "NIEUW!"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Deze uitgebreide opties geeft je volledige kracht om te kiezen hoe de gerelateerde bijdragen getoond worden. Sjablonen (opgeslagen in de map van je thema) zijn geschreven in PHP."
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Sjabloonbestand:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "Voor / na gerelateerde bijdrages:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Bijvoorbeeld:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "Voor / na elke gerelateerde bijdrage:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Toon uittreksel?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Lengte uittreksel (aantal woorden):"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "Voor / na (uittreksel):"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Sorteer resultaten:"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "Waardering (hoge naar lage relevantie)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "Waardering (lage naar hoge relevantie)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "datum (nieuw naar oud)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "datum (oud naar nieuw)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "titel (alfabetisch)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "titel (omgekeerd alfabetisch)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "Standaard tonen indien geen resultaten:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Help Yet Another Related Posts Plugin promoten?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Deze optie voegt de code %s toe. Probeer het aan te zetten, je opties bij te werken en zie de code in het codevoorbeeld rechts. Deze links en donaties worden gewaardeerd."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "Vertoningsopties <small>voor RSS</small>"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Toon gerelateerde bijdragen in feeds?"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Deze optie toont gerelateerde bijdragen aan het einde van ieder item in je RSS en ATOM feeds. Sjabloonwijzigingen niet nodig."
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Toon gerelateerde bijdragen in de omschrijving?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Deze optie toont de gerelateerde bijdragen in de RSS beschrijving, niet alleen de inhoud. Als je feed is ingesteld om alleen uittreksels te tonen, hoe dan ook, alleen het omschrijvingsveld wordt gebruikt, dus deze optie is vereist voor iedere vertoning."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "Voorbeeld RSS-vertoningscode "
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "Voor / na gerelateerde bijdragen toon:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "Voor / na (uittreksel):"
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Toon cache status"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Als de cache incompleet is, zoek gerelateerde bijdragen gaandeweg?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Als de gerelateerde bijdragen van een bijdrage niet gecached zijn en deze optie is ingeschakeld, YARPP zal ze gaandeweg zoeken. Schakel deze optie niet in als je een druk bezochte website hebt. <br />Als deze optie is uitgeschakeld en gerelateerde bijdragen van een bijdrage is niet gecached zal het lijken alsof er geen gerelateerde bijdragen zijn."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN minu(u)t(en) en SEC seconde(n) resterend'"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC seconde(n) resterend'"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Je gerelateerde bijdrage cache is nu compleet."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "De SQL opdrachten nam SEC seconden."
+
+#: options.php:575
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Er was een fout bij het maken van de gerelateerde bijdragen voor TITLE"
+
+#: options.php:577
+#: options.php:583
+msgid "Constructing the related posts timed out."
+msgstr "Aanmaken van gerelateerde bijdragen duurde te lang."
+
+#: options.php:580
+#: options.php:585
+msgid "Try to continue..."
+msgstr "Probeer door te gaan  ..."
+
+#: options.php:593
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Je gerelateerde bijdrage cache is PERCENT% compleet."
+
+#: options.php:599
+msgid "starting..."
+msgstr "starten ..."
+
+#: options.php:606
+msgid "Update options"
+msgstr "Opties bijwerken"
+
+#: options.php:607
+msgid "Do you really want to reset your configuration?"
+msgstr "Wil je echt de instellingen herstellen?"
+
+#: options.php:607
+msgid "Reset options"
+msgstr "Opties herstellen"
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Je kunt niet de YARPP cache herbouwen."
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f is de YARPP overeenkomst tussen de huidige bijdrage en de gerelateerde bijdrage. Je ziet deze resultaten omdat je ingelogd bent in WordPress als Administrator. Dit wordt niet getoond aan normale bezoekers."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Er zijn gerelateerde bijdragen voor deze bijdrage. Het bijwerken van deze bijdrage kan de gerelateerde bijdragen veranderen."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Of al deze gelateerde bijdragen getoond worden op de manier zoals je ze getoond wilt hebben hangt af van je YARPP instellingen."
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Geen gerelateerde bijdragen."
+
+#: includes.php:24
+#: includes.php:35
+msgid "Related posts:"
+msgstr "Gerelateerde bijdragen"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid " or "
+msgstr "of"
+
