@@ -64,7 +64,8 @@ if ($yarpp_myisam) {
 		if (yarpp_activate())
 			_e('The YARPP database had an error but has been fixed.','yarpp');
 		else 
-			_e('The YARPP database has an error which could not be fixed.','yarpp');
+			__('The YARPP database has an error which could not be fixed.','yarpp')
+			.str_replace('<A>','<a href=\'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix).'\'>',__('Please try <A>manual SQL setup</a>.','yarpp'));
 		echo '</div></p>';
 	}
 }

@@ -239,3 +239,5 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.4
   * A fix to the version checking in the options page - now uses Snoopy
   * Adding Dutch localization
+* 3.0.5
+  * Added link to manual SQL setup information
