@@ -1,0 +1,555 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v2.1.6\n"
+"PO-Revision-Date: 2008-12-04 01:32-0200\n"
+"Last-Translator: Rafael Fischmann <rfischmann@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: ."
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "Erro de MySQL na adição do yarpp_title"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "Erro de MySQL na adição do yarpp_content"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>Uma mensagem importante do YARPP:</h3><p>Obrigado por se atualizar para o YARPP 2. O YARPP 2.0 adiciona a tão requisitada habilidade de limitar os resultados de itens relacionados por certas tags ou categorias. A versão 2.0 ainda traz um controle mais preciso do seu algoritmo mágico, permitindo que você especifique o quanto ele deve considerar ou não com relação ao conteúdo, título, tags e categorias do artigo. Certifique-se de ajustar as configurações ao seu gosto e talvez reconfigurar o nível de precisão.</p><p>Para mais informações, veja a <a href=\"http://mitcho.com/code/yarpp/\">documentação do YARPP</a>. (Esta mensagem não será mostrada novamente.)</p>"
+
+#: includes.php:197
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Posts Relacionados (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:31
+#: yarpp.php:31
+msgid "Related Posts"
+msgstr "Posts Relacionados"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f é a pontuação do YARPP entre o artigo atual e este artigo relacionado. Você está vendo este valor porque está logado no WordPress como administrador. Usuários comuns não o vêem."
+
+#: magic.php:322
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Posts relacionados trazidos a você pelo <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "A checagem do MyISAM foi sobreescrita. Você agora pode usar os critérios de relacionamento \"considerar títulos\" e \"considerar corpos\"."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Os critérios de relacionamento \"considerar títulos\" e \"considerar corpos\" do YARPP necessitam que sua tabela <code>%s</code> utilize o <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>sistema de armazenamento MyISAM</a>, mas ela parece estar usando o mecanismo <code>%s</code>. Essas duas opções foram desabilitadas."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Para restaurar esses recursos, por favor atualize sua tabela <code>%s</code> executando o seguinte comando SQL: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . Nenhum dado será apagado na alteração do mecanismo da tabela, apesar de haver algumas implicações em performance."
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Se, apesar dessa checagem, você estiver certo de que a <code>%s</code> está usando o mecanismo MyISAM, aperte este botão mágico:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Confie em mim. Deixe-me usar recursos MyISAM."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "O banco de dados do YARPP tinha um erro mas foi corrigido."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "O banco de dados do YARPP tinha um erro que não pôde ser corrigido."
+
+#: options.php:126
+msgid "Options saved!"
+msgstr "Opções salvas!"
+
+#: options.php:148
+msgid "word"
+msgstr "palavra"
+
+#: options.php:149
+msgid "tag"
+msgstr "tag"
+
+#: options.php:150
+msgid "category"
+msgstr "categoria"
+
+#: options.php:154
+#: options.php:171
+#: options.php:183
+msgid "do not consider"
+msgstr "não considerar"
+
+#: options.php:155
+#: options.php:172
+#: options.php:185
+msgid "consider"
+msgstr "considerar"
+
+#: options.php:157
+#: options.php:187
+#, php-format
+msgid "require at least one %s in common"
+msgstr "requerer pelo menos uma %s em comum"
+
+#: options.php:159
+#: options.php:189
+#, php-format
+msgid "require more than one %s in common"
+msgstr "requerer mais de uma %s em comum"
+
+#: options.php:173
+msgid "consider with extra weight"
+msgstr "considerar com peso extra"
+
+#: options.php:201
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Histórico de versões do plugin Yet Another Related Posts (RSS 2.0)"
+
+#: options.php:271
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Doar ao mitcho (Michael Yoshitaka Erlewine) via PayPal para este plugin"
+
+#: options.php:255
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Opções do Plugin Yet Another Related Posts"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "\"O Conjunto\""
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "\"O Conjunto\" refere-se ao grupo de posts e páginas candidatos a serem mostrados como relacionados num determinado artigo."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Desaprovar por categoria:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Desaprovar por tag:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Mostrar posts protegidos por senha?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Mostrar apenas posts anteriores?"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "Opções de \"relacionamento\""
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "O YARPP é diferente dos <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">plugins anteriores nos quais é baseado</a> porque ele limita os posts relacionados por (1) um número máximo e (2) um <em>nível de precisão</em>."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "mais&gt;"
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Quanto maior o nível de precisão, mais restritivo, menos posts relacionados no geral. O nível padrão é 5. Se você quer achar uma configuração apropriada, observe alguns posts relacionados e suas pontuações. Você pode conferir que tipos de posts relacionados estão sendo selecionados com que tipos de pontuações, determinando assim um nível de precisão ideal para o seu site."
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "Nível de precisão:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Títulos:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Corpos:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Tags: "
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Categorias:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Cruzar posts e páginas?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Quando a opção \"Cruzar posts e páginas\" estiver selecionada, <code>related_posts()</code>, <code>related_pages()</code> e <code>related_entries()</code> darão a mesma saída, retornando ambos posts e páginas relacionadas."
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "Mostrar opções <small>para o seu website</small>"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "Mostrar posts relacionados automaticamente?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Esta opção mostra posts relacionados logo depois do conteúdo em páginas individuais de posts, automaticamente. Se esta opção estiver desligada, você terá que inserir <code>related_posts()</code> ou variantes (<code>related_pages()</code> e <code>related_entries()</code>) manualmente em seu tema."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Exemplo de código para visualização no website"
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Salve as opções para atualizar.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Número máximo de posts relacionados:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "Antes / depois de itens relacionados:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Por exemplo:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "Antes / depois de cada item relacionado:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Mostrar resumo?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Comprimento do resumo (No. de palavras):"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "Antes / depois (Resumo):"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Ordenar resultados:"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "pontuação (relevância alta para baixa)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "pontuação (relevância baixa para alta)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "data (novos para velhos)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "data (velhos para novos)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "título (alfabeticamente)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "título (alfabeticamente inverso)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "Mostragem padrão sem resultados:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Ajudar a promover o plugin Yet Another Related Posts?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Esta opção adicionará o código %s. Tente ligá-la, atualizar suas opções e ver o código no exemplo à direita. Esses links e doações são bastante apreciados."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "Mostrar opções <small>para RSS</small>"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Mostrar posts relacionados em feeds?"
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Mostrar posts relacionados nas descrições?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Esta opção mostra os posts relacionados nos campos de descrição do RSS, e não apenas o conteúdo. Se os seus feeds estão configurados para somente mostrar resumos, porém, apenas o campo de descrição será usado, então esta opção é necessária para mostrar qualquer coisa."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "Exemplo de código de visualização RSS"
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "Antes / depois de itens relacionados mostrar:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "Antes / depois (resumo):"
+
+#: options.php:606
+msgid "Update options"
+msgstr "Atualizar opções"
+
+#: options.php:607
+msgid "Do you really want to reset your configuration?"
+msgstr "Você quer mesmo redefinir sua configuração?"
+
+#: options.php:607
+msgid "Reset options"
+msgstr "Redefinir opções"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Erro de MySQL na criação da tabela yarpp_keyword_cache"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Erro de MySQL na criação da tabela yarpp_related_cache"
+
+#: magic.php:71
+msgid "Example post "
+msgstr "Post de exemplo"
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Por favor, mova os arquivos de template do YARPP para dentro do seu tema para completar a instalação. Simplesmente mova os arquivos de exemplo (atualmente em <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) para o diretório <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Nenhum arquivo de template do YARPP foi encontrado no seu tema (<code>TEMPLATEPATH</code>), então o recurso de templates foi desligado."
+
+#: options.php:82
+#: options.php:85
+#: options.php:127
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Estado do cache de posts relacionados"
+
+#: options.php:82
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Seu cache de posts relacionados está incompleto. Por favor, construa seu cache do <A>painel de estado de posts relacionados</a>."
+
+#: options.php:85
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Seu cache de posts relacionados está vazio. Por favor, construa o cache do <A>painel de estado de posts relacionados</a>."
+
+#: options.php:128
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Se você atualizou as opções \"pool\" ou \"relatedness\" mostradas, por favor reconstrua o seu cache agora do <A>painel de estado de posts relacionados</a>."
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "por <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Siga o <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin no Twitter</a>"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "dia(s)"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "semana(s)"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "mês(es)"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Mostrar posts apenas dos últimos NUMBER UNITS"
+
+#: options.php:388
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Há uma nova beta (VERSION) do Yet Another Related Posts Plugin. Você pode <A>baixá-la</a> sob a sua própria responsabilidade."
+
+#: options.php:390
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Há uma nova versão (VERSION) do Yet Another Related Posts Plugin disponível! Você pode <A>baixá-la aqui</a>."
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Mostrar usando um arquivo de modelo customizado"
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Arquivo de modelo:"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Esta opção mostra posts relacionados ao final de cada item nos seus feeds RSS e Atom. Nenhuma mudança em modelos é necessária."
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Avançado"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Mostrar estado do cache"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Quando o cache está incompleto, computar posts relacionados em tempo real?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Se os posts relacionados de um artigo visualizado não estiverem cacheados e esta opção estiver ligada, o YARPP os computará em tempo real. Não ligue esta opção se você possui um site com tráfego elevado.<br />Se esta opção estiver desligada e os posts relacionados de um artigo não estiverem cacheados, o sistema indicará que não há posts relacionados."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'faltando MIN minuto(s) e SEC segundo(s)'"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'faltando SEC segundo(s)'"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Seu cache de posts relacionados está agora completo."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "As chamadas SQL levaram SEC segundos."
+
+#: options.php:575
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Houve um erro na construção de posts relacionados para TITLE"
+
+#: options.php:593
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Seu cache de posts relacionados está PERCENT% completo."
+
+#: options.php:599
+msgid "starting..."
+msgstr "iniciando..."
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Você não pode reconstruir o cache do YARPP."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Há entradas relacionadas para este artigo. Atualizar este post poderá mudar esses itens relacionados."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "A forma como todas essas entradas relacionadas são mostradas e se elas serão de fato mostradas depende das suas opções de visualização do YARPP."
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Nenhum post relacionado."
+
+#: includes.php:24
+#: includes.php:35
+msgid "Related posts:"
+msgstr "Posts relacionados:"
+
+#: options.php:68
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "Por favor tente <A>uma configuração de SQL manual</a>."
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "NOVO!"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Esta opção avançada lhe dá poder total para customizar como seus posts relacionados são mostrados. Modelos (armazenados na sua pasta de tema) são escritos em PHP."
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid " or "
+msgstr " ou "
+
+#: options.php:577
+#: options.php:583
+msgid "Constructing the related posts timed out."
+msgstr "Construir os posts relacionados demorou demais."
+
+#: options.php:580
+#: options.php:585
+msgid "Try to continue..."
+msgstr "Tente continuar..."
+
