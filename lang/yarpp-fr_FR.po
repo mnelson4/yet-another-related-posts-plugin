@@ -1,0 +1,537 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin fr_FR v2.1.6\n"
+"PO-Revision-Date: 2008-12-07 23:48+0100\n"
+"Last-Translator: Lionel Chollet <lionel.chollet@gmail.com>\n"
+"Language-Team: Lionel Chollet <lionel.chollet@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .: "
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "Erreur MySQL lors de l’ajout du titre “yarpp_title”"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "Erreur MySQL lors de l’ajout du contenu “yarpp_content”"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>Message important de YARPP</h3><p>Merci d’avoir fait la mise à jour vers YARPP 2. Cette version inclut une fonctionnalité très demandée&nbsp;: la possibilité de construire la liste d’entrées complémentaires en fonction de certains tags ou certaines catégories. YARPP 2 apporte également un meilleur contrôle de l’algorithme de complémentarité, ce qui vous permet de définir si le calcul doit prendre en compte les contenus d’entrée, les titres, les tags ou les catégories. Réglez les nouveaux paramètres selon votre convenance (vous devrez peut-être adapter le seuil de prise en compte pour un résultat optimum).</p><p>Pour plus d’information, consultez la <a href=\"http://mitcho.com/code/yarpp/\">documentation YARPP</a>. (Ce message n’apparaîtra plus.)</p>"
+
+#: includes.php:197
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Related Posts (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:29
+#: yarpp.php:29
+msgid "Related Posts"
+msgstr "Entrées complémentaires"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f représente le degré de complémentarité entre l’entrée considérée et cette entrée complémentaire. Cette valeur n’est affichée que pour les administrateurs connectés au site&nbsp;; elle n’apparaît pas pour les simples visiteurs."
+
+#: magic.php:304
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "La liste des entrées complémentaires est établie par le module d’extension <a href='http://mitcho.com/code/yarpp/'>YARPP</a>."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "Le calcul MyISAM n’est plus utilisé. Vous pouvez maintenant activer les options “Prendre en compte le titre” et “Prendre en compte le contenu” pour définir le calcul de complémentarité."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Les options YARPP “Prendre en compte le titre” et “Prendre en compte le contenu” pour le calcul de complémentarité requièrent que votre table <code>%s</code> utilise le <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>moteur de classement MyISAM</a>, mais votre table utilise apparemment le moteur <code>%s</code>. Ces deux options ont été désactivées."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Pour rétablir ces fonctionnalités, mettez à jour votre table <code>%s</code> en exécutant la commande SQL suivante&nbsp;: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code><br />Le changement de moteur de classement n’entraînera pas de perte de données, mais pourra influer sur les performances."
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Si, malgré cette vérification, vous êtes certain que <code>%s</code> utilise le moteur MyISAM, cliquez ce bouton magique&nbsp;:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Faites-moi confiance. Laissez-moi utiliser le moteur MyISAM."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "La base de données YARPP a rencontré une erreur mais elle a pu être corrigée."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "La base de données YARPP a rencontré une erreur qui n’a pas pu être corrigée."
+
+#: options.php:153
+#: options.php:170
+#: options.php:182
+msgid "do not consider"
+msgstr "ne pas prendre en compte"
+
+#: options.php:154
+#: options.php:171
+#: options.php:184
+msgid "consider"
+msgstr "prendre en compte"
+
+#: options.php:172
+msgid "consider with extra weight"
+msgstr "prendre en compte avec plus d’importance"
+
+#: options.php:200
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Historique des versions de l’extension YARPP (RSS 2.0)"
+
+#: options.php:271
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Faire un don à mitcho (Michael Yoshitaka Erlewine), via PayPal, pour cette extension"
+
+#: options.php:254
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Réglages YARPP"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "Le <em>corpus</em>"
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "Le <em>corpus</em> représente l’ensemble des articles et pages pouvant apparaître dans la liste des entrées complémentaires établie par l’extension YARPP."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Catégorie(s) à&nbsp;exclure&nbsp;:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Tag(s)<br />à exclure&nbsp;:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Inclure les entrées protégées par mot de passe&nbsp;?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Afficher seulement les entrées publiées antérieurement&nbsp;?"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "Options de complémentarité"
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP fonctionne différemment <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">des extensions antérieures</a>, en ceci que la liste des articles complémentaires est établie en fonction&nbsp;:<br />(1) d’une valeur maximale et (2) d’un <em>seuil</em> de complémentarité."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "aide&nbsp;&gt;"
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "Seuil de complémentarité&nbsp;:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Titres&nbsp;:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Contenus&nbsp;:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Tags&nbsp;:"
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Catégories&nbsp;:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Complémentarité croisée entre articles et pages&nbsp;?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Quand l’option “Complémentarité croisée entre articles et pages” est activée, les fonctions <code>related_posts()</code>, <code>related_pages()</code> et <code>related_entries()</code> produiront le même résultat, et la liste présentera aussi bien les articles que les pages complémentaires."
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "Réglages de présentation <small>pour votre site</small>"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "Afficher la liste des entrées complémentaires automatiquement&nbsp;?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Quand cette option est activée, la liste d’entrées complémentaires sera affichée automatiquement après le contenu de l’entrée. Si cette option n’est pas activée, vous devrez insérer vous-même le code <code>related_posts()</code> ou ses variantes (<code>related_pages()</code> et <code>related_entries()</code>) dans vos fichiers-modèles."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Exemple du code produit pour l’affichage des entrées complémentaires sur votre site"
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Enregistrez les réglages pour actualiser.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Nombre maximal d’articles complémentaires&nbsp;:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "Avant / Après<br />la liste&nbsp;:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Par exemple&nbsp;:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "Avant / Après<br />chaque entrée&nbsp;:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Afficher l’extrait&nbsp;?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Taille de l’extrait (nombre de mots)&nbsp;/"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "Avant / Après<br />l’extrait"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Classement des résultats&nbsp;"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "par complémentarité (de la plus forte à la plus faible)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "par complémentarité (de la plus faible à la plus forte)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "par date (de la plus récente à la plus ancienne)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "par date (de la plus ancienne à la plus récente)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "par titre (en ordre alphabétique)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "par titre (en ordre contre-alphabétique)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "Afficher s’il n’y a pas d’entrée complémentaire&nbsp;:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Aider à la promotion de l’extension YARPP&nbsp;?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Cette option affiche la mention&nbsp;: %s. Activez-la, enregistrez les réglages, et vous verrez la mention apparaître sous l’exemple du code produit pour l’affichage des entrées complémentaires, dans le cadre à droite."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "Réglages de présentation <small>pour les flux RSS</small>"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Afficher les entrées complémentaires dans les flux RSS&nbsp;?"
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Afficher les entrées complémentaires dans les descriptions&nbsp;?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Cette option affiche les entrées complémentaires après l’extrait d’article dans vos flux RSS. Si vos flux RSS sont configurés pour n’afficher que les extraits, vous devez activer cette option si vous souhaitez faire apparaître la liste des entrées complémentaires."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "Exemple du code produit pour l’affichage des entrées complémentaires dans vos flux RSS"
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "Avant / Après<br />la liste&nbsp;:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "Avant / Après<br />l’extrait&nbsp;:"
+
+#: options.php:147
+msgid "word"
+msgstr "mot"
+
+#: options.php:148
+msgid "tag"
+msgstr "tag"
+
+#: options.php:149
+msgid "category"
+msgstr "catégorie"
+
+#: options.php:156
+#: options.php:186
+#, php-format
+msgid "require at least one %s in common"
+msgstr "nécessite d’avoir au moins 1 %s en commun"
+
+#: options.php:158
+#: options.php:188
+#, php-format
+msgid "require more than one %s in common"
+msgstr "nécessite d’avoir plusieurs %ss en commun"
+
+#: options.php:125
+msgid "Options saved!"
+msgstr "Réglages enregistrés."
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Plus le seuil de complémentarité sera élevé, plus la sélection sera restrictive, et les listes d’entrées complémentaires présenteront, dans l’ensemble, moins d’éléments. La valeur du seuil de complémentarité, par défaut, est fixée à 5. Faites des essais avec différentes valeurs, afin de déterminer le seuil de complémentarité le mieux adapté à votre site et à vos entrées."
+
+#: options.php:605
+msgid "Update options"
+msgstr "Enregistrer les réglages"
+
+#: options.php:606
+msgid "Do you really want to reset your configuration?"
+msgstr "Voulez-vous vraiment revenir aux réglages par défaut&nbsp;?"
+
+#: options.php:606
+msgid "Reset options"
+msgstr "Revenir aux réglages par défaut"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Erreur MySQL lors de la création de la table yarpp_keyword_cache"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Erreur MySQL lors de la création de la table yarpp_related_cache table"
+
+#: magic.php:56
+msgid "Example post "
+msgstr "Exemple d’entrée "
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Statut du cache des entrées complémentaires"
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Le cache des entrées complémentaires n’est pas à jour. Actualisez le cache depuis le <A>panneau du statut des entrées complémentaires</a>."
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Le cache des entrées complémentaires est vide. Construisez le cache depuis le <A>panneau du statut des entrées complémentaires</a>."
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Si vous avez modifié les réglages pour le <i>corpus</i> ou pour les options de complémentarité, veuillez reconstruire le cache depuis le <A>panneau du statut des entrées complémentaires</a>."
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "par <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Suivez <a href=\"http://twitter.com/yarpp/\">YARPP sur Twitter</a>"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "jour(s)"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "semaine(s)"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "mois"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "N’afficher que des entrées publiées depuis moins de NUMBER UNITS"
+
+#: options.php:387
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Une nouvelle version beta (VERSION) du module d’extension YARPP est disponible. Si vous souhaitez l’essayer, vous pouvez <A>la télécharger ici</a>."
+
+#: options.php:389
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Une nouvelle version (VERSION) du module d’extension YARPP est disponible. Vous pouvez <A>la télécharger ici</a>."
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Utiliser un modèle personnalisé"
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Fichier-modèle :"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Cette option affiche les entrées complémentaires sous le texte de l’article dans vos flux RSS. Il n’est pas nécessaire de définir un fichier-modèle."
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Options spéciales"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Afficher le statut du cache"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Quand le cache n’est pas à jour, établir la liste depuis la base de données ?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Quand cette option est activée, si les entrées complémentaires ne sont pas encore en cache, YARPP en établira la liste à partir de la base de données. N’activez pas cette option si votre site a une très fort trafic.<br />Quand cette option est désactivée, si les entrées complémentaires ne sont pas en cache, elles ne seront pas affichées."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN minute(s) et SEC seconde(s) restantes'"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC seconde(s) restantes'"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Le cache des entrées complémentaires est à jour."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "Les requêtes SQL ont pris SEC secondes."
+
+#: options.php:578
+#: options.php:582
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Une erreur s’est produite lors de l’établissement de la liste des entrées complémentaires pour TITLE"
+
+#: options.php:579
+#: options.php:584
+msgid "try to continue"
+msgstr "Essayez de poursuivre l’opération"
+
+#: options.php:592
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Le cache des entrées complémentaires est à jour à PERCENT%."
+
+#: options.php:598
+msgid "starting..."
+msgstr "Démarrage…"
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Vous n’êtes pas autorisé à reconstruire le cache YARPP."
+
+#: services.php:90
+#, php-format
+msgid "You do not have the permission to write the file '%s'."
+msgstr "Vous n‘avez pas la permission en écriture pour le fichier  '%s'."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Voici les entrées complémentaires pour cette entrée. Les futures modifications de cette entrée pourront entraîner une modification de la liste de ses entrées complémentaires."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "La teneur finale de la liste d’entrées complémentaires ainsi que sa présentation sur votre site dépendent des options d’affichage YARPP que vous aurez choisies."
+
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Il n’y a pas d’entrées complémentaires."
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Pour finaliser l’installation, mettez maintenant les fichiers-modèles YARPP dans votre thème WordPress. Déplacez simplement les fichiers-modèles de base (actuellement situés dans le dossier <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) vers le dossier <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Aucun fichier-modèle YARPP ne se trouve dans votre thème WordPress (<code>TEMPLATEPATH</code>) ; la fonction de présentation d’après fichier-modèle n’a donc pas été activée."
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "NOUVEAU !"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Cette option avancée vous permet de personnaliser la présentation de vos listes d’entrées complémentaires. Les fichiers-modèles (à placer dans le dossier de votre thème WordPress) sont écrits en PHP."
+
