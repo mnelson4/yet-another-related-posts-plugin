@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.7.2
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -114,6 +114,7 @@ YARPP is currently localized in the following languages:
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
   * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
+  * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
 	
 We already have localizers lined up for the following languages:
 
@@ -121,7 +122,6 @@ We already have localizers lined up for the following languages:
   * Spanish
   * Catalan
   * Indonesian
-  * Brazilian Portuguese
   * Hungarian
   * Romanian
   * Russian
@@ -241,3 +241,6 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Adding Dutch localization
 * 3.0.5
   * Added link to manual SQL setup information
+  * Added Portuguese localization
+  * Updated info on "on the fly" caching - it is *strongly recommended* for larger blogs.
+  * Updated "incomplete cache" warning message so it is only displayed when the "on the fly" option is off.

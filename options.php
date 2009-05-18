@@ -72,34 +72,6 @@ if ($yarpp_myisam) {
 
 yarpp_reinforce(); // just in case, set default options, etc.
 
-// check if the cache is complete or not.
-$cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-	FROM $wpdb->posts as p
-	LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-	WHERE p.post_status = 'publish' ");
-
-if ($cache_complete > 0 and $cache_complete < 1)
-	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-
-if ($cache_complete == 0)
-	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-	
-//compute $tagmap
-$tagmap = array();
-foreach ($wpdb->get_results("select $wpdb->terms.term_id, name from $wpdb->terms natural join $wpdb->term_taxonomy where $wpdb->term_taxonomy.taxonomy = 'category'") as $tag) {
-	$tagmap[$tag->term_id] = strtolower($tag->name);
-}
-
-function yarpp_mapthetag($id) {
-	global $tagmap;
-	return $tagmap[$id];
-}
-function yarpp_unmapthetag($name) {
-	global $tagmap;
-	$untagmap = array_flip($tagmap);
-	return $untagmap[$name];
-}
-
 if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_value_options) as $option) {
 		yarpp_set_option($option,addslashes($_POST[$option]));
@@ -126,6 +98,36 @@ if (isset($_POST['update_yarpp'])) {
 	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__('Options saved!','yarpp')
 	.' '.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',
 	__('If you updated the "pool" options or "relatedness" options displayed, please rebuild your cache now from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
+}
+
+if (yarpp_get_option('ad_hoc_caching') != 1) {
+  // check if the cache is complete or not.
+  $cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
+    FROM $wpdb->posts as p
+    LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
+    WHERE p.post_status = 'publish' ");
+  
+  if ($cache_complete > 0 and $cache_complete < 1)
+    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
+  
+  if ($cache_complete == 0)
+    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
+}
+	
+//compute $tagmap
+$tagmap = array();
+foreach ($wpdb->get_results("select $wpdb->terms.term_id, name from $wpdb->terms natural join $wpdb->term_taxonomy where $wpdb->term_taxonomy.taxonomy = 'category'") as $tag) {
+	$tagmap[$tag->term_id] = strtolower($tag->name);
+}
+
+function yarpp_mapthetag($id) {
+	global $tagmap;
+	return $tagmap[$id];
+}
+function yarpp_unmapthetag($name) {
+	global $tagmap;
+	$untagmap = array_flip($tagmap);
+	return $untagmap[$name];
 }
 
 function checkbox($option,$desc,$tr="<tr valign='top'>
@@ -529,7 +531,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 	<table class="form-table" style="margin-top: 0">
 	<tr valign='top' colspan='2'><td><input class="thickbox button" type="button" value="<?php _e("Show cache status",'yarpp');?>" title="<?php _e('Related posts cache status','yarpp');?>" alt="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status"/>
 	<?php checkbox('ad_hoc_caching',__("When the cache is incomplete, compute related posts on the fly?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.__("If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts.",'yarpp')
+	.__("If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts.",'yarpp')
 	."</span></a>"); ?>
 	</table>
 		</div>
