@@ -35,7 +35,11 @@ if ($related_query->have_posts()) {
 			$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round(get_the_score(),3)).'">('.round(get_the_score(),3).')</abbr>';
 		$output .= '</a>';
 		if ($show_excerpt) {
-			$output .= $before_post . yarpp_excerpt(get_the_excerpt(),$excerpt_length) . $after_post;
+			$output .= $before_post . 
+			  (function_exists('wp_html_excerpt') ? 
+			    wp_html_excerpt(get_the_excerpt(),$excerpt_length)
+			    : yarpp_excerpt(get_the_excerpt(),$excerpt_length) )
+			  . $after_post;
 		}
 		$output .=  $after_title;
 

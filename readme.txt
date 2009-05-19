@@ -240,7 +240,9 @@ If you are a bilingual speaker of English and another language and an avid user 
   * A fix to the version checking in the options page - now uses Snoopy
   * Adding Dutch localization
 * 3.0.5
-  * Added link to manual SQL setup information
+  * Added link to manual SQL setup information [by request](http://wordpress.org/support/topic/266752)
   * Added Portuguese localization
   * Updated info on "on the fly" caching - it is *strongly recommended* for larger blogs.
   * Updated "incomplete cache" warning message so it is only displayed when the "on the fly" option is off.
+* 3.0.6
+  * Bugfix: [updated excerpting to use `wp_html_excerpt`](http://wordpress.org/support/topic/268934) (for WP 2.5+)
