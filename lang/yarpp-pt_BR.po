@@ -466,7 +466,7 @@ msgstr "Quando o cache está incompleto, computar posts relacionados em tempo re
 
 #: options.php:532
 msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
-msgstr "Se os posts relacionados de um artigo visualizado não estiverem cacheados e esta opção estiver ligada, o YARPP os computará em tempo real. Não ligue esta opção se você possui um site com tráfego elevado.<br />Se esta opção estiver desligada e os posts relacionados de um artigo não estiverem cacheados, o sistema indicará que não há posts relacionados."
+msgstr "Se os posts relacionados de um artigo visualizado não estiverem cacheados e esta opção estiver ligada, o YARPP os computará em tempo real. <br />Se esta opção estiver desligada e os posts relacionados de um artigo não estiverem cacheados, o sistema indicará que não há posts relacionados."
 
 #: options.php:562
 msgid "'MIN minute(s) and SEC second(s) remaining'"
