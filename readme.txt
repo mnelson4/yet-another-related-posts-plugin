@@ -6,8 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
-Tested up to: 2.7.2
-Stable tag: 3.0.5
+Tested up to: 2.8
+Stable tag: 3.0.6
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -94,9 +94,11 @@ This has to do with the way the "match score" is computed. Every entry's match s
 
 It is recommended that you tweak your match threshold whenever you make changes to the "makeup" of your match score (i.e., the settings for the titles, bodies, tags, and categories items).
 
-= XXX plugin stopped working after I installed YARPP! =
+= Are there any plugins that are incompatible with YARPP? =
 
-Please submit such bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
+Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966). Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually.
+
+Please submit similar bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
 
 = Things are weird after I upgraded. =
 
@@ -115,6 +117,7 @@ YARPP is currently localized in the following languages:
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
   * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
+  * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
 	
 We already have localizers lined up for the following languages:
 
@@ -124,7 +127,6 @@ We already have localizers lined up for the following languages:
   * Indonesian
   * Hungarian
   * Romanian
-  * Russian
   * Hebrew
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
@@ -246,3 +248,8 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Updated "incomplete cache" warning message so it is only displayed when the "on the fly" option is off.
 * 3.0.6
   * Bugfix: [updated excerpting to use `wp_html_excerpt`](http://wordpress.org/support/topic/268934) (for WP 2.5+)
+  * Bugfix: [fixed broken widget display](http://wordpress.org/support/topic/276031)
+  * Added Russian (`ru_RU`) localization by Marat Latypov
+  * Confirmed 2.8 compatibility
+  * Added note on [incompatibility with SEO Pager plugin](http://wordpress.org/support/topic/267966)
+  
