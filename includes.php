@@ -220,11 +220,13 @@ function widget_yarpp_init() {
 		extract($args);
 		global $wpdb, $post;
 		if (is_single() && have_posts()) {
-      the_post();
-      echo $before_widget;
-      echo $before_title . __('Related Posts','yarpp') . $after_title;
-      echo yarpp_related(array('post'),array());
-      echo $after_widget;
+		  while (have_posts()) {
+        the_post();
+        echo $before_widget;
+        echo $before_title . __('Related Posts','yarpp') . $after_title;
+        echo yarpp_related(array('post'),array());
+        echo $after_widget;
+      }
 		}
 	}
 	register_sidebar_widget(__('YARPP','yarpp'), 'widget_yarpp');
