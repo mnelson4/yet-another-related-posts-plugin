@@ -252,4 +252,7 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Added Russian (`ru_RU`) localization by Marat Latypov
   * Confirmed 2.8 compatibility
   * Added note on [incompatibility with SEO Pager plugin](http://wordpress.org/support/topic/267966)
-  
+* 3.0.7
+  * Bugfix: additional bugfix for widgets.
+  * Reinstating excerpt length by number of words (was switched to letters in 3.0.6 without accompanying documentation)
+  * Updated Italian localization

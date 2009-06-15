@@ -36,9 +36,7 @@ if ($related_query->have_posts()) {
 		$output .= '</a>';
 		if ($show_excerpt) {
 			$output .= $before_post . 
-			  (function_exists('wp_html_excerpt') ? 
-			    wp_html_excerpt(get_the_excerpt(),$excerpt_length)
-			    : yarpp_excerpt(get_the_excerpt(),$excerpt_length) )
+			  yarpp_excerpt(get_the_excerpt(),$excerpt_length)
 			  . $after_post;
 		}
 		$output .=  $after_title;
