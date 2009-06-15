@@ -358,6 +358,7 @@ function yarpp_upgrade_one_five() {
 define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
 function yarpp_excerpt($content,$length) {
+  $content = strip_tags($content);
 	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
 	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
 }
