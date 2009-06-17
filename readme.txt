@@ -22,6 +22,8 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 5. *Disallowing certain tags or categories*: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
 6. *Related posts and pages*: Puts you in control of pulling up related posts, pages, or both.
 
+This plugin requires that your database run on MySQL 4.1 or greater.
+
 == Installation ==
 
 = Auto display on your website =
