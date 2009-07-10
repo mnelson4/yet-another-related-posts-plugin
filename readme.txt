@@ -6,7 +6,7 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
-Tested up to: 2.8
+Tested up to: 2.8.1
 Stable tag: 3.0.6
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
@@ -110,6 +110,7 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 
 YARPP is currently localized in the following languages:
 
+  * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
   * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
   * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
@@ -130,6 +131,7 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Hebrew
+  * Dutch
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -257,4 +259,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.7
   * Bugfix: additional bugfix for widgets.
   * Reinstating excerpt length by number of words (was switched to letters in 3.0.6 without accompanying documentation)
-  * Updated Italian localization
+  * Localizations:
+    * Updated Italian
+    * Added Belarussian by [Fat Cow](http://www.fatcow.com)
+  * Confirmed compatibility with 2.8.1
