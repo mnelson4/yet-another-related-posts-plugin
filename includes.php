@@ -126,8 +126,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','3.07b1');
-	update_option('yarpp_version','3.07b1');
+	add_option('yarpp_version','3.07');
+	update_option('yarpp_version','3.07');
 	return 1;
 }
 
