@@ -263,3 +263,7 @@ If you are a bilingual speaker of English and another language and an avid user 
     * Updated Italian
     * Added Belarussian by [Fat Cow](http://www.fatcow.com)
   * Confirmed compatibility with 2.8.1
+* 3.0.8
+  * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350)
+  * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
+  * Added Lithuanian localization
