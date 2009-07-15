@@ -285,6 +285,10 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_page = $page;
 	$current_pages = $pages;
 	$current_authordata = $authordata;
+	$current_numpages = $numpages;
+	$current_multipage = $multipage;
+	$current_more = $more;
+	$current_pagenow = $pagenow;
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
@@ -317,7 +321,11 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);
-	
+	$numpages = null; $numpages = $current_numpages; unset($current_numpages);
+	$multipage = null; $multipage = $current_multipage; unset($current_multipage);
+	$more = null; $more = $current_more; unset($current_more);
+	$pagenow = null; $pagenow = $current_pagenow; unset($current_pagenow);
+		
 	if ($promote_yarpp and $domain != 'metabox')
 		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 	
