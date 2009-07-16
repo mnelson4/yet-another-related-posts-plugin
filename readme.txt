@@ -267,3 +267,5 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350)
   * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
   * Added Lithuanian localization
+  * Bugfix: [when ad-hoc caching was off, the cached status would always say "0% cached" ](http://wordpress.org/support/topic/286395)
+  
