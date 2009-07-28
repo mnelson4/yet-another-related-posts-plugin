@@ -268,4 +268,5 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
   * Added Lithuanian localization
   * Bugfix: [when ad-hoc caching was off, the cached status would always say "0% cached" ](http://wordpress.org/support/topic/286395)
+  * Bugfix: enabled Polish and Italian stopwords and [fixed encoding of Italian stopwords](http://wordpress.org/support/topic/288808).
   

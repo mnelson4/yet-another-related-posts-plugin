@@ -10,7 +10,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 */
 
 define('YARPP_NUMERICAL_VERSION','3.08');
-define('YARPP_VERSION','3.08b2');
+define('YARPP_VERSION','3.08b3');
 
 require_once('includes.php');
 require_once('related-functions.php');
