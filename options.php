@@ -100,12 +100,13 @@ if (isset($_POST['update_yarpp'])) {
 	__('If you updated the "pool" options or "relatedness" options displayed, please rebuild your cache now from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
 }
 
+// check if the cache is complete or not.
+$cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
+  FROM $wpdb->posts as p
+  LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
+  WHERE p.post_status = 'publish' ");
+
 if (yarpp_get_option('ad_hoc_caching') != 1) {
-  // check if the cache is complete or not.
-  $cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-    FROM $wpdb->posts as p
-    LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-    WHERE p.post_status = 'publish' ");
   
   if ($cache_complete > 0 and $cache_complete < 1)
     echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
