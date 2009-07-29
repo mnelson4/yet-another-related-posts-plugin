@@ -271,4 +271,5 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Bugfix: enabled Polish and Italian stopwords and [fixed encoding of Italian stopwords](http://wordpress.org/support/topic/288808).
   * Bugfix: `is_single` and other such flags are now set properly within the related posts Loop (as a result, now [compatible with WP Greet Box](http://wordpress.org/support/topic/288230))
   * Confirmed compatibility with 2.8.2
+  * Bugfix: [the Related Posts metabox now respects the Screen Options](http://wordpress.org/support/topic/289290)
   
