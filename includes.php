@@ -267,11 +267,12 @@ function yarpp_rss_excerpt($content) {
 	- Viper's Video Quicktags
 	- WP-CodeBox
 	- WP shortcodes
+	- WP Greet Box
 	//- Tweet This - could not reproduce problem.
 */
 
 $yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','reddZEt_AddBut','dzoneZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');//,'insert_tweet_this'
-$yarpp_blackmethods = array(null,'addinlinejs','replacebbcode');
+$yarpp_blackmethods = array(null,'addinlinejs','replacebbcode','filter_content');
 
 function yarpp_white($filter) {
 	global $yarpp_blacklist;
