@@ -266,7 +266,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.8
   * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350)
   * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
-  * Added Lithuanian localization
+  * Added Korean and Lithuanian localizations
   * Bugfix: [when ad-hoc caching was off, the cached status would always say "0% cached" ](http://wordpress.org/support/topic/286395)
   * Bugfix: enabled Polish and Italian stopwords and [fixed encoding of Italian stopwords](http://wordpress.org/support/topic/288808).
   * Bugfix: `is_single` and other such flags are now set properly within the related posts Loop (as a result, now [compatible with WP Greet Box](http://wordpress.org/support/topic/288230))
