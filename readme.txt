@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.8.2
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -112,15 +112,17 @@ YARPP is currently localized in the following languages:
 
   * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
   * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
-  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+  * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
 	
 We already have localizers lined up for the following languages:
 
@@ -131,7 +133,6 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Hebrew
-  * Dutch
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -264,7 +265,7 @@ If you are a bilingual speaker of English and another language and an avid user 
     * Added Belarussian by [Fat Cow](http://www.fatcow.com)
   * Confirmed compatibility with 2.8.1
 * 3.0.8
-  * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350)
+  * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350) (may not be completely fixed yet)
   * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
   * Added Korean and Lithuanian localizations
   * Bugfix: [when ad-hoc caching was off, the cached status would always say "0% cached" ](http://wordpress.org/support/topic/286395)
