@@ -17,12 +17,13 @@ if ($related_query->have_posts()) {
 	$output .= '<ol>';
 	while ($related_query->have_posts()) {
 		$related_query->the_post();
-		$output .= "<li><a href='post.php?action=edit&post=$id'>".get_the_title()."</a>"; // FIXME: what if it's a page?
+		$output .= "<li><a href='post.php?action=edit&post=$id'>".get_the_title()."</a>";
+		// TODO: what if it's a page?
 		$output .= ' ('.round(get_the_score(),3).')';
 		$output .= '</li>';
 	}
 	$output .= '</ol>';
 	$output .= '<p>'.__( 'Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options.' , 'yarpp').'</p>';
 } else {
-	$output .= '<p><em>'.__('No related posts.').'</em></p>';
+	$output .= '<p><em>'.__('No related posts.','yarpp').'</em></p>';
 }
