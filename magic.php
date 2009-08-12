@@ -229,8 +229,10 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
+/* new in 3.0! new query-based approach: EXTREMELY HACKY! */
+
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata;
+	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $numpages;
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -289,6 +291,8 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_multipage = $multipage;
 	$current_more = $more;
 	$current_pagenow = $pagenow;
+	$current_day = $day;
+	$current_currentmonth = $currentmonth;
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
@@ -331,7 +335,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$multipage = null; $multipage = $current_multipage; unset($current_multipage);
 	$more = null; $more = $current_more; unset($current_more);
 	$pagenow = null; $pagenow = $current_pagenow; unset($current_pagenow);
-		
+  $day = null; $day = $current_day; unset($current_day);
+  $currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
+
 	if ($promote_yarpp and $domain != 'metabox')
 		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 	

@@ -78,11 +78,9 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 = Does YARPP slow down my blog/server? =
 
-A little bit, yes. Every time you display a post with automatic display of related posts (or one of the `related_*()` functions) it will calculate the related posts, which can be a database-intensive operation. *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).* For the majority of users, this type of caching will be enough to stem the performance issues.
+A little bit, yes. YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
 
-If you have a large blog with many (>1000) posts or have many tags or categories, YARPP may noticibly affect your blog's performance, even with a caching plugin. For these large blogs, for the time being I recommend you disable the "consider tags" and "consider categories" options. Turning off any "disallow" tags or categories will also speed things up.
-
-In the future I will be building a YARPP-internal cache system so that YARPP can calculate all the post-relations at one time and then re-use those results every time, rather than calculating them on the fly.
+If you are worried about your database load, do not manually build the cache—simply leave the "on the fly" caching option on, and it will build itself over time.
 
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
@@ -114,9 +112,11 @@ YARPP is currently localized in the following languages:
 
   * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+  * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
   * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
   * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
+  * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
@@ -125,6 +125,8 @@ YARPP is currently localized in the following languages:
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
+  * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 	
 We already have localizers lined up for the following languages:
 
@@ -135,6 +137,7 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Hebrew
+  * Latvian
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -275,4 +278,6 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Bugfix: `is_single` and other such flags are now set properly within the related posts Loop (as a result, now [compatible with WP Greet Box](http://wordpress.org/support/topic/288230))
   * Confirmed compatibility with 2.8.2
   * Bugfix: [the Related Posts metabox now respects the Screen Options](http://wordpress.org/support/topic/289290)
-  
+* 3.0.9
+  * Added Uzbek, Greek, Cypriot Greek, and Vietnamese localizations
+  * Further bugfixes for the [pagination issue](http://wordpress.org/support/topic/267350)
