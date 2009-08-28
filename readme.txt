@@ -6,8 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
-Tested up to: 2.8
-Stable tag: 3.0.6
+Tested up to: 2.8.4
+Stable tag: 3.0.11
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -15,14 +15,16 @@ Returns a list of related entries based on a unique algorithm for display on you
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
-1. *An advanced and versatile algorithm*: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
-2. *Templating*: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
-3. *Caching*: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
-4. *Related posts in RSS feeds*: Display related posts in your RSS and Atom feeds with custom display options.
-5. *Disallowing certain tags or categories*: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
-6. *Related posts and pages*: Puts you in control of pulling up related posts, pages, or both.
+1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
+2. **Templating**: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
+3. **Caching**: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
+4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
+5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
+6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
 
 This plugin requires that your database run on MySQL 4.1 or greater.
+
+**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
 
 == Installation ==
 
@@ -76,11 +78,9 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 = Does YARPP slow down my blog/server? =
 
-A little bit, yes. Every time you display a post with automatic display of related posts (or one of the `related_*()` functions) it will calculate the related posts, which can be a database-intensive operation. *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).* For the majority of users, this type of caching will be enough to stem the performance issues.
+A little bit, yes. YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
 
-If you have a large blog with many (>1000) posts or have many tags or categories, YARPP may noticibly affect your blog's performance, even with a caching plugin. For these large blogs, for the time being I recommend you disable the "consider tags" and "consider categories" options. Turning off any "disallow" tags or categories will also speed things up.
-
-In the future I will be building a YARPP-internal cache system so that YARPP can calculate all the post-relations at one time and then re-use those results every time, rather than calculating them on the fly.
+If you are worried about your database load, do not manually build the cache—simply leave the "on the fly" caching option on, and it will build itself over time.
 
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
@@ -110,16 +110,24 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 
 YARPP is currently localized in the following languages:
 
+  * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+  * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
+  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
   * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
+  * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
-  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+  * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
+  * Ukranian (`uk_UA`) by [Onore](Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
+  * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 	
 We already have localizers lined up for the following languages:
 
@@ -130,6 +138,7 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Hebrew
+  * Latvian
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -257,4 +266,26 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.7
   * Bugfix: additional bugfix for widgets.
   * Reinstating excerpt length by number of words (was switched to letters in 3.0.6 without accompanying documentation)
-  * Updated Italian localization
+  * Localizations:
+    * Updated Italian
+    * Added Belarussian by [Fat Cow](http://www.fatcow.com)
+  * Confirmed compatibility with 2.8.1
+* 3.0.8
+  * Bugfix: [a pagination issue](http://wordpress.org/support/topic/267350) (may not be completely fixed yet)
+  * Bugfix: a quick bugfix for widgets, thanks to Chris Northwood
+  * Added Korean and Lithuanian localizations
+  * Bugfix: [when ad-hoc caching was off, the cached status would always say "0% cached" ](http://wordpress.org/support/topic/286395)
+  * Bugfix: enabled Polish and Italian stopwords and [fixed encoding of Italian stopwords](http://wordpress.org/support/topic/288808).
+  * Bugfix: `is_single` and other such flags are now set properly within the related posts Loop (as a result, now [compatible with WP Greet Box](http://wordpress.org/support/topic/288230))
+  * Confirmed compatibility with 2.8.2
+  * Bugfix: [the Related Posts metabox now respects the Screen Options](http://wordpress.org/support/topic/289290)
+* 3.0.9
+  * Added Uzbek, Greek, Cypriot Greek, and Vietnamese localizations
+  * Further bugfixes for the [pagination issue](http://wordpress.org/support/topic/267350)
+* 3.0.10
+  * Added Ukranian localization
+  * Incorporated a quick update for the widget display [thanks to doodlebee](http://wordpress.org/support/topic/281575).
+  * Now properly uses `compare_version` in lieu of old hacky versioning.
+* 3.0.11
+  * Quick fix for `compare_version` code.
+  

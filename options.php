@@ -50,8 +50,8 @@ if (!yarpp_get_option('myisam_override')) {
 }
 
 $yarpp_twopointfive = true;
-if (substr($wp_version,0,3) < 2.5) {
-	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
+if (version_compare('2.5',$wp_version) > 0) {
+	echo "$wp_version<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
 
 	yarpp_set_option('categories',1);
 	yarpp_set_option('tags',1);
@@ -100,12 +100,13 @@ if (isset($_POST['update_yarpp'])) {
 	__('If you updated the "pool" options or "relatedness" options displayed, please rebuild your cache now from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
 }
 
+// check if the cache is complete or not.
+$cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
+  FROM $wpdb->posts as p
+  LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
+  WHERE p.post_status = 'publish' ");
+
 if (yarpp_get_option('ad_hoc_caching') != 1) {
-  // check if the cache is complete or not.
-  $cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-    FROM $wpdb->posts as p
-    LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-    WHERE p.post_status = 'publish' ");
   
   if ($cache_complete > 0 and $cache_complete < 1)
     echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
@@ -257,11 +258,6 @@ function load_display_discats() {
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
 			$display_version = yarpp_get_option('version');
-			$split = explode('.',$display_version);
-			if (strlen($split[1]) != 1) {
-				$pos = strpos($display_version,'.')+2;
-				$display_version = substr($display_version,0,$pos).'.'.substr($display_version,$pos);
-			}
       echo $display_version;
 			?></small>
 		</h2>
