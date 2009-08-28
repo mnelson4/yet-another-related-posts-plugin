@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.8.4
-Stable tag: 3.0.9
+Stable tag: 3.0.10
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -126,6 +126,7 @@ YARPP is currently localized in the following languages:
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
   * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
+  * Ukranian (`uk_UA`) by [Onore](Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
   * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 	
 We already have localizers lined up for the following languages:
@@ -281,3 +282,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * 3.0.9
   * Added Uzbek, Greek, Cypriot Greek, and Vietnamese localizations
   * Further bugfixes for the [pagination issue](http://wordpress.org/support/topic/267350)
+* 3.0.10
+  * Added Ukranian localization
+  * Incorporated a quick update for the widget display [thanks to doodlebee](http://wordpress.org/support/topic/281575).
+  * Now properly uses `compare_version` in lieu of old hacky versioning.

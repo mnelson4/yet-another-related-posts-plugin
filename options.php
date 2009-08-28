@@ -50,7 +50,7 @@ if (!yarpp_get_option('myisam_override')) {
 }
 
 $yarpp_twopointfive = true;
-if (substr($wp_version,0,3) < 2.5) {
+if (version_compare('2.5',$wp_version)) {
 	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
 
 	yarpp_set_option('categories',1);
@@ -258,11 +258,6 @@ function load_display_discats() {
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
 			$display_version = yarpp_get_option('version');
-			$split = explode('.',$display_version);
-			if (strlen($split[1]) != 1) {
-				$pos = strpos($display_version,'.')+2;
-				$display_version = substr($display_version,0,$pos).'.'.substr($display_version,$pos);
-			}
       echo $display_version;
 			?></small>
 		</h2>

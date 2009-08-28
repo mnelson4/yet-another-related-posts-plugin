@@ -173,12 +173,12 @@ function yarpp_upgrade_check($inuse = false) {
 
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 2.03) {
+	if (version_compare('2.03',get_option('yarpp_version'))) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < YARPP_NUMERICAL_VERSION or get_option('yarpp_version') != YARPP_VERSION) {
+	if (version_compare(YARPP_VERSION,get_option('yarpp_version'))) {
 		update_option('yarpp_version',YARPP_VERSION);
 		
 		//if (!$inuse)
@@ -220,7 +220,7 @@ function widget_yarpp_init() {
 		extract($args);
 		global $wpdb, $post;
 		if (is_single() && have_posts()) {
-      the_post();
+      get_post($post->ID);
       echo $before_widget;
       echo $before_title . __('Related Posts','yarpp') . $after_title;
       echo yarpp_related(array('post'),array());
