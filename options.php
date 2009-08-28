@@ -50,8 +50,8 @@ if (!yarpp_get_option('myisam_override')) {
 }
 
 $yarpp_twopointfive = true;
-if (version_compare('2.5',$wp_version)) {
-	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
+if (version_compare('2.5',$wp_version) > 0) {
+	echo "$wp_version<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
 
 	yarpp_set_option('categories',1);
 	yarpp_set_option('tags',1);
