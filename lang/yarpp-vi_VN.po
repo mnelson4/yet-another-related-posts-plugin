@@ -1,0 +1,665 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-08-03 09:51+0700\n"
+"Last-Translator: admin <vunguyen@viet-emarketing.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Vietnamese\n"
+"X-Poedit-Country: VIET NAM\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes.php:24
+#: includes.php:35
+#@ yarpp
+msgid "Related posts:"
+msgstr "Bài viết liên quan:"
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:28
+#@ yarpp
+msgid "No related posts."
+msgstr "Không có bài viết liên quan."
+
+#: includes.php:94
+#@ yarpp
+msgid "MySQL error on adding yarpp_title"
+msgstr "Lỗi MySQL khi nhập yarpp_title"
+
+#: includes.php:99
+#@ yarpp
+msgid "MySQL error on adding yarpp_content"
+msgstr "Lỗi MySQL khi nhập yarpp_content"
+
+#: includes.php:110
+#@ yarpp
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Lỗi MySQL khi nhập tạo bảng yarpp_keyword_cache"
+
+#: includes.php:121
+#@ yarpp
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Lỗi MySQL khi nhập tạo bảng yarpp_related_cache"
+
+#: includes.php:197
+#@ yarpp
+msgid "Related Posts (YARPP)"
+msgstr "Bài viết liên quan (YARPP)"
+
+#: includes.php:225
+#: yarpp.php:34
+#@ yarpp
+msgid "Related Posts"
+msgstr "Bài viết liên quan"
+
+#: includes.php:230
+#@ yarpp
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
+#@ yarpp
+msgid "Example post "
+msgstr "Bài viết mẫu"
+
+#: magic.php:336
+#: options.php:461
+#: options.php:524
+#@ yarpp
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Chức năng \"bài viết có liên quan\" được mang đến cho bạn bởi <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:10
+#@ yarpp
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Vui lòng di chuyển files của YARPP template vào trong theme để hoàn thành cài đặt. Bạn chỉ cần di chuyển những files template mẫu (hiện nằm trong <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) vào thư mục <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+#@ yarpp
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Không tìm được YARPP template files trong theme của bạn (<code>TEMPLATEPATH</code>) vì vậy chức năng templating đã được tắt."
+
+#: options.php:26
+#@ yarpp
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "Chức năng kiểm tra của MyISAM đã được override. Bạn có thể sử dụng \"consider titles\" và \"consider bodies\" để xem xét mức độ liên quan."
+
+#: options.php:35
+#, php-format
+#@ yarpp
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Chức năng xem xét mức độ liên quan dựa trên \"consider titles\" và \"consider bodies\" của YARPP đòi hỏi bảng <code>%s</code> cần phải dùng <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. Hai chức năng trên tạm thời bị khóa lại."
+
+#: options.php:37
+#, php-format
+#@ yarpp
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Để phục hồi những chức năng này vui lòng cập nhật bảng <code>%s</code> bằng cách chạy câu lệnh SQL sau: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code>. Dữ liệu trên bảng sẽ hoàn toàn không bị ảnh hưởng."
+
+#: options.php:39
+#, php-format
+#@ yarpp
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Nếu bạn chắc rằng bảng <code>%s</code> đang xài MyISAM mặc dù việc kiểm tra ở đây cho kết quả khác hãy nhấn nút này:"
+
+#: options.php:42
+#@ yarpp
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Hãy tin tưởng tôi và để tôi sử dụng chức năng của MyISAM."
+
+#: options.php:65
+#@ yarpp
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Cơ sở dữ liệu của YARPP có lỗi nhưng đã được sửa."
+
+#: options.php:67
+#@ yarpp
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Cơ sở dữ liệu của YARPP gặp lỗi không thể khắc phục."
+
+#: options.php:68
+#@ yarpp
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "Hãy thử <A>thiết lập SQL bằng tay</a>."
+
+#: options.php:98
+#@ yarpp
+msgid "Options saved!"
+msgstr "Đã lưu tùy chọn!"
+
+#: options.php:99
+#: options.php:112
+#: options.php:115
+#: options.php:533
+#@ yarpp
+msgid "Related posts cache status"
+msgstr "Tình trạng cache của những bài viết có liên quan."
+
+#: options.php:100
+#@ yarpp
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Nếu bạn đã cập nhật tùy chọn \"pool\" hoặc tùy chọn \"relatedness\", vui lòng xây dựng lại cache từ <A>bảng điều khỉển của các bài viết có liên quan</a>."
+
+#: options.php:112
+#@ yarpp
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Cache của những bài viết có liên quan của bạn không hoàn chỉnh. Vui lòng xây dựng lại cache từ <A>bảng điều khiển của các bài viết liên quan</a>."
+
+#: options.php:115
+#@ yarpp
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Cache của các bài viết các liên quan của bạn hiện đang rỗng. Vui lòng xây dựng cache từ <A>bảng điều khiển các bài viết có liên quan</a>."
+
+#: options.php:151
+#@ yarpp
+msgid "word"
+msgstr "từ"
+
+#: options.php:152
+#@ yarpp
+msgid "tag"
+msgstr "thẻ"
+
+#: options.php:153
+#@ yarpp
+msgid "category"
+msgstr "chuyên mục"
+
+#: options.php:157
+#: options.php:174
+#: options.php:186
+#@ yarpp
+msgid "do not consider"
+msgstr "không xem xét"
+
+#: options.php:158
+#: options.php:175
+#: options.php:188
+#@ yarpp
+msgid "consider"
+msgstr "xem xét"
+
+#: options.php:160
+#: options.php:190
+#, php-format
+#@ yarpp
+msgid "require at least one %s in common"
+msgstr "cần ít nhất một %s chung"
+
+#: options.php:162
+#: options.php:192
+#, php-format
+#@ yarpp
+msgid "require more than one %s in common"
+msgstr "cần hơn một %s chung"
+
+#: options.php:176
+#@ yarpp
+msgid "consider with extra weight"
+msgstr "xem xét với mức độ quan trọng đặc biệt"
+
+#: options.php:204
+#@ yarpp
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Những versions của Yet Another Related Posts Plugin (RSS 2.0)"
+
+#: options.php:258
+#@ yarpp
+msgid "Yet Another Related Posts Plugin Options"
+msgstr " Tùy chọn của Yet Another Related Posts Plugin"
+
+#: options.php:274
+#@ yarpp
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Tài trợ cho mitcho (Michael Yoshitaka Erlewine) qua PayPal cho việc phát triển plugin này "
+
+#: options.php:276
+#@ yarpp
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "bởi <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:276
+#@ yarpp
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Theo <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin trên Twitter</a>"
+
+#: options.php:281
+#@ yarpp
+msgid "\"The Pool\""
+msgstr "\"The Pool\""
+
+#: options.php:282
+#@ yarpp
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "\"The Pool\" là tập hợp những bài posts có thể hiển thị trong Những bài viết liên quan với bài viết hiện tại."
+
+#: options.php:287
+#@ yarpp
+msgid "Disallow by category:"
+msgstr "Không cho phép dựa trên chuyên mục:"
+
+#: options.php:289
+#@ yarpp
+msgid "Disallow by tag:"
+msgstr "Không cho phép dựa trên tag(thẻ):"
+
+#: options.php:291
+#@ yarpp
+msgid "Show password protected posts?"
+msgstr "Hiển thị những bài viết được bảo vệ bởi mật mã?"
+
+#: options.php:297
+#@ yarpp
+msgid "day(s)"
+msgstr "ngày"
+
+#: options.php:298
+#@ yarpp
+msgid "week(s)"
+msgstr "tuần"
+
+#: options.php:299
+#@ yarpp
+msgid "month(s)"
+msgstr "tháng"
+
+#: options.php:301
+#@ yarpp
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Chỉ hiển thị những bài viết trong vòng NUMBER UNITS"
+
+#: options.php:309
+#@ yarpp
+msgid "\"Relatedness\" options"
+msgstr "Tùy chọn \"Relatedness\" (Mức độ liên quan)"
+
+#: options.php:311
+#, php-format
+#@ yarpp
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP khác với <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">với những plugins bài viết có liên quan khác</a> vì nó hạn chế những bài viết có liên quan dựa trên (1) tổng số bài viết có liên quan và (2) mức độ liên quan."
+
+#: options.php:311
+#: options.php:325
+#: options.php:408
+#: options.php:413
+#: options.php:460
+#: options.php:472
+#: options.php:473
+#: options.php:477
+#: options.php:523
+#: options.php:534
+#@ yarpp
+msgid "more&gt;"
+msgstr "thêm&gt;"
+
+#: options.php:311
+#@ yarpp
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Mức độ liên quan càng cao thì càng có ít bài viết liên quan. Mức độ mặc định là 5. Nếu bạn muốn xác định một mức độ phù hợp với trang của mình bạn có thể kiểm tra một số bài viết liên quan đang được hiển thị và dựa trên đó để xác định một mức độ hợp lý."
+
+#: options.php:316
+#@ yarpp
+msgid "Match threshold:"
+msgstr "Mức độ liên quan:"
+
+#: options.php:317
+#@ yarpp
+msgid "Titles: "
+msgstr "Tựa đề:"
+
+#: options.php:319
+#@ yarpp
+msgid "Bodies: "
+msgstr "Phần nội dung:"
+
+#: options.php:321
+#@ yarpp
+msgid "Tags: "
+msgstr "Thẻ:"
+
+#: options.php:323
+#@ yarpp
+msgid "Categories: "
+msgstr "Chuyên mục:"
+
+#: options.php:325
+#@ yarpp
+msgid "Cross-relate posts and pages?"
+msgstr "Thiết lập mối liên quan giữa bài viết và trang?"
+
+#: options.php:325
+#@ yarpp
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Khi bạn chọ tùy chọn \"Thiết lập mối liên quan giữa bài viết và trang có liên quan\" thì các hàm <code>related_posts()</code>, <code>related_pages()</code>, và <code>related_entries()</code> đều sẽ trả về cùng kết quả."
+
+#: options.php:391
+#@ yarpp
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Có một version beta mới (thử nghiệm) của YARPP. Bạn có thể <A>download ở đây</a> và sử dụng (bạn tự chịu mọi rủi ro phát sinh)"
+
+#: options.php:393
+#@ yarpp
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Có một version mới của YARPP! Bạn có thể <A>download ở đây</a>."
+
+#: options.php:404
+#@ yarpp
+msgid "Display options <small>for your website</small>"
+msgstr "Tùy chọn giao diện cho <small>website của bạn</small>"
+
+#: options.php:408
+#@ yarpp
+msgid "Automatically display related posts?"
+msgstr "Tự động hiển thị bài viết có liên quan?"
+
+#: options.php:408
+#@ yarpp
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Tùy chọn này tự động hiển thị bài viết có liên quan ngay phía dưới nội dung của bài viết. Nếu tùy chọn này bị tắt, bạn có thể hiển thị ở vị trí bạn chọn bằng cách sửa theme files của bạn và sử dụng <code>related_posts()</code> hay (<code>related_pages()</code>."
+
+#: options.php:409
+#@ yarpp
+msgid "Website display code example"
+msgstr "Code mẫu cho giao diện website"
+
+#: options.php:409
+#: options.php:474
+#@ yarpp
+msgid "(Update options to reload.)"
+msgstr "(Cập nhật tùy chọn để load lại.)"
+
+#: options.php:412
+#: options.php:476
+#@ yarpp
+msgid "Maximum number of related posts:"
+msgstr "Tối đa số bài viết có liên quan:"
+
+#: options.php:413
+#: options.php:477
+#@ yarpp
+msgid "Display using a custom template file"
+msgstr "Hiển thị bằng cách sử dụng một file template riêng của bạn"
+
+#: options.php:413
+#: options.php:477
+#: options.php:530
+#@ yarpp
+msgid "NEW!"
+msgstr "MỚI!"
+
+#: options.php:413
+#: options.php:477
+#@ yarpp
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Tùy chọn nâng cao này cho phép bạn có quyền điều chỉnh những bài viết có liên quan của bạn được hiển thị ra sao. Templates (chứa trong thư mục theme của bạn) được viết bằng PHP."
+
+#: options.php:415
+#: options.php:479
+#@ yarpp
+msgid "Template file:"
+msgstr "Template file:"
+
+#: options.php:425
+#@ yarpp
+msgid "Before / after related entries:"
+msgstr "Trước / sau bài viết có liên quan:"
+
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
+#@ yarpp
+msgid "For example:"
+msgstr "Ví dụ:"
+
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
+#@ yarpp
+msgid " or "
+msgstr "hoặc"
+
+#: options.php:430
+#: options.php:494
+#@ yarpp
+msgid "Before / after each related entry:"
+msgstr "Trước / Sau mỗi bài viết liên quan:"
+
+#: options.php:434
+#: options.php:498
+#@ yarpp
+msgid "Show excerpt?"
+msgstr "Hiển thị phần trích dẫn?"
+
+#: options.php:435
+#: options.php:499
+#@ yarpp
+msgid "Excerpt length (No. of words):"
+msgstr "Độ dài của phần trích dẫn (tính theo số từ):"
+
+#: options.php:439
+#@ yarpp
+msgid "Before / after (Excerpt):"
+msgstr "Trước / Sau (Trích dẫn):"
+
+#: options.php:445
+#: options.php:509
+#@ yarpp
+msgid "Order results:"
+msgstr "Kết quả cũ hơn:"
+
+#: options.php:447
+#: options.php:511
+#@ yarpp
+msgid "score (high relevance to low)"
+msgstr "điểm (mức độ liên quan từ cao đến thấp)"
+
+#: options.php:448
+#: options.php:512
+#@ yarpp
+msgid "score (low relevance to high)"
+msgstr "điểm (mức độ liên quan từ thấp đến cao)"
+
+#: options.php:449
+#: options.php:513
+#@ yarpp
+msgid "date (new to old)"
+msgstr "ngày (từ mới đến cũ)"
+
+#: options.php:450
+#: options.php:514
+#@ yarpp
+msgid "date (old to new)"
+msgstr "ngày (từ cũ đến mới)"
+
+#: options.php:451
+#: options.php:515
+#@ yarpp
+msgid "title (alphabetical)"
+msgstr "Tên (theo thứ tự bảng chữ cái)"
+
+#: options.php:452
+#: options.php:516
+#@ yarpp
+msgid "title (reverse alphabetical)"
+msgstr "Tên (ngược thứ tự bảng chữ cái)"
+
+#: options.php:457
+#: options.php:521
+#@ yarpp
+msgid "Default display if no results:"
+msgstr "Hiển thị mặc định nếu không có kết quả:"
+
+#: options.php:459
+#: options.php:523
+#@ yarpp
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Giúp giới thiệu về  Yet Another Related Posts Plugin?"
+
+#: options.php:461
+#: options.php:524
+#, php-format
+#@ yarpp
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Tùy chọn này sẽ thêm phần code %s. Bạn có thể chọn tùy chọn, cập nhật rồi xem code mẫu bên tay phải. Những đường links và sự đóng góp này rất được trân trọng."
+
+#: options.php:467
+#@ yarpp
+msgid "Display options <small>for RSS</small>"
+msgstr "Tùy chọn giao diện <small>cho RSS</small>"
+
+#: options.php:472
+#@ yarpp
+msgid "Display related posts in feeds?"
+msgstr "Hiển thị bài viết có liên quan trong feeds?"
+
+#: options.php:472
+#@ yarpp
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Tùy chọn này hiển thị bài viết có liên quan phía dưới mỗi bài trong RSS và Atom của bạn. Không cần thiết phải thay đổi template."
+
+#: options.php:473
+#@ yarpp
+msgid "Display related posts in the descriptions?"
+msgstr "Hiển thị bài viết có liên quan trong phần mô tả (descriptions)?"
+
+#: options.php:473
+#@ yarpp
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Tùy chọn này sẽ hiển thị bài viết có liên quan trong phần mô tả (description) của RSS chứ không chỉ trong nội dung từng bài viết. Nếu RSS của bạn được thiết kế chỉ hiển thị phần trích dẫn thì chỉ có phần mô tả sẽ được dùng, vì vậy tùy chọn này cần thiết trong trường hợp này (nếu bạn muốn hiển thị bài viết liên quan)."
+
+#: options.php:474
+#@ yarpp
+msgid "RSS display code example"
+msgstr "Code mẫu cho giao diện RSS"
+
+#: options.php:489
+#@ yarpp
+msgid "Before / after related entries display:"
+msgstr "Trước / sau những bài viết liên quan:"
+
+#: options.php:503
+#@ yarpp
+msgid "Before / after (excerpt):"
+msgstr "Trước / Sau (Trích dẫn):"
+
+#: options.php:530
+#@ yarpp
+msgid "Advanced"
+msgstr "Nâng cao"
+
+#: options.php:533
+#@ yarpp
+msgid "Show cache status"
+msgstr "Hiển thị tình trạng cache"
+
+#: options.php:534
+#@ yarpp
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Tính toán bài viết có liên quan ngay lập tức nếu cache không hoàn chỉnh?"
+
+#: options.php:535
+#@ yarpp
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Nếu bạn chọn tùy chọn này và bài viết có liên quan đến bài viết hiện tại không được cache, YARPP sẽ tính toán ngay lập tức.<br /> Ngược lại, YARPP sẽ hiển thị không có bài viết liên quan."
+
+#: options.php:565
+#@ yarpp
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'Còn MIN phút và SEC giây'"
+
+#: options.php:567
+#@ yarpp
+msgid "'SEC second(s) remaining'"
+msgstr "'Còn SEC giây'"
+
+#: options.php:571
+#@ yarpp
+msgid "Your related posts cache is now complete."
+msgstr "Cache những bài viết có liên quan của bạn đã hoàn thành."
+
+#: options.php:571
+#@ yarpp
+msgid "The SQL queries took SEC seconds."
+msgstr "Truy vấn SQL tốn SEC giây"
+
+#: options.php:578
+#@ yarpp
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Có lỗi khi xây dựng bài viết có liên quan cho bài viết TITLE"
+
+#: options.php:580
+#: options.php:586
+#@ yarpp
+msgid "Constructing the related posts timed out."
+msgstr "Việc xây dựng bài viết có liên quan đã bị timed out (quá thời gian)."
+
+#: options.php:583
+#: options.php:588
+#@ yarpp
+msgid "Try to continue..."
+msgstr "Thử tiếp tục..."
+
+#: options.php:596
+#@ yarpp
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Cache những bài viết có liên quan của bạn hiện đã hoàn thành PERCENT%"
+
+#: options.php:602
+#@ yarpp
+msgid "starting..."
+msgstr "bắt đầu..."
+
+#: options.php:609
+#@ yarpp
+msgid "Update options"
+msgstr "Cập nhật tùy chọn"
+
+#: options.php:610
+#@ yarpp
+msgid "Do you really want to reset your configuration?"
+msgstr "Bạn có thực sự muốn reset những thiết lập (configuration) của bạn?"
+
+#: options.php:610
+#@ yarpp
+msgid "Reset options"
+msgstr "Reset tùy chọn"
+
+#: services.php:59
+#@ yarpp
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Bạn không thể xây dựng lại YARPP cache."
+
+#: template-builtin.php:35
+#, php-format
+#@ yarpp
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f là điểm đánh dấu mức độ tương đồng(YARPP match score) giữa bài viết hiện tại và bài viết liên quan . Bạn thấy điểm này vì bạn đã login vào WordPress với tư cách là admin. Điểm này sẽ không được hiển thị cho người truy cập bình thường."
+
+#: template-metabox.php:12
+#@ yarpp
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Bài viết này hiện có bài viết liên quan, cập nhật bài viết có thể dẫn đến sự thay đổi những bài viết liên quan."
+
+#: template-metabox.php:26
+#@ yarpp
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Việc hiển thị những bài viết có liên quan tùy thuộc vào những tùy chọn hiển thị bạn đã chọn trong YARPP display options."
+

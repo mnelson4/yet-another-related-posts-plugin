@@ -1,0 +1,665 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.8\n"
+"Report-Msgid-Bugs-To: yarpp-lt@mitcho.com\n"
+"POT-Creation-Date: 2009-08-04\n"
+"PO-Revision-Date: 2009-08-04 10:49+0300\n"
+"Last-Translator: \n"
+"Language-Team: Karolis Vyčius\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Lithuanian\n"
+"X-Poedit-Country: LITHUANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes.php:24
+#: includes.php:35
+#@ yarpp
+msgid "Related posts:"
+msgstr "Panašūs įrašai:"
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:28
+#@ yarpp
+msgid "No related posts."
+msgstr "Panašių įrašų nėra"
+
+#: includes.php:94
+#@ yarpp
+msgid "MySQL error on adding yarpp_title"
+msgstr "MySql klaida su yarpp pavadinimo įdėjimu"
+
+#: includes.php:99
+#@ yarpp
+msgid "MySQL error on adding yarpp_content"
+msgstr "MySql klaida su yarpp turinio pridėjimu"
+
+#: includes.php:110
+#@ yarpp
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "MySql klaida su YARPP keyword_cache lentelės kūrimu"
+
+#: includes.php:121
+#@ yarpp
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "MySql klaida su yarpp related_cache lentelės kūrimu"
+
+#: includes.php:197
+#@ yarpp
+msgid "Related Posts (YARPP)"
+msgstr "Panašūs įrašai (YARPP)"
+
+#: includes.php:225
+#: yarpp.php:34
+#@ yarpp
+msgid "Related Posts"
+msgstr "Panašūs įrašai"
+
+#: includes.php:230
+#@ yarpp
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
+#@ yarpp
+msgid "Example post "
+msgstr "Pavyzdiniai įrašai"
+
+#: magic.php:336
+#: options.php:461
+#: options.php:524
+#@ yarpp
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Panašūs įrašai jums <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Įskiepis</a>."
+
+#: options.php:10
+#@ yarpp
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Prašau perkelti YARPP išvaizdos failą š jūsų temą ,kad pabaigtumėte įdiegimo procesą. Paprasčiausia perkelkite YARPP temos failą iš <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code> į <code>TEMPLATEPATH</code> aplanką."
+
+#: options.php:15
+#@ yarpp
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "YARPP temos failai nebuvo rasti jūsų naudojamoje temoje (<code>TEMPLATEPATH</code>) ,taigi šablonų funkcija buvo išjungta."
+
+#: options.php:26
+#@ yarpp
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "MyISAM tikrinimas buvo "
+
+#: options.php:35
+#, php-format
+#@ yarpp
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr ""
+
+#: options.php:37
+#, php-format
+#@ yarpp
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Kad atstatytumėte šias ypatybes,prašau atnaujinti jūsų <code>%s</code> lenteles vykdančias SQL sekimo direktyvas: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> .Nėra duomenų  kurie bus ištrinti nekeičiant lentelių variklio., nors yra vykdymo pasėkmės."
+
+#: options.php:39
+#, php-format
+#@ yarpp
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Jeigu,nepaisant patikrinimo,jūs esate tikras ,kad šis kodas <code>%s</code> naudojamas MyISAM variklyje, paspauskite šį magišką mygtuką:"
+
+#: options.php:42
+#@ yarpp
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Pasikliaukite manimi. Leiskite naudoti MyISAM galimybes."
+
+#: options.php:65
+#@ yarpp
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP duomenų bazėje buvo klaida,bet jau dabar ištaisyta"
+
+#: options.php:67
+#@ yarpp
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP duomenų bazė turi klaidą kurios negalima ištaisyti"
+
+#: options.php:68
+#@ yarpp
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "Prašau pabandyti <A>rankinį SQL diegimą</a>."
+
+#: options.php:98
+#@ yarpp
+msgid "Options saved!"
+msgstr "Nuostatos išsaugotos!"
+
+#: options.php:99
+#: options.php:112
+#: options.php:115
+#: options.php:533
+#@ yarpp
+msgid "Related posts cache status"
+msgstr "Panašių įrašų podėlio statusas"
+
+#: options.php:100
+#@ yarpp
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Jeigu jūs atnaujinsite panašių įrašų nustatymus,prašau perkurti jūsų podėlį per <A>panašių įrašų statuso panele</a>."
+
+#: options.php:112
+#@ yarpp
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Jūsų panašių įrašų podėlio kūrimas nebaigtas.Prašau perkurti jūsų podėlį per <A>panašių įrašų statusų panelę</a>."
+
+#: options.php:115
+#@ yarpp
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Jūsų panašių įrašų podėlis yra tuščias. Prašau sukurti podėlį iš <A>panašių įrašų statusų panelės</a>."
+
+#: options.php:151
+#@ yarpp
+msgid "word"
+msgstr "žodis"
+
+#: options.php:152
+#@ yarpp
+msgid "tag"
+msgstr "žymė"
+
+#: options.php:153
+#@ yarpp
+msgid "category"
+msgstr "kategorija"
+
+#: options.php:157
+#: options.php:174
+#: options.php:186
+#@ yarpp
+msgid "do not consider"
+msgstr "nereikšminga"
+
+#: options.php:158
+#: options.php:175
+#: options.php:188
+#@ yarpp
+msgid "consider"
+msgstr "reikšminga"
+
+#: options.php:160
+#: options.php:190
+#, php-format
+#@ yarpp
+msgid "require at least one %s in common"
+msgstr "reikalinga bent jau vienas %s bendrojoje"
+
+#: options.php:162
+#: options.php:192
+#, php-format
+#@ yarpp
+msgid "require more than one %s in common"
+msgstr "reikalinga daugiau nei vienas %s bendrojoje"
+
+#: options.php:176
+#@ yarpp
+msgid "consider with extra weight"
+msgstr "Labai reikšminga"
+
+#: options.php:204
+#@ yarpp
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Related Posts Įskiepis versijų istorija (RSS 2.0)"
+
+#: options.php:258
+#@ yarpp
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Įskiepio Nuostatos"
+
+#: options.php:274
+#@ yarpp
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Paremkite mitcho (Michael Yoshitaka Erlewine) ,kad ir toliau šis WP  gyvuotų per PayPal"
+
+#: options.php:276
+#@ yarpp
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "sukurta <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> , LT vertimas <a href=\"vycius.co.cc\">Karolis Vyčius</a>"
+
+#: options.php:276
+#@ yarpp
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Sekite <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Įskiepio Twitter</a>"
+
+#: options.php:281
+#@ yarpp
+msgid "\"The Pool\""
+msgstr "Panašių Įrašų Nustatymai"
+
+#: options.php:282
+#@ yarpp
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "Panašių Įrašų Nustatymuose jūs galėsite nustatyti nepageidaujamas kategorijas,žymes ir t.t"
+
+#: options.php:287
+#@ yarpp
+msgid "Disallow by category:"
+msgstr "Išjungtos Kategorijos:"
+
+#: options.php:289
+#@ yarpp
+msgid "Disallow by tag:"
+msgstr "Išjungtos Žymės:"
+
+#: options.php:291
+#@ yarpp
+msgid "Show password protected posts?"
+msgstr "Rodyti slaptažodžiu apsaugotus įrašus?"
+
+#: options.php:297
+#@ yarpp
+msgid "day(s)"
+msgstr "dienos(dienų)"
+
+#: options.php:298
+#@ yarpp
+msgid "week(s)"
+msgstr "savaitės(ių)"
+
+#: options.php:299
+#@ yarpp
+msgid "month(s)"
+msgstr "mėnesio(ių)"
+
+#: options.php:301
+#@ yarpp
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Rodyti tik įrašus nesenesnius nei"
+
+#: options.php:309
+#@ yarpp
+msgid "\"Relatedness\" options"
+msgstr "daugiau&gt;"
+
+#: options.php:311
+#, php-format
+#@ yarpp
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP skiriasi nuo <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">senesnių įskiepių jis grindžiamas</a>  ,kaip apribojantis susijusių įrašų sąrašą  (1) kiek įmanoma daugiau ir (2) <em>atitikimo ribą</em>."
+
+#: options.php:311
+#: options.php:325
+#: options.php:408
+#: options.php:413
+#: options.php:460
+#: options.php:472
+#: options.php:473
+#: options.php:477
+#: options.php:523
+#: options.php:534
+#@ yarpp
+msgid "more&gt;"
+msgstr "daugiau&gt;"
+
+#: options.php:311
+#@ yarpp
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Kuo didesnė atitikimo riba ,tuo jūs gausite mažiau panašių įrašų. Numatyta atitikimo riba yra 5. Jeigu norite rasti tinkamą atitikimo ribą pažvelkite į kai kuriuos panašių pranešimų rodymų taškus. Kuo daugiau taškų tuo labaiau vienas įrašas atitinka kitą."
+
+#: options.php:316
+#@ yarpp
+msgid "Match threshold:"
+msgstr "Atitikimo riba:"
+
+#: options.php:317
+#@ yarpp
+msgid "Titles: "
+msgstr "Antraštės:"
+
+#: options.php:319
+#@ yarpp
+msgid "Bodies: "
+msgstr "Įrašus:"
+
+#: options.php:321
+#@ yarpp
+msgid "Tags: "
+msgstr "Žymės:"
+
+#: options.php:323
+#@ yarpp
+msgid "Categories: "
+msgstr "Kategorijos:"
+
+#: options.php:325
+#@ yarpp
+msgid "Cross-relate posts and pages?"
+msgstr ""
+
+#: options.php:325
+#@ yarpp
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Kai ''Cross-relate įrašai ir puslapiai\" yra pasirinkti ,<code>related_posts()</code>, <code>related_pages()</code>, ir <code>related_entries()</code> visi duoda lygiai tą patį,grąžinimas abiejų panašių įrašų ir puslapių."
+
+#: options.php:391
+#@ yarpp
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Jau išėjo nauja (VERSION) beta versija Yet Another Related Posts Įskiepis. Jūs galite <A>atsisiųsti ją čia</> beta versijos riziką prisiemate pats sau."
+
+#: options.php:393
+#@ yarpp
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Jau išėjusi nauja (VERSION) versija įskiepio Yet Another Related Posts.Jūs galite <A>atsisiųsti ją iš čia.</a>."
+
+#: options.php:404
+#@ yarpp
+msgid "Display options <small>for your website</small>"
+msgstr ""
+
+#: options.php:408
+#@ yarpp
+msgid "Automatically display related posts?"
+msgstr "Automatiškai rodyti panašius įrašus?"
+
+#: options.php:408
+#@ yarpp
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr ""
+
+#: options.php:409
+#@ yarpp
+msgid "Website display code example"
+msgstr ""
+
+#: options.php:409
+#: options.php:474
+#@ yarpp
+msgid "(Update options to reload.)"
+msgstr "(Atnaujinkite nuostatas pakartotinam paleidimui)"
+
+#: options.php:412
+#: options.php:476
+#@ yarpp
+msgid "Maximum number of related posts:"
+msgstr "Didžiausias panašių įrašų skaičius:"
+
+#: options.php:413
+#: options.php:477
+#@ yarpp
+msgid "Display using a custom template file"
+msgstr "Rodyti naudojant kitokį išvaizdos failą."
+
+#: options.php:413
+#: options.php:477
+#: options.php:530
+#@ yarpp
+msgid "NEW!"
+msgstr "NAUJAS!"
+
+#: options.php:413
+#: options.php:477
+#@ yarpp
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr ""
+
+#: options.php:415
+#: options.php:479
+#@ yarpp
+msgid "Template file:"
+msgstr "Išvaizdos failas:"
+
+#: options.php:425
+#@ yarpp
+msgid "Before / after related entries:"
+msgstr "Prieš/ po panašių įrašų:"
+
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
+#@ yarpp
+msgid "For example:"
+msgstr "Pavyzdžiui:"
+
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
+#@ yarpp
+msgid " or "
+msgstr "arba"
+
+#: options.php:430
+#: options.php:494
+#@ yarpp
+msgid "Before / after each related entry:"
+msgstr "Prieš/po panašių įrašų"
+
+#: options.php:434
+#: options.php:498
+#@ yarpp
+msgid "Show excerpt?"
+msgstr "Rodyti ištrauką?"
+
+#: options.php:435
+#: options.php:499
+#@ yarpp
+msgid "Excerpt length (No. of words):"
+msgstr "Ištraukos ilgis (skaičius žodžių):"
+
+#: options.php:439
+#@ yarpp
+msgid "Before / after (Excerpt):"
+msgstr "Prieš / po (Ištraukos):"
+
+#: options.php:445
+#: options.php:509
+#@ yarpp
+msgid "Order results:"
+msgstr "Tvarkymo rezultatas:"
+
+#: options.php:447
+#: options.php:511
+#@ yarpp
+msgid "score (high relevance to low)"
+msgstr "taškai (Nuo labai svarbaus iki žemo)"
+
+#: options.php:448
+#: options.php:512
+#@ yarpp
+msgid "score (low relevance to high)"
+msgstr "taškai (nuo žemo iki labai svarbaus)"
+
+#: options.php:449
+#: options.php:513
+#@ yarpp
+msgid "date (new to old)"
+msgstr "data (nuo naujausių iki seniausių)"
+
+#: options.php:450
+#: options.php:514
+#@ yarpp
+msgid "date (old to new)"
+msgstr "data (nuo seniausių iki naujausių)"
+
+#: options.php:451
+#: options.php:515
+#@ yarpp
+msgid "title (alphabetical)"
+msgstr "antraštė (abėcėlės tvarka)"
+
+#: options.php:452
+#: options.php:516
+#@ yarpp
+msgid "title (reverse alphabetical)"
+msgstr "antraštė (atvirkštinės abėcėlės tvarka)"
+
+#: options.php:457
+#: options.php:521
+#@ yarpp
+msgid "Default display if no results:"
+msgstr "Pagirndinis rodymas jeigu nėra rezultatų:"
+
+#: options.php:459
+#: options.php:523
+#@ yarpp
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Skatinti  Yet Another Related Posts įskiepį?"
+
+#: options.php:461
+#: options.php:524
+#, php-format
+#@ yarpp
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr ""
+
+#: options.php:467
+#@ yarpp
+msgid "Display options <small>for RSS</small>"
+msgstr "Rodymo rezultatai <small>vieninteliam RSS</small>"
+
+#: options.php:472
+#@ yarpp
+msgid "Display related posts in feeds?"
+msgstr "Rodyti panašius įrašus ir puslapius sklaidos kanaluose"
+
+#: options.php:472
+#@ yarpp
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr ""
+
+#: options.php:473
+#@ yarpp
+msgid "Display related posts in the descriptions?"
+msgstr "Rodyti panašius įrašus aprašyme?"
+
+#: options.php:473
+#@ yarpp
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr ""
+
+#: options.php:474
+#@ yarpp
+msgid "RSS display code example"
+msgstr "RSS rodymo kodo pavyzdys"
+
+#: options.php:489
+#@ yarpp
+msgid "Before / after related entries display:"
+msgstr "Prieš / po panašių įrašų rodyti:"
+
+#: options.php:503
+#@ yarpp
+msgid "Before / after (excerpt):"
+msgstr "Prieš / po ištraukos"
+
+#: options.php:530
+#@ yarpp
+msgid "Advanced"
+msgstr "Pažengusiems"
+
+#: options.php:533
+#@ yarpp
+msgid "Show cache status"
+msgstr "Žiūrėti podėlio statusą"
+
+#: options.php:534
+#@ yarpp
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Kai podėlis yra nebaigtas ,apskaičiuoti panašius įrašus?"
+
+#: options.php:535
+#@ yarpp
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Jeigu rodomi panašus įrašai , nėra podėlyje ši YARPP nuostata  jį įrašys.<br /> Jeigu šį nuostata yra išjungta ir panašus įrašai ne podėlyje  ,jie nebus rodomi panašiuose įrašuose."
+
+#: options.php:565
+#@ yarpp
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN minutės(ių) and SEC secondės(žių) liko'"
+
+#: options.php:567
+#@ yarpp
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC sekundės(žių) liko'"
+
+#: options.php:571
+#@ yarpp
+msgid "Your related posts cache is now complete."
+msgstr "Jūsų panašių įrašų podėlis baigtas"
+
+#: options.php:571
+#@ yarpp
+msgid "The SQL queries took SEC seconds."
+msgstr "SQL lentelės sukūrimas truks keletą sekundžių."
+
+#: options.php:578
+#@ yarpp
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Klaida konstruojant panašių įrašų antraštes"
+
+#: options.php:580
+#: options.php:586
+#@ yarpp
+msgid "Constructing the related posts timed out."
+msgstr "Konstruojami panašūs įrašai laikas baigėsi"
+
+#: options.php:583
+#: options.php:588
+#@ yarpp
+msgid "Try to continue..."
+msgstr "Bandykite tęsti..."
+
+#: options.php:596
+#@ yarpp
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Jūsų pranašių įrašų podėlis yra PERCENT% baigtas"
+
+#: options.php:602
+#@ yarpp
+msgid "starting..."
+msgstr "paleidžiama..."
+
+#: options.php:609
+#@ yarpp
+msgid "Update options"
+msgstr "Atnaujinti nustatymus"
+
+#: options.php:610
+#@ yarpp
+msgid "Do you really want to reset your configuration?"
+msgstr "Ar jūs tikrai norite atstatyti gamyklinius nustatymus?"
+
+#: options.php:610
+#@ yarpp
+msgid "Reset options"
+msgstr "Atstatyti nustatymus"
+
+#: services.php:59
+#@ yarpp
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Jūs negalite rekonstruoti YARPP podėlio"
+
+#: template-builtin.php:35
+#, php-format
+#@ yarpp
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr ""
+
+#: template-metabox.php:12
+#@ yarpp
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Čia yra pateikti visi panašūs įrašai. Atnaujinus įrašą bus pasikeis ir panašūs įrašai."
+
+#: template-metabox.php:26
+#@ yarpp
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Ar visi šie susiję įrašai yra ištikrųjų rodomi ir kaip jie yra rodomi/ tai priklauso nuo jūsų YARPP ekrano nuostatų."
+
