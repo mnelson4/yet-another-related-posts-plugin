@@ -126,7 +126,7 @@ YARPP is currently localized in the following languages:
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
   * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
-  * Ukranian (`uk_UA`) by [Onore](Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
+  * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
   * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 	
 We already have localizers lined up for the following languages:
@@ -283,7 +283,7 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Added Uzbek, Greek, Cypriot Greek, and Vietnamese localizations
   * Further bugfixes for the [pagination issue](http://wordpress.org/support/topic/267350)
 * 3.0.10
-  * Added Ukranian localization
+  * Added Ukrainian localization
   * Incorporated a quick update for the widget display [thanks to doodlebee](http://wordpress.org/support/topic/281575).
   * Now properly uses `compare_version` in lieu of old hacky versioning.
 * 3.0.11
