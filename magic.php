@@ -22,7 +22,7 @@ function yarpp_set_score_override_flag($q) {
 function yarpp_join_filter($arg) {
 	global $wpdb, $yarpp_time;
 	if ($yarpp_time) {
-		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp using (ID)";
+		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp on {$wpdb->posts}.ID = yarpp.ID";
 	}
 	return $arg;
 }
