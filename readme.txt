@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.3
 Tested up to: 2.8.4
-Stable tag: 3.0.12
+Stable tag: 3.0.13
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -148,6 +148,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.0.13 =
+* Quick immediate bugfix to 3.0.12
 = 3.0.12 =
 * Yet another DISQUS note... sigh.
 * Changed [default markup](http://wordpress.org/support/topic/307890) to be make the output validate better.

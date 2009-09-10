@@ -199,6 +199,14 @@ function yarpp_admin_menu() {
 	add_action("load-$hook",'yarpp_load_thickbox');
 }
 
+function yarpp_settings_link($links, $file) {
+    $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
+    if($file == $this_plugin) {
+        $links[] = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/options.php">' . __('Settings', 'yarpp') . '</a>';
+    }
+    return $links;
+}
+
 function yarpp_load_thickbox() {
 	wp_enqueue_script( 'thickbox' );
 	if (function_exists('wp_enqueue_style')) {
