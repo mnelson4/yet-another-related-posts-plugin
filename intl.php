@@ -8,6 +8,10 @@ function word_file_lang() {
 	switch (true) {
 		case preg_match("/^de/i",WPLANG):
 			return 'de_DE';
+		case preg_match("/^it/i",WPLANG):
+			return 'it_IT';
+		case preg_match("/^pl/i",WPLANG):
+			return 'pl_PL';
 		default:
 			return 'en_US';
 	}
@@ -34,7 +38,6 @@ function paypal_directory() {
 		case preg_match("/^zh_CN/i",WPLANG):
 			return 'zh_XC/';
 		case preg_match("/^zh_HK/i",WPLANG):
-			return 'zh_HK/';
 		case preg_match("/^zh_TW/i",WPLANG):
 			return 'zh_HK/';
 		default:
