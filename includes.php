@@ -54,8 +54,7 @@ $yarpp_binary_options = array('past_only' => true,
 				'rss_display' => true,
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
-				'rss_promote_yarpp' => false,
-				'ad_hoc_caching' => true);
+				'rss_promote_yarpp' => false);
 
 function yarpp_enabled() {
 	global $wpdb;

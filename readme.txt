@@ -148,6 +148,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.0.14 =
+* Removing the confusing "on the fly caching" setting... it is always on now.
 = 3.0.13 =
 * Quick immediate bugfix to 3.0.12
 = 3.0.12 =
@@ -301,6 +303,5 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Also, uses `apply_filters` to apply whatever content text transformation you use (Wikipedia link, Markdown, etc.) before computing similarity.
 = 1.0.1 =
 * Bugfix: 1.0 assumed you had Markdown installed
-
 = 1.0 =
 * Initial upload

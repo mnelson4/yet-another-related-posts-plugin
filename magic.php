@@ -271,10 +271,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 	extract($optvals);
 	
-	if (yarpp_get_option('ad_hoc_caching') == 1)
-		yarpp_cache_enforce($type,$reference_ID);
+  yarpp_cache_enforce($type,$reference_ID);
 	
-    $output = '';
+  $output = '';
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_time = true; // get ready for YARPP TIME!
