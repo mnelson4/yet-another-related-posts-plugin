@@ -50,8 +50,8 @@ if (!yarpp_get_option('myisam_override')) {
 }
 
 $yarpp_twopointfive = true;
-if (substr($wp_version,0,3) < 2.5) {
-	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
+if (version_compare('2.5',$wp_version) > 0) {
+	echo "$wp_version<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
 
 	yarpp_set_option('categories',1);
 	yarpp_set_option('tags',1);
@@ -100,19 +100,11 @@ if (isset($_POST['update_yarpp'])) {
 	__('If you updated the "pool" options or "relatedness" options displayed, please rebuild your cache now from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
 }
 
-if (yarpp_get_option('ad_hoc_caching') != 1) {
-  // check if the cache is complete or not.
-  $cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-    FROM $wpdb->posts as p
-    LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-    WHERE p.post_status = 'publish' ");
-  
-  if ($cache_complete > 0 and $cache_complete < 1)
-    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-  
-  if ($cache_complete == 0)
-    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-}
+// check if the cache is complete or not.
+$cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
+  FROM $wpdb->posts as p
+  LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
+  WHERE p.post_status = 'publish' ");
 	
 //compute $tagmap
 $tagmap = array();
@@ -137,7 +129,7 @@ function checkbox($option,$desc,$tr="<tr valign='top'>
 }
 function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 			<th scope='row'>") {
-	$value = yarpp_get_option($option,true);
+	$value = stripslashes(yarpp_get_option($option,true));
 	echo "			$tr$desc</th>
 			<td><input name='$option' type='text' id='$option' value='$value' size='$size' /></td>
 		</tr>";
@@ -257,11 +249,6 @@ function load_display_discats() {
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
 			$display_version = yarpp_get_option('version');
-			$split = explode('.',$display_version);
-			if (strlen($split[1]) != 1) {
-				$pos = strpos($display_version,'.')+2;
-				$display_version = substr($display_version,0,$pos).'.'.substr($display_version,$pos);
-			}
       echo $display_version;
 			?></small>
 		</h2>
@@ -526,13 +513,13 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 		</div>
 
 	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('Advanced','yarpp');?> <span style='color:red;'><?php _e('NEW!','yarpp')?></span></h3>
+	<h3><?php _e('Advanced','yarpp');?></h3>
 	
 	<table class="form-table" style="margin-top: 0">
 	<tr valign='top' colspan='2'><td><input class="thickbox button" type="button" value="<?php _e("Show cache status",'yarpp');?>" title="<?php _e('Related posts cache status','yarpp');?>" alt="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status"/>
-	<?php checkbox('ad_hoc_caching',__("When the cache is incomplete, compute related posts on the fly?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.__("If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts.",'yarpp')
-	."</span></a>"); ?>
+
+	<!--<input class="thickbox button" type="button" value="Test queries" title="If you are having trouble getting YARPP to show results, try this test." alt="#TB_inline?height=500&width=500&inlineId=yarpp-test"/>-->
+	</td></tr>
 	</table>
 		</div>
 
@@ -601,6 +588,41 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<p style='font-size: .8em' id='yarpp-latest'><?php _e('starting...','yarpp');?></p>
 			<p style='font-size: .8em' id='yarpp-time'></p>
 		</div>
+	</div>
+	
+	<div id='yarpp-test' style='display:none;'>
+	  <p>This test has been added in response to <a href='http://wordpress.org/support/topic/284209'>this thread</a> on wordpress.org. Once the bug is resolved, I will remove this screen.</p>
+	
+    <h3>Cache stats:</h3>
+  
+    <?php
+      $smct = $wpdb->get_row("select sum(ID = 0) as sm, count(*) as ct from {$wpdb->prefix}yarpp_related_cache");
+      echo "<p>Proportion of cached posts which have no related posts at all: ".(round(1000*$smct->sm/$smct->ct)/10)."%</p>";
+      
+      if ((round(1000*$smct->sm/$smct->ct)/10) > 20) {
+        echo "<p><b>You seem to be affected by the bug I am trying to fix. Please run a test on a single query (below) and <a href=''>post the results here</a>.</b></p>";
+      ?>
+    
+        <h3>Query test:</h3>
+        
+        <p>Please select a post with a good deal of content:</p>
+        
+        <select name='test_post_ID' id='test_post_ID'>
+        <?php
+          $posts = $wpdb->get_results("select ID, post_title from $wpdb->posts where length(post_content) > 0 and post_type != 'revision' order by length(post_content) desc limit 20");
+        
+          foreach ($posts as $post) {
+            echo "<option value='$post->ID'>$post->post_title</option>\n";
+          }
+        ?>
+        </select>
+        
+      <?php
+      }
+      else
+        echo "<p><b>You do not seem to be affected by the bug I'm trying to fix. Thank you.</b></p>";
+    ?>
+    
 	</div>
 	
 	<div>
