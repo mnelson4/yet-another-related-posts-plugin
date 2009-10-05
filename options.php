@@ -129,7 +129,7 @@ function checkbox($option,$desc,$tr="<tr valign='top'>
 }
 function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 			<th scope='row'>") {
-	$value = yarpp_get_option($option,true);
+	$value = stripslashes(yarpp_get_option($option,true));
 	echo "			$tr$desc</th>
 			<td><input name='$option' type='text' id='$option' value='$value' size='$size' /></td>
 		</tr>";
@@ -513,10 +513,13 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 		</div>
 
 	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('Advanced','yarpp');?> <span style='color:red;'><?php _e('NEW!','yarpp')?></span></h3>
+	<h3><?php _e('Advanced','yarpp');?></h3>
 	
 	<table class="form-table" style="margin-top: 0">
 	<tr valign='top' colspan='2'><td><input class="thickbox button" type="button" value="<?php _e("Show cache status",'yarpp');?>" title="<?php _e('Related posts cache status','yarpp');?>" alt="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status"/>
+
+	<!--<input class="thickbox button" type="button" value="Test queries" title="If you are having trouble getting YARPP to show results, try this test." alt="#TB_inline?height=500&width=500&inlineId=yarpp-test"/>-->
+	</td></tr>
 	</table>
 		</div>
 
@@ -585,6 +588,41 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<p style='font-size: .8em' id='yarpp-latest'><?php _e('starting...','yarpp');?></p>
 			<p style='font-size: .8em' id='yarpp-time'></p>
 		</div>
+	</div>
+	
+	<div id='yarpp-test' style='display:none;'>
+	  <p>This test has been added in response to <a href='http://wordpress.org/support/topic/284209'>this thread</a> on wordpress.org. Once the bug is resolved, I will remove this screen.</p>
+	
+    <h3>Cache stats:</h3>
+  
+    <?php
+      $smct = $wpdb->get_row("select sum(ID = 0) as sm, count(*) as ct from {$wpdb->prefix}yarpp_related_cache");
+      echo "<p>Proportion of cached posts which have no related posts at all: ".(round(1000*$smct->sm/$smct->ct)/10)."%</p>";
+      
+      if ((round(1000*$smct->sm/$smct->ct)/10) > 20) {
+        echo "<p><b>You seem to be affected by the bug I am trying to fix. Please run a test on a single query (below) and <a href=''>post the results here</a>.</b></p>";
+      ?>
+    
+        <h3>Query test:</h3>
+        
+        <p>Please select a post with a good deal of content:</p>
+        
+        <select name='test_post_ID' id='test_post_ID'>
+        <?php
+          $posts = $wpdb->get_results("select ID, post_title from $wpdb->posts where length(post_content) > 0 and post_type != 'revision' order by length(post_content) desc limit 20");
+        
+          foreach ($posts as $post) {
+            echo "<option value='$post->ID'>$post->post_title</option>\n";
+          }
+        ?>
+        </select>
+        
+      <?php
+      }
+      else
+        echo "<p><b>You do not seem to be affected by the bug I'm trying to fix. Thank you.</b></p>";
+    ?>
+    
 	</div>
 	
 	<div>

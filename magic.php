@@ -386,16 +386,24 @@ function yarpp_save_cache($post_ID,$force=true) {
 	// add it to the queue
 	array_push($yarpp_caching_queue,$post_ID);
 	
+	// any newly targetted posts will have to be cleared
+	$yarpp_toclear = array();
+	
 	// go through the queue
 	while ($ID = array_pop($yarpp_caching_queue)) {
 		if (array_search($ID,$yarpp_updated_posts) === false) {
-			//echo "YARPP updating $ID<br/>";
-			//echo "YARPP QUEUE: ".print_r($yarpp_caching_queue,true)."<br/>";
-			//echo "YARPP UPDATED: ".print_r($yarpp_updated_posts,true)."<br/>";
 			yarpp_cache_enforce($type,$ID,$force);
-			array_push($yarpp_updated_posts,$ID);
+			array_push($yarpp_toclear,$ID);
 		}
 	}
+	
+	yarpp_cache_clear($yarpp_toclear);
+	
+}
+
+function yarpp_cache_clear($reference_IDs) {
+  global $wpdb;
+  $wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID in (".implode(',',$reference_IDs).")");
 }
 
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {

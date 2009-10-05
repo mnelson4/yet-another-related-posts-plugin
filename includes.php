@@ -196,14 +196,16 @@ function yarpp_admin_menu() {
 	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 8, 'yet-another-related-posts-plugin/options.php', 'yarpp_options_page');
    //if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', 'Related Posts (YARPP)', 'Related Posts (YARPP)', 8, 'yet-another-related-posts-plugin/options.php');
 	add_action("load-$hook",'yarpp_load_thickbox');
+  // new in 3.0.12: add settings link to the plugins page
+  add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
 }
 
 function yarpp_settings_link($links, $file) {
-    $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
-    if($file == $this_plugin) {
-        $links[] = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/options.php">' . __('Settings', 'yarpp') . '</a>';
-    }
-    return $links;
+  $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
+  if($file == $this_plugin) {
+    $links[] = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/options.php">' . __('Settings', 'yarpp') . '</a>';
+  }
+  return $links;
 }
 
 function yarpp_load_thickbox() {

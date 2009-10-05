@@ -102,7 +102,7 @@ It is recommended that you tweak your match threshold whenever you make changes 
 
 = Are there any plugins that are incompatible with YARPP? =
 
-Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966). Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually.
+Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966) and the [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/) plugin. Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually. Other related posts plugins, obviously, may also be incompatible.
 
 Please submit similar bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
 
@@ -143,6 +143,8 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Latvian
+  * Swedish
+  * Thai
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -150,6 +152,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.0.14 =
 * Removing the confusing "on the fly caching" setting... it is always on now.
+* Fixed `yarpp_settings_link` dependency when disabled.
+* Breaks (&lt;br /&gt;) are now stripped out of titles.
+* Added plugin incompatibility info for Pagebar.
+* Bugfix: [a slash escaping bug](http://wordpress.org/support/topic/315560)
+* Faster post saving.
 = 3.0.13 =
 * Quick immediate bugfix to 3.0.12
 = 3.0.12 =
