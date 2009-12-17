@@ -119,9 +119,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 
 	extract($optvals);
 
-	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
-	if ($cross_relate) $type = array('post','page');
-
 	// Fetch keywords
     $body_terms = yarpp_get_cached_keywords($reference_ID,'body');
     $title_terms = yarpp_get_cached_keywords($reference_ID,'title');
@@ -203,7 +200,8 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	if ($recent_only)
 		$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
 
-	$newsql .= " and post_type IN ('".implode("', '",$type)."')";
+  if ($type == array('page') && !$cross_relate)
+    $newsql .= " and post_type = 'page'";
 
 	// GROUP BY
 	$newsql .= "\n group by id \n";
@@ -222,6 +220,10 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	if (!$giveresults) {
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
+
+  // if we're looking for a X related entries, make sure we get at most X posts and X pages if
+  // we cross-relate
+	if ($cross_relate) $newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
 
 	if ($yarpp_debug) echo "<!--$newsql-->";
 	return $newsql;
@@ -296,7 +298,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
-		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]."&showposts=$limit");
+		$related_query->query(array('p'=>$reference_ID,'orderby'=>$orders[0],'order'=>$orders[1],'showposts'=>$limit,'post_type'=>$type));
 	else
 		$related_query->query('');
 
