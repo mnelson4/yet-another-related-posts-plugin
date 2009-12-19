@@ -414,4 +414,19 @@ function yarpp_check_version_json($version) {
   return '{}';
 }
 
+function yarpp_add_metabox() {
+	if (function_exists('add_meta_box')) {
+    add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+	}
+}
+function yarpp_metabox() {
+	global $post;
+	echo '<div id="yarpp-related-posts">';
+	if ($post->ID)
+		yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
+	else
+		echo "<p>Related entries may be displayed once you save your entry.</p>";
+	echo '</div>';
+}
+
 ?>
