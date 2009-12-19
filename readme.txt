@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
 Tested up to: 2.9
-Stable tag: 3.0.13
+Stable tag: 3.1
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -16,8 +16,8 @@ Returns a list of related entries based on a unique algorithm for display on you
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
 1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
-2. **Templating**: **New in 3.0!** A new [templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
-3. **Caching**: **New in 3.0!** YARPP now caches the related posts for all the posts and thus has significantly improved performance over versions 2.x.
+2. **Templating**: **New in 3.0!** The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
+3. **Caching**: **Improved in 3.1!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
 6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
@@ -26,7 +26,9 @@ This plugin requires that your database run on MySQL 4.1 or greater.
 
 **Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
 
-= Testamonials =
+= Testimonials =
+
+"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - Matt Mullenwegg, WordPress creator
 
 "As most [sports betting](http://www.betus.com/) fans use our portal, [BetUS.com Sportsbook](http://www.betus.com/sportsbook/) works hard to maintain a high level of quality on their site.  Mitcho and his amazing plugins help keep us moving our technology forward.  Thank you Mitcho, and the [Wordpress](http://wordpress.org) team for your service and creativity!" - [BetUS.com](http://BetUS.com/)
 
@@ -56,11 +58,11 @@ For advanced users with knowledge of PHP, there is also an [advanced manual inst
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform).
+If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email or tweet with questions.*
 
 = Every page just says "no related posts"! What's up with that? =
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something ridiculously low, like 1 or 0.5. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something very low, like 1. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
 = How do I turn off the match score next to the related posts? =
 
@@ -76,7 +78,7 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 = Does YARPP slow down my blog/server? =
 
-A little bit, yes. YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
+A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
 
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
@@ -104,7 +106,7 @@ Please submit similar bugs by starting a new thread on [the Wordpress.org forums
 
 = Things are weird after I upgraded. =
 
-I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it. If you continue to have trouble, please find 
+I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
 
 == Localizations ==
 
@@ -148,11 +150,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.1 =
 * New snazzy options screen
-* Bugfix: Fixed related pages functionality
+* Smarter, less confusing caching
+  * No more manual caching option—"on the fly" caching is always on now.
+* Bugfix: [fixed related pages functionality](http://wordpress.org/support/topic/273008)
 * Bugfix: [an issue with options saving](http://wordpress.org/support/topic/312637)
 * Bugfix: [a slash escaping bug](http://wordpress.org/support/topic/315560)
 * Minor fixes:
-  * Removing the confusing "on the fly caching" setting... it is always on now.
   * Fixed `yarpp_settings_link` dependency when disabled.
   * Breaks (&lt;br /&gt;) are now stripped out of titles.
   * Added plugin incompatibility info for Pagebar.

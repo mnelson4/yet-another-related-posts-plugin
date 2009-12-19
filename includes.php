@@ -390,6 +390,11 @@ function yarpp_get_option($option,$escapehtml = false) {
 	return $return;
 }
 
+function yarpp_clear_cache() {
+  global $wpdb;
+  return $wpdb->query("truncate table `{$wpdb->prefix}yarpp_related_cache`");
+}
+
 function yarpp_microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
