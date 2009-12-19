@@ -21,8 +21,8 @@ $yarpp_value_options = array('threshold' => 5,
 				'after_title' => '</li>',
 				'before_post' => ' <small>',
 				'after_post' => '</small>',
-				'before_related' => '<p>'.__('Related posts:','yarpp').'<ol>',
-				'after_related' => '</ol></p>',
+				'before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+				'after_related' => '</ol>',
 				'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 				'order' => 'score DESC',
 				'rss_limit' => 3,
@@ -54,8 +54,7 @@ $yarpp_binary_options = array('past_only' => true,
 				'rss_display' => true,
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
-				'rss_promote_yarpp' => false,
-				'ad_hoc_caching' => true);
+				'rss_promote_yarpp' => false);
 
 function yarpp_enabled() {
 	global $wpdb;
@@ -126,8 +125,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version','3.07b1');
-	update_option('yarpp_version','3.07b1');
+	add_option('yarpp_version',YARPP_VERSION);
+	update_option('yarpp_version',YARPP_VERSION);
 	return 1;
 }
 
@@ -173,13 +172,13 @@ function yarpp_upgrade_check($inuse = false) {
 
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 2.03) {
+	if (version_compare('2.03',get_option('yarpp_version')) > 0) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 3.07 or get_option('yarpp_version') != '3.07') {
-		update_option('yarpp_version','3.07');
+	if (version_compare(YARPP_VERSION,get_option('yarpp_version')) > 0) {
+		update_option('yarpp_version',YARPP_VERSION);
 		
 		//if (!$inuse)
 		//	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
@@ -197,6 +196,16 @@ function yarpp_admin_menu() {
 	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 8, 'yet-another-related-posts-plugin/options.php', 'yarpp_options_page');
    //if (function_exists('add_submenu_page')) add_submenu_page('options-general.php', 'Related Posts (YARPP)', 'Related Posts (YARPP)', 8, 'yet-another-related-posts-plugin/options.php');
 	add_action("load-$hook",'yarpp_load_thickbox');
+  // new in 3.0.12: add settings link to the plugins page
+  add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
+}
+
+function yarpp_settings_link($links, $file) {
+  $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
+  if($file == $this_plugin) {
+    $links[] = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/options.php">' . __('Settings', 'yarpp') . '</a>';
+  }
+  return $links;
 }
 
 function yarpp_load_thickbox() {
@@ -220,13 +229,11 @@ function widget_yarpp_init() {
 		extract($args);
 		global $wpdb, $post;
 		if (is_single() && have_posts()) {
-		  while (have_posts()) {
-        the_post();
-        echo $before_widget;
-        echo $before_title . __('Related Posts','yarpp') . $after_title;
-        echo yarpp_related(array('post'),array());
-        echo $after_widget;
-      }
+      get_post($post->ID);
+      echo $before_widget;
+      echo $before_title . __('Related Posts','yarpp') . $after_title;
+      echo yarpp_related(array('post'),array());
+      echo $after_widget;
 		}
 	}
 	register_sidebar_widget(__('YARPP','yarpp'), 'widget_yarpp');
@@ -269,11 +276,12 @@ function yarpp_rss_excerpt($content) {
 	- Viper's Video Quicktags
 	- WP-CodeBox
 	- WP shortcodes
+	- WP Greet Box
 	//- Tweet This - could not reproduce problem.
 */
 
 $yarpp_blacklist = array(null,'yarpp_default','diggZEt_AddBut','reddZEt_AddBut','dzoneZEt_AddBut','wp_syntax_before_filter','wp_syntax_after_filter','wp_codebox_before_filter','wp_codebox_after_filter','do_shortcode');//,'insert_tweet_this'
-$yarpp_blackmethods = array(null,'addinlinejs','replacebbcode');
+$yarpp_blackmethods = array(null,'addinlinejs','replacebbcode','filter_content');
 
 function yarpp_white($filter) {
 	global $yarpp_blacklist;
@@ -382,6 +390,11 @@ function yarpp_get_option($option,$escapehtml = false) {
 	return $return;
 }
 
+function yarpp_clear_cache() {
+  global $wpdb;
+  return $wpdb->query("truncate table `{$wpdb->prefix}yarpp_related_cache`");
+}
+
 function yarpp_microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
@@ -399,6 +412,21 @@ function yarpp_check_version_json($version) {
     }
   }
   return '{}';
+}
+
+function yarpp_add_metabox() {
+	if (function_exists('add_meta_box')) {
+    add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+	}
+}
+function yarpp_metabox() {
+	global $post;
+	echo '<div id="yarpp-related-posts">';
+	if ($post->ID)
+		yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
+	else
+		echo "<p>Related entries may be displayed once you save your entry.</p>";
+	echo '</div>';
 }
 
 ?>

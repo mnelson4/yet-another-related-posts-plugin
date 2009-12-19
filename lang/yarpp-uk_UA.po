@@ -1,0 +1,535 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.9\n"
+"PO-Revision-Date: 2009-08-18 08:34+0200\n"
+"Last-Translator: Onore <onore@onore.kiev.ua>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"POT-Creation-Date: \n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "Помилка MYSQL при додаванні “yarpp_title”"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "Помилка MYSQL при додаванні “yarpp_content”"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>Важливе повідомлення від YARPP</h3><p>Спасибі за оновлення до YARPP 2. У цій версії додана довгождана можливість обмежувати зв'язані записи, що виводяться, деякими тегами або категоріями. YARPP 2 також дає можливість тонше настроювати алгоритм, дозволяючи указувати чи слід використовувати при розгляді тіло, заголовки, теги і категорії. Обов'язково перевірте стан нових налаштувань, чи все відповідає вашим очікуванням.</p><p>За більш детальною інформацією звертайтеся до: <а href=\"http://mitcho.com/code/yarpp/\">документація YARPP</a>. (Ce message n’apparaоtra plus.)</p>"
+
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Зв'язані пости (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:29
+msgid "Related Posts"
+msgstr "Зв'язані пости (YARPP)"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f - это коэффициэнт YARPP текущго поста и связаного с ним. Вы видите это потому, что вы зашли в Wordpress администратором. Это не показывается простым посетителям"
+
+#: magic.php:304
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Список схожих записів надано вам плагіном <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</ a>."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "Перевірка MyISAM була виконана. Тепер ви можете використовувати критерії схожості “Розглядати заголовки” і “Розглядати текст”."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Використання опцій YARPP “Розглядати заголовки” і “Розглядати текст” вимагає, щоб ваша таблиця <code>%s</code> використовувала движок <а href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, але таблиця мабуть використовує движок <code>%s</code>. Ці дві опції відключено."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Для відновлення цих опцій, будь ласка, змініть вашу таблицю <code>%s</code>наступною  SQL інструкцією е : <code>ALTER TABLE `%s` ENGINE = MYISAM;</code><br />При зміні таблиці дані не повинні пропасти, проте можливі наслідки."
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Якщо, незалежно від цієї опції, ви упевнені що таблиця <code>%s</code> використовує MyISAM, натисніть на цю чарівну кнопку:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Повірте мені. Дозвольте мені використовувати MyISAM."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "База даних YARPP містила помилки, але вони були виправлені."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "База даних YARPP містить помилку, яка не може бути виправлена."
+
+#: options.php:153
+#: options.php:170
+#: options.php:182
+msgid "do not consider"
+msgstr "не розглядати"
+
+#: options.php:154
+#: options.php:171
+#: options.php:184
+msgid "consider"
+msgstr "розглядати"
+
+#: options.php:172
+msgid "consider with extra weight"
+msgstr "розглядати з додатковою вагою"
+
+#: options.php:200
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Історія версій плагина YARPP (RSS 2.0)"
+
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Пожертвувати розробникові  mitcho (Michael Yoshitaka Erlewine), через PayPal"
+
+#: options.php:254
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Опції YARPP"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "<em>Контент</em>"
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "<em>Контент</em> розуміється як набір повідомлень і сторінок, які є кандидатами на показ в блоці зв'язаних записів."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Виключити категорії:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Виключити теги:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Показувати повідомлення, захищені паролем?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Показувати тільки попередні повідомлення?"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "Критерії схожості"
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP відрізняється від <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">попередніх плагінів</a> тим, що обмежує вибір постів<br /> (1) максимальною кількістю (2) <em>схожістью</em>."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "докладніше&gt;"
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "Поріг схожості:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Заголовки:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Тексти:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Теги:"
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Категорії:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Робити перехресну перелінковку сторінок і повідомлень?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Коли вибрана опція “Робити перехресну перелінковку сторінок і повідомлень?”, функції <code>related_posts()</code>, <code>related_pages()</code> і <code>related_entries()</code> видають однаковий набір, що містить і сторінки і повідомлення"
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "Перегляд опцій <small>для вашого сайта</small>"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "Автоматично показувати зв'язані пости?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Це опція автоматично показує зв'язані повідомлення прямо після вмісту на сторінці одиночного повідомлення. Якщо цю опцію відключити, вам знадобиться уручну вставити  <code>related_posts()</code> або щось подібне (<code>related_pages()</code> і <code>related_entries()</code>) у вашій темі."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Приклад коду на web-сайті"
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Збережете опції для перезавантаження.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Максимальна кількість зв'язаних постів:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "До / після <br />связанных постів:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Наприклад:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "До / после<br />каждого зв'язаного поста:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Показати витримку?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Довжина витримки(к-ть слів):"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "До / після (Витримки)"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Сортування результатів:"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "Схожість (по-спаданням)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "Схожість (по-зростанню)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "Дата (по-спаданням)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "Дата (за збільшенням)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "Заголовок (за абеткою)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "Заголовки: (у зворотному порядку)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "За замовчуванням  показувати якщо немає результату:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Допомогти просувати плагин YARPP?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Ця опція додасть код %s. Спробуйте включити її, змініть опції і дивіться приклад коду справа. Ці посилання і кнопки дуже важливі."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "Перегляд налаштувань <small>для RSS</small>"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Показувати зв'язані пости  в  RSS?"
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Показувати зв'язані пости в описі?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Цей параметр відображає зв'язані пости в RSS. Якщо ваші канали налаштований для відображення тільки поля опису, ви повинні вибрати цей варіант, якщо ви хочете, щоб показати список додаткових матеріалів."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "Приклад коду в RSS"
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "До  / після пов'язаних записів показати:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "До / після (витримки):"
+
+#: options.php:147
+msgid "word"
+msgstr "слово"
+
+#: options.php:148
+msgid "tag"
+msgstr "тег"
+
+#: options.php:149
+msgid "category"
+msgstr "категорія"
+
+#: options.php:156
+#: options.php:186
+#, php-format
+msgid "require at least one %s in common"
+msgstr "хоч би один \"%s\"  повинен бути загальним"
+
+#: options.php:158
+#: options.php:188
+#, php-format
+msgid "require more than one %s in common"
+msgstr "більш за одне  \"%s\"  повинно бути загальним"
+
+#: options.php:125
+msgid "Options saved!"
+msgstr "Настройки збережені!"
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Чим вище поріг схожості, тим суворіше вибірка, і тим менше отримаєте записів на виході. За замовчуванням поріг дорівнює 5. Якщо хочете знайти прийнятні порогові значення, поекспериментуйте з кількома повідомлення. Ви зможете побачити, які повідомлення виходять наверх і які у них значення подібності, за якими можна визначити прийнятний рівень для вашого сайту."
+
+#: options.php:605
+msgid "Update options"
+msgstr "Змінити налаштування"
+
+#: options.php:606
+msgid "Do you really want to reset your configuration?"
+msgstr "Ви дійсно хочете скинути ваші налаштування?"
+
+#: options.php:606
+msgid "Reset options"
+msgstr "Скинути налаштування"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Помилка MySQL при створенні таблиці yarpp_keyword_cache"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Помилка MySQL при створенні таблиці yarpp_related_cache table"
+
+#: magic.php:56
+msgid "Example post "
+msgstr "Приклад повідомлення"
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Статус кешу пов'язаних записів"
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Ваш кеш пов'язаних записів неповний. Будь ласка створіть ваш кеш з <A> панелі статусу кешу пов'язаних повідомлень </ a>."
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Ваш кеш пов'язаних записів порожній. Будь ласка створіть ваш кеш з <A> панелі статусу кешу пов'язаних повідомлень </ a>."
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Якщо ви змінили налаштування  \"Контенту \" або  \"Критерії схожість \", будь-ласка створіть ваш кеш з <A> панелі статусу кешу пов'язаних повідомлень </A>."
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "Зробив  <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Читати <a href=\"http://twitter.com/yarpp/\">YARPP на Твіттері</a>"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "днів"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "місяців"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "років"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Показувати тільки пости за останні  NUMBER UNITS"
+
+#: options.php:387
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Вийшла нова beta (VERSION) плагина YARPP. Ви можете <A>скачать її тут</a> на свій риск."
+
+#: options.php:389
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Вийшла нова версія (VERSION) плагина YARPP. Ви можете <A>скачать  її тут</a>."
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Показувати з шаблоном користувача"
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Файл шаблону:"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Ця опція показує зв'язані повідомлення в кінці кожного пункту вашого потоку RSS і Atom. Зміни шаблону не потрібні."
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Додатково"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Показати статус кеша"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Обчислювати зв'язані повідомлення на льоту, коли кеш не повний?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Якщо зв'язані повідомлення для поточного поста не знаходяться в кеші і ця опції включена, YARPP обчислюватиме їх на льоту. Не включайте цю опцію, якщо у вас великий трафік.<br /> Якщо опція вимкнена, то у постів без кеша, буде відображено, що вони не мають зв'язаних повідомлень."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN хвилин і SEC секунд залишилося'"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC секунд залишилося'"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Ваш кеш зв'язаних повідомлень готовий."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "SQL запити зайняли SEC секунд"
+
+#: options.php:578
+#: options.php:582
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Відбулася помилка при визначенні зв'язаних повідомлень для TITLE"
+
+#: options.php:579
+#: options.php:584
+msgid "try to continue"
+msgstr "пробую продовжити"
+
+#: options.php:592
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Ваш кеш зв'язаних повідомлень готовий на PERCENT%."
+
+#: options.php:598
+msgid "starting..."
+msgstr "починаю..."
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Ви не можете перестворювати кеш YARPP."
+
+#: services.php:90
+#, php-format
+msgid "You do not have the permission to write the file '%s'."
+msgstr "Ви не маєте доступу для запису у файл  '%s'."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Це зв'язані пости для цього поста. Зміна цього поста може змінити набір зв'язаних постів."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Чи відображатимуться всі ці пости і як вони відображатимуться, залежить від ваших настройок відображення YARPP."
+
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Немає зв'язаних повідомлень"
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Будь ласка, для завершення інсталяції помістіть файли шаблонів YARPP у вашу тему. Просто перенесіть файли шаблонів (на даний момент<code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) в теку <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "У вашій темі WordPress  (<code>TEMPLATEPATH</code>)  не знайдене файлів шаблонів YARPP. Опція використання шаблонів вимкнена."
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "НОВЕ!"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Ці додаткові налаштування дають вам повну потужність для налуштування відображення зв'язаних повідомлень. Шаблони (зберігаються в теці використовуваної теми) написані на PHP."
+
