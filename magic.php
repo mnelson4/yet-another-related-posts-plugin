@@ -22,7 +22,7 @@ function yarpp_set_score_override_flag($q) {
 function yarpp_join_filter($arg) {
 	global $wpdb, $yarpp_time;
 	if ($yarpp_time) {
-		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp using (ID)";
+		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp on {$wpdb->posts}.ID = yarpp.ID";
 	}
 	return $arg;
 }
@@ -119,9 +119,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 
 	extract($optvals);
 
-	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
-	if ($cross_relate) $type = array('post','page');
-
 	// Fetch keywords
     $body_terms = yarpp_get_cached_keywords($reference_ID,'body');
     $title_terms = yarpp_get_cached_keywords($reference_ID,'title');
@@ -203,12 +200,15 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	if ($recent_only)
 		$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
 
-	$newsql .= " and post_type IN ('".implode("', '",$type)."')";
+  if ($type == array('page') && !$cross_relate)
+    $newsql .= " and post_type = 'page'";
 
 	// GROUP BY
 	$newsql .= "\n group by id \n";
 	// HAVING
-	$safethreshold = max($threshold/2,0.1); // this is so the new calibration system works.
+	// safethreshold is so the new calibration system works.
+	// number_format fix suggested by vkovalcik! :) 
+	$safethreshold = number_format(max($threshold/2,0.1), 2, '.', '');
 	$newsql .= " having score >= $safethreshold";
 	if ($usedisterms)
 		$newsql .= " and count(blockterm.term_id) = 0";
@@ -223,14 +223,20 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
 
+  // if we're looking for a X related entries, make sure we get at most X posts and X pages if
+  // we cross-relate
+	if ($cross_relate) $newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+
 	if ($yarpp_debug) echo "<!--$newsql-->";
 	return $newsql;
 }
 
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
+/* new in 3.0! new query-based approach: EXTREMELY HACKY! */
+
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata;
+	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $numpages;
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -269,10 +275,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 	extract($optvals);
 	
-	if (yarpp_get_option('ad_hoc_caching') == 1)
-		yarpp_cache_enforce($type,$reference_ID);
+  yarpp_cache_enforce($type,$reference_ID);
 	
-    $output = '';
+  $output = '';
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_time = true; // get ready for YARPP TIME!
@@ -285,13 +290,25 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_page = $page;
 	$current_pages = $pages;
 	$current_authordata = $authordata;
+	$current_numpages = $numpages;
+	$current_multipage = $multipage;
+	$current_more = $more;
+	$current_pagenow = $pagenow;
+	$current_day = $day;
+	$current_currentmonth = $currentmonth;
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
-		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]."&showposts=$limit");
+		$related_query->query(array('p'=>$reference_ID,'orderby'=>$orders[0],'order'=>$orders[1],'showposts'=>$limit,'post_type'=>$type));
 	else
 		$related_query->query('');
+
+	$wp_query = $related_query;
+	$wp_query->in_the_loop = true;
+  // make sure we get the right is_single value
+  // (see http://wordpress.org/support/topic/288230)
+	$wp_query->is_single = false;
 				
 	if ($domain == 'metabox') {
 		include('template-metabox.php');
@@ -317,7 +334,13 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);
-	
+	$numpages = null; $numpages = $current_numpages; unset($current_numpages);
+	$multipage = null; $multipage = $current_multipage; unset($current_multipage);
+	$more = null; $more = $current_more; unset($current_more);
+	$pagenow = null; $pagenow = $current_pagenow; unset($current_pagenow);
+  $day = null; $day = $current_day; unset($current_day);
+  $currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
+
 	if ($promote_yarpp and $domain != 'metabox')
 		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 	
@@ -367,16 +390,24 @@ function yarpp_save_cache($post_ID,$force=true) {
 	// add it to the queue
 	array_push($yarpp_caching_queue,$post_ID);
 	
+	// any newly targetted posts will have to be cleared
+	$yarpp_toclear = array();
+	
 	// go through the queue
 	while ($ID = array_pop($yarpp_caching_queue)) {
 		if (array_search($ID,$yarpp_updated_posts) === false) {
-			//echo "YARPP updating $ID<br/>";
-			//echo "YARPP QUEUE: ".print_r($yarpp_caching_queue,true)."<br/>";
-			//echo "YARPP UPDATED: ".print_r($yarpp_updated_posts,true)."<br/>";
 			yarpp_cache_enforce($type,$ID,$force);
-			array_push($yarpp_updated_posts,$ID);
+			array_push($yarpp_toclear,$ID);
 		}
 	}
+	
+	yarpp_cache_clear($yarpp_toclear);
+	
+}
+
+function yarpp_cache_clear($reference_IDs) {
+  global $wpdb;
+  $wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID in (".implode(',',$reference_IDs).")");
 }
 
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
