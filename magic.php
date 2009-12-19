@@ -206,7 +206,9 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	// GROUP BY
 	$newsql .= "\n group by id \n";
 	// HAVING
-	$safethreshold = max($threshold/2,0.1); // this is so the new calibration system works.
+	// safethreshold is so the new calibration system works.
+	// number_format fix suggested by vkovalcik! :) 
+	$safethreshold = number_format(max($threshold/2,0.1), 2, '.', '');
 	$newsql .= " having score >= $safethreshold";
 	if ($usedisterms)
 		$newsql .= " and count(blockterm.term_id) = 0";

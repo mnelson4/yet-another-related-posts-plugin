@@ -148,6 +148,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.1 =
+* [Possible fix for the "no related posts" issue](http://wordpress.org/support/topic/284209/page/2) by [vkovalcik](http://wordpress.org/support/profile/5032111)
+* Bugfix: [slight optimization to keyword function](http://wordpress.org/support/topic/284209/page/2) by [vkovalcik](http://wordpress.org/support/profile/5032111)
+* Bugfix: [regex issue with br-stripping](http://wordpress.org/support/topic/323823)
 = 3.1 =
 * New snazzy options screen
 * Smarter, less confusing caching
