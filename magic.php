@@ -384,7 +384,8 @@ function yarpp_save_cache($post_ID,$force=true) {
 
 function yarpp_cache_clear($reference_IDs) {
   global $wpdb;
-  $wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID in (".implode(',',$reference_IDs).")");
+  if (is_array($reference_IDs) && count($reference_IDs))
+    $wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID in (".implode(',',$reference_IDs).")");
 }
 
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
@@ -393,10 +394,10 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	if ($reference_ID === '' || $reference_ID === false)
 	  return false;
 	
-	$timeout = 600;
-	
 	if (!$force) {
-		if ($wpdb->get_var("select count(*) as count from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and date > date_sub(now(),interval $timeout minute)")) {
+		if ($wpdb->get_var("select count(*) as count from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID")) {
+      // 3.1.3: removed the cache timeout
+      // and date > date_sub(now(),interval 600 minute)
 			if ($yarpp_debug) echo "<!--YARPP is using the cache right now.-->";
 			return false;
 		}
@@ -415,7 +416,7 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	// if changes were made, let's find out which ones are new. We'll want to clear their caches
 	// so that they will be rebuilt when they're hit next.
 	if ($wpdb->rows_affected) {
-		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID");//and ID not in (".implode(',',$old_relations).")"
+		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID != 0");
 		yarpp_cache_clear($new_relations);
 	}
 	

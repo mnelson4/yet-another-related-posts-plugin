@@ -98,12 +98,6 @@ if (isset($_POST['update_yarpp'])) {
 	}		
 	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
-
-// check if the cache is complete or not.
-$cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-  FROM $wpdb->posts as p
-  LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-  WHERE p.post_status = 'publish' ");
 	
 //compute $tagmap
 $tagmap = array();
@@ -383,12 +377,6 @@ function load_display_discats() {
 		load_display_distags();
 		load_display_demo_web();
 		load_display_demo_rss();
-		jQuery('#build-cache-button').click(function() {
-			jQuery('#yarpp-cache-message').hide();
-			jQuery('#build-cache-button').hide();
-			jQuery('#build-display').css('display','block');
-			yarppBuildRequest();
-		});
 		
 		version = jQuery('#yarpp-version').html();
 

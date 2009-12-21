@@ -148,6 +148,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.3 =
+* Turning off cache expiration, made possible by smarter caching system of 3.1—should improve database performance over time
+* Code cleanup
+* Bugfix: [`yearpp_clear_cache` bug on empty input](http://wordpress.org/support/topic/343001)
 = 3.1.2 =
 * Bugfix: [saving posts would sometimes timeout](http://wordpress.org/support/topic/343001)
 = 3.1.1 =
