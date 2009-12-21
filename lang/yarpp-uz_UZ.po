@@ -1,0 +1,535 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
+"PO-Revision-Date: 2009-08-09 20:19+0500\n"
+"Last-Translator: Alisher <bigtaur@mail.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Poedit-Language: Uzbek\n"
+"X-Poedit-Country: UZBEKISTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"POT-Creation-Date: \n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "“yarpp_title”ni qo'shishda MySQL xatosi"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "“yarpp_content”ni qo'shishda MySQL xatosi"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>YARPPdan muhim xabar:</h3><p>YARPP 2 gacha yangilaganingiz uchun rahmat. YARPP 2 da uzoq kutilgan tegishli kiritish natijalarini aniq teglar va toifalar bilan cheklash imkoniyati paydo bo'ldi. Shuningdek bu vesiya algoritmga kontent, sarlavha, teg va toifalarni qay tarzda hisobga olish yoki olmaslikka yo'riq berish orqali uni nozik tarzda sozlash imkonini beradi. Yangi sozlanmalar holatining didingizga mosligini tekshirib, chegara kattaliklarini ham qayta o'rnating.</p><p>Batafsil ma'lumot bu yerda: <a href=\"http://mitcho.com/code/yarpp/\">documentation YARPP</a>. (Bu xabar qayta namoyish etilmaydi.)</p>"
+
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Aloqador xabarlar (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:29
+msgid "Related Posts"
+msgstr "Aloqador xabarlar"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f - bu joriy xabar va aloqador xabar o'rtasidagi o'xshashlik koeffitsientidir. Bu ko'rsatkich Sizga \"Wordpress\"ga administrator sifatida kirganingiz uchun ko'rsatildi. Oddiy foydalanuvchilarga bu ko'rsatilmaydi."
+
+#: magic.php:304
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Aloqador xabarlar Sizga <a href='http://mitcho.com/code/yarpp/'>YARPP</a> plagini tomonidan taqdim etildi."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "MyISAM tekshiruvi bajarildi. Endi Siz \"Sarlavhalarni hisobga olmoq\" va \"Matnni hisobga olmoq\" o'xshashlik mezonlaridan foydalanishingiz mumkin."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "\"Sarlavhalarni hisobga olmoq\" va \"Matnni hisobga olmoq\" o'xshashlik mezonlaridan foydalanish Sizning <code>%s</code> jadval <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a> yuritmasini ishlatishini talab qiladi, ammo, ehtimol, jadval <code>%s</code> yuritgichidan foydalanyapti. Bu ikki opsiyalar o'chirilgan."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Marhamat, ushbu opsiyalarni qayta tiklash uchun <code>%s</code> jadvalingizni keyingi SQL yo'riqnoma bilan o'zgartiring;: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code><br />. Jadval o'zgartirilganda hech qanday ma'lumot yo'qolmaydi, ammo amallar natijasi o'zgarishi mumkin."
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Agar, bu opsiyaga qaramasdan, Siz <code>%s</code> jadval MyISAM ni ishlatayotganiga amin bo'lsangiz, mana bu sehrli tugmani bosing &nbsp;:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Menga ishoning. Menga MyISAM ni ishlatishga ruxsat bering."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP ma'lumotlar bazasida xatolar mavjud edi, lekin ular to'g'irlandi."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP ma'lumotlar bazasida xato mavjud va uni to'g'irlab bo'lmaydi."
+
+#: options.php:153
+#: options.php:170
+#: options.php:182
+msgid "do not consider"
+msgstr "hisobga olinmasin"
+
+#: options.php:154
+#: options.php:171
+#: options.php:184
+msgid "consider"
+msgstr "hisobga olinsin"
+
+#: options.php:172
+msgid "consider with extra weight"
+msgstr "qo'shimchalar bilan hisobga olmoq"
+
+#: options.php:200
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "YARPP (RSS 2.0) plagini versiyalari tarixi"
+
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Plagin uchun mitcho (Michael Yoshitaka Erlewine)ga PayPal orqali pul hadya qilmoq"
+
+#: options.php:254
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "YARPP opsiyalari"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "<em>Kontent</em>"
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "<em>Kontent</em> xabarlar va sahifalar to'plami bo'lib, joriy xabarga aloqador sifatida namoyish etishga nomzodlar bo'lib hisoblanadi."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Toifalar bo'yicha bekor qilish:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Teglar bo'yicha bekor qilish:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Parol bilan himoyalangan xabarlar ko'rsatilsinmi?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Faqat oldingi xabarlar ko'rsatilsinmi?"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "\"O'xshashlik\" opsiyalari"
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP oldingi </a> <a href=\"http://wasabi.pbwiki.com/Related%20Entries\"> plaginlardan shu bilan farq qiladiki, u aloqador xabarlar ro'yxatini (1) maksimal son va (2) \"o'xshashlik chegarasi\" bilan cheklaydi."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "batafsil&gt;"
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "O'xshashlik chegarasis:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Sarlavhalar:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Matnlar:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Teglar:"
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Toifalar:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Xabar va sahifalar o'zaro bog'lansinmi?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "\"Xabar va sahifalarni o'zaro bog'lash\" opsiyasi tanlanganda, <code>related_posts()</code>, <code>related_pages()</code> va <code>related_entries()</code> funktsiyalari aloqador sahifalar va xabarlardan iborat bir xil natijalarni berishadi."
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "<small> opsiyalarini Sizning </small> sayt uchun ko'rsatish"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "O'xshash xabarlar avtomatik tarzda ko'rsatilsinmi?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Bu opsiya aloqador xabarlarni kirish sahifalaridagi kontentdan keyinoq avtomatik ravishda namoyish etadi. Agar bu opsiya o'chirilsa <code>related_posts()</code> yoki shunga o'xshashni (<code>related_pages()</code> va <code>related_entries()</code>) o'z mavzungizda qo'lda kiritishga to'g'ri keladi."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Web saytni namoyish etish kodi"
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Qayta yuklash uchun opsiyalarni yangilash.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Aloqador xabarlarning maksimum soni:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "Aloqador xabarlargacha yoki xabardan keyin:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Misol uchun:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "Har bir aloqador xabargacha yoki xabardan keyin:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Ko'chirma ko'rsatilsinmi?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Ko'chirma uzunligi (so'zlar soni):"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "Ko'chirmadan oldin yoki keyin:"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Natijalarni saralash:"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "O'xshashlik (yuqoridan pastga)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "O'xshashlik (pastdan yuqoriga)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "sana (yangidan eskiga)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "sana (eskidan yangiga)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "sarlavha (alifbo bo'yicha)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "sarlavha (alifboga qarshi)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "Natijalar bo'lmasa asl holatini ko'rsatish:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Yana Bir Aloqador Xabarlar Plagini (YARPP)ni tarqatishda yordam kerakmi?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Bu opsiya % kodini qo'shadi. Uni yoqib, opsiyalaringizni yangilab ko'rgandan so'ng o'ng tomondagi kod namunasini qarang."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "<small> opsiyalarini RSS</small> uchu ko'rsatish"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Aloqador xabarlar tezkor xabarlar tizimida ko'rsatilsinmi?"
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Aloqador xabarlar tavsifda ko'rsatilsinmi?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Bu opsiya nafaqat butun kontentni, balki aloqador xabarlarni tezkor xabarlar tizimi maydonchalarida ko'rsatadi. Sizning tezkkor xabarlar tizimi faqat ko'chirmalarga moslashgan bo'lsa ham faqat tafsif maydonchalaridan foydalaniladi. Shuning uchun har qanday namoyishda ham shu opsiya talab qilinadi."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "RSS kodi namunasi"
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "Aloqador kiritish ro'yxatigacha yoki undan keyin:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "Ko'chirmagacha yoki undan keyin:"
+
+#: options.php:147
+msgid "word"
+msgstr "so'z"
+
+#: options.php:148
+msgid "tag"
+msgstr "teg"
+
+#: options.php:149
+msgid "category"
+msgstr "toifa"
+
+#: options.php:156
+#: options.php:186
+#, php-format
+msgid "require at least one %s in common"
+msgstr "Umumiy qilib hech bo'lmaganda % bo'lishi kerak"
+
+#: options.php:158
+#: options.php:188
+#, php-format
+msgid "require more than one %s in common"
+msgstr "Umumiy qilib % dan ko'p bo'lishi kerak"
+
+#: options.php:125
+msgid "Options saved!"
+msgstr "Opsiyalar saqlab qolindi!"
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "O'xshashlik chegarasi qanchalik yuqori bo'lsa natija shunchalik chegaralangan, yani natijada shunchalik kam aloqador xabarlarga ega bo'lasiz. Asl holida o'xshashlik chegarasi 5ga teng. Agar mos keladigan chegara ko'rsatkichini topishni hohlasangiz, turli xabarlarni o'rganib chiqing. Siz qanday aloqador xabarlar yuqoriga ko'tarilayotganini va ularning o'xshashlik ko'rsatkichlarini ko'rishingiz mumkin. Natijada o'z saytingizga mos chegara ko'rsatkichni aniqlay olasiz."
+
+#: options.php:605
+msgid "Update options"
+msgstr "Opsiyalarni yangilash"
+
+#: options.php:606
+msgid "Do you really want to reset your configuration?"
+msgstr "Siz haqiqatan ham konfiguratsiyani asl holatiga qaytarmoqchimisiz?"
+
+#: options.php:606
+msgid "Reset options"
+msgstr "Opsiyalarni asl holatiga qaytarmoq"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "yarpp_keyword_cache jadvalini tuzishda MySQLxatosi"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "yarpp_related_cache jadvalini tuzishda MySQLxatosi"
+
+#: magic.php:56
+msgid "Example post "
+msgstr "Xabar namunasi"
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Aloqador xabarlar keshi holati"
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Sizning aloqador xabarlar keshingiz to'la emas. Marhamat, o'z keshingizni <A>aloqador xabarlar holati paneli</a>dan tuzing."
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Sizning aloqador xabarlar keshingiz bo'sh. Marhamat, o'z keshingizni <A>aloqador xabarlar holati paneli</a>dan tuzing."
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Agar \"Kontent\" va \"Aloqadorlik\" opsiyalarini yangilagan bo'lsangiz, o'z keshingizni <A>aloqador xabarlar holati paneli</a>dan qayta tuzing."
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "<a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> tomonidan yaratildi"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "<a href=\"http://twitter.com/yarpp/\">YARPP Tvitterda </a> ga tashrif buyuring"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "kun(lar)"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "hafta(lar)"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "oy(lar)"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Oxirgi KO'RSATKICHLAR SONIga tegishli xabarlarni ko'rsatish"
+
+#: options.php:387
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "YARPPning yangi beta versiyasi chiqdi. Siz uni <A>bu yerdan</a> o'z tavakkalingizga ko'chirib olishingiz mumkin."
+
+#: options.php:389
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "YARPPning yangi versiyasi chiqdi. Siz uni <A>bu yerdan</a> o'z tavakkalingizga ko'chirib olishingiz mumkin."
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Foydalanuvchining shablon faylidan foydalanib ko'rsatish"
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Shablon fayl:"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Ushbu opsiya sizning RSS va ATOM tezkor xabarlaringizning har bir punktining oxirida aloqador xabarlarni ko'rsatadi. Shablonni o'zgartirish talab qilinmaydi."
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Qo'shimcha"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Kesh holatini ko'rsatish"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "kesh to'la bo'lmaganda aloqador xabarlar avtomatik tarzda hisoblab chiqilsinmi?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Agar joriy xabarning aloqador xabarlari keshga kirmagan va bu opsiya yoqilgan bo'lsa, YARPP uni avtomatik tarzda hisoblab chiqadi. Agar sizning sayt katta traffikga ega bo'lsa bu opsiyani yoqmaganingiz maqul. <br /> Agar bu opsiya o'chirilgan va aloqador xabarlar keshlanmagan bo'lsa, ular xuddi aloqador xabarlar yo'q bo'lgan holatda ko'rsatiladi."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'daqiqa va 'soniya qoldi"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'soniya qoldi"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Sizning aloqador xabarlar keshingiz to'ldi."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "SQL so'rovlari 'soniya davom etdi."
+
+#: options.php:578
+#: options.php:582
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Sarlavha uchun aloqador xabarlar tuzishda xato sodir bo'ldi"
+
+#: options.php:579
+#: options.php:584
+msgid "try to continue"
+msgstr "davom etishga urinib ko'ring"
+
+#: options.php:592
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Sizning aloqador xabarlar keshingiz %ga tayyor bo'ldi."
+
+#: options.php:598
+msgid "starting..."
+msgstr "boshlanish..."
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Siz YARPP keshini qayta tuza olmaysiz."
+
+#: services.php:90
+#, php-format
+msgid "You do not have the permission to write the file '%s'."
+msgstr "Siz '%s' faylga yozish uchun ruxsatga ega emas."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Ushbu xabar uchun aloqador xabarlar mavjud. Xabarni o'zgartirish ushbu aloqador xabarlarning o'zgarishiga olib kelishi mumkin."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Barcha aloqador xabarlarning namoyish etilishi va ularning qay tarzda namoyish etilishi sizning YARPP opsiyalaringizga bog'liq."
+
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Aloqador xabarlar yo'q."
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Iltimos, o'rnatish jarayonini nihoyasiga yetkazish uchun YARPP shablon fayllarini o'z mavzungizga joylashtiring. Shunchaki shablon fayllarini (hozirgi <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) <code>TEMPLATEPATH</code> papkasiga ko'chiring."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Sizning YARPP (<code>TEMPLATEPATH</code>) mavzungizda bironta shablon fayli topilmadi. Shablonlardan foydalanish opsiyasi ochirilgan."
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "YANGI!"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Ushbu qo'shimcha opsiyalar aloqador xabarlarning ko'rsatilishini sozlashda keng imkoniyatlar beradi. Shablonlar (qaysiki sizning mavzu papkangizda saqlanadi) PHP tilida yoziladi."
+

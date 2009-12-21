@@ -84,10 +84,11 @@ function yarpp_cache_keywords($ID) {
 function yarpp_get_cached_keywords($ID,$type='body') {
 	global $wpdb;
 	$out = $wpdb->get_var("select $type from {$wpdb->prefix}yarpp_keyword_cache where ID = $ID");
-	if ($out === false or $out == '')
+	if ($out === false or $out == '') { // if empty, try caching them first.
 		yarpp_cache_keywords($ID);
-	$out = $wpdb->get_var("select $type from {$wpdb->prefix}yarpp_keyword_cache where ID = $ID");
-	if ($out === false or $out == '') {
+    $out = $wpdb->get_var("select $type from {$wpdb->prefix}yarpp_keyword_cache where ID = $ID");
+  }
+	if ($out === false or $out == '') { // if still empty... return false
 		//echo "<!--YARPP ERROR: couldn't select/create yarpp $type keywords for $ID-->";
     return false;
 	} else {

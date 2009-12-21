@@ -50,8 +50,8 @@ if (!yarpp_get_option('myisam_override')) {
 }
 
 $yarpp_twopointfive = true;
-if (substr($wp_version,0,3) < 2.5) {
-	echo "<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
+if (version_compare('2.5',$wp_version) > 0) {
+	echo "$wp_version<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
 
 	yarpp_set_option('categories',1);
 	yarpp_set_option('tags',1);
@@ -74,7 +74,8 @@ yarpp_reinforce(); // just in case, set default options, etc.
 
 if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_value_options) as $option) {
-		yarpp_set_option($option,addslashes($_POST[$option]));
+    if (is_string($_POST[$option]))
+      yarpp_set_option($option,addslashes($_POST[$option]));
 	}
 	foreach (array('title','body','tags','categories') as $key) {
 		if (!isset($_POST[$key])) yarpp_set_option($key,1);
@@ -95,23 +96,7 @@ if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_binary_options) as $option) {
 		(isset($_POST[$option])) ? yarpp_set_option($option,true) : yarpp_set_option($option,false);
 	}		
-	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__('Options saved!','yarpp')
-	.' '.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',
-	__('If you updated the "pool" options or "relatedness" options displayed, please rebuild your cache now from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-}
-
-if (yarpp_get_option('ad_hoc_caching') != 1) {
-  // check if the cache is complete or not.
-  $cache_complete = $wpdb->get_var("select (count(p.ID)-sum(c.ID IS NULL))/count(p.ID)
-    FROM $wpdb->posts as p
-    LEFT JOIN {$wpdb->prefix}yarpp_related_cache as c ON ( p.ID = c.reference_ID )
-    WHERE p.post_status = 'publish' ");
-  
-  if ($cache_complete > 0 and $cache_complete < 1)
-    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
-  
-  if ($cache_complete == 0)
-    echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.str_replace('<A>','<a class="thickbox" title="'.__('Related posts cache status','yarpp').'" href="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status">',__('Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>.','yarpp')).'</p></div>';
+	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
 	
 //compute $tagmap
@@ -137,7 +122,7 @@ function checkbox($option,$desc,$tr="<tr valign='top'>
 }
 function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 			<th scope='row'>") {
-	$value = yarpp_get_option($option,true);
+	$value = stripslashes(yarpp_get_option($option,true));
 	echo "			$tr$desc</th>
 			<td><input name='$option' type='text' id='$option' value='$value' size='$size' /></td>
 		</tr>";
@@ -257,11 +242,6 @@ function load_display_discats() {
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
 			
 			$display_version = yarpp_get_option('version');
-			$split = explode('.',$display_version);
-			if (strlen($split[1]) != 1) {
-				$pos = strpos($display_version,'.')+2;
-				$display_version = substr($display_version,0,$pos).'.'.substr($display_version,$pos);
-			}
       echo $display_version;
 			?></small>
 		</h2>
@@ -275,9 +255,24 @@ function load_display_discats() {
 	<p><small><?php _e('by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a>','yarpp');?>. <?php _e('Follow <a href="http://twitter.com/yarpp/">Yet Another Related Posts Plugin on Twitter</a>','yarpp');?>.</small></p>
 
 
+<!--	<div style='border:1px solid #ddd;padding:8px;'>-->
+<div id="poststuff" class="metabox-holder">
+<div class="meta-box-sortables">
+
 	<!--The Pool-->
-	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('"The Pool"','yarpp');?></h3>
+<script>
+	jQuery(document).ready(function($) {
+		$('.postbox').children('h3, .handlediv').click(function(){
+			$(this).siblings('.inside').toggle();
+		});
+	});
+</script>
+<div class='postbox'>
+    <div class="handlediv" title="<?php _e( 'Click to toggle' ); ?>">
+      <br/>
+    </div>
+	<h3 class='hndle'><span><?php _e('"The Pool"','yarpp');?></span></h3>
+<div class='inside'>
 	<p><?php _e('"The Pool" refers to the pool of posts and pages that are candidates for display as related to the current entry.','yarpp');?></p>
 	
 	<table class="form-table" style="margin-top: 0">
@@ -302,10 +297,15 @@ function load_display_discats() {
 		</tbody>
 	</table>
 	</div>
+</div>
 
 	<!-- Relatedness -->
-	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('"Relatedness" options','yarpp');?></h3>
+<div class='postbox'>
+    <div class="handlediv" title="<?php _e( 'Click to toggle' ); ?>">
+      <br/>
+    </div>
+	<h3 class='hndle'><span><?php _e('"Relatedness" options','yarpp');?></span></h3>
+<div class='inside'>
 
 	<p><?php _e('YARPP is different than the <a href="http://wasabi.pbwiki.com/Related%20Entries">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <a href="#" class='info'><?php _e('more&gt;','yarpp');?><span><?php _e('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post\'s related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp');?></span></a></p>
 	
@@ -325,6 +325,7 @@ function load_display_discats() {
 			</tbody>
 		</table>
 	</div>
+</div>
 
 <script language="javascript">
 //<!--
@@ -376,12 +377,6 @@ function load_display_discats() {
 		load_display_distags();
 		load_display_demo_web();
 		load_display_demo_rss();
-		jQuery('#build-cache-button').click(function() {
-			jQuery('#yarpp-cache-message').hide();
-			jQuery('#build-cache-button').hide();
-			jQuery('#build-display').css('display','block');
-			yarppBuildRequest();
-		});
 		
 		version = jQuery('#yarpp-version').html();
 
@@ -399,8 +394,12 @@ function load_display_discats() {
 
 
 		<!-- Display options -->
-			<div style='border:1px solid #ddd;padding:8px;'>
-		<h3><?php _e("Display options <small>for your website</small>",'yarpp');?></h3>
+<div class='postbox'>
+    <div class="handlediv" title="<?php _e( 'Click to toggle' ); ?>">
+      <br/>
+    </div>
+	<h3 class='hndle'><span><?php _e("Display options <small>for your website</small>",'yarpp');?></span></h3>
+<div class='inside'>
 		
 		<table class="form-table" style="margin-top: 0;width:100%">
 <?php
@@ -409,7 +408,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>".__('NEW!','yarpp')."</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
+	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -460,10 +459,15 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>"); ?>
 		</table>
 		</div>
+	</div>
 
 		<!-- Display options for RSS -->
-			<div style='border:1px solid #ddd;padding:8px;'>
-		<h3><?php _e("Display options <small>for RSS</small>",'yarpp');?></h3>
+<div class='postbox'>
+    <div class="handlediv" title="<?php _e( 'Click to toggle' ); ?>">
+      <br/>
+    </div>
+	<h3 class='hndle'><span><?php _e("Display options <small>for RSS</small>",'yarpp');?></span></h3>
+<div class='inside'>
 		
 		<table class="form-table" style="margin-top: 0;width:100%">
 <?php
@@ -473,7 +477,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="9" style="border-left:8px transparent solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_rss' style='overflow:auto;width:350px;max-height:500px;'></div></td>"); ?>
 	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
-	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <span style='color:red;'>".__('NEW!','yarpp')."</span> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
+	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
 			<tr valign='top' class='rss_templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -524,91 +528,17 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<th class='th-full' colspan='2' scope='row'>"); ?>
 		</table>
 		</div>
-
-	<div style='border:1px solid #ddd;padding:8px;'>
-	<h3><?php _e('Advanced','yarpp');?> <span style='color:red;'><?php _e('NEW!','yarpp')?></span></h3>
-	
-	<table class="form-table" style="margin-top: 0">
-	<tr valign='top' colspan='2'><td><input class="thickbox button" type="button" value="<?php _e("Show cache status",'yarpp');?>" title="<?php _e('Related posts cache status','yarpp');?>" alt="#TB_inline?height=100&width=300&inlineId=yarpp-cache-status"/>
-	<?php checkbox('ad_hoc_caching',__("When the cache is incomplete, compute related posts on the fly?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.__("If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts.",'yarpp')
-	."</span></a>"); ?>
-	</table>
-		</div>
-
-	<script type='text/javascript'>
-	//<!--
-	time=0;i=0;m=0;id=0;
-  timeout = 10000;
-	function yarppBuildRequest() {
-		jQuery.ajax({
-			url:'admin-ajax.php',
-			type: 'post',
-			data: {action:'yarpp_build_cache_action',i:i,m:m,id:id},
-			dataType: 'json',
-			timeout: timeout,
-			success: function (json) {
-				if (json.result == 'success') {
-					i = json.i;
-					m = json.m;
-					id = json.id;
-					time = time + parseFloat(json.time);
-					var remaining = Math.floor((m-i)*(time/i));
-					var min = Math.floor(remaining/60);
-					var sec = Math.floor(remaining - 60*min);
-					if (i < m) {
-						jQuery('#yarpp-bar').css('width',json.percent+'%');
-						jQuery('#yarpp-percentage').html(json.percent+'%');
-						jQuery('#yarpp-latest').html(json.title);
-						if (min > 0) {
-							jQuery('#yarpp-time').html(<?php echo str_replace('SEC',"'+sec+'",str_replace('MIN',"'+min+'",__("'MIN minute(s) and SEC second(s) remaining'",'yarpp')));?>);
-						} else {
-							jQuery('#yarpp-time').html(<?php echo str_replace('SEC',"'+sec+'",__("'SEC second(s) remaining'",'yarpp'));?>);
-						}
-						yarppBuildRequest();
-					} else {
-						jQuery('#build-display').html('<p><?php _e("Your related posts cache is now complete.",'yarpp');?><br/><small><?php echo str_replace('SEC',"'+(Math.floor(time*10)/10)+'",__('The SQL queries took SEC seconds.','yarpp'));?></small></p>');
-					}
-					return;
-				} else if (json.result == 'error') {
-					i = json.i;
-					m = json.m;
-					id = json.id;
-          jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
-				} else {
-          jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
-				}
-				timeout += 5000;
-				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
-			},
-			error: function(json) {
-				jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
-				timeout += 5000;
-				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
-			}
-		});
-		return false;
-	}
-	//-->
-	</script>
-	
-	<div id='yarpp-cache-status' style='display:none;'><p id='yarpp-cache-message'><?php echo str_replace('PERCENT',floor($cache_complete * 1000)/10,__("Your related posts cache is PERCENT% complete.",'yarpp'));?></p>
-		<center><input type='button' class='button' id='build-cache-button' value='build the cache now'/></center>
-		<div id='build-display' style='display:none;margin-top:15px;'>
-			<div class="progress-container" style='border: 1px solid #ccc; width: 200px; margin: 2px 5px 2px 0; padding: 1px; float: left; background: white;'>
-			   <div id='yarpp-bar' style="width: 0%; height: 12px; background-color: #21759B;">&nbsp;</div>
-			</div><div id='yarpp-percentage'>0%</div>
-			<p style='font-size: .8em' id='yarpp-latest'><?php _e('starting...','yarpp');?></p>
-			<p style='font-size: .8em' id='yarpp-time'></p>
-		</div>
 	</div>
 	
 	<div>
 		<p class="submit">
-			<input type="submit" name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
+			<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
 			<input type="submit" onclick='return confirm("<?php _e("Do you really want to reset your configuration?",'yarpp');?>");' class="yarpp_warning" name="reset_yarpp" value="<?php _e('Reset options','yarpp')?>" />
 		</p>
 	</div>
+
+</div></div> <!--closing metabox containers-->
+
 </form>
 
 <?php
