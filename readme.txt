@@ -24,7 +24,7 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 This plugin requires that your database run on MySQL 4.1 or greater.
 
-**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
+**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
 
 = Testimonials =
 
@@ -149,9 +149,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.1.3 =
-* Turning off cache expiration, made possible by smarter caching system of 3.1—should improve database performance over time
+* Performance improvements:
+  * Turning off cache expiration, made possible by smarter caching system of 3.1 - should improve caching database performance over time.
+  * [updated primary key for cache](http://wordpress.org/support/topic/345070) by Pinoy.ca - improves client-side pageload times.
 * Code cleanup
+  * Rewrote `include` and `require` paths
 * Bugfix: [`yearpp_clear_cache` bug on empty input](http://wordpress.org/support/topic/343001)
+* Version checking code no longer uses Snoopy.
 = 3.1.2 =
 * Bugfix: [saving posts would sometimes timeout](http://wordpress.org/support/topic/343001)
 = 3.1.1 =

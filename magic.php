@@ -307,14 +307,14 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$wp_query->is_single = false;
 				
 	if ($domain == 'metabox') {
-		include('template-metabox.php');
+		include(YARPP_DIR.'/template-metabox.php');
 	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
 	} else {
-		include('template-builtin.php');
+		include(YARPP_DIR.'/template-builtin.php');
 	}
 		
 	unset($related_query);

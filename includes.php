@@ -1,9 +1,9 @@
 <?php
 
-require_once('magic.php');
-require_once('keywords.php');
-require_once('intl.php');
-require_once('services.php');
+require_once(YARPP_DIR.'/magic.php');
+require_once(YARPP_DIR.'/keywords.php');
+require_once(YARPP_DIR.'/intl.php');
+require_once(YARPP_DIR.'/services.php');
 
 if ( !defined('WP_CONTENT_URL') )
 	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
@@ -115,7 +115,7 @@ function yarpp_activate() {
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`score` float unsigned NOT NULL default '0',
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY  (`reference_ID`,`ID`)
+			PRIMARY KEY ( `score` , `date` , `reference_ID` , `ID` )
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;")) {
 			echo "<!--".__('MySQL error on creating yarpp_related_cache table','yarpp').": ";
 			$wpdb->print_error();
@@ -160,7 +160,7 @@ function yarpp_upgrade_check($inuse = false) {
 		update_option('yarpp_version','1.5');
 	}
 	
-	if (eregi_replace('[a-z].*$','',get_option('yarpp_version')) < 2) {
+	if (version_compare('2',get_option('yarpp_version'),'>') > 0) {
 		foreach (array_keys($yarpp_value_options) as $option) {
 			if (!get_option("yarpp_$option"))
 			add_option("yarpp_$option",$yarpp_value_options[$option].' ');
@@ -169,7 +169,6 @@ function yarpp_upgrade_check($inuse = false) {
 			if (!get_option("yarpp_$option"))
 			add_option("yarpp_$option",$yarpp_binary_options[$option]);
 		}
-
 	}
 
 	if (version_compare('2.03',get_option('yarpp_version')) > 0) {
@@ -177,12 +176,12 @@ function yarpp_upgrade_check($inuse = false) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
 	}
 
-	if (version_compare(YARPP_VERSION,get_option('yarpp_version')) > 0) {
-		update_option('yarpp_version',YARPP_VERSION);
-		
-		//if (!$inuse)
-		//	echo '<div id="message" class="updated fade" style="background-color: rgb(207, 235, 247);">'.__('<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href="http://mitcho.com/code/yarpp/">YARPP documentation</a>. (This message will not be displayed again.)</p>','yarpp').'</div>';
+	if (version_compare('3.1.3',get_option('yarpp_version')) > 0) {
+		$wpdb->query("ALTER TABLE {$wpdb->prefix}yarpp_related_cache DROP PRIMARY KEY ,
+                  ADD PRIMARY KEY ( score , date , reference_ID , ID )");
 	}
+
+  update_option('yarpp_version',YARPP_VERSION);
 
 	// just in case, try to add the index one more time.	
 	if (!yarpp_enabled()) {
@@ -216,7 +215,7 @@ function yarpp_load_thickbox() {
 }
 
 function yarpp_options_page() {
-	require(str_replace('includes.php','options.php',__FILE__));
+	require(YARPP_DIR.'/options.php');
 }
 
 // This function was written by @tyok
@@ -402,16 +401,10 @@ function yarpp_microtime_float()
 }
 
 function yarpp_check_version_json($version) {
-  include_once(ABSPATH . WPINC . '/class-snoopy.php');
-  if (class_exists('Snoopy')) {
-    $snoopy = new Snoopy;
-    $snoopy->referer = get_bloginfo('siteurl');
-    $result = $snoopy->fetch("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
-    if ($result) {
-      return $snoopy->results;
-    }
-  }
-  return '{}';
+  $remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
+  if (is_wp_error($remote))
+    return '{}';
+  return $remote['body'];
 }
 
 function yarpp_add_metabox() {

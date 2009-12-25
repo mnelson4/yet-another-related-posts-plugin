@@ -1,6 +1,6 @@
 <?php
 
-include('lang/words-'.word_file_lang().'.php');
+include(YARPP_DIR.'/lang/words-'.word_file_lang().'.php');
 
 function word_file_lang() {
 	if (!defined('WPLANG'))
