@@ -421,7 +421,7 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	}
 	
 	if (!$wpdb->rows_affected) {
-		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0)");
+		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0) on duplicate key update date = now()");
 		if (!$wpdb->rows_affected)
 			return false;
 	}

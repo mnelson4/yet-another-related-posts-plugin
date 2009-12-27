@@ -154,6 +154,8 @@ If you are a bilingual speaker of English and another language and an avid user 
   * [updated primary key for cache](http://wordpress.org/support/topic/345070) by Pinoy.ca - improves client-side pageload times.
 * Code cleanup
   * Rewrote `include` and `require` paths
+* Bugfix: localizations were not working with WordPress 2.9 ([a CodeStyling Localizations bug](http://wordpress.org/support/topic/343389))
+* Bugfix: [redundant entries for "unrelatedness" were being inserted](http://wordpress.org/support/topic/344859)
 * Bugfix: [`yearpp_clear_cache` bug on empty input](http://wordpress.org/support/topic/343001)
 * Version checking code no longer uses Snoopy.
 = 3.1.2 =
