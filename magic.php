@@ -22,7 +22,7 @@ function yarpp_set_score_override_flag($q) {
 function yarpp_join_filter($arg) {
 	global $wpdb, $yarpp_time;
 	if ($yarpp_time) {
-		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp using (ID)";
+		$arg .= " join {$wpdb->prefix}yarpp_related_cache as yarpp on {$wpdb->posts}.ID = yarpp.ID";
 	}
 	return $arg;
 }
@@ -84,10 +84,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 		$reference_ID = $post->ID;
 	}
 	
-	// set $yarpp_debug
-	if (isset($_REQUEST['yarpp_debug']))
-		$yarpp_debug = true;
-
 	// set the "domain prefix", used for all the preferences.
 	if ($domain == 'rss')
 		$domainprefix = 'rss_';
@@ -118,9 +114,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	}
 
 	extract($optvals);
-
-	// if cross_relate is set, override the type argument and make sure both matches are accepted in the sql query
-	if ($cross_relate) $type = array('post','page');
 
 	// Fetch keywords
     $body_terms = yarpp_get_cached_keywords($reference_ID,'body');
@@ -203,12 +196,15 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	if ($recent_only)
 		$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
 
-	$newsql .= " and post_type IN ('".implode("', '",$type)."')";
+  if ($type == array('page') && !$cross_relate)
+    $newsql .= " and post_type = 'page'";
 
 	// GROUP BY
 	$newsql .= "\n group by id \n";
 	// HAVING
-	$safethreshold = max($threshold/2,0.1); // this is so the new calibration system works.
+	// safethreshold is so the new calibration system works.
+	// number_format fix suggested by vkovalcik! :) 
+	$safethreshold = number_format(max($threshold/2,0.1), 2, '.', '');
 	$newsql .= " having score >= $safethreshold";
 	if ($usedisterms)
 		$newsql .= " and count(blockterm.term_id) = 0";
@@ -223,14 +219,20 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
 
+  // if we're looking for a X related entries, make sure we get at most X posts and X pages if
+  // we cross-relate
+	if ($cross_relate) $newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+
 	if ($yarpp_debug) echo "<!--$newsql-->";
 	return $newsql;
 }
 
 /* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
 
+/* new in 3.0! new query-based approach: EXTREMELY HACKY! */
+
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata;
+	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $numpages;
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -269,10 +271,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 	extract($optvals);
 	
-	if (yarpp_get_option('ad_hoc_caching') == 1)
-		yarpp_cache_enforce($type,$reference_ID);
+  yarpp_cache_enforce($type,$reference_ID);
 	
-    $output = '';
+  $output = '';
 	
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_time = true; // get ready for YARPP TIME!
@@ -285,23 +286,35 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_page = $page;
 	$current_pages = $pages;
 	$current_authordata = $authordata;
+	$current_numpages = $numpages;
+	$current_multipage = $multipage;
+	$current_more = $more;
+	$current_pagenow = $pagenow;
+	$current_day = $day;
+	$current_currentmonth = $currentmonth;
 
 	$related_query = new WP_Query();
 	$orders = split(' ',$order);
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
-		$related_query->query("p=$reference_ID&orderby=".$orders[0]."&order=".$orders[1]."&showposts=$limit");
+		$related_query->query(array('p'=>$reference_ID,'orderby'=>$orders[0],'order'=>$orders[1],'showposts'=>$limit,'post_type'=>$type));
 	else
 		$related_query->query('');
+
+	$wp_query = $related_query;
+	$wp_query->in_the_loop = true;
+  // make sure we get the right is_single value
+  // (see http://wordpress.org/support/topic/288230)
+	$wp_query->is_single = false;
 				
 	if ($domain == 'metabox') {
-		include('template-metabox.php');
+		include(YARPP_DIR.'/template-metabox.php');
 	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
 	} else {
-		include('template-builtin.php');
+		include(YARPP_DIR.'/template-builtin.php');
 	}
 		
 	unset($related_query);
@@ -317,7 +330,13 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);
-	
+	$numpages = null; $numpages = $current_numpages; unset($current_numpages);
+	$multipage = null; $multipage = $current_multipage; unset($current_multipage);
+	$more = null; $more = $current_more; unset($current_more);
+	$pagenow = null; $pagenow = $current_pagenow; unset($current_pagenow);
+  $day = null; $day = $current_day; unset($current_day);
+  $currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
+
 	if ($promote_yarpp and $domain != 'metabox')
 		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 	
@@ -348,13 +367,8 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	return $result > 0 ? true: false;
 }
 
-// these are the post ID's which have been updated in this caching cycle
-$yarpp_updated_posts = array();
-// here's a queue of posts whose related posts should be enforced
-$yarpp_caching_queue = array();
-
 function yarpp_save_cache($post_ID,$force=true) {
-	global $wpdb, $yarpp_caching_queue, $yarpp_updated_posts;
+	global $wpdb;
 
 	$parent_ID = $wpdb->get_var("select post_parent from $wpdb->posts where ID='$post_ID'");
 	if ($parent_ID != $post_ID and $parent_ID)
@@ -364,31 +378,26 @@ function yarpp_save_cache($post_ID,$force=true) {
 	else
 		$type = array('post');
 
-	// add it to the queue
-	array_push($yarpp_caching_queue,$post_ID);
+  yarpp_cache_enforce($type,$post_ID,$force);
 	
-	// go through the queue
-	while ($ID = array_pop($yarpp_caching_queue)) {
-		if (array_search($ID,$yarpp_updated_posts) === false) {
-			//echo "YARPP updating $ID<br/>";
-			//echo "YARPP QUEUE: ".print_r($yarpp_caching_queue,true)."<br/>";
-			//echo "YARPP UPDATED: ".print_r($yarpp_updated_posts,true)."<br/>";
-			yarpp_cache_enforce($type,$ID,$force);
-			array_push($yarpp_updated_posts,$ID);
-		}
-	}
+}
+
+function yarpp_cache_clear($reference_IDs) {
+  global $wpdb;
+  if (is_array($reference_IDs) && count($reference_IDs))
+    $wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID in (".implode(',',$reference_IDs).")");
 }
 
 function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
-	global $wpdb, $yarpp_debug, $yarpp_caching_queue;
+	global $wpdb, $yarpp_debug;
 	
 	if ($reference_ID === '' || $reference_ID === false)
 	  return false;
 	
-	$timeout = 600;
-	
 	if (!$force) {
-		if ($wpdb->get_var("select count(*) as count from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and date > date_sub(now(),interval $timeout minute)")) {
+		if ($wpdb->get_var("select count(*) as count from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID")) {
+      // 3.1.3: removed the cache timeout
+      // and date > date_sub(now(),interval 600 minute)
 			if ($yarpp_debug) echo "<!--YARPP is using the cache right now.-->";
 			return false;
 		}
@@ -396,33 +405,26 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	
 	yarpp_cache_keywords($reference_ID);
 	
-	// let's first record the current related posts for this reference ID
-	$old_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID != 0");
-	array_push($old_relations,0);
-
-	// now clear out the cruft	
-	$wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID");
+	// clear out the cruft
+  yarpp_cache_clear(array($reference_ID));
 	
 	// let's update the related posts
 	$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) ".yarpp_sql($type,array(),true,$reference_ID)." on duplicate key update date = now()");
 	
 	if ($wpdb->rows_affected and $yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 	
-	// if changes were made, let's find out which ones are new. We'll want to then add add these to the queue so their related posts can also be updated.
+	// if changes were made, let's find out which ones are new. We'll want to clear their caches
+	// so that they will be rebuilt when they're hit next.
 	if ($wpdb->rows_affected) {
-		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID not in (".implode(',',$old_relations).")");
-		//echo "YARPP added (select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID not in (".implode(',',$old_relations).")): ".print_r($new_relations,true)."<br/>";
-		$yarpp_caching_queue = array_merge($yarpp_caching_queue,$new_relations);
+		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID != 0");
+		yarpp_cache_clear($new_relations);
 	}
 	
 	if (!$wpdb->rows_affected) {
-		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0)");
+		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0) on duplicate key update date = now()");
 		if (!$wpdb->rows_affected)
 			return false;
 	}
-	//$wpdb->query("delete from {$wpdb->prefix}yarpp_related_cache where date <= date_sub(now(),interval $timeout minute)");
-	//if ($wpdb->rows_affected)
-	//	if ($yarpp_debug) echo "<!--$wpdb->rows_affected rows were cleared as they had expired.-->";
 	
 	return true;
 	
