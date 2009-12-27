@@ -158,6 +158,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Bugfix: [redundant entries for "unrelatedness" were being inserted](http://wordpress.org/support/topic/344859)
 * Bugfix: [`yearpp_clear_cache` bug on empty input](http://wordpress.org/support/topic/343001)
 * Version checking code no longer uses Snoopy.
+* New localization: Hindi
 = 3.1.2 =
 * Bugfix: [saving posts would sometimes timeout](http://wordpress.org/support/topic/343001)
 = 3.1.1 =
