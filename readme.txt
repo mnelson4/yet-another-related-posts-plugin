@@ -24,7 +24,7 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 This plugin requires that your database run on MySQL 4.1 or greater.
 
-**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
+**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Distinct Preview](http://wordpress.org/extend/plugins/distinct-preview/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
 
 = Testimonials =
 
