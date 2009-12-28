@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yet Another Related Posts Plugin fr_FR v2.1.6\n"
-"PO-Revision-Date: 2008-12-07 23:48+0100\n"
+"PO-Revision-Date: 2009-12-28 04:32+0100\n"
 "Last-Translator: Lionel Chollet <lionel.chollet@gmail.com>\n"
 "Language-Team: Lionel Chollet <lionel.chollet@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,8 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
 "X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .: "
+"POT-Creation-Date: \n"
+"X-Poedit-SearchPath-0: .:\n"
 
 #: includes.php:94
 msgid "MySQL error on adding yarpp_title"
@@ -28,12 +29,10 @@ msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YA
 msgstr "<h3>Message important de YARPP</h3><p>Merci d’avoir fait la mise à jour vers YARPP 2. Cette version inclut une fonctionnalité très demandée&nbsp;: la possibilité de construire la liste d’entrées complémentaires en fonction de certains tags ou certaines catégories. YARPP 2 apporte également un meilleur contrôle de l’algorithme de complémentarité, ce qui vous permet de définir si le calcul doit prendre en compte les contenus d’entrée, les titres, les tags ou les catégories. Réglez les nouveaux paramètres selon votre convenance (vous devrez peut-être adapter le seuil de prise en compte pour un résultat optimum).</p><p>Pour plus d’information, consultez la <a href=\"http://mitcho.com/code/yarpp/\">documentation YARPP</a>. (Ce message n’apparaîtra plus.)</p>"
 
 #: includes.php:197
-#: includes.php:197
 msgid "Related Posts (YARPP)"
 msgstr "Related Posts (YARPP)"
 
 #: includes.php:224
-#: yarpp.php:29
 #: yarpp.php:29
 msgid "Related Posts"
 msgstr "Entrées complémentaires"
@@ -104,7 +103,6 @@ msgstr "prendre en compte avec plus d’importance"
 msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
 msgstr "Historique des versions de l’extension YARPP (RSS 2.0)"
 
-#: options.php:271
 #: options.php:271
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Faire un don à mitcho (Michael Yoshitaka Erlewine), via PayPal, pour cette extension"
@@ -534,4 +532,12 @@ msgstr "NOUVEAU !"
 #: options.php:474
 msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
 msgstr "Cette option avancée vous permet de personnaliser la présentation de vos listes d’entrées complémentaires. Les fichiers-modèles (à placer dans le dossier de votre thème WordPress) sont écrits en PHP."
+
+#. Description of an extension
+msgid "Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display."
+msgstr "Affiche pour les articles et pages de votre site une liste d’entrées complémentaires selon un algorithme unique. Un système de modèles modifiables permet de personnaliser la présentation."
+
+#. Settings of an extension
+msgid "Settings"
+msgstr "Réglages"
 

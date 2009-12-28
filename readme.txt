@@ -8,6 +8,7 @@ Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
 Tested up to: 2.9.1
 Stable tag: 3.1.3
+Text Domain: yarpp
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
