@@ -151,7 +151,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.1.4 =
-* Localization improvements
+* Localization improvements - descriptions can now be localized
+* [Compatibility with PageBar](http://wordpress.org/support/topic/346714) - thanks to Latz for the patch!
 = 3.1.3 =
 * Performance improvements:
   * Turning off cache expiration, made possible by smarter caching system of 3.1 - should improve caching database performance over time.

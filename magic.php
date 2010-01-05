@@ -302,6 +302,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 
 	$wp_query = $related_query;
 	$wp_query->in_the_loop = true;
+  $wp_query->is_feed = $current_query->is_feed;
   // make sure we get the right is_single value
   // (see http://wordpress.org/support/topic/288230)
 	$wp_query->is_single = false;
