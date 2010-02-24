@@ -151,6 +151,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.1.4 =
+* Improved widget code
 * Localization improvements - descriptions can now be localized
 * [Compatibility with PageBar](http://wordpress.org/support/topic/346714) - thanks to Latz for the patch!
 = 3.1.3 =
