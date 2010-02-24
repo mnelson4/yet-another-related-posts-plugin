@@ -309,6 +309,8 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 				
 	if ($domain == 'metabox') {
 		include(YARPP_DIR.'/template-metabox.php');
+	} elseif ($domain == 'widget') {
+		include(YARPP_DIR.'/template-widget.php');
 	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
