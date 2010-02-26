@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 Text Domain: yarpp
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
@@ -80,6 +80,8 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 = Does YARPP slow down my blog/server? =
 
 A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
+
+If you find that the YARPP database calls are still too database-intensive, try turning off "cross relate posts and pages," not considering tags and/or categories in the Relatedness formula, and not excluding any tags and/or categories in The Pool. All of these will improve database performance.
 
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
