@@ -71,7 +71,7 @@ function yarpp_cache_keywords($ID) {
 	) ENGINE = MYISAM COMMENT = 'YARPP\'s keyword cache table' 
 	*/
 	
-	if (defined('DB_CHARSET')) {
+	if (defined('DB_CHARSET') && DB_CHARSET) {
   	$wpdb->query('set names '.DB_CHARSET);
 	}
 	
