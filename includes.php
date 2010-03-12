@@ -218,25 +218,53 @@ function yarpp_options_page() {
 	require(YARPP_DIR.'/options.php');
 }
 
-// This function was written by @tyok
 function widget_yarpp_init() {
-
-	if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
-		return;
-
-	function widget_yarpp($args) {
-		extract($args);
-		global $wpdb, $post;
-		if (is_single() && have_posts()) {
-      get_post($post->ID);
-      echo $before_widget;
-      echo $before_title . __('Related Posts','yarpp') . $after_title;
-      echo yarpp_related(array('post'),array());
-      echo $after_widget;
-		}
-	}
-	register_sidebar_widget(__('YARPP','yarpp'), 'widget_yarpp');
+  register_widget('YARPP_Widget');
 }
+
+// vaguely based on code by MK Safi
+// http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
+class YARPP_Widget extends WP_Widget {
+  function YARPP_Widget() {
+    parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
+  }
+ 
+  function widget($args, $instance) {
+    if (!is_single())
+      return;
+      
+    extract($args);
+    $title = apply_filters('widget_title', $instance['title']); 
+    echo $before_widget;
+    echo $before_title;
+    if ($title)
+      echo $title;
+    else
+      _e('Related Posts (YARPP)','yarpp');
+    echo $after_title;
+		echo yarpp_related(array('post'),$instance,false,false,'widget');
+    echo $after_widget;
+  }
+ 
+  function update($new_instance, $old_instance) {
+		$instance = array( 'promote_yarpp' => 0);
+		foreach ( $instance as $field => $val ) {
+			if ( isset($new_instance[$field]) )
+				$instance[$field] = 1;
+		}
+		$instance['title'] = $new_instance['title'];
+    return $instance;
+  }
+  
+  function form($instance) {				
+    $title = esc_attr($instance['title']);
+    ?>
+        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+        <p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
+    <?php
+  }
+}
+
 
 function yarpp_default($content) {
 	global $wpdb, $post;
@@ -421,5 +449,3 @@ function yarpp_metabox() {
 		echo "<p>Related entries may be displayed once you save your entry.</p>";
 	echo '</div>';
 }
-
-?>

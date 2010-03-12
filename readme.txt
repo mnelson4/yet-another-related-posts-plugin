@@ -6,9 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
-Tested up to: 2.9.1
-Stable tag: 3.1.3
-Text Domain: yarpp
+Tested up to: 2.9.3
+Stable tag: 3.1.6
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -81,6 +80,8 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
 
+If you find that the YARPP database calls are still too database-intensive, try turning off "cross relate posts and pages," not considering tags and/or categories in the Relatedness formula, and not excluding any tags and/or categories in The Pool. All of these will improve database performance.
+
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
 The DISQUS plugin loads some JavaScript voodoo which is interacting in weird ways with the AJAX in YARPP's options page. You can fix this by going to the DISQUS plugin advanced settings and turning on the "Check this if you have a problem with comment counts not showing on permalinks" option.
@@ -125,6 +126,7 @@ YARPP is currently localized in the following languages:
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+  * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
   * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
@@ -142,7 +144,6 @@ We already have localizers lined up for the following languages:
   * Indonesian
   * Hungarian
   * Romanian
-  * Latvian
   * Swedish
   * Thai
 
@@ -150,9 +151,17 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.6 =
+* Added Latvian localization (`lv_LV`)
+* Added a template which displays post thumbnails; requires WordPress 2.9 and a theme which has post thumbnail support
+= 3.1.5 =
+* Quick bugfix to new widget template (removed extra quote).
 = 3.1.4 =
+* Improved widget code
 * Localization improvements - descriptions can now be localized
 * [Compatibility with PageBar](http://wordpress.org/support/topic/346714) - thanks to Latz for the patch!
+* Bugfix: [`related_posts_exist` was giving incorrect values](http://wordpress.org/support/topic/362347)
+* Bugfix: [SQL error for setups with blank DB_CHARSET](http://wordpress.org/support/topic/358757)
 = 3.1.3 =
 * Performance improvements:
   * Turning off cache expiration, made possible by smarter caching system of 3.1 - should improve caching database performance over time.

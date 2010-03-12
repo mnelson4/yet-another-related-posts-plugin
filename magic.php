@@ -309,6 +309,8 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 				
 	if ($domain == 'metabox') {
 		include(YARPP_DIR.'/template-metabox.php');
+	} elseif ($domain == 'widget') {
+		include(YARPP_DIR.'/template-widget.php');
 	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
@@ -353,19 +355,16 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	if ($yarpp_time) // if we're already in a YARPP loop, stop now.
 		return false;
 	
-	$options = array('threshold'=>'threshold','show_pass_post'=>'show_pass_post','past_only'=>'past_only');
-	$optvals = array();
-	foreach (array_keys($options) as $option) {
-		if (isset($args[$option])) {
-			$optvals[$option] = stripslashes($args[$option]);
-		} else {
-			$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
-		}
-	}
-	extract($optvals);
+  yarpp_cache_enforce($type,$reference_ID);
+	
+  $yarpp_time = true; // get ready for YARPP TIME!
+	$related_query = new WP_Query();
+  $related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
+  $return = $related_query->have_posts();
+  $yarpp_time = false; // YARPP time is over. :(
+  unset($related_query);
 
-    $result = $wpdb->get_var(yarpp_sql($type,$args,false,$reference_ID));
-	return $result > 0 ? true: false;
+	return $return;
 }
 
 function yarpp_save_cache($post_ID,$force=true) {
