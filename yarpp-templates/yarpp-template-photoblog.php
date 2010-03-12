@@ -7,7 +7,7 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 <ol>
 	<?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
 		<?php if (function_exists('yapb_is_photoblog_post')): if (yapb_is_photoblog_post()):?>
-		<li><a href="<?php the_permalink() ?>" rel="bookmark"><?php yapb_get_thumbnail(); ?></a></li>
+		<li><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php yapb_get_thumbnail(); ?></a></li>
 		<?php endif; endif; ?>
 	<?php endwhile; ?>
 </ol>

@@ -1,0 +1,535 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin\n"
+"PO-Revision-Date: 2010-03-12 22:30+0300\n"
+"Last-Translator: FatCow <zhr@tut.by>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Poedit-Language: Latvian\n"
+"X-Poedit-Country: LATVIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+"X-Poedit-Basepath: ../\n"
+"POT-Creation-Date: \n"
+"Language-Team: Mike <iamm@tut.by>\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "Oshibka MySQL pri dobavlenii “yarpp_title”"
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "Oshibka MySQL pri dobavlenii “yarpp_content”"
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>Vajnoe soobschenie ot YARPP</h3><p>Spasibo za obnovlenie do YARPP 2. V etoi versii dobavlena dolgojdannaya vozmojnost' ogranichivat' vyvodimye svyazannye zapisi nekotorymi tegami ili kategoriyami. YARPP 2 takje daet vozmojnost' bolee tonko nastraivat' algoritm, pozvolyaya ukazyvat' sleduet li ispol'zovat' pri rassmotrenii telo, zagolovki, tegi i kategorii. Obyazatel'no prover'e sostoyanie novyh nastroek, vse li sootvetstvuet vashim ojidaniyam.</p><p>Podrobnee zdes': <a href=\"http://mitcho.com/code/yarpp/\">documentation YARPP</a>. (Ce message n’apparaîtra plus.)</p>"
+
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Svyazannye posty (YARPP)"
+
+#: includes.php:224
+#: yarpp.php:29
+msgid "Related Posts"
+msgstr "Svyazannye posty"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f - eto koefficient \"pohojesti\" tekuschgo posta i svyazanogo s nim. Vy vidite eto potomu, chto vy zashli v Wordpress administratorom. Eto ne pokazyvaetsya prostym posetitelyam"
+
+#: magic.php:304
+#: options.php:458
+#: options.php:521
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Spisok pohojih postov predostavlen vam plaginom <a href='http://mitcho.com/code/yarpp/'>YARPP</a>."
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "Proverka MyISAM byla vypolnena. Teper' vy mojete ispol'zovat' kriterii pohojesti “Rassmatrivat' zagolovki” i “Rassmotrivat' tekst”."
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Ispol'zovanie opcii YARPP “Rassmatrivat' zagolovki” i “Rassmatrivat' tekst” trebuet, chtoby vasha tablica <code>%s</code> ispol'zovala dvijok <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, no tablica vidimo ispol'zuet dvijok <code>%s</code>. Eti dve opcii otklyucheny."
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Dlya vosstanovleniya etih opcii, pojaluista, izmenite vashu tablicu <code>%s</code>sleduyuschei  SQL instrukciei e&nbsp;: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code><br />Pri izmenenii tablicy dannye ne doljny propast', odnako vozmojny posledstviya. "
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Esli, nezavisimo ot etoi opcii, vy uvereny chto tablica <code>%s</code> ispol'zuet MyISAM, najmite na etu volshebnuyu knopku&nbsp;:"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Pover'te mne. Pozvol'te mne ispol'zovat' MyISAM."
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Baza dannyh YARPP soderjala oshibki, no oni byli ispravleny."
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Baza dannyh YARPP soderjit oshibku, kotoraya ne mojet byt' ispravlena."
+
+#: options.php:153
+#: options.php:170
+#: options.php:182
+msgid "do not consider"
+msgstr "ne rassmatrivat'"
+
+#: options.php:154
+#: options.php:171
+#: options.php:184
+msgid "consider"
+msgstr "rassmatrivat'"
+
+#: options.php:172
+msgid "consider with extra weight"
+msgstr "rassmatrivat' s dopolnitel'nym vesom"
+
+#: options.php:200
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Istoriya versii plagina YARPP (RSS 2.0)"
+
+#: options.php:271
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Pojertvovat' razrabotchiku  mitcho (Michael Yoshitaka Erlewine), cherez PayPal"
+
+#: options.php:254
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Opcii YARPP"
+
+#: options.php:278
+msgid "\"The Pool\""
+msgstr "<em>Kontent</em>"
+
+#: options.php:279
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "<em>Kontent</em> ponimaetsya kak nabor soobschenii i stranic, kotorye yavlyayutsya kandidatami na pokaz v bloke svyazannyh zapisei."
+
+#: options.php:284
+msgid "Disallow by category:"
+msgstr "Isklyuchit' kategorii:"
+
+#: options.php:286
+msgid "Disallow by tag:"
+msgstr "Isklyuchit' tegi:"
+
+#: options.php:288
+msgid "Show password protected posts?"
+msgstr "Pokazyvat' soobscheniya, zaschischennye parolem?"
+
+#: options.php:289
+msgid "Show only previous posts?"
+msgstr "Pokazyvat' tol'ko predyduschie soobscheniya?"
+
+#: options.php:306
+msgid "\"Relatedness\" options"
+msgstr "Kriterii pohojesti"
+
+#: options.php:308
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP otlichaetsya ot <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">predshestvuyuschih plaginov</a> tem chto ogranichivaet vybor soobschenii <br />(1) maksimal'nym kolichestvom (2) \"pohojest'yu\"."
+
+#: options.php:308
+#: options.php:322
+#: options.php:405
+#: options.php:410
+#: options.php:457
+#: options.php:469
+#: options.php:470
+#: options.php:474
+#: options.php:520
+#: options.php:531
+msgid "more&gt;"
+msgstr "podrobnee&gt;"
+
+#: options.php:313
+msgid "Match threshold:"
+msgstr "Porog pohojesti:"
+
+#: options.php:314
+msgid "Titles: "
+msgstr "Zagolovki:"
+
+#: options.php:316
+msgid "Bodies: "
+msgstr "Teksty:"
+
+#: options.php:318
+msgid "Tags: "
+msgstr "Tegi:"
+
+#: options.php:320
+msgid "Categories: "
+msgstr "Kategorii:"
+
+#: options.php:322
+msgid "Cross-relate posts and pages?"
+msgstr "Delat' perekrestnuyu perelinkovku stranic i soobschenii?"
+
+#: options.php:322
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Kogda vybrana opciya “Delat' perekrestnuyu perelinkovku stranic i soobschenii?”, funkcii <code>related_posts()</code>, <code>related_pages()</code> i <code>related_entries()</code> vydayut odinakovyi nabor, soderjaschii i stranicy i soobscheniya"
+
+#: options.php:401
+msgid "Display options <small>for your website</small>"
+msgstr "Prosmotr opcii <small>dlya vashego saita</small>"
+
+#: options.php:405
+msgid "Automatically display related posts?"
+msgstr "Avtomaticheski pokazyvat' svyazannye posty?"
+
+#: options.php:405
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Eto opciya avtomaticheski pokazyvaet svyazannye soobscheniya hgzvj posle soderjimogo na stranice odinochnogo soobscheniya. Esli etu opciyu otklyuchit', vam ponadobitsya vruchnuyu vstavit'  <code>related_posts()</code> ili chto-to podobnoe (<code>related_pages()</code> i <code>related_entries()</code>) v vashei teme."
+
+#: options.php:406
+msgid "Website display code example"
+msgstr "Primer koda na web-saite "
+
+#: options.php:406
+#: options.php:471
+msgid "(Update options to reload.)"
+msgstr "(Sohranite opcii dlya perezagruzki.)"
+
+#: options.php:409
+#: options.php:473
+msgid "Maximum number of related posts:"
+msgstr "Maksimal'noe kolichestvo svyazannyh postov:"
+
+#: options.php:422
+msgid "Before / after related entries:"
+msgstr "Do / posle <br />svyazannyh postov:"
+
+#: options.php:423
+#: options.php:428
+#: options.php:437
+#: options.php:487
+#: options.php:492
+#: options.php:501
+msgid "For example:"
+msgstr "Naprimer:"
+
+#: options.php:427
+#: options.php:491
+msgid "Before / after each related entry:"
+msgstr "Do / posle<br />kajdogo svyazannogo posta:"
+
+#: options.php:431
+#: options.php:495
+msgid "Show excerpt?"
+msgstr "Pokazat' vyderjku?"
+
+#: options.php:432
+#: options.php:496
+msgid "Excerpt length (No. of words):"
+msgstr "Dlina vyderjki(kol-vo slov):"
+
+#: options.php:436
+msgid "Before / after (Excerpt):"
+msgstr "Do /posle<br />vyderjki"
+
+#: options.php:442
+#: options.php:506
+msgid "Order results:"
+msgstr "Sortirovka rezul'tatov:"
+
+#: options.php:444
+#: options.php:508
+msgid "score (high relevance to low)"
+msgstr "Pohojest' (po-ubyvaniyu)"
+
+#: options.php:445
+#: options.php:509
+msgid "score (low relevance to high)"
+msgstr "Pohojest' (po-vozrastaniyu)"
+
+#: options.php:446
+#: options.php:510
+msgid "date (new to old)"
+msgstr "Data (po-ubyvaniyu)"
+
+#: options.php:447
+#: options.php:511
+msgid "date (old to new)"
+msgstr "Data (po vozrastaniyu)"
+
+#: options.php:448
+#: options.php:512
+msgid "title (alphabetical)"
+msgstr "Zagolovok (po alfavitu)"
+
+#: options.php:449
+#: options.php:513
+msgid "title (reverse alphabetical)"
+msgstr "Zagolovok (v obratnom poryadke)"
+
+#: options.php:454
+#: options.php:518
+msgid "Default display if no results:"
+msgstr "Po-umolchaniyu pokazyvat' esli pusto:"
+
+#: options.php:456
+#: options.php:520
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Pomoch' prodvigat' plagin YARPP?"
+
+#: options.php:458
+#: options.php:521
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Eta opciya dobavit kod %s. Poprobuite vklyuchit' ee, izmenite opcii i smotrite primer koda sprava. Eti ssylki i knopki ochen' vajny."
+
+#: options.php:464
+msgid "Display options <small>for RSS</small>"
+msgstr "Prosmotr nastroek <small>dlya RSS</small>"
+
+#: options.php:469
+msgid "Display related posts in feeds?"
+msgstr "Pokazyvat' svyazannye posty  v  RSS?"
+
+#: options.php:470
+msgid "Display related posts in the descriptions?"
+msgstr "Pokazyvat' svyazannye posty v opisanii?"
+
+#: options.php:470
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+
+#: options.php:471
+msgid "RSS display code example"
+msgstr "Primer koda v RSS"
+
+#: options.php:486
+msgid "Before / after related entries display:"
+msgstr "Do  / posle <br />spiska:"
+
+#: options.php:500
+msgid "Before / after (excerpt):"
+msgstr "Do / posle<br />vyderjki:"
+
+#: options.php:147
+msgid "word"
+msgstr "slovo"
+
+#: options.php:148
+msgid "tag"
+msgstr "teg"
+
+#: options.php:149
+msgid "category"
+msgstr "kategoriya"
+
+#: options.php:156
+#: options.php:186
+#, php-format
+msgid "require at least one %s in common"
+msgstr "hotya by odin \"%s\"  doljen byt' obschim"
+
+#: options.php:158
+#: options.php:188
+#, php-format
+msgid "require more than one %s in common"
+msgstr "bolee odnogo  \"%s\"  doljno byt' obschim"
+
+#: options.php:125
+msgid "Options saved!"
+msgstr "Nastroiki sohraneny!"
+
+#: options.php:308
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Chem vyshe porog pohojesti, tem stroje vyborka, i tem men'she poluchite zapisei na vyhode. Po-umolchaniyu porog raven 5. Esli hotite naiti priemlimye porogovye znacheniya, poeksperimentiruite s neskol'kimi soobscheniyami. Vy smojete uvidet', kakie soobscheniya vyhodyat naverh i kakie u nih znacheniya shojesti, po kotorym mojno opredelit' priemlimyi uroven' dlya vashego saita."
+
+#: options.php:605
+msgid "Update options"
+msgstr "Izmenit' nastroiki"
+
+#: options.php:606
+msgid "Do you really want to reset your configuration?"
+msgstr "Vy deistvitel'no hotite sbrosit' vashi nastroiki?"
+
+#: options.php:606
+msgid "Reset options"
+msgstr "Sbrosit' nastroiki"
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Oshibka MySQL pri sozdanii tablicy yarpp_keyword_cache"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Oshibka MySQL pri sozdanii tablicy yarpp_related_cache table"
+
+#: magic.php:56
+msgid "Example post "
+msgstr "Primer posta"
+
+#: options.php:81
+#: options.php:84
+#: options.php:126
+#: options.php:530
+msgid "Related posts cache status"
+msgstr "Status kesha svyazannyh zapisei"
+
+#: options.php:81
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Vash kesh svyazannyh zapisei nepolon. Pojaluista sozdaite vash kesh iz <A>paneli statusa kesha svyazannyh soobschenii</a>."
+
+#: options.php:84
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Vash kesh svyazannyh zapisei pust. Pojaluista sozdaite vash kesh iz <A>paneli statusa kesha svyazannyh soobschenii</a>."
+
+#: options.php:127
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Esli vy izmenili nastroiki \"Kontenta\" ili \"Kriterii pohojesti\", pojaluista sozdaite vash kesh iz <A>paneli statusa kesha svyazannyh soobschenii</a>."
+
+#: options.php:273
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "Sdelal  <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:273
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Chitat'  <a href=\"http://twitter.com/yarpp/\">YARPP na Tvittere</a>"
+
+#: options.php:294
+msgid "day(s)"
+msgstr "dnei"
+
+#: options.php:295
+msgid "week(s)"
+msgstr "mesyacev"
+
+#: options.php:296
+msgid "month(s)"
+msgstr "let"
+
+#: options.php:298
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Pokazyvat' tol'ko posty za poslednie  NUMBER UNITS"
+
+#: options.php:387
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Vyshla novaya beta (VERSION) plagina YARPP. Vy mojete <A>skachat' ee zdes'</a> na svoi risk."
+
+#: options.php:389
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Vyshla novaya versiya (VERSION) plagina YARPP. Vy mojete <A>skachat' ego zdes'</a>."
+
+#: options.php:410
+#: options.php:474
+msgid "Display using a custom template file"
+msgstr "Pokazyvat' s shablonom pol'zovatelya"
+
+#: options.php:412
+#: options.php:476
+msgid "Template file:"
+msgstr "Fail shablona:"
+
+#: options.php:469
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Eta opciya pokazyvaet svyazannye soobscheniya v konce kajdogo punkta vashego potoka RSS i Atom. Izmeneniya shablona ne trebuyutsya."
+
+#: options.php:527
+msgid "Advanced"
+msgstr "Dopolnitel'no"
+
+#: options.php:530
+msgid "Show cache status"
+msgstr "Pokazat' status kesha"
+
+#: options.php:531
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Vychislyat' svyazannye soobscheniya na letu, kogda kesh ne polon?"
+
+#: options.php:532
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly. Do not turn this option on if you have a high-traffic site.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Esli svyazannye soobscheniya dlya tekuschego posta ne nahodyatsya v keshe i eta opciya vklyuchena, YARPP budet vychislyat' ih na letu. Ne uklyuchaite etu opciyu, esli u vas bol'shoi trafik.<br /> Esli opciya vyklyuchena, to u postov ne imeyuschih kesha budet otobrajat'sya, chto oni ne imeyut svyazannyh soobschenii."
+
+#: options.php:562
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN minut i SEC sekund ostalos''"
+
+#: options.php:564
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC sekund ostalos''"
+
+#: options.php:568
+msgid "Your related posts cache is now complete."
+msgstr "Vash kesh svyazannyh soobschenii gotov."
+
+#: options.php:568
+msgid "The SQL queries took SEC seconds."
+msgstr "SQL zaprosy zanyali SEC sekund"
+
+#: options.php:578
+#: options.php:582
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Proizoshla oshibka pri opredelenii svyazannyh soobschenii dlya TITLE"
+
+#: options.php:579
+#: options.php:584
+msgid "try to continue"
+msgstr "probuyu prodoljit'"
+
+#: options.php:592
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Vash kesh svyazannyh soobschenii gotov na PERCENT%."
+
+#: options.php:598
+msgid "starting..."
+msgstr "nachinayu…"
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Vy ne mojete peresozdat' kesh YARPP."
+
+#: services.php:90
+#, php-format
+msgid "You do not have the permission to write the file '%s'."
+msgstr "Vy ne imeete dostupa dlya zapisi v fail  '%s'."
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Eto svyazannye posty dlya etogo posta. Izmenenie etogo posta mojet izmenit' nabor svyazannyh postov."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Budut li otobrajat'sya vse eti posty i kak oni budut otobrajat'sya, zavisit ot vashih nastroek otobrajeniya YARPP."
+
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "Net svyazannyh soobschenii"
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Pojaluista, dlya zaversheniya installyacii pomestite faily shablonov YARPP v vashu temu. Prosto perenesite faily shablonov (na dannyi moment<code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) v papku <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "V vashei teme WordPress  (<code>TEMPLATEPATH</code>)  ne naideno failov shablonov YARPP. Opciya ispol'zovaniya shablonov vyklyuchena."
+
+#: options.php:410
+#: options.php:474
+#: options.php:527
+msgid "NEW!"
+msgstr "NOVOE!"
+
+#: options.php:410
+#: options.php:474
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Eti dopolnitel'nye nastroiki dayut vam polnuyu mosch' dlya nastroiki otobrajeniya svyazannyh soobschenii. Shablony (hranyatsya papke ispol'zuemoi temy) napisany na PHP."
+

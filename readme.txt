@@ -6,9 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
-Tested up to: 2.9.1
-Stable tag: 3.1.5
-Text Domain: yarpp
+Tested up to: 2.9.3
+Stable tag: 3.1.6
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -127,6 +126,7 @@ YARPP is currently localized in the following languages:
   * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
   * Japanese (`ja`) by myself (yarpp at mitcho dot com)
   * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+  * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
   * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
@@ -144,7 +144,6 @@ We already have localizers lined up for the following languages:
   * Indonesian
   * Hungarian
   * Romanian
-  * Latvian
   * Swedish
   * Thai
 
@@ -152,6 +151,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.6 =
+* Added Latvian localization (`lv_LV`)
+* Added a template which displays post thumbnails; requires WordPress 2.9 and a theme which has post thumbnail support
 = 3.1.5 =
 * Quick bugfix to new widget template (removed extra quote).
 = 3.1.4 =
