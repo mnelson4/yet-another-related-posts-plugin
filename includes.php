@@ -51,7 +51,7 @@ $yarpp_binary_options = array('past_only' => true,
 				'show_pass_post' => false,
 				'cross_relate' => false,
 				'auto_display' => true,
-				'rss_display' => true,
+				'rss_display' => false, // changed default in 3.1.7
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
 				'rss_promote_yarpp' => false);

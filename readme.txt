@@ -6,8 +6,8 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
-Tested up to: 2.9.3
-Stable tag: 3.1.6
+Tested up to: 3.0
+Stable tag: 3.1.7
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -114,6 +114,7 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 
 YARPP is currently localized in the following languages:
 
+	* Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
   * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
   * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
@@ -151,6 +152,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.7 =
+* Added Egyptian Arabic localization (`ar_EG`)
+* Changed default option for automatic display of related posts in feeds to OFF. May improve performance for new users who use the default settings.
+* "Use template" options are now disabled when templates are not found. Other minor tweaks to options screen.
+* 3.1.7 has been lightly tested with WP 3.0. Multisite (WPMU) compatibility has not been tested yet.
 = 3.1.6 =
 * Added Latvian localization (`lv_LV`)
 * Added a template which displays post thumbnails; requires WordPress 2.9 and a theme which has post thumbnail support
