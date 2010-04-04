@@ -3,8 +3,8 @@
 global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
 
 // check to see that templates are in the right place
-
-if (!count(glob(STYLESHEETPATH . '/yarpp-template-*.php'))) {
+$yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0);
+if (!$yarpp_templateable) {
   if (count(glob(WP_CONTENT_DIR.'/plugins/yet-another-related-posts-plugin/yarpp-templates/yarpp-template-*.php')))
   	echo "<div class='updated'>"
 	  .str_replace("TEMPLATEPATH",STYLESHEETPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
@@ -96,7 +96,7 @@ if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_binary_options) as $option) {
 		(isset($_POST[$option])) ? yarpp_set_option($option,true) : yarpp_set_option($option,false);
 	}		
-	echo '<div class="updated fade" style="background-color: rgb(207, 235, 247);"><p>'.__('Options saved!','yarpp').'</p></div>';
+	echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
 	
 //compute $tagmap
@@ -408,7 +408,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'); ?>
+	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -477,7 +477,7 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="9" style="border-left:8px transparent solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_rss' style='overflow:auto;width:350px;max-height:500px;'></div></td>"); ?>
 	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
-	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'); ?>
+	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
 			<tr valign='top' class='rss_templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
