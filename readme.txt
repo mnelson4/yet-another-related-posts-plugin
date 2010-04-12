@@ -133,6 +133,7 @@ YARPP is currently localized in the following languages:
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+  * Turkish (`tr_TR`) by Nurullah (yarpp-tr at mitcho.com) of [ndemir.com](http://www.ndemir.com)
   * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
   * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
   * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
@@ -145,13 +146,14 @@ We already have localizers lined up for the following languages:
   * Indonesian
   * Hungarian
   * Romanian
-  * Swedish
   * Thai
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
 
+= 3.1.8 =
+* Added Turkish localization (`tr_TR`)
 = 3.1.7 =
 * Added Egyptian Arabic localization (`ar_EG`)
 * Changed default option for automatic display of related posts in feeds to OFF. May improve performance for new users who use the default settings.
