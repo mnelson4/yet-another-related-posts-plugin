@@ -31,7 +31,7 @@ function yarpp_where_filter($arg) {
 	global $wpdb, $yarpp_time;
 	$threshold = yarpp_get_option('threshold');
 	if ($yarpp_time) {
-		$arg = str_replace("$wpdb->posts.ID = ","yarpp.score > $threshold and yarpp.reference_ID = ",$arg);
+		$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 		if (yarpp_get_option("recent_only"))
 			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
 		//echo "<!--YARPP TEST: $arg-->";
@@ -189,8 +189,13 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	
 	$newsql .= " where (post_status IN ( 'publish',  'static' ) and ID != '$reference_ID')";
 
-	if ($past_only)
-		$newsql .= " and post_date <= NOW() ";
+	if ($past_only) { // 3.1.8: revised $past_only option
+    if ( is_object($post) && $reference_ID == $post->ID )
+	    $reference_post_date = $post->post_date;
+	  else
+	    $reference_post_date = $wpdb->get_var("select post_date from $wpdb->posts where ID = $reference_ID");
+		$newsql .= " and post_date <= '$reference_post_date' ";
+	}
 	if (!$show_pass_post)
 		$newsql .= " and post_password ='' ";
 	if ($recent_only)
@@ -198,13 +203,15 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 
   if ($type == array('page') && !$cross_relate)
     $newsql .= " and post_type = 'page'";
+  else
+    $newsql .= " and post_type = 'post'";
 
 	// GROUP BY
 	$newsql .= "\n group by id \n";
 	// HAVING
 	// safethreshold is so the new calibration system works.
 	// number_format fix suggested by vkovalcik! :) 
-	$safethreshold = number_format(max($threshold/2,0.1), 2, '.', '');
+	$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
 	$newsql .= " having score >= $safethreshold";
 	if ($usedisterms)
 		$newsql .= " and count(blockterm.term_id) = 0";
@@ -370,13 +377,21 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 function yarpp_save_cache($post_ID,$force=true) {
 	global $wpdb;
 
-	$parent_ID = $wpdb->get_var("select post_parent from $wpdb->posts where ID='$post_ID'");
+  $sql = "select post_parent, post_type from $wpdb->posts where ID='$post_ID'";
+	$parent_ID = $wpdb->get_var($sql,0);
+
 	if ($parent_ID != $post_ID and $parent_ID)
 		$post_ID = $parent_ID;
+
+	$post_type = $wpdb->get_var($sql,1);
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
+	elseif ($post_type == 'page')
+		$type = array('page');
 	else
 		$type = array('post');
+  // TODO: support other post types? maybe?
+  // TODO: fix this bug... we should be getting the post type from the parent, if there is one.
 
   yarpp_cache_enforce($type,$post_ID,$force);
 	
@@ -411,16 +426,18 @@ function yarpp_cache_enforce($type=array('post'),$reference_ID,$force=false) {
 	// let's update the related posts
 	$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) ".yarpp_sql($type,array(),true,$reference_ID)." on duplicate key update date = now()");
 	
-	if ($wpdb->rows_affected and $yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+	$affected = $wpdb->rows_affected;
 	
+	if ($affected and $yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+
 	// if changes were made, let's find out which ones are new. We'll want to clear their caches
 	// so that they will be rebuilt when they're hit next.
-	if ($wpdb->rows_affected) {
+	if ($affected && !yarpp_get_option('past_only')) {
 		$new_relations = $wpdb->get_col("select ID from {$wpdb->prefix}yarpp_related_cache where reference_ID = $reference_ID and ID != 0");
 		yarpp_cache_clear($new_relations);
 	}
 	
-	if (!$wpdb->rows_affected) {
+	if (!$affected) {
 		$wpdb->query("insert into {$wpdb->prefix}yarpp_related_cache (reference_ID,ID,score) values ($reference_ID,0,0) on duplicate key update date = now()");
 		if (!$wpdb->rows_affected)
 			return false;

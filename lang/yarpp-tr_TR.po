@@ -1,0 +1,670 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.13\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-09-17 15:10+0300\n"
+"Last-Translator: Nurullah DEMIR <ndemir@live.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes.php:24
+#: includes.php:35
+#@ yarpp
+msgid "Related posts:"
+msgstr "Benzer yazılar:"
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:28
+#@ yarpp
+msgid "No related posts."
+msgstr "Benzer yazı yok."
+
+#: includes.php:94
+#@ yarpp
+msgid "MySQL error on adding yarpp_title"
+msgstr "MySQL hatası : yarpp_title eklenirken "
+
+#: includes.php:99
+#@ yarpp
+msgid "MySQL error on adding yarpp_content"
+msgstr "MySQL hatası : yarpp_content eklenirken"
+
+#: includes.php:110
+#@ yarpp
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "MySQL hatası : yarpp_keyword_cache tablosu oluşturulurken"
+
+#: includes.php:121
+#@ yarpp
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "MySQL hatası : yarpp_related_cache table oluşturulurken"
+
+#: includes.php:197
+#@ yarpp
+msgid "Related Posts (YARPP)"
+msgstr "Benzer Yazılar(YARPP)"
+
+#: includes.php:205
+#@ yarpp
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: includes.php:233
+#: yarpp.php:33
+#@ yarpp
+msgid "Related Posts"
+msgstr "Benzer Yazılar"
+
+#: includes.php:238
+#@ yarpp
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
+#@ yarpp
+msgid "Example post "
+msgstr "Örnek yazı"
+
+#: magic.php:342
+#: options.php:456
+#: options.php:519
+#@ yarpp
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Benzer yazı sizi  <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Eklentisini</a> kullanarak getirdi."
+
+#: options.php:10
+#@ yarpp
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "YARPP template (tema) dosyalarını kullandığınız temanın dizinine taşıyın yüklemeyi tamamlamak için. ( tema dizini : <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code> ) <code>TEMPLATEPATH</code> taşıyın."
+
+#: options.php:15
+#@ yarpp
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "YARPP temaları bulunamadı. (<code>TEMPLATEPATH</code>) Bu yüzden tema özelliği kapatıldı."
+
+#: options.php:26
+#@ yarpp
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "MyISAM kontorü artık geçersiz. Artık \"uygun başlık\"( \"consider titles\" ) ve \"uygun body'leri\" ( \"consider bodies\" )  kriterlerini kullanabilirsiniz."
+
+#: options.php:35
+#, php-format
+#@ yarpp
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP'ın \"consider titles\" (uygun başlık) ve \"consider bodies\" (uygun gövde) kriteri <code>%s</code> tablosunu gerektirir,  <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM depo motorunu</a> çalıştırmak için. Ama  tablolar <code>%s</code> motorunu kullanıyor gibi gözüküyor. Bu her iki özellik devre dışı bırakıldı."
+
+#: options.php:37
+#, php-format
+#@ yarpp
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Bu özellikleri düzenlemek için, <code>%s</code> tablosunu <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> kodunu kullanarak güncelleştirin. Hiçbir veri silinmeyecektir tam aksi bu performansı arttıracaktır."
+
+#: options.php:39
+#, php-format
+#@ yarpp
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Eğer <code>%s</code>'in MyISAM motorunu kullandığından eminseniz lütfen butonu tıklayın:"
+
+#: options.php:42
+#@ yarpp
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Bana güvenebilirsin :). MYISAM özelliklerini kullanmama izin ver."
+
+#: options.php:65
+#@ yarpp
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP veritabanında bir hata oluştu, hata giderildi."
+
+#: options.php:67
+#@ yarpp
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP veritabanında bir hata oluştu, hata giderilemedi."
+
+#: options.php:68
+#@ yarpp
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "<a>El ile SQL yüklemeyi</a>(<A>manual SQL setup</a>) tekrar deneyin."
+
+#: options.php:98
+#@ yarpp
+msgid "Options saved!"
+msgstr "Ayarlar kaydedildi!"
+
+#: options.php:99
+#: options.php:112
+#: options.php:115
+#: options.php:528
+#@ yarpp
+msgid "Related posts cache status"
+msgstr "İlgili yazılar önbellek istatikleri"
+
+#: options.php:100
+#@ yarpp
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Eğer \"pool\" (etiket) ayarlarını yada \"relatedness\" ayarlarını güncelleştirdiyseniz, lütfen önbelleğinizi yeniden oluşturun, <A>related posts status pane</a>(benzer yazı istatistik paneli)"
+
+#: options.php:112
+#@ yarpp
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Benzer yazı önbellekleri eksik. Lütfen önbelleği <A>related posts status pane</a>(benzer yazı istatistik paneli)nden oluşturun"
+
+#: options.php:115
+#@ yarpp
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Benzer yazı önbelleğiniz boş. Lütfen önbelleği <A>related posts status pane</a>(benzer yazı istatistik paneli)nden oluşturun"
+
+#: options.php:151
+#@ yarpp
+msgid "word"
+msgstr "kelime"
+
+#: options.php:152
+#@ yarpp
+msgid "tag"
+msgstr "etiket"
+
+#: options.php:153
+#@ yarpp
+msgid "category"
+msgstr "kategori"
+
+#: options.php:157
+#: options.php:174
+#: options.php:186
+#@ yarpp
+msgid "do not consider"
+msgstr "gözardı et"
+
+#: options.php:158
+#: options.php:175
+#: options.php:188
+#@ yarpp
+msgid "consider"
+msgstr "göz önünde bulundur"
+
+#: options.php:160
+#: options.php:190
+#, php-format
+#@ yarpp
+msgid "require at least one %s in common"
+msgstr "en az bir tane %s gerektirir common için"
+
+#: options.php:162
+#: options.php:192
+#, php-format
+#@ yarpp
+msgid "require more than one %s in common"
+msgstr "birden fazla %s gerektirir common için"
+
+#: options.php:176
+#@ yarpp
+msgid "consider with extra weight"
+msgstr "en fazla ağırlığa göre göz önünde bulundur"
+
+#: options.php:204
+#@ yarpp
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Related Posts Eklentisinin önceki versiyonları (RSS 2.0)"
+
+#: options.php:258
+#@ yarpp
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Ayarlar"
+
+#: options.php:269
+#@ yarpp
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Bu eklentinin yazarına (Michael Yoshitaka Erlewine) PayPal kullanarak bağış yap"
+
+#: options.php:271
+#@ yarpp
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> || Translation : <a href=http://nurullah.us>Nurullah DEMIR </a>"
+
+#: options.php:271
+#@ yarpp
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "<a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Eklentisini Twitterda Takip Et</a>"
+
+#: options.php:276
+#@ yarpp
+msgid "\"The Pool\""
+msgstr "\"The Pool\" (Anket)"
+
+#: options.php:277
+#@ yarpp
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+
+#: options.php:282
+#@ yarpp
+msgid "Disallow by category:"
+msgstr "Kategoriye göre kabul et:"
+
+#: options.php:284
+#@ yarpp
+msgid "Disallow by tag:"
+msgstr "Etikete göre kabul et:"
+
+#: options.php:286
+#@ yarpp
+msgid "Show password protected posts?"
+msgstr "Şifreyle korunmuş olan yazıları göster?"
+
+#: options.php:292
+#@ yarpp
+msgid "day(s)"
+msgstr "gün"
+
+#: options.php:293
+#@ yarpp
+msgid "week(s)"
+msgstr "hafta"
+
+#: options.php:294
+#@ yarpp
+msgid "month(s)"
+msgstr "ay"
+
+#: options.php:296
+#@ yarpp
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Sadece son NUMBER UNITS (sayı ünitelerinden) postları göster"
+
+#: options.php:304
+#@ yarpp
+msgid "\"Relatedness\" options"
+msgstr "\"Relatedness\" seçenekler"
+
+#: options.php:306
+#, php-format
+#@ yarpp
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> eklentisinden farklıdır, as it limits the related posts list by (1) a maximum sayi ve (2) a <em>match threshold</em>."
+
+#: options.php:306
+#: options.php:320
+#: options.php:403
+#: options.php:408
+#: options.php:455
+#: options.php:467
+#: options.php:468
+#: options.php:472
+#: options.php:518
+#: options.php:529
+#@ yarpp
+msgid "more&gt;"
+msgstr "more&gt;"
+
+#: options.php:306
+#@ yarpp
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+
+#: options.php:311
+#@ yarpp
+msgid "Match threshold:"
+msgstr "Match threshold:"
+
+#: options.php:312
+#@ yarpp
+msgid "Titles: "
+msgstr "Başlıklar:"
+
+#: options.php:314
+#@ yarpp
+msgid "Bodies: "
+msgstr "Gövde:"
+
+#: options.php:316
+#@ yarpp
+msgid "Tags: "
+msgstr "Etiketler:"
+
+#: options.php:318
+#@ yarpp
+msgid "Categories: "
+msgstr "Kategoriler:"
+
+#: options.php:320
+#@ yarpp
+msgid "Cross-relate posts and pages?"
+msgstr "Sayfa ve yazıları ilişkilendir?"
+
+#: options.php:320
+#@ yarpp
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "\"Cross-relate posts and pages\" (Sayfa ve yazıları ilişkilendir) özelliğini seçtiğinizde <code>related_posts()</code>, <code>related_pages()</code> ve <code>related_entries()</code> kodlarını hepsi aynı çıktıyı verecektir. "
+
+#: options.php:386
+#@ yarpp
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Bu eklentinin BETA (deneme) sürümü mevcut. <A>Buradan indirebilirsiniz</a>"
+
+#: options.php:388
+#@ yarpp
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Bu eklentinin yeni sürümü mevcut. <A>Buradan indirebilirsiniz</a>."
+
+#: options.php:399
+#@ yarpp
+msgid "Display options <small>for your website</small>"
+msgstr "Gösterim seçenekleri <small>sizin siteniz için</small>"
+
+#: options.php:403
+#@ yarpp
+msgid "Automatically display related posts?"
+msgstr "Otomatik olarak benzer yazıları göster"
+
+#: options.php:403
+#@ yarpp
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Bu özellik otomatik olarak <i>Benzer Yazıların</i> sayfa ve yazıların hemen ardından eklenmesini sağlar. Eğer bu özelliği kapatırsanız,  <code>related_posts()</code> yada (<code>related_pages()</code> and <code>related_entries()</code>) kodlarından birini temanıza eklemek zorunda kalırsınız."
+
+#: options.php:404
+#@ yarpp
+msgid "Website display code example"
+msgstr "Site göstermek için örnek kod"
+
+#: options.php:404
+#: options.php:469
+#@ yarpp
+msgid "(Update options to reload.)"
+msgstr "(Tekrar yüklemek için seçenekleri güncelleştirin)"
+
+#: options.php:407
+#: options.php:471
+#@ yarpp
+msgid "Maximum number of related posts:"
+msgstr "Maximum benzer yazı sayısı:"
+
+#: options.php:408
+#: options.php:472
+#@ yarpp
+msgid "Display using a custom template file"
+msgstr "İstediğiniz bir temayı seçerek gösterin"
+
+#: options.php:408
+#: options.php:472
+#: options.php:525
+#@ yarpp
+msgid "NEW!"
+msgstr "YENİ!"
+
+#: options.php:408
+#: options.php:472
+#@ yarpp
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Bu özellik benzer yazıları göstermek sizin istediğiniz şekil göstermek için size tam güç verir. Temalar (tema klasöründe saklı) PHP dilinde yazıldı."
+
+#: options.php:410
+#: options.php:474
+#@ yarpp
+msgid "Template file:"
+msgstr "Tema dosyası:"
+
+#: options.php:420
+#@ yarpp
+msgid "Before / after related entries:"
+msgstr "Önceki/Sonraki benzer yazılar:"
+
+#: options.php:421
+#: options.php:426
+#: options.php:435
+#: options.php:485
+#: options.php:490
+#: options.php:499
+#@ yarpp
+msgid "For example:"
+msgstr "Örneğin:"
+
+#: options.php:421
+#: options.php:426
+#: options.php:435
+#: options.php:485
+#: options.php:490
+#: options.php:499
+#@ yarpp
+msgid " or "
+msgstr "yada"
+
+#: options.php:425
+#: options.php:489
+#@ yarpp
+msgid "Before / after each related entry:"
+msgstr "Her yazı girilmeden önce/sonra:"
+
+#: options.php:429
+#: options.php:493
+#@ yarpp
+msgid "Show excerpt?"
+msgstr "Alıntıları göster?"
+
+#: options.php:430
+#: options.php:494
+#@ yarpp
+msgid "Excerpt length (No. of words):"
+msgstr "Alıntı uzunluğu(kelime sayısı)"
+
+#: options.php:434
+#@ yarpp
+msgid "Before / after (Excerpt):"
+msgstr "Önceki/Sonraki (Alıntılar):"
+
+#: options.php:440
+#: options.php:504
+#@ yarpp
+msgid "Order results:"
+msgstr "Sıralama sonucu:"
+
+#: options.php:442
+#: options.php:506
+#@ yarpp
+msgid "score (high relevance to low)"
+msgstr "Skor (yukarıdan aşağı)"
+
+#: options.php:443
+#: options.php:507
+#@ yarpp
+msgid "score (low relevance to high)"
+msgstr "skor (aşağıdan yukarı)"
+
+#: options.php:444
+#: options.php:508
+#@ yarpp
+msgid "date (new to old)"
+msgstr "tarih (yeniden eskiye)"
+
+#: options.php:445
+#: options.php:509
+#@ yarpp
+msgid "date (old to new)"
+msgstr "tarih (eskiden yeniye)"
+
+#: options.php:446
+#: options.php:510
+#@ yarpp
+msgid "title (alphabetical)"
+msgstr "başlık (alfabetik)"
+
+#: options.php:447
+#: options.php:511
+#@ yarpp
+msgid "title (reverse alphabetical)"
+msgstr "başlık (alfabetik tersten)"
+
+#: options.php:452
+#: options.php:516
+#@ yarpp
+msgid "Default display if no results:"
+msgstr "Sonuç yoksa, şunu göster:"
+
+#: options.php:454
+#: options.php:518
+#@ yarpp
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Yet Another Related Posts Eklentisine Yardımcı ol?"
+
+#: options.php:456
+#: options.php:519
+#, php-format
+#@ yarpp
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Bu özellik %s kodunu ekleyecek. Etkinleştirmeye çalışılırken, ayarları güncellemeye çalışılırken , ve kodu sağ taraftaki kod örneğinde görün."
+
+#: options.php:462
+#@ yarpp
+msgid "Display options <small>for RSS</small>"
+msgstr "<small>RSS için</small> seçenekleri göster"
+
+#: options.php:467
+#@ yarpp
+msgid "Display related posts in feeds?"
+msgstr "Benzer yazıları beslemede(feed) göster?"
+
+#: options.php:467
+#@ yarpp
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Bu özelllik RSS ve Atom beslemelerinin her bir öğenin sonunda \\\"Related Posts\\\" (Benzer yazıları) gösterir. Herhangi bir template değişikliğine gerek yok."
+
+#: options.php:468
+#@ yarpp
+msgid "Display related posts in the descriptions?"
+msgstr "Benzer yazıları açıklama (descriptions) kısmında göster?"
+
+#: options.php:468
+#@ yarpp
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "RSS'nin açıklama kısmında benzer yazıları gösterir, sadece içeriği değil. Eğer beslemeniz(RSS) sadece alıntıları göstermeye ayarlamışsa, sadece  açıklama(description) alanı kullanılıyorsa,  bu özellik gereklidir."
+
+#: options.php:469
+#@ yarpp
+msgid "RSS display code example"
+msgstr "RSS gösterme kod örneği"
+
+#: options.php:484
+#@ yarpp
+msgid "Before / after related entries display:"
+msgstr "Önceki/sonraki benzer yazıları göster:"
+
+#: options.php:498
+#@ yarpp
+msgid "Before / after (excerpt):"
+msgstr "Önceki/sonraki alıntıar:"
+
+#: options.php:525
+#@ yarpp
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: options.php:528
+#@ yarpp
+msgid "Show cache status"
+msgstr "Önbellek istatiklerini göster"
+
+#: options.php:529
+#@ yarpp
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Önbellek eksik olduğu zaman, anında benzer yazıları hesapla?"
+
+#: options.php:530
+#@ yarpp
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Gösterilen <i>benzer yazı</i>nın  önbelleği alınmamışsa ve bu özellik açık ise, YARPP kafadan hesaplayacak. <br> Eğer bu özellike kapalıysa ve yazının <i>benzer yazı</i>sı önbelleğe alınmamışsa, benzer öğe yok diye gösterilecek."
+
+#: options.php:560
+#@ yarpp
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN dakika ve SEC saniye kaldı'"
+
+#: options.php:562
+#@ yarpp
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC saniye kaldı'"
+
+#: options.php:566
+#@ yarpp
+msgid "Your related posts cache is now complete."
+msgstr "Benzer yazı önbellği tamamlandı."
+
+#: options.php:566
+#@ yarpp
+msgid "The SQL queries took SEC seconds."
+msgstr "SQL kuyruğu SEC saniye aldı."
+
+#: options.php:573
+#@ yarpp
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Başlık oluşturulurken hata meydana geldi."
+
+#: options.php:575
+#: options.php:581
+#@ yarpp
+msgid "Constructing the related posts timed out."
+msgstr "Zaman aşımına uğradı."
+
+#: options.php:578
+#: options.php:583
+#@ yarpp
+msgid "Try to continue..."
+msgstr "Devam etmeyi deneyin..."
+
+#: options.php:591
+#@ yarpp
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Benzer yazılarınızın önbelleği PERCENT% tamamlandı"
+
+#: options.php:597
+#@ yarpp
+msgid "starting..."
+msgstr "başlıyor..."
+
+#: options.php:604
+#@ yarpp
+msgid "Update options"
+msgstr "Seçenekler güncelleştir"
+
+#: options.php:605
+#@ yarpp
+msgid "Do you really want to reset your configuration?"
+msgstr "Ayarlarınızı sıfırlamak istediğinizden emin misiniz?"
+
+#: options.php:605
+#@ yarpp
+msgid "Reset options"
+msgstr "Ayarları sıfırla"
+
+#: services.php:59
+#@ yarpp
+msgid "You cannot rebuild the YARPP cache."
+msgstr "YARPP önbelleğini tekrar oluşturamazsınız."
+
+#: template-builtin.php:35
+#, php-format
+#@ yarpp
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f geçerli yazı ve benzer yazı arasında karşılaştırma. Bu değeri görme sebebiniz WordPress administrator olarak giriş yaptınız. Ziyaretçilere bu değer gösterilmez."
+
+#: template-metabox.php:12
+#@ yarpp
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Bu yazı için benzer yazı var. Bu postu güncellerken ilgili yazı değişebilir."
+
+#: template-metabox.php:26
+#@ yarpp
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Benzer yazıların nasıl gösterileceği tamamen size bağlıdır."
+

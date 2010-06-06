@@ -48,11 +48,6 @@ function html_entity_strip($html) {
 function post_body_keywords($ID,$max = 20) {
 	global $wpdb;
 	$content = strip_tags(apply_filters_if_white('the_content',$wpdb->get_var("select post_content from $wpdb->posts where ID = $ID")));
-	//echo "<!--".get_option('blog_charset')."-->";
-	/*if (get_option('blog_charset') == 'UTF-8')
-		$content = html_entity_decode_utf8($content);
-	else
-		$content = html_entity_decode($content,ENT_QUOTES,get_option('blog_charset'));*/
 	$content = html_entity_strip($content);
 	return yarpp_extract_keywords($content,$max);
 }
@@ -77,8 +72,6 @@ function yarpp_cache_keywords($ID) {
 	
 	$wpdb->query("insert into {$wpdb->prefix}yarpp_keyword_cache (ID,body,title) values ($ID,'$body_terms ','$title_terms ') on duplicate key update date = now(), body = '$body_terms ', title = '$title_terms '");
 	
-	//echo "<!--"."insert into {$wpdb->prefix}yarpp_keyword_cache (ID,body,title) values ($ID,'$body_terms','$title_terms') on duplicate key update date = now(), body = '$body_terms', title = '$title_terms'"."-->";
-
 }
 
 function yarpp_get_cached_keywords($ID,$type='body') {

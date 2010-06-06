@@ -9,6 +9,8 @@ if ( !defined('WP_CONTENT_URL') )
 	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
 if ( !defined('WP_CONTENT_DIR') )
 	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
+if ( !defined('YARPP_UNLIKELY_DEFAULT') )
+	define('YARPP_UNLIKELY_DEFAULT', "There's no way this is going to be the string.");
 
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 $yarpp_value_options = array('threshold' => 5,
@@ -51,7 +53,7 @@ $yarpp_binary_options = array('past_only' => true,
 				'show_pass_post' => false,
 				'cross_relate' => false,
 				'auto_display' => true,
-				'rss_display' => true,
+				'rss_display' => false, // changed default in 3.1.7
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
 				'rss_promote_yarpp' => false);
@@ -73,7 +75,7 @@ function yarpp_enabled() {
 }
 
 function yarpp_reinforce() {
-	if (!get_option('yarpp_version'))
+	if (!get_site_option('yarpp_version'))
 		yarpp_activate();
 	yarpp_upgrade_check(true);
 }
@@ -81,12 +83,12 @@ function yarpp_reinforce() {
 function yarpp_activate() {
 	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options;
 	foreach (array_keys($yarpp_value_options) as $option) {
-		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
-		add_option("yarpp_$option",$yarpp_value_options[$option]);
+		if (get_site_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+			add_site_option("yarpp_$option",$yarpp_value_options[$option] . ' ');
 	}
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
-		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
+		if (get_site_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+			add_site_option("yarpp_$option",$yarpp_binary_options[$option]);
 	}
 	if (!yarpp_enabled()) {
 		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)")) {
@@ -125,8 +127,8 @@ function yarpp_activate() {
 			return 0;
 		}
 	}
-	add_option('yarpp_version',YARPP_VERSION);
-	update_option('yarpp_version',YARPP_VERSION);
+	add_site_option('yarpp_version',YARPP_VERSION);
+	update_site_option('yarpp_version',YARPP_VERSION);
 	return 1;
 }
 
@@ -144,44 +146,28 @@ function yarpp_upgrade_check($inuse = false) {
 	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 
 	foreach (array_keys($yarpp_value_options) as $option) {
-		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
-		add_option("yarpp_$option",$yarpp_value_options[$option].' ');
+		if (get_site_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+			add_site_option("yarpp_$option",$yarpp_value_options[$option].' ');
 	}
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (!get_option("yarpp_$option") or get_option("yarpp_$option") == '')
-		add_option("yarpp_$option",$yarpp_binary_options[$option]." ");
+		if (get_site_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+			add_site_option("yarpp_$option",$yarpp_binary_options[$option]);
 	}
 
 	// upgrade check
 
-	if (get_option('threshold') and get_option('limit') and get_option('len')) {
+	if (get_site_option('threshold') and get_site_option('limit') and get_site_option('len')) {
 		yarpp_activate();
 		yarpp_upgrade_one_five();
-		update_option('yarpp_version','1.5');
+		update_site_option('yarpp_version','1.5');
 	}
 	
-	if (version_compare('2',get_option('yarpp_version'),'>') > 0) {
-		foreach (array_keys($yarpp_value_options) as $option) {
-			if (!get_option("yarpp_$option"))
-			add_option("yarpp_$option",$yarpp_value_options[$option].' ');
-		}
-		foreach (array_keys($yarpp_binary_options) as $option) {
-			if (!get_option("yarpp_$option"))
-			add_option("yarpp_$option",$yarpp_binary_options[$option]);
-		}
-	}
-
-	if (version_compare('2.03',get_option('yarpp_version')) > 0) {
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");		update_option('yarpp_version','2.03');
-	}
-
-	if (version_compare('3.1.3',get_option('yarpp_version')) > 0) {
+	if (version_compare('3.1.3',get_site_option('yarpp_version')) > 0) {
 		$wpdb->query("ALTER TABLE {$wpdb->prefix}yarpp_related_cache DROP PRIMARY KEY ,
                   ADD PRIMARY KEY ( score , date , reference_ID , ID )");
 	}
 
-  update_option('yarpp_version',YARPP_VERSION);
+  update_site_option('yarpp_version',YARPP_VERSION);
 
 	// just in case, try to add the index one more time.	
 	if (!yarpp_enabled()) {
@@ -268,26 +254,42 @@ class YARPP_Widget extends WP_Widget {
 
 function yarpp_default($content) {
 	global $wpdb, $post;
+	
 	if (is_feed())
-		return yarpp_rss($content);
-	elseif (yarpp_get_option('auto_display') and is_single())
-		return $content.yarpp_related(array('post'),array(),false,false,'website');
+		return yarpp_rss($content,$type);
+	
+	$type = ($post->post_type == 'page' ? array('page') : array('post'));
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+	
+	if (yarpp_get_option('auto_display') and is_single())
+		return $content.yarpp_related($type,array(),false,false,'website');
 	else
 		return $content;
 }
 
 function yarpp_rss($content) {
 	global $wpdb, $post;
+	
+	$type = ($post->post_type == 'page' ? array('page') : array('post'));
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+	
 	if (yarpp_get_option('rss_display'))
-		return $content.yarpp_related(array('post'),array(),false,false,'rss');
+		return $content.yarpp_related($type,array(),false,false,'rss');
 	else
 		return $content;
 }
 
 function yarpp_rss_excerpt($content) {
 	global $wpdb, $post;
+
+	$type = ($post->post_type == 'page' ? array('page') : array('post'));
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+
 	if (yarpp_get_option('rss_excerpt_display') && yarpp_get_option('rss_display'))
-		return $content.clean_pre(yarpp_related(array('post'),array(),false,false,'rss'));
+		return $content.clean_pre(yarpp_related($type,array(),false,false,'rss'));
 	else
 		return $content;
 }
@@ -374,26 +376,26 @@ function yarpp_upgrade_one_five() {
 	global $wpdb;
 	$migrate_options = array('past_only','show_excerpt','show_pass_post','cross_relate','limit','threshold','before_title','after_title','before_post','after_post');
 	foreach ($migrate_options as $option) {
-		if (get_option($option)) {
-			update_option("yarpp_$option",get_option($option));
-			delete_option($option);
+		if (get_site_option($option,YARPP_UNLIKELY_DEFAULT) != YARPP_UNLIKELY_DEFAULT) {
+			update_site_option("yarpp_$option",get_site_option($option));
+			delete_site_option($option);
 		}
 	}
 	// len is one option where we actually change the name of the option
-	update_option('yarpp_excerpt_length',get_option('len'));
-	delete_option('len');
+	update_site_option('yarpp_excerpt_length',get_site_option('len'));
+	delete_site_option('len');
 
 	// override these defaults for those who upgrade from < 1.5
-	update_option('yarpp_auto_display',false);
-	update_option('yarpp_before_related','');
-	update_option('yarpp_after_related','');
+	update_site_option('yarpp_auto_display',false);
+	update_site_option('yarpp_before_related','');
+	update_site_option('yarpp_after_related','');
 	unset($yarpp_version);
 }
 
 define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
 function yarpp_excerpt($content,$length) {
-  $content = strip_tags($content);
+  $content = strip_tags( (string) $content );
 	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
 	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
 }
@@ -401,17 +403,17 @@ function yarpp_excerpt($content,$length) {
 function yarpp_set_option($option,$value) {
 	global $yarpp_value_options;
 	if (array_search($option,array_keys($yarpp_value_options)) === true)
-		update_option("yarpp_$option",$value.' ');
+		update_site_option("yarpp_$option",$value.' ');
 	else
-		update_option("yarpp_$option",$value);
+		update_site_option("yarpp_$option",$value);
 }
 
 function yarpp_get_option($option,$escapehtml = false) {
 	global $yarpp_value_options;
 	if (!(array_search($option,array_keys($yarpp_value_options)) === false))
-		$return = chop(get_option("yarpp_$option"));
+		$return = chop(get_site_option("yarpp_$option"));
 	else
-		$return = get_option("yarpp_$option");
+		$return = get_site_option("yarpp_$option");
 	if ($escapehtml)
 		$return = htmlspecialchars(stripslashes($return));
 	return $return;
