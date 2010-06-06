@@ -94,7 +94,7 @@ if (isset($_POST['update_yarpp'])) {
 	//update_option('yarpp_distags',implode(',',array_map('yarpp_unmapthetag',preg_split('!\s*[;,]\s*!',strtolower($_POST['distags']))))); // distags is even more different
 	
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		(isset($_POST[$option])) ? yarpp_set_option($option,true) : yarpp_set_option($option,false);
+		(isset($_POST[$option])) ? yarpp_set_option($option,1) : yarpp_set_option($option,0);
 	}		
 	echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
@@ -282,9 +282,8 @@ function load_display_discats() {
 			<tr valign='top'>
 				<th scope='row'><?php _e('Disallow by tag:','yarpp');?></th>
 				<td><div id='display_distags' style="overflow:auto;max-height:100px;"></div></td></tr>
-	<?php checkbox('show_pass_post',__("Show password protected posts?",'yarpp')); ?>
-	<?php /*checkbox('past_only',__("Show only previous posts?",'yarpp')); */ ?>
-	<?php 
+<?php 
+	checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
 	
 	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".stripslashes(yarpp_get_option('recent_number',true))."\" size=\"2\" />";
 	$recent_units = "<select name=\"recent_units\" id=\"recent_units\">
@@ -292,7 +291,8 @@ function load_display_discats() {
 		<option value='week'". (('week'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('week(s)','yarpp')."</option>
 		<option value='month'". (('month'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('month(s)','yarpp')."</option>
 	</select>";
-	checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp')))); ?>
+	checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp'))));
+?>
 
 		</tbody>
 	</table>
@@ -312,16 +312,19 @@ function load_display_discats() {
 	<table class="form-table" style="margin-top: 0">
 		<tbody>
 	
-	<?php textbox('threshold',__('Match threshold:','yarpp'))?>
-	<?php importance2('title',__("Titles: ",'yarpp'),'word',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''))?>
-	<?php importance2('body',__("Bodies: ",'yarpp'),'word',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''))?>
-	<?php importance('tags',__("Tags: ",'yarpp'),'tag',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
-	<?php importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''))?>
-	<?php checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>"); ?>
+<?php
+	textbox('threshold',__('Match threshold:','yarpp'));
+	importance2('title',__("Titles: ",'yarpp'),'word',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''));
+	importance2('body',__("Bodies: ",'yarpp'),'word',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''));
+	importance('tags',__("Tags: ",'yarpp'),'tag',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
+	importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
+			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
+	checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
+	checkbox('past_only',__("Show only previous posts?",'yarpp'));
+?>
 			</tbody>
 		</table>
 	</div>

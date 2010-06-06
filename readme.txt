@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
@@ -54,11 +54,36 @@ New in version 3.0, YARPP allows the advanced user with knowledge of PHP to cust
 
 = Manual installation =
 
-For advanced users with knowledge of PHP, there is also an [advanced manual installation option](http://mitcho.com/code/yarpp/manual.php).
+For advanced users with knowledge of PHP, there is also an [advanced manual installation option](http://mitcho.com/code/yarpp/manual-installation/).
 
 == Frequently Asked Questions ==
 
 If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email or tweet with questions.*
+
+= How can I move the related posts display? =
+
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" option in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
+
+If you would like to add the Related Posts display elsewhere, follow these directions: (*Knowledge of PHP and familiarity with editing your WordPress theme files is required.*)
+
+Edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. 
+
+This method can also be used to display YARPP on pages other than single-post displays, such as on archive pages. There is a little more information on the [advanced manual installation page](http://mitcho.com/code/yarpp/manual-installation/).
+
+= Does YARPP slow down my blog/server? =
+
+A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
+
+If you find that the YARPP database calls are still too database-intensive, try the following:
+
+* turning off "cross relate posts and pages";
+* turning on "show only previous posts";
+* not considering tags and/or categories in the Relatedness formula;
+* not excluding any tags and/or categories in The Pool.
+
+All of these can improve database performance.
+
+If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/go/order/?refdom=mitcho.com).
 
 = Every page just says "no related posts"! What's up with that? =
 
@@ -69,18 +94,6 @@ Most likely you have "no related posts" right now as the default "match threshol
 The match score display is only for administrators... you can log out of `wp-admin` and check out the post again and you will see that the score is gone.
 
 If you would like more flexibility in changing the display of your related posts, please see the [templating tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
-
-= Does YARPP work with full-width characters or languages that don't use spaces between words? =
-
-YARPP works fine with full-width (double-byte) characters, assuming your WordPress database is set up with Unicode support. 99% of the time, if you're able to write blog posts with full-width characters and they're displayed correctly, YARPP will work on your blog.
-
-However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
-
-= Does YARPP slow down my blog/server? =
-
-A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
-
-If you find that the YARPP database calls are still too database-intensive, try turning off "cross relate posts and pages," not considering tags and/or categories in the Relatedness formula, and not excluding any tags and/or categories in The Pool. All of these will improve database performance.
 
 = I use DISQUS for comments. I can't access the YARPP options page! =
 
@@ -102,9 +115,15 @@ It is recommended that you tweak your match threshold whenever you make changes 
 
 = Are there any plugins that are incompatible with YARPP? =
 
-Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966) and the [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/) plugin. Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually. Other related posts plugins, obviously, may also be incompatible.
+Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966) and the [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/) plugin. Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually. There are reports that the [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605) may also be incompatible with YARPP. Other related posts plugins, obviously, may also be incompatible.
 
 Please submit similar bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
+
+= Does YARPP work with full-width characters or languages that don't use spaces between words? =
+
+YARPP works fine with full-width (double-byte) characters, assuming your WordPress database is set up with Unicode support. 99% of the time, if you're able to write blog posts with full-width characters and they're displayed correctly, YARPP will work on your blog.
+
+However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
 
 = Things are weird after I upgraded. =
 
@@ -154,6 +173,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.1.8 =
 * Added Turkish localization (`tr_TR`)
+* Bugfix: related pages and "cross-relate posts and pages" functionality is now working again.
+* Some bare minimum changes for Multisite (WPMU) support.
+* Reimplemented the old "show only previous posts" option. May improve performance for sites with frequent new posts, as there is then no longer a need to recompute the previous posts' related posts set, as it cannot include the new post anyway.
+* Minor bugfix to threshold limiting.
+* Minor fix which may help reduce [`strip_tags()` errors](http://wordpress.org/support/topic/353588).
+* Updated FAQ.
+* Code cleanup.
 = 3.1.7 =
 * Added Egyptian Arabic localization (`ar_EG`)
 * Changed default option for automatic display of related posts in feeds to OFF. May improve performance for new users who use the default settings.

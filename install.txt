@@ -17,7 +17,7 @@ NOTE: If you run a large and complex site and/or worry about your SQL query volu
 
 If you see an error saying "The YARPP database has an error which could not be fixed", please try manual SQL setup:
 
-http://mitcho.com/code/yarpp/sql.php
+http://mitcho.com/code/yarpp/sql/
 
 == SUPPORT ==
 
