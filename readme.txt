@@ -26,6 +26,12 @@ This plugin requires that your database run on MySQL 4.1 or greater.
 
 **Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Allow LaTeX Uploads](http://wordpress.org/extend/plugins/allow-latex-uploads/), [Taxonomy Metadata](http://wordpress.org/extend/plugins/taxonomy-metadata/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Distinct Preview](http://wordpress.org/extend/plugins/distinct-preview/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
 
+= A note on support (June 2010) =
+
+I have begun instituting a stricter policy of not responding to support inquiries via email, instead directing senders to the appropriate WordPress.org forum, [here](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform).
+
+I try to respond to inquiries on the forums on a regular basis and hope to build a community of users who can learn from each other's questions and experiences and can support one another. I ask for your understanding on this matter.
+
 = Testimonials =
 
 "One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - Matt Mullenweg, WordPress creator
