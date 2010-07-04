@@ -177,6 +177,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.1.9 =
+* The Related Posts Widget now can also use custom templates. ([#1143](http://plugins.trac.wordpress.org/ticket/1143))
+* Fixes a WordPress warning of "unexpected output" on plugin installation.
+* Fixes a PHP warning message regarding `array_key`.
+* Fixed a strict WordPress warning about capabilities.
+* Bugfix: widget now obeys cross-relate posts and pages option
+* For WPMU + Multisite users, reverted 3.1.8's `get_site_option`s to `get_option`s, so that individual site options can be maintained.
 = 3.1.8 =
 * Added Turkish localization (`tr_TR`)
 * Bugfix: related pages and "cross-relate posts and pages" functionality is now working again.

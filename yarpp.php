@@ -3,13 +3,13 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.1.8
+Version: 3.1.9
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 */
 
-define('YARPP_VERSION','3.1.8');
+define('YARPP_VERSION','3.1.9');
 define('YARPP_DIR',dirname(__FILE__));
 
 require_once(YARPP_DIR.'/includes.php');
@@ -24,16 +24,16 @@ add_filter('the_excerpt_rss','yarpp_rss_excerpt',600);
 register_activation_hook(__FILE__,'yarpp_activate');
 
 // new in 3.1: clear cache when updating certain settings.
-add_action('update_site_option_yarpp_distags','yarpp_clear_cache');
-add_action('update_site_option_yarpp_discats','yarpp_clear_cache');
-add_action('update_site_option_yarpp_show_pass_post','yarpp_clear_cache');
-add_action('update_site_option_yarpp_recent_only','yarpp_clear_cache');
-add_action('update_site_option_yarpp_threshold','yarpp_clear_cache');
-add_action('update_site_option_yarpp_title','yarpp_clear_cache');
-add_action('update_site_option_yarpp_body','yarpp_clear_cache');
-add_action('update_site_option_yarpp_categories','yarpp_clear_cache');
-add_action('update_site_option_yarpp_tags','yarpp_clear_cache');
-add_action('update_site_option_yarpp_tags','yarpp_clear_cache');
+add_action('update_option_yarpp_distags','yarpp_clear_cache');
+add_action('update_option_yarpp_discats','yarpp_clear_cache');
+add_action('update_option_yarpp_show_pass_post','yarpp_clear_cache');
+add_action('update_option_yarpp_recent_only','yarpp_clear_cache');
+add_action('update_option_yarpp_threshold','yarpp_clear_cache');
+add_action('update_option_yarpp_title','yarpp_clear_cache');
+add_action('update_option_yarpp_body','yarpp_clear_cache');
+add_action('update_option_yarpp_categories','yarpp_clear_cache');
+add_action('update_option_yarpp_tags','yarpp_clear_cache');
+add_action('update_option_yarpp_tags','yarpp_clear_cache');
 
 load_plugin_textdomain('yarpp', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)), dirname(plugin_basename(__FILE__)).'/lang',dirname(plugin_basename(__FILE__)).'/lang');
 

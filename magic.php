@@ -313,16 +313,16 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
   // make sure we get the right is_single value
   // (see http://wordpress.org/support/topic/288230)
 	$wp_query->is_single = false;
-				
+	
 	if ($domain == 'metabox') {
 		include(YARPP_DIR.'/template-metabox.php');
-	} elseif ($domain == 'widget') {
-		include(YARPP_DIR.'/template-widget.php');
 	} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
 		ob_start();
 		include(STYLESHEETPATH . '/' . $template_file);
 		$output = ob_get_contents();
 		ob_end_clean();
+	} elseif ($domain == 'widget') {
+		include(YARPP_DIR.'/template-widget.php');
 	} else {
 		include(YARPP_DIR.'/template-builtin.php');
 	}
