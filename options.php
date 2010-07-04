@@ -411,7 +411,7 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
 	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
+	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
