@@ -140,6 +140,7 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 YARPP is currently localized in the following languages:
 
 	* Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
+	* Standard Arabic (`ar_AR`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
   * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
   * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
@@ -178,7 +179,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.1.9 =
+* Added Standard Arabic localization (`ar_AR`) by [led](http://led24.de)
 * The Related Posts Widget now can also use custom templates. ([#1143](http://plugins.trac.wordpress.org/ticket/1143))
+* Fixed a [conflict with the Magazine Premium theme](http://wordpress.org/support/topic/419174)
 * Fixes a WordPress warning of "unexpected output" on plugin installation.
 * Fixes a PHP warning message regarding `array_key`.
 * Fixed a strict WordPress warning about capabilities.
