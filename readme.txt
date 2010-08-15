@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 3.2b1
+Stable tag: 3.1.9
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
 
