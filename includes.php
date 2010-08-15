@@ -56,6 +56,7 @@ $yarpp_binary_options = array('past_only' => true,
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
 				'rss_promote_yarpp' => false);
+$yarpp_clear_cache_options = array('distags','discats','show_pass_post','recent_only','threshold','title','body','categories','tags');
 
 function yarpp_enabled() {
 	global $wpdb;
@@ -418,16 +419,19 @@ function yarpp_excerpt($content,$length) {
 }
 
 function yarpp_set_option($option,$value) {
-	global $yarpp_value_options;
-	if (array_search($option,array_keys($yarpp_value_options)) === true)
+	global $yarpp_value_options, $yarpp_clear_cache_options;
+	if (array_search($option,array_keys($yarpp_value_options)) !== false)
 		update_option("yarpp_$option",$value.' ');
 	else
 		update_option("yarpp_$option",$value);
+	// new in 3.1: clear cache when updating certain settings.
+	if (array_search($option,yarpp_clear_cache_options) !== false)
+		yarpp_clear_cache();
 }
 
 function yarpp_get_option($option,$escapehtml = false) {
 	global $yarpp_value_options;
-	if (!(array_search($option,array_keys($yarpp_value_options)) === false))
+	if (array_search($option,array_keys($yarpp_value_options)) !== false)
 		$return = chop(get_option("yarpp_$option"));
 	else
 		$return = get_option("yarpp_$option");

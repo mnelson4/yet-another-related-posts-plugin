@@ -49,7 +49,7 @@ function yarpp_limit_filter($arg) {
 
 function yarpp_fields_filter($arg) {
 	global $wpdb, $yarpp_time, $wpdb, $yarpp_related_postdata;
-	if ($yarpp_time) {
+	if ($yarpp_time && is_array($yarpp_related_postdata)) {
 		$scores = array();
 		foreach ($yarpp_related_postdata as $related_entry) {
 			$scores[] = " WHEN {$related_entry['ID']} THEN {$related_entry['score']}";
@@ -233,10 +233,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
 	global $wpdb, $post, $userdata, $yarpp_time, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $numpages, $yarpp_related_postdata, $yarpp_related_IDs;
 	
-	if ($yarpp_debug) {
-		echo "rar!";
-	}
-	
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_time) // if we're already in a YARPP loop, stop now.
 			return false;
@@ -283,7 +279,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		// get the related posts from postdata, and also construct the relate_IDs array
 		$yarpp_related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 		$yarpp_related_IDs = array();
-		if ($yarpp_related_postdata)
+		if ($yarpp_related_postdata && is_array($yarpp_related_postdata))
 			$yarpp_related_IDs = array_map(create_function('$x','return $x["ID"];'), $yarpp_related_postdata);
 	} else
 		$yarpp_demo_time = true;
