@@ -9,8 +9,6 @@ if ( !defined('WP_CONTENT_URL') )
 	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
 if ( !defined('WP_CONTENT_DIR') )
 	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-if ( !defined('YARPP_UNLIKELY_DEFAULT') )
-	define('YARPP_UNLIKELY_DEFAULT', "There's no way this is going to be the string.");
 
 global $yarpp_value_options, $yarpp_binary_options;
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
@@ -58,21 +56,16 @@ $yarpp_binary_options = array('past_only' => true,
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
 				'rss_promote_yarpp' => false);
+$yarpp_clear_cache_options = array('distags','discats','show_pass_post','recent_only','threshold','title','body','categories','tags');
 
 function yarpp_enabled() {
 	global $wpdb;
 	$indexdata = $wpdb->get_results("show index from $wpdb->posts");
 	foreach ($indexdata as $index) {
-		if ($index->Key_name == 'yarpp_title') {
-			// now check for the cache tables
-			$tabledata = $wpdb->get_col("show tables");
-			if (array_search("{$wpdb->prefix}yarpp_related_cache",$tabledata) !== false and array_search("{$wpdb->prefix}yarpp_keyword_cache",$tabledata) !== false)
-				return 1;
-			else
-				return 0;
-		};
+		if ($index->Key_name == 'yarpp_title')
+			return true;
 	}
-	return 0;
+	return false;
 }
 
 function yarpp_reinforce() {
@@ -84,11 +77,11 @@ function yarpp_reinforce() {
 function yarpp_activate() {
 	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options;
 	foreach (array_keys($yarpp_value_options) as $option) {
-		if (get_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_value_options[$option] . ' ');
 	}
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (get_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_binary_options[$option]);
 	}
 	if (!yarpp_enabled()) {
@@ -102,31 +95,8 @@ function yarpp_activate() {
 			$wpdb->print_error();
 			echo "-->";
 		}
-		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}yarpp_keyword_cache` (
-			`ID` bigint(20) unsigned NOT NULL default '0',
-			`body` text collate utf8_unicode_ci NOT NULL,
-			`title` text collate utf8_unicode_ci NOT NULL,
-			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY  (`ID`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='YARPP''s keyword cache table';")) {
-			echo "<!--".__('MySQL error on creating yarpp_keyword_cache table','yarpp').": ";
-			$wpdb->print_error();
-			echo "-->";
-		}
-		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}yarpp_related_cache` (
-			`reference_ID` bigint(20) unsigned NOT NULL default '0',
-			`ID` bigint(20) unsigned NOT NULL default '0',
-			`score` float unsigned NOT NULL default '0',
-			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY ( `score` , `date` , `reference_ID` , `ID` )
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;")) {
-			echo "<!--".__('MySQL error on creating yarpp_related_cache table','yarpp').": ";
-			$wpdb->print_error();
-			echo "-->";
-		}
-		if (!yarpp_enabled()) {
+		if (!yarpp_enabled())
 			return 0;
-		}
 	}
 	add_option('yarpp_version',YARPP_VERSION);
 	update_option('yarpp_version',YARPP_VERSION);
@@ -135,7 +105,7 @@ function yarpp_activate() {
 
 function yarpp_myisam_check() {
 	global $wpdb;
-	$tables = $wpdb->get_results("show table status like '$wpdb->posts'");
+	$tables = $wpdb->get_results("show table status like '{$wpdb->posts}'");
 	foreach ($tables as $table) {
 		if ($table->Engine == 'MyISAM') return true;
 		else return $table->Engine;
@@ -147,11 +117,11 @@ function yarpp_upgrade_check($inuse = false) {
 	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 
 	foreach (array_keys($yarpp_value_options) as $option) {
-		if (get_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_value_options[$option].' ');
 	}
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (get_option("yarpp_$option",YARPP_UNLIKELY_DEFAULT) == YARPP_UNLIKELY_DEFAULT)
+		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_binary_options[$option]);
 	}
 
@@ -163,9 +133,10 @@ function yarpp_upgrade_check($inuse = false) {
 		update_option('yarpp_version','1.5');
 	}
 	
-	if (version_compare('3.1.3',get_option('yarpp_version')) > 0) {
-		$wpdb->query("ALTER TABLE {$wpdb->prefix}yarpp_related_cache DROP PRIMARY KEY ,
-                  ADD PRIMARY KEY ( score , date , reference_ID , ID )");
+	if (version_compare('3.2',get_option('yarpp_version')) > 0) {
+		// check for unnecessary cache tables
+		$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_related_cache');
+		$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_keyword_cache');
 	}
 
   update_option('yarpp_version',YARPP_VERSION);
@@ -423,7 +394,7 @@ function yarpp_upgrade_one_five() {
 	global $wpdb;
 	$migrate_options = array('past_only','show_excerpt','show_pass_post','cross_relate','limit','threshold','before_title','after_title','before_post','after_post');
 	foreach ($migrate_options as $option) {
-		if (get_option($option,YARPP_UNLIKELY_DEFAULT) != YARPP_UNLIKELY_DEFAULT) {
+		if (get_option($option) !== null) {
 			update_option("yarpp_$option",get_option($option));
 			delete_option($option);
 		}
@@ -448,16 +419,19 @@ function yarpp_excerpt($content,$length) {
 }
 
 function yarpp_set_option($option,$value) {
-	global $yarpp_value_options;
-	if (array_search($option,array_keys($yarpp_value_options)) === true)
+	global $yarpp_value_options, $yarpp_clear_cache_options;
+	if (array_search($option,array_keys($yarpp_value_options)) !== false)
 		update_option("yarpp_$option",$value.' ');
 	else
 		update_option("yarpp_$option",$value);
+	// new in 3.1: clear cache when updating certain settings.
+	if (array_search($option,yarpp_clear_cache_options) !== false)
+		yarpp_clear_cache();
 }
 
 function yarpp_get_option($option,$escapehtml = false) {
 	global $yarpp_value_options;
-	if (!(array_search($option,array_keys($yarpp_value_options)) === false))
+	if (array_search($option,array_keys($yarpp_value_options)) !== false)
 		$return = chop(get_option("yarpp_$option"));
 	else
 		$return = get_option("yarpp_$option");
@@ -468,7 +442,7 @@ function yarpp_get_option($option,$escapehtml = false) {
 
 function yarpp_clear_cache() {
   global $wpdb;
-  return $wpdb->query("truncate table `{$wpdb->prefix}yarpp_related_cache`");
+  return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "'");
 }
 
 function yarpp_microtime_float()
@@ -495,6 +469,6 @@ function yarpp_metabox() {
 	if ($post->ID)
 		yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
 	else
-		echo "<p>Related entries may be displayed once you save your entry.</p>";
+		echo "<p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p>";
 	echo '</div>';
 }
