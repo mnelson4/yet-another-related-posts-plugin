@@ -425,7 +425,7 @@ function yarpp_set_option($option,$value) {
 	else
 		update_option("yarpp_$option",$value);
 	// new in 3.1: clear cache when updating certain settings.
-	if (array_search($option,yarpp_clear_cache_options) !== false)
+	if (array_search($option,$yarpp_clear_cache_options) !== false)
 		yarpp_clear_cache();
 }
 
