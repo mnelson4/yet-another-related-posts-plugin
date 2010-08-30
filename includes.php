@@ -10,7 +10,7 @@ if ( !defined('WP_CONTENT_URL') )
 if ( !defined('WP_CONTENT_DIR') )
 	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
 
-global $yarpp_value_options, $yarpp_binary_options;
+global $yarpp_value_options, $yarpp_binary_options, $yarpp_clear_cache_options;
 // here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 $yarpp_value_options = array('threshold' => 5,
 				'limit' => 5,
