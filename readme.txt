@@ -146,6 +146,7 @@ YARPP is currently localized in the following languages:
   * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
   * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
   * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
+  * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
   * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
   * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
   * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
@@ -160,7 +161,7 @@ YARPP is currently localized in the following languages:
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
   * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
   * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
-  * Turkish (`tr_TR`) by Nurullah (yarpp-tr at mitcho.com) of [ndemir.com](http://www.ndemir.com)
+  * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
   * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
   * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
   * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
@@ -182,6 +183,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.2 =
 * YARPP no longer uses custom tables! Both custom tables (`yarpp_related_cache` and `yarpp_keywords_cache`) are automatically removed if you have them. WordPress Post Meta is used instead for caching.
 * Added Bulgarian localization (`bg_BG`) by [Flash Gallery](www.flashgallery.org)
+* Added Farsi/Persian localization (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
 = 3.1.9 =
 * Added Standard Arabic localization (`ar`) by [led](http://led24.de)
 * The Related Posts Widget now can also use custom templates. ([#1143](http://plugins.trac.wordpress.org/ticket/1143))

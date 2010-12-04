@@ -1,0 +1,609 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YARPP in italiano\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: doctorbeta <doctorbeta@gmail.com>\n"
+"Language-Team: Gianni Diurno | http://gidibao.net/ <gidibao@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+": \n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes.php:94
+msgid "MySQL error on adding yarpp_title"
+msgstr "yarpp_title در افزودن MySQL مشکل "
+
+#: includes.php:99
+msgid "MySQL error on adding yarpp_content"
+msgstr "yarpp_content در افزودن MySQL مشکل "
+
+#: includes.php:185
+msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
+msgstr "<h3>یک پیام مهم از YARPP:</h3><p>با تشکر از شما به خاطر به هنگام سازی به نسخه YARPP 2."
+
+#: includes.php:224
+#: yarpp.php:31
+msgid "Related Posts"
+msgstr "پست های مرتبط"
+
+#: includes.php:229
+msgid "YARPP"
+msgstr "YARPP"
+
+#: options.php:35
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr ""
+
+#: options.php:37
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr ""
+
+#: options.php:39
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "اگر فکر می کنید که<code>%s</code> از MyISAM استفاده می کند، روی این تکمه کلیک کنید"
+
+#: options.php:42
+msgid "Trust me. Let me use MyISAM features."
+msgstr "  استفاده کنم MyISAM به من اطمینان کم. اجازه بده از ویژگیهای "
+
+#: options.php:65
+msgid "The YARPP database had an error but has been fixed."
+msgstr " با یک اشکال مواجه شده که  ترمیم شد  YARPP پایگاه داده"
+
+#: options.php:67
+msgid "The YARPP database has an error which could not be fixed."
+msgstr " با یک اشکال مواجه شده که قابل ترمیم نیست YARPP پایگاه داده   "
+
+#: options.php:150
+msgid "word"
+msgstr "واژه"
+
+#: options.php:151
+msgid "tag"
+msgstr "برچسب"
+
+#: options.php:152
+msgid "category"
+msgstr "دسته"
+
+#: options.php:156
+#: options.php:173
+#: options.php:185
+msgid "do not consider"
+msgstr "درنظر گرفته نشود"
+
+#: options.php:157
+#: options.php:174
+#: options.php:187
+msgid "consider"
+msgstr "درنظر بگیر"
+
+#: options.php:159
+#: options.php:189
+#, php-format
+msgid "require at least one %s in common"
+msgstr "حداقل یک %s لازم است"
+
+#: options.php:161
+#: options.php:191
+#, php-format
+msgid "require more than one %s in common"
+msgstr "بیش از یک %s لازم است"
+
+#: options.php:175
+msgid "consider with extra weight"
+msgstr "بسیارمهم در نظر گرفته شود"
+
+#: options.php:203
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr " (RSS 2.0) تاریخچه تغییرات افزونه سایر پست های مرتبط"
+
+#: options.php:273
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "کمک مالی به mitcho برای این افزونه از طریق PayPal"
+
+#: options.php:257
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "تـنظیمات افزونه YARPP"
+
+#: options.php:280
+msgid "\"The Pool\""
+msgstr "\"مخزن\""
+
+#: options.php:281
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "مخزن شامل پست ها و صفحاتی است که برای موضوع فعلی میتوانند به عنوان پست مرتبط نشان داده شود"
+
+#: options.php:286
+msgid "Disallow by category:"
+msgstr "از کدام دسته ها صرفنظر شود؟"
+
+#: options.php:288
+msgid "Disallow by tag:"
+msgstr "از کدام برچسب ها صرفنظر شود؟"
+
+#: options.php:290
+msgid "Show password protected posts?"
+msgstr "پست های رمزدار نمایش داده شوند؟"
+
+#: options.php:291
+msgid "Show only previous posts?"
+msgstr "فقط پست های قبلی نمایش داده شود؟"
+
+#: options.php:308
+msgid "\"Relatedness\" options"
+msgstr "\"میزان ارتباط\" تنظیمات"
+
+#: options.php:310
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPPبا افزونه زیر متفاوت است <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">precedenti plugin</a>."
+
+#: options.php:315
+msgid "Match threshold:"
+msgstr "حداقل تطبیق:"
+
+#: options.php:316
+msgid "Titles: "
+msgstr "عنوان ها:"
+
+#: options.php:318
+msgid "Bodies: "
+msgstr "محتواها:"
+
+#: options.php:320
+msgid "Tags: "
+msgstr "برچسب ها:"
+
+#: options.php:322
+msgid "Categories: "
+msgstr "دسته ها:"
+
+#: options.php:324
+msgid "Cross-relate posts and pages?"
+msgstr "ارتباط متقابل پست و صفحات؟"
+
+#: options.php:324
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "وقتی که گزینه \"ارتباط متقابل پست و صفحات\" انتخاب می شود, خروجی <code>related_posts()</code>, <code>related_pages()</code>, و <code>related_entries()</code> یکسان است و همصفحات مرتبط نمایش داده می شوند و هم پست های مرتبط."
+
+#: options.php:403
+msgid "Display options <small>for your website</small>"
+msgstr "نمایش تنظیمات <small>برای وب سایت شما</small>"
+
+#: magic.php:322
+#: options.php:460
+#: options.php:523
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "سازنده سایر پست های مرتبط <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts</a>."
+
+#: options.php:407
+msgid "Automatically display related posts?"
+msgstr "نمایش خودکار پست های مرتبط؟"
+
+#: options.php:407
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr ""
+
+#: options.php:408
+msgid "Website display code example"
+msgstr "الگوی نمایش کد وب سایت به صورت زیر است:"
+
+#: options.php:408
+#: options.php:473
+msgid "(Update options to reload.)"
+msgstr "(تنظیمات را برای فعال سازی به هنگام کنید.)"
+
+#: options.php:411
+#: options.php:475
+msgid "Maximum number of related posts:"
+msgstr "حداکثر تعداد پست های مرتبط"
+
+#: options.php:424
+msgid "Before / after related entries:"
+msgstr "قبل / بعد از موضوعات مرتبط:"
+
+#: options.php:425
+#: options.php:430
+#: options.php:439
+#: options.php:489
+#: options.php:494
+#: options.php:503
+msgid "For example:"
+msgstr "مثلا:"
+
+#: options.php:429
+#: options.php:493
+msgid "Before / after each related entry:"
+msgstr "قبل / بعد از هر موضوع مرتبط"
+
+#: options.php:433
+#: options.php:497
+msgid "Show excerpt?"
+msgstr "چکیده ها را نمایش بده؟"
+
+#: options.php:434
+#: options.php:498
+msgid "Excerpt length (No. of words):"
+msgstr "طول چکیده (تعداد واژه ها):"
+
+#: options.php:438
+msgid "Before / after (Excerpt):"
+msgstr "قبل / بعد (چکیده):"
+
+#: options.php:444
+#: options.php:508
+msgid "Order results:"
+msgstr "ترتیب نتایج:"
+
+#: options.php:446
+#: options.php:510
+msgid "score (high relevance to low)"
+msgstr "امتیاز (از بیشترین ارتباط به کمتریت ارتباط)"
+
+#: options.php:447
+#: options.php:511
+msgid "score (low relevance to high)"
+msgstr "امتیاز (از کمترین ارتباط به بیشترین ارتباط)"
+
+#: options.php:448
+#: options.php:512
+msgid "date (new to old)"
+msgstr "تاریخ (جدید به قدیم)"
+
+#: options.php:449
+#: options.php:513
+msgid "date (old to new)"
+msgstr "تاریخ (قدیم به جدید)"
+
+#: options.php:450
+#: options.php:514
+msgid "title (alphabetical)"
+msgstr "عنوان (به ترتیب الفبا)"
+
+#: options.php:451
+#: options.php:515
+msgid "title (reverse alphabetical)"
+msgstr "عنوان (برعکس ترتیب الفبا)"
+
+#: options.php:456
+#: options.php:520
+msgid "Default display if no results:"
+msgstr "در صورت عدم وجود نتیجه این را نشان بده:"
+
+#: options.php:458
+#: options.php:522
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "کمک به  ترقی این افزونه ؟"
+
+#: options.php:460
+#: options.php:523
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "این گزینه کد %s را اضافه می کند. با روشن کردن آن می توانید کد را در سمت راست ملاحظه کنید."
+
+#: options.php:466
+msgid "Display options <small>for RSS</small>"
+msgstr "نمایش تنظیمات برای <small>آر اس اس</small>"
+
+#: options.php:471
+msgid "Display related posts in feeds?"
+msgstr "نمایش پست های مرتبط در خوراک سایت"
+
+#: options.php:472
+msgid "Display related posts in the descriptions?"
+msgstr "نمایش پست های مرتبط در توضیحات؟"
+
+#: options.php:472
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "این گزینه، پست های مرتبط را در محل توضیحات آر اس اس (نه تنها محتوا) به نمایش در می آورد. اگر خوراک را به صورتی تنظیم کنید که فقط چکیده را نشان دهد، تنها قسمت توضیحات مورد استفاده قرار می گیرد."
+
+#: options.php:473
+msgid "RSS display code example"
+msgstr "نمونه کد آر اس اس نمایش داده شده"
+
+#: options.php:488
+msgid "Before / after related entries display:"
+msgstr "نمایش قبل/ بعد از موضوعات مرتبط:"
+
+#: options.php:502
+msgid "Before / after (excerpt):"
+msgstr "قبل/ بعد از (چکیده):"
+
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f امتیاز تطبیق بین پست فعلی و پست مرتبط به آن است. شما این پیغام را دریافت کردید زیرا به عنوان مدیر وارد وردپرس شده اید"
+
+#: includes.php:197
+msgid "Related Posts (YARPP)"
+msgstr "Related Posts (YARPP)"
+
+#: options.php:26
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr ""
+
+#: options.php:310
+#: options.php:324
+#: options.php:407
+#: options.php:412
+#: options.php:459
+#: options.php:471
+#: options.php:472
+#: options.php:476
+#: options.php:522
+#: options.php:533
+msgid "more&gt;"
+msgstr "بیشتر&gt;"
+
+#: options.php:128
+msgid "Options saved!"
+msgstr "تنظیمات ذخیره شد!"
+
+#: options.php:609
+msgid "Do you really want to reset your configuration?"
+msgstr "آیا واقعا می خواهید تنظیمات را به پیش فرض برگردانید؟"
+
+#: options.php:608
+msgid "Update options"
+msgstr "ذخیره تنظیمات"
+
+#: options.php:310
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "هر چه حداقل تطبیق کمتر شود، نتیجه حساس تر و تعداد پست های مرتبط کمتر می شود. مقدار پیش فرض آن 5 است. برای اینکه مقدار مطلوب آن را بیابید به امتیاز تطبیق برخی از پست ها نگاهی بیاندازید."
+
+#: options.php:609
+msgid "Reset options"
+msgstr "تنظیمات از نو"
+
+#: magic.php:71
+msgid "Example post "
+msgstr "پست نمونه:"
+
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "مطالب مرتبط با این موضوع به شرح زیر است. در صورتی که  این پست رابه روز کنید،ممکن است این مطالب مرتبط تغییر کنند."
+
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "از طریق تنظیمات YARPP شما می توانیدمشخص کنید که نحوه نمایش پست های مرتبط چگونه باشد."
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:27
+msgid "No related posts."
+msgstr "بدون پست مرتبط."
+
+#: options.php:83
+#: options.php:86
+#: options.php:129
+#: options.php:532
+msgid "Related posts cache status"
+msgstr "وضعیت ذخیره سازی پست های مرتبط"
+
+#: options.php:83
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "صفحه ذخیره (cache) پست های شما تکمیل نشده است. لطفا آن را <A>نوار وضعیت پست های مرتبط</a> از دوباره بسازید."
+
+#: options.php:86
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "cache پست های مرتبط شما خالی است. لطفا آن را از <A>نوار وضعیت پست های مرتبط</a>دوباره بسازید."
+
+#: options.php:130
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "اگر تنظیمات  \"pool\" یا  \"pool\" را تغییر داده اید، لطفا cache را از طریق <A>related posts status pane</a>.دوباره بسازید "
+
+#: options.php:275
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "توسط <a href=\"http://mitcho.com/code/\">mitcho</a>"
+
+#: options.php:275
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "دنبال کردن <a href=\"http://twitter.com/yarpp/\">افزونه در توییتر</a>"
+
+#: options.php:296
+msgid "day(s)"
+msgstr "روز"
+
+#: options.php:297
+msgid "week(s)"
+msgstr "هفته"
+
+#: options.php:298
+msgid "month(s)"
+msgstr "ماه"
+
+#: options.php:300
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "نمایش پست ها از NUMBER UNITS پیش"
+
+#: options.php:390
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "نسخه بتای جدید این افزونه در دسترس است. در صورتی که مایلید می توانید آن را <A>از اینجا دریافت کنید</a> و با مسئولیت خود از آن استفاده کنید"
+
+#: options.php:392
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "نسخه جدید افزونه در دسترس است! می توانید آن را <A>از اینجا دریافت کنید</a>"
+
+#: options.php:412
+#: options.php:476
+msgid "Display using a custom template file"
+msgstr "نمایش به صورت قالب دلخواه شما"
+
+#: options.php:414
+#: options.php:478
+msgid "Template file:"
+msgstr "پرونده قالب:"
+
+#: options.php:471
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "این گزینه، پست های مرتبط رادر آخر خوراک های آر اس اس و اتم شما نمایش می دهد. هیچ نیازی به تغییر قالب نیست."
+
+#: options.php:529
+msgid "Advanced"
+msgstr "پیشرفته"
+
+#: options.php:532
+msgid "Show cache status"
+msgstr "نمایش وضعیت ذخیره سازی"
+
+#: options.php:533
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "تا وقتی ذخیره سازی تکمیل نشده، محاسبات پست های مرتبط به صورت مستقیم انجام شود"
+
+#: options.php:564
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MINدقیقه و SEC ثانیه باقی مانده'"
+
+#: options.php:566
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC ثانیه باقیماندهi'"
+
+#: options.php:570
+msgid "Your related posts cache is now complete."
+msgstr "ذخیره سازی پست های مرتبط شما به تکمیل شد. "
+
+#: options.php:570
+msgid "The SQL queries took SEC seconds."
+msgstr "محاسبات SQL SEC ثانیه طول کشید"
+
+#: options.php:577
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "هنگام ایجاد پست های مرتبط برای عنوان مشکلی به وجود آمد."
+
+#: options.php:595
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "ذخیره سازی پست های مرتبط شما PERCENT% تکمیل شده است."
+
+#: options.php:601
+msgid "starting..."
+msgstr "در حال شروع..."
+
+#: includes.php:110
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "مشکل  MySQL در ایجادجدول yarpp_keyword_cache  رخ داد"
+
+#: includes.php:121
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "مشکل  MySQL در ایجادجدول yarpp_related_cache  رخ داد"
+
+#: services.php:59
+msgid "You cannot rebuild the YARPP cache."
+msgstr "شما نمی توانید دوباره ذخیره سازی کنید."
+
+#: options.php:10
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "لطفا پرونده های قالب افزونه را برای تکمیل نصب به پوشه قالب کنونی وبلاگتان منتقل کنید. پرونده های موجود در (<code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) رابه <code>TEMPLATEPATH</code> انتقال دهید.<code "
+
+#: options.php:15
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "چون هیچی قالبی برای افزونه در (<code>TEMPLATEPATH</code>) یافت نشد ویژگی ایجاد قالب غیرفعال شد."
+
+#: options.php:412
+#: options.php:476
+#: options.php:529
+msgid "NEW!"
+msgstr "جدید!"
+
+#: options.php:412
+#: options.php:476
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "این امکان پیشرفته به شما اختیار کامل جهت شخصی سازی محل نمایش پست های مرتبط را می دهد."
+
+#: includes.php:24
+#: includes.php:35
+msgid "Related posts:"
+msgstr "پست های مرتبط:"
+
+#: options.php:68
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "لطفا سعی کنید <A>manual SQL setup</a>."
+
+#: options.php:425
+#: options.php:430
+#: options.php:439
+#: options.php:489
+#: options.php:494
+#: options.php:503
+msgid " or "
+msgstr "یا"
+
+#: options.php:534
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "تا وقتی ذخیره سازی تکمیل نشده و این گزینه روشن باشد، محاسبات پست های مرتبط به صورت مستقیم انجام شود<br /> اگر این گزینه خاموش باشدو هنوز ذخیره سازی تکمیل نشده باشد، همان چیزی نمایش داده می شود که انگار هیچ پست مرتبطی وجود ندارد."
+
+#: options.php:579
+#: options.php:585
+msgid "Constructing the related posts timed out."
+msgstr "در حال ایجاد زمان انقضای پست ها"
+
+#: options.php:582
+#: options.php:587
+msgid "Try to continue..."
+msgstr "برای ادامه تلاش کنید..."
+
+#~ msgid "Edit Catalog Entry"
+#~ msgstr "modifica elenco articoli"
+
+#~ msgid "close"
+#~ msgstr "chiudi"
+
+#~ msgid "You do not have the permission to write the file '%s'."
+#~ msgstr "Non hai i permessi per la scrittura del file '%s'."
+
+#~ msgid ""
+#~ "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a> "
+#~ "and based on the fabulous work of <a href=\"http://peter.mapledesign.co."
+#~ "uk/weblog/archives/wordpress-related-posts-plugin\">Peter Bower</a>, <a "
+#~ "href=\"http://wasabi.pbwiki.com/Related%20Entries\">Alexander Malov &amp; "
+#~ "Mike Lu</a>."
+#~ msgstr ""
+#~ "Il Team: <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 "
+#~ "Erlewine)</a> ha sviluppato questo plugin grazie al favoloso lavoro di <a "
+#~ "href=\"http://peter.mapledesign.co.uk/weblog/archives/wordpress-related-"
+#~ "posts-plugin\">Peter Bower</a> e <a href=\"http://wasabi.pbwiki.com/"
+#~ "Related%20Entries\">Alexander Malov &amp; Mike Lu</a>. Traduzione "
+#~ "italiana a cura di <a href=\"http://gidibao.net/\">Gianni Diurno</a>."
+
+#~ msgid "PERMALINK"
+#~ msgstr "PERMALINK"
+
+#~ msgid "RELATED TITLE"
+#~ msgstr "TITOLO CORRELATO"
+
+#~ msgid ""
+#~ "The higher the match threshold, the more restrictive, and you get less "
+#~ "related posts overall. The default match threshold is 5. If you want to "
+#~ "find an appropriate match threshhold, I recommend you turn on the \"show "
+#~ "admins the match scores\" setting below. That way, you can see what kinds "
+#~ "of related posts are being picked up and with what kind of match scores, "
+#~ "and determine an appropriate threshold for your site."
+#~ msgstr ""
+#~ "Je höher Sie den Wert \"Relevanz\" setzen, desto restriktiver arbeitet "
+#~ "YARPP. Der Standardwert liegt bei 5. Wenn gar keine oder zuwenige Artikel "
+#~ "angezeigt werden, setzen Sie ihn auf 3.5 oder gar 1 herunter. Für die "
+#~ "Feinabstimmung aktivieren Sie die Option \"Administratoren den Wert der "
+#~ "Relevanz anzeigen\" und stimmen den Wert auf Ihre Anforderungen ab."
+
+#~ msgid "Show admins (user level > 8) the match scores?"
+#~ msgstr "Administratoren (User Level > 8) den Wert der Relevanz anzeigen?"
+
+#~ msgid ""
+#~ "With this option on, each related entry's total 'match score' (all above "
+#~ "the threshold, set above) are displayed after each entry title, <em>if "
+#~ "you are an administrator and logged in.</em> Even if you see these "
+#~ "values, your visitors will not."
+#~ msgstr ""
+#~ "Wenn aktiviert, sehen nur eingeloggte Administratoren (nicht die "
+#~ "Besucher!) neben jeder Beitragsüberschrift den Übereinstimmungswert."
