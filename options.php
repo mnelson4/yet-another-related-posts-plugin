@@ -394,12 +394,6 @@ function load_display_discats() {
 		load_display_distags();
 		load_display_demo_web();
 		load_display_demo_rss();
-		jQuery('#build-cache-button').click(function() {
-			jQuery('#yarpp-cache-message').hide();
-			jQuery('#build-cache-button').hide();
-			jQuery('#build-display').css('display','block');
-			yarppBuildRequest();
-		});
 
 		var version = jQuery('#yarpp-version').html();
 
@@ -411,61 +405,6 @@ function load_display_discats() {
 	}
 
 	jQuery(document).ready(yarpp_js_init);
-
-	var time = 0;
-	var i    = 0;
-	var m    = 0;
-  var timeout = 10000;
-  var lastid = 0;
-	function yarppBuildRequest() {
-		jQuery.ajax({
-			url:'admin-ajax.php',
-			type: 'post',
-			data: {action:'yarpp_build_cache_action',i:i,m:m,lastid:lastid},
-			dataType: 'json',
-			timeout: timeout,
-			success: function (json) {
-				if (json.result == 'success') {
-					i = json.i;
-					m = json.m;
-					lastid = json.id;
-					time = time + parseFloat(json.time);
-					var remaining = Math.floor((m-i)*(time/i));
-					var min = Math.floor(remaining/60);
-					var sec = Math.floor(remaining - 60*min);
-					if (i < m) {
-						jQuery('#yarpp-bar').css('width',(json.status * 100)+'%');
-						jQuery('#yarpp-percentage').html(Math.round(json.status * 1000)/10);
-//						jQuery('#yarpp-latest').html(json.title);
-						if (min > 0) {
-							jQuery('#yarpp-time').html(<?php echo str_replace('SEC',"'+sec+'",str_replace('MIN',"'+min+'",__("'MIN minute(s) and SEC second(s) remaining'",'yarpp')));?>);
-						} else {
-							jQuery('#yarpp-time').html(<?php echo str_replace('SEC',"'+sec+'",__("'SEC second(s) remaining'",'yarpp'));?>);
-						}
-						yarppBuildRequest();
-					} else {
-						jQuery('#build-display').html('<?php _e("Your related posts cache is now complete.",'yarpp');?><br/><small><?php echo str_replace('SEC',"'+(Math.floor(time*10)/10)+'",__('The SQL queries took SEC seconds.','yarpp'));?></small>');
-					}
-					return;
-				} else if (json.result == 'error') {
-					i = json.i++; // bump it up to try to skip this item for now.
-					m = json.m;
-          jQuery('#yarpp-latest').html('<?php echo str_replace('TITLE',"'+json.title+'",__('There was an error while constructing the related posts for TITLE','yarpp'))?>');
-				} else {
-          jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
-				}
-				timeout += 5000;
-				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
-			},
-			error: function(json) {
-			  console.log(arguments);
-				jQuery('#yarpp-latest').html('<?php _e('Constructing the related posts timed out.','yarpp')?>');
-				timeout += 5000;
-				jQuery('#build-cache-button').show().val('<?php _e("Try to continue...",'yarpp');?>');
-			}
-		});
-		return false;
-	}
 	//-->
 	</script>
 
@@ -606,43 +545,7 @@ yarpp_options_checkbox('rss_excerpt_display',__("Display related posts in the de
 		</div>
 	</div>
 
-		<!-- Cache options -->
-<div class='postbox'>
-    <div class="handlediv" title="<?php _e( 'Click to toggle' ); ?>">
-      <br/>
-    </div>
-	<h3 class='hndle'><span><?php _e("Cache status",'yarpp');?></span></h3>
-<div class='inside'>
-
-		<table class="form-table" style="margin-top: 0;width:100%">
-
-			<tr>
-				<th><?php _e("Cache engine:",'yarpp');?></th>
-				<td><!--<input name="rss_before_post" type="text" id="rss_before_post" value="<?php echo stripslashes(yarpp_get_option('rss_before_post',true)); ?>" size="10" />--><?php echo $yarpp_cache->name; ?>
-				</td>
-			</tr>
-
-			<tr>
-				<th><?php _e("Cache status:",'yarpp');?></th>
-				<td><?php echo str_replace('PERCENT','<span id="yarpp-percentage">' . round($yarpp_cache->cache_status() * 100, 1) . '</span>',__("Your related posts cache is PERCENT% complete.",'yarpp')); ?> <input type='button' class='button' id='build-cache-button' value='build the cache now'/>
-				</td>
-			</tr>
-
-			<tr>
-			  <th>&nbsp;</th>
-			  <td id='build-display' style='display:none;'>
-          <div class="progress-container" style='border: 1px solid #ccc; width: 200px; margin: 2px 5px 2px 0; padding: 1px; float: left; background: white;'>
-             <div id='yarpp-bar' style="width: 0%; height: 12px; background-color: #D7D7D7;">&nbsp;</div>
-          </div>
-          <div><img class="waiting" src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" /></div>
-          <p style='font-size: .8em' id='yarpp-latest'><?php _e('starting...','yarpp');?></p>
-          <p style='font-size: .8em' id='yarpp-time'></p>
-        </td>
-			</tr>
-
-		</table>
-		</div>
-	</div>
+<!--cache engine: <?php echo $yarpp_cache->name;?>; cache status: <?php echo $yarpp_cache->cache_status();?>-->
 
 	<div>
 		<p class="submit">
