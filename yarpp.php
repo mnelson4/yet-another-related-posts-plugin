@@ -3,26 +3,33 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.2b2
+Version: 3.2b3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 */
+
+// set $yarpp_debug
 if (isset($_REQUEST['yarpp_debug']))
   $yarpp_debug = true;
 
-define('YARPP_VERSION','3.2b2');
+define('YARPP_VERSION','3.2b3');
 define('YARPP_DIR',dirname(__FILE__));
-
-define('YARPP_POSTMETA_TITLE_KEYWORDS_KEY','_yarpp_title_keywords');
-define('YARPP_POSTMETA_BODY_KEYWORDS_KEY','_yarpp_body_keywords');
-define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
-define('YARPP_NO_RELATED', ':(');
 
 require_once(YARPP_DIR.'/includes.php');
 require_once(YARPP_DIR.'/related-functions.php');
 require_once(YARPP_DIR.'/template-functions.php');
 
+// New in 3.2: load YARPP cache engine
+// By default, this is tables, which uses custom db tables.
+// Use postmeta instead and avoid custom tables by adding the following to wp-config:
+//   define('YARPP_CACHE_TYPE', 'postmeta');
+if (!defined('YARPP_CACHE_TYPE'))
+	define('YARPP_CACHE_TYPE', 'tables');
+require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
+$yarpp_cache = new $yarpp_storage_class;
+
+// Setup admin
 add_action('admin_menu','yarpp_admin_menu');
 add_action('admin_print_scripts','yarpp_upgrade_check');
 add_filter('the_content','yarpp_default',1200);
@@ -40,13 +47,8 @@ add_action( 'admin_menu', 'yarpp_add_metabox');
 // update cache on save
 add_action('save_post','yarpp_save_cache');
 
-add_filter('posts_where','yarpp_where_filter');
-add_filter('posts_orderby','yarpp_orderby_filter');
-add_filter('posts_fields','yarpp_fields_filter');
-add_filter('posts_request','yarpp_demo_request_filter');
-add_filter('post_limits','yarpp_limit_filter');
-add_action('parse_query','yarpp_set_score_override_flag'); // sets the score override flag. 
+// new in 3.2: update cache on delete
+add_action('delete_post','yarpp_delete_cache');
 
-// set $yarpp_debug
-if (isset($_REQUEST['yarpp_debug']))
-  $yarpp_debug = true;
+// sets the score override flag.
+add_action('parse_query','yarpp_set_score_override_flag');

@@ -2,10 +2,11 @@
 
 yarpp_save_cache($reference_ID,false); // enforce the cache, but don't force it
 
-$body_terms = yarpp_get_cached_keywords($reference_ID,'body');
-$title_terms = yarpp_get_cached_keywords($reference_ID,'title');
+$body_terms = $yarpp_cache->get_keywords($reference_ID,'body');
+$title_terms = $yarpp_cache->get_keywords($reference_ID,'title');
 
-if ($yarpp_debug) $output .= "<p>last updated keywords: ".$wpdb->get_var("select date from {$wpdb->prefix}yarpp_keyword_cache where ID = '$reference_ID'")."</p>";
+// Disabled "last updated keywords" as it doesn't support postmeta storage
+// if ($yarpp_debug) $output .= "<p>last updated keywords: ".$wpdb->get_var("select date from {$wpdb->prefix}yarpp_keyword_cache where ID = '$reference_ID'")."</p>";
 if ($yarpp_debug) $output .= "<p>body keywords: $body_terms</p>";
 if ($yarpp_debug) $output .= "<p>title keywords: $title_terms</p>";
 

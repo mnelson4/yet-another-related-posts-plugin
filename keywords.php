@@ -2,16 +2,16 @@
 
 function yarpp_extract_keywords($source,$max = 20) {
 	global $overusedwords;
-	
+
 	if (function_exists('mb_split')) {
 		mb_regex_encoding(get_option('blog_charset'));
 		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source));
 	} else
-		$wordlist = preg_split('%\s*\W+\s*%', strtolower($source));	
+		$wordlist = preg_split('%\s*\W+\s*%', strtolower($source));
 
 	// Build an array of the unique words and number of times they occur.
 	$tokens = array_count_values($wordlist);
-	
+
 	// Remove the stop words from the list.
 	foreach ($overusedwords as $word) {
 		 unset($tokens[$word]);
@@ -23,11 +23,11 @@ function yarpp_extract_keywords($source,$max = 20) {
 		else
 			if (strlen($word) < 2) unset($tokens[$word]);
 	}
-	
+
 	arsort($tokens, SORT_NUMERIC);
-	
+
 	$types = array_keys($tokens);
-	
+
 	if (count($types) > $max)
 		$types = array_slice($types, 0, $max);
 	return implode(' ', $types);
@@ -51,22 +51,4 @@ function post_body_keywords($ID,$max = 20) {
 	$content = strip_tags(apply_filters_if_white('the_content',$posts[0]->post_content));
 	$content = html_entity_strip($content);
 	return yarpp_extract_keywords($content,$max);
-}
-
-function yarpp_cache_keywords($ID) {
-	update_post_meta($ID, YARPP_POSTMETA_BODY_KEYWORDS_KEY, post_body_keywords($ID));
-	update_post_meta($ID, YARPP_POSTMETA_TITLE_KEYWORDS_KEY, post_title_keywords($ID));
-}
-
-function yarpp_get_cached_keywords($ID, $type='body') {
-	$key = $type == 'body' ? YARPP_POSTMETA_BODY_KEYWORDS_KEY : YARPP_POSTMETA_TITLE_KEYWORDS_KEY;
-	$out = get_post_meta($ID, $key, true);
-
-	// if empty, try caching them first
-	if ($out === false) {
-		yarpp_cache_keywords($ID);
-		$out = get_post_meta($ID, $key, true);
-	}
-
-	return $out;
 }

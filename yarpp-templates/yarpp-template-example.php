@@ -1,7 +1,7 @@
 <?php /*
 Example template
 Author: mitcho (Michael Yoshitaka Erlewine)
-*/ 
+*/
 ?><h3>Related Posts</h3>
 <?php if ($related_query->have_posts()):?>
 <ol>

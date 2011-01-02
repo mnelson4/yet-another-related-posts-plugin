@@ -56,10 +56,13 @@ $yarpp_binary_options = array('past_only' => true,
 				'rss_excerpt_display' => true,
 				'promote_yarpp' => false,
 				'rss_promote_yarpp' => false);
+// These are options which, when updated, will trigger a clearing of the cache
 $yarpp_clear_cache_options = array('distags','discats','show_pass_post','recent_only','threshold','title','body','categories','tags');
 
 function yarpp_enabled() {
-	global $wpdb;
+	global $wpdb, $yarpp_cache;
+	if ($yarpp_cache->is_enabled() === false)
+		return false;
 	$indexdata = $wpdb->get_results("show index from $wpdb->posts");
 	foreach ($indexdata as $index) {
 		if ($index->Key_name == 'yarpp_title')
@@ -75,7 +78,7 @@ function yarpp_reinforce() {
 }
 
 function yarpp_activate() {
-	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options;
+	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options, $yarpp_cache;
 	foreach (array_keys($yarpp_value_options) as $option) {
 		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_value_options[$option] . ' ');
@@ -84,17 +87,28 @@ function yarpp_activate() {
 		if (get_option("yarpp_$option") === false)
 			add_option("yarpp_$option",$yarpp_binary_options[$option]);
 	}
-	if (!yarpp_enabled()) {
+
+	$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
+	if (!$wpdb->num_rows) {
 		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)")) {
-			echo "<!--".__('MySQL error on adding yarpp_title','yarpp').": ";
+			echo "<!--MySQL error on adding yarpp_title: ";
 			$wpdb->print_error();
 			echo "-->";
 		}
+	}
+
+	$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_content'");
+	if (!$wpdb->num_rows) {
 		if (!$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)")) {
 			echo "<!--".__('MySQL error on adding yarpp_content','yarpp').": ";
 			$wpdb->print_error();
 			echo "-->";
 		}
+	}
+	if (!yarpp_enabled()) {
+		// If we are still not enabled, run the cache abstraction's setup method.
+		$yarpp_cache->setup();
+		// If we're still not enabled, give up.
 		if (!yarpp_enabled())
 			return 0;
 	}
@@ -132,21 +146,22 @@ function yarpp_upgrade_check($inuse = false) {
 		yarpp_upgrade_one_five();
 		update_option('yarpp_version','1.5');
 	}
-	
+
 	if (version_compare('3.2',get_option('yarpp_version')) > 0) {
 		// check for unnecessary cache tables
-		$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_related_cache');
-		$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_keyword_cache');
+		// Currently commented out because this depends on the cache engine
+		// $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_related_cache');
+		// $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'yarpp_keyword_cache');
 	}
 
-  update_option('yarpp_version',YARPP_VERSION);
+	update_option('yarpp_version',YARPP_VERSION);
 
-	// just in case, try to add the index one more time.	
+	// just in case, try to add the index one more time.
 	if (!yarpp_enabled()) {
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title`)");
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content`)");
 	}
-	
+
 }
 
 function yarpp_admin_menu() {
@@ -185,19 +200,19 @@ class YARPP_Widget extends WP_Widget {
   function YARPP_Widget() {
     parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
   }
- 
+
   function widget($args, $instance) {
   	global $post;
     if (!is_single())
       return;
-      
+
     extract($args);
-    
+
 		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if (yarpp_get_option('cross_relate'))
 			$type = array('post','page');
-    
-    $title = apply_filters('widget_title', $instance['title']); 
+
+    $title = apply_filters('widget_title', $instance['title']);
     echo $before_widget;
 		if ( !$instance['use_template'] ) {
 			echo $before_title;
@@ -211,7 +226,7 @@ class YARPP_Widget extends WP_Widget {
 		echo yarpp_related($type,$instance,false,false,'widget');
     echo $after_widget;
   }
- 
+
   function update($new_instance, $old_instance) {
 		// this starts with default values.
 		$instance = array( 'promote_yarpp' => 0, 'use_template' => 0 );
@@ -228,8 +243,8 @@ class YARPP_Widget extends WP_Widget {
 		}
     return $instance;
   }
-  
-  function form($instance) {				
+
+  function form($instance) {
     $title = esc_attr($instance['title']);
     $template_file = $instance['template_file'];
     ?>
@@ -272,14 +287,14 @@ class YARPP_Widget extends WP_Widget {
 
 function yarpp_default($content) {
 	global $wpdb, $post;
-	
+
 	if (is_feed())
-		return yarpp_rss($content,$type);
-	
+		return yarpp_rss($content);
+
 	$type = ($post->post_type == 'page' ? array('page') : array('post'));
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
-	
+
 	if (yarpp_get_option('auto_display') and is_single())
 		return $content.yarpp_related($type,array(),false,false,'website');
 	else
@@ -288,11 +303,11 @@ function yarpp_default($content) {
 
 function yarpp_rss($content) {
 	global $wpdb, $post;
-	
+
 	$type = ($post->post_type == 'page' ? array('page') : array('post'));
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
-	
+
 	if (yarpp_get_option('rss_display'))
 		return $content.yarpp_related($type,array(),false,false,'rss');
 	else
@@ -410,7 +425,8 @@ function yarpp_upgrade_one_five() {
 	unset($yarpp_version);
 }
 
-define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
+if (!defined('LOREMIPSUM'))
+	define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
 function yarpp_excerpt($content,$length) {
   $content = strip_tags( (string) $content );
@@ -419,14 +435,14 @@ function yarpp_excerpt($content,$length) {
 }
 
 function yarpp_set_option($option,$value) {
-	global $yarpp_value_options, $yarpp_clear_cache_options;
+	global $yarpp_value_options, $yarpp_clear_cache_options, $yarpp_cache;
 	if (array_search($option,array_keys($yarpp_value_options)) !== false)
 		update_option("yarpp_$option",$value.' ');
 	else
 		update_option("yarpp_$option",$value);
 	// new in 3.1: clear cache when updating certain settings.
 	if (array_search($option,$yarpp_clear_cache_options) !== false)
-		yarpp_clear_cache();
+		$yarpp_cache->flush();
 }
 
 function yarpp_get_option($option,$escapehtml = false) {
@@ -440,13 +456,7 @@ function yarpp_get_option($option,$escapehtml = false) {
 	return $return;
 }
 
-function yarpp_clear_cache() {
-  global $wpdb;
-  return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "'");
-}
-
-function yarpp_microtime_float()
-{
+function yarpp_microtime_float() {
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
 }

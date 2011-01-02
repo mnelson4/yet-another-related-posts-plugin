@@ -4,7 +4,7 @@ YARPP's built-in "template"
 This "template" is used when you choose not to use a template.
 
 If you want to create a new template, look at templates/template-example.php as an example.
-*/ 
+*/
 
 $options = array(
 	'before_title'=>"${domainprefix}before_title",
@@ -31,11 +31,11 @@ if ($related_query->have_posts()) {
 		$related_query->the_post();
 
 		$output .= "$before_title<a href='".get_permalink()."' rel='bookmark' title='Permanent Link: ".preg_replace('/\s*<br[ \/]*>\s*/i', ' ', get_the_title())."'>".get_the_title()."";
-		if ($userdata->user_level >= 8 and $domain != 'rss')
+		if (current_user_can('manage_options') && $domain != 'rss')
 			$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round(get_the_score(),3)).'">('.round(get_the_score(),3).')</abbr>';
 		$output .= '</a>';
 		if ($show_excerpt) {
-			$output .= $before_post . 
+			$output .= $before_post .
 			  yarpp_excerpt(get_the_excerpt(),$excerpt_length)
 			  . $after_post;
 		}

@@ -1,7 +1,7 @@
 <?php /*
 Example template for use with WPML (WP Multilingual, http://wpml.org)
 Author: mitcho (Michael Yoshitaka Erlewine)
-*/ 
+*/
 
 if (function_exists("icl_register_string")) {
   icl_register_string("Yet Another Related Posts Plugin","related posts header","Related Posts");
