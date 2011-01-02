@@ -1,6 +1,6 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache;
 
 // check to see that templates are in the right place
 $yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0);
@@ -10,17 +10,17 @@ if (!$yarpp_templateable) {
 	  .str_replace("TEMPLATEPATH",STYLESHEETPATH,__("Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory.",'yarpp'))
 	  ."</div>";
 
-  else 
+  else
   	echo "<div class='updated'>"
   	.str_replace('TEMPLATEPATH',STYLESHEETPATH,__("No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off.",'yarpp'))
   	."</div>";
-  
+
   yarpp_set_option('use_template',false);
   yarpp_set_option('rss_use_template',false);
-  
+
 }
 
-if ($_POST['myisam_override']) {
+if (isset($_POST['myisam_override'])) {
 	yarpp_set_option('myisam_override',1);
 	echo "<div class='updated'>"
 	.__("The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria.",'yarpp')
@@ -42,7 +42,7 @@ if (!yarpp_get_option('myisam_override')) {
 		.__("Trust me. Let me use MyISAM features.",'yarpp')
 		."'></input></form>"
 		."</div>";
-	
+
 		yarpp_set_option('title',1);
 		yarpp_set_option('body',1);
 		$yarpp_myisam = false;
@@ -63,7 +63,7 @@ if ($yarpp_myisam) {
 		echo '<div class="updated"><p>';
 		if (yarpp_activate())
 			_e('The YARPP database had an error but has been fixed.','yarpp');
-		else 
+		else
 			__('The YARPP database has an error which could not be fixed.','yarpp')
 			.str_replace('<A>','<a href=\'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix).'\'>',__('Please try <A>manual SQL setup</a>.','yarpp'));
 		echo '</div></p>';
@@ -80,25 +80,25 @@ if (isset($_POST['update_yarpp'])) {
 	foreach (array('title','body','tags','categories') as $key) {
 		if (!isset($_POST[$key])) yarpp_set_option($key,1);
 	}
-	if (isset($_POST['discats'])) { 
+	if (isset($_POST['discats'])) {
 		yarpp_set_option('discats',implode(',',array_keys($_POST['discats']))); // discats is different
 	} else {
 		yarpp_set_option('discats','');
 	}
 
-	if (isset($_POST['distags'])) { 
+	if (isset($_POST['distags'])) {
 		yarpp_set_option('distags',implode(',',array_keys($_POST['distags']))); // distags is also different
 	} else {
 		yarpp_set_option('distags','');
 	}
 	//update_option('yarpp_distags',implode(',',array_map('yarpp_unmapthetag',preg_split('!\s*[;,]\s*!',strtolower($_POST['distags']))))); // distags is even more different
-	
+
 	foreach (array_keys($yarpp_binary_options) as $option) {
 		(isset($_POST[$option])) ? yarpp_set_option($option,1) : yarpp_set_option($option,0);
-	}		
+	}
 	echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
-	
+
 //compute $tagmap
 $tagmap = array();
 foreach ($wpdb->get_results("select $wpdb->terms.term_id, name from $wpdb->terms natural join $wpdb->term_taxonomy where $wpdb->term_taxonomy.taxonomy = 'category'") as $tag) {
@@ -115,40 +115,40 @@ function yarpp_unmapthetag($name) {
 	return $untagmap[$name];
 }
 
-function checkbox($option,$desc,$tr="<tr valign='top'>
+function yarpp_options_checkbox($option,$desc,$tr="<tr valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
 	echo "			$tr<input $inputplus type='checkbox' name='$option' value='true'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  /> $desc</th>$thplus
 		</tr>";
 }
-function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
+function yarpp_options_textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 			<th scope='row'>") {
 	$value = stripslashes(yarpp_get_option($option,true));
 	echo "			$tr$desc</th>
 			<td><input name='$option' type='text' id='$option' value='$value' size='$size' /></td>
 		</tr>";
 }
-function importance($option,$desc,$type='word',$tr="<tr valign='top'>
+function yarpp_options_importance($option,$desc,$type='word',$tr="<tr valign='top'>
 			<th scope='row'>",$inputplus = '') {
 	$value = yarpp_get_option($option);
-	
+
 	// $type could be...
 	__('word','yarpp');
 	__('tag','yarpp');
 	__('category','yarpp');
-	
+
 	echo "		$tr$desc</th>
 			<td>
 			<input $inputplus type='radio' name='$option' value='1'". (($value == 1) ? ' checked="checked"': '' )."  /> ".__("do not consider",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='2'". (($value == 2) ? ' checked="checked"': '' )."  /> ".__("consider",'yarpp')."
-			<input $inputplus type='radio' name='$option' value='3'". (($value == 3) ? ' checked="checked"': '' )."  /> 
+			<input $inputplus type='radio' name='$option' value='3'". (($value == 3) ? ' checked="checked"': '' )."  />
 			".sprintf(__("require at least one %s in common",'yarpp'),__($type,'yarpp'))."
-			<input $inputplus type='radio' name='$option' value='4'". (($value == 4) ? ' checked="checked"': '' )."  /> 
+			<input $inputplus type='radio' name='$option' value='4'". (($value == 4) ? ' checked="checked"': '' )."  />
 			".sprintf(__("require more than one %s in common",'yarpp'),__($type,'yarpp'))."
 			</td>
 		</tr>";
 }
 
-function importance2($option,$desc,$type='word',$tr="<tr valign='top'>
+function yarpp_options_importance2($option,$desc,$type='word',$tr="<tr valign='top'>
 			<th scope='row'>",$inputplus = '') {
 	$value = yarpp_get_option($option);
 
@@ -162,11 +162,11 @@ function importance2($option,$desc,$type='word',$tr="<tr valign='top'>
 		</tr>";
 }
 
-function select($option,$desc,$type='word',$tr="<tr valign='top'>
+function yarpp_options_select($option,$desc,$type='word',$tr="<tr valign='top'>
 			<th scope='row'>",$inputplus = '') {
 	echo "		$tr$desc</th>
 			<td>
-			<input $inputplus type='radio' name='$option' value='1'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  /> 
+			<input $inputplus type='radio' name='$option' value='1'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  />
 			".__("do not consider",'yarpp')."
 			<input $inputplus type='radio' name='$option' value='2'". ((yarpp_get_option($option) == 2) ? ' checked="checked"': '' )."  />
 			".__("consider",'yarpp')."
@@ -179,6 +179,11 @@ function select($option,$desc,$type='word',$tr="<tr valign='top'>
 }
 
 ?>
+<style type="text/css">
+.form-table td {
+  line-height: 11px; /* to match the th's */
+}
+</style>
 <script type="text/javascript">
 //<!--
 
@@ -195,11 +200,13 @@ css.setAttribute("type", "text/css");
 css.setAttribute("href", "../wp-content/plugins/yet-another-related-posts-plugin/options.css");
 document.getElementsByTagName("head")[0].appendChild(css);
 
+var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>';
+
 function load_display_demo_web() {
 	jQuery.ajax({type:'POST',
 	    url:'admin-ajax.php',
 	    data:'action=yarpp_display_demo_web',
-	    beforeSend:function(){jQuery('#display_demo_web').eq(0).html('<img src="../wp-content/plugins/yet-another-related-posts-plugin/i/spin.gif" alt="loading..."/>')},
+	    beforeSend:function(){jQuery('#display_demo_web').eq(0).html('<img src="' + spinner + '" alt="loading..."/>')},
 	    success:function(html){jQuery('#display_demo_web').eq(0).html('<pre>'+html+'</pre>')},
 	    dataType:'html'}
 	)
@@ -209,7 +216,7 @@ function load_display_demo_rss() {
 	jQuery.ajax({type:'POST',
 	    url:'admin-ajax.php',
 	    data:'action=yarpp_display_demo_rss',
-	    beforeSend:function(){jQuery('#display_demo_rss').eq(0).html('<img src="../wp-content/plugins/yet-another-related-posts-plugin/i/spin.gif" alt="loading..."/>')},
+	    beforeSend:function(){jQuery('#display_demo_rss').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
 	    success:function(html){jQuery('#display_demo_rss').eq(0).html('<pre>'+html+'</pre>')},
 	    dataType:'html'}
 	)
@@ -219,7 +226,7 @@ function load_display_distags() {
 	jQuery.ajax({type:'POST',
 	    url:'admin-ajax.php',
 	    data:'action=yarpp_display_distags',
-	    beforeSend:function(){jQuery('#display_distags').eq(0).html('<img src="../wp-content/plugins/yet-another-related-posts-plugin/i/spin.gif" alt="loading..."/>')},
+	    beforeSend:function(){jQuery('#display_distags').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
 	    success:function(html){jQuery('#display_distags').eq(0).html(html)},
 	    dataType:'html'}
 	)
@@ -229,7 +236,7 @@ function load_display_discats() {
 	jQuery.ajax({type:'POST',
 	    url:'admin-ajax.php',
 	    data:'action=yarpp_display_discats',
-	    beforeSend:function(){jQuery('#display_discats').eq(0).html('<img src="../wp-content/plugins/yet-another-related-posts-plugin/i/spin.gif" alt="loading..."/>')},
+	    beforeSend:function(){jQuery('#display_discats').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
 	    success:function(html){jQuery('#display_discats').eq(0).html(html)},
 	    dataType:'html'}
 	)
@@ -239,21 +246,28 @@ function load_display_discats() {
 
 <div class="wrap">
 		<h2>
-			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php 
-			
+			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php
+
 			$display_version = yarpp_get_option('version');
       echo $display_version;
 			?></small>
 		</h2>
 
 	<?php echo "<div id='yarpp-version' style='display:none;'>".yarpp_get_option('version')."</div>"; ?>
-		
+
 	<form method="post">
 
-			<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>" style="float:right" /></a>
+  <div>
+  <div id="badges" style="float:right">
+    <!--<small><a href="http://wordpress.org/tags/yet-another-related-posts-plugin" style="padding-right: 10px;">Support forums</a></small>-->
+    <script type="text/javascript">var WPHC_AFF_ID = "14336"; var WPHC_POSITION = "d1"; var WPHC_PRODUCT = "Yet Another Related Posts Plugin (<?php echo yarpp_get_option('version'); ?>)"; var WPHC_WP_VERSION = "<?php echo $wp_version; ?>";</script>
+    <script src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js" type="text/javascript"></script>
+    <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>" style="padding-left: 10px;"/></a>
+  </div>
 
-	<p><small><?php _e('by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a>','yarpp');?>. <?php _e('Follow <a href="http://twitter.com/yarpp/">Yet Another Related Posts Plugin on Twitter</a>','yarpp');?>.</small></p>
+	<small><?php _e('by <a href="http://mitcho.com/code/">mitcho (Michael 芳貴 Erlewine)</a>','yarpp');?>. <?php _e('Follow <a href="http://twitter.com/yarpp/">Yet Another Related Posts Plugin on Twitter</a>','yarpp');?>.</small>
 
+  </div>
 
 <!--	<div style='border:1px solid #ddd;padding:8px;'>-->
 <div id="poststuff" class="metabox-holder">
@@ -274,7 +288,7 @@ function load_display_discats() {
 	<h3 class='hndle'><span><?php _e('"The Pool"','yarpp');?></span></h3>
 <div class='inside'>
 	<p><?php _e('"The Pool" refers to the pool of posts and pages that are candidates for display as related to the current entry.','yarpp');?></p>
-	
+
 	<table class="form-table" style="margin-top: 0">
 		<tbody>
 			<tr valign='top'>
@@ -282,16 +296,16 @@ function load_display_discats() {
 			<tr valign='top'>
 				<th scope='row'><?php _e('Disallow by tag:','yarpp');?></th>
 				<td><div id='display_distags' style="overflow:auto;max-height:100px;"></div></td></tr>
-<?php 
-	checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
-	
+<?php
+	yarpp_options_checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
+
 	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".stripslashes(yarpp_get_option('recent_number',true))."\" size=\"2\" />";
 	$recent_units = "<select name=\"recent_units\" id=\"recent_units\">
 		<option value='day'". (('day'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('day(s)','yarpp')."</option>
 		<option value='week'". (('week'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('week(s)','yarpp')."</option>
 		<option value='month'". (('month'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('month(s)','yarpp')."</option>
 	</select>";
-	checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp'))));
+	yarpp_options_checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp'))));
 ?>
 
 		</tbody>
@@ -308,22 +322,22 @@ function load_display_discats() {
 <div class='inside'>
 
 	<p><?php _e('YARPP is different than the <a href="http://wasabi.pbwiki.com/Related%20Entries">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <a href="#" class='info'><?php _e('more&gt;','yarpp');?><span><?php _e('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post\'s related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp');?></span></a></p>
-	
+
 	<table class="form-table" style="margin-top: 0">
 		<tbody>
-	
+
 <?php
-	textbox('threshold',__('Match threshold:','yarpp'));
-	importance2('title',__("Titles: ",'yarpp'),'word',"<tr valign='top'>
+	yarpp_options_textbox('threshold',__('Match threshold:','yarpp'));
+	yarpp_options_importance2('title',__("Titles: ",'yarpp'),'word',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''));
-	importance2('body',__("Bodies: ",'yarpp'),'word',"<tr valign='top'>
+	yarpp_options_importance2('body',__("Bodies: ",'yarpp'),'word',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''));
-	importance('tags',__("Tags: ",'yarpp'),'tag',"<tr valign='top'>
+	yarpp_options_importance('tags',__("Tags: ",'yarpp'),'tag',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
-	importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
+	yarpp_options_importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
-	checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
-	checkbox('past_only',__("Show only previous posts?",'yarpp'));
+	yarpp_options_checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
+	yarpp_options_checkbox('past_only',__("Show only previous posts?",'yarpp'));
 ?>
 			</tbody>
 		</table>
@@ -348,7 +362,7 @@ function load_display_discats() {
 		else
 			jQuery('.excerpted').hide();
 	}
-	
+
 	function rss_display() {
 		if (jQuery('.rss_display').eq(0).attr('checked'))
 			jQuery('.rss_displayed').show();
@@ -372,7 +386,7 @@ function load_display_discats() {
 		else
 			jQuery('.rss_excerpted').hide();
 	}
-	
+
 	function yarpp_js_init() {
 		template();
 		rss_template();
@@ -380,8 +394,8 @@ function load_display_discats() {
 		load_display_distags();
 		load_display_demo_web();
 		load_display_demo_rss();
-		
-		version = jQuery('#yarpp-version').html();
+
+		var version = jQuery('#yarpp-version').html();
 
 		var json = <?php echo yarpp_check_version_json($display_version); ?>;
 		if (json.result == 'newbeta')
@@ -389,12 +403,10 @@ function load_display_discats() {
 		if (json.result == 'new')
 		    jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>).show();
 	}
-	
-	jQuery(document).ready(yarpp_js_init);
-	
-//-->
-</script>
 
+	jQuery(document).ready(yarpp_js_init);
+	//-->
+	</script>
 
 		<!-- Display options -->
 <div class='postbox'>
@@ -403,15 +415,15 @@ function load_display_discats() {
     </div>
 	<h3 class='hndle'><span><?php _e("Display options <small>for your website</small>",'yarpp');?></span></h3>
 <div class='inside'>
-		
+
 		<table class="form-table" style="margin-top: 0;width:100%">
 <?php
-checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')."</span></a>","<tr valign='top'>
+yarpp_options_checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')."</span></a>","<tr valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="11" style="border-left:8px transparent solid;"><b>'.__("Website display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");?>
 
-	<?php textbox('limit',__('Maximum number of related posts:','yarpp'))?>
-	<?php checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
+	<?php yarpp_options_textbox('limit',__('Maximum number of related posts:','yarpp'))?>
+	<?php yarpp_options_checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template" onclick="javascript:template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -432,10 +444,10 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				<td><input name="before_title" type="text" id="before_title" value="<?php echo stripslashes(yarpp_get_option('before_title',true)); ?>" size="10" /> / <input name="after_title" type="text" id="after_title" value="<?php echo stripslashes(yarpp_get_option('after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
-	<?php checkbox('show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='not_templated' valign='top'><th colspan='2'>",' class="show_excerpt" onclick="javascript:excerpt()"'); ?>
-	<?php textbox('excerpt_length',__('Excerpt length (No. of words):','yarpp'),null,"<tr class='excerpted' valign='top'>
+	<?php yarpp_options_checkbox('show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='not_templated' valign='top'><th colspan='2'>",' class="show_excerpt" onclick="javascript:excerpt()"'); ?>
+	<?php yarpp_options_textbox('excerpt_length',__('Excerpt length (No. of words):','yarpp'),null,"<tr class='excerpted' valign='top'>
 				<th>")?>
-	
+
 			<tr class="excerpted" valign='top'>
 				<th><?php _e("Before / after (Excerpt):",'yarpp');?></th>
 				<td><input name="before_post" type="text" id="before_post" value="<?php echo stripslashes(yarpp_get_option('before_post',true)); ?>" size="10" /> / <input name="after_post" type="text" id="after_post" value="<?php echo stripslashes(yarpp_get_option('after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
@@ -454,10 +466,10 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
 				</select>
 				</td>
 			</tr>
-	
-	<?php textbox('no_results',__('Default display if no results:','yarpp'),'40',"<tr class='not_templated' valign='top'>
+
+	<?php yarpp_options_textbox('no_results',__('Default display if no results:','yarpp'),'40',"<tr class='not_templated' valign='top'>
 				<th>")?>
-	<?php checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
+	<?php yarpp_options_checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
 	." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
 	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>"); ?>
 		</table>
@@ -471,16 +483,16 @@ checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a 
     </div>
 	<h3 class='hndle'><span><?php _e("Display options <small>for RSS</small>",'yarpp');?></span></h3>
 <div class='inside'>
-		
+
 		<table class="form-table" style="margin-top: 0;width:100%">
 <?php
 
-checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')."</span></a>","<tr valign='top'><th colspan='3'>",' class="rss_display" onclick="javascript:rss_display();"');
-checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>","<tr class='rss_displayed' valign='top'>
+yarpp_options_checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')."</span></a>","<tr valign='top'><th colspan='3'>",' class="rss_display" onclick="javascript:rss_display();"');
+yarpp_options_checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>","<tr class='rss_displayed' valign='top'>
 			<th class='th-full' colspan='2' scope='row'>",'','<td rowspan="9" style="border-left:8px transparent solid;"><b>'.__("RSS display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_rss' style='overflow:auto;width:350px;max-height:500px;'></div></td>"); ?>
-	<?php textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
-	<?php checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
+	<?php yarpp_options_textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2)?>
+	<?php yarpp_options_checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="rss_template" onclick="javascript:rss_template()"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
 			<tr valign='top' class='rss_templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
@@ -501,10 +513,10 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 				<td><input name="rss_before_title" type="text" id="rss_before_title" value="<?php echo stripslashes(yarpp_get_option('rss_before_title',true)); ?>" size="10" /> / <input name="rss_after_title" type="text" id="rss_after_title" value="<?php echo stripslashes(yarpp_get_option('rss_after_title',true)); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
-	<?php checkbox('rss_show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='rss_not_templated' valign='top'><th colspan='2'>",' class="rss_show_excerpt" onclick="javascript:rss_excerpt()"'); ?>
-	<?php textbox('rss_excerpt_length',__('Excerpt length (No. of words):','yarpp'),null,"<tr class='rss_excerpted' valign='top'>
+	<?php yarpp_options_checkbox('rss_show_excerpt',__("Show excerpt?",'yarpp'),"<tr class='rss_not_templated' valign='top'><th colspan='2'>",' class="rss_show_excerpt" onclick="javascript:rss_excerpt()"'); ?>
+	<?php yarpp_options_textbox('rss_excerpt_length',__('Excerpt length (No. of words):','yarpp'),null,"<tr class='rss_excerpted' valign='top'>
 				<th>")?>
-	
+
 			<tr class="rss_excerpted" valign='top'>
 				<th><?php _e("Before / after (excerpt):",'yarpp');?></th>
 				<td><input name="rss_before_post" type="text" id="rss_before_post" value="<?php echo stripslashes(yarpp_get_option('rss_before_post',true)); ?>" size="10" /> / <input name="rss_after_post" type="text" id="rss_after_post" value="<?php echo stripslashes(yarpp_get_option('rss_after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
@@ -523,16 +535,18 @@ checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'
 				</select>
 				</td>
 			</tr>
-	
-	<?php textbox('rss_no_results',__('Default display if no results:','yarpp'),'40',"<tr valign='top' class='rss_not_templated'>
+
+	<?php yarpp_options_textbox('rss_no_results',__('Default display if no results:','yarpp'),'40',"<tr valign='top' class='rss_not_templated'>
 			<th scope='row'>")?>
-	<?php checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
+	<?php yarpp_options_checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
 	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>","<tr valign='top' class='rss_displayed'>
 			<th class='th-full' colspan='2' scope='row'>"); ?>
 		</table>
 		</div>
 	</div>
-	
+
+<!--cache engine: <?php echo $yarpp_cache->name;?>; cache status: <?php echo $yarpp_cache->cache_status();?>-->
+
 	<div>
 		<p class="submit">
 			<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
