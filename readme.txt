@@ -157,6 +157,7 @@ YARPP is currently localized in the following languages:
   * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
   * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
   * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
+	* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no) (yarpp-nb at mitcho dot com)
   * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
   * (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](www.fernstudium-net.de)
   * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
@@ -167,8 +168,7 @@ YARPP is currently localized in the following languages:
   * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
   * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 
-We already have localizers lined up for the following languages:
-
+<!--We already have localizers lined up for the following languages:
   * Danish
   * Spanish
   * Catalan
@@ -176,6 +176,7 @@ We already have localizers lined up for the following languages:
   * Hungarian
   * Romanian
   * Thai
+-->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
@@ -187,7 +188,11 @@ If you are a bilingual speaker of English and another language and an avid user 
   * The appropriate caches are cleared after posts are deleted ([#1245](http://plugins.trac.wordpress.org/ticket/1245)).
   * Caching is no longer performed while batch-importing posts.
 * A new object-based abstraction for the caching system. YARPP by default uses custom database tables (same behavior as 3.1.x), but you now have an option to use the `postmeta` table instead. To use `postmeta` caching, add `define('YARPP_CACHE_TYPE', 'postmeta');` to your `wp-config.php` file.<!--YARPP no longer uses custom tables! Both custom tables (`yarpp_related_cache` and `yarpp_keywords_cache`) are automatically removed if you have them. WordPress Post Meta is used instead for caching.-->
-* Added Bulgarian localization (`bg_BG`) by [Flash Gallery](www.flashgallery.org), Farsi/Persian localization (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/), and Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
+* Localizations:
+	* added Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org);
+	* added Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/);
+	* added Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no);
+	* added Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
 * Added [WordPress HelpCenter](http://wphelpcenter.com/) widget for quick access to professional support.
 * Some code cleanup (bug [#1246](http://plugins.trac.wordpress.org/ticket/1246))
 * No longer supporting WordPress versions before 3.0, not because I suddenly started using something that requires 3.0, but in order to simplify testing.
