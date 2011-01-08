@@ -6,7 +6,7 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.0.4
+Tested up to: 3.1
 Stable tag: 3.1.9
 
 Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
@@ -139,43 +139,43 @@ I highly recommend you disactivate YARPP, replace it with the new one, and then 
 
 YARPP is currently localized in the following languages:
 
-  * Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
-  * Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
-  * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
-  * Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org)
-  * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
-  * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
-  * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
-  * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-  * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
-  * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-  * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
-  * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
-  * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
-  * Japanese (`ja`) by myself (yarpp at mitcho dot com)
-  * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
-  * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
-  * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
-	* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no) (yarpp-nb at mitcho dot com)
-  * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-  * (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](www.fernstudium-net.de)
-  * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
-  * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
-  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
-  * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
-  * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
-  * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
-  * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
+* Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
+* Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
+* Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
+* Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org)
+* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+* Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
+* Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
+* Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
+* French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
+* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
+* Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
+* Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
+* Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
+* Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+* Japanese (`ja`) by myself (yarpp at mitcho dot com)
+* Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+* Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
+* Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
+* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no) (yarpp-nb at mitcho dot com)
+* Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
+* (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](www.fernstudium-net.de)
+* Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
+* Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+* Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
+* Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
+* Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
+* Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 
 <!--We already have localizers lined up for the following languages:
-  * Danish
-  * Spanish
-  * Catalan
-  * Indonesian
-  * Hungarian
-  * Romanian
-  * Thai
+* Danish
+* Spanish
+* Catalan
+* Indonesian
+* Hungarian
+* Romanian
+* Thai
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
@@ -193,6 +193,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* added Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/);
 	* added Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no);
 	* added Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
+	* updated Lithuanian (`lt_LT`) by [Mantas Malcius](http://mantas.malcius.lt/)
 * Added [WordPress HelpCenter](http://wphelpcenter.com/) widget for quick access to professional support.
 * Some code cleanup (bug [#1246](http://plugins.trac.wordpress.org/ticket/1246))
 * No longer supporting WordPress versions before 3.0, not because I suddenly started using something that requires 3.0, but in order to simplify testing.

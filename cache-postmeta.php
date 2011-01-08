@@ -12,6 +12,7 @@ class YARPP_Cache_Postmeta {
 	var $related_postdata = array();
 	var $related_IDs = array();
 	var $name = "postmeta";
+	var $yarpp_time = false;
 
 	/**
 	 * SETUP/STATUS
@@ -53,9 +54,9 @@ class YARPP_Cache_Postmeta {
 	 * MAGIC FILTERS
 	 */
 	function where_filter($arg) {
-		global $wpdb, $yarpp_time;
-		$threshold = yarpp_get_option('threshold');
-		if ($yarpp_time) {
+		global $wpdb;
+		if ($this->yarpp_time) {
+			$threshold = yarpp_get_option('threshold');
 			// modify the where clause to use the related ID list.
 			if (!count($this->related_IDs))
 				$this->related_IDs = array(0);
@@ -69,15 +70,18 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function orderby_filter($arg) {
-		global $wpdb, $yarpp_time, $yarpp_score_override;
-		if ($yarpp_time and $yarpp_score_override)
+		global $wpdb, $yarpp_score_override;
+		// only order by score if the score function is added in fields_filter, which only happens
+		// if there are related posts in the postdata
+		if ($this->yarpp_time && $yarpp_score_override &&
+		    is_array($this->related_postdata) && count($this->related_postdata))
 			return str_replace("$wpdb->posts.post_date","score",$arg);
 		return $arg;
 	}
 
 	function fields_filter($arg) {
-		global $wpdb, $yarpp_time, $wpdb;
-		if ($yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
+		global $wpdb, $wpdb;
+		if ($this->yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
 			$scores = array();
 			foreach ($this->related_postdata as $related_entry) {
 				$scores[] = " WHEN {$related_entry['ID']} THEN {$related_entry['score']}";
@@ -100,8 +104,8 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function limit_filter($arg) {
-		global $wpdb, $yarpp_time, $yarpp_online_limit;
-		if ($yarpp_time and $yarpp_online_limit)
+		global $wpdb, $yarpp_online_limit;
+		if ($this->yarpp_time and $yarpp_online_limit)
 			return " limit $yarpp_online_limit ";
 		return $arg;
 	}
@@ -110,6 +114,7 @@ class YARPP_Cache_Postmeta {
 	 * RELATEDNESS CACHE CONTROL
 	 */
 	function begin_yarpp_time($reference_ID) {
+		$this->yarpp_time = true;
 		// get the related posts from postdata, and also construct the relate_IDs array
 		$this->related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 		if (is_array($this->related_postdata) && count($this->related_postdata))
@@ -117,6 +122,7 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function end_yarpp_time() {
+		$this->yarpp_time = false;
 		$this->related_IDs = array();
 		$this->related_postdata = array();
 	}
