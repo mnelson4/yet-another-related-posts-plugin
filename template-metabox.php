@@ -1,12 +1,11 @@
 <?php
+global $yarpp_debug;
 
 yarpp_save_cache($reference_ID,false); // enforce the cache, but don't force it
 
 $body_terms = $yarpp_cache->get_keywords($reference_ID,'body');
 $title_terms = $yarpp_cache->get_keywords($reference_ID,'title');
 
-// Disabled "last updated keywords" as it doesn't support postmeta storage
-// if ($yarpp_debug) $output .= "<p>last updated keywords: ".$wpdb->get_var("select date from {$wpdb->prefix}yarpp_keyword_cache where ID = '$reference_ID'")."</p>";
 if ($yarpp_debug) $output .= "<p>body keywords: $body_terms</p>";
 if ($yarpp_debug) $output .= "<p>title keywords: $title_terms</p>";
 
@@ -19,7 +18,6 @@ if ($related_query->have_posts()) {
 	while ($related_query->have_posts()) {
 		$related_query->the_post();
 		$output .= "<li><a href='post.php?action=edit&post=$id'>".get_the_title()."</a>";
-		// TODO: what if it's a page?
 		$output .= ' ('.round(get_the_score(),3).')';
 		$output .= '</li>';
 	}
