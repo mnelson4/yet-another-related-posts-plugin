@@ -2,6 +2,11 @@
 
 global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache;
 
+// if action=flush, reset the cache
+if (isset($_GET['action']) && $_GET['action'] == 'flush') {
+  $yarpp_cache->flush();
+}
+
 // check to see that templates are in the right place
 $yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0);
 if (!$yarpp_templateable) {

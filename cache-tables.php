@@ -37,11 +37,11 @@ class YARPP_Cache_Tables {
 		global $wpdb;
 		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
 			`ID` bigint(20) unsigned NOT NULL default '0',
-			`body` text collate utf8_unicode_ci NOT NULL,
-			`title` text collate utf8_unicode_ci NOT NULL,
+			`body` text NOT NULL,
+			`title` text NOT NULL,
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY  (`ID`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='YARPP''s keyword cache table';")) {
+			) ENGINE=MyISAM COMMENT='YARPP''s keyword cache table';")) {
 			echo "<!--MySQL error on creating " . YARPP_TABLES_KEYWORDS_TABLE . " table: ";
 			$wpdb->print_error();
 			echo "-->";
@@ -52,7 +52,7 @@ class YARPP_Cache_Tables {
 			`score` float unsigned NOT NULL default '0',
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY ( `score` , `date` , `reference_ID` , `ID` )
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;")) {
+			) ENGINE=MyISAM;")) {
 			echo "<!--MySQL error on creating " . YARPP_TABLES_RELATED_TABLE . " table: ";
 			$wpdb->print_error();
 			echo "-->";
@@ -93,10 +93,8 @@ class YARPP_Cache_Tables {
 
 			$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 
-
 			if (yarpp_get_option("recent_only"))
 				$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
-			//echo "<!--YARPP TEST: $arg-->";
 		}
 		return $arg;
 	}
@@ -179,9 +177,7 @@ class YARPP_Cache_Tables {
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {
 				$this->clear(array_diff($original_related, $new_related));
-				//error_log('clear:' . implode(':', array_diff($original_related, $new_related)));
 				$this->clear(array_diff($new_related, $original_related));
-				//error_log('clear:' . implode(':', array_diff($new_related, $original_related)));
 			}
 		} else {
 			$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) values ($reference_ID,0,0) on duplicate key update date = now()");
@@ -190,7 +186,6 @@ class YARPP_Cache_Tables {
 			// Clear the caches of those which are no longer related.
 			if (count($original_related)) {
 				$this->clear($original_related);
-				//error_log('clear:' . implode(':', $original_related));
 			}
 		}
 	}

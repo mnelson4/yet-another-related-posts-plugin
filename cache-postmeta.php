@@ -128,7 +128,6 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function is_cached($reference_ID) {
-//		error_log('hit:' . print_r(debug_backtrace(), true));
 		return get_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, true) != false;
 	}
 
@@ -148,30 +147,23 @@ class YARPP_Cache_Postmeta {
 		global $wpdb, $yarpp_debug;
 
 		$original_related = $this->related($reference_ID);
-//		error_log('original:' . implode(':', $original_related));
-
 		$related = $wpdb->get_results(yarpp_sql($types,array(),true,$reference_ID), ARRAY_A);
-//		error_log('debug:' . print_r($related, true));
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
 		if (count($new_related)) {
-//			error_log('new:' . implode(':', $new_related));
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
 			if ($yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {
 				$this->clear(array_diff($original_related, $new_related));
-//				error_log('clear:' . implode(':', array_diff($original_related, $new_related)));
 				$this->clear(array_diff($new_related, $original_related));
-//				error_log('clear:' . implode(':', array_diff($new_related, $original_related)));
 			}
 		} else {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, YARPP_NO_RELATED);
 			// Clear the caches of those which are no longer related.
 			if (count($original_related)) {
 				$this->clear($original_related);
-//				error_log('clear:' . implode(':', $original_related));
 			}
 		}
 	}
@@ -195,7 +187,6 @@ class YARPP_Cache_Postmeta {
 		// return a list of ID's of "related" entries
 		if (!is_null($reference_ID)) {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
-//			error_log('debug:' . print_r($results, true));
 			if (!$results || $results == YARPP_NO_RELATED)
 				return array();
 			return array_map(create_function('$x','return $x["ID"];'), $results);

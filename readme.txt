@@ -7,9 +7,9 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 3.1.9
+Stable tag: 3.2
 
-Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
+Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
 == Description ==
 
@@ -135,6 +135,10 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
 
+= Can I clear my cache? =
+
+Yes, you can clear the cache by going to your YARPP settings page ("Related Posts (YARPP)") in your admin interface, and adding `&action=flush` to the URL and reloading the page. YARPP will begin the process of organically rebuilding your cache.
+
 == Localizations ==
 
 YARPP is currently localized in the following languages:
@@ -153,6 +157,7 @@ YARPP is currently localized in the following languages:
 * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
 * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+* Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) (yarpp-id at mitcho dot com) of [Kelayang](http://kelayang.com/)
 * Japanese (`ja`) by myself (yarpp at mitcho dot com)
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
@@ -191,6 +196,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Localizations:
 	* added Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org);
 	* added Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/);
+	* added Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
 	* added Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no);
 	* added Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
 	* updated Lithuanian (`lt_LT`) by [Mantas Malcius](http://mantas.malcius.lt/)
