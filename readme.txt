@@ -185,6 +185,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.2.1 =
+* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
 = 3.2 =
 * Better caching performance:
   * Previously, the cache would never actually build up properly. This is now fixed. Thanks to Artefact for pointing this out.

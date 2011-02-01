@@ -301,7 +301,7 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 
   yarpp_cache_enforce($type,$reference_ID);
 
-	$yarpp_cache->start_yarpp_time($reference_ID); // get ready for YARPP TIME!
+	$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	$related_query = new WP_Query();
   $related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
   $return = $related_query->have_posts();
