@@ -34,9 +34,7 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 
 = Testimonials =
 
-"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - Matt Mullenweg, WordPress creator
-
-"As most [sports betting](http://www.betus.com/) fans use our portal, [BetUS.com Sportsbook](http://www.betus.com/sportsbook/) works hard to maintain a high level of quality on their site.  Mitcho and his amazing plugins help keep us moving our technology forward.  Thank you Mitcho, and the [Wordpress](http://wordpress.org) team for your service and creativity!" - [BetUS.com](http://BetUS.com/)
+"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - [Matt Mullenweg](http://ma.tt), WordPress creator
 
 == Installation ==
 
