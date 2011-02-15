@@ -12,6 +12,7 @@ class YARPP_Cache_Postmeta {
 	var $related_postdata = array();
 	var $related_IDs = array();
 	var $name = "postmeta";
+	var $yarpp_time = false;
 
 	/**
 	 * SETUP/STATUS
@@ -53,9 +54,9 @@ class YARPP_Cache_Postmeta {
 	 * MAGIC FILTERS
 	 */
 	function where_filter($arg) {
-		global $wpdb, $yarpp_time;
-		$threshold = yarpp_get_option('threshold');
-		if ($yarpp_time) {
+		global $wpdb;
+		if ($this->yarpp_time) {
+			$threshold = yarpp_get_option('threshold');
 			// modify the where clause to use the related ID list.
 			if (!count($this->related_IDs))
 				$this->related_IDs = array(0);
@@ -69,15 +70,18 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function orderby_filter($arg) {
-		global $wpdb, $yarpp_time, $yarpp_score_override;
-		if ($yarpp_time and $yarpp_score_override)
+		global $wpdb, $yarpp_score_override;
+		// only order by score if the score function is added in fields_filter, which only happens
+		// if there are related posts in the postdata
+		if ($this->yarpp_time && $yarpp_score_override &&
+		    is_array($this->related_postdata) && count($this->related_postdata))
 			return str_replace("$wpdb->posts.post_date","score",$arg);
 		return $arg;
 	}
 
 	function fields_filter($arg) {
-		global $wpdb, $yarpp_time, $wpdb;
-		if ($yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
+		global $wpdb, $wpdb;
+		if ($this->yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
 			$scores = array();
 			foreach ($this->related_postdata as $related_entry) {
 				$scores[] = " WHEN {$related_entry['ID']} THEN {$related_entry['score']}";
@@ -100,8 +104,8 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function limit_filter($arg) {
-		global $wpdb, $yarpp_time, $yarpp_online_limit;
-		if ($yarpp_time and $yarpp_online_limit)
+		global $wpdb, $yarpp_online_limit;
+		if ($this->yarpp_time and $yarpp_online_limit)
 			return " limit $yarpp_online_limit ";
 		return $arg;
 	}
@@ -110,6 +114,7 @@ class YARPP_Cache_Postmeta {
 	 * RELATEDNESS CACHE CONTROL
 	 */
 	function begin_yarpp_time($reference_ID) {
+		$this->yarpp_time = true;
 		// get the related posts from postdata, and also construct the relate_IDs array
 		$this->related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 		if (is_array($this->related_postdata) && count($this->related_postdata))
@@ -117,12 +122,12 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function end_yarpp_time() {
+		$this->yarpp_time = false;
 		$this->related_IDs = array();
 		$this->related_postdata = array();
 	}
 
 	function is_cached($reference_ID) {
-//		error_log('hit:' . print_r(debug_backtrace(), true));
 		return get_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, true) != false;
 	}
 
@@ -142,30 +147,23 @@ class YARPP_Cache_Postmeta {
 		global $wpdb, $yarpp_debug;
 
 		$original_related = $this->related($reference_ID);
-//		error_log('original:' . implode(':', $original_related));
-
 		$related = $wpdb->get_results(yarpp_sql($types,array(),true,$reference_ID), ARRAY_A);
-//		error_log('debug:' . print_r($related, true));
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
 		if (count($new_related)) {
-//			error_log('new:' . implode(':', $new_related));
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
 			if ($yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {
 				$this->clear(array_diff($original_related, $new_related));
-//				error_log('clear:' . implode(':', array_diff($original_related, $new_related)));
 				$this->clear(array_diff($new_related, $original_related));
-//				error_log('clear:' . implode(':', array_diff($new_related, $original_related)));
 			}
 		} else {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, YARPP_NO_RELATED);
 			// Clear the caches of those which are no longer related.
 			if (count($original_related)) {
 				$this->clear($original_related);
-//				error_log('clear:' . implode(':', $original_related));
 			}
 		}
 	}
@@ -189,7 +187,6 @@ class YARPP_Cache_Postmeta {
 		// return a list of ID's of "related" entries
 		if (!is_null($reference_ID)) {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
-//			error_log('debug:' . print_r($results, true));
 			if (!$results || $results == YARPP_NO_RELATED)
 				return array();
 			return array_map(create_function('$x','return $x["ID"];'), $results);
