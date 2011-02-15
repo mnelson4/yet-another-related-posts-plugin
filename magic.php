@@ -351,6 +351,15 @@ function yarpp_delete_cache($post_ID) {
   $yarpp_cache->clear($peers);
 }
 
+// New in 3.2.1: handle various post_status transitions
+function yarpp_status_transition($new_status, $old_status, $post) {
+  switch ($new_status) {
+    case "draft":
+      yarpp_delete_cache($post->ID);
+      break;
+  }
+}
+
 function yarpp_cache_enforce($types=array('post'),$reference_ID,$force=false) {
 	global $yarpp_debug, $yarpp_cache;
 

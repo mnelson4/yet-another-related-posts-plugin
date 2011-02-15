@@ -203,7 +203,7 @@ class YARPP_Widget extends WP_Widget {
 
   function widget($args, $instance) {
   	global $post;
-    if (!is_single())
+    if (!is_singular())
       return;
 
     extract($args);
@@ -222,7 +222,6 @@ class YARPP_Widget extends WP_Widget {
 				_e('Related Posts (YARPP)','yarpp');
 			echo $after_title;
     }
-//    var_dump($instance);
 		echo yarpp_related($type,$instance,false,false,'widget');
     echo $after_widget;
   }
@@ -461,11 +460,16 @@ function yarpp_microtime_float() {
     return ((float)$usec + (float)$sec);
 }
 
-function yarpp_check_version_json($version) {
+function yarpp_version_json() {
+	check_ajax_referer('yarpp_version_json');
+	$version = YARPP_VERSION;
   $remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
-  if (is_wp_error($remote))
-    return '{}';
-  return $remote['body'];
+  if (is_wp_error($remote)) {
+    echo '{}';
+		exit;
+  }
+  echo $remote['body'];
+  exit;
 }
 
 function yarpp_add_metabox() {
