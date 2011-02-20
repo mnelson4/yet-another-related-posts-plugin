@@ -6,10 +6,10 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.0.4
-Stable tag: 3.1.9
+Tested up to: 3.1
+Stable tag: 3.2
 
-Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
+Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
 == Description ==
 
@@ -34,9 +34,7 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 
 = Testimonials =
 
-"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - Matt Mullenweg, WordPress creator
-
-"As most [sports betting](http://www.betus.com/) fans use our portal, [BetUS.com Sportsbook](http://www.betus.com/sportsbook/) works hard to maintain a high level of quality on their site.  Mitcho and his amazing plugins help keep us moving our technology forward.  Thank you Mitcho, and the [Wordpress](http://wordpress.org) team for your service and creativity!" - [BetUS.com](http://BetUS.com/)
+"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - [Matt Mullenweg](http://ma.tt), WordPress creator
 
 == Installation ==
 
@@ -135,53 +133,71 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
 
+= Can I clear my cache? =
+
+Yes, you can clear the cache by going to your YARPP settings page ("Related Posts (YARPP)") in your admin interface, and adding `&action=flush` to the URL and reloading the page. YARPP will begin the process of organically rebuilding your cache.
+
 == Localizations ==
 
 YARPP is currently localized in the following languages:
 
-  * Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
-  * Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
-  * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
-  * Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org)
-  * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
-  * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-  * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
-  * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
-  * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-  * German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
-  * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-  * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
-  * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
-  * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
-  * Japanese (`ja`) by myself (yarpp at mitcho dot com)
-  * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
-  * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
-  * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) (yarpp-lt at mitcho dot com)
-	* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no) (yarpp-nb at mitcho dot com)
-  * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-  * (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](www.fernstudium-net.de)
-  * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
-  * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
-  * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
-  * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
-  * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
-  * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
-  * Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
+* Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
+* Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
+* Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
+* Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
+* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
+* Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
+* Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
+* Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
+* French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
+* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
+* Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
+* Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
+* Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
+* Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+* Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) (yarpp-id at mitcho dot com) of [Kelayang](http://kelayang.com/)
+* Japanese (`ja`) by myself (yarpp at mitcho dot com)
+* Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
+* Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
+* Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
+* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](http://www.datanerden.no) (yarpp-nb at mitcho dot com)
+* Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
+* (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](http://www.fernstudium-net.de)
+* Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
+* Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+* Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
+* Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
+* Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
+* Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
 
 <!--We already have localizers lined up for the following languages:
-  * Danish
-  * Spanish
-  * Catalan
-  * Indonesian
-  * Hungarian
-  * Romanian
-  * Thai
+* Danish
+* Spanish
+* Catalan
+* Indonesian
+* Hungarian
+* Romanian
+* Thai
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
 
+= 3.2.1 =
+* Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
+* Better handling of [`post_status` transitions](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-changed-post-to-draft-still-showing-up-as-related-to-other-posts).
+* Bugfix: [the widget was not working on pages](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-showing-yarp-widget-in-pages-and-subpages)
+* Added overused words list for French, thanks to [saymonz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
+* Minor code cleanup:
+	* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
+	* Minor security fix in version-checking code
+	* Removed legacy code for gracefully upgrading from YARPP versions < 1.5 and working with WordPress versions < 2.8.
+	* Cleanup of `yarpp_upgrade_check()` calling
+	* Eliminated a couple globals
+	* Cleaned up some edge case causes for "unexpected output" on plugin activation
+	* Removed WP Help Center badge, as they are closing
 = 3.2 =
 * Better caching performance:
   * Previously, the cache would never actually build up properly. This is now fixed. Thanks to Artefact for pointing this out.
@@ -189,10 +205,12 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Caching is no longer performed while batch-importing posts.
 * A new object-based abstraction for the caching system. YARPP by default uses custom database tables (same behavior as 3.1.x), but you now have an option to use the `postmeta` table instead. To use `postmeta` caching, add `define('YARPP_CACHE_TYPE', 'postmeta');` to your `wp-config.php` file.<!--YARPP no longer uses custom tables! Both custom tables (`yarpp_related_cache` and `yarpp_keywords_cache`) are automatically removed if you have them. WordPress Post Meta is used instead for caching.-->
 * Localizations:
-	* added Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org);
+	* added Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org);
 	* added Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/);
+	* added Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
 	* added Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no);
-	* added Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
+	* added Portuguese (`pt_PT`) by [Stefan Mueller](http://www.fernstudium-net.de).
+	* updated Lithuanian (`lt_LT`) by [Mantas Malcius](http://mantas.malcius.lt/)
 * Added [WordPress HelpCenter](http://wphelpcenter.com/) widget for quick access to professional support.
 * Some code cleanup (bug [#1246](http://plugins.trac.wordpress.org/ticket/1246))
 * No longer supporting WordPress versions before 3.0, not because I suddenly started using something that requires 3.0, but in order to simplify testing.

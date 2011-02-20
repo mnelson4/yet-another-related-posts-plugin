@@ -27,18 +27,18 @@ msgstr "MySQL-Erro ao adicionar \"yarpp_content\""
 
 #: includes.php:185
 msgid "<h3>An important message from YARPP:</h3><p>Thank you for upgrading to YARPP 2. YARPP 2.0 adds the much requested ability to limit related entry results by certain tags or categories. 2.0 also brings more fine tuned control of the magic algorithm, letting you specify how the algorithm should consider or not consider entry content, titles, tags, and categories. Make sure to adjust the new settings to your liking and perhaps readjust your threshold.</p><p>For more information, check out the <a href=\"http://mitcho.com/code/yarpp/\">YARPP documentation</a>. (This message will not be displayed again.)</p>"
-msgstr "<h3>Mensagem de YARPP</h3><p>Obrigado por actualizar para o YARPP 2. Esta versão inclui melhorias no algoritmo mágico, permite-lhe configurar opções na quantificação das várias palavras-chave ou categoria, tem em consideração as opções da utilização de determinadas regras de exclusão e permite-lhe determinar a força das variáveis \"Conteúdo\", \"Sobretítulo\", \"Palavras-chave\" und \"Categorias\". Para mais informações, consulte <a href=\"http://mitcho.com/code/yarpp/\">Documentação YARPP </a>.</p><p>Esta mensagem nunca mais aparecerá!</p>"
+msgstr "<h3>Mensagem de YARPP</h3><p>Obrigado por actualizar para o YARPP 2. Esta vers√£o inclui melhorias no algoritmo m√°gico, permite-lhe configurar op√ß√µes na quantifica√ß√£o das v√°rias palavras-chave ou categoria, tem em considera√ß√£o as op√ß√µes da utiliza√ß√£o de determinadas regras de exclus√£o e permite-lhe determinar a for√ßa das vari√°veis \"Conte√∫do\", \"Sobret√≠tulo\", \"Palavras-chave\" und \"Categorias\". Para mais informa√ß√µes, consulte <a href=\"http://mitcho.com/code/yarpp/\">Documenta√ß√£o YARPP </a>.</p><p>Esta mensagem nunca mais aparecer√°!</p>"
 
 #: includes.php:197
 #: includes.php:197
 msgid "Related Posts (YARPP)"
-msgstr "Contribuições parecidas (YARPP)"
+msgstr "Contribui√ß√µes parecidas (YARPP)"
 
 #: includes.php:224
 #: yarpp.php:31
 #: yarpp.php:31
 msgid "Related Posts"
-msgstr "Contribuições parecidas"
+msgstr "Contribui√ß√µes parecidas"
 
 #: includes.php:229
 msgid "YARPP"
@@ -47,7 +47,7 @@ msgstr "YARPP"
 #: template-builtin.php:35
 #, php-format
 msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f é a concordância determinada pelo YARPP entre este artigo e o artigo parecido (Valor de relevância). Consegue ver este artigo porque está a utilizar uma conta de administrador da WordPress. Visitantes normais não o vêem."
+msgstr "%f √© a concord√¢ncia determinada pelo YARPP entre este artigo e o artigo parecido (Valor de relev√¢ncia). Consegue ver este artigo porque est√° a utilizar uma conta de administrador da WordPress. Visitantes normais n√£o o v√™em."
 
 #: magic.php:322
 #: options.php:458
@@ -57,22 +57,22 @@ msgstr "Artigos parecidos fornecidos por <a href='http://mitcho.com/code/yarpp/'
 
 #: options.php:26
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
-msgstr "O MyISAM-Check foi suspenso. Pode agora utilizar \"consider titles\" e \"consider bodies\" como critério de relevância."
+msgstr "O MyISAM-Check foi suspenso. Pode agora utilizar \"consider titles\" e \"consider bodies\" como crit√©rio de relev√¢ncia."
 
 #: options.php:35
 #, php-format
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPPs \"consider titles\" und \"consider bodies\" Os critérios \"consider titles\" und \"consider bodies\" de relevância da YARPP requerem que a sua tabela <code>%s</code> utilize a <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, mas a tabela parece utilizar a <code>%s</code>-Engine. As duas opções foram desactivadas."
+msgstr "YARPPs \"consider titles\" und \"consider bodies\" Os crit√©rios \"consider titles\" und \"consider bodies\" de relev√¢ncia da YARPP requerem que a sua tabela <code>%s</code> utilize a <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, mas a tabela parece utilizar a <code>%s</code>-Engine. As duas op√ß√µes foram desactivadas."
 
 #: options.php:37
 #, php-format
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
-msgstr "Para reactivar esta função, execute o código <code>%s</code> com o comando SQL: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code>."
+msgstr "Para reactivar esta fun√ß√£o, execute o c√≥digo <code>%s</code> com o comando SQL: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code>."
 
 #: options.php:39
 #, php-format
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
-msgstr "Se, mesmo depois desta verificação, tiver a certeza de que <code>%s</code> utiliza a MyISAM-Engine, clique no botão mágico:"
+msgstr "Se, mesmo depois desta verifica√ß√£o, tiver a certeza de que <code>%s</code> utiliza a MyISAM-Engine, clique no bot√£o m√°gico:"
 
 #: options.php:42
 msgid "Trust me. Let me use MyISAM features."
@@ -84,13 +84,13 @@ msgstr "Ocorreu um erro na base de dados da YARPP que pode contudo ser corrigido
 
 #: options.php:67
 msgid "The YARPP database has an error which could not be fixed."
-msgstr "Ocorreu um erro na base de dados da YARPP que não pode ser corrigido."
+msgstr "Ocorreu um erro na base de dados da YARPP que n√£o pode ser corrigido."
 
 #: options.php:154
 #: options.php:171
 #: options.php:183
 msgid "do not consider"
-msgstr ""não ter em conta""
+msgstr ""n√£o ter em conta""
 
 #: options.php:155
 #: options.php:172
@@ -104,16 +104,16 @@ msgstr "ter especialmente em conta"
 
 #: options.php:201
 msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
-msgstr "Histórico da versão YARPP (RSS 2.0)"
+msgstr "Hist√≥rico da vers√£o YARPP (RSS 2.0)"
 
 #: options.php:271
 #: options.php:271
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
-msgstr "Fazer uma doação via PayPal a mitcho (Michael Yoshitaka Erlewine) pelo desenvolvimento do plugin"
+msgstr "Fazer uma doa√ß√£o via PayPal a mitcho (Michael Yoshitaka Erlewine) pelo desenvolvimento do plugin"
 
 #: options.php:255
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "Opções da YARPP"
+msgstr "Op√ß√µes da YARPP"
 
 #: options.php:278
 msgid "\"The Pool\""
@@ -121,7 +121,7 @@ msgstr "\"Pool\""
 
 #: options.php:279
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
-msgstr "O plugin tem em conta todos os artigos e páginas que são mencionados (ou não excluídos) neste \"Pool\"."
+msgstr "O plugin tem em conta todos os artigos e p√°ginas que s√£o mencionados (ou n√£o exclu√≠dos) neste \"Pool\"."
 
 #: options.php:284
 msgid "Disallow by category:"
@@ -141,12 +141,12 @@ msgstr "Ter em conta apenas artigos passados?"
 
 #: options.php:306
 msgid "\"Relatedness\" options"
-msgstr "Opções de parecença"
+msgstr "Op√ß√µes de parecen√ßa"
 
 #: options.php:308
 #, php-format
 msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YA YARPP funciona de um modo um pouco diferente do que [a href=\"http://wasabi.pbwiki.com/Related%20Entries\"]outros plugins de funcionalidade semelhante[/a]: A YARPP tem em conta não só a quantidade de contribuições por si inserida, como também o valor \"Relevância\"."
+msgstr "YA YARPP funciona de um modo um pouco diferente do que [a href=\"http://wasabi.pbwiki.com/Related%20Entries\"]outros plugins de funcionalidade semelhante[/a]: A YARPP tem em conta n√£o s√≥ a quantidade de contribui√ß√µes por si inserida, como tamb√©m o valor \"Relev√¢ncia\"."
 
 #: options.php:308
 #: options.php:322
@@ -163,11 +163,11 @@ msgstr "?"
 
 #: options.php:313
 msgid "Match threshold:"
-msgstr "Relevância:"
+msgstr "Relev√¢ncia:"
 
 #: options.php:314
 msgid "Titles: "
-msgstr "Sobretítulos:"
+msgstr "Sobret√≠tulos:"
 
 #: options.php:316
 msgid "Bodies: "
@@ -183,41 +183,41 @@ msgstr "Categorias:"
 
 #: options.php:322
 msgid "Cross-relate posts and pages?"
-msgstr "Emitir artigos e páginas em conjunto?"
+msgstr "Emitir artigos e p√°ginas em conjunto?"
 
 #: options.php:322
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
-msgstr "Se a opção \"Emitir artigos e páginas em conjunto \" estiver activa, as funções <code>related_posts()</code>, <code>related_pages()</code>, e <code>related_entries()</code> emitem o mesmo: Nas contribuições parecidas não aparecem artigos nem páginas!"
+msgstr "Se a op√ß√£o \"Emitir artigos e p√°ginas em conjunto \" estiver activa, as fun√ß√µes <code>related_posts()</code>, <code>related_pages()</code>, e <code>related_entries()</code> emitem o mesmo: Nas contribui√ß√µes parecidas n√£o aparecem artigos nem p√°ginas!"
 
 #: options.php:401
 msgid "Display options <small>for your website</small>"
-msgstr "Apresentação <small>(Website)</small>"
+msgstr "Apresenta√ß√£o <small>(Website)</small>"
 
 #: options.php:405
 msgid "Automatically display related posts?"
-msgstr "Mostrar contribuições parecidas automaticamente?"
+msgstr "Mostrar contribui√ß√µes parecidas automaticamente?"
 
 #: options.php:405
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
-msgstr "Quando activada, a YARPP anexa apenas a emissão de contribuições parecidas aos artigos actuais. Se estiver desactivada, terá de tratar da apresentação no modelo com as funções <code>related_posts()</code> ou variantes (<code>related_pages()</code> ou <code>related_entries()</code>).
+msgstr "Quando activada, a YARPP anexa apenas a emiss√£o de contribui√ß√µes parecidas aos artigos actuais. Se estiver desactivada, ter√° de tratar da apresenta√ß√£o no modelo com as fun√ß√µes <code>related_posts()</code> ou variantes (<code>related_pages()</code> ou <code>related_entries()</code>).
 
 #: options.php:406
 msgid "Website display code example"
-msgstr "Exemplo de um código-fonte para o anúncio da página"
+msgstr "Exemplo de um c√≥digo-fonte para o an√∫ncio da p√°gina"
 
 #: options.php:406
 #: options.php:471
 msgid "(Update options to reload.)"
-msgstr "Para ver as suas opções aqui, terá de guardar primeiro as opções!"
+msgstr "Para ver as suas op√ß√µes aqui, ter√° de guardar primeiro as op√ß√µes!"
 
 #: options.php:409
 #: options.php:473
 msgid "Maximum number of related posts:"
-msgstr "Quantidade máxima de contribuições:"
+msgstr "Quantidade m√°xima de contribui√ß√µes:"
 
 #: options.php:422
 msgid "Before / after related entries:"
-msgstr "Código-fonte antes / depois das contribuições parecidas:"
+msgstr "C√≥digo-fonte antes / depois das contribui√ß√µes parecidas:"
 
 #: options.php:423
 #: options.php:428
@@ -231,7 +231,7 @@ msgstr "Ex.:"
 #: options.php:427
 #: options.php:491
 msgid "Before / after each related entry:"
-msgstr "Código-fonte antes / depois das respectivas contribuições:"
+msgstr "C√≥digo-fonte antes / depois das respectivas contribui√ß√µes:"
 
 #: options.php:431
 #: options.php:495
@@ -245,47 +245,47 @@ msgstr "Comprimento do excerto (Quantidade de palavras):"
 
 #: options.php:436
 msgid "Before / after (Excerpt):"
-msgstr "Código-fonte antes / depois dos respectivos excertos:"
+msgstr "C√≥digo-fonte antes / depois dos respectivos excertos:"
 
 #: options.php:442
 #: options.php:506
 msgid "Order results:"
-msgstr "Sequência dos anúncios:"
+msgstr "Sequ√™ncia dos an√∫ncios:"
 
 #: options.php:444
 #: options.php:508
 msgid "score (high relevance to low)"
-msgstr "Relevância (da maior à mais pequena)"
+msgstr "Relev√¢ncia (da maior √† mais pequena)"
 
 #: options.php:445
 #: options.php:509
 msgid "score (low relevance to high)"
-msgstr "Relevância (da mais pequena à maior)"
+msgstr "Relev√¢ncia (da mais pequena √† maior)"
 
 #: options.php:446
 #: options.php:510
 msgid "date (new to old)"
-msgstr "Estampa da hora (da mais actual à mais velha)"
+msgstr "Estampa da hora (da mais actual √† mais velha)"
 
 #: options.php:447
 #: options.php:511
 msgid "date (old to new)"
-msgstr "Estampa da hora (da mais antiga à mais actual)"
+msgstr "Estampa da hora (da mais antiga √† mais actual)"
 
 #: options.php:448
 #: options.php:512
 msgid "title (alphabetical)"
-msgstr "Sobretítulo (A-Z)"
+msgstr "Sobret√≠tulo (A-Z)"
 
 #: options.php:449
 #: options.php:513
 msgid "title (reverse alphabetical)"
-msgstr "Sobretítulo (Z-A)"
+msgstr "Sobret√≠tulo (Z-A)"
 
 #: options.php:454
 #: options.php:518
 msgid "Default display if no results:"
-msgstr "Código-fonte quando forem encontrados 0 artigos relevantes:"
+msgstr "C√≥digo-fonte quando forem encontrados 0 artigos relevantes:"
 
 #: options.php:456
 #: options.php:520
@@ -296,35 +296,35 @@ msgstr "Aplicar a YARPP discretamente?"
 #: options.php:521
 #, php-format
 msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
-msgstr "Quando activado, aparece nos resultados uma pequena informação em relação ao autor e plugin das contribuições parecidas. Adiciona o código %s."
+msgstr "Quando activado, aparece nos resultados uma pequena informa√ß√£o em rela√ß√£o ao autor e plugin das contribui√ß√µes parecidas. Adiciona o c√≥digo %s."
 
 #: options.php:464
 msgid "Display options <small>for RSS</small>"
-msgstr "Apresentação <small>(RSS)</small>"
+msgstr "Apresenta√ß√£o <small>(RSS)</small>"
 
 #: options.php:469
 msgid "Display related posts in feeds?"
-msgstr "Mostrar contribuições parecidas nos feeds de notícias?"
+msgstr "Mostrar contribui√ß√µes parecidas nos feeds de not√≠cias?"
 
 #: options.php:470
 msgid "Display related posts in the descriptions?"
-msgstr "Mostrar contribuições em Descriptions?"
+msgstr "Mostrar contribui√ß√µes em Descriptions?"
 
 #: options.php:470
 msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
-msgstr "Mostra as contribuições parecidas também em RSS-Descriptions, não só em Content."
+msgstr "Mostra as contribui√ß√µes parecidas tamb√©m em RSS-Descriptions, n√£o s√≥ em Content."
 
 #: options.php:471
 msgid "RSS display code example"
-msgstr "Exemplos de anúncios RSS"
+msgstr "Exemplos de an√∫ncios RSS"
 
 #: options.php:486
 msgid "Before / after related entries display:"
-msgstr "Código-fonte antes / depois das contribuições parecidas:"
+msgstr "C√≥digo-fonte antes / depois das contribui√ß√µes parecidas:"
 
 #: options.php:500
 msgid "Before / after (excerpt):"
-msgstr "Código-fonte antes / depois do excerto:"
+msgstr "C√≥digo-fonte antes / depois do excerto:"
 
 #: options.php:148
 msgid "word"
@@ -352,7 +352,7 @@ msgstr "mais do que igual a %s"
 
 #: options.php:126
 msgid "Options saved!"
-msgstr "Opções gravadas!"
+msgstr "Op√ß√µes gravadas!"
 
 #: options.php:308
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
@@ -360,15 +360,15 @@ msgstr ""
 
 #: options.php:606
 msgid "Update options"
-msgstr "Actualizar opções"
+msgstr "Actualizar op√ß√µes"
 
 #: options.php:607
 msgid "Do you really want to reset your configuration?"
-msgstr "Deseja mesmo reverter as opções?"
+msgstr "Deseja mesmo reverter as op√ß√µes?"
 
 #: options.php:607
 msgid "Reset options"
-msgstr "Reverter opções"
+msgstr "Reverter op√ß√µes"
 
 #: includes.php:24
 #: includes.php:35
@@ -425,7 +425,7 @@ msgid "If you updated the \"pool\" options or \"relatedness\" options displayed,
 msgstr ""
 
 #: options.php:273
-msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael Ëä≥Ë≤¥ Erlewine)</a>"
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael √ã√§‚â•√ã‚â§¬• Erlewine)</a>"
 msgstr ""
 
 #: options.php:273
