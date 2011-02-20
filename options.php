@@ -2,6 +2,12 @@
 
 global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache;
 
+// Reenforce YARPP setup:
+if (!get_option('yarpp_version'))
+  yarpp_activate();
+else
+  yarpp_upgrade_check();
+
 // if action=flush, reset the cache
 if (isset($_GET['action']) && $_GET['action'] == 'flush') {
   $yarpp_cache->flush();
@@ -54,32 +60,19 @@ if (!yarpp_get_option('myisam_override')) {
 	}
 }
 
-$yarpp_twopointfive = true;
-if (version_compare('2.5',$wp_version) > 0) {
-	echo "$wp_version<div class='updated'>The \"consider tags\" and \"consider categories\" options require WordPress version 2.5. These two options have been disabled.</div>";
-
-	yarpp_set_option('categories',1);
-	yarpp_set_option('tags',1);
-	$yarpp_twopointfive = false;
+if ($yarpp_myisam && !yarpp_enabled()) {
+  echo '<div class="updated"><p>';
+  if (yarpp_activate())
+    _e('The YARPP database had an error but has been fixed.','yarpp');
+  else
+    __('The YARPP database has an error which could not be fixed.','yarpp')
+    .str_replace('<A>','<a href=\'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix).'\'>',__('Please try <A>manual SQL setup</a>.','yarpp'));
+  echo '</div></p>';
 }
-
-if ($yarpp_myisam) {
-	if (!yarpp_enabled()) {
-		echo '<div class="updated"><p>';
-		if (yarpp_activate())
-			_e('The YARPP database had an error but has been fixed.','yarpp');
-		else
-			__('The YARPP database has an error which could not be fixed.','yarpp')
-			.str_replace('<A>','<a href=\'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix).'\'>',__('Please try <A>manual SQL setup</a>.','yarpp'));
-		echo '</div></p>';
-	}
-}
-
-yarpp_reinforce(); // just in case, set default options, etc.
 
 if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_value_options) as $option) {
-    if (is_string($_POST[$option]))
+    if (isset($_POST[$option]) && is_string($_POST[$option]))
       yarpp_set_option($option,addslashes($_POST[$option]));
 	}
 	foreach (array('title','body','tags','categories') as $key) {
@@ -192,14 +185,7 @@ function yarpp_options_select($option,$desc,$type='word',$tr="<tr valign='top'>
 <script type="text/javascript">
 //<!--
 
-var rss=document.createElement("link");
-rss.setAttribute("rel", "alternate");
-rss.setAttribute("type", "application/rss+xml");
-rss.setAttribute('title',"<?php _e("Yet Another Related Posts Plugin version history (RSS 2.0)",'yarpp');?>");
-rss.setAttribute("href", "http://mitcho.com/code/yarpp/yarpp.rss");
-document.getElementsByTagName("head")[0].appendChild(rss);
-
-var css=document.createElement("link");
+var css = document.createElement("link");
 css.setAttribute("rel", "stylesheet");
 css.setAttribute("type", "text/css");
 css.setAttribute("href", "../wp-content/plugins/yet-another-related-posts-plugin/options.css");
@@ -209,41 +195,41 @@ var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>'
 
 function load_display_demo_web() {
 	jQuery.ajax({type:'POST',
-	    url:'admin-ajax.php',
-	    data:'action=yarpp_display_demo_web',
-	    beforeSend:function(){jQuery('#display_demo_web').eq(0).html('<img src="' + spinner + '" alt="loading..."/>')},
-	    success:function(html){jQuery('#display_demo_web').eq(0).html('<pre>'+html+'</pre>')},
-	    dataType:'html'}
+	  url: ajaxurl,
+	  data:'action=yarpp_display_demo_web',
+	  beforeSend:function(){jQuery('#display_demo_web').eq(0).html('<img src="' + spinner + '" alt="loading..."/>')},
+	  success:function(html){jQuery('#display_demo_web').eq(0).html('<pre>'+html+'</pre>')},
+	  dataType:'html'}
 	)
 }
 
 function load_display_demo_rss() {
 	jQuery.ajax({type:'POST',
-	    url:'admin-ajax.php',
-	    data:'action=yarpp_display_demo_rss',
-	    beforeSend:function(){jQuery('#display_demo_rss').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	    success:function(html){jQuery('#display_demo_rss').eq(0).html('<pre>'+html+'</pre>')},
-	    dataType:'html'}
+	  url: ajaxurl,
+	  data:'action=yarpp_display_demo_rss',
+	  beforeSend:function(){jQuery('#display_demo_rss').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
+	  success:function(html){jQuery('#display_demo_rss').eq(0).html('<pre>'+html+'</pre>')},
+	  dataType:'html'}
 	)
 }
 
 function load_display_distags() {
 	jQuery.ajax({type:'POST',
-	    url:'admin-ajax.php',
-	    data:'action=yarpp_display_distags',
-	    beforeSend:function(){jQuery('#display_distags').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	    success:function(html){jQuery('#display_distags').eq(0).html(html)},
-	    dataType:'html'}
+	  url: ajaxurl,
+	  data:'action=yarpp_display_distags',
+	  beforeSend:function(){jQuery('#display_distags').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
+	  success:function(html){jQuery('#display_distags').eq(0).html(html)},
+	  dataType:'html'}
 	)
 }
 
 function load_display_discats() {
 	jQuery.ajax({type:'POST',
-	    url:'admin-ajax.php',
-	    data:'action=yarpp_display_discats',
-	    beforeSend:function(){jQuery('#display_discats').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	    success:function(html){jQuery('#display_discats').eq(0).html(html)},
-	    dataType:'html'}
+	  url: ajaxurl,
+	  data:'action=yarpp_display_discats',
+	  beforeSend:function(){jQuery('#display_discats').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
+	  success:function(html){jQuery('#display_discats').eq(0).html(html)},
+	  dataType:'html'}
 	)
 }
 //-->
@@ -252,9 +238,7 @@ function load_display_discats() {
 <div class="wrap">
 		<h2>
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php
-
-			$display_version = yarpp_get_option('version');
-      echo $display_version;
+      echo yarpp_get_option('version');
 			?></small>
 		</h2>
 
@@ -265,8 +249,6 @@ function load_display_discats() {
   <div>
   <div id="badges" style="float:right">
     <!--<small><a href="http://wordpress.org/tags/yet-another-related-posts-plugin" style="padding-right: 10px;">Support forums</a></small>-->
-    <script type="text/javascript">var WPHC_AFF_ID = "14336"; var WPHC_POSITION = "d1"; var WPHC_PRODUCT = "Yet Another Related Posts Plugin (<?php echo yarpp_get_option('version'); ?>)"; var WPHC_WP_VERSION = "<?php echo $wp_version; ?>";</script>
-    <script src="http://cloud.wphelpcenter.com/support-form/0001/deliver-a.js" type="text/javascript"></script>
     <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=1&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>" style="padding-left: 10px;"/></a>
   </div>
 
@@ -338,9 +320,9 @@ function load_display_discats() {
 	yarpp_options_importance2('body',__("Bodies: ",'yarpp'),'word',"<tr valign='top'>
 			<th scope='row'>",(!$yarpp_myisam?' readonly="readonly" disabled="disabled"':''));
 	yarpp_options_importance('tags',__("Tags: ",'yarpp'),'tag',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
+			<th scope='row'>",'');
 	yarpp_options_importance('categories',__("Categories: ",'yarpp'),'category',"<tr valign='top'>
-			<th scope='row'>",(!$yarpp_twopointfive?' readonly="readonly" disabled="disabled"':''));
+			<th scope='row'>",'');
 	yarpp_options_checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
 	yarpp_options_checkbox('past_only',__("Show only previous posts?",'yarpp'));
 ?>
@@ -402,14 +384,20 @@ function load_display_discats() {
 
 		var version = jQuery('#yarpp-version').html();
 
-    <?php $ajax_nonce= wp_create_nonce('yarpp_version_json');?>
+    <?php $ajax_nonce = wp_create_nonce('yarpp_version_json');?>
     jQuery.getJSON(ajaxurl,
       'action=yarpp_version_json&_ajax_nonce=<?php echo $ajax_nonce; ?>', 
       function(json) {
         if (json.result == 'newbeta')
-          jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",addslashes(__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp"))))."</p>'"?>).show();
+          jQuery('#yarpp-version')
+            .addClass('updated')
+            .html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",addslashes(__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp"))))."</p>'"?>)
+            .show();
         if (json.result == 'new')
-          jQuery('#yarpp-version').addClass('updated').html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>).show();
+          jQuery('#yarpp-version')
+            .addClass('updated')
+            .html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>)
+            .show();
       }
     );
 	}

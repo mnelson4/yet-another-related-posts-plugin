@@ -144,7 +144,7 @@ YARPP is currently localized in the following languages:
 * Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
 * Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
-* Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org)
+* Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
 * Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
 * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
@@ -160,9 +160,9 @@ YARPP is currently localized in the following languages:
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
 * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
-* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no) (yarpp-nb at mitcho dot com)
+* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](http://www.datanerden.no) (yarpp-nb at mitcho dot com)
 * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-* (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](www.fernstudium-net.de)
+* (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
 * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
@@ -186,10 +186,18 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.2.1 =
-* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
+* Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
 * Better handling of [`post_status` transitions](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-changed-post-to-draft-still-showing-up-as-related-to-other-posts).
 * Bugfix: [the widget was not working on pages](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-showing-yarp-widget-in-pages-and-subpages)
-* Minor security fix in version-checking code
+* Added overused words list for French, thanks to [saymonz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
+* Minor code cleanup:
+	* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
+	* Minor security fix in version-checking code
+	* Removed legacy code for gracefully upgrading from YARPP versions < 1.5 and working with WordPress versions < 2.8.
+	* Cleanup of `yarpp_upgrade_check()` calling
+	* Eliminated a couple globals
+	* Cleaned up some edge case causes for "unexpected output" on plugin activation
+	* Removed WP Help Center badge, as they are closing
 = 3.2 =
 * Better caching performance:
   * Previously, the cache would never actually build up properly. This is now fixed. Thanks to Artefact for pointing this out.
@@ -197,11 +205,11 @@ If you are a bilingual speaker of English and another language and an avid user 
   * Caching is no longer performed while batch-importing posts.
 * A new object-based abstraction for the caching system. YARPP by default uses custom database tables (same behavior as 3.1.x), but you now have an option to use the `postmeta` table instead. To use `postmeta` caching, add `define('YARPP_CACHE_TYPE', 'postmeta');` to your `wp-config.php` file.<!--YARPP no longer uses custom tables! Both custom tables (`yarpp_related_cache` and `yarpp_keywords_cache`) are automatically removed if you have them. WordPress Post Meta is used instead for caching.-->
 * Localizations:
-	* added Bulgarian (`bg_BG`) by [Flash Gallery](www.flashgallery.org);
+	* added Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org);
 	* added Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/);
 	* added Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
 	* added Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](www.datanerden.no);
-	* added Portuguese (`pt_PT`) by [Stefan Mueller](www.fernstudium-net.de).
+	* added Portuguese (`pt_PT`) by [Stefan Mueller](http://www.fernstudium-net.de).
 	* updated Lithuanian (`lt_LT`) by [Mantas Malcius](http://mantas.malcius.lt/)
 * Added [WordPress HelpCenter](http://wphelpcenter.com/) widget for quick access to professional support.
 * Some code cleanup (bug [#1246](http://plugins.trac.wordpress.org/ticket/1246))

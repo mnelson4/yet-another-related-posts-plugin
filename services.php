@@ -37,27 +37,19 @@ function yarpp_ajax_display_distags() {
 }
 
 function yarpp_ajax_display_demo_web() {
-	global $wpdb, $post, $yarpp_demo_time, $wp_query, $id, $page, $pages, $yarpp_limit;
-
 	header("HTTP/1.1 200");
 	header("Content-Type: text/html; charset=UTF-8");
 
-	$yarpp_limit = yarpp_get_option('limit');
 	$return = yarpp_related(array('post'),array(),false,false,'demo_web');
-	unset($yarpp_limit);
 	echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
 	exit;
 }
 
 function yarpp_ajax_display_demo_rss() {
-	global $wpdb, $post, $yarpp_demo_time, $wp_query, $id, $page, $pages, $yarpp_limit;
-
 	header("HTTP/1.1 200");
 	header("Content-Type: text/html; charset=UTF-8");
 
-	$yarpp_limit = yarpp_get_option('rss_limit');
 	$return = yarpp_related(array('post'),array(),false,false,'demo_rss');
-	unset($yarpp_limit);
 	echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
 	exit;
 }

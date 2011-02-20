@@ -144,7 +144,7 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
     $newsql .= " and post_type = 'post'";
 
 	// GROUP BY
-	$newsql .= "\n group by id \n";
+	$newsql .= "\n group by ID \n";
 	// HAVING
 	// safethreshold is so the new calibration system works.
 	// number_format fix suggested by vkovalcik! :)
@@ -176,7 +176,9 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 /* new in 3.0! new query-based approach: EXTREMELY HACKY! */
 
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $post, $yarpp_demo_time, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $pagenow, $numpages, $yarpp_cache;
+	global $post, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $pagenow, $numpages, $yarpp_cache;
+
+  yarpp_upgrade_check();
 
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_cache->yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -185,7 +187,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		if (is_object($post) and !$reference_ID)
 			$reference_ID = $post->ID;
 	} else {
-		if ($yarpp_demo_time) // if we're already in a YARPP loop, stop now.
+		if ($yarpp_cache->demo_time) // if we're already in a YARPP loop, stop now.
 			return false;
 	}
 
@@ -221,8 +223,13 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
-	else
-		$yarpp_demo_time = true;
+	else {
+		$yarpp_cache->demo_time = true;
+    if ($domain == 'demo_web')
+      $yarpp_cache->demo_limit = yarpp_get_option('limit');
+    else
+      $yarpp_cache->demo_limit = yarpp_get_option('rss_limit');
+	}
 	// just so we can return to normal later
 	$current_query = $wp_query;
 	$current_post = $post;
@@ -268,7 +275,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_cache->end_yarpp_time(); // YARPP time is over... :(
 	else
-		$yarpp_demo_time = false;
+		$yarpp_cache->demo_time = false;
 
 	// restore the older wp_query.
 	$wp_query = null; $wp_query = $current_query; unset($current_query);
@@ -292,6 +299,8 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 
 function yarpp_related_exist($type,$args,$reference_ID=false) {
 	global $post, $yarpp_cache;
+
+  yarpp_upgrade_check();
 
 	if (is_object($post) and !$reference_ID)
 		$reference_ID = $post->ID;
@@ -353,10 +362,16 @@ function yarpp_delete_cache($post_ID) {
 
 // New in 3.2.1: handle various post_status transitions
 function yarpp_status_transition($new_status, $old_status, $post) {
+  global $yarpp_cache;
   switch ($new_status) {
     case "draft":
       yarpp_delete_cache($post->ID);
       break;
+    case "publish":
+      // find everything which is related to this post, and clear them, so that this
+      // post might show up as related to them.
+      $related = $yarpp_cache->related($post->ID, null);
+      $yarpp_cache->clear($related);
   }
 }
 

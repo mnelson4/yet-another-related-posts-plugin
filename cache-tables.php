@@ -8,6 +8,7 @@ define('YARPP_TABLES_KEYWORDS_TABLE', 'yarpp_keyword_cache');
 class YARPP_Cache_Tables {
 	var $name = "custom tables";
 	var $yarpp_time = false;
+	var $demo_time = false;
 
 	/**
 	 * SETUP/STATUS
@@ -35,27 +36,35 @@ class YARPP_Cache_Tables {
 
 	function setup() {
 		global $wpdb;
-		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
+		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`body` text NOT NULL,
 			`title` text NOT NULL,
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY  (`ID`)
-			) ENGINE=MyISAM COMMENT='YARPP''s keyword cache table';")) {
-			echo "<!--MySQL error on creating " . YARPP_TABLES_KEYWORDS_TABLE . " table: ";
-			$wpdb->print_error();
-			echo "-->";
-		}
-		if (!$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
+			) ENGINE=MyISAM COMMENT='YARPP''s keyword cache table';");
+		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
 			`reference_ID` bigint(20) unsigned NOT NULL default '0',
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`score` float unsigned NOT NULL default '0',
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY ( `score` , `date` , `reference_ID` , `ID` )
-			) ENGINE=MyISAM;")) {
-			echo "<!--MySQL error on creating " . YARPP_TABLES_RELATED_TABLE . " table: ";
-			$wpdb->print_error();
-			echo "-->";
+			PRIMARY KEY ( `reference_ID` , `ID` ),
+			INDEX (`score`)
+			) ENGINE=MyISAM;");
+	}
+	
+	function upgrade($last_version) {
+		global $wpdb;
+		if (version_compare('3.2.1b2', $last_version) > 0) {
+			// Change primary key to be (reference_ID, ID) to ensure that we don't
+			// get duplicates.
+			// We unfortunately have to clear the cache first here, to ensure that there
+			// are no duplicates.
+			$this->flush();
+			$wpdb->query('ALTER TABLE ' . $wpdb->prefix . YARPP_TABLES_RELATED_TABLE .
+			  ' DROP PRIMARY KEY ,' .
+			  ' ADD PRIMARY KEY ( `reference_ID` , `ID` ),' .
+			  ' ADD INDEX (`score`)');
 		}
 	}
 
@@ -115,13 +124,13 @@ class YARPP_Cache_Tables {
 	}
 
 	function demo_request_filter($arg) {
-		global $wpdb, $yarpp_demo_time, $yarpp_limit;
-		if ($yarpp_demo_time) {
+		global $wpdb;
+		if ($this->demo_time) {
 			$wpdb->query("set @count = 0;");
-			$arg = "SELECT SQL_CALC_FOUND_ROWS ID + $yarpp_limit as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
+			$arg = "SELECT SQL_CALC_FOUND_ROWS ID + {$this->demo_limit} as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
 			concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
 			FROM $wpdb->posts
-			ORDER BY ID DESC LIMIT 0, $yarpp_limit";
+			ORDER BY ID DESC LIMIT 0, {$this->demo_limit}";
 		}
 		return $arg;
 	}

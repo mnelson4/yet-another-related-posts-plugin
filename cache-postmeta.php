@@ -13,6 +13,7 @@ class YARPP_Cache_Postmeta {
 	var $related_IDs = array();
 	var $name = "postmeta";
 	var $yarpp_time = false;
+	var $demo_time = false;
 
 	/**
 	 * SETUP/STATUS
@@ -31,6 +32,9 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function setup() {
+	}
+	
+	function upgrade() {
 	}
 
 	function cache_status() {
@@ -92,13 +96,13 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function demo_request_filter($arg) {
-		global $wpdb, $yarpp_demo_time, $yarpp_limit;
-		if ($yarpp_demo_time) {
+		global $wpdb;
+		if ($this->demo_time) {
 			$wpdb->query("set @count = 0;");
-			return "SELECT SQL_CALC_FOUND_ROWS ID + $yarpp_limit as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
+			return "SELECT SQL_CALC_FOUND_ROWS ID + {$this->demo_limit} as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
 			concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
 			FROM $wpdb->posts
-			ORDER BY ID DESC LIMIT 0, $yarpp_limit";
+			ORDER BY ID DESC LIMIT 0, {$this->demo_limit}";
 		}
 		return $arg;
 	}
