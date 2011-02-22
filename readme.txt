@@ -198,7 +198,6 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Eliminated a couple globals
 	* Cleaned up some edge case causes for "unexpected output" on plugin activation
 	* Removed WP Help Center badge, as they are closing
-	* Added wp-Typography to the YARPP-internal `the_content` filters blacklist, as [it was messing up keyword generation](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 = 3.2 =
 * Better caching performance:
   * Previously, the cache would never actually build up properly. This is now fixed. Thanks to Artefact for pointing this out.
