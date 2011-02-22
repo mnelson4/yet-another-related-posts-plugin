@@ -9,6 +9,7 @@ class YARPP_Cache_Tables {
 	var $name = "custom tables";
 	var $yarpp_time = false;
 	var $demo_time = false;
+	var $score_override = false;
 
 	/**
 	 * SETUP/STATUS
@@ -109,10 +110,9 @@ class YARPP_Cache_Tables {
 	}
 
 	function orderby_filter($arg) {
-		global $wpdb, $yarpp_score_override;
-		if ($this->yarpp_time and $yarpp_score_override) {
+		global $wpdb;
+		if ($this->yarpp_time and $this->score_override)
 			$arg = str_replace("$wpdb->posts.post_date","yarpp.score",$arg);
-		}
 		return $arg;
 	}
 
@@ -136,9 +136,9 @@ class YARPP_Cache_Tables {
 	}
 
 	function limit_filter($arg) {
-		global $wpdb, $yarpp_online_limit;
-		if ($this->yarpp_time and $yarpp_online_limit) {
-			return " limit $yarpp_online_limit ";
+		global $wpdb;
+		if ($this->yarpp_time and $this->online_limit) {
+			return " limit {$this->online_limit} ";
 		}
 		return $arg;
 	}

@@ -3,7 +3,7 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://mitcho.com/code/yarpp/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.2.1b2
+Version: 3.2.1b3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
@@ -13,7 +13,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 if (isset($_REQUEST['yarpp_debug']))
   $yarpp_debug = true;
 
-define('YARPP_VERSION','3.2.1b2');
+define('YARPP_VERSION','3.2.1b3');
 define('YARPP_DIR',dirname(__FILE__));
 // 3.2.1: safer new version checking
 add_action('wp_ajax_yarpp_version_json', 'yarpp_version_json');
@@ -30,7 +30,8 @@ if (!defined('YARPP_CACHE_TYPE'))
 	define('YARPP_CACHE_TYPE', 'tables');
 global $yarpp_cache, $yarpp_storage_class;
 require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
-$yarpp_cache = new $yarpp_storage_class;
+// For PHP 4, we have to pass this object by reference:
+$yarpp_cache =& new $yarpp_storage_class;
 
 // Setup admin
 add_action('admin_menu','yarpp_admin_menu');
