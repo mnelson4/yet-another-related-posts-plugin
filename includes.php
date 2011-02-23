@@ -344,11 +344,11 @@ function yarpp_microtime_float() {
     return ((float)$usec + (float)$sec);
 }
 
-function yarpp_version_json($just_cache = false) {
-	if (!$just_cache)
+function yarpp_version_json($enforce_cache = false) {
+	if (!$enforce_cache)
 		check_ajax_referer('yarpp_version_json');
 
-	if (!$just_cache && false === ($result = get_transient('yarpp_version_json'))) {
+	if ($enforce_cache || false === ($result = get_transient('yarpp_version_json'))) {
 		$version = YARPP_VERSION;
 		$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
 		
@@ -356,7 +356,7 @@ function yarpp_version_json($just_cache = false) {
 		
 		set_transient('yarpp_version_json', $result, 60*60*12);
 	}
-  if ($just_cache)
+  if ($enforce_cache)
   	return $result;
 
 	echo $result;
