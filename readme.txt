@@ -185,6 +185,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= trunk =
+* Fixed `pt_PT` Portuguese localization files
 = 3.2.1 =
 * Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
 * Bugfix: [With PHP4, the "related posts" would simply show the current post](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-showing-same-post)
