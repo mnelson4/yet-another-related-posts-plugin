@@ -102,10 +102,12 @@ function yarpp_activate() {
 			return 0;
 	}
 	
-	if (!get_option('yarpp_version'))
+	if (!get_option('yarpp_version')) {
 		add_option('yarpp_version',YARPP_VERSION);	
-	else
+		yarpp_version_json(true);
+	} else {
 		yarpp_upgrade_check();
+	}
 
 	return 1;
 }
@@ -137,6 +139,8 @@ function yarpp_upgrade_check() {
 	}
 
 	$yarpp_cache->upgrade($last_version);
+
+	yarpp_version_json(true);
 
 	update_option('yarpp_version',YARPP_VERSION);
 }
@@ -340,15 +344,22 @@ function yarpp_microtime_float() {
     return ((float)$usec + (float)$sec);
 }
 
-function yarpp_version_json() {
-	check_ajax_referer('yarpp_version_json');
-	$version = YARPP_VERSION;
-  $remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
-  if (is_wp_error($remote)) {
-    echo '{}';
-		exit;
-  }
-  echo $remote['body'];
+function yarpp_version_json($enforce_cache = false) {
+	if (!$enforce_cache)
+		check_ajax_referer('yarpp_version_json');
+
+	if ($enforce_cache || false === ($result = get_transient('yarpp_version_json'))) {
+		$version = YARPP_VERSION;
+		$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
+		
+		$result = (is_wp_error($remote) ? '{}' : $remote['body']);
+		
+		set_transient('yarpp_version_json', $result, 60*60*12);
+	}
+  if ($enforce_cache)
+  	return $result;
+
+	echo $result;
   exit;
 }
 

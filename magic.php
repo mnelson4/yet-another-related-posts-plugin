@@ -3,16 +3,18 @@
 //=TEMPLATING/DISPLAY===========
 
 function yarpp_set_score_override_flag($q) {
-	global $yarpp_cache, $yarpp_score_override, $yarpp_online_limit;
+	global $yarpp_cache;
 	if ($yarpp_cache->yarpp_time) {
-		$yarpp_score_override = ($q->query_vars['orderby'] == 'score');
+		$yarpp_cache->score_override = ($q->query_vars['orderby'] == 'score');
 
 		if (!empty($q->query_vars['showposts'])) {
-			$yarpp_online_limit = $q->query_vars['showposts'];
+			$yarpp_cache->online_limit = $q->query_vars['showposts'];
 		} else {
-			$yarpp_online_limit = false;
+			$yarpp_cache->online_limit = false;
     }
-
+	} else {
+    $yarpp_cache->score_override = false;
+    $yarpp_cache->online_limit = false;
 	}
 }
 
