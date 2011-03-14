@@ -150,7 +150,7 @@ YARPP is currently localized in the following languages:
 * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
 * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
+* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms) (yarpp-de at mitcho dot com)
 * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
 * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
@@ -185,7 +185,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= trunk =
+= 3.2.2 =
 * Fixed `pt_PT` Portuguese localization files
 = 3.2.1 =
 * Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
