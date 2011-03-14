@@ -204,6 +204,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// get options
 	// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
 	$options = array(
+	  'cross_relate'=>"cross_relate",
     'limit'=>"${domainprefix}limit",
 		'use_template'=>"${domainprefix}use_template",
 		'order'=>"${domainprefix}order",
@@ -218,6 +219,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		}
 	}
 	extract($optvals);
+
+	if ($cross_relate)
+		$type = array('post','page');
 
   yarpp_cache_enforce($type,$reference_ID);
 
@@ -310,10 +314,14 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	if ($yarpp_cache->yarpp_time) // if we're already in a YARPP loop, stop now.
 		return false;
 
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+
   yarpp_cache_enforce($type,$reference_ID);
 
 	$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	$related_query = new WP_Query();
+	// Note: why is this 10000? Should we just make it 1?
   $related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
   $return = $related_query->have_posts();
   unset($related_query);
