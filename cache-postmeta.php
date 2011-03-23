@@ -149,11 +149,11 @@ class YARPP_Cache_Postmeta {
 		}
 	}
 
-	function update($reference_ID, $types) {
+	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
 		$original_related = $this->related($reference_ID);
-		$related = $wpdb->get_results(yarpp_sql($types,array(),true,$reference_ID), ARRAY_A);
+		$related = $wpdb->get_results(yarpp_sql(array(),true,$reference_ID), ARRAY_A);
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
 		if (count($new_related)) {

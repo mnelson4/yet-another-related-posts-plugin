@@ -167,7 +167,7 @@ class YARPP_Cache_Tables {
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
 	}
 
-	function update($reference_ID, $types) {
+	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
 		$original_related = $this->related($reference_ID);
@@ -176,7 +176,7 @@ class YARPP_Cache_Tables {
 		// clear out the cruft
 		$this->clear($reference_ID);
 
-		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql($types,array(),true,$reference_ID)." on duplicate key update date = now()");
+		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql(array(),true,$reference_ID)." on duplicate key update date = now()");
 
 		if ($wpdb->rows_affected) {
 			$new_related = $this->related($reference_ID);
