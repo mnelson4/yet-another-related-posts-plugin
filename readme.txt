@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4D
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 3.2
+Stable tag: 3.2.1
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -150,7 +150,8 @@ YARPP is currently localized in the following languages:
 * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
 * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
+* Georgian (`ge_KA`) by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
+* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms) (yarpp-de at mitcho dot com)
 * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
 * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
@@ -165,6 +166,7 @@ YARPP is currently localized in the following languages:
 * (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+* Spanish (`es_ES`) by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
 * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
@@ -173,9 +175,7 @@ YARPP is currently localized in the following languages:
 
 <!--We already have localizers lined up for the following languages:
 * Danish
-* Spanish
 * Catalan
-* Indonesian
 * Hungarian
 * Romanian
 * Thai
@@ -185,16 +185,27 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.2.2 =
+* Now [ignores soft hyphens](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words) in keyword construction
+* Minor fix for "cross-relate posts and pages" option and more accurate `related_*()` results across post types
+* Localization updates:
+	* Fixed `pt_PT` Portuguese localization files, updated `de_DE` German localization
+	* Added `es_ES` Spanish localization by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
+	* Added `ge_KA` Georgian by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
+	* Added Czech (`cs_CZ`) overused words list [by berniecz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 = 3.2.1 =
 * Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
+* Bugfix: [With PHP4, the "related posts" would simply show the current post](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-showing-same-post)
+	* This was due to an issue with [object references in PHP4](http://www.obdev.at/developers/articles/00002.html). What a pain!
+	* A big thanks to Brendon Held of [inMotion Graphics](http://www.imgwebdesign.com) for being incredibly patient and letting me try out different diagnostics on his server.
 * Better handling of [`post_status` transitions](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-changed-post-to-draft-still-showing-up-as-related-to-other-posts).
 * Bugfix: [the widget was not working on pages](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-showing-yarp-widget-in-pages-and-subpages)
 * Added overused words list for French, thanks to [saymonz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 * Minor code cleanup:
 	* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
-	* Minor security fix in version-checking code
 	* Removed legacy code for gracefully upgrading from YARPP versions < 1.5 and working with WordPress versions < 2.8.
 	* Cleanup of `yarpp_upgrade_check()` calling
+	* Cleanup of `yarpp_version_json()`, including caching and minor security fix
 	* Eliminated a couple globals
 	* Cleaned up some edge case causes for "unexpected output" on plugin activation
 	* Removed WP Help Center badge, as they are closing
