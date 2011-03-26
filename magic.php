@@ -3,22 +3,24 @@
 //=TEMPLATING/DISPLAY===========
 
 function yarpp_set_score_override_flag($q) {
-	global $yarpp_cache, $yarpp_score_override, $yarpp_online_limit;
+	global $yarpp_cache;
 	if ($yarpp_cache->yarpp_time) {
-		$yarpp_score_override = ($q->query_vars['orderby'] == 'score');
+		$yarpp_cache->score_override = ($q->query_vars['orderby'] == 'score');
 
 		if (!empty($q->query_vars['showposts'])) {
-			$yarpp_online_limit = $q->query_vars['showposts'];
+			$yarpp_cache->online_limit = $q->query_vars['showposts'];
 		} else {
-			$yarpp_online_limit = false;
+			$yarpp_cache->online_limit = false;
     }
-
+	} else {
+    $yarpp_cache->score_override = false;
+    $yarpp_cache->online_limit = false;
 	}
 }
 
 //=CACHING===========
 
-function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='website') {
+function yarpp_sql($args,$giveresults = true,$reference_ID=false,$domain='website') {
 	global $wpdb, $post, $yarpp_debug, $yarpp_cache;
 
 	if (is_object($post) and !$reference_ID) {
@@ -35,7 +37,6 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 		'threshold'=>'threshold',
 		'show_pass_post'=>'show_pass_post',
 		'past_only'=>'past_only',
-		'cross_relate'=>'cross_relate',
 		'body'=>'body',
 		'title'=>'title',
 		'tags'=>'tags',
@@ -138,10 +139,7 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 	if ($recent_only)
 		$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
 
-  if ($type == array('page') && !$cross_relate)
-    $newsql .= " and post_type = 'page'";
-  else
-    $newsql .= " and post_type = 'post'";
+  $newsql .= " and post_type = 'post'";
 
 	// GROUP BY
 	$newsql .= "\n group by ID \n";
@@ -163,9 +161,9 @@ function yarpp_sql($type,$args,$giveresults = true,$reference_ID=false,$domain='
 		$newsql = "select count(t.ID) from ($newsql) as t";
 	}
 
-  // if we're looking for a X related entries, make sure we get at most X posts and X pages if
-  // we cross-relate
-	if ($cross_relate) $newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+  // in caching, we cross-relate regardless of whether we're going to actually
+  // use it or not.
+  $newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
 
 	if ($yarpp_debug) echo "<!--$newsql-->";
 	return $newsql;
@@ -202,6 +200,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// get options
 	// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
 	$options = array(
+	  'cross_relate'=>"cross_relate",
     'limit'=>"${domainprefix}limit",
 		'use_template'=>"${domainprefix}use_template",
 		'order'=>"${domainprefix}order",
@@ -217,7 +216,10 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 	extract($optvals);
 
-  yarpp_cache_enforce($type,$reference_ID);
+	if ($cross_relate)
+		$type = array('post','page');
+
+  yarpp_cache_enforce($reference_ID);
 
   $output = '';
 
@@ -308,10 +310,14 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	if ($yarpp_cache->yarpp_time) // if we're already in a YARPP loop, stop now.
 		return false;
 
-  yarpp_cache_enforce($type,$reference_ID);
+	if (yarpp_get_option('cross_relate'))
+		$type = array('post','page');
+
+  yarpp_cache_enforce($reference_ID);
 
 	$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	$related_query = new WP_Query();
+	// Note: why is this 10000? Should we just make it 1?
   $related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
   $return = $related_query->have_posts();
   unset($related_query);
@@ -327,23 +333,13 @@ function yarpp_save_cache($post_ID,$force=true) {
   if ( defined( 'WP_IMPORTING' ) )
     return;
 
-  $sql = "select post_parent, post_type from $wpdb->posts where ID='$post_ID'";
-	$parent_ID = $wpdb->get_var($sql,0);
+  $sql = "select post_parent from $wpdb->posts where ID='$post_ID'";
+	$parent_ID = $wpdb->get_var($sql);
 
 	if ($parent_ID != $post_ID and $parent_ID)
 		$post_ID = $parent_ID;
 
-	$post_type = $wpdb->get_var($sql,1);
-	if (yarpp_get_option('cross_relate'))
-		$type = array('post','page');
-	elseif ($post_type == 'page')
-		$type = array('page');
-	else
-		$type = array('post');
-  // TODO: support other post types? maybe?
-  // TODO: fix this bug... we should be getting the post type from the parent, if there is one.
-
-  yarpp_cache_enforce($type,$post_ID,$force);
+  yarpp_cache_enforce($post_ID,$force);
 }
 
 // Clear the cache for this entry and for all posts which are "related" to it.
@@ -375,7 +371,7 @@ function yarpp_status_transition($new_status, $old_status, $post) {
   }
 }
 
-function yarpp_cache_enforce($types=array('post'),$reference_ID,$force=false) {
+function yarpp_cache_enforce($reference_ID,$force=false) {
 	global $yarpp_debug, $yarpp_cache;
 
 	if ($reference_ID === '' || $reference_ID === false)
@@ -389,7 +385,7 @@ function yarpp_cache_enforce($types=array('post'),$reference_ID,$force=false) {
 	$yarpp_cache->cache_keywords($reference_ID);
 
 	// let's update the related post
-	$yarpp_cache->update($reference_ID, $types);
+	$yarpp_cache->update($reference_ID);
 	return true;
 
 }

@@ -3,6 +3,10 @@
 function yarpp_extract_keywords($source,$max = 20) {
 	global $overusedwords;
 
+	// 3.2.2: ignore soft hyphens
+	$softhyphen = html_entity_decode('&#173;',ENT_NOQUOTES,'UTF-8');
+	$source = str_replace($softhyphen, '', $source);
+
 	if (function_exists('mb_split')) {
 		mb_regex_encoding(get_option('blog_charset'));
 		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source));
