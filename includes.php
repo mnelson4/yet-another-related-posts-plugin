@@ -276,7 +276,7 @@ function yarpp_default($content) {
 		$type = array('post','page');
 
 	if (yarpp_get_option('auto_display') and is_single())
-		return $content.yarpp_related($type,array(),false,false,'website');
+		return $content . yarpp_related($type,array(),false,false,'website');
 	else
 		return $content;
 }

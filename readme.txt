@@ -3,11 +3,11 @@ Contributors: mitchoyoshitaka
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://mitcho.com/code/yarpp/
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
+Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -17,14 +17,14 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
 2. **Templating**: **New in 3.0!** The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
-3. **Caching**: **Improved in 3.1!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
+3. **Caching**: **Improved in 3.2!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
 6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
 
 This plugin requires that your database run on MySQL 4.1 or greater.
 
-**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Allow LaTeX Uploads](http://wordpress.org/extend/plugins/allow-latex-uploads/), [Taxonomy Metadata](http://wordpress.org/extend/plugins/taxonomy-metadata/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Distinct Preview](http://wordpress.org/extend/plugins/distinct-preview/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
+**See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/)**.
 
 = A note on support (June 2010) =
 
@@ -189,7 +189,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Now [ignores soft hyphens](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words) in keyword construction
 * Minor fix for "cross-relate posts and pages" option and more accurate `related_*()` results across post types
 * Localization updates:
-	* Fixed `pt_PT` Portuguese localization files, updated `de_DE` German localization
+	* Updated `de_DE` German localization files
+	* Fixed an encoding issue in the `pt_PT` Portuguese localization files
 	* Added `es_ES` Spanish localization by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
 	* Added `ge_KA` Georgian by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
 	* Added Czech (`cs_CZ`) overused words list [by berniecz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
