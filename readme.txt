@@ -6,7 +6,7 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.1
+Tested up to: 3.2
 Stable tag: 3.2.2
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
@@ -156,8 +156,10 @@ YARPP is currently localized in the following languages:
 * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
 * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+* Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
 * Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) (yarpp-id at mitcho dot com) of [Kelayang](http://kelayang.com/)
 * Japanese (`ja`) by myself (yarpp at mitcho dot com)
+* Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
 * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
@@ -185,9 +187,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.3.3 =
-* Updated Italian localization (`it_IT`)
+= 3.2.3 =
 * Quick fix to Czech word list file name
+* Localizations
+	* Updated Italian localization (`it_IT`)
+	* Added Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
+	* Added Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
 = 3.2.2 =
 * Now [ignores soft hyphens](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words) in keyword construction
 * Minor fix for "cross-relate posts and pages" option and more accurate `related_*()` results across post types
