@@ -15,16 +15,6 @@ ul.yarpp_contacts li a img {
 	vertical-align: bottom;
 }
 
-div.yarpp_left_box {
-	float: left;
-	min-width: 675px;
-	margin-right: 30px;
-}
-
-div.yarpp_right_box {
-	float: left;
-}
-
 a.info{
 	position:relative;
 	z-index:24;
