@@ -8,8 +8,9 @@ function yarpp_extract_keywords($source,$max = 20) {
 	$source = str_replace($softhyphen, '', $source);
 
 	if (function_exists('mb_split')) {
-		mb_regex_encoding(get_option('blog_charset'));
-		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source));
+		$charset = get_option('blog_charset');
+		mb_regex_encoding($charset);
+		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source, $charset));
 	} else
 		$wordlist = preg_split('%\s*\W+\s*%', strtolower($source));
 
