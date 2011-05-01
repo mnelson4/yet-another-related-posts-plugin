@@ -188,9 +188,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.2.3 =
-* Quick fix to Czech word list file name
+* Pretty major rewrite to the options page for extensibility and screen options support
+	* By default, the options screen now only show the display options. "The Pool" and "Relatedness" options can be shown in the screen options tab in the top right corner of the screen.
 * Localizations
+	* Quick fix to Czech word list file name
 	* Updated Italian localization (`it_IT`)
+	* Added Hungarian (`hu_HU`) by [daSSad](http://dassad.com) (yarpp-hu at mitcho dot com)
 	* Added Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
 	* Added Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
 = 3.2.2 =
@@ -454,5 +457,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Initial upload
 
 == Upgrade Notice ==
+= 3.2.3 =
+Some YARPP options are now hidden by default. You can show them again from the screen options tab.
+
 = 3.2.2 =
 Requires PHP 5.

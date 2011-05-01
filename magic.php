@@ -294,7 +294,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
   $currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
 
 	if ($promote_yarpp and $domain != 'metabox')
-		$output .= "\n<p>".__("Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
+		$output .= "\n<p>".__("Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>.",'yarpp')."</p>";
 
 	if ($echo) echo $output; else return ((!empty($output))?"\n\n":'').$output;
 }

@@ -34,13 +34,13 @@ $yarpp_value_options = array(
 	'rss_after_title' => '</li>',
 	'rss_before_post' => ' <small>',
 	'rss_after_post' => '</small>',
-	'rss_before_related' => '<p>'.__('Related posts:','yarpp').'<ol>',
-	'rss_after_related' => '</ol></p>',
+	'rss_before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+	'rss_after_related' => '</ol>',
 	'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 	'rss_order' => 'score DESC',
 	'title' => '2',
 	'body' => '2',
-	'categories' => '2',
+	'categories' => '1', // changed default in 3.2.3
 	'tags' => '2',
 	'distags' => '',
 	'discats' => '');
@@ -146,16 +146,27 @@ function yarpp_upgrade_check() {
 }
 
 function yarpp_admin_menu() {
-	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yet-another-related-posts-plugin/options.php', 'yarpp_options_page');
+	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', 'yarpp_options_page');
 	add_action("load-$hook",'yarpp_load_thickbox');
+	// new in 3.2.3: load options page sections as metaboxes
+	include('options-meta-boxes.php');
   // new in 3.0.12: add settings link to the plugins page
   add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
+}
+
+// since 3.2.3
+function yarpp_admin_enqueue() {
+	global $current_screen;
+	if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
+		wp_enqueue_script( 'postbox' );
+		wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), YARPP_VERSION );
+	}
 }
 
 function yarpp_settings_link($links, $file) {
   $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
   if($file == $this_plugin) {
-    $links[] = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/options.php">' . __('Settings', 'yarpp') . '</a>';
+    $links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
   }
   return $links;
 }
@@ -168,6 +179,7 @@ function yarpp_load_thickbox() {
 }
 
 function yarpp_options_page() {
+	// for proper metabox support:
 	require(YARPP_DIR.'/options.php');
 }
 
@@ -376,4 +388,11 @@ function yarpp_metabox() {
 	else
 		echo "<p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p>";
 	echo '</div>';
+}
+
+// since 3.2.3: default metaboxes to show:
+function yarpp_default_hidden_meta_boxes($hidden, $screen) {
+	if ( 'settings_page_yarpp' == $screen->id )
+		$hidden = array( 'yarpp_pool', 'yarpp_relatedness' );
+	return $hidden;
 }

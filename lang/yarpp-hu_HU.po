@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YARPP_DE\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-17 14:23+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: dassad <dassad@dassad.net>\n"
+"Language-Team: Michael Kalina <m.kalina@3th.be>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ yarpp
+#: includes.php:149
+#: includes.php:182
+#: includes.php:203
+msgid "Related Posts (YARPP)"
+msgstr "Hasonló bejegyzések (YARPP)"
+
+#@ yarpp
+#: includes.php:368
+msgid "Related Posts"
+msgstr "Hasonló bejegyzések"
+
+#@ yarpp
+#: template-builtin.php:35
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "Az %f a YARPP hasonlósági eredményt jelképezi az adott és a hasonló bejegyzés közt- Azért látod ezt mert adminisztrátorként vagy bejelentkezve Wordpress oldaladra. Normál látogatók ezt nem láthatják."
+
+#@ yarpp
+#: magic.php:297
+#: options.php:472
+#: options.php:540
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "Hasonló Bejegyzések bitosítva a  <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a> segtségével."
+
+#@ yarpp
+#: options.php:37
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "A MyISAM beállításai felüllíródtak. Most már használhatod a \"címek figyelembe vevése\" és \"tartalmak figyelembe vevése\" hasonlósági opciókat."
+
+#@ yarpp
+#: options.php:46
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Hibát észleltünk. Több információ: YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+
+#@ yarpp
+#: options.php:48
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Hogy visszaállítsd ezeket a lehetőségeket, kérlek frissítsd a <code>%s</code> adatbázis táblázatot a következő SQL parancs segítségével: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . Egyetlen tábla sem lesz törölve, csak a telyesítmény beállításai módusulnak"
+
+#@ yarpp
+#: options.php:50
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Ha biztos vagy benne, hogy <code>%s</code> használja a  MyISAMmodult, nyomd meg ezt a varázsgombot:"
+
+#@ yarpp
+#: options.php:53
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Bizz meg bennem. Engedd hogy használjam a MyISAM lehetőségét."
+
+#@ yarpp
+#: options.php:66
+msgid "The YARPP database had an error but has been fixed."
+msgstr "A YARPP adatbázis hibát tartalmazott de ki lett javítva"
+
+#@ yarpp
+#: options.php:68
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "A ZARPP adatbázis hibát tartalmaz melyet nem sikerült kijavítanunk"
+
+#@ yarpp
+#: options.php:139
+#: options.php:156
+#: options.php:168
+msgid "do not consider"
+msgstr "ne vegye figyelembe"
+
+#@ yarpp
+#: options.php:140
+#: options.php:157
+#: options.php:170
+msgid "consider"
+msgstr "vegye figyelembe"
+
+#@ yarpp
+#: options.php:158
+msgid "consider with extra weight"
+msgstr "különlegesként kezeld"
+
+#@ default
+#@ yarpp
+#: options.php:252
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Adományozz (Michael Yoshitaka Erlewine) -nek ezért a pluginétt Paypal segítségével"
+
+#@ yarpp
+#: options.php:240
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "YARPP beállítások"
+
+#@ yarpp
+#: options.php:275
+msgid "\"The Pool\""
+msgstr "Adatbázis"
+
+#@ yarpp
+#: options.php:277
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "Az adatbázis a megjelenítendő bejegyzések és oldalak közös halmazát jelenti melyek az adott bejegyzésben jelennek meg"
+
+#@ yarpp
+#: options.php:282
+msgid "Disallow by category:"
+msgstr "Letiltás Kategória alapján:"
+
+#@ yarpp
+#: options.php:284
+msgid "Disallow by tag:"
+msgstr "Letiltás TAG-ok alapján:"
+
+#@ yarpp
+#: options.php:287
+msgid "Show password protected posts?"
+msgstr "Jelszóval védett bejegyzések mutatása?"
+
+#@ yarpp
+#: options.php:327
+msgid "Show only previous posts?"
+msgstr "Csak korábbi bejegyzések mutatása?"
+
+#@ yarpp
+#: options.php:308
+msgid "\"Relatedness\" options"
+msgstr "Hasonlóság opciók"
+
+#@ yarpp
+#: options.php:311
+#, php-format
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "A YARPP más mint az <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">előző plugin melyre alapoztuk</a> mivel csak egy hasonló bejegyzések listát engedély és <em>pontosabb találatok</em>."
+
+#@ yarpp
+#: options.php:311
+#: options.php:326
+#: options.php:419
+#: options.php:424
+#: options.php:471
+#: options.php:488
+#: options.php:489
+#: options.php:493
+#: options.php:539
+msgid "more&gt;"
+msgstr "több&gt;"
+
+#@ yarpp
+#: options.php:317
+msgid "Match threshold:"
+msgstr "Hasonlóság:"
+
+#@ yarpp
+#: options.php:318
+msgid "Titles: "
+msgstr "Címek:"
+
+#@ yarpp
+#: options.php:320
+msgid "Bodies: "
+msgstr "tartalmak:"
+
+#@ yarpp
+#: options.php:322
+msgid "Tags: "
+msgstr "Tagok:"
+
+#@ yarpp
+#: options.php:324
+msgid "Categories: "
+msgstr "Kategóriák:"
+
+#@ yarpp
+#: options.php:326
+msgid "Cross-relate posts and pages?"
+msgstr "Bejegyzések és oldalak közösen_"
+
+#@ yarpp
+#: options.php:326
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr "Ha ez az opció aktv akkor a  <code>related_posts()</code>, <code>related_pages()</code>, és <code>related_entries()</code> kódok ugyanazokat a találatokat jelentik meg, melyek tartalmazzák a bejegyzéseket és oldalakat is."
+
+#@ yarpp
+#: options.php:414
+msgid "Display options <small>for your website</small>"
+msgstr "<small>(weboldal)</small> megjelenítési opciók"
+
+#@ yarpp
+#: options.php:419
+msgid "Automatically display related posts?"
+msgstr "Hasonló bejegyzések autómatikus megjelentése?"
+
+#@ yarpp
+#: options.php:419
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Ez az opció automatikusan megjeleníti a hasonló bejegyzéseket minden bejegyzése utánn. Ha ez az opció nincs engedélyezve, manuálisan kell beillesztened a <code>related_posts()</code> vagy (<code>related_pages()</code> és <code>related_entries()</code>) kódot a Wordpress sablonodba."
+
+#@ yarpp
+#: options.php:420
+msgid "Website display code example"
+msgstr "Megjelenítési kód példa"
+
+#@ yarpp
+#: options.php:420
+#: options.php:490
+msgid "(Update options to reload.)"
+msgstr "Frissités az újrabetöltés előtt."
+
+#@ yarpp
+#: options.php:423
+#: options.php:492
+msgid "Maximum number of related posts:"
+msgstr "Maximum hasonló bejegyzés:"
+
+#@ yarpp
+#: options.php:436
+msgid "Before / after related entries:"
+msgstr "Hasonló bejegyzések előtt és utánn"
+
+#@ yarpp
+#: options.php:437
+#: options.php:442
+#: options.php:451
+#: options.php:506
+#: options.php:511
+#: options.php:520
+msgid "For example:"
+msgstr "Például:"
+
+#@ yarpp
+#: options.php:441
+#: options.php:510
+msgid "Before / after each related entry:"
+msgstr "Hasonló bejegyzések találatai előtt és utánn"
+
+#@ yarpp
+#: options.php:445
+#: options.php:514
+msgid "Show excerpt?"
+msgstr "Szövegrészlet (excerpt) mutatása?"
+
+#@ yarpp
+#: options.php:446
+#: options.php:515
+msgid "Excerpt length (No. of words):"
+msgstr "Szövegrészlet (Excerpt) hossza (szavak száma):"
+
+#@ yarpp
+#: options.php:450
+msgid "Before / after (Excerpt):"
+msgstr "Előtte / Utánna  (Excerpt):"
+
+#@ yarpp
+#: options.php:456
+#: options.php:525
+msgid "Order results:"
+msgstr "Bejegyzések rendezése:"
+
+#@ yarpp
+#: options.php:458
+#: options.php:527
+msgid "score (high relevance to low)"
+msgstr "hasonlóság (erőstőll a gyengéig)"
+
+#@ yarpp
+#: options.php:459
+#: options.php:528
+msgid "score (low relevance to high)"
+msgstr "hasonlóság (gyengétőll az erőssig)"
+
+#@ yarpp
+#: options.php:460
+#: options.php:529
+msgid "date (new to old)"
+msgstr "dátum (áj a régire)"
+
+#@ yarpp
+#: options.php:461
+#: options.php:530
+msgid "date (old to new)"
+msgstr "dátum (régi az újra)"
+
+#@ yarpp
+#: options.php:462
+#: options.php:531
+msgid "title (alphabetical)"
+msgstr "Cím (ABC sorrend)"
+
+#@ yarpp
+#: options.php:463
+#: options.php:532
+msgid "title (reverse alphabetical)"
+msgstr "Cím (fordtott ABC sorrend)"
+
+#@ yarpp
+#: options.php:468
+#: options.php:537
+msgid "Default display if no results:"
+msgstr "Alap megjelenítés ha nincs találat:"
+
+#@ yarpp
+#: includes.php:245
+#: options.php:470
+#: options.php:539
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "A YARPP reklámozása?"
+
+#@ yarpp
+#: options.php:472
+#: options.php:540
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Ez az opció a %s kódot hozzáadja. Engedélyezd, és mentsd el a beállításaidat majd ellenőrizd a példa kódot a jobb oldalon. Ezeket a linkeket és az adományokat megköszönjök."
+
+#@ yarpp
+#: options.php:482
+msgid "Display options <small>for RSS</small>"
+msgstr "Megjelenítési beállítások az <small>RSS</small>-nek"
+
+#@ yarpp
+#: options.php:488
+msgid "Display related posts in feeds?"
+msgstr "Hasonló bejegyzések megjelenítése a RSS/XML Feedekben?"
+
+#@ yarpp
+#: options.php:489
+msgid "Display related posts in the descriptions?"
+msgstr "Hasonló bejegyzések megjelenítése a leírásban?"
+
+#@ yarpp
+#: options.php:489
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Ez az opció a hasonló bejegyzéseket is megjelenti az RSS-ben nem csak azok tartalmát. Abban az esetben ha csak szövegrészleteket jelenítesz meg az RSS-ben akkoris megjelennek a hasonló bejegyzések."
+
+#@ yarpp
+#: options.php:490
+msgid "RSS display code example"
+msgstr "RSS-megjelenítési példa"
+
+#@ yarpp
+#: options.php:505
+msgid "Before / after related entries display:"
+msgstr "Megjelentés a hasonló bejegyzések Előtt és Utánn"
+
+#@ yarpp
+#: options.php:519
+msgid "Before / after (excerpt):"
+msgstr "Előtte / Utánna (excerpt):"
+
+#@ yarpp
+#: options.php:133
+msgid "word"
+msgstr "szó"
+
+#@ yarpp
+#: options.php:134
+msgid "tag"
+msgstr "tag"
+
+#@ yarpp
+#: options.php:135
+msgid "category"
+msgstr "kategória"
+
+#@ yarpp
+#: options.php:142
+#: options.php:172
+#, php-format
+msgid "require at least one %s in common"
+msgstr "leglább egy közös %s kell legyen"
+
+#@ yarpp
+#: options.php:144
+#: options.php:174
+#, php-format
+msgid "require more than one %s in common"
+msgstr "több mint egy közös %s kell legyen "
+
+#@ yarpp
+#: options.php:97
+msgid "Options saved!"
+msgstr "Beállítások elmentve!"
+
+#@ yarpp
+#: options.php:311
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Minél pontossabb a hasonlósági beállításod annál kevesebb hasonló bejegyzés jelenik meg. Az alap megjelentés 5. Ha több hasonló bejegyzést szeretnél megjeleníteni adj meg kevesebb szűrési opciót illetve ha kevesebb de pontosabb találatokat szeretnél, adj meg minden szűrési opciót."
+
+#@ yarpp
+#: options.php:550
+msgid "Update options"
+msgstr "Beállítások frissítése"
+
+#@ yarpp
+#: options.php:551
+msgid "Do you really want to reset your configuration?"
+msgstr "Biztosan vissza szeretnéd állítani minden beállításodat alap hejzetbe:"
+
+#@ yarpp
+#: options.php:551
+msgid "Reset options"
+msgstr "Alap beállítások"
+
+#@ yarpp
+#: includes.php:26
+#: includes.php:37
+msgid "Related posts:"
+msgstr "hasonló bejegyzések:"
+
+#@ yarpp
+#: includes.php:28
+#: includes.php:39
+#: template-metabox.php:27
+#: template-widget.php:13
+msgid "No related posts."
+msgstr "Nincs hasonló bejegyzés"
+
+#@ yarpp
+#: cache-postmeta.php:105
+#: cache-tables.php:131
+msgid "Example post "
+msgstr "Példa bejegyzés"
+
+#@ yarpp
+#: options.php:21
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Kérlek helyezd at a YARPP sablonokat a jelenlegi Wordpress sablonod mappájábqa. Egyszerüen helyezd át az alap YARPP sablonokat (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) a <code>TEMPLATEPATH</code> mappába."
+
+#@ yarpp
+#: options.php:26
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Nincs talált YARPP sablon a jelenleggi Wordpress sablonod mappájában (<code>TEMPLATEPATH</code>)  tehát ezt az opciót letiltottuk."
+
+#@ yarpp
+#: options.php:69
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "Kérlek próbálozz a  <A>manuális SQL beállításokkal</a>."
+
+#@ yarpp
+#: options.php:255
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Folge <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin auf Twitter</a>"
+
+#@ yarpp
+#: options.php:291
+msgid "day(s)"
+msgstr "nap(ok)"
+
+#@ yarpp
+#: options.php:292
+msgid "week(s)"
+msgstr "hét(hetek)"
+
+#@ yarpp
+#: options.php:293
+msgid "month(s)"
+msgstr "hónap(ok)"
+
+#@ yarpp
+#: options.php:295
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Csak az előbbi számhalmazokból jelenítsen meg"
+
+#@ yarpp
+#: options.php:394
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr "Új BETA verzója van a YARPP pluginak. Az új verziót <A>itt letöltheted</a> saját felelősségedre."
+
+#@ yarpp
+#: options.php:399
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Új verzója van a YARPP pluginak. Az új verziót <A>itt letöltheted</a> ."
+
+#@ yarpp
+#: includes.php:236
+#: options.php:424
+#: options.php:493
+msgid "Display using a custom template file"
+msgstr "Tetszőleges Sablon használata"
+
+#@ yarpp
+#: options.php:493
+msgid "NEW!"
+msgstr "ÚJ!"
+
+#@ yarpp
+#: options.php:424
+#: options.php:493
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "Ez az opció lehetőséget ad neked a hasonló bejegyzések megjelensének módostására. A sablonok (melyek a jelenlegi Wordpress sablonod mappájában találhatóak) PHP nyelven vannak írva."
+
+#@ yarpp
+#: includes.php:237
+#: options.php:426
+#: options.php:495
+msgid "Template file:"
+msgstr "Sablon file:"
+
+#@ yarpp
+#: options.php:437
+#: options.php:442
+#: options.php:451
+#: options.php:506
+#: options.php:511
+#: options.php:520
+msgid " or "
+msgstr "vagy"
+
+#@ yarpp
+#: options.php:488
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Ez az opció minden RSS iletve XML feed bejegyzés után megjeleníti a hasonló bejegyzéseket. Nincs szükség kód módosításra."
+
+#@ yarpp
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Ezek a hasonló bejegyzések ennek a bejegyzésnek. A bejegyzés frissítése más hasonló bejegyzéseket eredményezhet."
+
+#@ yarpp
+#: template-metabox.php:25
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "A hasonló bejegyzések megjelenítési stílus aés módja a YARPP beállításaitól függ."
+
+#@ yarpp
+#: includes.php:158
+msgid "Settings"
+msgstr "Beállítások"
+
+#@ default
+#: includes.php:231
+msgid "Title:"
+msgstr "Cím:"
+
+#@ yarpp
+#: includes.php:377
+msgid "Related entries may be displayed once you save your entry"
+msgstr "Hasonló bejegyzések csak mentés után jelenhetnek meg"
+
+#@ yarpp
+#: options.php:255
+msgid "by <a href=\"http://mitcho.com/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "<a href=\"http://mitcho.com/\">mitcho (Michael 芳貴 Erlewine)</a> -től"
+
+#@ default
+#: options.php:272
+#: options.php:305
+#: options.php:411
+#: options.php:479
+msgid "Click to toggle"
+msgstr "Kattints az átváltáshoz"
+
