@@ -3,11 +3,11 @@ Contributors: mitchoyoshitaka
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://mitcho.com/code/yarpp/
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=66G4DATK4999L&item_name=mitcho%2ecom%2fcode%3a%20donate%20to%20Michael%20Yoshitaka%20Erlewine&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&charset=UTF%2d8
+Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 3.2
+Tested up to: 3.2
+Stable tag: 3.2.2
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -17,14 +17,14 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
 2. **Templating**: **New in 3.0!** The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
-3. **Caching**: **Improved in 3.1!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
+3. **Caching**: **Improved in 3.2!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
 6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
 
-This plugin requires that your database run on MySQL 4.1 or greater.
+This plugin requires PHP 5 and MySQL 4.1 or greater.
 
-**Other plugins by mitcho**: [HookPress](http://wordpress.org/extend/plugins/hookpress/), [Allow LaTeX Uploads](http://wordpress.org/extend/plugins/allow-latex-uploads/), [Taxonomy Metadata](http://wordpress.org/extend/plugins/taxonomy-metadata/), [Plugin Beta Tester](http://wordpress.org/extend/plugins/plugin-beta-tester/), [Distinct Preview](http://wordpress.org/extend/plugins/distinct-preview/), [Markdown for WordPress and bbPress](http://wordpress.org/extend/plugins/markdown-for-wordpress-and-bbpress/), [WP-Smartdate](http://wordpress.org/extend/plugins/wp-smartdate/).
+**See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/)**.
 
 = A note on support (June 2010) =
 
@@ -150,13 +150,16 @@ YARPP is currently localized in the following languages:
 * Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
 * French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be) - **we are now looking for a new German translator**
+* Georgian (`ge_KA`) by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
+* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms) (yarpp-de at mitcho dot com)
 * Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
 * Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
 * Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
+* Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
 * Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) (yarpp-id at mitcho dot com) of [Kelayang](http://kelayang.com/)
 * Japanese (`ja`) by myself (yarpp at mitcho dot com)
+* Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
 * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
@@ -165,6 +168,7 @@ YARPP is currently localized in the following languages:
 * (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
+* Spanish (`es_ES`) by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
 * Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
@@ -173,9 +177,7 @@ YARPP is currently localized in the following languages:
 
 <!--We already have localizers lined up for the following languages:
 * Danish
-* Spanish
 * Catalan
-* Indonesian
 * Hungarian
 * Romanian
 * Thai
@@ -185,16 +187,37 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.2.3 =
+* Pretty major rewrite to the options page for extensibility and screen options support
+	* By default, the options screen now only show the display options. "The Pool" and "Relatedness" options can be shown in the screen options tab in the top right corner of the screen.
+* Localizations
+	* Quick fix to Czech word list file name
+	* Updated Italian localization (`it_IT`)
+	* Added Hungarian (`hu_HU`) by [daSSad](http://dassad.com) (yarpp-hu at mitcho dot com)
+	* Added Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
+	* Added Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
+= 3.2.2 =
+* Now [ignores soft hyphens](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words) in keyword construction
+* Minor fix for "cross-relate posts and pages" option and more accurate `related_*()` results across post types
+* Localization updates:
+	* Updated `de_DE` German localization files
+	* Fixed an encoding issue in the `pt_PT` Portuguese localization files
+	* Added `es_ES` Spanish localization by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
+	* Added `ge_KA` Georgian by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
+	* Added Czech (`cs_CZ`) overused words list [by berniecz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 = 3.2.1 =
 * Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
+* Bugfix: [With PHP4, the "related posts" would simply show the current post](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-showing-same-post)
+	* This was due to an issue with [object references in PHP4](http://www.obdev.at/developers/articles/00002.html). What a pain!
+	* A big thanks to Brendon Held of [inMotion Graphics](http://www.imgwebdesign.com) for being incredibly patient and letting me try out different diagnostics on his server.
 * Better handling of [`post_status` transitions](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-changed-post-to-draft-still-showing-up-as-related-to-other-posts).
 * Bugfix: [the widget was not working on pages](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-showing-yarp-widget-in-pages-and-subpages)
 * Added overused words list for French, thanks to [saymonz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 * Minor code cleanup:
 	* Fixed [a bug in `yarpp_related_exists()`](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-fatal-error-call-to-undefined-method-yarpp_cache_tablesstart_yarpp_time)
-	* Minor security fix in version-checking code
 	* Removed legacy code for gracefully upgrading from YARPP versions < 1.5 and working with WordPress versions < 2.8.
 	* Cleanup of `yarpp_upgrade_check()` calling
+	* Cleanup of `yarpp_version_json()`, including caching and minor security fix
 	* Eliminated a couple globals
 	* Cleaned up some edge case causes for "unexpected output" on plugin activation
 	* Removed WP Help Center badge, as they are closing
@@ -432,3 +455,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Bugfix: 1.0 assumed you had Markdown installed
 = 1.0 =
 * Initial upload
+
+== Upgrade Notice ==
+= 3.2.3 =
+Some YARPP options are now hidden by default. You can show them again from the screen options tab.
+
+= 3.2.2 =
+Requires PHP 5.

@@ -9,6 +9,7 @@ class YARPP_Cache_Tables {
 	var $name = "custom tables";
 	var $yarpp_time = false;
 	var $demo_time = false;
+	var $score_override = false;
 
 	/**
 	 * SETUP/STATUS
@@ -49,13 +50,13 @@ class YARPP_Cache_Tables {
 			`score` float unsigned NOT NULL default '0',
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY ( `reference_ID` , `ID` ),
-			INDEX (`score`)
+			INDEX (`score`), INDEX (`ID`)
 			) ENGINE=MyISAM;");
 	}
 	
 	function upgrade($last_version) {
 		global $wpdb;
-		if (version_compare('3.2.1b2', $last_version) > 0) {
+		if (version_compare('3.2.1b4', $last_version) > 0) {
 			// Change primary key to be (reference_ID, ID) to ensure that we don't
 			// get duplicates.
 			// We unfortunately have to clear the cache first here, to ensure that there
@@ -64,7 +65,7 @@ class YARPP_Cache_Tables {
 			$wpdb->query('ALTER TABLE ' . $wpdb->prefix . YARPP_TABLES_RELATED_TABLE .
 			  ' DROP PRIMARY KEY ,' .
 			  ' ADD PRIMARY KEY ( `reference_ID` , `ID` ),' .
-			  ' ADD INDEX (`score`)');
+			  ' ADD INDEX (`score`), ADD INDEX (`ID`)');
 		}
 	}
 
@@ -109,10 +110,9 @@ class YARPP_Cache_Tables {
 	}
 
 	function orderby_filter($arg) {
-		global $wpdb, $yarpp_score_override;
-		if ($this->yarpp_time and $yarpp_score_override) {
+		global $wpdb;
+		if ($this->yarpp_time and $this->score_override)
 			$arg = str_replace("$wpdb->posts.post_date","yarpp.score",$arg);
-		}
 		return $arg;
 	}
 
@@ -136,9 +136,9 @@ class YARPP_Cache_Tables {
 	}
 
 	function limit_filter($arg) {
-		global $wpdb, $yarpp_online_limit;
-		if ($this->yarpp_time and $yarpp_online_limit) {
-			return " limit $yarpp_online_limit ";
+		global $wpdb;
+		if ($this->yarpp_time and $this->online_limit) {
+			return " limit {$this->online_limit} ";
 		}
 		return $arg;
 	}
@@ -167,7 +167,7 @@ class YARPP_Cache_Tables {
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
 	}
 
-	function update($reference_ID, $types) {
+	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
 		$original_related = $this->related($reference_ID);
@@ -176,7 +176,7 @@ class YARPP_Cache_Tables {
 		// clear out the cruft
 		$this->clear($reference_ID);
 
-		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql($types,array(),true,$reference_ID)." on duplicate key update date = now()");
+		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql(array(),true,$reference_ID)." on duplicate key update date = now()");
 
 		if ($wpdb->rows_affected) {
 			$new_related = $this->related($reference_ID);

@@ -27,5 +27,3 @@ function related_pages_exist($a = array(),$reference_ID=false) {
 function related_entries_exist($a = array(),$reference_ID=false) {
 	return yarpp_related_exist(array('page','post'),$a,$reference_ID);
 }
-
-?>
