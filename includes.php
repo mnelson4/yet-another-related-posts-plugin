@@ -104,7 +104,7 @@ function yarpp_activate() {
 	
 	if (!get_option('yarpp_version')) {
 		add_option('yarpp_version',YARPP_VERSION);	
-		yarpp_version_json(true);
+		yarpp_version_info(true);
 	} else {
 		yarpp_upgrade_check();
 	}
@@ -140,7 +140,7 @@ function yarpp_upgrade_check() {
 
 	$yarpp_cache->upgrade($last_version);
 
-	yarpp_version_json(true);
+	yarpp_version_info(true);
 
 	update_option('yarpp_version',YARPP_VERSION);
 }
@@ -356,23 +356,19 @@ function yarpp_microtime_float() {
     return ((float)$usec + (float)$sec);
 }
 
-function yarpp_version_json($enforce_cache = false) {
-	if (!$enforce_cache)
-		check_ajax_referer('yarpp_version_json');
-
-	if ($enforce_cache || false === ($result = get_transient('yarpp_version_json'))) {
+// new in 3.2.3: use PHP serialized format instead of JSON
+function yarpp_version_info($enforce_cache = false) {
+	if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 		$version = YARPP_VERSION;
-		$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?version=$version");
+		$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
 		
-		$result = (is_wp_error($remote) ? '{}' : $remote['body']);
+		if (is_wp_error($remote))
+			return false;
 		
-		set_transient('yarpp_version_json', $result, 60*60*12);
+		$result = unserialize($remote['body']);
+		set_transient('yarpp_version_info', $result, 60*60*12);
 	}
-  if ($enforce_cache)
-  	return $result;
-
-	echo $result;
-  exit;
+	return $result;
 }
 
 function yarpp_add_metabox() {

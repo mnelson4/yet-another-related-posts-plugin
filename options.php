@@ -20,6 +20,32 @@ if (!$yarpp_templateable) {
   yarpp_set_option('rss_use_template',false);
 }
 
+// 3.2.3: move version checking here, in PHP:
+if ( current_user_can('update_plugins' ) ) {
+	$yarpp_version_info = yarpp_version_info();
+	
+	$slug = 'yet-another-related-posts-plugin';
+	$plugin_name = __('Yet Another Related Posts Plugin', 'yarpp');
+	$file = basename(YARPP_DIR) . '/yarpp.php';
+	if ( $yarpp_version_info['result'] == 'new' ) {
+		// make sure the update system is aware of this version
+		$current = get_site_transient( 'update_plugins' );
+		if ( !isset( $current->response[ $file ] ) ) {
+			delete_site_transient( 'update_plugins' );
+			wp_update_plugins();
+		}
+	
+		echo '<div class="updated"><p>';
+		$details_url = self_admin_url('plugin-install.php?tab=plugin-information&plugin=' . $slug . '&TB_iframe=true&width=600&height=800');
+		printf( __('There is a new version of %1$s available. <a href="%2$s" class="thickbox" title="%3$s">View version %4$s details</a> or <a href="%5$s">update automatically</a>.'), $plugin_name, esc_url($details_url), esc_attr($plugin_name), $yarpp_version_info['current']['version'], wp_nonce_url( self_admin_url('update.php?action=upgrade-plugin&plugin=') . $file, 'upgrade-plugin_' . $file) );
+		echo '</p></div>';
+	} else if ( $yarpp_version_info['result'] == 'newbeta' ) {
+		echo '<div class="updated"><p>';
+		printf(__("There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk.","yarpp"), $yarpp_version_info['beta']['version'], $yarpp_version_info['beta']['url']);
+		echo '</p></div>';
+	}
+}
+
 if (isset($_POST['myisam_override'])) {
 	yarpp_set_option('myisam_override',1);
 	echo "<div class='updated'>"
@@ -240,23 +266,6 @@ do_meta_boxes('settings_page_yarpp', 'normal', array());
 		load_display_demo_rss();
 
 		var version = jQuery('#yarpp-version').html();
-
-    <?php $ajax_nonce = wp_create_nonce('yarpp_version_json');?>
-    jQuery.getJSON(ajaxurl,
-      'action=yarpp_version_json&_ajax_nonce=<?php echo $ajax_nonce; ?>', 
-      function(json) {
-        if (json.result == 'newbeta')
-          jQuery('#yarpp-version')
-            .addClass('updated')
-            .html(<?php echo "'<p>" . addslashes(sprintf(__("There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk.","yarpp"), "'+json.beta.version+'", "<a href=\"'+json.beta.url+'\">")) . "</p>'"; ?>)
-            .show();
-        if (json.result == 'new')
-          jQuery('#yarpp-version')
-            .addClass('updated')
-            .html(<?php echo "'<p>" . addslashes(sprintf(__("There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>.","yarpp"), "'+json.current.version+'", "'+json.current.url+'\"")) . "</p>'"; ?>)
-            .show();
-      }
-    );
 	}
 
 	jQuery(yarpp_js_init);

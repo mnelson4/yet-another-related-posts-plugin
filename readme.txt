@@ -191,6 +191,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Pretty major rewrite to the options page for extensibility and screen options support
 	* By default, the options screen now only show the display options. "The Pool" and "Relatedness" options can be shown in the screen options tab in the top right corner of the screen.
 	* Removed the "reset options" button, because it wasn't actually doing anything.
+* Rebuilt the new version notice to actually have a link which triggers the WordPress plugin updater, at least for new full versions
 * Localizations
 	* Quick fix to Czech word list file name
 	* Updated Italian localization (`it_IT`)
