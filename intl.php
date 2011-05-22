@@ -16,6 +16,8 @@ function word_file_lang() {
 			return 'bg_BG';
 		case preg_match("/^fr/i",WPLANG):
 			return 'fr_FR';
+		case preg_match("/^cs/i",WPLANG):
+			return 'cs_CZ';
 		default:
 			return 'en_US';
 	}
