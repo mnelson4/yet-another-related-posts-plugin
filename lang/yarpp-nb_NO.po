@@ -19,104 +19,68 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: includes.php:27
-#: includes.php:38
+#: includes.php:26
+#: includes.php:37
 #@ yarpp
 msgid "Related posts:"
 msgstr "Relaterte poster:"
 
-#: includes.php:29
-#: includes.php:40
-#: template-metabox.php:28
+#: includes.php:28
+#: includes.php:39
+#: template-metabox.php:27
 #: template-widget.php:13
 #@ yarpp
 msgid "No related posts."
 msgstr "Ingen relaterte poster."
 
-#: includes.php:96
-#@ yarpp
-msgid "MySQL error on adding yarpp_title"
-msgstr "MySQL feilmelding ved yarpp_title"
-
-#: includes.php:101
-#@ yarpp
-msgid "MySQL error on adding yarpp_content"
-msgstr "MySQL feilmelding ved yarpp_content"
-
-#: includes.php:112
-#@ yarpp
-msgid "MySQL error on creating yarpp_keyword_cache table"
-msgstr "MySQL feilmelding ved opprettelse av yarpp_keyword_cache tabell"
-
-#: includes.php:123
-#@ yarpp
-msgid "MySQL error on creating yarpp_related_cache table"
-msgstr "MySQL feilmelding ved opprettelse av yarpp_related_cache tabell"
-
-#: includes.php:182
+#: includes.php:149
+#: includes.php:194
 #: includes.php:215
-#: includes.php:236
 #@ yarpp
 msgid "Related Posts (YARPP)"
 msgstr "Relaterte poster (YARPP)"
 
-#: includes.php:191
+#: includes.php:169
 #@ yarpp
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: includes.php:265
+#: includes.php:243
 #@ default
 msgid "Title:"
 msgstr ""
 
-#: includes.php:270
-#: options.php:414
-#: options.php:483
+#: includes.php:248
+#: options-meta-boxes.php:161
+#: options-meta-boxes.php:228
 #@ yarpp
 msgid "Display using a custom template file"
 msgstr "Vis ved å bruke en egendefinert mal-fil"
 
-#: includes.php:271
-#: options.php:416
-#: options.php:485
+#: includes.php:249
+#: options-meta-boxes.php:165
+#: options-meta-boxes.php:233
 #@ yarpp
 msgid "Template file:"
 msgstr "Mal fil:"
 
-#: includes.php:279
-#: options.php:460
-#: options.php:529
+#: includes.php:257
+#: options-meta-boxes.php:203
+#: options-meta-boxes.php:268
 #@ yarpp
 msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Vil du hjelpe å fremme Yet Another Related Posts Plugin?"
 
-#: includes.php:489
+#: includes.php:380
 #@ yarpp
 msgid "Related Posts"
 msgstr "Relaterte poster"
 
-#: magic.php:71
+#: cache-postmeta.php:105
+#: cache-tables.php:131
 #@ yarpp
 msgid "Example post "
 msgstr "Eksempel post"
-
-#: magic.php:351
-#: options.php:462
-#: options.php:530
-#@ yarpp
-msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
-msgstr "Relaterte poster ble vist med <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
-
-#: options.php:10
-#@ yarpp
-msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
-msgstr "Vennligst flytt YARPP mal filene til tema-mappen din for å fullføre installasjonen. Du kan enkelt nok flytte eksempel mal-filene (forløpig i <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) til <code>TEMPLATEPATH</code> mappen."
-
-#: options.php:15
-#@ yarpp
-msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
-msgstr "Ingen YARPP mal-filer ble funnet i temaet (<code>TEMPLATEPATH</code>), så den egendefinerte mal-visningen ble deaktivert."
 
 #: options.php:26
 #@ yarpp
@@ -146,429 +110,381 @@ msgstr "Dersom, til tross for denne sjekken, du er sikker at <code>%s</code> kj�
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Stol på meg. La meg bruke MyISAM funksjonene."
 
-#: options.php:65
+#: options.php:55
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPP databasen hadde en feilmelding, men det har blitt fikset."
 
-#: options.php:67
+#: options.php:57
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPP databasen hadde en feilmelding som ikke kunne bli fikset."
 
-#: options.php:68
-#@ yarpp
-msgid "Please try <A>manual SQL setup</a>."
-msgstr "Vennligst prøv <a>manuell SQL installasjon</a>."
-
-#: options.php:99
+#: options.php:86
 #@ yarpp
 msgid "Options saved!"
 msgstr "Innstillingene ble lagret!"
 
-#: options.php:135
+#: options-meta-boxes.php:38
 #@ yarpp
 msgid "word"
 msgstr "ord"
 
-#: options.php:136
+#: options-meta-boxes.php:39
 #@ yarpp
 msgid "tag"
 msgstr "stikkord"
 
-#: options.php:137
+#: options-meta-boxes.php:40
 #@ yarpp
 msgid "category"
 msgstr "kategori"
 
-#: options.php:141
-#: options.php:158
-#: options.php:170
+#: options-meta-boxes.php:45
+#: options-meta-boxes.php:63
+#: options-meta-boxes.php:76
 #@ yarpp
 msgid "do not consider"
 msgstr "ikke vurder"
 
-#: options.php:142
-#: options.php:159
-#: options.php:172
+#: options-meta-boxes.php:46
+#: options-meta-boxes.php:64
+#: options-meta-boxes.php:78
 #@ yarpp
 msgid "consider"
 msgstr "vurder"
 
-#: options.php:144
-#: options.php:174
+#: options-meta-boxes.php:48
+#: options-meta-boxes.php:80
 #, php-format
 #@ yarpp
 msgid "require at least one %s in common"
 msgstr "krev at minst èn %s er felles"
 
-#: options.php:146
-#: options.php:176
+#: options-meta-boxes.php:50
+#: options-meta-boxes.php:82
 #, php-format
 #@ yarpp
 msgid "require more than one %s in common"
 msgstr "krev at mer enn èn %s er felles"
 
-#: options.php:160
+#: options-meta-boxes.php:65
 #@ yarpp
 msgid "consider with extra weight"
 msgstr "vurder med ekstra vekt"
 
-#: options.php:188
-#@ yarpp
-msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
-msgstr "Yet Another Related Posts Plugin versjon historie (RSS 2.0)"
-
-#: options.php:242
+#: options.php:150
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts Plugin innstillinger"
 
-#: options.php:253
+#: options-meta-boxes.php:286
 #@ default
 #@ yarpp
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Donèr til mitcho (Michael Yoshitaka Erlewine) for denne utvidelsen via PayPal"
 
-#: options.php:255
-#@ yarpp
-msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr "av <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
-
-#: options.php:255
-#@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
-msgstr "Følg <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin på Twitter</a>"
-
-#: options.php:271
-#: options.php:304
-#: options.php:401
-#: options.php:469
-#@ default
-msgid "Click to toggle"
-msgstr ""
-
-#: options.php:274
+#: options-meta-boxes.php:118
 #@ yarpp
 msgid "\"The Pool\""
 msgstr "\"Samlingen\""
 
-#: options.php:276
+#: options-meta-boxes.php:91
 #@ yarpp
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
 msgstr "\"Samlingen\" refererer til samlingen av poster og sider som er kandidater for visning som relatert til den følgende oppføringen."
 
-#: options.php:281
+#: options-meta-boxes.php:96
 #@ yarpp
 msgid "Disallow by category:"
 msgstr "Ikke tillat ved kategori:"
 
-#: options.php:283
+#: options-meta-boxes.php:98
 #@ yarpp
 msgid "Disallow by tag:"
 msgstr "Ikke tillat ved stikkord:"
 
-#: options.php:286
+#: options-meta-boxes.php:101
 #@ yarpp
 msgid "Show password protected posts?"
 msgstr "Vil du vise passord beskyttede poster?"
 
-#: options.php:290
+#: options-meta-boxes.php:105
 #@ yarpp
 msgid "day(s)"
 msgstr "dag(er)"
 
-#: options.php:291
+#: options-meta-boxes.php:106
 #@ yarpp
 msgid "week(s)"
 msgstr "uke(r)"
 
-#: options.php:292
+#: options-meta-boxes.php:107
 #@ yarpp
 msgid "month(s)"
 msgstr "måned(er)"
 
-#: options.php:294
+#: options-meta-boxes.php:109
 #@ yarpp
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Vis kun poster fra de forrige NUMBER UNITS"
 
-#: options.php:307
+#: options-meta-boxes.php:148
 #@ yarpp
 msgid "\"Relatedness\" options"
 msgstr "\"Relatert\" innstillinger"
 
-#: options.php:310
-#, php-format
-#@ yarpp
-msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP er forskjellig fra de <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">forrige utvidelsene den er basert på</a> siden den setter en grense for listen med relaterte poster med (1) et maksimum tall og (2) en <em>resultat-terskel</em>."
-
-#: options.php:310
-#: options.php:325
-#: options.php:409
-#: options.php:414
-#: options.php:461
-#: options.php:478
-#: options.php:479
-#: options.php:483
-#: options.php:529
+#: options-meta-boxes.php:124
+#: options-meta-boxes.php:139
+#: options-meta-boxes.php:157
+#: options-meta-boxes.php:161
+#: options-meta-boxes.php:204
+#: options-meta-boxes.php:221
+#: options-meta-boxes.php:223
+#: options-meta-boxes.php:228
+#: options-meta-boxes.php:268
 #@ yarpp
 msgid "more&gt;"
 msgstr "mer&gt;"
 
-#: options.php:310
+#: options-meta-boxes.php:124
 #@ yarpp
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "Desto høyere resultat-terskel, desto strenger, og du vil få mindre relaterte poster generelt. Standard resultat-terskel er 5. Dersom du vil oppnå en hensiktsmessig resultat-terskel, ta en titt på noen relaterte poster og se på poengsummen. Du kan se hva slags relaterte poster som blir valgt ut og hva slags poengsum, og dermed finne en hensiktsmessig resultat-terskel for din side."
 
-#: options.php:316
+#: options-meta-boxes.php:130
 #@ yarpp
 msgid "Match threshold:"
 msgstr "Resultat-terskel:"
 
-#: options.php:317
+#: options-meta-boxes.php:131
 #@ yarpp
 msgid "Titles: "
 msgstr "Titler:"
 
-#: options.php:319
+#: options-meta-boxes.php:133
 #@ yarpp
 msgid "Bodies: "
 msgstr "Innhold:"
 
-#: options.php:321
+#: options-meta-boxes.php:135
 #@ yarpp
 msgid "Tags: "
 msgstr "Stikkord:"
 
-#: options.php:323
+#: options-meta-boxes.php:137
 #@ yarpp
 msgid "Categories: "
 msgstr "Kategorier:"
 
-#: options.php:325
+#: options-meta-boxes.php:139
 #@ yarpp
 msgid "Cross-relate posts and pages?"
 msgstr "Kryss-relatèr poster og sider?"
 
-#: options.php:325
+#: options-meta-boxes.php:139
 #@ yarpp
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
 msgstr "Når \"Kryss-relatèr poster og sider\" innstillingen er markert, så vil <code>related_posts()</code>, <code>related_pages()</code>, og <code>related_entries()</code> gi samme resultat, og vise både relaterte sider og poster."
 
-#: options.php:326
+#: options-meta-boxes.php:140
 #@ yarpp
 msgid "Show only previous posts?"
 msgstr "Vis kun tidligere poster?"
 
-#: options.php:388
-#@ yarpp
-msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
-msgstr "Det er en ny beta (VERSION) av Yet Another Related Posts Plugin. Du kan <A>laste den ned her</a> på egen risiko."
-
-#: options.php:390
-#@ yarpp
-msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "Det er en ny versjon (VERSION) av Yet Another Related Posts Plugin tilgjengelig! Du kan <A>laste den ned her</a>."
-
-#: options.php:404
+#: options-meta-boxes.php:212
 #@ yarpp
 msgid "Display options <small>for your website</small>"
 msgstr "Vis innstillingene <small>for din hjemmeside</small>"
 
-#: options.php:409
+#: options-meta-boxes.php:157
 #@ yarpp
 msgid "Automatically display related posts?"
 msgstr "Automatisk vis relaterte poster?"
 
-#: options.php:409
+#: options-meta-boxes.php:157
 #@ yarpp
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
 msgstr "Denne innstillingen automatisk viser poster rett etter innholdet ved enkelt sider. Dersom denne innstillingen er deaktivert, må du manuelt plassere <code>related_posts()</code> eller andre varianter (<code>related_pages()</code> og <code>related_entries()</code>) i filene til ditt tema."
 
-#: options.php:410
+#: options-meta-boxes.php:158
 #@ yarpp
 msgid "Website display code example"
 msgstr "Eksempel av kodevisning på hjemmesiden"
 
-#: options.php:410
-#: options.php:480
+#: options-meta-boxes.php:158
+#: options-meta-boxes.php:221
 #@ yarpp
 msgid "(Update options to reload.)"
 msgstr "(Oppdater innstillinger for å laste på nytt.)"
 
-#: options.php:413
-#: options.php:482
+#: options-meta-boxes.php:160
+#: options-meta-boxes.php:226
 #@ yarpp
 msgid "Maximum number of related posts:"
 msgstr "Maksimalt antall relaterte poster:"
 
-#: options.php:414
-#: options.php:483
+#: options-meta-boxes.php:161
+#: options-meta-boxes.php:228
 #@ yarpp
 msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
 msgstr "Denne avanserte innstillingen gir deg full makt til å definere hvordan dine relaterte poster blir vist. Malene (plassert i din tema-mappe) er skrevet i PHP."
 
-#: options.php:426
+#: options-meta-boxes.php:175
+#: options-meta-boxes.php:244
 #@ yarpp
 msgid "Before / after related entries:"
 msgstr "Før / etter relatert innhold:"
 
-#: options.php:427
-#: options.php:432
-#: options.php:441
-#: options.php:496
-#: options.php:501
-#: options.php:510
+#: options-meta-boxes.php:175
+#: options-meta-boxes.php:176
+#: options-meta-boxes.php:184
+#: options-meta-boxes.php:244
+#: options-meta-boxes.php:245
+#: options-meta-boxes.php:250
 #@ yarpp
 msgid "For example:"
 msgstr "For eksempel:"
 
-#: options.php:427
-#: options.php:432
-#: options.php:441
-#: options.php:496
-#: options.php:501
-#: options.php:510
+#: options-meta-boxes.php:175
+#: options-meta-boxes.php:176
+#: options-meta-boxes.php:184
+#: options-meta-boxes.php:244
+#: options-meta-boxes.php:245
+#: options-meta-boxes.php:250
 #@ yarpp
 msgid " or "
 msgstr "eller"
 
-#: options.php:431
-#: options.php:500
+#: options-meta-boxes.php:176
+#: options-meta-boxes.php:245
 #@ yarpp
 msgid "Before / after each related entry:"
 msgstr "Før / etter hvert relatert innhold:"
 
-#: options.php:435
-#: options.php:504
+#: options-meta-boxes.php:178
+#: options-meta-boxes.php:247
 #@ yarpp
 msgid "Show excerpt?"
 msgstr "Vis utdrag?"
 
-#: options.php:436
-#: options.php:505
+#: options-meta-boxes.php:179
+#: options-meta-boxes.php:248
 #@ yarpp
 msgid "Excerpt length (No. of words):"
 msgstr "Lengde på utdrag (antall ord):"
 
-#: options.php:440
+#: options-meta-boxes.php:183
 #@ yarpp
 msgid "Before / after (Excerpt):"
 msgstr "Før / etter (utdrag):"
 
-#: options.php:446
-#: options.php:515
+#: options-meta-boxes.php:189
+#: options-meta-boxes.php:254
 #@ yarpp
 msgid "Order results:"
 msgstr "Rydd opp resultater:"
 
-#: options.php:448
-#: options.php:517
+#: options-meta-boxes.php:191
+#: options-meta-boxes.php:256
 #@ yarpp
 msgid "score (high relevance to low)"
 msgstr "poeng (høy relevans til lav)"
 
-#: options.php:449
-#: options.php:518
+#: options-meta-boxes.php:192
+#: options-meta-boxes.php:257
 #@ yarpp
 msgid "score (low relevance to high)"
 msgstr "poeng (lav relevans til høy)"
 
-#: options.php:450
-#: options.php:519
+#: options-meta-boxes.php:193
+#: options-meta-boxes.php:258
 #@ yarpp
 msgid "date (new to old)"
 msgstr "dato (ny til gammel)"
 
-#: options.php:451
-#: options.php:520
+#: options-meta-boxes.php:194
+#: options-meta-boxes.php:259
 #@ yarpp
 msgid "date (old to new)"
 msgstr "dato (gammel til ny)"
 
-#: options.php:452
-#: options.php:521
+#: options-meta-boxes.php:195
+#: options-meta-boxes.php:260
 #@ yarpp
 msgid "title (alphabetical)"
 msgstr "tittel (alfabetisk)"
 
-#: options.php:453
-#: options.php:522
+#: options-meta-boxes.php:196
+#: options-meta-boxes.php:261
 #@ yarpp
 msgid "title (reverse alphabetical)"
 msgstr "tittel (omvendt alfabetisk)"
 
-#: options.php:458
-#: options.php:527
+#: options-meta-boxes.php:201
+#: options-meta-boxes.php:266
 #@ yarpp
 msgid "Default display if no results:"
 msgstr "Standard visning ved ingen resultater:"
 
-#: options.php:462
-#: options.php:530
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
 msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
 msgstr "Denne innstillingen vil legge til koden %s. Prøv å slå den på, oppdater innstillingene dine, og se koden i kode-eksempelet til høyre. Disse linkene og donasjonene blir satt stor pris på."
 
-#: options.php:472
+#: options-meta-boxes.php:276
 #@ yarpp
 msgid "Display options <small>for RSS</small>"
 msgstr "Visning innstillinger <small>for RSS</small>"
 
-#: options.php:478
+#: options-meta-boxes.php:221
 #@ yarpp
 msgid "Display related posts in feeds?"
 msgstr "Vis relaterte poster i feeds?"
 
-#: options.php:478
+#: options-meta-boxes.php:221
 #@ yarpp
 msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
 msgstr "Disse innstillingene viser relaterte poster ved slutten av hver enhet i dine RSS og Atom feeds. Krever ingen endringer på malen."
 
-#: options.php:479
+#: options-meta-boxes.php:223
 #@ yarpp
 msgid "Display related posts in the descriptions?"
 msgstr "Vis relaterte poster i beskrivelsen?"
 
-#: options.php:479
+#: options-meta-boxes.php:223
 #@ yarpp
 msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
 msgstr "Denne innstillingen viser relaterte poster i RSS beskrivelse-feltet, ikke bare i selve innholdet. Dersom dine feeds er satt opp til å kun vise utdrag, men kun beskrivelses feltet blir brukt, så kreves denne innstillingen for noe som helst visning."
 
-#: options.php:480
+#: options-meta-boxes.php:221
 #@ yarpp
 msgid "RSS display code example"
 msgstr "RSS visning kode-eksempel"
 
-#: options.php:483
+#: options-meta-boxes.php:228
 #@ yarpp
 msgid "NEW!"
 msgstr "NY!"
 
-#: options.php:495
-#@ yarpp
-msgid "Before / after related entries display:"
-msgstr "Før / etter visning av relatert innhold:"
-
-#: options.php:509
+#: options-meta-boxes.php:250
 #@ yarpp
 msgid "Before / after (excerpt):"
 msgstr "Før / etter (utdrag):"
 
-#: options.php:538
+#: options.php:268
 #@ yarpp
 msgid "Update options"
 msgstr "Oppdater innstillinger"
 
-#: options.php:539
+#: options.php:269
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "Vil du virkelig fjerne alle innstillingene?"
 
-#: options.php:539
+#: options.php:269
 #@ yarpp
 msgid "Reset options"
 msgstr "Fjern innstillinger"
@@ -584,8 +500,74 @@ msgstr "%f er YARPP resultat-terskel mellom det gjeldende og relaterte innholdet
 msgid "These are the related entries for this entry. Updating this post may change these related posts."
 msgstr "Dette er det relaterte innholdet for denne denne. Ved å oppdatere denne posten kan gi endringer til relaterte poster."
 
-#: template-metabox.php:26
+#: template-metabox.php:25
 #@ yarpp
 msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
 msgstr "Om alle disse relaterte poster faktisk blir vist, eller hvordan de blir vist, kommer an på dine YARPP visning innstillinger."
+
+#: includes.php:389
+#@ yarpp
+msgid "Related entries may be displayed once you save your entry"
+msgstr ""
+
+#: magic.php:297
+#, php-format
+#@ yarpp
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr ""
+
+#: options-meta-boxes.php:124
+#@ yarpp
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr ""
+
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:269
+#@ yarpp
+msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
+msgstr ""
+
+#: options-meta-boxes.php:283
+#@ yarpp
+msgid "YARPP Forum"
+msgstr ""
+
+#: options-meta-boxes.php:284
+#@ yarpp
+msgid "YARPP on Twitter"
+msgstr ""
+
+#: options-meta-boxes.php:285
+#@ yarpp
+msgid "YARPP on the Web"
+msgstr ""
+
+#: options-meta-boxes.php:292
+#@ yarpp
+msgid "Contact YARPP"
+msgstr ""
+
+#: options.php:58
+#, php-format
+#@ yarpp
+msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
+msgstr ""
+
+#: options.php:160
+#, php-format
+#@ yarpp
+msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr ""
+
+#: options.php:251
+#, php-format
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr ""
+
+#: options.php:256
+#, php-format
+#@ yarpp
+msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
+msgstr ""
 

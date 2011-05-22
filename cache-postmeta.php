@@ -14,6 +14,8 @@ class YARPP_Cache_Postmeta {
 	var $name = "postmeta";
 	var $yarpp_time = false;
 	var $demo_time = false;
+	var $score_override = false;
+	var $online_limit = false;
 
 	/**
 	 * SETUP/STATUS
@@ -74,10 +76,10 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function orderby_filter($arg) {
-		global $wpdb, $yarpp_score_override;
+		global $wpdb;
 		// only order by score if the score function is added in fields_filter, which only happens
 		// if there are related posts in the postdata
-		if ($this->yarpp_time && $yarpp_score_override &&
+		if ($this->yarpp_time && $this->score_override &&
 		    is_array($this->related_postdata) && count($this->related_postdata))
 			return str_replace("$wpdb->posts.post_date","score",$arg);
 		return $arg;
@@ -108,9 +110,9 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function limit_filter($arg) {
-		global $wpdb, $yarpp_online_limit;
-		if ($this->yarpp_time and $yarpp_online_limit)
-			return " limit $yarpp_online_limit ";
+		global $wpdb;
+		if ($this->yarpp_time and $this->online_limit)
+			return " limit {$this->online_limit} ";
 		return $arg;
 	}
 
@@ -147,11 +149,15 @@ class YARPP_Cache_Postmeta {
 		}
 	}
 
-	function update($reference_ID, $types) {
+	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
+		// $reference_ID must be numeric
+		if ( !is_int( $reference_ID ) )
+			return new WP_Error('yarpp_cache_error', "reference ID must be an int" );
+
 		$original_related = $this->related($reference_ID);
-		$related = $wpdb->get_results(yarpp_sql($types,array(),true,$reference_ID), ARRAY_A);
+		$related = $wpdb->get_results(yarpp_sql(array(),true,$reference_ID), ARRAY_A);
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
 		if (count($new_related)) {
@@ -179,6 +185,10 @@ class YARPP_Cache_Postmeta {
 
 	function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
+
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
+			return new WP_Error('yarpp_cache_error', "reference ID and/or related ID must be ints" );
+
 		if (!is_null($reference_ID) && !is_null($related_ID)) {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 			foreach($results as $result) {
