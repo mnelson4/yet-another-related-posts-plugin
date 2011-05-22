@@ -18,7 +18,6 @@ $yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0
 if (!$yarpp_templateable) {
   yarpp_set_option('use_template',false);
   yarpp_set_option('rss_use_template',false);
-
 }
 
 if (isset($_POST['myisam_override'])) {
@@ -52,11 +51,12 @@ if (!yarpp_get_option('myisam_override')) {
 
 if ($yarpp_myisam && !yarpp_enabled()) {
   echo '<div class="updated"><p>';
-  if (yarpp_activate())
+  if (yarpp_activate()) {
     _e('The YARPP database had an error but has been fixed.','yarpp');
-  else
-    __('The YARPP database has an error which could not be fixed.','yarpp')
-    .str_replace('<A>','<a href=\'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix).'\'>',__('Please try <A>manual SQL setup</a>.','yarpp'));
+  } else {
+    _e('The YARPP database has an error which could not be fixed.','yarpp');
+    printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
+  }
   echo '</div></p>';
 }
 
@@ -248,12 +248,12 @@ do_meta_boxes('settings_page_yarpp', 'normal', array());
         if (json.result == 'newbeta')
           jQuery('#yarpp-version')
             .addClass('updated')
-            .html(<?php echo "'<p>".str_replace('VERSION',"'+json.beta.version+'",str_replace('<A>',"<a href=\"'+json.beta.url+'\">",addslashes(__("There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk.","yarpp"))))."</p>'"?>)
+            .html(<?php echo "'<p>" . addslashes(sprintf(__("There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk.","yarpp"), "'+json.beta.version+'", "<a href=\"'+json.beta.url+'\">")) . "</p>'"; ?>)
             .show();
         if (json.result == 'new')
           jQuery('#yarpp-version')
             .addClass('updated')
-            .html(<?php echo "'<p>".str_replace('VERSION',"'+json.current.version+'",str_replace('<A>',"<a href=\"'+json.current.url+'\">",addslashes(__("There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>.","yarpp"))))."</p>'"?>)
+            .html(<?php echo "'<p>" . addslashes(sprintf(__("There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>.","yarpp"), "'+json.current.version+'", "'+json.current.url+'\"")) . "</p>'"; ?>)
             .show();
       }
     );
@@ -266,7 +266,7 @@ do_meta_boxes('settings_page_yarpp', 'normal', array());
 	<div>
 		<p class="submit">
 			<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
-			<input type="submit" onclick='return confirm("<?php _e("Do you really want to reset your configuration?",'yarpp');?>");' class="yarpp_warning" name="reset_yarpp" value="<?php _e('Reset options','yarpp')?>" />
+			<!--<input type="submit" onclick='return confirm("<?php _e("Do you really want to reset your configuration?",'yarpp');?>");' class="yarpp_warning" name="reset_yarpp" value="<?php _e('Reset options','yarpp')?>" />-->
 		</p>
 	</div>
 <!--cache engine: <?php echo $yarpp_cache->name;?>; cache status: <?php echo $yarpp_cache->cache_status();?>-->

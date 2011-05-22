@@ -150,8 +150,8 @@ function yarpp_admin_menu() {
 	add_action("load-$hook",'yarpp_load_thickbox');
 	// new in 3.2.3: load options page sections as metaboxes
 	include('options-meta-boxes.php');
-  // new in 3.0.12: add settings link to the plugins page
-  add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
+	// new in 3.0.12: add settings link to the plugins page
+	add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
 }
 
 // since 3.2.3

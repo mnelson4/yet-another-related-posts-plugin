@@ -169,6 +169,10 @@ class YARPP_Cache_Tables {
 
 	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
+		
+		// $reference_ID must be numeric
+		if ( !is_int( $reference_ID ) )
+			return new WP_Error('yarpp_cache_error', "update's reference ID must be an int" );
 
 		$original_related = $this->related($reference_ID);
 		//error_log('original:' . implode(':', $original_related));
@@ -206,6 +210,10 @@ class YARPP_Cache_Tables {
 
 	function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
+
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
+			return new WP_Error('yarpp_cache_error', "reference ID and/or related ID must be ints" );
+
 		if (!is_null($reference_ID) && !is_null($related_ID)) {
 			$results = $wpdb->get_col("select ID from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = $reference_ID and ID = $related_ID");
 			return count($results) > 0;

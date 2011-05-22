@@ -152,6 +152,10 @@ class YARPP_Cache_Postmeta {
 	function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
+		// $reference_ID must be numeric
+		if ( !is_int( $reference_ID ) )
+			return new WP_Error('yarpp_cache_error', "reference ID must be an int" );
+
 		$original_related = $this->related($reference_ID);
 		$related = $wpdb->get_results(yarpp_sql(array(),true,$reference_ID), ARRAY_A);
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
@@ -181,6 +185,10 @@ class YARPP_Cache_Postmeta {
 
 	function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
+
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
+			return new WP_Error('yarpp_cache_error', "reference ID and/or related ID must be ints" );
+
 		if (!is_null($reference_ID) && !is_null($related_ID)) {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 			foreach($results as $result) {

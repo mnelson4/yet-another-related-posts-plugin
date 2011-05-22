@@ -4,6 +4,7 @@ function yarpp_extract_keywords($source,$max = 20) {
 	global $overusedwords;
 
 	// 3.2.2: ignore soft hyphens
+	// Requires PHP 5: http://bugs.php.net/bug.php?id=25670
 	$softhyphen = html_entity_decode('&#173;',ENT_NOQUOTES,'UTF-8');
 	$source = str_replace($softhyphen, '', $source);
 
@@ -79,10 +80,10 @@ function yarpp_white($filter) {
 	global $yarpp_blacklist;
 	global $yarpp_blackmethods;
 	if (is_array($filter)) {
-		if (array_search($filter[1],$yarpp_blackmethods)) //print_r($filter[1]);
+		if (array_search($filter[1],$yarpp_blackmethods))
 			return false;
 	}
-	if (array_search($filter,$yarpp_blacklist)) //print_r($filter);
+	if (array_search($filter,$yarpp_blacklist))
 		return false;
 	return true;
 }
