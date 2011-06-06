@@ -20,7 +20,7 @@ if (!$yarpp_templateable) {
   yarpp_set_option('rss_use_template',false);
 }
 
-// 3.2.3: move version checking here, in PHP:
+// 3.3: move version checking here, in PHP:
 if ( current_user_can('update_plugins' ) ) {
 	$yarpp_version_info = yarpp_version_info();
 	
@@ -118,7 +118,7 @@ if (isset($_POST['update_yarpp'])) {
 <script type="text/javascript">
 //<!--
 
-// since 3.2.3: add screen option toggles
+// since 3.3: add screen option toggles
 jQuery(function() {
 	postboxes.add_postbox_toggles(pagenow);
 });

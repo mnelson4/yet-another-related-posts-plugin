@@ -291,6 +291,6 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 
 add_meta_box('yarpp_display_contact', __('Contact YARPP','yarpp'), array(new YARPP_Meta_Box_Contact, 'display'), 'settings_page_yarpp', 'side', 'core');
 
-// since 3.2.3: hook for registering new YARPP meta boxes
+// since 3.3: hook for registering new YARPP meta boxes
 do_action( 'add_meta_boxes_settings_page_yarpp' );
 
