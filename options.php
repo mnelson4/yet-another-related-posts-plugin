@@ -24,8 +24,10 @@ if (!$yarpp_templateable) {
 if ( current_user_can('update_plugins' ) ) {
 	$yarpp_version_info = yarpp_version_info();
 	
+	// these strings are not localizable, as long as the plugin data on wordpress.org
+	// cannot be.
 	$slug = 'yet-another-related-posts-plugin';
-	$plugin_name = __('Yet Another Related Posts Plugin', 'yarpp');
+	$plugin_name = 'Yet Another Related Posts Plugin';
 	$file = basename(YARPP_DIR) . '/yarpp.php';
 	if ( $yarpp_version_info['result'] == 'new' ) {
 		// make sure the update system is aware of this version

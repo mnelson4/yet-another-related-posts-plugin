@@ -202,7 +202,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 				<th>")?>
 	<?php $this->checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
 	." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>"); ?>
+	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")	."</span></a>"); ?>
 		</tbody>
 		</table>
 <?php
@@ -266,7 +266,7 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 	<?php $this->textbox('rss_no_results',__('Default display if no results:','yarpp'),'40',"<tr valign='top' class='rss_not_templated'>
 			<th scope='row'>")?>
 	<?php $this->checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(__("Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>.",'yarpp'))."</code>")	."</span></a>","<tr valign='top' class='rss_displayed'>
+	.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")	."</span></a>","<tr valign='top' class='rss_displayed'>
 			<th class='th-full' colspan='2' scope='row'>"); ?>
 		</tbody></table>
 <?php
