@@ -19,40 +19,40 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: includes.php:380
+#: includes.php:376
 #@ yarpp
 msgid "Related Posts"
 msgstr "Tulisan Terkait"
 
-#: options.php:35
+#: options.php:63
 #, php-format
 #@ yarpp
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "Kriteria kaitan \"pertimbangkan judul\" dan \"pertimbangkan batang tubuh\" YARPP mengharuskan tabel <code>%s</code> Anda mempergunakan <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>mesin penyimpan MyISAM</a>, tapi tabel kelihatannya menggunakan mesin <code>%s</code>. Dua opsi ini telah dinonaktifkan."
 
-#: options.php:37
+#: options.php:65
 #, php-format
 #@ yarpp
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "Untuk memulihkan fitur ini, mohon perbarui tabel <code>%s</code> Anda dengan mengeksekusi direktif SQL berikut: <code>ALTER  TABLE `%s` ENGINE = MyISAM;</code>. Tidak ada data yang akan dihapus dengan mengubah mesin tabel, walaupun ada implikasi performa."
 
-#: options.php:39
+#: options.php:67
 #, php-format
 #@ yarpp
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "Jika, setelah pengecekan ini, Anda yakin <code>%s</code> menggunakan mesin MyISAM, tekan tombol ajaib  ini:"
 
-#: options.php:42
+#: options.php:70
 #@ yarpp
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Percaya pada saya. Izinkan saya memakai fitur MyISAM."
 
-#: options.php:55
+#: options.php:83
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "Database YARPP memilik galat tapi telah diperbaiki."
 
-#: options.php:57
+#: options.php:85
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "Database YARPP mempunyai galat yang tidak dapat diperbaiki."
@@ -111,7 +111,7 @@ msgstr "pertimbangkan dengan berat ekstra"
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Donasi ke mitcho (Michael Yoshitaka Erlewine) untuk plugin ini melalui PayPal"
 
-#: options.php:150
+#: options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Opsi Yet Another Related Posts Plugin"
@@ -190,6 +190,14 @@ msgstr "Ketika opsi \"Hubungkan tulisan dan halaman\" terpilih, <code>related_po
 #@ yarpp
 msgid "Display options <small>for your website</small>"
 msgstr "Tampilkan opsi <small>untuk situs web Anda</small>"
+
+#: magic.php:297
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:269
+#, php-format
+#@ yarpp
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Tulisan terkait dibawakan kepada Anda oleh <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: options-meta-boxes.php:157
 #@ yarpp
@@ -362,7 +370,7 @@ msgstr "%f adalah skor kecocokan YARPP antara entri terkini dan entri terkait in
 msgid "Related Posts (YARPP)"
 msgstr "Tulisan Terkait (YARPP)"
 
-#: options.php:26
+#: options.php:54
 #@ yarpp
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "Pengecekan MyISAM dikesampingkan. Anda boleh mempergunakan kriteria keterkaitan \"pertimbangkan judul\" dan \"pertimbangkan batang tubuh\"."
@@ -380,17 +388,17 @@ msgstr "Pengecekan MyISAM dikesampingkan. Anda boleh mempergunakan kriteria kete
 msgid "more&gt;"
 msgstr "lanjut&gt;"
 
-#: options.php:86
+#: options.php:114
 #@ yarpp
 msgid "Options saved!"
 msgstr "Opsi tersimpan!"
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "Apakah Anda benar-benar ingin mereset konfigurasi Anda?"
 
-#: options.php:268
+#: options.php:279
 #@ yarpp
 msgid "Update options"
 msgstr "Perbarui Opsi"
@@ -400,7 +408,7 @@ msgstr "Perbarui Opsi"
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "Semakin tinggi ambang kecocokan, semakin ketat, dan Anda mendapat tulisan terkait yang semakin sedikit secara keseluruhan. Ambang kecocokan bawaan adalah 5. Jika Anda ingin menemukan ambang kecocokan yang pas, lihat pada tampilan tulisan terkait untuk beberapa tulisan dan skornya. Anda dapat melihat jenis tulisan terkait yang terpilih dan dengan jenis kecocokan yang mana, dan menentukan ambang yang cocok untuk situs Anda."
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Reset options"
 msgstr "Reset opsi"
@@ -448,6 +456,12 @@ msgstr "bulan"
 #@ yarpp
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Tampilkan tulisan dari JUMLAH UNIT terdahulu saja"
+
+#: options.php:46
+#, php-format
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Ada beta baru (%s) dari Plugin Yet Another Related Posts. Anda dapat <a href=\"%s\">mengunduhnya di sini</a> dengan risiko Anda sendiri."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -505,26 +519,14 @@ msgstr "Pengaturan"
 msgid "Title:"
 msgstr "Judul:"
 
-#: includes.php:389
+#: includes.php:385
 #@ yarpp
 msgid "Related entries may be displayed once you save your entry"
-msgstr ""
-
-#: magic.php:297
-#, php-format
-#@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
 msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr ""
-
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#@ yarpp
-msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:283
@@ -547,27 +549,21 @@ msgstr ""
 msgid "Contact YARPP"
 msgstr ""
 
-#: options.php:58
+#: options.php:42
+#, php-format
+#@ default
+msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
+msgstr ""
+
+#: options.php:86
 #, php-format
 #@ yarpp
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr ""
 
-#: options.php:160
+#: options.php:188
 #, php-format
 #@ yarpp
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr ""
-
-#: options.php:251
-#, php-format
-#@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr ""
-
-#: options.php:256
-#, php-format
-#@ yarpp
-msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
 msgstr ""
 
