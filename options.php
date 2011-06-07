@@ -1,6 +1,6 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable, $yarpp_myisam;
 
 // Reenforce YARPP setup:
 if (!get_option('yarpp_version'))
@@ -122,12 +122,6 @@ if (isset($_POST['update_yarpp'])) {
 jQuery(function() {
 	postboxes.add_postbox_toggles(pagenow);
 });
-
-/*var css = document.createElement("link");
-css.setAttribute("rel", "stylesheet");
-css.setAttribute("type", "text/css");
-css.setAttribute("href", "../wp-content/plugins/yet-another-related-posts-plugin/options.css");
-document.getElementsByTagName("head")[0].appendChild(css);*/
 
 var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>';
 
