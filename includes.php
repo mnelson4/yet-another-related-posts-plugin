@@ -40,7 +40,7 @@ $yarpp_value_options = array(
 	'rss_order' => 'score DESC',
 	'title' => '2',
 	'body' => '2',
-	'categories' => '1', // changed default in 3.2.3
+	'categories' => '1', // changed default in 3.3
 	'tags' => '2',
 	'distags' => '',
 	'discats' => '');
@@ -148,13 +148,13 @@ function yarpp_upgrade_check() {
 function yarpp_admin_menu() {
 	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', 'yarpp_options_page');
 	add_action("load-$hook",'yarpp_load_thickbox');
-	// new in 3.2.3: load options page sections as metaboxes
+	// new in 3.3: load options page sections as metaboxes
 	include('options-meta-boxes.php');
 	// new in 3.0.12: add settings link to the plugins page
 	add_filter('plugin_action_links', 'yarpp_settings_link', 10, 2);
 }
 
-// since 3.2.3
+// since 3.3
 function yarpp_admin_enqueue() {
 	global $current_screen;
 	if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
@@ -356,7 +356,7 @@ function yarpp_microtime_float() {
     return ((float)$usec + (float)$sec);
 }
 
-// new in 3.2.3: use PHP serialized format instead of JSON
+// new in 3.3: use PHP serialized format instead of JSON
 function yarpp_version_info($enforce_cache = false) {
 	if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 		$version = YARPP_VERSION;
@@ -386,7 +386,7 @@ function yarpp_metabox() {
 	echo '</div>';
 }
 
-// since 3.2.3: default metaboxes to show:
+// since 3.3: default metaboxes to show:
 function yarpp_default_hidden_meta_boxes($hidden, $screen) {
 	if ( 'settings_page_yarpp' == $screen->id )
 		$hidden = array( 'yarpp_pool', 'yarpp_relatedness' );

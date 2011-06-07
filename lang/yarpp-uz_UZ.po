@@ -26,7 +26,7 @@ msgstr ""
 msgid "Related Posts (YARPP)"
 msgstr "Aloqador xabarlar (YARPP)"
 
-#: includes.php:380
+#: includes.php:376
 #@ yarpp
 msgid "Related Posts"
 msgstr "Aloqador xabarlar"
@@ -37,40 +37,48 @@ msgstr "Aloqador xabarlar"
 msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f - bu joriy xabar va aloqador xabar o'rtasidagi o'xshashlik koeffitsientidir. Bu ko'rsatkich Sizga \"Wordpress\"ga administrator sifatida kirganingiz uchun ko'rsatildi. Oddiy foydalanuvchilarga bu ko'rsatilmaydi."
 
-#: options.php:26
+#: magic.php:297
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:269
+#, php-format
+#@ yarpp
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Aloqador xabarlar Sizga <a href='%s'>YARPP</a> plagini tomonidan taqdim etildi."
+
+#: options.php:54
 #@ yarpp
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "MyISAM tekshiruvi bajarildi. Endi Siz \"Sarlavhalarni hisobga olmoq\" va \"Matnni hisobga olmoq\" o'xshashlik mezonlaridan foydalanishingiz mumkin."
 
-#: options.php:35
+#: options.php:63
 #, php-format
 #@ yarpp
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "\"Sarlavhalarni hisobga olmoq\" va \"Matnni hisobga olmoq\" o'xshashlik mezonlaridan foydalanish Sizning <code>%s</code> jadval <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a> yuritmasini ishlatishini talab qiladi, ammo, ehtimol, jadval <code>%s</code> yuritgichidan foydalanyapti. Bu ikki opsiyalar o'chirilgan."
 
-#: options.php:37
+#: options.php:65
 #, php-format
 #@ yarpp
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "Marhamat, ushbu opsiyalarni qayta tiklash uchun <code>%s</code> jadvalingizni keyingi SQL yo'riqnoma bilan o'zgartiring;: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code><br />. Jadval o'zgartirilganda hech qanday ma'lumot yo'qolmaydi, ammo amallar natijasi o'zgarishi mumkin."
 
-#: options.php:39
+#: options.php:67
 #, php-format
 #@ yarpp
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "Agar, bu opsiyaga qaramasdan, Siz <code>%s</code> jadval MyISAM ni ishlatayotganiga amin bo'lsangiz, mana bu sehrli tugmani bosing &nbsp;:"
 
-#: options.php:42
+#: options.php:70
 #@ yarpp
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Menga ishoning. Menga MyISAM ni ishlatishga ruxsat bering."
 
-#: options.php:55
+#: options.php:83
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPP ma'lumotlar bazasida xatolar mavjud edi, lekin ular to'g'irlandi."
 
-#: options.php:57
+#: options.php:85
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPP ma'lumotlar bazasida xato mavjud va uni to'g'irlab bo'lmaydi."
@@ -100,7 +108,7 @@ msgstr "qo'shimchalar bilan hisobga olmoq"
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Plagin uchun mitcho (Michael Yoshitaka Erlewine)ga PayPal orqali pul hadya qilmoq"
 
-#: options.php:150
+#: options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "YARPP opsiyalari"
@@ -380,7 +388,7 @@ msgstr "Umumiy qilib hech bo'lmaganda % bo'lishi kerak"
 msgid "require more than one %s in common"
 msgstr "Umumiy qilib % dan ko'p bo'lishi kerak"
 
-#: options.php:86
+#: options.php:114
 #@ yarpp
 msgid "Options saved!"
 msgstr "Opsiyalar saqlab qolindi!"
@@ -390,17 +398,17 @@ msgstr "Opsiyalar saqlab qolindi!"
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "O'xshashlik chegarasi qanchalik yuqori bo'lsa natija shunchalik chegaralangan, yani natijada shunchalik kam aloqador xabarlarga ega bo'lasiz. Asl holida o'xshashlik chegarasi 5ga teng. Agar mos keladigan chegara ko'rsatkichini topishni hohlasangiz, turli xabarlarni o'rganib chiqing. Siz qanday aloqador xabarlar yuqoriga ko'tarilayotganini va ularning o'xshashlik ko'rsatkichlarini ko'rishingiz mumkin. Natijada o'z saytingizga mos chegara ko'rsatkichni aniqlay olasiz."
 
-#: options.php:268
+#: options.php:279
 #@ yarpp
 msgid "Update options"
 msgstr "Opsiyalarni yangilash"
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "Siz haqiqatan ham konfiguratsiyani asl holatiga qaytarmoqchimisiz?"
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Reset options"
 msgstr "Opsiyalarni asl holatiga qaytarmoq"
@@ -430,6 +438,12 @@ msgstr "oy(lar)"
 #@ yarpp
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Oxirgi KO'RSATKICHLAR SONIga tegishli xabarlarni ko'rsatish"
+
+#: options.php:46
+#, php-format
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "YARPPning yangi beta versiyasi chiqdi. Siz uni <a href=\"%s\">bu yerdan</a> o'z tavakkalingizga ko'chirib olishingiz mumkin."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -495,15 +509,9 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-#: includes.php:389
+#: includes.php:385
 #@ yarpp
 msgid "Related entries may be displayed once you save your entry"
-msgstr ""
-
-#: magic.php:297
-#, php-format
-#@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:124
@@ -519,12 +527,6 @@ msgstr ""
 #: options-meta-boxes.php:250
 #@ yarpp
 msgid " or "
-msgstr ""
-
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#@ yarpp
-msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:283
@@ -547,27 +549,21 @@ msgstr ""
 msgid "Contact YARPP"
 msgstr ""
 
-#: options.php:58
+#: options.php:42
+#, php-format
+#@ default
+msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
+msgstr ""
+
+#: options.php:86
 #, php-format
 #@ yarpp
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr ""
 
-#: options.php:160
+#: options.php:188
 #, php-format
 #@ yarpp
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr ""
-
-#: options.php:251
-#, php-format
-#@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr ""
-
-#: options.php:256
-#, php-format
-#@ yarpp
-msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
 msgstr ""
 

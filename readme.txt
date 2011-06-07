@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 3.2.2
+Stable tag: 3.3
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -35,6 +35,14 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 = Testimonials =
 
 "One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on." - [Matt Mullenweg](http://ma.tt), WordPress creator
+
+"The first one I ended up trying was Yet Another Related Posts Plugin (YARPP), and mitcho has really done a fantastic job on it:
+
+* It’s trivial to install.
+* You don’t have to edit your WordPress template.
+* The relevance is good: the suggested posts are related, and you can tweak thresholds and how things are computed if you want."
+
+-[Matt Cutts](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/), head of Webspam, Google
 
 == Installation ==
 
@@ -187,11 +195,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.2.3 =
+= 3.3 =
 * Pretty major rewrite to the options page for extensibility and screen options support
 	* By default, the options screen now only show the display options. "The Pool" and "Relatedness" options can be shown in the screen options tab in the top right corner of the screen.
 	* Removed the "reset options" button, because it wasn't actually doing anything.
 * Rebuilt the new version notice to actually have a link which triggers the WordPress plugin updater, at least for new full versions
+* Changed default "relatedness" settings to not consider categories, to improve performance
+* Added [BlogGlue](http://blogglue.com) partnership module
 * Localizations
 	* Quick fix to Czech word list file name
 	* Updated Italian localization (`it_IT`)
@@ -459,8 +469,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Initial upload
 
 == Upgrade Notice ==
-= 3.2.3 =
-Some YARPP options are now hidden by default. You can show them again from the screen options tab.
+= 3.3 =
+Some YARPP options are now hidden by default. You can show them again from the Screen Options tab.
 
 = 3.2.2 =
 Requires PHP 5.

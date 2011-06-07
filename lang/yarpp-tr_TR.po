@@ -45,7 +45,7 @@ msgstr "Benzer Yazılar(YARPP)"
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: includes.php:380
+#: includes.php:376
 #@ yarpp
 msgid "Related Posts"
 msgstr "Benzer Yazılar"
@@ -56,45 +56,53 @@ msgstr "Benzer Yazılar"
 msgid "Example post "
 msgstr "Örnek yazı"
 
-#: options.php:26
+#: magic.php:297
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:269
+#, php-format
+#@ yarpp
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Benzer yazı sizi  <a href='%s'>Yet Another Related Posts Eklentisini</a> kullanarak getirdi."
+
+#: options.php:54
 #@ yarpp
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "MyISAM kontorü artık geçersiz. Artık \"uygun başlık\"( \"consider titles\" ) ve \"uygun body'leri\" ( \"consider bodies\" )  kriterlerini kullanabilirsiniz."
 
-#: options.php:35
+#: options.php:63
 #, php-format
 #@ yarpp
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "YARPP'ın \"consider titles\" (uygun başlık) ve \"consider bodies\" (uygun gövde) kriteri <code>%s</code> tablosunu gerektirir,  <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM depo motorunu</a> çalıştırmak için. Ama  tablolar <code>%s</code> motorunu kullanıyor gibi gözüküyor. Bu her iki özellik devre dışı bırakıldı."
 
-#: options.php:37
+#: options.php:65
 #, php-format
 #@ yarpp
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "Bu özellikleri düzenlemek için, <code>%s</code> tablosunu <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> kodunu kullanarak güncelleştirin. Hiçbir veri silinmeyecektir tam aksi bu performansı arttıracaktır."
 
-#: options.php:39
+#: options.php:67
 #, php-format
 #@ yarpp
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "Eğer <code>%s</code>'in MyISAM motorunu kullandığından eminseniz lütfen butonu tıklayın:"
 
-#: options.php:42
+#: options.php:70
 #@ yarpp
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Bana güvenebilirsin :). MYISAM özelliklerini kullanmama izin ver."
 
-#: options.php:55
+#: options.php:83
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPP veritabanında bir hata oluştu, hata giderildi."
 
-#: options.php:57
+#: options.php:85
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPP veritabanında bir hata oluştu, hata giderilemedi."
 
-#: options.php:86
+#: options.php:114
 #@ yarpp
 msgid "Options saved!"
 msgstr "Ayarlar kaydedildi!"
@@ -147,7 +155,7 @@ msgstr "birden fazla %s gerektirir common için"
 msgid "consider with extra weight"
 msgstr "en fazla ağırlığa göre göz önünde bulundur"
 
-#: options.php:150
+#: options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts Ayarlar"
@@ -260,6 +268,12 @@ msgstr "Sayfa ve yazıları ilişkilendir?"
 #@ yarpp
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
 msgstr "\"Cross-relate posts and pages\" (Sayfa ve yazıları ilişkilendir) özelliğini seçtiğinizde <code>related_posts()</code>, <code>related_pages()</code> ve <code>related_entries()</code> kodlarını hepsi aynı çıktıyı verecektir. "
+
+#: options.php:46
+#, php-format
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Bu eklentinin BETA (%s) sürümü mevcut. <a href=\"%s\">Buradan indirebilirsiniz</a>"
 
 #: options-meta-boxes.php:212
 #@ yarpp
@@ -464,17 +478,17 @@ msgstr "RSS gösterme kod örneği"
 msgid "Before / after (excerpt):"
 msgstr "Önceki/sonraki alıntıar:"
 
-#: options.php:268
+#: options.php:279
 #@ yarpp
 msgid "Update options"
 msgstr "Seçenekler güncelleştir"
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "Ayarlarınızı sıfırlamak istediğinizden emin misiniz?"
 
-#: options.php:269
+#: options.php:280
 #@ yarpp
 msgid "Reset options"
 msgstr "Ayarları sıfırla"
@@ -500,15 +514,9 @@ msgstr "Benzer yazıların nasıl gösterileceği tamamen size bağlıdır."
 msgid "Title:"
 msgstr ""
 
-#: includes.php:389
+#: includes.php:385
 #@ yarpp
 msgid "Related entries may be displayed once you save your entry"
-msgstr ""
-
-#: magic.php:297
-#, php-format
-#@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:124
@@ -519,12 +527,6 @@ msgstr ""
 #: options-meta-boxes.php:140
 #@ yarpp
 msgid "Show only previous posts?"
-msgstr ""
-
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#@ yarpp
-msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:283
@@ -547,27 +549,21 @@ msgstr ""
 msgid "Contact YARPP"
 msgstr ""
 
-#: options.php:58
+#: options.php:42
+#, php-format
+#@ default
+msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
+msgstr ""
+
+#: options.php:86
 #, php-format
 #@ yarpp
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr ""
 
-#: options.php:160
+#: options.php:188
 #, php-format
 #@ yarpp
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr ""
-
-#: options.php:251
-#, php-format
-#@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr ""
-
-#: options.php:256
-#, php-format
-#@ yarpp
-msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
 msgstr ""
 

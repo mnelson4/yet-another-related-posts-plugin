@@ -19,40 +19,40 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: includes.php:380
+#: includes.php:376
 #@ yarpp
 msgid "Related Posts"
 msgstr "関連記事"
 
-#: options.php:35
+#: options.php:63
 #, php-format
 #@ yarpp
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "YARPPの関連スコア計算の「タイトルを検討する」、「内容を検討する」オプションはデータベースの<code>%s</code>テーブルが <a href='http://dev.mysql.com/doc/refman/4.1/ja/myisam.html'>MyISAM</a> でなければ使用できません。 <code>%s</code>テーブルは現在<code>%s</code>ストーレージエンジンを使用しているので、このふたつのオプションは使えません。"
 
-#: options.php:37
+#: options.php:65
 #, php-format
 #@ yarpp
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "このオプションを使用したければ、<code>%s</code>テーブルに対してこのようなクエリを実行してください：<code>ALTER TABLE `%s` ENGINE = MyISAM;</code>。このクエリはデータは一切消しません。"
 
-#: options.php:39
+#: options.php:67
 #, php-format
 #@ yarpp
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "<code>%s</code>テーブルが絶対MyISAMを使用していると思う方はこちらの魔法のボタンをどうぞ："
 
-#: options.php:42
+#: options.php:70
 #@ yarpp
 msgid "Trust me. Let me use MyISAM features."
 msgstr "MyISAM を使ってます。嘘じゃないから。"
 
-#: options.php:55
+#: options.php:83
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPPのデータベースは修正されました。"
 
-#: options.php:57
+#: options.php:85
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPPのデータベースに修正できないエラーが発生しました。"
@@ -60,7 +60,7 @@ msgstr "YARPPのデータベースに修正できないエラーが発生しま�
 #: options-meta-boxes.php:38
 #@ yarpp
 msgid "word"
-msgstr ""
+msgstr "言葉"
 
 #: options-meta-boxes.php:39
 #@ yarpp
@@ -111,7 +111,7 @@ msgstr "検討する（重要視）"
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "YARPPの作成者（ミッチョ）にPayPalで寄付をする"
 
-#: options.php:149
+#: options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "関連記事 (YARPP) 設定"
@@ -150,12 +150,6 @@ msgstr "過去の記事だけを表示"
 #@ yarpp
 msgid "\"Relatedness\" options"
 msgstr "関連スコア設定"
-
-#: options-meta-boxes.php:124
-#, php-format
-#@ yarpp
-msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "この関連記事プラグイン（YARPP）は各対象記事の関連スコアを計算し、ある関連スコア以上の記事だけを表示します。"
 
 #: options-meta-boxes.php:130
 #@ yarpp
@@ -368,7 +362,7 @@ msgstr "%fは現在表示の記事とこの関連記事の関連スコアです�
 msgid "Related Posts (YARPP)"
 msgstr "関連記事 (YARPP)"
 
-#: options.php:26
+#: options.php:54
 #@ yarpp
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "MyISAM専用機能を強制的に有効にしました。「タイトルを検討」と「内容を検討」機能が使えるようになりました。"
@@ -386,17 +380,17 @@ msgstr "MyISAM専用機能を強制的に有効にしました。「タイトル
 msgid "more&gt;"
 msgstr "(説明)"
 
-#: options.php:85
+#: options.php:114
 #@ yarpp
 msgid "Options saved!"
 msgstr "設定の変更は保存されました。"
 
-#: options.php:268
+#: options.php:280
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "本当に初期設定に戻りますか？"
 
-#: options.php:267
+#: options.php:279
 #@ yarpp
 msgid "Update options"
 msgstr "変更を保存"
@@ -406,7 +400,7 @@ msgstr "変更を保存"
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "より関連性の高い記事だけを表示したい場合は、最低関連スコアを上げてください。初期設定は5です。"
 
-#: options.php:268
+#: options.php:280
 #@ yarpp
 msgid "Reset options"
 msgstr "初期設定に戻る"
@@ -455,16 +449,6 @@ msgstr "ヶ月間"
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "過去 NUMBER UNITS の記事だけを表示"
 
-#: options.php:250
-#@ yarpp
-msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
-msgstr "関連記事プラグイン（YARPP）の新しいベータ（VERSION）があります。是非<A>ダウンロード</a>してみてください。"
-
-#: options.php:255
-#@ yarpp
-msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "関連記事プラグイン（YARPP）の新しいバージョン（VERSION）があります。是非<A>ダウンロード</a>してみてください。"
-
 #: includes.php:248
 #: options-meta-boxes.php:161
 #: options-meta-boxes.php:228
@@ -501,11 +485,6 @@ msgstr "この新機能で関連記事の表示を完全にカスタマイズす
 msgid "Related posts:"
 msgstr "関連記事:"
 
-#: options.php:58
-#@ yarpp
-msgid "Please try <A>manual SQL setup</a>."
-msgstr "<A>手動インストール</a>を参照ください。"
-
 #: options-meta-boxes.php:175
 #: options-meta-boxes.php:176
 #: options-meta-boxes.php:184
@@ -526,17 +505,23 @@ msgstr "設定"
 msgid "Title:"
 msgstr ""
 
-#: includes.php:389
+#: includes.php:385
 #@ yarpp
 msgid "Related entries may be displayed once you save your entry"
-msgstr "関連エントリーは保存後計算されます。"
+msgstr "関連記事は保存後更新されます。"
 
 #: magic.php:297
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
+#, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
-msgstr "関連記事は<a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>を使用。"
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "関連記事は<a href='%s'>YARPP関連記事プラグイン</a>によって表示されています。"
+
+#: options-meta-boxes.php:124
+#@ yarpp
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "この関連記事プラグイン（YARPP）は各対象記事の関連スコアを計算し、ある関連スコア以上の記事だけを表示します。"
 
 #: options-meta-boxes.php:283
 #@ yarpp
@@ -546,19 +531,37 @@ msgstr "YARPP フォーラム"
 #: options-meta-boxes.php:284
 #@ yarpp
 msgid "YARPP on Twitter"
-msgstr "YARPP ツイッター"
+msgstr "YARPP Twitter"
 
 #: options-meta-boxes.php:285
 #@ yarpp
 msgid "YARPP on the Web"
-msgstr "YARPP ウェブサイト"
+msgstr "ウェブサイト"
 
 #: options-meta-boxes.php:292
 #@ yarpp
 msgid "Contact YARPP"
-msgstr "メールで連絡"
+msgstr "YARPP 情報"
 
-#: options.php:159
+#: options.php:42
+#, php-format
+#@ default
+msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
+msgstr ""
+
+#: options.php:46
+#, php-format
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "関連記事プラグイン（YARPP）の新しいベータ（%s）があります。是非<a href=\"%s\">ダウンロード</a>してみてください。"
+
+#: options.php:86
+#, php-format
+#@ yarpp
+msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
+msgstr ""
+
+#: options.php:188
 #, php-format
 #@ yarpp
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
