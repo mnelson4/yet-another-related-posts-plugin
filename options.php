@@ -1,6 +1,6 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable, $yarpp_myisam;
 
 // Reenforce YARPP setup:
 if (!get_option('yarpp_version'))
@@ -20,12 +20,14 @@ if (!$yarpp_templateable) {
   yarpp_set_option('rss_use_template',false);
 }
 
-// 3.2.3: move version checking here, in PHP:
+// 3.3: move version checking here, in PHP:
 if ( current_user_can('update_plugins' ) ) {
 	$yarpp_version_info = yarpp_version_info();
 	
+	// these strings are not localizable, as long as the plugin data on wordpress.org
+	// cannot be.
 	$slug = 'yet-another-related-posts-plugin';
-	$plugin_name = __('Yet Another Related Posts Plugin', 'yarpp');
+	$plugin_name = 'Yet Another Related Posts Plugin';
 	$file = basename(YARPP_DIR) . '/yarpp.php';
 	if ( $yarpp_version_info['result'] == 'new' ) {
 		// make sure the update system is aware of this version
@@ -116,16 +118,10 @@ if (isset($_POST['update_yarpp'])) {
 <script type="text/javascript">
 //<!--
 
-// since 3.2.3: add screen option toggles
+// since 3.3: add screen option toggles
 jQuery(function() {
 	postboxes.add_postbox_toggles(pagenow);
 });
-
-/*var css = document.createElement("link");
-css.setAttribute("rel", "stylesheet");
-css.setAttribute("type", "text/css");
-css.setAttribute("href", "../wp-content/plugins/yet-another-related-posts-plugin/options.css");
-document.getElementsByTagName("head")[0].appendChild(css);*/
 
 var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>';
 

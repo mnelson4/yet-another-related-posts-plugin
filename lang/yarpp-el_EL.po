@@ -13,43 +13,82 @@ msgstr ""
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: includes.php:26
-#: includes.php:37
+#: includes.php:24
+#: includes.php:35
 #@ yarpp
 msgid "Related posts:"
 msgstr "Σχετικά άρθρα:"
 
-#: includes.php:28
-#: includes.php:39
-#: template-metabox.php:27
-#: template-widget.php:13
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:28
 #@ yarpp
 msgid "No related posts."
 msgstr "Τυχαία άρθρα."
 
-#: includes.php:149
-#: includes.php:194
-#: includes.php:215
+#: includes.php:94
+#@ yarpp
+msgid "MySQL error on adding yarpp_title"
+msgstr "Λάθος MySQL στην προσθήκη yarpp_title"
+
+#: includes.php:99
+#@ yarpp
+msgid "MySQL error on adding yarpp_content"
+msgstr "Λάθος MySQL στην προσθήκη yarpp_content"
+
+#: includes.php:110
+#@ yarpp
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "Λάθος MySQL στην δημιουργία του πίνακα yarpp_keyword_cache table"
+
+#: includes.php:121
+#@ yarpp
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "Λάθος MySQL στην δημιουργία του πίνακα yarpp_related_cache"
+
+#: includes.php:197
 #@ yarpp
 msgid "Related Posts (YARPP)"
 msgstr "Σχετικά Άρθρα (YARPP)"
 
-#: includes.php:380
+#: includes.php:225
+#: yarpp.php:34
 #@ yarpp
 msgid "Related Posts"
 msgstr "Σχετικά άρθρα:"
 
-#: cache-postmeta.php:105
-#: cache-tables.php:131
+#: includes.php:230
+#@ yarpp
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
 #@ yarpp
 msgid "Example post "
 msgstr "Παράδειγμα άρθρου"
+
+#: magic.php:336
+#: options.php:461
+#: options.php:524
+#@ yarpp
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Τα Σχετικά Άρθρα είναι κατασκεύασμα του <a href='%s'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:10
+#@ yarpp
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Για να ολοκληρωθεί η εγκατάσταση τα πρότυπα αρχεία στον κατάλογο του τρέχοντος θέματος του blog σας. Απλά μεταφέρετε τα αρχεία που βρίσκονται στον φάκελο <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code> στον φάκελο <code>TEMPLATEPATH</code>."
+
+#: options.php:15
+#@ yarpp
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Δεν βρέθηκαν πρότυπα αρχεία YARPP στο τρέχον θέμα <code>TEMPLATEPATH</code> έτσι η δυνατότητα αυτή έχει απενεργοποιηθεί."
 
 #: options.php:26
 #@ yarpp
@@ -79,400 +118,534 @@ msgstr "Αν παρά τον έλεγχο αυτό είστε σίγουροι �
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Δείξε εμπιστοσύνη. Επέτρεψε μου να χρησιμοποιήσω το χαρακτηριστικό MyISAM."
 
-#: options.php:55
+#: options.php:65
 #@ yarpp
 msgid "The YARPP database had an error but has been fixed."
 msgstr "Η βάση δεδομένων του YARPP είχε ένα λάθος το οποίο έχει διορθωθεί."
 
-#: options.php:57
+#: options.php:67
 #@ yarpp
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "Η βάση δεδομένων του YARPP έχει ένα σφάλμα το οποίο δεν μπορεί να παρακαμθει."
 
-#: options.php:86
+#: options.php:68
+#@ yarpp
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "Παρακαλώ δοκιμάστε  την \\\"χειροκίνητη\\\" <A>εγκατάσταση SQL.</a>"
+
+#: options.php:98
 #@ yarpp
 msgid "Options saved!"
 msgstr "Οι επιλογές που έγιναν έχουν αποθηκευτεί!"
 
-#: options-meta-boxes.php:38
+#: options.php:99
+#: options.php:112
+#: options.php:115
+#: options.php:533
+#@ yarpp
+msgid "Related posts cache status"
+msgstr "Κατάσταση προσωρινής μνήμης Σχετικών Άρθρων"
+
+#: options.php:100
+#@ yarpp
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr "Αν έχετε κάνει update στις επιλογές του \"pool\" ή της \"σχετικότητας\" τότε πρέπει να επαναδημιουργήσετε την προσωρινή μνήμη από το <A>Καθεστώς προσωρινής μνήμης σχετικών άρθρων</a>."
+
+#: options.php:112
+#@ yarpp
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Η προσωρινή μνήμη των σχετικών άρθρων δεν ΄΄εχει συμπληρωθεί. Πρέπει να επαναδημιουργήσετε την προσωρινή μνήμη από το <A>Καθεστώς προσωρινής μνήμης σχετικών άρθρων</a>."
+
+#: options.php:115
+#@ yarpp
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "Η προσωρινή μνήμη των σχετικών άρθρων είναι κενή. Παρακαλούμε δημιουργήστε την από το <A>Καθεστώς προσωρινής μνήμης σχετικών άρθρων</a>. "
+
+#: options.php:151
 #@ yarpp
 msgid "word"
 msgstr "λέξη/εις"
 
-#: options-meta-boxes.php:39
+#: options.php:152
 #@ yarpp
 msgid "tag"
 msgstr "ετικέτα/ες"
 
-#: options-meta-boxes.php:40
+#: options.php:153
 #@ yarpp
 msgid "category"
 msgstr "κατηγορία/ες"
 
-#: options-meta-boxes.php:45
-#: options-meta-boxes.php:63
-#: options-meta-boxes.php:76
+#: options.php:157
+#: options.php:174
+#: options.php:186
 #@ yarpp
 msgid "do not consider"
 msgstr "να μην ληφθούν υπόψιν"
 
-#: options-meta-boxes.php:46
-#: options-meta-boxes.php:64
-#: options-meta-boxes.php:78
+#: options.php:158
+#: options.php:175
+#: options.php:188
 #@ yarpp
 msgid "consider"
 msgstr "να ληφθούν υπόψιν"
 
-#: options-meta-boxes.php:48
-#: options-meta-boxes.php:80
+#: options.php:160
+#: options.php:190
 #, php-format
 #@ yarpp
 msgid "require at least one %s in common"
 msgstr "Απαιτείται τουλάχιστον μία κοινή %s"
 
-#: options-meta-boxes.php:50
-#: options-meta-boxes.php:82
+#: options.php:162
+#: options.php:192
 #, php-format
 #@ yarpp
 msgid "require more than one %s in common"
 msgstr "Aπαιτείται περισσότερες από μία κοινές %s"
 
-#: options-meta-boxes.php:65
+#: options.php:176
 #@ yarpp
 msgid "consider with extra weight"
 msgstr "να ληφθεί ιδιαίτερα υπόψιν"
 
-#: options.php:150
+#: options.php:204
+#@ yarpp
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Related Posts Plugin ιστορικό εκδόσεων (RSS 2.0)"
+
+#: options.php:258
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Ρυθμίσεις του Yet Another Related Posts Plugin"
 
-#: options-meta-boxes.php:286
-#@ default
+#: options.php:274
 #@ yarpp
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Δωρεά στον Μήτσο (mitcho - Michael Yoshitaka Erlewine) για το plugin αυτό μέσω PayPal"
 
-#: options-meta-boxes.php:118
+#: options.php:276
+#@ yarpp
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr "Aπό τον <a href=\"http://mitcho.com/code/\">Μήτσο (mitcho - Michael 芳貴 Erlewine)</a>"
+
+#: options.php:276
+#@ yarpp
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin στο Twitter</a>"
+
+#: options.php:281
 #@ yarpp
 msgid "\"The Pool\""
 msgstr "\"The Pool\""
 
-#: options-meta-boxes.php:91
+#: options.php:282
 #@ yarpp
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
 msgstr "Η \"The Pool\" αναφέρεται στο σύνολο των υποψήφιων για εμφάνιση σχετικών άρθρων."
 
-#: options-meta-boxes.php:96
+#: options.php:287
 #@ yarpp
 msgid "Disallow by category:"
 msgstr "Απαγόρευση βάσει της κατηγορίας:"
 
-#: options-meta-boxes.php:98
+#: options.php:289
 #@ yarpp
 msgid "Disallow by tag:"
 msgstr "Απαγόρευση βάσει της ετικέτας:"
 
-#: options-meta-boxes.php:101
+#: options.php:291
 #@ yarpp
 msgid "Show password protected posts?"
 msgstr "Εμφάνιση των προστατευμένων με κωδικό άρθρων;"
 
-#: options-meta-boxes.php:105
+#: options.php:297
 #@ yarpp
 msgid "day(s)"
 msgstr "ημέρα(ες)"
 
-#: options-meta-boxes.php:106
+#: options.php:298
 #@ yarpp
 msgid "week(s)"
 msgstr "εβδομάδα(ες)"
 
-#: options-meta-boxes.php:107
+#: options.php:299
 #@ yarpp
 msgid "month(s)"
 msgstr "μήνα(ες)"
 
-#: options-meta-boxes.php:109
+#: options.php:301
 #@ yarpp
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Τα άρθρα να μήν είναι παλιότερα από NUMBER UNITS"
 
-#: options-meta-boxes.php:148
+#: options.php:309
 #@ yarpp
 msgid "\"Relatedness\" options"
 msgstr "Επιλογές \"Σχετικότητας\""
 
-#: options-meta-boxes.php:124
-#: options-meta-boxes.php:139
-#: options-meta-boxes.php:157
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:204
-#: options-meta-boxes.php:221
-#: options-meta-boxes.php:223
-#: options-meta-boxes.php:228
-#: options-meta-boxes.php:268
+#: options.php:311
+#, php-format
+#@ yarpp
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "Το YARPP είναι διαφορετικό από  <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">προηγούμενα plugins</a> αφού δημιουργεί την λίστα των σχετικών άρθρων βάσει (1) έναν μέγιστο αριθμό και (2) ένα <em>όριο σχετικότητας</em>."
+
+#: options.php:311
+#: options.php:325
+#: options.php:408
+#: options.php:413
+#: options.php:460
+#: options.php:472
+#: options.php:473
+#: options.php:477
+#: options.php:523
+#: options.php:534
 #@ yarpp
 msgid "more&gt;"
 msgstr "περισσότερα&gt;"
 
-#: options-meta-boxes.php:124
+#: options.php:311
 #@ yarpp
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "Όσο πιο υψηλό είναι το όριο σχετικότητας τόσο περιορίζονται τα εμφανιζόμενα σχετικά άρθρα. Το default όριο σχετικότητας είναι 5. Για να προσαρμόσετε το κατάλληλο στο blog σας όριο σχετικότητας ελέγξτε τα εμφανιζόμενα αποτελέσματα και την βαθμολογία τους. "
 
-#: options-meta-boxes.php:130
+#: options.php:316
 #@ yarpp
 msgid "Match threshold:"
 msgstr "'Ορια σχετικότητας"
 
-#: options-meta-boxes.php:131
+#: options.php:317
 #@ yarpp
 msgid "Titles: "
 msgstr "Τίτλοι:"
 
-#: options-meta-boxes.php:133
+#: options.php:319
 #@ yarpp
 msgid "Bodies: "
 msgstr "Bodies:"
 
-#: options-meta-boxes.php:135
+#: options.php:321
 #@ yarpp
 msgid "Tags: "
 msgstr "Ετικέτες:"
 
-#: options-meta-boxes.php:137
+#: options.php:323
 #@ yarpp
 msgid "Categories: "
 msgstr "Κατηγορίες:"
 
-#: options-meta-boxes.php:139
+#: options.php:325
 #@ yarpp
 msgid "Cross-relate posts and pages?"
 msgstr "Διασταύρωση σχετικών άρθρων και σελίδων;"
 
-#: options-meta-boxes.php:139
+#: options.php:325
 #@ yarpp
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
 msgstr "Όταν είναι επιλεγμένη τότε τα <code>related_posts()</code>, <code>related_pages()</code>, και <code>related_entries()</code> θα δώσουν το ίδιο αποτέλεσμα με σχετικά άρθρα και σελίδες."
 
-#: options-meta-boxes.php:212
+#: options.php:391
+#@ yarpp
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Yet Another Related Posts Plugin. Μπορείτε και εσείς να το κατεβάσετε <a href=\"%s\">από εδώ</a> με δική σας ευθύνη."
+
+#: options.php:393
+#@ yarpp
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Yet Another Related Posts Plugin! Κατεβάστε το από <A> εδώ</a>."
+
+#: options.php:404
 #@ yarpp
 msgid "Display options <small>for your website</small>"
 msgstr "Επιλογές εμφάνισης <small>για το Blog</small>"
 
-#: options-meta-boxes.php:157
+#: options.php:408
 #@ yarpp
 msgid "Automatically display related posts?"
 msgstr "Τα Σχετικά Άρθρα να εμφανίζονται αυτόματα;"
 
-#: options-meta-boxes.php:157
+#: options.php:408
 #@ yarpp
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
 msgstr "Η επιλογή αυτή εμφανίζει αυτόματα την λίστα των σχετικών άρθρων αμέσως μετά από το εκάστοτε άρθρο. Αν είναι αποεπιλεγμένη τότε θα πρέπει να τοποθετήσετε χειροκίνητα των κώδικα <code>related_posts()</code> ή την μεταβλητή (<code>related_pages()</code> και <code>related_entries()</code>) στον κώδικα του θέματος σας."
 
-#: options-meta-boxes.php:158
+#: options.php:409
 #@ yarpp
 msgid "Website display code example"
 msgstr "Παράδειγμα κώδικα εμφάνισης στο Website"
 
-#: options-meta-boxes.php:158
-#: options-meta-boxes.php:221
+#: options.php:409
+#: options.php:474
 #@ yarpp
 msgid "(Update options to reload.)"
 msgstr "(Ενημερώστε τις επιλογές ώστε να γίνει επαναφόρτωση.)"
 
-#: options-meta-boxes.php:160
-#: options-meta-boxes.php:226
+#: options.php:412
+#: options.php:476
 #@ yarpp
 msgid "Maximum number of related posts:"
 msgstr "Μέγιστος αριθμός εμφανισθέντων σχετικών άρθρων:"
 
-#: includes.php:248
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:228
+#: options.php:413
+#: options.php:477
 #@ yarpp
 msgid "Display using a custom template file"
 msgstr "Η εμφάνιση να στηρίζεται σε δικό σας πρότυπο αρχείο"
 
-#: options-meta-boxes.php:228
+#: options.php:413
+#: options.php:477
+#: options.php:530
 #@ yarpp
 msgid "NEW!"
 msgstr "ΝΕΟ!"
 
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:228
+#: options.php:413
+#: options.php:477
 #@ yarpp
 msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
 msgstr "Αυτή η επιλογή σας δίνει την δυνατότητα να καθορίσεται την εμφάνιση των σχετικών άρθρων όπως εσείς θέλετε. Τα πρότυπα αρχεία που είναι αποθηκευμένα στο θέμα σας είναι γραμμένα σε PHP."
 
-#: includes.php:249
-#: options-meta-boxes.php:165
-#: options-meta-boxes.php:233
+#: options.php:415
+#: options.php:479
 #@ yarpp
 msgid "Template file:"
 msgstr "Πρότυπο αρχείο:"
 
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:244
+#: options.php:425
 #@ yarpp
 msgid "Before / after related entries:"
 msgstr "Πριν / Μετά από τα σχετικά άρθρα:"
 
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:184
-#: options-meta-boxes.php:244
-#: options-meta-boxes.php:245
-#: options-meta-boxes.php:250
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
 #@ yarpp
 msgid "For example:"
 msgstr "Για παράδειγμα:"
 
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:184
-#: options-meta-boxes.php:244
-#: options-meta-boxes.php:245
-#: options-meta-boxes.php:250
+#: options.php:426
+#: options.php:431
+#: options.php:440
+#: options.php:490
+#: options.php:495
+#: options.php:504
 #@ yarpp
 msgid " or "
 msgstr "ή"
 
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:245
+#: options.php:430
+#: options.php:494
 #@ yarpp
 msgid "Before / after each related entry:"
 msgstr "Πριν / μετά από κάθε σχετικό άρθρο:"
 
-#: options-meta-boxes.php:178
-#: options-meta-boxes.php:247
+#: options.php:434
+#: options.php:498
 #@ yarpp
 msgid "Show excerpt?"
 msgstr "Εμφάνιση αποσπάσματος;"
 
-#: options-meta-boxes.php:179
-#: options-meta-boxes.php:248
+#: options.php:435
+#: options.php:499
 #@ yarpp
 msgid "Excerpt length (No. of words):"
 msgstr "Μέγεθος αποσπάσματος (Αριθμός λέξεων):"
 
-#: options-meta-boxes.php:183
+#: options.php:439
 #@ yarpp
 msgid "Before / after (Excerpt):"
 msgstr "Πρίν / Μετά (απόσπασμα):"
 
-#: options-meta-boxes.php:189
-#: options-meta-boxes.php:254
+#: options.php:445
+#: options.php:509
 #@ yarpp
 msgid "Order results:"
 msgstr "Σειρά αποτελεσμάτων:"
 
-#: options-meta-boxes.php:191
-#: options-meta-boxes.php:256
+#: options.php:447
+#: options.php:511
 #@ yarpp
 msgid "score (high relevance to low)"
 msgstr "αποτέλεσμα (υψηλή προς χαμηλή σχετικότητα)"
 
-#: options-meta-boxes.php:192
-#: options-meta-boxes.php:257
+#: options.php:448
+#: options.php:512
 #@ yarpp
 msgid "score (low relevance to high)"
 msgstr "αποτέλεσμα (χαμηλή προς υψηλή σχετικότητα)"
 
-#: options-meta-boxes.php:193
-#: options-meta-boxes.php:258
+#: options.php:449
+#: options.php:513
 #@ yarpp
 msgid "date (new to old)"
 msgstr "ημερομηνία (νεότερο στο παλιότερο)"
 
-#: options-meta-boxes.php:194
-#: options-meta-boxes.php:259
+#: options.php:450
+#: options.php:514
 #@ yarpp
 msgid "date (old to new)"
 msgstr "ημερομηνία (παλιότερο στο νεότερο)"
 
-#: options-meta-boxes.php:195
-#: options-meta-boxes.php:260
+#: options.php:451
+#: options.php:515
 #@ yarpp
 msgid "title (alphabetical)"
 msgstr "τίτλος (αλφαβητικά)"
 
-#: options-meta-boxes.php:196
-#: options-meta-boxes.php:261
+#: options.php:452
+#: options.php:516
 #@ yarpp
 msgid "title (reverse alphabetical)"
 msgstr "τίτλος (αντίστροφη αλφαβητική σειρά)"
 
-#: options-meta-boxes.php:201
-#: options-meta-boxes.php:266
+#: options.php:457
+#: options.php:521
 #@ yarpp
 msgid "Default display if no results:"
 msgstr "Αν δεν υπάρχουν σχετικά άρθρα θα εμφανίζονται:"
 
-#: includes.php:257
-#: options-meta-boxes.php:203
-#: options-meta-boxes.php:268
+#: options.php:459
+#: options.php:523
 #@ yarpp
 msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Να εμφανίζονται credits του plugin;"
 
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
+#: options.php:461
+#: options.php:524
 #, php-format
 #@ yarpp
 msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
 msgstr "Η επιλογή αυτή προσθέτει των κώδικα %s. Αν θέλετε ενεργοποιήστε τον, ενημερώστε την αλλαγή αυτή και δείτε τον κώδικα στα δεξιά. Τα Links και οι δωρεές είναι ευπρόδεκτες."
 
-#: options-meta-boxes.php:276
+#: options.php:467
 #@ yarpp
 msgid "Display options <small>for RSS</small>"
 msgstr "Επιλογές εμφάνισης <small>για το RSS</small>"
 
-#: options-meta-boxes.php:221
+#: options.php:472
 #@ yarpp
 msgid "Display related posts in feeds?"
 msgstr "Εμφάνιση σχετικών άρθρων στα feeds;"
 
-#: options-meta-boxes.php:221
+#: options.php:472
 #@ yarpp
 msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
 msgstr "Αυτή η επιλογή εμφανίζει τα σχετικά άρθρα στο τέλος κάθε άρθρου στο RSS και στο Atom Feeds. Δεν απαιτείται καμία αλλαγή του αρχείου εμφάνισης."
 
-#: options-meta-boxes.php:223
+#: options.php:473
 #@ yarpp
 msgid "Display related posts in the descriptions?"
 msgstr "Εμφάνιση σχετικών άρθρων στις περιγραφές;"
 
-#: options-meta-boxes.php:223
+#: options.php:473
 #@ yarpp
 msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
 msgstr "Η επιλογή αυτή εμφανίζει τα σχετικά άρθρα στο πεδίο της περιγραφής του RSS και όχι μόνο στο περιεχόμενο. Αν τα feeds σας είναι ρυθμισμένα να εμφανίζουν μόνο ένα απόσπασμα του άρθρου τότε χρησιμοποιείται μόνο το πεδίο της περιγραφής, άρα είναι απαραίτητο γενικά."
 
-#: options-meta-boxes.php:221
+#: options.php:474
 #@ yarpp
 msgid "RSS display code example"
 msgstr "Παράδειγμα κώδικα εμφάνισης του RSS"
 
-#: options-meta-boxes.php:250
+#: options.php:489
+#@ yarpp
+msgid "Before / after related entries display:"
+msgstr "Πριν / μετά από την εμφάνιση των σχετικών άρθρων:"
+
+#: options.php:503
 #@ yarpp
 msgid "Before / after (excerpt):"
 msgstr "Πριν / μετά (απόσπασμα):"
 
-#: options.php:268
+#: options.php:530
+#@ yarpp
+msgid "Advanced"
+msgstr "Για προχωρημένους"
+
+#: options.php:533
+#@ yarpp
+msgid "Show cache status"
+msgstr "Εμφάνιση του καθεστώτος προσωρινής μνήμης"
+
+#: options.php:534
+#@ yarpp
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "Όταν η προσωρινή μνήμη δεν έχει συμπληρωθεί τότε ο υπολογισμός των σχετικών άρθρων να γίνεται με πιο χαλαρα κριτήρια;"
+
+#: options.php:535
+#@ yarpp
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Αν τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί και η επιλογή αυτή έχει επιλεχθεί τότε το YARPP θα τα υπολογίσει με πιο χαλαρά κριτήρια. Αν η επιλογή είναι αποπεπιλεγμένη και τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί τότε δεν θα εμφανίζονται σχετικά άρθρα."
+
+#: options.php:565
+#@ yarpp
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'μένουν MIN λεπτά και SEC δευτερόλεπτα'"
+
+#: options.php:567
+#@ yarpp
+msgid "'SEC second(s) remaining'"
+msgstr "'μένουν SEC δευτερόλεπτα'"
+
+#: options.php:571
+#@ yarpp
+msgid "Your related posts cache is now complete."
+msgstr "Η προσωρινή αποθήκευση των σχετικών άρθρων έχει επιτευχθεί."
+
+#: options.php:571
+#@ yarpp
+msgid "The SQL queries took SEC seconds."
+msgstr "To SQL query διήρκησε SEC δευτερόλεπτα. "
+
+#: options.php:578
+#@ yarpp
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "Υπήρξε ένα σφάλμα κατά την δημίουrγία των σχετικών άρθρων\\\" κατά TITLE"
+
+#: options.php:580
+#: options.php:586
+#@ yarpp
+msgid "Constructing the related posts timed out."
+msgstr "Η δημιουργία των σχετικών άρθρων έληξε."
+
+#: options.php:583
+#: options.php:588
+#@ yarpp
+msgid "Try to continue..."
+msgstr "Προσπάθεια για συνέχισει της διαδικασίας..."
+
+#: options.php:596
+#@ yarpp
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "Η προσωρίνή μνήμη των σχετικών άρθρων είναι PERCENT% πλήρης."
+
+#: options.php:602
+#@ yarpp
+msgid "starting..."
+msgstr "εκκίνηση..."
+
+#: options.php:609
 #@ yarpp
 msgid "Update options"
 msgstr "Ενημέρωση επιλογών"
 
-#: options.php:269
+#: options.php:610
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "Είστε σίγουροι ότι θέλετε να επαναφέρετε τις αρχικές ρύθμισεις;"
 
-#: options.php:269
+#: options.php:610
 #@ yarpp
 msgid "Reset options"
 msgstr "Επαναφορά επιλογών"
+
+#: services.php:59
+#@ yarpp
+msgid "You cannot rebuild the YARPP cache."
+msgstr "Δεν μπορείτε να επαναδημιουργήσετε την προσωρινή μνήμη YARPP."
 
 #: template-builtin.php:35
 #, php-format
@@ -485,89 +658,8 @@ msgstr "%f είναι η βαθμολογία σχετικότητας του YA
 msgid "These are the related entries for this entry. Updating this post may change these related posts."
 msgstr "Αυτά τα άρθρα φαίνεται ότι ταιριάζουν με αυτό το άρθρο. Αν ανανεώσεται την σελίδα υπάρχει πιθανότητα να εμφανιστούν κάποια άλλα."
 
-#: template-metabox.php:25
+#: template-metabox.php:26
 #@ yarpp
 msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
 msgstr "Ο τρόπος με τον οποίο εμφανίζονται αλλά και ο τρόπος με τον οποίο υπολογίζονται τα σχετικά άρθρα του εκάστοτε άρθρου εξαρτάται από της ρυθμίσεις του YARPP."
-
-#: includes.php:169
-#@ yarpp
-msgid "Settings"
-msgstr ""
-
-#: includes.php:243
-#@ default
-msgid "Title:"
-msgstr ""
-
-#: includes.php:389
-#@ yarpp
-msgid "Related entries may be displayed once you save your entry"
-msgstr ""
-
-#: magic.php:297
-#, php-format
-#@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr ""
-
-#: options-meta-boxes.php:124
-#@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr ""
-
-#: options-meta-boxes.php:140
-#@ yarpp
-msgid "Show only previous posts?"
-msgstr ""
-
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#@ yarpp
-msgid "Related posts brought to you by <a href='http://yarpp.org'>Yet Another Related Posts Plugin</a>."
-msgstr ""
-
-#: options-meta-boxes.php:283
-#@ yarpp
-msgid "YARPP Forum"
-msgstr ""
-
-#: options-meta-boxes.php:284
-#@ yarpp
-msgid "YARPP on Twitter"
-msgstr ""
-
-#: options-meta-boxes.php:285
-#@ yarpp
-msgid "YARPP on the Web"
-msgstr ""
-
-#: options-meta-boxes.php:292
-#@ yarpp
-msgid "Contact YARPP"
-msgstr ""
-
-#: options.php:58
-#, php-format
-#@ yarpp
-msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
-msgstr ""
-
-#: options.php:160
-#, php-format
-#@ yarpp
-msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr ""
-
-#: options.php:251
-#, php-format
-#@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr ""
-
-#: options.php:256
-#, php-format
-#@ yarpp
-msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
-msgstr ""
 
