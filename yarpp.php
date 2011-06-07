@@ -3,7 +3,7 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://yarpp.org/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.2.3b3
+Version: 3.3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: http://tinyurl.com/donatetomitcho
@@ -13,7 +13,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 if (isset($_REQUEST['yarpp_debug']))
   $yarpp_debug = true;
 
-define('YARPP_VERSION','3.2.3b3');
+define('YARPP_VERSION','3.3');
 define('YARPP_DIR',dirname(__FILE__));
 
 require_once(YARPP_DIR.'/includes.php');
@@ -36,9 +36,9 @@ load_plugin_textdomain('yarpp', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__))
 
 // setup admin
 add_action('admin_menu','yarpp_admin_menu');
-// new in 3.2.3: properly enqueue scripts for admin:
+// new in 3.3: properly enqueue scripts for admin:
 add_action( 'admin_enqueue_scripts', 'yarpp_admin_enqueue' );
-// new in 3.2.3: set default meta boxes to show:
+// new in 3.3: set default meta boxes to show:
 add_filter( 'default_hidden_meta_boxes', 'yarpp_default_hidden_meta_boxes', 10, 2 );
 
 // automatic display hooks:
@@ -62,6 +62,6 @@ add_action('transition_post_status','yarpp_status_transition', 10, 3);
 // sets the score override flag.
 add_action('parse_query','yarpp_set_score_override_flag');
 
-// new in 3.2.3: include BlogGlue meta box
+// new in 3.3: include BlogGlue meta box
 if ( file_exists( YARPP_DIR . '/blogglue.php' ) )
 	include_once( YARPP_DIR . '/blogglue.php' );
