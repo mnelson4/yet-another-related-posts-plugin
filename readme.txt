@@ -195,6 +195,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.3.2 =
+* [Bugfix](http://wordpress.org/support/topic/missing-translate-strings): removed an unlocalized string
+* Bugfix for users of WordPress 3.0.x.
 = 3.3.1 =
 * Quick bugfix to [relatedness options panel bug](http://wordpress.org/support/topic/relatedness-options-for-titles-and-bodies-cant-be-changed)
 = 3.3 =
