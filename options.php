@@ -1,6 +1,6 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable, $yarpp_myisam;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templates, $yarpp_myisam;
 
 // Reenforce YARPP setup:
 if (!get_option('yarpp_version'))
@@ -14,8 +14,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'flush') {
 }
 
 // check to see that templates are in the right place
-$yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0);
-if (!$yarpp_templateable) {
+$yarpp_templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+if ( !(is_array($yarpp_templates) && count($yarpp_templates)) ) {
   yarpp_set_option('use_template',false);
   yarpp_set_option('rss_use_template',false);
 }

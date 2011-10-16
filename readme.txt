@@ -6,7 +6,7 @@ Plugin URI: http://mitcho.com/code/yarpp/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.3
 Stable tag: 3.3.2
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
@@ -93,7 +93,7 @@ If you find that the YARPP database calls are still too database-intensive, try 
 * not considering tags and/or categories in the Relatedness formula;
 * not excluding any tags and/or categories in The Pool.
 
-All of these can improve database performance.
+These options can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab. All of these can improve database performance.
 
 If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/go/order/?refdom=mitcho.com).
 
@@ -189,12 +189,23 @@ YARPP is currently localized in the following languages:
 * Hungarian
 * Romanian
 * Thai
+* Bhasa Indonesian
+* Spanish
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
 
+= 3.3.3 =
+* Init YARPP on the `init` action, [by request](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
+* Updated Polish and Italian localizations
+* Added Dutch stopwords by Paul Kessels
+* Code cleanup:
+	* Minor speedup to unnecessarily slow i18n code
+	* Fixed fatal error in postmeta keyword caching code
+	* Fewer `glob`s
+	* [Bug fix](http://wordpress.org/support/topic/the-problem-when-publish-a-post): ignore empty `blog_charset`s
 = 3.3.2 =
 * [Bugfix](http://wordpress.org/support/topic/missing-translate-strings): removed an unlocalized string
 * Bugfix for users of WordPress 3.0.x.
