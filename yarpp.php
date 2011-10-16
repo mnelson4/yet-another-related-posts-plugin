@@ -67,4 +67,8 @@ function yarpp_init() {
 
 	require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
 	$yarpp_cache = new $yarpp_storage_class;
+
+	// new in 3.3: include BlogGlue meta box
+	if ( file_exists( YARPP_DIR . '/blogglue.php' ) )
+		include_once( YARPP_DIR . '/blogglue.php' );
 }
