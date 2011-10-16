@@ -250,12 +250,17 @@ class YARPP_Cache_Tables {
 
 	function get_keywords($ID, $type='body') {
 		global $wpdb;
+
+		if ( !is_int($ID) )
+			return false;
+
 		$out = $wpdb->get_var("select $type from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = $ID");
-		if ($out === false or $out == '') { // if empty, try caching them first.
+		if ( empty($out) ) { // if empty, try caching them first.
 			$this->cache_keywords($ID);
 			$out = $wpdb->get_var("select $type from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = $ID");
 		}
-		if ($out === false or $out == '') { // if still empty... return false
+
+		if ( empty($out) ) { // if still empty... return false
 			//echo "<!--YARPP ERROR: couldn't select/create yarpp $type keywords for $ID-->";
 			return false;
 		} else {

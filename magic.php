@@ -176,7 +176,7 @@ function yarpp_sql($args,$giveresults = true,$reference_ID=false,$domain='websit
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
 	global $post, $wp_query, $id, $page, $pages, $authordata, $day, $currentmonth, $multipage, $more, $pagenow, $numpages, $yarpp_cache;
 
-  yarpp_upgrade_check();
+	yarpp_upgrade_check();
 
 	if ($domain != 'demo_web' and $domain != 'demo_rss') {
 		if ($yarpp_cache->yarpp_time) // if we're already in a YARPP loop, stop now.
@@ -219,18 +219,18 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	if ($cross_relate)
 		$type = array('post','page');
 
-  yarpp_cache_enforce($reference_ID);
+	yarpp_cache_enforce($reference_ID);
 
-  $output = '';
+	$output = '';
 
 	if ($domain != 'demo_web' and $domain != 'demo_rss')
 		$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	else {
 		$yarpp_cache->demo_time = true;
-    if ($domain == 'demo_web')
-      $yarpp_cache->demo_limit = yarpp_get_option('limit');
-    else
-      $yarpp_cache->demo_limit = yarpp_get_option('rss_limit');
+		if ($domain == 'demo_web')
+			$yarpp_cache->demo_limit = yarpp_get_option('limit');
+		else
+			$yarpp_cache->demo_limit = yarpp_get_option('rss_limit');
 	}
 	// just so we can return to normal later
 	$current_query = $wp_query;
@@ -255,9 +255,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 
 	$wp_query = $related_query;
 	$wp_query->in_the_loop = true;
-  $wp_query->is_feed = $current_query->is_feed;
-  // make sure we get the right is_single value
-  // (see http://wordpress.org/support/topic/288230)
+	$wp_query->is_feed = $current_query->is_feed;
+	// make sure we get the right is_single value
+	// (see http://wordpress.org/support/topic/288230)
 	$wp_query->is_single = false;
 
 	if ($domain == 'metabox') {
@@ -282,7 +282,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// restore the older wp_query.
 	$wp_query = null; $wp_query = $current_query; unset($current_query);
 	$post = null; $post = $current_post; unset($current_post);
-  $authordata = null; $authordata = $current_authordata; unset($current_authordata);
+	$authordata = null; $authordata = $current_authordata; unset($current_authordata);
 	$pages = null; $pages = $current_pages; unset($current_pages);
 	$id = $current_id; unset($current_id);
 	$page = $current_page; unset($current_page);
@@ -290,8 +290,8 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$multipage = null; $multipage = $current_multipage; unset($current_multipage);
 	$more = null; $more = $current_more; unset($current_more);
 	$pagenow = null; $pagenow = $current_pagenow; unset($current_pagenow);
-  $day = null; $day = $current_day; unset($current_day);
-  $currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
+	$day = null; $day = $current_day; unset($current_day);
+	$currentmonth = null; $currentmonth = $current_currentmonth; unset($current_currentmonth);
 
 	if ($promote_yarpp and $domain != 'metabox')
 		$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
@@ -302,7 +302,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 function yarpp_related_exist($type,$args,$reference_ID=false) {
 	global $post, $yarpp_cache;
 
-  yarpp_upgrade_check();
+	yarpp_upgrade_check();
 
 	if (is_object($post) and !$reference_ID)
 		$reference_ID = $post->ID;
@@ -313,33 +313,33 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
 
-  yarpp_cache_enforce($reference_ID);
+	yarpp_cache_enforce($reference_ID);
 
 	$yarpp_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	$related_query = new WP_Query();
 	// Note: why is this 10000? Should we just make it 1?
-  $related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
-  $return = $related_query->have_posts();
-  unset($related_query);
-  $yarpp_cache->end_yarpp_time(); // YARPP time is over. :(
+	$related_query->query(array('p'=>$reference_ID,'showposts'=>10000,'post_type'=>$type));
+	$return = $related_query->have_posts();
+	unset($related_query);
+	$yarpp_cache->end_yarpp_time(); // YARPP time is over. :(
 
 	return $return;
 }
 
-function yarpp_save_cache($post_ID,$force=true) {
+function yarpp_save_cache($post_ID, $force=true) {
 	global $wpdb;
 
-  // new in 3.2: don't compute cache during import
-  if ( defined( 'WP_IMPORTING' ) )
-    return;
+	// new in 3.2: don't compute cache during import
+	if ( defined( 'WP_IMPORTING' ) )
+		return;
 
-  $sql = "select post_parent from $wpdb->posts where ID='$post_ID'";
+	$sql = "select post_parent from $wpdb->posts where ID='$post_ID'";
 	$parent_ID = $wpdb->get_var($sql);
 
 	if ($parent_ID != $post_ID and $parent_ID)
 		$post_ID = $parent_ID;
 
-  yarpp_cache_enforce($post_ID,$force);
+	yarpp_cache_enforce((int) $post_ID, $force);
 }
 
 // Clear the cache for this entry and for all posts which are "related" to it.
@@ -371,10 +371,10 @@ function yarpp_status_transition($new_status, $old_status, $post) {
   }
 }
 
-function yarpp_cache_enforce($reference_ID,$force=false) {
+function yarpp_cache_enforce($reference_ID, $force=false) {
 	global $yarpp_debug, $yarpp_cache;
 
-	if ($reference_ID === '' || $reference_ID === false)
+	if ( empty($reference_ID) || !is_int($reference_ID) )
 	  return false;
 
 	if (!$force && $yarpp_cache->is_cached($reference_ID)) {
