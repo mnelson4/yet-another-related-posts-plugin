@@ -223,12 +223,15 @@ class YARPP_Cache_Postmeta {
 	}
 
 	function get_keywords($ID, $type='body') {
+		if ( !is_int($ID) )
+			return false;
+	
 		$key = $type == 'body' ? YARPP_POSTMETA_BODY_KEYWORDS_KEY : YARPP_POSTMETA_TITLE_KEYWORDS_KEY;
 		$out = get_post_meta($ID, $key, true);
 
 		// if empty, try caching them first
 		if ($out === false) {
-			yarpp_cache_keywords($ID);
+			$this->cache_keywords($ID);
 			$out = get_post_meta($ID, $key, true);
 		}
 

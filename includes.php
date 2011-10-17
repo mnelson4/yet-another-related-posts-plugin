@@ -164,11 +164,11 @@ function yarpp_admin_enqueue() {
 }
 
 function yarpp_settings_link($links, $file) {
-  $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
-  if($file == $this_plugin) {
-    $links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
-  }
-  return $links;
+	$this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
+	if($file == $this_plugin) {
+		$links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
+	}
+	return $links;
 }
 
 function yarpp_load_thickbox() {
@@ -184,29 +184,29 @@ function yarpp_options_page() {
 }
 
 function widget_yarpp_init() {
-  register_widget('YARPP_Widget');
+	register_widget('YARPP_Widget');
 }
 
 // vaguely based on code by MK Safi
 // http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
 class YARPP_Widget extends WP_Widget {
-  function YARPP_Widget() {
-    parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
-  }
+	function YARPP_Widget() {
+		parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
+	}
 
-  function widget($args, $instance) {
-  	global $post;
-    if (!is_singular())
-      return;
+	function widget($args, $instance) {
+		global $post;
+		if (!is_singular())
+			return;
 
-    extract($args);
+		extract($args);
 
 		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if (yarpp_get_option('cross_relate'))
 			$type = array('post','page');
 
-    $title = apply_filters('widget_title', $instance['title']);
-    echo $before_widget;
+		$title = apply_filters('widget_title', $instance['title']);
+		echo $before_widget;
 		if ( !$instance['use_template'] ) {
 			echo $before_title;
 			if ($title)
@@ -214,12 +214,12 @@ class YARPP_Widget extends WP_Widget {
 			else
 				_e('Related Posts (YARPP)','yarpp');
 			echo $after_title;
-    }
+		}
 		echo yarpp_related($type,$instance,false,false,'widget');
-    echo $after_widget;
-  }
+		echo $after_widget;
+	}
 
-  function update($new_instance, $old_instance) {
+	function update($new_instance, $old_instance) {
 		// this starts with default values.
 		$instance = array( 'promote_yarpp' => 0, 'use_template' => 0 );
 		foreach ( $instance as $field => $val ) {
@@ -233,28 +233,30 @@ class YARPP_Widget extends WP_Widget {
 			$instance['template_file'] = $old_instance['template_file'];
 			$instance['title'] = $new_instance['title'];
 		}
-    return $instance;
-  }
+		return $instance;
+	}
 
-  function form($instance) {
-    $title = esc_attr($instance['title']);
-    $template_file = $instance['template_file'];
-    ?>
-        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+	function form($instance) {
+		$title = esc_attr($instance['title']);
+		$template_file = $instance['template_file'];
+		?>
+				<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 
 			<?php // if there are YARPP templates installed...
-				if (count(glob(STYLESHEETPATH . '/yarpp-template-*.php'))): ?>
+			
+				$templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+				if ( is_array(templates) && count($templates) ): ?>
 
 				<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked($instance['use_template'], true) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
 				<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
-					<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
+					<?php foreach ($templates as $template): ?>
 					<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==$template_file)?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 					<?php endforeach; ?>
 				</select><p>
 
 			<?php endif; ?>
 
-        <p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
+				<p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
 
 				<script type="text/javascript">
 				jQuery(function() {
@@ -272,8 +274,8 @@ class YARPP_Widget extends WP_Widget {
 				});
 				</script>
 
-    <?php
-  }
+		<?php
+	}
 }
 
 
@@ -324,7 +326,7 @@ if (!defined('LOREMIPSUM'))
 	define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
 function yarpp_excerpt($content,$length) {
-  $content = strip_tags( (string) $content );
+	$content = strip_tags( (string) $content );
 	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
 	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
 }
@@ -352,8 +354,8 @@ function yarpp_get_option($option,$escapehtml = false) {
 }
 
 function yarpp_microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
 }
 
 // new in 3.3: use PHP serialized format instead of JSON
@@ -373,7 +375,7 @@ function yarpp_version_info($enforce_cache = false) {
 
 function yarpp_add_metabox() {
 	if (function_exists('add_meta_box')) {
-    add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+		add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
 	}
 }
 function yarpp_metabox() {
