@@ -15,8 +15,8 @@ Display a list of related entries on your site and feeds based on a unique algor
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
-1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less.
-2. **Templating**: **New in 3.0!** The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
+1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
+2. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
 3. **Caching**: **Improved in 3.2!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
@@ -99,7 +99,7 @@ If you are in the process of looking for a hosting provider whose databases will
 
 = Every page just says "no related posts"! What's up with that? =
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP prefs to something very low, like 1. Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
 = How do I turn off the match score next to the related posts? =
 
@@ -201,6 +201,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Init YARPP on the `init` action, [by request](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
 * Updated Polish and Italian localizations
 * Added Dutch stopwords by Paul Kessels
+* [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; may improve relatedness performance
 * Code cleanup:
 	* Minor speedup to unnecessarily slow i18n code
 	* Fixed fatal error in postmeta keyword caching code
