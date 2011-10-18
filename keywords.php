@@ -51,10 +51,10 @@ function yarpp_html_entity_strip( $html ) {
 }
 
 function post_body_keywords( $ID, $max = 20 ) {
-	$posts = get_posts(array('p'=>$ID,'post_type'=>'any'));
-	if (count($posts) != 1)
+	$post = get_post( $ID );
+	if ( empty($post) )
 		return '';
-	$content = strip_tags( apply_filters_if_white( 'the_content', $posts[0]->post_content ) );
+	$content = strip_tags( apply_filters_if_white( 'the_content', $post->post_content ) );
 	$content = yarpp_html_entity_strip( $content );
 	return yarpp_extract_keywords( $content, $max );
 }

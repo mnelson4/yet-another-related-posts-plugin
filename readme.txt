@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 3.3.2
+Stable tag: 3.3.3
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -23,6 +23,8 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
 
 This plugin requires PHP 5 and MySQL 4.1 or greater.
+
+YARPP does not yet support custom post types or taxonomies; look for these in a future version.
 
 **See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/)**.
 
@@ -198,10 +200,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.3.3 =
-* Init YARPP on the `init` action, [by request](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
-* Updated Polish and Italian localizations
-* Added Dutch stopwords by Paul Kessels
-* [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; may improve relatedness performance
+* [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.
+* Init YARPP on the `init` action, [for compatibility with WPML](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
+* Updated Polish, Italian, and Japanese localizations; added Dutch stopwords by Paul Kessels
 * Code cleanup:
 	* Minor speedup to unnecessarily slow i18n code
 	* Fixed fatal error in postmeta keyword caching code
