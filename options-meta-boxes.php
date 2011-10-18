@@ -149,7 +149,7 @@ add_meta_box('yarpp_relatedness', __('"Relatedness" options','yarpp'), array(new
 
 class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 	function display() {
-		global $yarpp_templateable;
+		global $yarpp_templates;
 	?>
 		<table class="form-table" style="margin-top: 0; clear:none;">
 		<tbody>
@@ -158,7 +158,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			<th class='th-full' colspan='2' scope='row' style='width:100%;'>",'','<td rowspan="3" style="border-left:8px transparent solid;"><b>'.__("Website display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");
 		$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
-		$this->checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
+		$this->checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template"'.(!(is_array($yarpp_templates) && count($yarpp_templates))?' disabled="disabled"':'')); ?>
 		</tbody></table>
 		<table class="form-table" style="clear:none;"><tbody>
 			<tr valign='top' class='templated'>
@@ -213,7 +213,7 @@ add_meta_box('yarpp_display_web', __('Display options <small>for your website</s
 
 class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 	function display() {
-		global $yarpp_templateable;
+		global $yarpp_templates;
 ?>
 		<table class="form-table" style="margin-top: 0; clear:none;"><tbody>
 <?php
@@ -225,7 +225,7 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 
 	$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2, "<tr valign='top' class='rss_displayed'>
 				<th scope='row'>");
-	$this->checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top' class='rss_displayed'><th colspan='2'>",' class="rss_template"'.(!$yarpp_templateable?' disabled="disabled"':'')); ?>
+	$this->checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top' class='rss_displayed'><th colspan='2'>",' class="rss_template"'.(!(is_array($yarpp_templates) && count($yarpp_templates))?' disabled="disabled"':'')); ?>
 	</tbody></table>
 	<table class="form-table rss_displayed" style="clear:none;">
 		<tbody>
@@ -283,6 +283,7 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 		<li  style="background: url(<?php echo $pluginurl . 'wordpress.png'; ?>) no-repeat left bottom;"><a href="http://wordpress.org/tags/yet-another-related-posts-plugin" target="_blank"><?php _e('YARPP Forum', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'twitter.png' ; ?>) no-repeat left bottom;"><a href="http://twitter.com/yarpp" target="_blank"><?php _e('YARPP on Twitter', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'plugin.png'; ?>) no-repeat left bottom;"><a href="http://yarpp.org" target="_blank"><?php _e('YARPP on the Web', 'yarpp'); ?></a></li>
+		<li style="background: url(<?php echo $pluginurl . 'star.png'; ?>) no-repeat 3px 2px;"><a href="http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/" target="_blank"><?php _e('Rate YARPP on WordPress.org', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'paypal-icon.png'; ?>) no-repeat left bottom;"><a href='http://tinyurl.com/donatetomitcho' target='_new'><img src="https://www.paypal.com/<?php echo paypal_directory(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>"/></a></li>
 	 </ul>
 <?php
