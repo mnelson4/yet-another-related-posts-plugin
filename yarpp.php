@@ -23,7 +23,7 @@ require_once(YARPP_DIR.'/template-functions.php');
 if (!defined('YARPP_CACHE_TYPE'))
 	define('YARPP_CACHE_TYPE', 'tables');
 
-// new in 3.2.3: init yarpp on init
+// new in 3.3.3: init yarpp on init
 add_action( 'init', 'yarpp_init' );
 function yarpp_init() {
 	global $yarpp_cache, $yarpp_storage_class, $yarpp_debug;
