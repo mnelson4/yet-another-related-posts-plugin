@@ -20,42 +20,20 @@ function yarpp_set_score_override_flag($q) {
 
 //=CACHING===========
 
-function yarpp_sql($args,$giveresults = true,$reference_ID=false,$domain='website') {
+function yarpp_sql( $reference_ID = false ) {
 	global $wpdb, $post, $yarpp_debug, $yarpp_cache;
 
-	if (is_object($post) && !$reference_ID) {
+	if ( is_object($post) && !$reference_ID ) {
 		$reference_ID = $post->ID;
 	}
 
-	// set the "domain prefix", used for all the preferences.
-	if ($domain == 'rss')
-		$domainprefix = 'rss_';
-	else
-		$domainprefix = '';
-
-	$options = array('limit'=>"${domainprefix}limit",
-		'threshold'=>'threshold',
-		'show_pass_post'=>'show_pass_post',
-		'past_only'=>'past_only',
-		'body'=>'body',
-		'title'=>'title',
-		'tags'=>'tags',
-		'categories'=>'categories',
-		'distags'=>'distags',
-		'discats'=>'discats',
-		'recent_only'=>'recent_only',
-		'recent_number'=>'recent_number',
-		'recent_units'=>'recent_units');
+	$options = array( 'threshold', 'show_pass_post', 'past_only', 'body', 'title', 'tags', 'categories', 'distags', 'discats', 'recent_only', 'recent_number', 'recent_units');
 	$optvals = array();
-	foreach (array_keys($options) as $option) {
-		if (isset($args[$option])) {
-			$optvals[$option] = stripslashes($args[$option]);
-		} else {
-			$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
-		}
+	foreach ( $options as $option ) {
+		$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($option)));
 	}
-
 	extract($optvals);
+	$limit = max(yarpp_get_option('limit'), yarpp_get_option('rss_limit'));
 
 	// Fetch keywords
 	$keywords = $yarpp_cache->get_keywords($reference_ID);
@@ -152,10 +130,6 @@ function yarpp_sql($args,$giveresults = true,$reference_ID=false,$domain='websit
 	$newsql .= (($tags == 4)?' and '.$criteria['tag'].' >= 2':'');
 	$newsql .= " order by score desc limit ".$limit;
 
-	if (!$giveresults) {
-		$newsql = "select count(t.ID) from ($newsql) as t";
-	}
-
 	// in caching, we cross-relate regardless of whether we're going to actually
 	// use it or not.
 	$newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
@@ -187,7 +161,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	get_currentuserinfo();
 
 	// set the "domain prefix", used for all the preferences.
-	if ($domain == 'rss' or $domain == 'demo_rss')
+	if ($domain == 'rss' || $domain == 'demo_rss')
 		$domainprefix = 'rss_';
 	else
 		$domainprefix = '';

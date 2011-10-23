@@ -203,7 +203,7 @@ class YARPP_Cache_Tables {
 		// clear out the cruft
 		$this->clear($reference_ID);
 
-		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql(array(),true,$reference_ID)." on duplicate key update date = now()");
+		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql($reference_ID)." on duplicate key update date = now()");
 
 		// If there were related entries saved...
 		if ( $wpdb->rows_affected ) {
@@ -234,7 +234,8 @@ class YARPP_Cache_Tables {
 
 	public function flush() {
 		global $wpdb;
-		return $wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
+		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
+		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "`");
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {

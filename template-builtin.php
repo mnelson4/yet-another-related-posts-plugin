@@ -18,11 +18,7 @@ $options = array(
 	'no_results'=>"${domainprefix}no_results");
 $optvals = array();
 foreach (array_keys($options) as $option) {
-	if (isset($args[$option])) {
-		$optvals[$option] = stripslashes($args[$option]);
-	} else {
-		$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
-	}
+	$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
 }
 extract($optvals);
 

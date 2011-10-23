@@ -184,7 +184,7 @@ function yarpp_options_page() {
 }
 
 function widget_yarpp_init() {
-	register_widget('YARPP_Widget');
+	register_widget( 'YARPP_Widget' );
 }
 
 // vaguely based on code by MK Safi
