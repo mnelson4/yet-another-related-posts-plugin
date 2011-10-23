@@ -26,9 +26,9 @@ foreach (array_keys($options) as $option) {
 }
 extract($optvals);
 
-if ($related_query->have_posts()) {
-	while ($related_query->have_posts()) {
-		$related_query->the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 
 		$output .= "$before_title<a href='" . get_permalink() . "' rel='bookmark' title='" . esc_attr(get_the_title() ? get_the_title() : get_the_ID()) . "'>".get_the_title()."";
 		if (current_user_can('manage_options') && $domain != 'rss')

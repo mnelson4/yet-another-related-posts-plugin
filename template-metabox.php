@@ -12,10 +12,10 @@ $output .= '<p>'.__( 'These are the related entries for this entry. Updating thi
 
 if ($yarpp_debug) $output .= "<p>last updated: ".$wpdb->get_var("select max(date) as updated from {$wpdb->prefix}yarpp_related_cache where reference_ID = '$reference_ID'")."</p>";
 
-if ($related_query->have_posts()) {
+if (have_posts()) {
 	$output .= '<ol>';
-	while ($related_query->have_posts()) {
-		$related_query->the_post();
+	while (have_posts()) {
+		the_post();
 		$output .= "<li><a href='post.php?action=edit&post=$id'>".get_the_title()."</a>";
 		$output .= ' ('.round(get_the_score(),3).')';
 		$output .= '</li>';
