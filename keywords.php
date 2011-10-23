@@ -8,8 +8,8 @@ function yarpp_extract_keywords($source,$max = 20) {
 	$softhyphen = html_entity_decode('&#173;',ENT_NOQUOTES,'UTF-8');
 	$source = str_replace($softhyphen, '', $source);
 
-	if (function_exists('mb_split')) {
-		$charset = get_option('blog_charset');
+	$charset = get_option('blog_charset');
+	if ( function_exists('mb_split') && !empty($charset) ) {
 		mb_regex_encoding($charset);
 		$wordlist = mb_split('\s*\W+\s*', mb_strtolower($source, $charset));
 	} else
@@ -40,23 +40,23 @@ function yarpp_extract_keywords($source,$max = 20) {
 }
 
 function post_title_keywords($ID,$max = 20) {
-	return yarpp_extract_keywords(html_entity_strip(get_the_title($ID)),$max);
+	return yarpp_extract_keywords(yarpp_html_entity_strip(get_the_title($ID)),$max);
 }
 
-function html_entity_strip($html) {
+function yarpp_html_entity_strip( $html ) {
 	$html = preg_replace('/&#x[0-9a-f]+;/','',$html);
 	$html = preg_replace('/&#[0-9]+;/','',$html);
 	$html = preg_replace('/&[a-zA-Z]+;/','',$html);
 	return $html;
 }
 
-function post_body_keywords($ID,$max = 20) {
-	$posts = get_posts(array('p'=>$ID));
-	if (count($posts) != 1)
+function post_body_keywords( $ID, $max = 20 ) {
+	$post = get_post( $ID );
+	if ( empty($post) )
 		return '';
-	$content = strip_tags(apply_filters_if_white('the_content',$posts[0]->post_content));
-	$content = html_entity_strip($content);
-	return yarpp_extract_keywords($content,$max);
+	$content = strip_tags( apply_filters_if_white( 'the_content', $post->post_content ) );
+	$content = yarpp_html_entity_strip( $content );
+	return yarpp_extract_keywords( $content, $max );
 }
 
 /* new in 2.0! apply_filters_if_white (previously apply_filters_without) now has a blacklist. It's defined here. */

@@ -1,9 +1,9 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templateable, $yarpp_myisam;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templates, $yarpp_myisam;
 
 // Reenforce YARPP setup:
-if (!get_option('yarpp_version'))
+if ( !get_option('yarpp_version') )
   yarpp_activate();
 else
   yarpp_upgrade_check();
@@ -14,10 +14,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'flush') {
 }
 
 // check to see that templates are in the right place
-$yarpp_templateable = (count(glob(STYLESHEETPATH . '/yarpp-template-*.php')) > 0);
-if (!$yarpp_templateable) {
-  yarpp_set_option('use_template',false);
-  yarpp_set_option('rss_use_template',false);
+$yarpp_templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+if ( !(is_array($yarpp_templates) && count($yarpp_templates)) ) {
+	yarpp_set_option(array('use_template' => false, 'rss_use_template' => false));
 }
 
 // 3.3: move version checking here, in PHP:
@@ -56,7 +55,7 @@ if (isset($_POST['myisam_override'])) {
 }
 
 $yarpp_myisam = true;
-if (!yarpp_get_option('myisam_override')) {
+if ( !yarpp_get_option('myisam_override') ) {
 	$yarpp_check_return = yarpp_myisam_check();
 	if ($yarpp_check_return !== true) { // if it's not *exactly* true
 		echo "<div class='updated'>"
@@ -71,8 +70,7 @@ if (!yarpp_get_option('myisam_override')) {
 		."'></input></form>"
 		."</div>";
 
-		yarpp_set_option('title',1);
-		yarpp_set_option('body',1);
+		yarpp_set_option(array('title' => 1, 'body' => 1));
 		$yarpp_myisam = false;
 	}
 }
@@ -89,28 +87,35 @@ if ($yarpp_myisam && !yarpp_enabled()) {
 }
 
 if (isset($_POST['update_yarpp'])) {
+
+	$new_options = array();
+
 	foreach (array_keys($yarpp_value_options) as $option) {
-    if (isset($_POST[$option]) && is_string($_POST[$option]))
-      yarpp_set_option($option,addslashes($_POST[$option]));
+		if ( isset($_POST[$option]) && is_string($_POST[$option]) )
+			$new_options[$option] = stripslashes($_POST[$option]);
 	}
 	foreach (array('title','body','tags','categories') as $key) {
-		if (!isset($_POST[$key])) yarpp_set_option($key,1);
+		if ( !isset($_POST[$key]) )
+			$new_options[$key] = 1;
 	}
-	if (isset($_POST['discats'])) {
-		yarpp_set_option('discats',implode(',',array_keys($_POST['discats']))); // discats is different
+	if ( isset($_POST['discats']) ) {
+		$new_options['discats'] = implode(',',array_keys($_POST['discats'])); // discats is different
 	} else {
-		yarpp_set_option('discats','');
+		$new_options['discats'] = '';
 	}
 
-	if (isset($_POST['distags'])) {
-		yarpp_set_option('distags',implode(',',array_keys($_POST['distags']))); // distags is also different
+	if ( isset($_POST['distags']) ) {
+		$new_options['distags'] = implode(',',array_keys($_POST['distags'])); // distags is also different
 	} else {
-		yarpp_set_option('distags','');
+		$new_options['distags'] = '';
 	}
 	
 	foreach (array_keys($yarpp_binary_options) as $option) {
-		(isset($_POST[$option])) ? yarpp_set_option($option,1) : yarpp_set_option($option,0);
+		$new_options[$option] = isset($_POST[$option]);
 	}
+
+	yarpp_set_option($new_options);
+
 	echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
 }
 
@@ -170,11 +175,11 @@ function load_display_discats() {
 <div class="wrap">
 		<h2>
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php
-      echo yarpp_get_option('version');
+				echo esc_html(get_option('yarpp_version'));
 			?></small>
 		</h2>
 
-	<?php echo "<div id='yarpp-version' style='display:none;'>".yarpp_get_option('version')."</div>"; ?>
+	<?php echo "<div id='yarpp-version' style='display:none;'>" . esc_html(get_option('yarpp_version')) . "</div>"; ?>
 
 	<form method="post">
 
@@ -192,13 +197,13 @@ wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 
 <div class="inner-sidebar" id="side-info-column">
 <?php
-do_meta_boxes('settings_page_yarpp', 'side', array());
+do_meta_boxes( 'settings_page_yarpp', 'side', array() );
 ?>
 </div>
 
 <div id="post-body-content">
 <?php
-do_meta_boxes('settings_page_yarpp', 'normal', array());
+do_meta_boxes( 'settings_page_yarpp', 'normal', array() );
 ?>
 </div>
 

@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: includes.php:376
+#: includes.php:378
 #@ yarpp
 msgid "Related Posts"
 msgstr "関連記事"
@@ -105,13 +105,13 @@ msgstr "共有の%sをふたつ以上必要とする"
 msgid "consider with extra weight"
 msgstr "検討する（重要視）"
 
-#: options-meta-boxes.php:286
+#: options-meta-boxes.php:287
 #@ default
 #@ yarpp
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "YARPPの作成者（ミッチョ）にPayPalで寄付をする"
 
-#: options.php:178
+#: options.php:172
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "関連記事 (YARPP) 設定"
@@ -305,7 +305,7 @@ msgstr "タイトル順（降順）"
 msgid "Default display if no results:"
 msgstr "関連記事がない時のメッセージ"
 
-#: includes.php:257
+#: includes.php:259
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
@@ -385,12 +385,12 @@ msgstr "(説明)"
 msgid "Options saved!"
 msgstr "設定の変更は保存されました。"
 
-#: options.php:280
+#: options.php:274
 #@ yarpp
 msgid "Do you really want to reset your configuration?"
 msgstr "本当に初期設定に戻りますか？"
 
-#: options.php:279
+#: options.php:273
 #@ yarpp
 msgid "Update options"
 msgstr "変更を保存"
@@ -400,7 +400,7 @@ msgstr "変更を保存"
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "より関連性の高い記事だけを表示したい場合は、最低関連スコアを上げてください。初期設定は5です。"
 
-#: options.php:280
+#: options.php:274
 #@ yarpp
 msgid "Reset options"
 msgstr "初期設定に戻る"
@@ -449,14 +449,14 @@ msgstr "ヶ月間"
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "過去 NUMBER UNITS の記事だけを表示"
 
-#: includes.php:248
+#: includes.php:250
 #: options-meta-boxes.php:161
 #: options-meta-boxes.php:228
 #@ yarpp
 msgid "Display using a custom template file"
 msgstr "テンプレートを使って表示"
 
-#: includes.php:249
+#: includes.php:251
 #: options-meta-boxes.php:165
 #: options-meta-boxes.php:233
 #@ yarpp
@@ -505,7 +505,7 @@ msgstr "設定"
 msgid "Title:"
 msgstr ""
 
-#: includes.php:385
+#: includes.php:387
 #@ yarpp
 msgid "Related entries may be displayed once you save your entry"
 msgstr "関連記事は保存後更新されます。"
@@ -538,7 +538,7 @@ msgstr "YARPP Twitter"
 msgid "YARPP on the Web"
 msgstr "ウェブサイト"
 
-#: options-meta-boxes.php:292
+#: options-meta-boxes.php:293
 #@ yarpp
 msgid "Contact YARPP"
 msgstr "YARPP 情報"
@@ -561,9 +561,14 @@ msgstr "関連記事プラグイン（YARPP）の新しいベータ（%s）が�
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr ""
 
-#: options.php:188
+#: options.php:182
 #, php-format
 #@ yarpp
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
-msgstr ""
+msgstr "by <a href=\"%s\" target=\"_blank\">みっちょ (アーリーワイン・マイケル芳貴)</a>"
+
+#: options-meta-boxes.php:286
+#@ yarpp
+msgid "Rate YARPP on WordPress.org"
+msgstr "WordPress.org で YARPP を評価する"
 
