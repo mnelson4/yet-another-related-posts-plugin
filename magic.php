@@ -236,15 +236,14 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_query = $wp_query;
 	$current_pagenow = $pagenow;
 
-	$related_query = new WP_Query();
+	$wp_query = new WP_Query();
 	$orders = explode(' ',$order);
 	if ( 'demo_web' == $domain || 'demo_rss' == $domain ) {
-		$related_query->query('');
+		$wp_query->query('');
 	} else if ( YARPP_NO_RELATED == $cache_status ) {
-		// If there are no related posts, just get a query of nothing.
-//		$related_query->query(array('p' => -1));
+		// If there are no related posts, get no query
 	} else {
-		$related_query->query(array(
+		$wp_query->query(array(
 			'p' => $reference_ID,
 			'orderby' => $orders[0],
 			'order' => $orders[1],
@@ -253,7 +252,6 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		));
 	}
 
-	$wp_query = $related_query;
 	$wp_query->in_the_loop = true;
 	$wp_query->is_feed = $current_query->is_feed;
 	// make sure we get the right is_single value
@@ -282,7 +280,6 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 
 	// restore the older wp_query.
-	unset($related_query);
 	$wp_query = $current_query; unset($current_query);
 	wp_reset_postdata();
 	$pagenow = $current_pagenow; unset($current_pagenow);
