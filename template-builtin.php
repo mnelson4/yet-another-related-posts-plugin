@@ -18,7 +18,7 @@ $options = array(
 	'no_results'=>"${domainprefix}no_results");
 $optvals = array();
 foreach (array_keys($options) as $option) {
-	$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
+	$optvals[$option] = yarpp_get_option($options[$option]);
 }
 extract($optvals);
 
@@ -38,7 +38,7 @@ if (have_posts()) {
 		$output .=  $after_title."\n";
 
 	}
-	$output = stripslashes(stripslashes($before_related)).$output.stripslashes(stripslashes($after_related));
+	$output = $before_related . $output . $after_related;
 } else {
 	$output = $no_results;
 }

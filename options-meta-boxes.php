@@ -8,7 +8,7 @@ class YARPP_Meta_Box {
 	}
 	function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 				<th scope='row'>", $note = '') {
-		$value = stripslashes(yarpp_get_option($option,true));
+		$value = esc_attr(yarpp_get_option($option));
 		echo "			$tr$desc</th>
 				<td><input name='$option' type='text' id='$option' value='$value' size='$size' />";
 		if ( !empty($note) )
@@ -20,9 +20,9 @@ class YARPP_Meta_Box {
 				<th scope='row'>", $note = '') {
 		echo "			$tr$desc</th>
 				<td>";
-		$value = stripslashes(yarpp_get_option($options[0],true));
+		$value = esc_attr(yarpp_get_option($options[0]));
 		echo "<input name='{$options[0]}' type='text' id='{$options[0]}' value='$value' size='$size' /> / ";
-		$value = stripslashes(yarpp_get_option($options[1],true));
+		$value = esc_attr(yarpp_get_option($options[1]));
 		echo "<input name='{$options[1]}' type='text' id='{$options[1]}' value='$value' size='$size' />";
 		if ( !empty($note) )
 			echo " <em><small>{$note}</small></em>";
@@ -70,15 +70,17 @@ class YARPP_Meta_Box {
 	
 	function select($option,$desc,$type='word',$tr="<tr valign='top'>
 				<th scope='row'>",$inputplus = '') {
+		$value = yarpp_get_option($option);
+
 		echo "		$tr$desc</th>
 				<td>
-				<input $inputplus type='radio' name='$option' value='1'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  />
+				<input $inputplus type='radio' name='$option' value='1'". (($value == 1) ? ' checked="checked"': '' )."  />
 				".__("do not consider",'yarpp')."
-				<input $inputplus type='radio' name='$option' value='2'". ((yarpp_get_option($option) == 2) ? ' checked="checked"': '' )."  />
+				<input $inputplus type='radio' name='$option' value='2'". (($value == 2) ? ' checked="checked"': '' )."  />
 				".__("consider",'yarpp')."
-				<input $inputplus type='radio' name='$option' value='3'". ((yarpp_get_option($option) == 3) ? ' checked="checked"': '' )."  />
+				<input $inputplus type='radio' name='$option' value='3'". (($value == 3) ? ' checked="checked"': '' )."  />
 				".sprintf(__("require at least one %s in common",'yarpp'),__($type,'yarpp'))."
-				<input $inputplus type='radio' name='$option' value='4'". ((yarpp_get_option($option) == 4) ? ' checked="checked"': '' )."  />
+				<input $inputplus type='radio' name='$option' value='4'". (($value == 4) ? ' checked="checked"': '' )."  />
 				".sprintf(__("require more than one %s in common",'yarpp'),__($type,'yarpp'))."
 				</td>
 			</tr>";
@@ -100,11 +102,12 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 <?php
 	$this->checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
 
-	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".stripslashes(yarpp_get_option('recent_number',true))."\" size=\"2\" />";
+	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".esc_attr(yarpp_get_option('recent_number'))."\" size=\"2\" />";
+	$recent_units = yarpp_get_option('recent_units');
 	$recent_units = "<select name=\"recent_units\" id=\"recent_units\">
-		<option value='day'". (('day'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('day(s)','yarpp')."</option>
-		<option value='week'". (('week'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('week(s)','yarpp')."</option>
-		<option value='month'". (('month'==yarpp_get_option('recent_units'))?" selected='selected'":'').">".__('month(s)','yarpp')."</option>
+		<option value='day'". (('day'==$recent_units)?" selected='selected'":'').">".__('day(s)','yarpp')."</option>
+		<option value='week'". (('week'==$recent_units)?" selected='selected'":'').">".__('week(s)','yarpp')."</option>
+		<option value='month'". (('month'==$recent_units)?" selected='selected'":'').">".__('month(s)','yarpp')."</option>
 	</select>";
 	$this->checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp'))));
 ?>
@@ -166,7 +169,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 				<td>
 					<select name="template_file" id="template_file">
 						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
-						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
+						<option value='<?php echo esc_attr(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -181,19 +184,20 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 
 			<tr class="excerpted" valign='top'>
 				<th><?php _e("Before / after (Excerpt):",'yarpp');?></th>
-				<td><input name="before_post" type="text" id="before_post" value="<?php echo stripslashes(yarpp_get_option('before_post',true)); ?>" size="10" /> / <input name="after_post" type="text" id="after_post" value="<?php echo stripslashes(yarpp_get_option('after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
+				<td><input name="before_post" type="text" id="before_post" value="<?php echo esc_attr(yarpp_get_option('before_post')); ?>" size="10" /> / <input name="after_post" type="text" id="after_post" value="<?php echo esc_attr(yarpp_get_option('after_post')); ?>" size="10" /><em><small> <?php _e("For example:",'yarpp');?> &lt;li&gt;&lt;/li&gt;<?php _e(' or ','yarpp');?>&lt;dl&gt;&lt;/dl&gt;</small></em>
 				</td>
 			</tr>
 
 			<tr valign='top'>
 				<th><?php _e("Order results:",'yarpp');?></th>
 				<td><select name="order" id="order">
-					<option value="score DESC" <?php echo (yarpp_get_option('order')=='score DESC'?' selected="selected"':'')?>><?php _e("score (high relevance to low)",'yarpp');?></option>
-					<option value="score ASC" <?php echo (yarpp_get_option('order')=='score ASC'?' selected="selected"':'')?>><?php _e("score (low relevance to high)",'yarpp');?></option>
-					<option value="post_date DESC" <?php echo (yarpp_get_option('order')=='post_date DESC'?' selected="selected"':'')?>><?php _e("date (new to old)",'yarpp');?></option>
-					<option value="post_date ASC" <?php echo (yarpp_get_option('order')=='post_date ASC'?' selected="selected"':'')?>><?php _e("date (old to new)",'yarpp');?></option>
-					<option value="post_title ASC" <?php echo (yarpp_get_option('order')=='post_title ASC'?' selected="selected"':'')?>><?php _e("title (alphabetical)",'yarpp');?></option>
-					<option value="post_title DESC" <?php echo (yarpp_get_option('order')=='post_title DESC'?' selected="selected"':'')?>><?php _e("title (reverse alphabetical)",'yarpp');?></option>
+				<?php $order = yarpp_get_option('order'); ?>
+					<option value="score DESC" <?php echo ($order == 'score DESC'?' selected="selected"':'')?>><?php _e("score (high relevance to low)",'yarpp');?></option>
+					<option value="score ASC" <?php echo ($order == 'score ASC'?' selected="selected"':'')?>><?php _e("score (low relevance to high)",'yarpp');?></option>
+					<option value="post_date DESC" <?php echo ($order == 'post_date DESC'?' selected="selected"':'')?>><?php _e("date (new to old)",'yarpp');?></option>
+					<option value="post_date ASC" <?php echo ($order == 'post_date ASC'?' selected="selected"':'')?>><?php _e("date (old to new)",'yarpp');?></option>
+					<option value="post_title ASC" <?php echo ($order == 'post_title ASC'?' selected="selected"':'')?>><?php _e("title (alphabetical)",'yarpp');?></option>
+					<option value="post_title DESC" <?php echo ($order == 'post_title DESC'?' selected="selected"':'')?>><?php _e("title (reverse alphabetical)",'yarpp');?></option>
 				</select>
 				</td>
 			</tr>
@@ -253,12 +257,13 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 			<tr class='rss_displayed' valign='top'>
 				<th><?php _e("Order results:",'yarpp');?></th>
 				<td><select name="rss_order" id="rss_order">
-					<option value="score DESC" <?php echo (yarpp_get_option('rss_order')=='score DESC'?' selected="selected"':'')?>><?php _e("score (high relevance to low)",'yarpp');?></option>
-					<option value="score ASC" <?php echo (yarpp_get_option('rss_order')=='score ASC'?' selected="selected"':'')?>><?php _e("score (low relevance to high)",'yarpp');?></option>
-					<option value="post_date DESC" <?php echo (yarpp_get_option('rss_order')=='post_date DESC'?' selected="selected"':'')?>><?php _e("date (new to old)",'yarpp');?></option>
-					<option value="post_date ASC" <?php echo (yarpp_get_option('rss_order')=='post_date ASC'?' selected="selected"':'')?>><?php _e("date (old to new)",'yarpp');?></option>
-					<option value="post_title ASC" <?php echo (yarpp_get_option('rss_order')=='post_title ASC'?' selected="selected"':'')?>><?php _e("title (alphabetical)",'yarpp');?></option>
-					<option value="post_title DESC" <?php echo (yarpp_get_option('rss_order')=='post_title DESC'?' selected="selected"':'')?>><?php _e("title (reverse alphabetical)",'yarpp');?></option>
+					<?php $order = yarpp_get_option('rss_order'); ?>
+					<option value="score DESC" <?php echo ($order=='score DESC'?' selected="selected"':'')?>><?php _e("score (high relevance to low)",'yarpp');?></option>
+					<option value="score ASC" <?php echo ($order == 'score ASC'?' selected="selected"':'')?>><?php _e("score (low relevance to high)",'yarpp');?></option>
+					<option value="post_date DESC" <?php echo ($order == 'post_date DESC'?' selected="selected"':'')?>><?php _e("date (new to old)",'yarpp');?></option>
+					<option value="post_date ASC" <?php echo ($order == 'post_date ASC'?' selected="selected"':'')?>><?php _e("date (old to new)",'yarpp');?></option>
+					<option value="post_title ASC" <?php echo ($order == 'post_title ASC'?' selected="selected"':'')?>><?php _e("title (alphabetical)",'yarpp');?></option>
+					<option value="post_title DESC" <?php echo ($order == 'post_title DESC'?' selected="selected"':'')?>><?php _e("title (reverse alphabetical)",'yarpp');?></option>
 				</select>
 				</td>
 			</tr>

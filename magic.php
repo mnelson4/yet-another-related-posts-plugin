@@ -28,11 +28,11 @@ function yarpp_sql( $reference_ID = false ) {
 	}
 
 	$options = array( 'threshold', 'show_pass_post', 'past_only', 'body', 'title', 'tags', 'categories', 'distags', 'discats', 'recent_only', 'recent_number', 'recent_units');
-	$optvals = array();
-	foreach ( $options as $option ) {
-		$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($option)));
-	}
+	$yarpp_options = yarpp_get_option();
+	// mask it so we only get the ones specified in $options
+	$optvals = array_intersect_key($yarpp_options, array_flip($options));
 	extract($optvals);
+
 	$limit = max(yarpp_get_option('limit'), yarpp_get_option('rss_limit'));
 
 	// Fetch keywords
@@ -178,9 +178,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$optvals = array();
 	foreach (array_keys($options) as $option) {
 		if (isset($args[$option])) {
-			$optvals[$option] = stripslashes($args[$option]);
+			$optvals[$option] = $args[$option];
 		} else {
-			$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
+			$optvals[$option] = yarpp_get_option($options[$option]);
 		}
 	}
 	extract($optvals);
