@@ -199,7 +199,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.3.4 =
+= 3.4 =
+* Significant code cleanup
+	* Performance improvements on pages with "no related posts"
+	* Streamlined keyword storage in YARPP_Cache_Postmeta
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.

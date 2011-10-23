@@ -3,11 +3,10 @@ global $yarpp_debug;
 
 yarpp_save_cache($reference_ID,false); // enforce the cache, but don't force it
 
-$body_terms = $yarpp_cache->get_keywords($reference_ID,'body');
-$title_terms = $yarpp_cache->get_keywords($reference_ID,'title');
+$keywords = $yarpp_cache->get_keywords($reference_ID);
 
-if ($yarpp_debug) $output .= "<p>body keywords: $body_terms</p>";
-if ($yarpp_debug) $output .= "<p>title keywords: $title_terms</p>";
+if ($yarpp_debug) $output .= "<p>body keywords: {$keywords['body']}</p>";
+if ($yarpp_debug) $output .= "<p>title keywords: {$keywords['title']}</p>";
 
 $output .= '<p>'.__( 'These are the related entries for this entry. Updating this post may change these related posts.' , 'yarpp').'</p>';
 
