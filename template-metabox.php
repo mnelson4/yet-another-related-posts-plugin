@@ -13,11 +13,12 @@ $output .= '<p>'.__( 'These are the related entries for this entry. Updating thi
 if ($yarpp_debug) $output .= "<p>last updated: ".$wpdb->get_var("select max(date) as updated from {$wpdb->prefix}yarpp_related_cache where reference_ID = '$reference_ID'")."</p>";
 
 if (have_posts()) {
+	$output .= '<style>#yarpp-related-posts ol li { list-style-type: decimal; }</style>';
 	$output .= '<ol>';
 	while (have_posts()) {
 		the_post();
-		$output .= "<li><a href='post.php?action=edit&post=$id'>".get_the_title()."</a>";
-		$output .= ' ('.round(get_the_score(),3).')';
+		$output .= "<li><a href='post.php?action=edit&post=" . get_the_ID() . "'>" . get_the_title() . "</a>";
+		$output .= ' (' . round(get_the_score(),3) . ')';
 		$output .= '</li>';
 	}
 	$output .= '</ol>';
