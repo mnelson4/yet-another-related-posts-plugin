@@ -153,9 +153,14 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	} else {
 		if ($yarpp_cache->is_yarpp_time()) // if we're already in a YARPP loop, stop now.
 			return false;
-
 		if ( !$reference_ID )
 			$reference_ID = get_the_ID();
+
+		$cache_status = yarpp_cache_enforce($reference_ID);
+		
+		// If cache status is YARPP_DONT_RUN, end here without returning or echoing anything.
+		if ( YARPP_DONT_RUN == $cache_status )
+			return;
 	}
 
 	get_currentuserinfo();
@@ -165,7 +170,6 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		$domainprefix = 'rss_';
 	else
 		$domainprefix = '';
-
 	// get options
 	// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
 	$options = array(
@@ -184,13 +188,9 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		}
 	}
 	extract($optvals);
-
+	// override $type for cross_relate:
 	if ($cross_relate)
 		$type = array('post','page');
-
-	$cache_status = yarpp_cache_enforce($reference_ID);
-
-	$output = '';
 
 	if ($domain == 'demo_web' || $domain == 'demo_rss') {
 		// It's DEMO TIME!
@@ -210,6 +210,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	$current_query = $wp_query;
 	$current_pagenow = $pagenow;
 
+	$output = '';
 	$wp_query = new WP_Query();
 	$orders = explode(' ',$order);
 	if ( 'demo_web' == $domain || 'demo_rss' == $domain ) {
@@ -340,7 +341,7 @@ function yarpp_status_transition($new_status, $old_status, $post) {
 }
 
 // Note: return value changed in 3.4
-// return YARPP_NO_RELATED | YARPP_RELATED | false if no good input
+// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
 function yarpp_cache_enforce($reference_ID, $force = false) {
 	global $yarpp_debug, $yarpp_cache;
 
@@ -348,6 +349,11 @@ function yarpp_cache_enforce($reference_ID, $force = false) {
 		return false;
 
 	$status = $yarpp_cache->is_cached($reference_ID);
+	$status = apply_filters( 'yarpp_cache_enforce_status', $status, $reference_ID );
+
+	// There's a stop signal:
+	if ( YARPP_DONT_RUN === $status )
+		return YARPP_DONT_RUN;
 
 	// If not cached, process now:
 	if ( YARPP_NOT_CACHED == $status || $force ) {

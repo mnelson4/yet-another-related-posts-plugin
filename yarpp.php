@@ -3,17 +3,18 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://yarpp.org/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.4b2
+Version: 3.4b3
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: http://tinyurl.com/donatetomitcho
 */
 
-define('YARPP_VERSION', '3.4b2');
+define('YARPP_VERSION', '3.4b3');
 define('YARPP_DIR', dirname(__FILE__));
 define('YARPP_NO_RELATED', ':(');
 define('YARPP_RELATED', ':)');
 define('YARPP_NOT_CACHED', ':/');
+define('YARPP_DONT_RUN', 'X(');
 
 require_once(YARPP_DIR.'/includes.php');
 require_once(YARPP_DIR.'/related-functions.php');
@@ -33,7 +34,7 @@ function yarpp_init() {
 
 	// set $yarpp_debug
 	if ( isset($_REQUEST['yarpp_debug']) )
-	  $yarpp_debug = true;
+		$yarpp_debug = true;
 
 	register_activation_hook( __FILE__, 'yarpp_activate' );
 

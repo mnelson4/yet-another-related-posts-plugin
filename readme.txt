@@ -206,6 +206,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Performance improvements on pages with "no related posts"
 	* Streamlined keyword storage in YARPP_Cache_Postmeta
 	* Updated minor bug for computing how many results should be cached
+	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.

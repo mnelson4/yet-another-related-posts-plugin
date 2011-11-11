@@ -113,7 +113,8 @@ if (isset($_POST['update_yarpp'])) {
 	foreach (array_keys($yarpp_binary_options) as $option) {
 		$new_options[$option] = isset($_POST[$option]);
 	}
-
+	
+	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);
 
 	echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
