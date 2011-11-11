@@ -387,9 +387,11 @@ function yarpp_get_option($option = null) {
 	// ensure defaults if not set:
 	$options = array_merge( $yarpp_value_options, $yarpp_binary_options, $options );
 	
-	if ( !is_null( $option ) )
+	if ( is_null( $option ) )
+		return $options;
+	if ( isset($options[$option]) )
 		return $options[$option];
-	return $options;
+	return null;
 }
 
 function yarpp_microtime_float() {
