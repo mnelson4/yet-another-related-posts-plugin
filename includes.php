@@ -38,10 +38,10 @@ $yarpp_value_options = array(
 	'rss_after_related' => '</ol>',
 	'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 	'rss_order' => 'score DESC',
-	'title' => '2',
-	'body' => '2',
-	'categories' => '1', // changed default in 3.3
-	'tags' => '2',
+	'title' => 2,
+	'body' => 2,
+	'categories' => 1, // changed default in 3.3
+	'tags' => 2,
 	'distags' => '',
 	'discats' => '');
 $yarpp_binary_options = array(
@@ -57,7 +57,8 @@ $yarpp_binary_options = array(
 	'rss_display' => false, // changed default in 3.1.7
 	'rss_excerpt_display' => true,
 	'promote_yarpp' => false,
-	'rss_promote_yarpp' => false);
+	'rss_promote_yarpp' => false,
+	'myisam_override' => false);
 // These are options which, when updated, will trigger a clearing of the cache
 $yarpp_clear_cache_options = array(
 	'distags','discats','show_pass_post','recent_only','threshold','title','body','categories',
@@ -76,15 +77,7 @@ function yarpp_enabled() {
 }
 
 function yarpp_activate() {
-	global $yarpp_version, $wpdb, $yarpp_binary_options, $yarpp_value_options, $yarpp_cache;
-	foreach (array_keys($yarpp_value_options) as $option) {
-		if (get_option("yarpp_$option") === false)
-			add_option("yarpp_$option",$yarpp_value_options[$option] . ' ');
-	}
-	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (get_option("yarpp_$option") === false)
-			add_option("yarpp_$option",$yarpp_binary_options[$option]);
-	}
+	global $yarpp_version, $wpdb, $yarpp_cache;
 
 	$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
 	if (!$wpdb->num_rows)
@@ -94,16 +87,16 @@ function yarpp_activate() {
 	if (!$wpdb->num_rows)
 		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
 	
-	if (!yarpp_enabled()) {
+	if ( !yarpp_enabled() ) {
 		// If we are still not enabled, run the cache abstraction's setup method.
 		$yarpp_cache->setup();
 		// If we're still not enabled, give up.
-		if (!yarpp_enabled())
+		if ( !yarpp_enabled() )
 			return 0;
 	}
 	
-	if (!get_option('yarpp_version')) {
-		add_option('yarpp_version',YARPP_VERSION);	
+	if ( !get_option('yarpp_version') ) {
+		add_option( 'yarpp_version', YARPP_VERSION );
 		yarpp_version_info(true);
 	} else {
 		yarpp_upgrade_check();
@@ -123,19 +116,14 @@ function yarpp_myisam_check() {
 }
 
 function yarpp_upgrade_check() {
-	$last_version = get_option('yarpp_version');
+	global $yarpp_cache;
+
+	$last_version = get_option( 'yarpp_version' );
 	if (version_compare(YARPP_VERSION, $last_version) === 0)
 		return;
 
-	global $yarpp_value_options, $yarpp_binary_options, $yarpp_cache;
-
-	foreach (array_keys($yarpp_value_options) as $option) {
-		if (get_option("yarpp_$option") === false)
-			add_option("yarpp_$option",$yarpp_value_options[$option].' ');
-	}
-	foreach (array_keys($yarpp_binary_options) as $option) {
-		if (get_option("yarpp_$option") === false)
-			add_option("yarpp_$option",$yarpp_binary_options[$option]);
+	if ( $last_version && version_compare('3.4b2', $last_version) > 0 ) {
+		yarpp_upgrade_3_4();
 	}
 
 	$yarpp_cache->upgrade($last_version);
@@ -143,6 +131,48 @@ function yarpp_upgrade_check() {
 	yarpp_version_info(true);
 
 	update_option('yarpp_version',YARPP_VERSION);
+}
+
+function yarpp_upgrade_3_4() {
+	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
+
+	$yarpp_options = array();
+	foreach ( $yarpp_value_options as $key => $default ) {
+		$value = get_option( "yarpp_$key", null );
+		if ( is_null($value) )
+			continue;
+
+		// value options used to be stored with a bajillion slashes...
+		$value = stripslashes(stripslashes($value));
+		// value options used to be stored with a blank space at the end... don't ask.
+		$value = rtrim($value, ' ');
+		
+		if ( is_int($default) )
+			$yarpp_options[$key] = absint($value);
+		else
+			$yarpp_options[$key] = $value;
+	}
+	foreach ( $yarpp_binary_options as $key => $default ) {
+		$value = get_option( "yarpp_$key", null );
+		if ( is_null($value) )
+			continue;
+		$yarpp_options[$key] = (boolean) $value;
+	}
+	
+	// add the options directly first, then call set_option which will ensure defaults,
+	// in case any new options have been added.
+	update_option( 'yarpp', $yarpp_options );
+	yarpp_set_option( $yarpp_options );
+	
+	$option_keys = array_keys( $yarpp_options );
+	// append some keys for options which are long deprecated:
+	$option_keys[] = 'ad_hoc_caching';
+	$option_keys[] = 'excerpt_len';
+	$option_keys[] = 'show_score';
+	if ( count($option_keys) ) {
+		$in = "('yarpp_" . join("', 'yarpp_", $option_keys) . "')";
+		$wpdb->query("delete from {$wpdb->options} where option_name in {$in}");
+	}
 }
 
 function yarpp_admin_menu() {
@@ -164,11 +194,11 @@ function yarpp_admin_enqueue() {
 }
 
 function yarpp_settings_link($links, $file) {
-  $this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
-  if($file == $this_plugin) {
-    $links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
-  }
-  return $links;
+	$this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
+	if($file == $this_plugin) {
+		$links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
+	}
+	return $links;
 }
 
 function yarpp_load_thickbox() {
@@ -184,29 +214,29 @@ function yarpp_options_page() {
 }
 
 function widget_yarpp_init() {
-  register_widget('YARPP_Widget');
+	register_widget( 'YARPP_Widget' );
 }
 
 // vaguely based on code by MK Safi
 // http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
 class YARPP_Widget extends WP_Widget {
-  function YARPP_Widget() {
-    parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
-  }
+	function YARPP_Widget() {
+		parent::WP_Widget(false, $name = __('Related Posts (YARPP)','yarpp'));
+	}
 
-  function widget($args, $instance) {
-  	global $post;
-    if (!is_singular())
-      return;
+	function widget($args, $instance) {
+		global $post;
+		if (!is_singular())
+			return;
 
-    extract($args);
+		extract($args);
 
 		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if (yarpp_get_option('cross_relate'))
 			$type = array('post','page');
 
-    $title = apply_filters('widget_title', $instance['title']);
-    echo $before_widget;
+		$title = apply_filters('widget_title', $instance['title']);
+		echo $before_widget;
 		if ( !$instance['use_template'] ) {
 			echo $before_title;
 			if ($title)
@@ -214,12 +244,12 @@ class YARPP_Widget extends WP_Widget {
 			else
 				_e('Related Posts (YARPP)','yarpp');
 			echo $after_title;
-    }
+		}
 		echo yarpp_related($type,$instance,false,false,'widget');
-    echo $after_widget;
-  }
+		echo $after_widget;
+	}
 
-  function update($new_instance, $old_instance) {
+	function update($new_instance, $old_instance) {
 		// this starts with default values.
 		$instance = array( 'promote_yarpp' => 0, 'use_template' => 0 );
 		foreach ( $instance as $field => $val ) {
@@ -233,28 +263,30 @@ class YARPP_Widget extends WP_Widget {
 			$instance['template_file'] = $old_instance['template_file'];
 			$instance['title'] = $new_instance['title'];
 		}
-    return $instance;
-  }
+		return $instance;
+	}
 
-  function form($instance) {
-    $title = esc_attr($instance['title']);
-    $template_file = $instance['template_file'];
-    ?>
-        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+	function form($instance) {
+		$title = esc_attr($instance['title']);
+		$template_file = $instance['template_file'];
+		?>
+				<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 
 			<?php // if there are YARPP templates installed...
-				if (count(glob(STYLESHEETPATH . '/yarpp-template-*.php'))): ?>
+			
+				$templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+				if ( is_array($templates) && count($templates) ): ?>
 
 				<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked($instance['use_template'], true) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
 				<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
-					<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
+					<?php foreach ($templates as $template): ?>
 					<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==$template_file)?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
 					<?php endforeach; ?>
 				</select><p>
 
 			<?php endif; ?>
 
-        <p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
+				<p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
 
 				<script type="text/javascript">
 				jQuery(function() {
@@ -272,8 +304,8 @@ class YARPP_Widget extends WP_Widget {
 				});
 				</script>
 
-    <?php
-  }
+		<?php
+	}
 }
 
 
@@ -287,7 +319,7 @@ function yarpp_default($content) {
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
 
-	if (yarpp_get_option('auto_display') and is_single())
+	if (yarpp_get_option('auto_display') && is_single())
 		return $content . yarpp_related($type,array(),false,false,'website');
 	else
 		return $content;
@@ -324,36 +356,47 @@ if (!defined('LOREMIPSUM'))
 	define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
 function yarpp_excerpt($content,$length) {
-  $content = strip_tags( (string) $content );
+	$content = strip_tags( (string) $content );
 	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
 	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
 }
 
-function yarpp_set_option($option,$value) {
-	global $yarpp_value_options, $yarpp_clear_cache_options, $yarpp_cache;
-	if (array_search($option,array_keys($yarpp_value_options)) !== false)
-		update_option("yarpp_$option",$value.' ');
-	else
-		update_option("yarpp_$option",$value);
+function yarpp_set_option($options, $value = null) {
+	global $yarpp_clear_cache_options, $yarpp_cache;
+
+	$current_options = yarpp_get_option();
+
+	// we can call yarpp_set_option(key,value) if we like:
+	if ( !is_array($options) && isset($value) )
+		$options = array( $options => $value );
+
+	$new_options = array_merge( $current_options, $options );
+
 	// new in 3.1: clear cache when updating certain settings.
-	if (array_search($option,$yarpp_clear_cache_options) !== false)
-		$yarpp_cache->flush();
+	$new_options_which_require_flush = array_intersect( array_keys( array_diff($options, $current_options) ), $yarpp_clear_cache_options );
+	if ( count($new_options_which_require_flush) )
+		$yarpp_cache->flush();		
+
+	update_option( 'yarpp', $new_options );
 }
 
-function yarpp_get_option($option,$escapehtml = false) {
-	global $yarpp_value_options;
-	if (array_search($option,array_keys($yarpp_value_options)) !== false)
-		$return = chop(get_option("yarpp_$option"));
-	else
-		$return = get_option("yarpp_$option");
-	if ($escapehtml)
-		$return = htmlspecialchars(stripslashes($return));
-	return $return;
+function yarpp_get_option($option = null) {
+	global $yarpp_value_options, $yarpp_binary_options;
+
+	$options = get_option( 'yarpp' );
+	// ensure defaults if not set:
+	$options = array_merge( $yarpp_value_options, $yarpp_binary_options, $options );
+	
+	if ( is_null( $option ) )
+		return $options;
+	if ( isset($options[$option]) )
+		return $options[$option];
+	return null;
 }
 
 function yarpp_microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
 }
 
 // new in 3.3: use PHP serialized format instead of JSON
@@ -373,12 +416,12 @@ function yarpp_version_info($enforce_cache = false) {
 
 function yarpp_add_metabox() {
 	if (function_exists('add_meta_box')) {
-    add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp'), 'yarpp_metabox', 'post', 'normal' );
+		add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp') . ' <span class="postbox-title-action"><a href="' . esc_url( admin_url('options-general.php?page=yarpp') ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>', 'yarpp_metabox', 'post', 'normal' );
 	}
 }
 function yarpp_metabox() {
 	global $post;
-	echo '<div id="yarpp-related-posts">';
+	echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 }</style><div id="yarpp-related-posts">';
 	if ($post->ID)
 		yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
 	else
