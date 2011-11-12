@@ -54,15 +54,7 @@ function yarpp_init() {
 	
 	// new in 3.0: add meta box
 	add_action( 'admin_menu', 'yarpp_add_metabox');
-	
-	// update cache on save
-	add_action('save_post','yarpp_save_cache');
-	
-	// new in 3.2: update cache on delete
-	add_action('delete_post','yarpp_delete_cache');
-	// new in 3.2.1: handle post_status transitions
-	add_action('transition_post_status','yarpp_status_transition', 10, 3);
-	
+		
 	// sets the score override flag.
 	add_action('parse_query','yarpp_set_score_override_flag');
 

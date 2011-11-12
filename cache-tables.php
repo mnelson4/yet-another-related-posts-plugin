@@ -5,22 +5,18 @@ $yarpp_storage_class = 'YARPP_Cache_Tables';
 define('YARPP_TABLES_RELATED_TABLE', 'yarpp_related_cache');
 define('YARPP_TABLES_KEYWORDS_TABLE', 'yarpp_keyword_cache');
 
-class YARPP_Cache_Tables {
+class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
 	private $yarpp_time = false;
 	public $demo_time = false;
 	public $score_override = false; // @todo: should be private
 	public $online_limit = false; // @todo: should be private
 
-	private $core;
-
 	/**
 	 * SETUP/STATUS
 	 */
 	function __construct( &$core ) {
-		$this->core = &$core;
-
-		$this->name = __($this->name, 'yarpp');
+		parent::__construct( $core );
 		add_filter('posts_join',array(&$this,'join_filter'));
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
@@ -272,8 +268,8 @@ class YARPP_Cache_Tables {
 	// @return (array) with body and title keywords
 	private function cache_keywords($ID) {
 		global $wpdb;
-		$body_terms = post_body_keywords($ID);
-		$title_terms = post_title_keywords($ID);
+		$body_terms = $this->body_keywords($ID);
+		$title_terms = $this->title_keywords($ID);
 
 		if (defined('DB_CHARSET') && DB_CHARSET) {
 			$wpdb->query('set names '.DB_CHARSET);

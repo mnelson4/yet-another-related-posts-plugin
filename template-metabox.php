@@ -1,7 +1,7 @@
 <?php
 global $yarpp;
 
-yarpp_save_cache($reference_ID,false); // enforce the cache, but don't force it
+$yarpp->cache->save_post($reference_ID, false); // enforce the cache, but don't force it
 
 $keywords = $yarpp->cache->get_keywords($reference_ID);
 

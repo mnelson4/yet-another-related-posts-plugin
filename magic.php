@@ -156,7 +156,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 		if ( !$reference_ID )
 			$reference_ID = get_the_ID();
 
-		$cache_status = yarpp_cache_enforce($reference_ID);
+		$cache_status = $yarpp->cache->enforce($reference_ID);
 		
 		// If cache status is YARPP_DONT_RUN, end here without returning or echoing anything.
 		if ( YARPP_DONT_RUN == $cache_status )
@@ -279,7 +279,7 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	if (yarpp_get_option('cross_relate'))
 		$type = array('post','page');
 
-	$cache_status = yarpp_cache_enforce($reference_ID);
+	$cache_status = $yarpp->cache->enforce($reference_ID);
 
 	if ( YARPP_NO_RELATED == $cache_status )
 		return false;
@@ -293,81 +293,5 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 	$yarpp->cache->end_yarpp_time(); // YARPP time is over. :(
 
 	return $return;
-}
-
-function yarpp_save_cache($post_ID, $force=true) {
-	global $wpdb;
-
-	// new in 3.2: don't compute cache during import
-	if ( defined( 'WP_IMPORTING' ) )
-		return;
-
-	$sql = "select post_parent from $wpdb->posts where ID='$post_ID'";
-	$parent_ID = $wpdb->get_var($sql);
-
-	if ($parent_ID != $post_ID and $parent_ID)
-		$post_ID = $parent_ID;
-
-	yarpp_cache_enforce((int) $post_ID, $force);
-}
-
-// Clear the cache for this entry and for all posts which are "related" to it.
-// New in 3.2: This is called when a post is deleted.
-function yarpp_delete_cache($post_ID) {
-	global $yarpp;
-
-	// Clear the cache for this post.
-	$yarpp->cache->clear($post_ID);
-
-	// Find all "peers" which list this post as a related post.
-	$peers = $yarpp->cache->related(null, $post_ID);
-	// Clear the peers' caches.
-	$yarpp->cache->clear($peers);
-}
-
-// New in 3.2.1: handle various post_status transitions
-function yarpp_status_transition($new_status, $old_status, $post) {
-	global $yarpp;
-	switch ($new_status) {
-		case "draft":
-			yarpp_delete_cache($post->ID);
-			break;
-		case "publish":
-			// find everything which is related to this post, and clear them, so that this
-			// post might show up as related to them.
-			$related = $yarpp->cache->related($post->ID, null);
-			$yarpp->cache->clear($related);
-	}
-}
-
-// Note: return value changed in 3.4
-// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
-function yarpp_cache_enforce($reference_ID, $force = false) {
-	global $yarpp;
-
-	if ( !$reference_ID = absint($reference_ID) )
-		return false;
-
-	$status = $yarpp->cache->is_cached($reference_ID);
-	$status = apply_filters( 'yarpp_cache_enforce_status', $status, $reference_ID );
-
-	// There's a stop signal:
-	if ( YARPP_DONT_RUN === $status )
-		return YARPP_DONT_RUN;
-
-	// If not cached, process now:
-	if ( YARPP_NOT_CACHED == $status || $force ) {
-		$status = $yarpp->cache->update($reference_ID);
-		// if still not cached, there's a problem, but for the time being return NO RELATED
-		if ( YARPP_NOT_CACHED === $status )
-			return YARPP_NO_RELATED;
-	}
-
-	// There are no related posts
-	if ( YARPP_NO_RELATED === $status )
-		return YARPP_NO_RELATED;
-
-	// There are results
-	return YARPP_RELATED;
 }
 

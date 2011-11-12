@@ -18,15 +18,11 @@ class YARPP_Cache_Postmeta {
 	public $score_override = false;
 	public $online_limit = false;
 
-	private $core;
-
 	/**
 	 * SETUP/STATUS
 	 */
 	function __construct( &$core ) {
-		$this->core = &$core;
-	
-		$this->name = __($this->name, 'yarpp');
+		parent::__construct( $core );
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
 		add_filter('posts_fields',array(&$this,'fields_filter'));
@@ -247,8 +243,8 @@ class YARPP_Cache_Postmeta {
 	// @return (array) with body and title keywords
 	private function cache_keywords($ID) {
 		$keywords = array(
-			'body' => post_body_keywords($ID),
-			'title' => post_title_keywords($ID)
+			'body' => $this->body_keywords($ID),
+			'title' => $this->title_keywords($ID)
 		);
 		update_post_meta($ID, YARPP_POSTMETA_KEYWORDS_KEY, $keywords);
 		return $keywords;
