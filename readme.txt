@@ -202,10 +202,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.4 =
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
 * Significant code cleanup
+	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`.
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
 	* Performance improvements on pages with "no related posts"
-	* Streamlined keyword storage in YARPP_Cache_Postmeta
+	* Streamlined keyword storage in `YARPP_Cache_Postmeta`
+	* Create `YARPP_Cache` abstract class
 	* Updated minor bug for computing how many results should be cached
 	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words
 	* New systematic use of YARPP_ constants to communicate cache status
