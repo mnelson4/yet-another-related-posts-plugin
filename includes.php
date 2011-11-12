@@ -394,11 +394,6 @@ function yarpp_get_option($option = null) {
 	return null;
 }
 
-function yarpp_microtime_float() {
-		list($usec, $sec) = explode(" ", microtime());
-		return ((float)$usec + (float)$sec);
-}
-
 // new in 3.3: use PHP serialized format instead of JSON
 function yarpp_version_info($enforce_cache = false) {
 	if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
