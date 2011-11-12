@@ -275,7 +275,7 @@ class YARPP_Widget extends WP_Widget {
 			<?php // if there are YARPP templates installed...
 			
 				$templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-				if ( is_array(templates) && count($templates) ): ?>
+				if ( is_array($templates) && count($templates) ): ?>
 
 				<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked($instance['use_template'], true) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
 				<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
