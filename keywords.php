@@ -1,7 +1,33 @@
 <?php
 
 function yarpp_extract_keywords($html, $max = 20) {
-	global $overusedwords;
+
+	$lang = 'en_US';
+	if ( defined('WPLANG') ) {
+		$lang = substr(WPLANG, 0, 2);
+		switch ( $lang ) {
+			case 'de':
+				$lang = 'de_DE';
+			case 'it':
+				$lang = 'it_IT';
+			case 'pl':
+				$lang = 'pl_PL';
+			case 'bg':
+				$lang = 'bg_BG';
+			case 'fr':
+				$lang = 'fr_FR';
+			case 'cs':
+				$lang = 'cs_CZ';
+			case 'nl':
+				$lang = 'nl_NL';
+		}
+	}
+
+	$words_file = YARPP_DIR . '/lang/words-' . $lang . '.php';
+	if ( file_exists($words_file) )
+		include( $words_file );
+	if ( !isset($overusedwords) )
+		$overusedwords = array();
 
 	// strip tags and html entities
 	$text = preg_replace('/&(#x[0-9a-f]+|#[0-9]+|[a-zA-Z]+);/', '', strip_tags($html) );
@@ -22,8 +48,11 @@ function yarpp_extract_keywords($html, $max = 20) {
 	$tokens = array_count_values($wordlist);
 
 	// Remove the stop words from the list.
-	foreach ($overusedwords as $word) {
-		 unset($tokens[$word]);
+	$overusedwords = apply_filters( 'yarpp_keywords_overused_words', $overusedwords );
+	if ( is_array($overusedwords) ) {
+		foreach ($overusedwords as $word) {
+			 unset($tokens[$word]);
+		}
 	}
 	// Remove words which are only a letter
 	$mb_strlen_exists = function_exists('mb_strlen');

@@ -2,7 +2,6 @@
 
 require_once(YARPP_DIR.'/magic.php');
 require_once(YARPP_DIR.'/keywords.php');
-require_once(YARPP_DIR.'/intl.php');
 require_once(YARPP_DIR.'/services.php');
 
 if ( !defined('WP_CONTENT_URL') )
