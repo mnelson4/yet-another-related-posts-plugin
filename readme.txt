@@ -200,6 +200,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.4 =
+* [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
 * Significant code cleanup
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
