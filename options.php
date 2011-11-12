@@ -277,9 +277,7 @@ do_meta_boxes( 'settings_page_yarpp', 'normal', array() );
 	<div>
 		<p class="submit">
 			<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
-			<!--<input type="submit" onclick='return confirm("<?php _e("Do you really want to reset your configuration?",'yarpp');?>");' class="yarpp_warning" name="reset_yarpp" value="<?php _e('Reset options','yarpp')?>" />-->
 		</p>
 	</div>
-<!--cache engine: <?php echo $yarpp_cache->name;?>; cache status: <?php echo $yarpp_cache->cache_status();?>-->
 
 </form>
