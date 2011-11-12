@@ -2,7 +2,7 @@
 Contributors: mitchoyoshitaka
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
-Plugin URI: http://mitcho.com/code/yarpp/
+Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
@@ -208,6 +208,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Updated minor bug for computing how many results should be cached
 	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods
 	* New systematic use of YARPP_ constants to communicate cache status
+* Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.

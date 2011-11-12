@@ -176,7 +176,7 @@ function load_display_discats() {
 <div class="wrap">
 		<h2>
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php
-				echo esc_html(get_option('yarpp_version'));
+				echo apply_filters( 'yarpp_version_html', esc_html( get_option('yarpp_version') ) );
 			?></small>
 		</h2>
 
