@@ -1,16 +1,16 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp_cache, $yarpp_templates, $yarpp_myisam;
+global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp, $yarpp_templates, $yarpp_myisam;
 
 // Reenforce YARPP setup:
 if ( !get_option('yarpp_version') )
-  yarpp_activate();
+	$yarpp->activate();
 else
-  yarpp_upgrade_check();
+	$yarpp->upgrade_check();
 
 // if action=flush, reset the cache
 if (isset($_GET['action']) && $_GET['action'] == 'flush') {
-  $yarpp_cache->flush();
+	$yarpp->cache->flush();
 }
 
 // check to see that templates are in the right place
@@ -21,7 +21,7 @@ if ( !(is_array($yarpp_templates) && count($yarpp_templates)) ) {
 
 // 3.3: move version checking here, in PHP:
 if ( current_user_can('update_plugins' ) ) {
-	$yarpp_version_info = yarpp_version_info();
+	$yarpp_version_info = $yarpp->version_info();
 	
 	// these strings are not localizable, as long as the plugin data on wordpress.org
 	// cannot be.
@@ -56,7 +56,7 @@ if (isset($_POST['myisam_override'])) {
 
 $yarpp_myisam = true;
 if ( !yarpp_get_option('myisam_override') ) {
-	$yarpp_check_return = yarpp_myisam_check();
+	$yarpp_check_return = $yarpp->myisam_check();
 	if ($yarpp_check_return !== true) { // if it's not *exactly* true
 		echo "<div class='updated'>"
 		.sprintf(__("YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled.",'yarpp'),$wpdb->posts,$yarpp_check_return)
@@ -75,15 +75,15 @@ if ( !yarpp_get_option('myisam_override') ) {
 	}
 }
 
-if ($yarpp_myisam && !yarpp_enabled()) {
-  echo '<div class="updated"><p>';
-  if (yarpp_activate()) {
-    _e('The YARPP database had an error but has been fixed.','yarpp');
-  } else {
-    _e('The YARPP database has an error which could not be fixed.','yarpp');
-    printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
-  }
-  echo '</div></p>';
+if ( $yarpp_myisam && !$yarpp->enabled() ) {
+	echo '<div class="updated"><p>';
+	if ( $yarpp->activate() ) {
+		_e('The YARPP database had an error but has been fixed.','yarpp');
+	} else {
+		_e('The YARPP database has an error which could not be fixed.','yarpp');
+		printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
+	}
+	echo '</div></p>';
 }
 
 if (isset($_POST['update_yarpp'])) {

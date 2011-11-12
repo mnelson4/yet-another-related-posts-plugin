@@ -31,9 +31,10 @@ if (have_posts()) {
 			$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round(get_the_score(),3)).'">('.round(get_the_score(),3).')</abbr>';
 		$output .= '</a>';
 		if ($show_excerpt) {
-			$output .= $before_post .
-			  yarpp_excerpt(get_the_excerpt(),$excerpt_length)
-			  . $after_post;
+			$excerpt = strip_tags( (string) get_the_excerpt() );
+			preg_replace( '/([,;.-]+)\s*/','\1 ', $excerpt );
+			$excerpt = implode( ' ', array_slice( preg_split('/\s+/',$excerpt), 0, $excerpt_length ) ).'...';
+			$output .= $before_post . $excerpt . $after_post;
 		}
 		$output .=  $after_title."\n";
 

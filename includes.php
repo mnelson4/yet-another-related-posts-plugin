@@ -1,5 +1,153 @@
 <?php
 
+// new in 3.4: put everything YARPP into an object, expected to be a singleton global $yarpp
+class YARPP {
+
+	public $debug = false;
+	
+	public $cache;
+	private $storage_class;
+
+	function __construct() {
+		require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
+		$this->storage_class = $yarpp_storage_class;
+		$this->cache = new $this->storage_class( $this );
+	}
+
+	/*
+	 * INFRASTRUCTURE
+	 */
+
+	function enabled() {
+		global $wpdb;
+		if ( $this->cache->is_enabled() === false )
+			return false;
+		$indexdata = $wpdb->get_results("show index from $wpdb->posts");
+		foreach ($indexdata as $index) {
+			if ($index->Key_name == 'yarpp_title')
+				return true;
+		}
+		return false;
+	}
+	
+	function activate() {
+		global $yarpp_version, $wpdb;
+	
+		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
+		if (!$wpdb->num_rows)
+			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
+	
+		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_content'");
+		if (!$wpdb->num_rows)
+			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
+		
+		if ( !$this->enabled() ) {
+			// If we are still not enabled, run the cache abstraction's setup method.
+			$this->cache->setup();
+			// If we're still not enabled, give up.
+			if ( !$this->enabled() )
+				return 0;
+		}
+		
+		if ( !get_option('yarpp_version') ) {
+			add_option( 'yarpp_version', YARPP_VERSION );
+			$this->version_info(true);
+		} else {
+			$this->upgrade_check();
+		}
+	
+		return 1;
+	}
+	
+	function myisam_check() {
+		global $wpdb;
+		$tables = $wpdb->get_results("show table status like '{$wpdb->posts}'");
+		foreach ($tables as $table) {
+			if ($table->Engine == 'MyISAM') return true;
+			else return $table->Engine;
+		}
+		return 'UNKNOWN';
+	}
+	
+	function upgrade_check() {
+		$last_version = get_option( 'yarpp_version' );
+		if (version_compare(YARPP_VERSION, $last_version) === 0)
+			return;
+	
+		if ( $last_version && version_compare('3.4b2', $last_version) > 0 ) {
+			$this->upgrade_3_4();
+		}
+	
+		$this->cache->upgrade($last_version);
+	
+		$this->version_info(true);
+	
+		update_option('yarpp_version',YARPP_VERSION);
+	}
+	
+	function upgrade_3_4() {
+		global $wpdb, $yarpp_value_options, $yarpp_binary_options;
+	
+		$yarpp_options = array();
+		foreach ( $yarpp_value_options as $key => $default ) {
+			$value = get_option( "yarpp_$key", null );
+			if ( is_null($value) )
+				continue;
+	
+			// value options used to be stored with a bajillion slashes...
+			$value = stripslashes(stripslashes($value));
+			// value options used to be stored with a blank space at the end... don't ask.
+			$value = rtrim($value, ' ');
+			
+			if ( is_int($default) )
+				$yarpp_options[$key] = absint($value);
+			else
+				$yarpp_options[$key] = $value;
+		}
+		foreach ( $yarpp_binary_options as $key => $default ) {
+			$value = get_option( "yarpp_$key", null );
+			if ( is_null($value) )
+				continue;
+			$yarpp_options[$key] = (boolean) $value;
+		}
+		
+		// add the options directly first, then call set_option which will ensure defaults,
+		// in case any new options have been added.
+		update_option( 'yarpp', $yarpp_options );
+		yarpp_set_option( $yarpp_options );
+		
+		$option_keys = array_keys( $yarpp_options );
+		// append some keys for options which are long deprecated:
+		$option_keys[] = 'ad_hoc_caching';
+		$option_keys[] = 'excerpt_len';
+		$option_keys[] = 'show_score';
+		if ( count($option_keys) ) {
+			$in = "('yarpp_" . join("', 'yarpp_", $option_keys) . "')";
+			$wpdb->query("delete from {$wpdb->options} where option_name in {$in}");
+		}
+	}
+	
+	/*
+	 * UTILS
+	 */
+	
+	// new in 3.3: use PHP serialized format instead of JSON
+	function version_info( $enforce_cache = false ) {
+		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
+			$version = YARPP_VERSION;
+			$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
+			
+			if (is_wp_error($remote))
+				return false;
+			
+			$result = unserialize($remote['body']);
+			set_transient('yarpp_version_info', $result, 60*60*12);
+		}
+		return $result;
+	}
+
+}
+
 require_once(YARPP_DIR.'/magic.php');
 require_once(YARPP_DIR.'/keywords.php');
 require_once(YARPP_DIR.'/services.php');
@@ -63,117 +211,6 @@ $yarpp_clear_cache_options = array(
 	'distags','discats','show_pass_post','recent_only','threshold','title','body','categories',
 	'tags');
 
-function yarpp_enabled() {
-	global $wpdb, $yarpp_cache;
-	if ($yarpp_cache->is_enabled() === false)
-		return false;
-	$indexdata = $wpdb->get_results("show index from $wpdb->posts");
-	foreach ($indexdata as $index) {
-		if ($index->Key_name == 'yarpp_title')
-			return true;
-	}
-	return false;
-}
-
-function yarpp_activate() {
-	global $yarpp_version, $wpdb, $yarpp_cache;
-
-	$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
-	if (!$wpdb->num_rows)
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
-
-	$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_content'");
-	if (!$wpdb->num_rows)
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
-	
-	if ( !yarpp_enabled() ) {
-		// If we are still not enabled, run the cache abstraction's setup method.
-		$yarpp_cache->setup();
-		// If we're still not enabled, give up.
-		if ( !yarpp_enabled() )
-			return 0;
-	}
-	
-	if ( !get_option('yarpp_version') ) {
-		add_option( 'yarpp_version', YARPP_VERSION );
-		yarpp_version_info(true);
-	} else {
-		yarpp_upgrade_check();
-	}
-
-	return 1;
-}
-
-function yarpp_myisam_check() {
-	global $wpdb;
-	$tables = $wpdb->get_results("show table status like '{$wpdb->posts}'");
-	foreach ($tables as $table) {
-		if ($table->Engine == 'MyISAM') return true;
-		else return $table->Engine;
-	}
-	return 'UNKNOWN';
-}
-
-function yarpp_upgrade_check() {
-	global $yarpp_cache;
-
-	$last_version = get_option( 'yarpp_version' );
-	if (version_compare(YARPP_VERSION, $last_version) === 0)
-		return;
-
-	if ( $last_version && version_compare('3.4b2', $last_version) > 0 ) {
-		yarpp_upgrade_3_4();
-	}
-
-	$yarpp_cache->upgrade($last_version);
-
-	yarpp_version_info(true);
-
-	update_option('yarpp_version',YARPP_VERSION);
-}
-
-function yarpp_upgrade_3_4() {
-	global $wpdb, $yarpp_value_options, $yarpp_binary_options;
-
-	$yarpp_options = array();
-	foreach ( $yarpp_value_options as $key => $default ) {
-		$value = get_option( "yarpp_$key", null );
-		if ( is_null($value) )
-			continue;
-
-		// value options used to be stored with a bajillion slashes...
-		$value = stripslashes(stripslashes($value));
-		// value options used to be stored with a blank space at the end... don't ask.
-		$value = rtrim($value, ' ');
-		
-		if ( is_int($default) )
-			$yarpp_options[$key] = absint($value);
-		else
-			$yarpp_options[$key] = $value;
-	}
-	foreach ( $yarpp_binary_options as $key => $default ) {
-		$value = get_option( "yarpp_$key", null );
-		if ( is_null($value) )
-			continue;
-		$yarpp_options[$key] = (boolean) $value;
-	}
-	
-	// add the options directly first, then call set_option which will ensure defaults,
-	// in case any new options have been added.
-	update_option( 'yarpp', $yarpp_options );
-	yarpp_set_option( $yarpp_options );
-	
-	$option_keys = array_keys( $yarpp_options );
-	// append some keys for options which are long deprecated:
-	$option_keys[] = 'ad_hoc_caching';
-	$option_keys[] = 'excerpt_len';
-	$option_keys[] = 'show_score';
-	if ( count($option_keys) ) {
-		$in = "('yarpp_" . join("', 'yarpp_", $option_keys) . "')";
-		$wpdb->query("delete from {$wpdb->options} where option_name in {$in}");
-	}
-}
-
 function yarpp_admin_menu() {
 	$hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', 'yarpp_options_page');
 	add_action("load-$hook",'yarpp_load_thickbox');
@@ -202,9 +239,7 @@ function yarpp_settings_link($links, $file) {
 
 function yarpp_load_thickbox() {
 	wp_enqueue_script( 'thickbox' );
-	if (function_exists('wp_enqueue_style')) {
-		wp_enqueue_style( 'thickbox' );
-	}
+	wp_enqueue_style( 'thickbox' );
 }
 
 function yarpp_options_page() {
@@ -354,14 +389,8 @@ function yarpp_rss_excerpt($content) {
 if (!defined('LOREMIPSUM'))
 	define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
 
-function yarpp_excerpt($content,$length) {
-	$content = strip_tags( (string) $content );
-	preg_replace('/([,;.-]+)\s*/','\1 ',$content);
-	return implode(' ',array_slice(preg_split('/\s+/',$content),0,$length)).'...';
-}
-
 function yarpp_set_option($options, $value = null) {
-	global $yarpp_clear_cache_options, $yarpp_cache;
+	global $yarpp_clear_cache_options, $yarpp;
 
 	$current_options = yarpp_get_option();
 
@@ -374,7 +403,7 @@ function yarpp_set_option($options, $value = null) {
 	// new in 3.1: clear cache when updating certain settings.
 	$new_options_which_require_flush = array_intersect( array_keys( array_diff($options, $current_options) ), $yarpp_clear_cache_options );
 	if ( count($new_options_which_require_flush) )
-		$yarpp_cache->flush();		
+		$yarpp->cache->flush();		
 
 	update_option( 'yarpp', $new_options );
 }
@@ -393,30 +422,13 @@ function yarpp_get_option($option = null) {
 	return null;
 }
 
-// new in 3.3: use PHP serialized format instead of JSON
-function yarpp_version_info($enforce_cache = false) {
-	if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
-		$version = YARPP_VERSION;
-		$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
-		
-		if (is_wp_error($remote))
-			return false;
-		
-		$result = unserialize($remote['body']);
-		set_transient('yarpp_version_info', $result, 60*60*12);
-	}
-	return $result;
-}
-
 function yarpp_add_metabox() {
-	if (function_exists('add_meta_box')) {
-		add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp') . ' <span class="postbox-title-action"><a href="' . esc_url( admin_url('options-general.php?page=yarpp') ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>', 'yarpp_metabox', 'post', 'normal' );
-	}
+	add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp') . ' <span class="postbox-title-action"><a href="' . esc_url( admin_url('options-general.php?page=yarpp') ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>', 'yarpp_metabox', 'post', 'normal' );
 }
 function yarpp_metabox() {
 	global $post;
 	echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 }</style><div id="yarpp-related-posts">';
-	if ($post->ID)
+	if ( $post->ID )
 		yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
 	else
 		echo "<p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p>";

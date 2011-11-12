@@ -12,10 +12,14 @@ class YARPP_Cache_Tables {
 	public $score_override = false; // @todo: should be private
 	public $online_limit = false; // @todo: should be private
 
+	private $core;
+
 	/**
 	 * SETUP/STATUS
 	 */
-	function YARPP_Cache_Tables() {
+	function __construct( &$core ) {
+		$this->core = &$core;
+
 		$this->name = __($this->name, 'yarpp');
 		add_filter('posts_join',array(&$this,'join_filter'));
 		add_filter('posts_where',array(&$this,'where_filter'));
@@ -192,7 +196,7 @@ class YARPP_Cache_Tables {
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
 	public function update($reference_ID) {
-		global $wpdb, $yarpp_debug;
+		global $wpdb;
 		
 		// $reference_ID must be numeric
 		if ( !$reference_ID = absint($reference_ID) )
@@ -209,7 +213,7 @@ class YARPP_Cache_Tables {
 		if ( $wpdb->rows_affected ) {
 			$new_related = $this->related($reference_ID);
 
-			if ($yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+			if ($this->core->debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {

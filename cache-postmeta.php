@@ -6,19 +6,26 @@ define('YARPP_POSTMETA_KEYWORDS_KEY','_yarpp_keywords');
 define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
 
 class YARPP_Cache_Postmeta {
+
 	// variables used for lookup
 	private $related_postdata = array();
 	private $related_IDs = array();
+
 	public $name = "postmeta";
+
 	private $yarpp_time = false;
 	public $demo_time = false;
 	public $score_override = false;
 	public $online_limit = false;
 
+	private $core;
+
 	/**
 	 * SETUP/STATUS
 	 */
-	function YARPP_Cache_Postmeta() {
+	function __construct( &$core ) {
+		$this->core = &$core;
+	
 		$this->name = __($this->name, 'yarpp');
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
@@ -165,7 +172,7 @@ class YARPP_Cache_Postmeta {
 
 	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
 	public function update($reference_ID) {
-		global $wpdb, $yarpp_debug;
+		global $wpdb;
 
 		// $reference_ID must be numeric
 		if ( !$reference_ID = absint($reference_ID) )
@@ -177,7 +184,7 @@ class YARPP_Cache_Postmeta {
 
 		if ( count($new_related) ) {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
-			if ($yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+			if ($this->core->debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {

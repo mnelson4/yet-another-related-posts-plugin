@@ -1,12 +1,10 @@
 <?php
 
 // setup the ajax action hooks
-if (function_exists('add_action')) {
-	add_action('wp_ajax_yarpp_display_discats', 'yarpp_ajax_display_discats');
-	add_action('wp_ajax_yarpp_display_distags', 'yarpp_ajax_display_distags');
-	add_action('wp_ajax_yarpp_display_demo_web', 'yarpp_ajax_display_demo_web');
-	add_action('wp_ajax_yarpp_display_demo_rss', 'yarpp_ajax_display_demo_rss');
-}
+add_action('wp_ajax_yarpp_display_discats', 'yarpp_ajax_display_discats');
+add_action('wp_ajax_yarpp_display_distags', 'yarpp_ajax_display_distags');
+add_action('wp_ajax_yarpp_display_demo_web', 'yarpp_ajax_display_demo_web');
+add_action('wp_ajax_yarpp_display_demo_rss', 'yarpp_ajax_display_demo_rss');
 
 function yarpp_ajax_display_discats() {
 	global $wpdb;

@@ -30,11 +30,10 @@ if (!defined('YARPP_CACHE_TYPE'))
 // new in 3.3.3: init yarpp on init
 add_action( 'init', 'yarpp_init' );
 function yarpp_init() {
-	global $yarpp_cache, $yarpp_storage_class, $yarpp_debug;
+	global $yarpp;
 
-	// set $yarpp_debug
 	if ( isset($_REQUEST['yarpp_debug']) )
-		$yarpp_debug = true;
+		$yarpp->debug = true;
 
 	register_activation_hook( __FILE__, 'yarpp_activate' );
 
@@ -67,8 +66,7 @@ function yarpp_init() {
 	// sets the score override flag.
 	add_action('parse_query','yarpp_set_score_override_flag');
 
-	require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
-	$yarpp_cache = new $yarpp_storage_class;
+	$yarpp = new YARPP;
 
 	// new in 3.3: include BlogGlue meta box
 	if ( file_exists( YARPP_DIR . '/blogglue.php' ) )
