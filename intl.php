@@ -1,51 +1,55 @@
 <?php
 
-include(YARPP_DIR.'/lang/words-'.word_file_lang().'.php');
+include( YARPP_DIR . '/lang/words-' . word_file_lang() . '.php' );
 
 function word_file_lang() {
-	if (!defined('WPLANG'))
+	if ( !defined('WPLANG') )
 		return 'en_US';
-	switch (true) {
-		case preg_match("/^de/i",WPLANG):
+	$lang = substr(WPLANG, 0, 2);
+	switch ( $lang ) {
+		case 'de':
 			return 'de_DE';
-		case preg_match("/^it/i",WPLANG):
+		case 'it':
 			return 'it_IT';
-		case preg_match("/^pl/i",WPLANG):
+		case 'pl':
 			return 'pl_PL';
-		case preg_match("/^bg/i",WPLANG):
+		case 'bg':
 			return 'bg_BG';
-		case preg_match("/^fr/i",WPLANG):
+		case 'fr':
 			return 'fr_FR';
-		case preg_match("/^cs/i",WPLANG):
+		case 'cs':
 			return 'cs_CZ';
+		case 'nl':
+			return 'nl_NL';
 		default:
 			return 'en_US';
 	}
 }
 
 function paypal_directory() {
-	if (!defined('WPLANG'))
+	if ( !defined('WPLANG') )
 		return 'en_US/';
-	switch (true) {
-		case preg_match("/^fr/i",WPLANG):
+	$lang = substr(WPLANG, 0, 2);
+	switch ( $lang ) {
+		case 'fr':
 			return 'fr_FR/';
-		case preg_match("/^de/i",WPLANG):
+		case 'de':
 			return 'de_DE/';
-		case preg_match("/^it/i",WPLANG):
+		case 'it':
 			return 'it_IT/';
-		case preg_match("/^ja/i",WPLANG):
+		case 'ja':
 			return 'ja_JP/';
-		case preg_match("/^es/i",WPLANG):
+		case 'es':
 			return 'es_XC/';
-		case preg_match("/^nl/i",WPLANG):
+		case 'nl':
 			return 'nl_NL/';
-		case preg_match("/^pl/i",WPLANG):
+		case 'pl':
 			return 'pl_PL/';
-		case preg_match("/^zh_CN/i",WPLANG):
+		case 'zh':
+			if (preg_match("/^zh_(HK|TW)/i",WPLANG))
+				return 'zh_HK/';
+			// actually zh_CN, but interpret as default zh:
 			return 'zh_XC/';
-		case preg_match("/^zh_HK/i",WPLANG):
-		case preg_match("/^zh_TW/i",WPLANG):
-			return 'zh_HK/';
 		default:
 			return 'en_US/';
 	}

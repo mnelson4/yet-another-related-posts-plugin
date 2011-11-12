@@ -2,20 +2,18 @@
 
 $yarpp_storage_class = 'YARPP_Cache_Postmeta';
 
-define('YARPP_POSTMETA_TITLE_KEYWORDS_KEY','_yarpp_title_keywords');
-define('YARPP_POSTMETA_BODY_KEYWORDS_KEY','_yarpp_body_keywords');
+define('YARPP_POSTMETA_KEYWORDS_KEY','_yarpp_keywords');
 define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
-define('YARPP_NO_RELATED', ':(');
 
 class YARPP_Cache_Postmeta {
 	// variables used for lookup
-	var $related_postdata = array();
-	var $related_IDs = array();
-	var $name = "postmeta";
-	var $yarpp_time = false;
-	var $demo_time = false;
-	var $score_override = false;
-	var $online_limit = false;
+	private $related_postdata = array();
+	private $related_IDs = array();
+	public $name = "postmeta";
+	private $yarpp_time = false;
+	public $demo_time = false;
+	public $score_override = false;
+	public $online_limit = false;
 
 	/**
 	 * SETUP/STATUS
@@ -29,17 +27,23 @@ class YARPP_Cache_Postmeta {
 		add_filter('post_limits',array(&$this,'limit_filter'));
 	}
 
-	function is_enabled() {
+	public function is_enabled() {
 		return true; // always enabled.
 	}
 
-	function setup() {
+	public function setup() {
 	}
 	
-	function upgrade() {
+	public function upgrade( $last_version ) {
+		global $wpdb;
+		if ( $last_version && version_compare('3.4b1', $last_version) > 0 ) {
+			// 3.4 moved _yarpp_body_keywords and _yarpp_title_keywords into the single
+			// postmeta _yarpp_keywords, so clear out the old data now.
+			$wpdb->query("delete from {$wpdb->postmeta} where (meta_key = '_yarpp_title_keywords' or meta_key = '_yarpp_body_keywords')");
+		}	
 	}
 
-	function cache_status() {
+	public function cache_status() {
 		global $wpdb;
 		return $wpdb->get_var("select (count(p.ID)-sum(m.meta_value IS NULL))/count(p.ID)
 			FROM `{$wpdb->posts}` as p
@@ -47,7 +51,7 @@ class YARPP_Cache_Postmeta {
 			WHERE p.post_status = 'publish'");
 	}
 
-	function uncached($limit = 20, $offset = 0) {
+	public function uncached($limit = 20, $offset = 0) {
 		global $wpdb;
 		return $wpdb->get_col("select SQL_CALC_FOUND_ROWS p.ID
 			FROM `{$wpdb->posts}` as p
@@ -59,7 +63,7 @@ class YARPP_Cache_Postmeta {
 	/**
 	 * MAGIC FILTERS
 	 */
-	function where_filter($arg) {
+	public function where_filter($arg) {
 		global $wpdb;
 		if ($this->yarpp_time) {
 			$threshold = yarpp_get_option('threshold');
@@ -75,7 +79,7 @@ class YARPP_Cache_Postmeta {
 		return $arg;
 	}
 
-	function orderby_filter($arg) {
+	public function orderby_filter($arg) {
 		global $wpdb;
 		// only order by score if the score function is added in fields_filter, which only happens
 		// if there are related posts in the postdata
@@ -85,7 +89,7 @@ class YARPP_Cache_Postmeta {
 		return $arg;
 	}
 
-	function fields_filter($arg) {
+	public function fields_filter($arg) {
 		global $wpdb, $wpdb;
 		if ($this->yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
 			$scores = array();
@@ -97,7 +101,7 @@ class YARPP_Cache_Postmeta {
 		return $arg;
 	}
 
-	function demo_request_filter($arg) {
+	public function demo_request_filter($arg) {
 		global $wpdb;
 		if ($this->demo_time) {
 			$wpdb->query("set @count = 0;");
@@ -109,7 +113,7 @@ class YARPP_Cache_Postmeta {
 		return $arg;
 	}
 
-	function limit_filter($arg) {
+	public function limit_filter($arg) {
 		global $wpdb;
 		if ($this->yarpp_time and $this->online_limit)
 			return " limit {$this->online_limit} ";
@@ -119,7 +123,11 @@ class YARPP_Cache_Postmeta {
 	/**
 	 * RELATEDNESS CACHE CONTROL
 	 */
-	function begin_yarpp_time($reference_ID) {
+	public function is_yarpp_time() {
+		return $this->yarpp_time;
+	}
+	
+	public function begin_yarpp_time($reference_ID) {
 		$this->yarpp_time = true;
 		// get the related posts from postdata, and also construct the relate_IDs array
 		$this->related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
@@ -127,17 +135,23 @@ class YARPP_Cache_Postmeta {
 			$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
 	}
 
-	function end_yarpp_time() {
+	public function end_yarpp_time() {
 		$this->yarpp_time = false;
 		$this->related_IDs = array();
 		$this->related_postdata = array();
 	}
 
-	function is_cached($reference_ID) {
-		return get_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, true) != false;
+	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
+	public function is_cached($reference_ID) {
+		$related = get_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, true);
+		if ( YARPP_NO_RELATED === $related )
+			return YARPP_NO_RELATED;			
+		if ( '' == $related )
+			return YARPP_NOT_CACHED;
+		return YARPP_RELATED;
 	}
 
-	function clear($reference_ID) {
+	public function clear($reference_ID) {
 		if (is_int($reference_ID))
 			$reference_ID = array($reference_ID);
 		// make sure that we have a non-trivial array
@@ -149,18 +163,19 @@ class YARPP_Cache_Postmeta {
 		}
 	}
 
-	function update($reference_ID) {
+	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
+	public function update($reference_ID) {
 		global $wpdb, $yarpp_debug;
 
 		// $reference_ID must be numeric
-		if ( !is_int( $reference_ID ) )
-			return new WP_Error('yarpp_cache_error', "reference ID must be an int" );
+		if ( !$reference_ID = absint($reference_ID) )
+			return YARPP_NOT_CACHED;
 
 		$original_related = $this->related($reference_ID);
-		$related = $wpdb->get_results(yarpp_sql(array(),true,$reference_ID), ARRAY_A);
+		$related = $wpdb->get_results(yarpp_sql($reference_ID), ARRAY_A);
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
-		if (count($new_related)) {
+		if ( count($new_related) ) {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
 			if ($yarpp_debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
@@ -169,21 +184,25 @@ class YARPP_Cache_Postmeta {
 				$this->clear(array_diff($original_related, $new_related));
 				$this->clear(array_diff($new_related, $original_related));
 			}
+
+			return YARPP_RELATED;
 		} else {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, YARPP_NO_RELATED);
+
 			// Clear the caches of those which are no longer related.
-			if (count($original_related)) {
+			if (count($original_related))
 				$this->clear($original_related);
-			}
+
+			return YARPP_NO_RELATED;
 		}
 	}
 
-	function flush() {
+	public function flush() {
 		global $wpdb;
 		return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "'");
 	}
 
-	function related($reference_ID = null, $related_ID = null) {
+	public function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
 
 		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
@@ -217,21 +236,34 @@ class YARPP_Cache_Postmeta {
 	/**
 	 * KEYWORDS CACHE CONTROL
 	 */
-	function cache_keywords($ID) {
-		update_post_meta($ID, YARPP_POSTMETA_BODY_KEYWORDS_KEY, post_body_keywords($ID));
-		update_post_meta($ID, YARPP_POSTMETA_TITLE_KEYWORDS_KEY, post_title_keywords($ID));
+	 
+	// @return (array) with body and title keywords
+	private function cache_keywords($ID) {
+		$keywords = array(
+			'body' => post_body_keywords($ID),
+			'title' => post_title_keywords($ID)
+		);
+		update_post_meta($ID, YARPP_POSTMETA_KEYWORDS_KEY, $keywords);
+		return $keywords;
 	}
 
-	function get_keywords($ID, $type='body') {
-		$key = $type == 'body' ? YARPP_POSTMETA_BODY_KEYWORDS_KEY : YARPP_POSTMETA_TITLE_KEYWORDS_KEY;
-		$out = get_post_meta($ID, $key, true);
+	// @param $ID (int)
+	// @param $type (string) body | title | all
+	// @return (string|array) depending on whether "all" were requested or not
+	public function get_keywords( $ID, $type = 'all' ) {
+		if ( !$ID = absint($ID) )
+			return false;
+	
+		$keywords = get_post_meta($ID, YARPP_POSTMETA_KEYWORDS_KEY, true);
 
-		// if empty, try caching them first
-		if ($out === false) {
-			yarpp_cache_keywords($ID);
-			$out = get_post_meta($ID, $key, true);
-		}
+		if ( empty($keywords) ) // if empty, try caching them first.
+			$keywords = $this->cache_keywords($ID);
 
-		return $out;
+		if ( empty($keywords) )
+			return false;
+		
+		if ( 'all' == $type )
+			return $keywords;
+		return $keywords[$type];
 	}
 }

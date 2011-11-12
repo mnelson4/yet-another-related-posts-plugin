@@ -18,17 +18,13 @@ $options = array(
 	'no_results'=>"${domainprefix}no_results");
 $optvals = array();
 foreach (array_keys($options) as $option) {
-	if (isset($args[$option])) {
-		$optvals[$option] = stripslashes($args[$option]);
-	} else {
-		$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
-	}
+	$optvals[$option] = yarpp_get_option($options[$option]);
 }
 extract($optvals);
 
-if ($related_query->have_posts()) {
-	while ($related_query->have_posts()) {
-		$related_query->the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 
 		$output .= "$before_title<a href='" . get_permalink() . "' rel='bookmark' title='" . esc_attr(get_the_title() ? get_the_title() : get_the_ID()) . "'>".get_the_title()."";
 		if (current_user_can('manage_options') && $domain != 'rss')
@@ -42,7 +38,7 @@ if ($related_query->have_posts()) {
 		$output .=  $after_title."\n";
 
 	}
-	$output = stripslashes(stripslashes($before_related)).$output.stripslashes(stripslashes($after_related));
+	$output = $before_related . $output . $after_related;
 } else {
 	$output = $no_results;
 }
