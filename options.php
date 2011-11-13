@@ -98,16 +98,13 @@ if (isset($_POST['update_yarpp'])) {
 		if ( !isset($_POST[$key]) )
 			$new_options[$key] = 1;
 	}
-	if ( isset($_POST['discats']) ) {
-		$new_options['discats'] = implode(',',array_keys($_POST['discats'])); // discats is different
-	} else {
-		$new_options['discats'] = '';
-	}
 
-	if ( isset($_POST['distags']) ) {
-		$new_options['distags'] = implode(',',array_keys($_POST['distags'])); // distags is also different
-	} else {
-		$new_options['distags'] = '';
+	// excludes are different
+	$new_options['exclude'] = array();
+	if ( isset($_POST['exclude']) ) {
+		$exclude = array_merge( array('category' => array(), 'post_tag' => array()), $_POST['exclude'] );
+		$new_options['exclude']['category'] = implode(',',array_keys($exclude['category']));
+		$new_options['exclude']['post_tag'] = implode(',',array_keys($exclude['post_tag']));
 	}
 	
 	foreach (array_keys($yarpp_binary_options) as $option) {
@@ -121,66 +118,12 @@ if (isset($_POST['update_yarpp'])) {
 }
 
 ?>
-<script type="text/javascript">
-//<!--
-
-// since 3.3: add screen option toggles
-jQuery(function() {
-	postboxes.add_postbox_toggles(pagenow);
-});
-
-var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>';
-
-function load_display_demo_web() {
-	jQuery.ajax({type:'POST',
-	  url: ajaxurl,
-	  data:'action=yarpp_display_demo_web',
-	  beforeSend:function(){jQuery('#display_demo_web').eq(0).html('<img src="' + spinner + '" alt="loading..."/>')},
-	  success:function(html){jQuery('#display_demo_web').eq(0).html('<pre>'+html+'</pre>')},
-	  dataType:'html'}
-	)
-}
-
-function load_display_demo_rss() {
-	jQuery.ajax({type:'POST',
-	  url: ajaxurl,
-	  data:'action=yarpp_display_demo_rss',
-	  beforeSend:function(){jQuery('#display_demo_rss').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	  success:function(html){jQuery('#display_demo_rss').eq(0).html('<pre>'+html+'</pre>')},
-	  dataType:'html'}
-	)
-}
-
-function load_display_distags() {
-	jQuery.ajax({type:'POST',
-	  url: ajaxurl,
-	  data:'action=yarpp_display_distags',
-	  beforeSend:function(){jQuery('#display_distags').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	  success:function(html){jQuery('#display_distags').eq(0).html(html)},
-	  dataType:'html'}
-	)
-}
-
-function load_display_discats() {
-	jQuery.ajax({type:'POST',
-	  url: ajaxurl,
-	  data:'action=yarpp_display_discats',
-	  beforeSend:function(){jQuery('#display_discats').eq(0).html('<img src="'+spinner+'" alt="loading..."/>')},
-	  success:function(html){jQuery('#display_discats').eq(0).html(html)},
-	  dataType:'html'}
-	)
-}
-//-->
-</script>
-
 <div class="wrap">
 		<h2>
 			<?php _e('Yet Another Related Posts Plugin Options','yarpp');?> <small><?php
 				echo apply_filters( 'yarpp_version_html', esc_html( get_option('yarpp_version') ) );
 			?></small>
 		</h2>
-
-	<?php echo "<div id='yarpp-version' style='display:none;'>" . esc_html(get_option('yarpp_version')) . "</div>"; ?>
 
 	<form method="post">
 
@@ -209,75 +152,14 @@ do_meta_boxes( 'settings_page_yarpp', 'normal', array() );
 </div>
 
 <script language="javascript">
-//<!--
-	function template() {
-		if (jQuery('.template').eq(0).attr('checked')) {
-			jQuery('.templated').show();
-			jQuery('.not_templated').hide();
-		} else {
-			jQuery('.templated').hide();
-			jQuery('.not_templated').show();
-		}
-		excerpt();
-	}
-	jQuery('.template').click(template);
-	
-	function excerpt() {
-		if (!jQuery('.template').eq(0).attr('checked') && jQuery('.show_excerpt').eq(0).attr('checked'))
-			jQuery('.excerpted').show();
-		else
-			jQuery('.excerpted').hide();
-	}
-	jQuery('.show_excerpt,.template').click(excerpt);
+var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>',
+	loading = '<img class="loading" src="'+spinner+'" alt="loading..."/>';
+</script>
 
-	function rss_display() {
-		if (jQuery('.rss_display').eq(0).attr('checked'))
-			jQuery('.rss_displayed').show();
-		else
-			jQuery('.rss_displayed').hide();
-		rss_excerpt();
-	}
-	jQuery('.rss_display').click(rss_display);
-	
-	function rss_template() {
-		if (jQuery('.rss_template').eq(0).attr('checked')) {
-			jQuery('.rss_templated').show();
-			jQuery('.rss_not_templated').hide();
-		} else {
-			jQuery('.rss_templated').hide();
-			jQuery('.rss_not_templated').show();
-		}
-		rss_excerpt();
-	}
-	jQuery('.rss_template').click(rss_template);
-	
-	function rss_excerpt() {
-		if (jQuery('.rss_display').eq(0).attr('checked') && jQuery('.rss_show_excerpt').eq(0).attr('checked'))
-			jQuery('.rss_excerpted').show();
-		else
-			jQuery('.rss_excerpted').hide();
-	}
-	jQuery('.rss_display,.rss_show_excerpt').click(rss_excerpt);
-
-	function yarpp_js_init() {
-		template();
-		rss_template();
-		load_display_discats();
-		load_display_distags();
-		load_display_demo_web();
-		load_display_demo_rss();
-
-		var version = jQuery('#yarpp-version').html();
-	}
-
-	jQuery(yarpp_js_init);
-	//-->
-	</script>
-
-	<div>
-		<p class="submit">
-			<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
-		</p>
-	</div>
+<div>
+	<p class="submit">
+		<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
+	</p>
+</div>
 
 </form>

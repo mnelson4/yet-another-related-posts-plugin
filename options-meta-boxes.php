@@ -88,18 +88,34 @@ class YARPP_Meta_Box {
 }
 
 class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
+	function exclude($taxonomy, $string) {
+?>
+			<tr valign='top'>
+				<th scope='row'><?php echo $string; ?></th>
+				<td><div class='scroll_wrapper' style="overflow:auto;max-height:100px;"><div id='exclude_<?php echo $taxonomy; ?>'>
+<?php
+$exclude_terms = yarpp_get_option('exclude');
+if ( !empty($exclude_terms[$taxonomy]) ) {
+	$terms = get_terms($taxonomy, array('include' => $exclude_terms[$taxonomy]));
+	foreach ($terms as $term) {
+		echo "<input type='checkbox' name='exclude[{$taxonomy}][{$term->term_id}]' value='true' checked='checked' /> <label>" . esc_html($term->name) . "</label> ";
+	}
+}
+?>
+				</div></div></td>
+			</tr>
+<?php
+	}
+
 	function display() {
 ?>
 	<p><?php _e('"The Pool" refers to the pool of posts and pages that are candidates for display as related to the current entry.','yarpp');?></p>
 
 	<table class="form-table" style="margin-top: 0; clear:none;">
 		<tbody>
-			<tr valign='top'>
-				<th scope='row'><?php _e('Disallow by category:','yarpp');?></th><td><div id='display_discats' style="overflow:auto;max-height:100px;"></div></td></tr>
-			<tr valign='top'>
-				<th scope='row'><?php _e('Disallow by tag:','yarpp');?></th>
-				<td><div id='display_distags' style="overflow:auto;max-height:100px;"></div></td></tr>
 <?php
+	$this->exclude('category', __('Disallow by category:','yarpp'));
+	$this->exclude('post_tag', __('Disallow by tag:','yarpp'));
 	$this->checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
 
 	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".esc_attr(yarpp_get_option('recent_number'))."\" size=\"2\" />";

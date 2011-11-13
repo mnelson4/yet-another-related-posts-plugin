@@ -27,7 +27,7 @@ function yarpp_sql( $reference_ID = false ) {
 		$reference_ID = $post->ID;
 	}
 
-	$options = array( 'threshold', 'show_pass_post', 'past_only', 'body', 'title', 'tags', 'categories', 'distags', 'discats', 'recent_only', 'recent_number', 'recent_units');
+	$options = array( 'threshold', 'show_pass_post', 'past_only', 'body', 'title', 'tags', 'categories', 'exclude', 'recent_only', 'recent_number', 'recent_units');
 	$yarpp_options = yarpp_get_option();
 	// mask it so we only get the ones specified in $options
 	$optvals = array_intersect_key($yarpp_options, array_flip($options));
@@ -48,12 +48,7 @@ function yarpp_sql( $reference_ID = false ) {
 	$totalweight = array_sum( array_values( $weights ) );
 
 	// get disallowed categories and tags
-	$disterms = array_filter(
-		array_merge(
-			explode(',',$discats),
-			explode(',',$distags)
-		),
-		'is_numeric');
+	$disterms = wp_parse_id_list($exclude['category'] . ',' . $exclude['post_tag']);
 	$usedisterms = count($disterms);
 	$disterms = implode(',', $disterms);
 
@@ -286,7 +281,6 @@ function yarpp_related_exist($type,$args,$reference_ID=false) {
 
 	$yarpp->cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 	$related_query = new WP_Query();
-	// Note: why is this 10000? Should we just make it 1?
 	$related_query->query(array('p'=>$reference_ID,'showposts'=>1,'post_type'=>$type));
 	$return = $related_query->have_posts();
 	unset($related_query);

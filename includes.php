@@ -81,9 +81,10 @@ class YARPP {
 		if (version_compare(YARPP_VERSION, $last_version) === 0)
 			return;
 	
-		if ( $last_version && version_compare('3.4b2', $last_version) > 0 ) {
-			$this->upgrade_3_4();
-		}
+		if ( $last_version && version_compare('3.4b2', $last_version) > 0 )
+			$this->upgrade_3_4b2();
+		if ( $last_version && version_compare('3.4b5', $last_version) > 0 )
+			$this->upgrade_3_4b5();
 	
 		$this->cache->upgrade($last_version);
 	
@@ -92,7 +93,7 @@ class YARPP {
 		update_option('yarpp_version',YARPP_VERSION);
 	}
 	
-	function upgrade_3_4() {
+	function upgrade_3_4b2() {
 		global $wpdb, $yarpp_value_options, $yarpp_binary_options;
 	
 		$yarpp_options = array();
@@ -132,6 +133,17 @@ class YARPP {
 			$in = "('yarpp_" . join("', 'yarpp_", $option_keys) . "')";
 			$wpdb->query("delete from {$wpdb->options} where option_name in {$in}");
 		}
+	}
+	
+	function upgrade_3_4b5() {
+		$options = yarpp_get_option();
+		$options['exclude'] = array(
+			'post_tag' => $options['distags'],
+			'category' => $options['discats']
+		);
+		unset( $options['distags'] );
+		unset( $options['discats'] );
+		update_option( 'yarpp', $options );
 	}
 	
 	/*
@@ -445,9 +457,7 @@ $yarpp_value_options = array(
 	'title' => 2,
 	'body' => 2,
 	'categories' => 1, // changed default in 3.3
-	'tags' => 2,
-	'distags' => '',
-	'discats' => '');
+	'tags' => 2);
 $yarpp_binary_options = array(
 	'past_only' => true,
 	'show_excerpt' => false,
@@ -465,7 +475,7 @@ $yarpp_binary_options = array(
 	'myisam_override' => false);
 // These are options which, when updated, will trigger a clearing of the cache
 $yarpp_clear_cache_options = array(
-	'distags','discats','show_pass_post','recent_only','threshold','title','body','categories',
+	'show_pass_post','recent_only','threshold','title','body','categories',
 	'tags');
 
 function yarpp_admin_menu() {
@@ -483,6 +493,7 @@ function yarpp_admin_enqueue() {
 	if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
 		wp_enqueue_script( 'postbox' );
 		wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), YARPP_VERSION );
+		wp_enqueue_script( 'yarpp_options', plugins_url( 'options.js', __FILE__ ), array('jquery'), YARPP_VERSION );
 	}
 }
 
@@ -658,8 +669,9 @@ function yarpp_set_option($options, $value = null) {
 	$new_options = array_merge( $current_options, $options );
 
 	// new in 3.1: clear cache when updating certain settings.
-	$new_options_which_require_flush = array_intersect( array_keys( array_diff($options, $current_options) ), $yarpp_clear_cache_options );
-	if ( count($new_options_which_require_flush) )
+	$new_options_which_require_flush = array_intersect( array_keys( array_diff_assoc($options, $current_options) ), $yarpp_clear_cache_options );
+	if ( count($new_options_which_require_flush) ||
+		( isset($options['exclude']) && $options['exclude'] != $current_options['exclude'] ) )
 		$yarpp->cache->flush();		
 
 	update_option( 'yarpp', $new_options );
@@ -671,6 +683,8 @@ function yarpp_get_option($option = null) {
 	$options = get_option( 'yarpp' );
 	// ensure defaults if not set:
 	$options = array_merge( $yarpp_value_options, $yarpp_binary_options, $options );
+	if ( !isset($options['exclude']) )
+		$options['exclude'] = array();
 	
 	if ( is_null( $option ) )
 		return $options;

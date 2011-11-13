@@ -201,6 +201,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4 =
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
+* Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
 * Significant code cleanup
 	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`.
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
@@ -211,6 +212,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Updated minor bug for computing how many results should be cached
 	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words
 	* New systematic use of YARPP_ constants to communicate cache status
+	* Use `get_terms` to load terms
 * Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
