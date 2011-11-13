@@ -23,8 +23,28 @@ jQuery(function($) {
 	}
 	$('.show_excerpt,.template').click(excerpt);
 
+	var loaded_demo_web = false;
+	function display() {
+		if ( !$('#yarpp_display_web .inside').is(':visible') )
+			return;
+		if ( !loaded_demo_web ) {
+			loaded_demo_web = true;
+			var demo_web = $('#display_demo_web');
+			$.ajax({type:'POST',
+			  url: ajaxurl,
+			  data:'action=yarpp_display_demo&domain=demo_web',
+			  beforeSend:function(){demo_web.html(loading)},
+			  success:function(html){demo_web.html('<pre>'+html+'</pre>')},
+			  dataType:'html'});
+		}
+	}
+	$('#yarpp_display_web .handlediv, #yarpp_display_web-hide').click(display);
+	display();
+
 	var loaded_demo_rss = false;
 	function rss_display() {
+		if ( !$('#yarpp_display_rss .inside').is(':visible') )
+			return;
 		if ($('.rss_display').attr('checked')) {
 			$('.rss_displayed').show();
 			if ( !loaded_demo_rss ) {
@@ -32,17 +52,17 @@ jQuery(function($) {
 				var demo_rss = $('#display_demo_rss');
 				$.ajax({type:'POST',
 						url: ajaxurl,
-						data:'action=yarpp_display_demo_rss',
+						data:'action=yarpp_display_demo&domain=demo_rss',
 						beforeSend:function(){demo_rss.html(loading)},
 						success:function(html){demo_rss.html('<pre>'+html+'</pre>')},
 						dataType:'html'});
 			}
+			rss_template();
 		} else {
 			$('.rss_displayed').hide();
 		}
-		rss_template();
 	}
-	$('.rss_display').click(rss_display);
+	$('.rss_display, #yarpp_display_rss .handlediv, #yarpp_display_rss-hide').click(rss_display);
 	rss_display();
 	
 	function rss_template() {
@@ -118,12 +138,4 @@ jQuery(function($) {
 	}
 	$('#yarpp_pool .handlediv, #yarpp_pool-hide').click(load_disallows);
 	load_disallows();
-
-	var demo_web = $('#display_demo_web');
-	$.ajax({type:'POST',
-	  url: ajaxurl,
-	  data:'action=yarpp_display_demo_web',
-	  beforeSend:function(){demo_web.html(loading)},
-	  success:function(html){demo_web.html('<pre>'+html+'</pre>')},
-	  dataType:'html'});
 });

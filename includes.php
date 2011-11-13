@@ -13,12 +13,22 @@ class YARPP {
 		$this->storage_class = $yarpp_storage_class;
 		$this->cache = new $this->storage_class( $this );
 		
+		add_action( 'admin_init', array($this, 'admin_init') );
+		
 		// update cache on save
-		add_action('save_post', array($this->cache, 'save_post') );
+		add_action( 'save_post', array($this->cache, 'save_post') );
 		// new in 3.2: update cache on delete
-		add_action('delete_post', array($this->cache, 'delete_post') );
+		add_action( 'delete_post', array($this->cache, 'delete_post') );
 		// new in 3.2.1: handle post_status transitions
-		add_action('transition_post_status', array($this->cache, 'transition_post_status'), 10, 3);
+		add_action( 'transition_post_status', array($this->cache, 'transition_post_status'), 10, 3);
+	}
+	
+	function admin_init() {
+		// Register AJAX services
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			add_action( 'wp_ajax_yarpp_display_exclude_terms', array( $this, 'ajax_display_exclude_terms' ) );
+			add_action( 'wp_ajax_yarpp_display_demo', array( $this, 'ajax_display_demo' ) );
+		}
 	}
 
 	/*
@@ -165,6 +175,52 @@ class YARPP {
 		return $result;
 	}
 
+	/*
+	 * AJAX SERVICES
+	 */
+
+	function ajax_display_exclude_terms() {
+		if ( !isset($_REQUEST['taxonomy']) )
+			return;
+		
+		$taxonomy = (string) $_REQUEST['taxonomy'];
+		
+		header("HTTP/1.1 200");
+		header("Content-Type: text/html; charset=UTF-8");
+		
+		$exclude = yarpp_get_option('exclude');
+		if ( !isset($exclude[$taxonomy]) )
+			$exclude[$taxonomy] = array();
+		$terms = get_terms($taxonomy, array(
+			'exclude' => $exclude[$taxonomy],
+			'number' => 100,
+			'offset' => $_REQUEST['offset']
+		));
+		
+		if ( !count($terms) ) {
+			echo ':('; // no more :(
+			exit;
+		}
+		
+		foreach ($terms as $term) {
+			echo "<input type='checkbox' name='exclude[$taxonomy][$term->term_id]' value='true' /> <label>" . esc_html($term->name) . "</label> ";
+			//for='exclude[$taxonomy][$cat->term_id]' it's not HTML. :(
+		}
+		exit;
+	}
+	
+	function ajax_display_demo() {
+		header("HTTP/1.1 200");
+		header("Content-Type: text/html; charset=UTF-8");
+	
+		$domain = 'demo_web';
+		if ( isset($_REQUEST['domain']) )
+			$domain = $_REQUEST['domain'];
+	
+		$return = yarpp_related(array('post'), array(), false, false, $domain);
+		echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
+		exit;
+	}
 }
 
 abstract class YARPP_Cache {
@@ -419,7 +475,6 @@ abstract class YARPP_Cache {
 }
 
 require_once(YARPP_DIR.'/magic.php');
-require_once(YARPP_DIR.'/services.php');
 
 if ( !defined('WP_CONTENT_URL') )
 	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
