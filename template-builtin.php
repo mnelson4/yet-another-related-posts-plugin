@@ -18,31 +18,28 @@ $options = array(
 	'no_results'=>"${domainprefix}no_results");
 $optvals = array();
 foreach (array_keys($options) as $option) {
-	if (isset($args[$option])) {
-		$optvals[$option] = stripslashes($args[$option]);
-	} else {
-		$optvals[$option] = stripslashes(stripslashes(yarpp_get_option($options[$option])));
-	}
+	$optvals[$option] = yarpp_get_option($options[$option]);
 }
 extract($optvals);
 
-if ($related_query->have_posts()) {
-	while ($related_query->have_posts()) {
-		$related_query->the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 
 		$output .= "$before_title<a href='" . get_permalink() . "' rel='bookmark' title='" . esc_attr(get_the_title() ? get_the_title() : get_the_ID()) . "'>".get_the_title()."";
 		if (current_user_can('manage_options') && $domain != 'rss')
 			$output .= ' <abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),round(get_the_score(),3)).'">('.round(get_the_score(),3).')</abbr>';
 		$output .= '</a>';
 		if ($show_excerpt) {
-			$output .= $before_post .
-			  yarpp_excerpt(get_the_excerpt(),$excerpt_length)
-			  . $after_post;
+			$excerpt = strip_tags( (string) get_the_excerpt() );
+			preg_replace( '/([,;.-]+)\s*/','\1 ', $excerpt );
+			$excerpt = implode( ' ', array_slice( preg_split('/\s+/',$excerpt), 0, $excerpt_length ) ).'...';
+			$output .= $before_post . $excerpt . $after_post;
 		}
 		$output .=  $after_title."\n";
 
 	}
-	$output = stripslashes(stripslashes($before_related)).$output.stripslashes(stripslashes($after_related));
+	$output = $before_related . $output . $after_related;
 } else {
 	$output = $no_results;
 }
