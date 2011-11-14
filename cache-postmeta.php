@@ -15,8 +15,6 @@ class YARPP_Cache_Postmeta {
 
 	private $yarpp_time = false;
 	public $demo_time = false;
-	public $score_override = false;
-	public $online_limit = false;
 
 	/**
 	 * SETUP/STATUS
@@ -28,6 +26,8 @@ class YARPP_Cache_Postmeta {
 		add_filter('posts_fields',array(&$this,'fields_filter'));
 		add_filter('posts_request',array(&$this,'demo_request_filter'));
 		add_filter('post_limits',array(&$this,'limit_filter'));
+		// sets the score override flag.
+		add_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
 
 	public function is_enabled() {

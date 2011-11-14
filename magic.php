@@ -1,23 +1,5 @@
 <?php
 
-//=TEMPLATING/DISPLAY===========
-
-function yarpp_set_score_override_flag($q) {
-	global $yarpp;
-	if ( $yarpp->cache->is_yarpp_time() ) {
-		$yarpp->cache->score_override = ($q->query_vars['orderby'] == 'score');
-
-		if (!empty($q->query_vars['showposts'])) {
-			$yarpp->cache->online_limit = $q->query_vars['showposts'];
-		} else {
-			$yarpp->cache->online_limit = false;
-		}
-	} else {
-		$yarpp->cache->score_override = false;
-		$yarpp->cache->online_limit = false;
-	}
-}
-
 //=CACHING===========
 
 function yarpp_sql( $reference_ID = false ) {
