@@ -120,7 +120,7 @@ function yarpp_sql( $reference_ID = false ) {
 /* new in 3.0! new query-based approach: EXTREMELY HACKY! */
 
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $yarpp, $wp_query, $pagenow, $yarpp, $related_query;
+	global $yarpp, $wp_query, $pagenow, $yarpp;
 
 	$yarpp->upgrade_check();
 
