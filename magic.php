@@ -120,7 +120,7 @@ function yarpp_sql( $reference_ID = false ) {
 /* new in 3.0! new query-based approach: EXTREMELY HACKY! */
 
 function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
-	global $yarpp, $wp_query, $pagenow, $yarpp;
+	global $yarpp, $wp_query, $pagenow, $yarpp, $related_query;
 
 	$yarpp->upgrade_check();
 
@@ -209,6 +209,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	// make sure we get the right is_single value
 	// (see http://wordpress.org/support/topic/288230)
 	$wp_query->is_single = false;
+	$related_query = $wp_query; // backwards compatibility
 
 	if ($domain == 'metabox') {
 		include(YARPP_DIR.'/template-metabox.php');
@@ -232,7 +233,7 @@ function yarpp_related($type,$args,$echo = true,$reference_ID=false,$domain = 'w
 	}
 
 	// restore the older wp_query.
-	$wp_query = $current_query; unset($current_query);
+	$wp_query = $current_query; unset($current_query); unset($related_query);
 	wp_reset_postdata();
 	$pagenow = $current_pagenow; unset($current_pagenow);
 
