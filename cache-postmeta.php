@@ -93,7 +93,7 @@ class YARPP_Cache_Postmeta {
 	}
 
 	public function fields_filter($arg) {
-		global $wpdb, $wpdb;
+		global $wpdb;
 		if ($this->yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
 			$scores = array();
 			foreach ($this->related_postdata as $related_entry) {

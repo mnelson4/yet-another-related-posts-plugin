@@ -69,7 +69,7 @@ class YARPP {
 	}
 	
 	function activate() {
-		global $yarpp_version, $wpdb;
+		global $wpdb;
 	
 		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
 		if (!$wpdb->num_rows)
