@@ -8,6 +8,12 @@ function yarpp_sql( $reference_ID = false ) {
 	if ( is_object($post) && !$reference_ID ) {
 		$reference_ID = $post->ID;
 	}
+	
+	if ( !is_object($post) || $reference_ID != $post->ID ) {
+		$reference_post = get_post( $reference_ID );
+	} else {
+		$reference_post = $post;
+	}
 
 	$options = array( 'threshold', 'show_pass_post', 'past_only', 'body', 'title', 'tags', 'categories', 'exclude', 'recent_only', 'recent_number', 'recent_units');
 	$yarpp_options = yarpp_get_option();
@@ -15,97 +21,86 @@ function yarpp_sql( $reference_ID = false ) {
 	$optvals = array_intersect_key($yarpp_options, array_flip($options));
 	extract($optvals);
 
-	$limit = max(yarpp_get_option('limit'), yarpp_get_option('rss_limit'));
-
 	// Fetch keywords
 	$keywords = $yarpp->cache->get_keywords($reference_ID);
 
-	// get weights
+	// Get weights
 	$weights = array(
 		'body' => (($body == 3)?3:(($body == 2)?1:0)),
 		'title' => (($title == 3)?3:(($title == 2)?1:0)),
-		'tag' => (($tags != 1)?1:0),
-		'cat' => (($categories != 1)?1:0)
+		'post_tag' => (($tags != 1)?1:0),
+		'category' => (($categories != 1)?1:0)
 	);
-	$totalweight = array_sum( array_values( $weights ) );
+	//$totalweight = array_sum( array_values( $weights ) );
 
-	// get disallowed categories and tags
-	$disterms = wp_parse_id_list($exclude['category'] . ',' . $exclude['post_tag']);
-	$usedisterms = count($disterms);
-	$disterms = implode(',', $disterms);
-
+	// Build criteria query parts based on the weights
 	$criteria = array();
 	if ($weights['body'])
 		$criteria['body'] = "(MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."'))";
 	if ($weights['title'])
 		$criteria['title'] = "(MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."'))";
-	if ($weights['tag'])
-		$criteria['tag'] = "COUNT( DISTINCT tagtax.term_taxonomy_id )";
-	if ($weights['cat'])
-		$criteria['cat'] = "COUNT( DISTINCT cattax.term_taxonomy_id )";
+	if ($weights['post_tag'])
+		$criteria['post_tag'] = "count(distinct if( termtax.taxonomy = 'post_tag', termtax.term_taxonomy_id, null ))";
+	if ($weights['category'])
+		$criteria['category'] = "count(distinct if( termtax.taxonomy = 'category', termtax.term_taxonomy_id, null ))";
 
+	// SELECT
 	$newsql = "SELECT $reference_ID as reference_ID, ID, "; //post_title, post_date, post_content, post_excerpt,
 
 	$newsql .= 'ROUND(0';
 	foreach ($criteria as $key => $value) {
-		$newsql .= "+ $value * ".$weights[$key];
+		$newsql .= "+ $value * " . $weights[$key];
 	}
 	$newsql .= ',1) as score';
 
 	$newsql .= "\n from $wpdb->posts \n";
 
-	if ($usedisterms)
-		$newsql .= " left join $wpdb->term_relationships as blockrel on ($wpdb->posts.ID = blockrel.object_id)
-		left join $wpdb->term_taxonomy as blocktax using (`term_taxonomy_id`)
-		left join $wpdb->terms as blockterm on (blocktax.term_id = blockterm.term_id and blockterm.term_id in ($disterms))\n";
-
-	if ($weights['tag'])
-		$newsql .= " left JOIN $wpdb->term_relationships AS thistag ON (thistag.object_id = $reference_ID )
-		left JOIN $wpdb->term_relationships AS tagrel on (tagrel.term_taxonomy_id = thistag.term_taxonomy_id
-		AND tagrel.object_id = $wpdb->posts.ID)
-		left JOIN $wpdb->term_taxonomy AS tagtax ON ( tagrel.term_taxonomy_id = tagtax.term_taxonomy_id
-		AND tagtax.taxonomy = 'post_tag')\n";
-
-	if ($weights['cat'])
-		$newsql .= " left JOIN $wpdb->term_relationships AS thiscat ON (thiscat.object_id = $reference_ID )
-		left JOIN $wpdb->term_relationships AS catrel on (catrel.term_taxonomy_id = thiscat.term_taxonomy_id
-		AND catrel.object_id = $wpdb->posts.ID)
-		left JOIN $wpdb->term_taxonomy AS cattax ON ( catrel.term_taxonomy_id = cattax.term_taxonomy_id
-		AND cattax.taxonomy = 'category')\n";
+	// Get disallowed categories and tags
+	$disterms = wp_parse_id_list($exclude['category'] . ',' . $exclude['post_tag']);
+	$usedisterms = count($disterms);
+	if ( $usedisterms || $weights['post_tag'] || $weights['category'] ) {
+		$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = wp_posts.ID )
+left join $wpdb->term_taxonomy as termtax on ( terms.term_taxonomy_id = termtax.term_taxonomy_id )
+left join $wpdb->term_relationships as refterms on ( terms.term_taxonomy_id = refterms.term_taxonomy_id and refterms.object_id = $reference_ID )";
+	}
 
 	// WHERE
 
-	$newsql .= " where (post_status IN ( 'publish',	'static' ) and ID != '$reference_ID')";
+	$newsql .= " where post_status in ( 'publish', 'static' ) and ID != '$reference_ID'";
 
-	if ($past_only) { // 3.1.8: revised $past_only option
-		if ( is_object($post) && $reference_ID == $post->ID )
-			$reference_post_date = $post->post_date;
-		else
-			$reference_post_date = $wpdb->get_var("select post_date from $wpdb->posts where ID = $reference_ID");
-		$newsql .= " and post_date <= '$reference_post_date' ";
-	}
-	if (!$show_pass_post)
+	if ($past_only) // 3.1.8: revised $past_only option
+		$newsql .= " and post_date <= '$reference_post->post_date' ";
+	if ( !$show_pass_post )
 		$newsql .= " and post_password ='' ";
-	if ($recent_only)
+	if ( $recent_only )
 		$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
 
 	$newsql .= " and post_type = 'post'";
 
 	// GROUP BY
 	$newsql .= "\n group by ID \n";
+
 	// HAVING
-	// safethreshold is so the new calibration system works.
 	// number_format fix suggested by vkovalcik! :)
 	$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
 	$newsql .= " having score >= $safethreshold";
-	if ($usedisterms)
-		$newsql .= " and count(blockterm.term_id) = 0";
+	if ( $usedisterms ) {
+		$disterms = implode(',', $disterms);
+		$newsql .= " and bit_and(termtax.term_id in ($disterms)) = 0";
+	}
 
-	$newsql .= (($categories == 3)?' and '.$criteria['cat'].' >= 1':'');
-	$newsql .= (($categories == 4)?' and '.$criteria['cat'].' >= 2':'');
-	$newsql .= (($tags == 3)?' and '.$criteria['tag'].' >= 1':'');
-	$newsql .= (($tags == 4)?' and '.$criteria['tag'].' >= 2':'');
-	$newsql .= " order by score desc limit ".$limit;
+	if ( $categories == 3 )
+		$newsql .= ' and '.$criteria['category'].' >= 1';
+	if ( $categories == 4 )
+		$newsql .= ' and '.$criteria['category'].' >= 2';
+	if ( $tags == 3 )
+		$newsql .= ' and '.$criteria['post_tag'].' >= 1';
+	if ( $tags == 4 )
+		$newsql .= ' and '.$criteria['post_tag'].' >= 2';
+
+	// The maximum number of items we'll ever want to cache
+	$limit = max(yarpp_get_option('limit'), yarpp_get_option('rss_limit'));
+	$newsql .= " order by score desc limit $limit";
 
 	// in caching, we cross-relate regardless of whether we're going to actually
 	// use it or not.

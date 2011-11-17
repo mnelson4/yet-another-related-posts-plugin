@@ -200,6 +200,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.4 =
+* Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
 * Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
 * Significant code cleanup
@@ -215,6 +216,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Use `get_terms` to load terms
 * Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
+* Fix formatting of the Related Posts meta box
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.
 * Init YARPP on the `init` action, [for compatibility with WPML](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
