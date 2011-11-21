@@ -30,8 +30,7 @@ class YARPP {
 		$this->storage_class = $yarpp_storage_class;
 		$this->cache = new $this->storage_class( $this );
 
-		register_activation_hook( __FILE__, array($this, 'activate') );		
-		add_action( 'admin_init', array($this, 'admin_init') );
+		register_activation_hook( __FILE__, array($this, 'activate') );
 		
 		// update cache on save
 		add_action( 'save_post', array($this->cache, 'save_post') );
@@ -54,15 +53,7 @@ class YARPP {
 			$this->admin = new YARPP_Admin( $this );
 		}
 	}
-	
-	function admin_init() {
-		// Register AJAX services
-		if ( defined('DOING_AJAX') && DOING_AJAX ) {
-			add_action( 'wp_ajax_yarpp_display_exclude_terms', array( $this, 'ajax_display_exclude_terms' ) );
-			add_action( 'wp_ajax_yarpp_display_demo', array( $this, 'ajax_display_demo' ) );
-		}
-	}
-	
+		
 	/*
 	 * OPTIONS
 	 */
@@ -452,59 +443,5 @@ class YARPP {
 			set_transient('yarpp_version_info', $result, 60*60*12);
 		}
 		return $result;
-	}
-
-	/*
-	 * AJAX SERVICES
-	 */
-
-	function ajax_display_exclude_terms() {
-		if ( !isset($_REQUEST['taxonomy']) )
-			return;
-		
-		$taxonomy = (string) $_REQUEST['taxonomy'];
-		
-		header("HTTP/1.1 200");
-		header("Content-Type: text/html; charset=UTF-8");
-		
-		$exclude = yarpp_get_option('exclude');
-		if ( isset($exclude[$taxonomy]) )
-			$exclude = $exclude[$taxonomy];
-		else
-			$exclude = array();
-		if ( 'category' == $taxonomy )
-			$exclude .= ',' . get_option( 'default_category' );
-
-		$terms = get_terms($taxonomy, array(
-			'exclude' => $exclude,
-			'hide_empty' => false,
-			'hierarchical' => false,
-			'number' => 100,
-			'offset' => $_REQUEST['offset']
-		));
-		
-		if ( !count($terms) ) {
-			echo ':('; // no more :(
-			exit;
-		}
-		
-		foreach ($terms as $term) {
-			echo "<input type='checkbox' name='exclude[$taxonomy][$term->term_id]' value='true' /> <label>" . esc_html($term->name) . "</label> ";
-			//for='exclude[$taxonomy][$cat->term_id]' it's not HTML. :(
-		}
-		exit;
-	}
-	
-	function ajax_display_demo() {
-		header("HTTP/1.1 200");
-		header("Content-Type: text/html; charset=UTF-8");
-	
-		$domain = 'demo_web';
-		if ( isset($_REQUEST['domain']) )
-			$domain = $_REQUEST['domain'];
-	
-		$return = yarpp_related(array('post'), array(), false, false, $domain);
-		echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
-		exit;
 	}
 }
