@@ -18,7 +18,6 @@ define('YARPP_DONT_RUN', 'X(');
 
 require_once(YARPP_DIR.'/class-core.php');
 require_once(YARPP_DIR.'/includes.php');
-require_once(YARPP_DIR.'/magic.php');
 require_once(YARPP_DIR.'/related-functions.php');
 require_once(YARPP_DIR.'/template-functions.php');
 require_once(YARPP_DIR.'/class-widget.php');
