@@ -468,10 +468,17 @@ class YARPP {
 		header("Content-Type: text/html; charset=UTF-8");
 		
 		$exclude = yarpp_get_option('exclude');
-		if ( !isset($exclude[$taxonomy]) )
-			$exclude[$taxonomy] = array();
+		if ( isset($exclude[$taxonomy]) )
+			$exclude = $exclude[$taxonomy];
+		else
+			$exclude = array();
+		if ( 'category' == $taxonomy )
+			$exclude .= ',' . get_option( 'default_category' );
+
 		$terms = get_terms($taxonomy, array(
-			'exclude' => $exclude[$taxonomy],
+			'exclude' => $exclude,
+			'hide_empty' => false,
+			'hierarchical' => false,
 			'number' => 100,
 			'offset' => $_REQUEST['offset']
 		));
