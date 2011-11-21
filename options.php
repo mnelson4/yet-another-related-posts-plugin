@@ -125,7 +125,7 @@ if (isset($_POST['update_yarpp'])) {
 	<form method="post">
 
   <div id="yarpp_author_text">
-	<small><?php printf(__('by <a href="%s" target="_blank">mitcho (Michael 芳貴 Erlewine)</a>','yarpp'), 'http://yarpp.org/');?></small>
+	<small><?php printf(__('by <a href="%s" target="_blank">mitcho (Michael 芳貴 Erlewine)</a>','yarpp'), 'http://mitcho.com/');?></small>
   </div>
 
 <!--	<div style='border:1px solid #ddd;padding:8px;'>-->

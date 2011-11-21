@@ -33,10 +33,10 @@ class YARPP_Meta_Box {
 	function tax_importance($taxonomy) {
 		$value = yarpp_get_option("weight[tax][{$taxonomy->name}]");
 		echo "<tr valign='top'><th scope='row'>{$taxonomy->labels->name}:</th><td><select name='weight[tax][{$taxonomy->name}]'>";
-		echo "<option $inputplus value='1'". (($value == 1) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
-		echo "<option $inputplus value='2'". (($value == 2) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
-		echo "<option $inputplus value='3'". (($value == 3) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
-		echo "<option $inputplus value='4'". (($value == 4) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='1'". (($value == 1) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
+		echo "<option value='2'". (($value == 2) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
+		echo "<option value='3'". (($value == 3) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='4'". (($value == 4) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
 		echo "</select></td></tr>";
 	}
 	
