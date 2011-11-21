@@ -17,10 +17,14 @@ define('YARPP_NOT_CACHED', ':/');
 define('YARPP_DONT_RUN', 'X(');
 
 require_once(YARPP_DIR.'/class-core.php');
-require_once(YARPP_DIR.'/includes.php');
 require_once(YARPP_DIR.'/related-functions.php');
 require_once(YARPP_DIR.'/template-functions.php');
 require_once(YARPP_DIR.'/class-widget.php');
+
+if ( !defined('WP_CONTENT_URL') )
+	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
+if ( !defined('WP_CONTENT_DIR') )
+	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
 
 // New in 3.2: load YARPP cache engine
 // By default, this is tables, which uses custom db tables.
@@ -38,4 +42,26 @@ function yarpp_init() {
 	// new in 3.3: include BlogGlue meta box
 	if ( file_exists( YARPP_DIR . '/blogglue.php' ) )
 		include_once( YARPP_DIR . '/blogglue.php' );
+}
+
+function yarpp_set_option($options, $value = null) {
+	global $yarpp;
+	$yarpp->set_option($options, $value);
+}
+
+function yarpp_get_option($option = null) {
+	global $yarpp;
+	return $yarpp->get_option($option);
+}
+
+// since 3.3.2: fix for WP 3.0.x
+if ( !function_exists( 'self_admin_url' ) ) {
+	function self_admin_url($path = '', $scheme = 'admin') {
+		if ( defined( 'WP_NETWORK_ADMIN' ) && WP_NETWORK_ADMIN )
+			return network_admin_url($path, $scheme);
+		elseif ( defined( 'WP_USER_ADMIN' ) && WP_USER_ADMIN )
+			return user_admin_url($path, $scheme);
+		else
+			return admin_url($path, $scheme);
+	}
 }
