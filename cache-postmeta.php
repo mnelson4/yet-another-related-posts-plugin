@@ -175,7 +175,7 @@ class YARPP_Cache_Postmeta {
 			return YARPP_NOT_CACHED;
 
 		$original_related = $this->related($reference_ID);
-		$related = $wpdb->get_results(yarpp_sql($reference_ID), ARRAY_A);
+		$related = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
 		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
 
 		if ( count($new_related) ) {

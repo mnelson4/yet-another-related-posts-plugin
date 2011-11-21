@@ -5,6 +5,7 @@ abstract class YARPP_Cache {
 	public $core;
 	public $score_override = false;
 	public $online_limit = false;
+	public $last_sql;
 
 	function __construct( &$core ) {
 		$this->core = &$core;
@@ -13,7 +14,7 @@ abstract class YARPP_Cache {
 	
 	// Note: return value changed in 3.4
 	// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
-	function enforce($reference_ID, $force = false) {
+	function enforce( $reference_ID, $force = false ) {
 		if ( !$reference_ID = absint($reference_ID) )
 			return false;
 	
@@ -99,6 +100,111 @@ abstract class YARPP_Cache {
 			$this->score_override = false;
 			$this->online_limit = false;
 		}
+	}
+
+	/*
+	 * SQL!
+	 */
+
+	function sql( $reference_ID = false ) {
+		global $wpdb, $post;
+	
+		if ( is_object($post) && !$reference_ID ) {
+			$reference_ID = $post->ID;
+		}
+		
+		if ( !is_object($post) || $reference_ID != $post->ID ) {
+			$reference_post = get_post( $reference_ID );
+		} else {
+			$reference_post = $post;
+		}
+	
+		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units' );
+		// mask it so we only get the ones specified in $options
+		$optvals = array_intersect_key($this->core->get_option(), array_flip($options));
+		extract($optvals);
+	
+		// Fetch keywords
+		$keywords = $this->get_keywords($reference_ID);
+	
+		// SELECT
+		$newsql = "SELECT $reference_ID as reference_ID, ID, "; //post_title, post_date, post_content, post_excerpt,
+	
+		$newsql .= 'ROUND(0';
+	
+		if ($weight['body'] != 1)
+			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". ($weight['body'] == 3 ? 3 : 1);
+		if ($weight['title'] != 1)
+			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". ($weight['title'] == 3 ? 3 : 1);
+	
+		// Build tax criteria query parts based on the weights
+		$tax_criteria = array();
+		foreach ( $weight['tax'] as $tax => $value ) {
+			// 1 means don't consider:
+			if ($value == 1)
+				continue;
+			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', termtax.term_taxonomy_id, null ))";
+			$newsql .= " + " . $tax_criteria[$tax];
+		}
+	
+		$newsql .= ',1) as score';
+	
+		$newsql .= "\n from $wpdb->posts \n";
+	
+		// Get disallowed categories and tags
+		$disterms = wp_parse_id_list(join(',',$exclude));
+		$usedisterms = count($disterms);
+		if ( $usedisterms || count($tax_criteria) ) {
+			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = wp_posts.ID ) \n"
+				. "left join $wpdb->term_taxonomy as termtax on ( terms.term_taxonomy_id = termtax.term_taxonomy_id ) \n"
+				. "left join $wpdb->term_relationships as refterms on ( terms.term_taxonomy_id = refterms.term_taxonomy_id and refterms.object_id = $reference_ID ) \n";
+		}
+	
+		// WHERE
+	
+		$newsql .= " where post_status in ( 'publish', 'static' ) and ID != '$reference_ID'";
+	
+		if ($past_only) // 3.1.8: revised $past_only option
+			$newsql .= " and post_date <= '$reference_post->post_date' ";
+		if ( !$show_pass_post )
+			$newsql .= " and post_password ='' ";
+		if ( $recent_only )
+			$newsql .= " and post_date > date_sub(now(), interval $recent_number $recent_units) ";
+	
+		$newsql .= " and post_type = 'post'";
+	
+		// GROUP BY
+		$newsql .= "\n group by ID \n";
+	
+		// HAVING
+		// number_format fix suggested by vkovalcik! :)
+		$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
+		$newsql .= " having score >= $safethreshold";
+		if ( $usedisterms ) {
+			$disterms = implode(',', $disterms);
+			$newsql .= " and bit_and(termtax.term_id in ($disterms)) = 0";
+		}
+	
+		foreach ( $weight['tax'] as $tax => $value ) {
+			if ( $value == 3 )
+				$newsql .= ' and '.$tax_criteria[$tax].' >= 1';
+			if ( $value == 4 )
+				$newsql .= ' and '.$tax_criteria[$tax].' >= 2';
+		}
+	
+		// The maximum number of items we'll ever want to cache
+		$limit = max($this->core->get_option('limit'), $this->core->get_option('rss_limit'));
+		$newsql .= " order by score desc limit $limit";
+	
+		// in caching, we cross-relate regardless of whether we're going to actually
+		// use it or not.
+		$newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+	
+		if ($this->core->debug) echo "<!--$newsql-->";
+		
+		$this->last_sql = $newsql;
+		
+		return $newsql;
 	}
 
 	/*
@@ -207,13 +313,15 @@ abstract class YARPP_Cache {
 		static $blacklist, $blackmethods;
 	
 		if ( is_null($blacklist) || is_null($blackmethods) ) {
-			$yarpp_blacklist = array('yarpp_default', 'diggZEt_AddBut', 'reddZEt_AddBut', 'dzoneZEt_AddBut', 'wp_syntax_before_filter', 'wp_syntax_after_filter', 'wp_codebox_before_filter', 'wp_codebox_after_filter', 'do_shortcode');//,'insert_tweet_this'
+			$yarpp_blacklist = array('diggZEt_AddBut', 'reddZEt_AddBut', 'dzoneZEt_AddBut', 'wp_syntax_before_filter', 'wp_syntax_after_filter', 'wp_codebox_before_filter', 'wp_codebox_after_filter', 'do_shortcode');//,'insert_tweet_this'
 			$yarpp_blackmethods = array('addinlinejs', 'replacebbcode', 'filter_content');
 		
 			$blacklist = (array) apply_filters( 'yarpp_blacklist', $yarpp_blacklist );
 			$blackmethods = (array) apply_filters( 'yarpp_blackmethods', $yarpp_blackmethods );
 		}
 		
+		if ( is_array($filter) && is_a( $filter[0], 'YARPP' ) )
+			return false;
 		if ( is_array($filter) && in_array( $filter[1], $blackmethods ) )
 			return false;
 		return !in_array( $filter, $blacklist );

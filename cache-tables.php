@@ -203,7 +203,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		// clear out the cruft
 		$this->clear($reference_ID);
 
-		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) ".yarpp_sql($reference_ID)." on duplicate key update date = now()");
+		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) " . $this->sql($reference_ID) . " on duplicate key update date = now()");
 
 		// If there were related entries saved...
 		if ( $wpdb->rows_affected ) {

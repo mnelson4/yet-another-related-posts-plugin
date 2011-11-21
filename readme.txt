@@ -15,16 +15,16 @@ Display a list of related entries on your site and feeds based on a unique algor
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site. Key features include:
 
-1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, and categories, YARPP calculates a "match score" for each pair of posts on your blog. You choose the threshold limit for relevance and you get more related posts if there are more related posts and less if there are less. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
+1. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and **now custom taxonomies**, YARPP finds related content from across your site. **Improved and optimized in 3.4!** [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
 2. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) puts you in charge of how your posts are displayed.
-3. **Caching**: **Improved in 3.2!** YARPP organically caches the related posts data as your site is visited, greatly improving performance.
+3. **Caching**: YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
 6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
 
 This plugin requires PHP 5 and MySQL 4.1 or greater.
 
-YARPP does not yet support custom post types or taxonomies; look for these in a future version.
+YARPP does not yet support custom post types; look for these in a future version.
 
 **See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/)**.
 
@@ -66,10 +66,6 @@ Related posts can also be displayed as a widget. Go to the Design > Widgets opti
 
 New in version 3.0, YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
 
-= Manual installation =
-
-For advanced users with knowledge of PHP, there is also an [advanced manual installation option](http://mitcho.com/code/yarpp/manual-installation/).
-
 == Frequently Asked Questions ==
 
 If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email or tweet with questions.*
@@ -86,16 +82,17 @@ This method can also be used to display YARPP on pages other than single-post di
 
 = Does YARPP slow down my blog/server? =
 
-A little bit, yes. However, YARPP 3.0 introduced a new caching mechanism which greatly reduces the hit of the computationally intensive relatedness computation. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
+The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
 
 If you find that the YARPP database calls are still too database-intensive, try the following:
 
 * turning off "cross relate posts and pages";
 * turning on "show only previous posts";
-* not considering tags and/or categories in the Relatedness formula;
-* not excluding any tags and/or categories in The Pool.
+* not considering any taxonomies (tags, categories, etc.) in the Relatedness formula and not excluding any content by taxonomy in The Pool.
 
 These options can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab. All of these can improve database performance.
+
+If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality.
 
 If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/go/order/?refdom=mitcho.com).
 
@@ -131,7 +128,7 @@ It is recommended that you tweak your match threshold whenever you make changes 
 
 Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966) and the [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/) plugin. Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually. There are reports that the [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605) may also be incompatible with YARPP. Other related posts plugins, obviously, may also be incompatible.
 
-Please submit similar bugs by starting a new thread on [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
+Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
 
 = Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
@@ -141,7 +138,7 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 = Things are weird after I upgraded. =
 
-I highly recommend you disactivate YARPP, replace it with the new one, and then reactivate it.
+I highly recommend you disactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it. Visit the YARPP settings page ("Related Posts") to verify your settings.
 
 = Can I clear my cache? =
 
@@ -201,6 +198,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
+* Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content.
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
 * Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
 * Significant code cleanup

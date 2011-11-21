@@ -1,6 +1,6 @@
 <?php
 
-global $wpdb, $yarpp_value_options, $yarpp_binary_options, $wp_version, $yarpp, $yarpp_templates, $yarpp_myisam;
+global $wpdb, $wp_version, $yarpp;
 
 // Reenforce YARPP setup:
 if ( !get_option('yarpp_version') )
@@ -14,8 +14,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'flush') {
 }
 
 // check to see that templates are in the right place
-$yarpp_templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-if ( !(is_array($yarpp_templates) && count($yarpp_templates)) ) {
+$yarpp->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+if ( !(is_array($yarpp->templates) && count($yarpp->templates)) ) {
 	yarpp_set_option(array('use_template' => false, 'rss_use_template' => false));
 }
 
@@ -54,7 +54,6 @@ if (isset($_POST['myisam_override'])) {
 	."</div>";
 }
 
-$yarpp_myisam = true;
 if ( !yarpp_get_option('myisam_override') ) {
 	$yarpp_check_return = $yarpp->myisam_check();
 	if ($yarpp_check_return !== true) { // if it's not *exactly* true
@@ -71,11 +70,11 @@ if ( !yarpp_get_option('myisam_override') ) {
 		."</div>";
 
 		yarpp_set_option(array('title' => 1, 'body' => 1));
-		$yarpp_myisam = false;
+		$yarpp->myisam = false;
 	}
 }
 
-if ( $yarpp_myisam && !$yarpp->enabled() ) {
+if ( $yarpp->myisam && !$yarpp->enabled() ) {
 	echo '<div class="updated"><p>';
 	if ( $yarpp->activate() ) {
 		_e('The YARPP database had an error but has been fixed.','yarpp');
@@ -89,14 +88,16 @@ if ( $yarpp_myisam && !$yarpp->enabled() ) {
 if (isset($_POST['update_yarpp'])) {
 
 	$new_options = array();
-
-	foreach (array_keys($yarpp_value_options) as $option) {
-		if ( isset($_POST[$option]) && is_string($_POST[$option]) )
+	foreach ($yarpp->default_options as $option => $default) {
+		if ( is_bool($default) )
+			$new_options[$option] = isset($_POST[$option]);
+		if ( (is_string($default) || is_int($default)) &&
+			isset($_POST[$option]) && is_string($_POST[$option]) )
 			$new_options[$option] = stripslashes($_POST[$option]);
 	}
-	foreach (array('title','body','tags','categories') as $key) {
-		if ( !isset($_POST[$key]) )
-			$new_options[$key] = 1;
+
+	if ( isset($_POST['weight']) ) {
+		$new_options['weight'] = $_POST['weight'];
 	}
 
 	// excludes are different
@@ -105,10 +106,6 @@ if (isset($_POST['update_yarpp'])) {
 		$exclude = array_merge( array('category' => array(), 'post_tag' => array()), $_POST['exclude'] );
 		$new_options['exclude']['category'] = implode(',',array_keys($exclude['category']));
 		$new_options['exclude']['post_tag'] = implode(',',array_keys($exclude['post_tag']));
-	}
-	
-	foreach (array_keys($yarpp_binary_options) as $option) {
-		$new_options[$option] = isset($_POST[$option]);
 	}
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
