@@ -1,29 +1,69 @@
 <?php
 
-// Here are the related_WHATEVER functions, as introduced in 1.1, which actually just use the yarpp_related and yarpp_related_exist functions.
+function yarpp_related($reference_ID, $args = array(), $echo = false) {
+	global $yarpp;
 
+	if ( is_array($reference_ID) ) {
+		_doing_it_wrong( __FUNCTION__, "YARPP's (internal) related function signature now takes the \$reference_ID first.", '3.4');
+		return;
+	}
+	
+	return $yarpp->display_related($reference_ID, $args, $echo);
+}
+
+function yarpp_related_exist($reference_ID, $args = array()) {
+	global $yarpp;
+
+	if ( is_array($reference_ID) ) {
+		_doing_it_wrong( __FUNCTION__, "YARPP's (internal) related function signature now takes the \$reference_ID first.", '3.4');
+		return;
+	}
+	
+	return $yarpp->related_exist($reference_ID, $args, $echo);
+}
+
+function yarpp_get_related($reference_ID, $args = array()) {
+	global $yarpp;
+	return $yarpp->get_related($reference_ID, $args);
+}
+
+// Here are the related_WHATEVER functions, as introduced in 1.1
 // Since YARPP 2.1, these functions receive (optionally) one array argument. See the documentation for instructions on how to customize their output.
 
-function related_posts($a = array(),$echo=true,$reference_ID=false) {
-	return yarpp_related(array('post'),$a,$echo,$reference_ID);
+function related_posts($args = array(),$echo=true,$reference_ID=false) {
+	$args['type'] = array('post');
+	if ( yarpp_get_option('cross_relate') )
+		$args['type'] = array('post', 'page');
+	return yarpp_related($reference_ID, $args, $echo);
 }
 
-function related_pages($a = array(),$echo=true,$reference_ID=false) {
-	return yarpp_related(array('page'),$a,$echo,$reference_ID);
+function related_pages($args = array(),$echo=true,$reference_ID=false) {
+	$args['type'] = array('page');
+	if ( yarpp_get_option('cross_relate') )
+		$args['type'] = array('post', 'page');
+	return yarpp_related($reference_ID, $args, $echo);
 }
 
-function related_entries($a = array(),$echo=true,$reference_ID=false) {
-	return yarpp_related(array('page','post'),$a,$echo,$reference_ID);
+function related_entries($args = array(),$echo=true,$reference_ID=false) {
+	$args['type'] = array('post', 'page');
+	return yarpp_related($reference_ID, $args, $echo);
 }
 
-function related_posts_exist($a = array(),$reference_ID=false) {
-	return yarpp_related_exist(array('post'),$a,$reference_ID);
+function related_posts_exist($args = array(),$reference_ID=false) {
+	$args['type'] = array('post');
+	if ( yarpp_get_option('cross_relate') )
+		$args['type'] = array('post', 'page');
+	return yarpp_related_exist($reference_ID, $args);
 }
 
-function related_pages_exist($a = array(),$reference_ID=false) {
-	return yarpp_related_exist(array('page'),$a,$reference_ID);
+function related_pages_exist($args = array(),$reference_ID=false) {
+	$args['type'] = array('page');
+	if ( yarpp_get_option('cross_relate') )
+		$args['type'] = array('post', 'page');
+	return yarpp_related_exist($reference_ID, $args);
 }
 
-function related_entries_exist($a = array(),$reference_ID=false) {
-	return yarpp_related_exist(array('page','post'),$a,$reference_ID);
+function related_entries_exist($args = array(),$reference_ID=false) {
+	$args['type'] = array('post', 'page');
+	return yarpp_related_exist($reference_ID, $args);
 }

@@ -5,9 +5,9 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 */
 ?><h3>Related Posts</h3>
 
-<?php if ($related_query->have_posts()):
+<?php if (have_posts()):
 	$postsArray = array();
-	while ($related_query->have_posts()) : $related_query->the_post();
+	while (have_posts()) : the_post();
 		$postsArray[] = '<a href="'.get_permalink().'" rel="bookmark">'.get_the_title().'</a><!-- ('.get_the_score().')-->';
 	endwhile;
 
