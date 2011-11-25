@@ -1,9 +1,5 @@
 <?php
 
-// Used only in demo mode
-if (!defined('LOREMIPSUM'))
-	define('LOREMIPSUM','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.');
-
 class YARPP_Admin {
 	public $core;
 	public $hook;
@@ -45,9 +41,10 @@ class YARPP_Admin {
 	function enqueue() {
 		global $current_screen;
 		if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
+			$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 			wp_enqueue_script( 'postbox' );
-			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), YARPP_VERSION );
-			wp_enqueue_script( 'yarpp_options', plugins_url( 'options.js', __FILE__ ), array('jquery'), YARPP_VERSION );
+			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
+			wp_enqueue_script( 'yarpp_options', plugins_url( 'options.js', __FILE__ ), array('jquery'), $version );
 			// wp_enqueue_script( 'thickbox' );
 			// wp_enqueue_style( 'thickbox' );
 		}
@@ -69,7 +66,10 @@ class YARPP_Admin {
 	function metabox() {
 		echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 }</style><div id="yarpp-related-posts">';
 		if ( get_the_ID() )
-			yarpp_related(array('post'),array('limit'=>1000),true,false,'metabox');
+			$this->core->display_related(null, array(
+				'post_type' => array('post'),
+				'domain' => 'metabox'
+			));
 		else
 			echo "<p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p>";
 		echo '</div>';
@@ -127,11 +127,12 @@ class YARPP_Admin {
 		header("HTTP/1.1 200");
 		header("Content-Type: text/html; charset=UTF-8");
 	
-		$domain = 'demo_web';
-		if ( isset($_REQUEST['domain']) )
-			$domain = $_REQUEST['domain'];
-	
-		$return = yarpp_related(array('post'), array(), false, false, $domain);
+		$args = array(
+			'post_type' => array('post'),
+			'domain' => isset($_REQUEST['domain']) ? $_REQUEST['domain'] : 'website'
+		);
+			
+		$return = $this->core->display_demo_related($args, false);
 		echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
 		exit;
 	}

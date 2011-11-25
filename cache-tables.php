@@ -8,21 +8,12 @@ define('YARPP_TABLES_KEYWORDS_TABLE', 'yarpp_keyword_cache');
 class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
 	private $yarpp_time = false;
-	public $demo_time = false;
 
 	/**
 	 * SETUP/STATUS
 	 */
 	function __construct( &$core ) {
 		parent::__construct( $core );
-		add_filter('posts_join',array(&$this,'join_filter'));
-		add_filter('posts_where',array(&$this,'where_filter'));
-		add_filter('posts_orderby',array(&$this,'orderby_filter'));
-		add_filter('posts_fields',array(&$this,'fields_filter'));
-		add_filter('posts_request',array(&$this,'demo_request_filter'));
-		add_filter('post_limits',array(&$this,'limit_filter'));
-		// sets the score override flag.
-		add_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
 
 	public function is_enabled() {
@@ -124,18 +115,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		return $arg;
 	}
 
-	public function demo_request_filter($arg) {
-		global $wpdb;
-		if ($this->demo_time) {
-			$wpdb->query("set @count = 0;");
-			$arg = "SELECT SQL_CALC_FOUND_ROWS ID + {$this->demo_limit} as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
-			concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
-			FROM $wpdb->posts
-			ORDER BY ID DESC LIMIT 0, {$this->demo_limit}";
-		}
-		return $arg;
-	}
-
 	public function limit_filter($arg) {
 		global $wpdb;
 		if ($this->yarpp_time and $this->online_limit) {
@@ -153,12 +132,27 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 	 
 	public function begin_yarpp_time() {
 		$this->yarpp_time = true;
+		add_filter('posts_join',array(&$this,'join_filter'));
+		add_filter('posts_where',array(&$this,'where_filter'));
+		add_filter('posts_orderby',array(&$this,'orderby_filter'));
+		add_filter('posts_fields',array(&$this,'fields_filter'));
+		add_filter('post_limits',array(&$this,'limit_filter'));
+		add_action('pre_get_posts',array(&$this,'add_signature'));
+		// sets the score override flag.
+		add_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
-
+	
 	public function end_yarpp_time() {
 		$this->yarpp_time = false;
+		remove_filter('posts_join',array(&$this,'join_filter'));
+		remove_filter('posts_where',array(&$this,'where_filter'));
+		remove_filter('posts_orderby',array(&$this,'orderby_filter'));
+		remove_filter('posts_fields',array(&$this,'fields_filter'));
+		remove_filter('post_limits',array(&$this,'limit_filter'));
+		remove_action('pre_get_posts',array(&$this,'add_signature'));
+		remove_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
-
+	
 	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
 	public function is_cached($reference_ID) {
 		global $wpdb;
@@ -241,8 +235,10 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 	public function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
 
-		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
-			return new WP_Error('yarpp_cache_error', "reference ID and/or related ID must be ints" );
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) ) {
+			_doing_it_wrong( __METHOD__, 'reference ID and/or related ID must be set', '3.4' );
+			return;
+		}
 
 		if (!is_null($reference_ID) && !is_null($related_ID)) {
 			$results = $wpdb->get_col("select ID from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = $reference_ID and ID = $related_ID");

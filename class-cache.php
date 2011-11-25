@@ -12,6 +12,10 @@ abstract class YARPP_Cache {
 		$this->name = __($this->name, 'yarpp');
 	}
 	
+	function add_signature( $query ) {
+		$query->yarpp_cache_type = $this->name;
+	}
+	
 	// Note: return value changed in 3.4
 	// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
 	function enforce( $reference_ID, $force = false ) {
@@ -52,8 +56,8 @@ abstract class YARPP_Cache {
 		if ( defined( 'WP_IMPORTING' ) )
 			return;
 	
-		$sql = "select post_parent from $wpdb->posts where ID='$post_ID'";
-		$parent_ID = $wpdb->get_var($sql);
+		$post = get_post( $post_ID );
+		$parent_ID = $post->post_parent;
 	
 		if ( $parent_ID != $post_ID && $parent_ID )
 			$post_ID = $parent_ID;
@@ -106,7 +110,7 @@ abstract class YARPP_Cache {
 	 * SQL!
 	 */
 
-	function sql( $reference_ID = false ) {
+	function sql( $reference_ID = false, $args ) {
 		global $wpdb, $post;
 	
 		if ( is_object($post) && !$reference_ID ) {
@@ -119,10 +123,10 @@ abstract class YARPP_Cache {
 			$reference_post = $post;
 		}
 	
-		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units' );
-		// mask it so we only get the ones specified in $options
-		$optvals = array_intersect_key($this->core->get_option(), array_flip($options));
-		extract($optvals);
+		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
+		extract( $this->core->parse_args($args, $options) );
+		// The maximum number of items we'll ever want to cache
+		$limit = max($limit, $this->core->get_option('rss_limit'));
 	
 		// Fetch keywords
 		$keywords = $this->get_keywords($reference_ID);
@@ -192,8 +196,6 @@ abstract class YARPP_Cache {
 				$newsql .= ' and '.$tax_criteria[$tax].' >= 2';
 		}
 	
-		// The maximum number of items we'll ever want to cache
-		$limit = max($this->core->get_option('limit'), $this->core->get_option('rss_limit'));
 		$newsql .= " order by score desc limit $limit";
 	
 		// in caching, we cross-relate regardless of whether we're going to actually
@@ -327,7 +329,7 @@ abstract class YARPP_Cache {
 		return !in_array( $filter, $blacklist );
 	}
 	
-	/* FYI, apply_filters_if_white was used here to avoid a loop in apply_filters('the_content') > yarpp_default() > yarpp_related() > current_post_keywords() > apply_filters('the_content').*/
+	/* FYI, apply_filters_if_white was used here to avoid a loop in apply_filters('the_content') > YARPP::the_content() > YARPP::related() > YARPP_Cache::body_keywords() > apply_filters('the_content').*/
 	function apply_filters_if_white($tag, $value) {
 		global $wp_filter, $merged_filters, $wp_current_filter;
 	
@@ -373,5 +375,232 @@ abstract class YARPP_Cache {
 		array_pop( $wp_current_filter );
 	
 		return $value;
+	}
+}
+
+class YARPP_Cache_Bypass extends YARPP_Cache {
+
+	public $name = "bypass";
+
+	// variables used for lookup
+	private $related_postdata = array();
+	private $related_IDs = array();
+
+	private $yarpp_time = false;
+	public $demo_time = false;
+	private $demo_limit = 0;
+
+	/**
+	 * SETUP/STATUS
+	 */
+	function __construct( &$core ) {
+		parent::__construct( $core );
+	}
+
+	public function is_enabled() {
+		return true; // always enabled.
+	}
+
+	public function setup() {
+	}
+	
+	public function upgrade( $last_version ) {
+	}
+
+	public function cache_status() {
+		return 0; // always uncached
+	}
+
+	public function uncached($limit = 20, $offset = 0) {
+		return array(); // nothing to cache
+	}
+
+	/**
+	 * MAGIC FILTERS
+	 */
+	public function where_filter($arg) {
+		global $wpdb;
+		$threshold = yarpp_get_option('threshold');
+		// modify the where clause to use the related ID list.
+		if (!count($this->related_IDs))
+			$this->related_IDs = array(0);
+		$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
+
+		// if we have "recent only" set, add an additional condition
+		if (yarpp_get_option("recent_only"))
+			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
+		return $arg;
+	}
+
+	public function orderby_filter($arg) {
+		global $wpdb;
+		// only order by score if the score function is added in fields_filter, which only happens
+		// if there are related posts in the postdata
+		if ($this->score_override &&
+		    is_array($this->related_postdata) && count($this->related_postdata))
+			return str_replace("$wpdb->posts.post_date","score",$arg);
+		return $arg;
+	}
+
+	public function fields_filter($arg) {
+		global $wpdb;
+		if (is_array($this->related_postdata) && count($this->related_postdata)) {
+			$scores = array();
+			foreach ($this->related_postdata as $related_entry) {
+				$scores[] = " WHEN {$related_entry['ID']} THEN {$related_entry['score']}";
+			}
+			$arg .= ", CASE {$wpdb->posts}.ID" . join('',$scores) ." END as score";
+		}
+		return $arg;
+	}
+
+	public function demo_request_filter($arg) {
+		global $wpdb;
+		$wpdb->query("set @count = 0;");
+
+		$loremipsum = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras tincidunt justo a urna. Ut turpis. Phasellus convallis, odio sit amet cursus convallis, eros orci scelerisque velit, ut sodales neque nisl at ante. Suspendisse metus. Curabitur auctor pede quis mi. Pellentesque lorem justo, condimentum ac, dapibus sit amet, ornare et, erat. Quisque velit. Etiam sodales dui feugiat neque suscipit bibendum. Integer mattis. Nullam et ante non sem commodo malesuada. Pellentesque ultrices fermentum lectus. Maecenas hendrerit neque ac est. Fusce tortor mi, tristique sed, cursus at, pellentesque non, dui. Suspendisse potenti.';
+
+		return "SELECT SQL_CALC_FOUND_ROWS ID + {$this->demo_limit} as ID, post_author, post_date, post_date_gmt, '{$loremipsum}' as post_content,
+		concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
+		FROM $wpdb->posts
+		ORDER BY ID DESC LIMIT 0, {$this->demo_limit}";
+	}
+
+	public function limit_filter($arg) {
+		global $wpdb;
+		if ($this->online_limit)
+			return " limit {$this->online_limit} ";
+		return $arg;
+	}
+
+	/**
+	 * RELATEDNESS CACHE CONTROL
+	 */
+	public function is_yarpp_time() {
+		return $this->yarpp_time;
+	}
+	 
+	public function begin_yarpp_time( $reference_ID, $args ) {
+		global $wpdb;
+
+		$this->yarpp_time = true;
+
+		$this->related_postdata = $wpdb->get_results($this->sql($reference_ID, $args), ARRAY_A);
+		$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
+
+		add_filter('posts_join',array(&$this,'join_filter'));
+		add_filter('posts_where',array(&$this,'where_filter'));
+		add_filter('posts_orderby',array(&$this,'orderby_filter'));
+		add_filter('posts_fields',array(&$this,'fields_filter'));
+		add_filter('post_limits',array(&$this,'limit_filter'));
+		add_action('pre_get_posts',array(&$this,'add_signature'));
+		// sets the score override flag.
+		add_action('parse_query',array(&$this,'set_score_override_flag'));
+	}
+	
+	public function begin_demo_time( $limit ) {
+		$this->demo_time = true;
+		$this->demo_limit = $limit;
+		add_action('pre_get_posts',array(&$this,'add_signature'));
+		add_filter('posts_request',array(&$this,'demo_request_filter'));
+	}
+
+	public function end_yarpp_time() {
+		$this->yarpp_time = false;
+		remove_filter('posts_join',array(&$this,'join_filter'));
+		remove_filter('posts_where',array(&$this,'where_filter'));
+		remove_filter('posts_orderby',array(&$this,'orderby_filter'));
+		remove_filter('posts_fields',array(&$this,'fields_filter'));
+		remove_filter('post_limits',array(&$this,'limit_filter'));
+		remove_action('pre_get_posts',array(&$this,'add_signature'));
+		remove_action('parse_query',array(&$this,'set_score_override_flag'));
+	}
+	
+	public function end_demo_time() {
+		$this->demo_time = false;
+		remove_action('pre_get_posts',array(&$this,'add_signature'));
+		remove_filter('posts_request',array(&$this,'demo_request_filter'));
+	}
+
+	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
+	public function is_cached($reference_ID) {
+		return YARPP_NOT_CACHED;
+	}
+
+	public function clear($reference_ID) {
+		return;
+	}
+
+	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
+	public function update($reference_ID) {
+		global $wpdb;
+
+		// $reference_ID must be numeric
+		if ( !$reference_ID = absint($reference_ID) )
+			return YARPP_NOT_CACHED;
+
+		return YARPP_RELATED;
+	}
+
+	public function flush() {
+	}
+
+	public function related($reference_ID = null, $related_ID = null) {
+		global $wpdb;
+
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) ) {
+			_doing_it_wrong( __METHOD__, 'reference ID and/or related ID must be set', '3.4' );
+			return;
+		}
+
+		// reverse lookup
+		if ( is_int($related_ID) && is_null($reference_ID) ) {
+			_doing_it_wrong( __METHOD__, 'YARPP_Cache_Bypass::related cannot do a reverse lookup', '3.4' );
+			return;
+		}
+
+		$results = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
+		if ( !$results || !count($results) )
+			return false;
+		
+		if ( is_null($related_ID) ) {
+			return array_map(create_function('$x','return $x["ID"];'), $results);			
+		} else {
+			foreach($results as $result) {
+				if ($result['ID'] == $related_ID)
+					return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * KEYWORDS CACHE CONTROL
+	 */
+	 
+	// @return (array) with body and title keywords
+	private function cache_keywords($ID) {
+		return array(
+			'body' => $this->body_keywords($ID),
+			'title' => $this->title_keywords($ID)
+		);
+	}
+
+	// @param $ID (int)
+	// @param $type (string) body | title | all
+	// @return (string|array) depending on whether "all" were requested or not
+	public function get_keywords( $ID, $type = 'all' ) {
+		if ( !$ID = absint($ID) )
+			return false;
+	
+		$keywords = $this->cache_keywords($ID);
+
+		if ( empty($keywords) )
+			return false;
+		
+		if ( 'all' == $type )
+			return $keywords;
+		return $keywords[$type];
 	}
 }

@@ -6,6 +6,9 @@ class YARPP {
 	public $debug = false;
 	
 	public $cache;
+	public $cache_bypass;
+	private $active_cache;
+	
 	public $admin;
 	private $storage_class;
 	
@@ -29,6 +32,7 @@ class YARPP {
 		require_once(YARPP_DIR . '/cache-' . YARPP_CACHE_TYPE . '.php');
 		$this->storage_class = $yarpp_storage_class;
 		$this->cache = new $this->storage_class( $this );
+		$this->cache_bypass = new YARPP_Cache_Bypass( $this );
 
 		register_activation_hook( __FILE__, array($this, 'activate') );
 		
@@ -384,70 +388,39 @@ class YARPP {
 	 * CORE LOOKUP + DISPLAY FUNCTIONS
 	 */
 	 
-	/* new in 2.1! the domain argument refers to {website,widget,rss}, though widget is not used yet. */
+	/* new in 2.1! the domain argument refers to {website,widget,rss} */
 	/* new in 3.0! new query-based approach: EXTREMELY HACKY! */
-	function related($type,$args,$echo = true,$reference_ID=false,$domain = 'website') {
+	/* 
+	 * @param (int) $reference_ID - obligatory
+	 * @param (array) $args
+	 * @param (bool) $echo
+	 */
+	function display_related($reference_ID, $args = array(), $echo = true) {
 		global $wp_query, $pagenow;
 	
 		$this->upgrade_check();
 	
-		if ($domain == 'demo_web' || $domain == 'demo_rss') {
-			if ($this->cache->demo_time) // if we're already in a YARPP loop, stop now.
-				return false;
-		} else {
-			if ($this->cache->is_yarpp_time()) // if we're already in a YARPP loop, stop now.
-				return false;
-			if ( !$reference_ID )
-				$reference_ID = get_the_ID();
-	
-			$cache_status = $this->cache->enforce($reference_ID);
-			
-			// If cache status is YARPP_DONT_RUN, end here without returning or echoing anything.
-			if ( YARPP_DONT_RUN == $cache_status )
-				return;
-		}
-	
-		get_currentuserinfo();
-	
-		// set the "domain prefix", used for all the preferences.
-		if ($domain == 'rss' || $domain == 'demo_rss')
-			$domainprefix = 'rss_';
-		else
-			$domainprefix = '';
-		// get options
-		// note the 2.1 change... the options array changed from what you might call a "list" to a "hash"... this changes the structure of the $args to something which is, in the long term, much more useful
-		$options = array(
-			'cross_relate'=>"cross_relate",
-			'limit'=>"${domainprefix}limit",
-			'use_template'=>"${domainprefix}use_template",
-			'order'=>"${domainprefix}order",
-			'template_file'=>"${domainprefix}template_file",
-			'promote_yarpp'=>"${domainprefix}promote_yarpp");
-		$optvals = array();
-		foreach (array_keys($options) as $option) {
-			if (isset($args[$option])) {
-				$optvals[$option] = $args[$option];
-			} else {
-				$optvals[$option] = $this->get_option($options[$option]);
-			}
-		}
-		extract($optvals);
-		// override $type for cross_relate:
-		if ($cross_relate)
-			$type = array('post','page');
-	
-		if ($domain == 'demo_web' || $domain == 'demo_rss') {
-			// It's DEMO TIME!
-			$this->cache->demo_time = true;
-			if ($domain == 'demo_web')
-				$this->cache->demo_limit = $this->get_option('limit');
-			else
-				$this->cache->demo_limit = $this->get_option('rss_limit');
-		} else if ( YARPP_NO_RELATED == $cache_status ) {
+		// if we're already in a YARPP loop, stop now.
+		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
+			return false;
+		if ( is_null($reference_ID) )
+			$reference_ID = get_the_ID();
+		
+		$this->setup_active_cache( $args );
+
+		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		extract( $this->parse_args( $args, $options ) );
+
+		$cache_status = $this->active_cache->enforce($reference_ID);
+		// If cache status is YARPP_DONT_RUN, end here without returning or echoing anything.
+		if ( YARPP_DONT_RUN == $cache_status )
+			return;
+		
+		if ( YARPP_NO_RELATED == $cache_status ) {
 			// There are no results, so no yarpp time for us... :'(
 		} else {
 			// Get ready for YARPP TIME!
-			$this->cache->begin_yarpp_time($reference_ID);
+			$this->active_cache->begin_yarpp_time($reference_ID, $args);
 		}
 	
 		// so we can return to normal later
@@ -456,26 +429,19 @@ class YARPP {
 	
 		$output = '';
 		$wp_query = new WP_Query();
-		$orders = explode(' ',$order);
-		if ( 'demo_web' == $domain || 'demo_rss' == $domain ) {
-			$wp_query->query('');
-		} else if ( YARPP_NO_RELATED == $cache_status ) {
+		if ( YARPP_NO_RELATED == $cache_status ) {
 			// If there are no related posts, get no query
 		} else {
+			$orders = explode(' ',$order);
 			$wp_query->query(array(
 				'p' => $reference_ID,
 				'orderby' => $orders[0],
 				'order' => $orders[1],
 				'showposts' => $limit,
-				'post_type' => $type
+				'post_type' => $args['post_type']
 			));
 		}
-	
-		$wp_query->in_the_loop = true;
-		$wp_query->is_feed = $current_query->is_feed;
-		// make sure we get the right is_single value
-		// (see http://wordpress.org/support/topic/288230)
-		$wp_query->is_single = false;
+		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 	
 		if ($domain == 'metabox') {
@@ -491,12 +457,10 @@ class YARPP {
 			include(YARPP_DIR.'/template-builtin.php');
 		}
 	
-		if ( 'demo_web' == $domain || 'demo_rss' == $domain ) {
-			$this->cache->demo_time = false;
-		} else if ( YARPP_NO_RELATED == $cache_status ) {
+		if ( YARPP_NO_RELATED == $cache_status ) {
 			// Uh, do nothing. Stay very still.
 		} else {
-			$this->cache->end_yarpp_time(); // YARPP time is over... :(
+			$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 		}
 	
 		// restore the older wp_query.
@@ -504,42 +468,177 @@ class YARPP {
 		wp_reset_postdata();
 		$pagenow = $current_pagenow; unset($current_pagenow);
 	
-		if ($promote_yarpp and $domain != 'metabox')
+		if ($promote_yarpp && $domain != 'metabox')
 			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
 	
 		if ($echo)
 			echo $output;
-		else
-			return ((!empty($output))?"\n\n":'').$output;
+		return $output;
 	}
 	
-	function related_exist($type,$args,$reference_ID=false) {
+	/* 
+	 * @param (int) $reference_ID - obligatory
+	 * @param (array) $args
+	 */
+	function get_related($reference_ID, $args = array()) {
+		$this->upgrade_check();
+	
+		// if we're already in a YARPP loop, stop now.
+		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
+			return false;
+		if ( is_null($reference_ID) )
+			$reference_ID = get_the_ID();
+		
+		$this->setup_active_cache( $args );
+
+		$options = array( 'limit', 'order' );
+		extract( $this->parse_args( $args, $options ) );
+
+		$cache_status = $this->active_cache->enforce($reference_ID);
+		if ( YARPP_DONT_RUN == $cache_status || YARPP_NO_RELATED == $cache_status )
+			return array();
+					
+		// Get ready for YARPP TIME!
+		$this->active_cache->begin_yarpp_time($reference_ID, $args);
+	
+		$related_query = new WP_Query();
+		$orders = explode(' ',$order);
+		$related_query->query(array(
+			'p' => $reference_ID,
+			'orderby' => $orders[0],
+			'order' => $orders[1],
+			'showposts' => $limit,
+			'post_type' => $args['post_type']
+		));
+		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
+	
+		return $related_query->posts;
+	}
+	
+	/* 
+	 * @param (int) $reference_ID
+	 * @param (array) $args
+	 */
+	function related_exist($reference_ID, $args = array()) {
 		global $post;
 	
 		$this->upgrade_check();
 	
-		if (is_object($post) && !$reference_ID)
+		if ( is_object($post) && is_null($reference_ID) )
 			$reference_ID = $post->ID;
 	
-		if ($this->cache->is_yarpp_time()) // if we're already in a YARPP loop, stop now.
+		// if we're already in a YARPP loop, stop now.
+		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
 	
-		if ($this->get_option('cross_relate'))
-			$type = array('post','page');
+		$this->setup_active_cache( $args );
 	
-		$cache_status = $this->cache->enforce($reference_ID);
+		$cache_status = $this->active_cache->enforce($reference_ID);
 	
 		if ( YARPP_NO_RELATED == $cache_status )
 			return false;
 	
-		$this->cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
+		$this->active_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 		$related_query = new WP_Query();
-		$related_query->query(array('p'=>$reference_ID,'showposts'=>1,'post_type'=>$type));
+		$related_query->query(array('p'=>$reference_ID,'showposts'=>1,'post_type'=>$args['post_type']));
 		$return = $related_query->have_posts();
 		unset($related_query);
-		$this->cache->end_yarpp_time(); // YARPP time is over. :(
+		$this->active_cache->end_yarpp_time(); // YARPP time is over. :(
 	
 		return $return;
+	}
+		
+	/* 
+	 * @param (array) $args
+	 * @param (bool) $echo
+	 */
+	function display_demo_related($args = array(), $echo = true) {
+		global $wp_query;
+	
+		if ( $this->cache_bypass->demo_time ) // if we're already in a demo YARPP loop, stop now.
+			return false;
+	
+		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		extract( $this->parse_args( $args, $options ) );
+	
+		$this->cache_bypass->begin_demo_time( $limit );
+	
+		$output = '';
+		$wp_query = new WP_Query();
+		$wp_query->query('');
+	
+		$this->prep_query( $domain == 'rss' );
+		$related_query = $wp_query; // backwards compatibility
+	
+		if ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
+			ob_start();
+			include(STYLESHEETPATH . '/' . $template_file);
+			$output = ob_get_contents();
+			ob_end_clean();
+		} else {
+			include(YARPP_DIR.'/template-builtin.php');
+		}
+	
+		$this->cache_bypass->end_demo_time();
+	
+		if ($promote_yarpp)
+			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+	
+		if ( $echo )
+			echo $output;
+		return $output;
+	}
+	
+	public function parse_args( $args, $options ) {
+		$options_with_rss_variants = array( 'limit', 'template_file', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
+
+		$r = array();
+		foreach ( $options as $option ) {
+			if ( isset($args['domain']) && 'rss' == $args['domain'] &&
+				 in_array( $option, $options_with_rss_variants ) )
+				$default = $this->get_option( 'rss_' . $option );
+			else
+				$default = $this->get_option( $option );
+			
+			if ( isset($args[$option]) && $args[$option] !== $default ) {
+				$r[$option] = $args[$option];
+			} else {
+				$r[$option] = $default;
+			}
+		}
+		return $r;
+	}
+	
+	private function setup_active_cache( $args ) {
+		// the options which the main sql query cares about:
+		$magic_options = array( 'limit', 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units' );
+
+		$defaults = $this->get_option();
+		foreach ( $magic_options as $option ) {
+			if ( !isset($args[$option]) )
+				continue;
+				
+			// limit is a little different... if it's less than what we cache,
+			// let it go.
+			if ( 'limit' == $option &&
+				 $args[$option] <= max($defaults['limit'], $defaults['rss_limit']) )
+				 continue;
+			
+			if ( $args[$option] !== $defaults[$option] ) {
+				$this->active_cache = $this->cache_bypass;
+				return;
+			}
+		}
+		$this->active_cache = $this->cache;
+	}
+	
+	private function prep_query( $is_feed = false ) {
+		global $wp_query;
+		$wp_query->in_the_loop = true;
+		$wp_query->is_feed = $is_feed;
+		// make sure we get the right is_single value
+		// (see http://wordpress.org/support/topic/288230)
+		$wp_query->is_single = false;
 	}
 	
 	/*
@@ -557,7 +656,7 @@ class YARPP {
 			$type = array('post','page');
 	
 		if ( $this->get_option('auto_display') && is_single() )
-			return $content . $this->related($type,array(),false,false,'website');
+			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'website'), false);
 		else
 			return $content;
 	}
@@ -570,7 +669,7 @@ class YARPP {
 			$type = array('post','page');
 	
 		if ( $this->get_option('rss_display') )
-			return $content . $this->related($type,array(),false,false,'rss');
+			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false);
 		else
 			return $content;
 	}
@@ -583,7 +682,7 @@ class YARPP {
 			$type = array('post','page');
 	
 		if ( $this->get_option('rss_excerpt_display') && $this->get_option('rss_display') )
-			return $content . clean_pre($this->related($type,array(),false,false,'rss'));
+			return $content . clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
 		else
 			return $content;
 	}

@@ -32,7 +32,7 @@ jQuery(function($) {
 			var demo_web = $('#display_demo_web');
 			$.ajax({type:'POST',
 			  url: ajaxurl,
-			  data:'action=yarpp_display_demo&domain=demo_web',
+			  data:'action=yarpp_display_demo&domain=website',
 			  beforeSend:function(){demo_web.html(loading)},
 			  success:function(html){demo_web.html('<pre>'+html+'</pre>')},
 			  dataType:'html'});
@@ -52,7 +52,7 @@ jQuery(function($) {
 				var demo_rss = $('#display_demo_rss');
 				$.ajax({type:'POST',
 						url: ajaxurl,
-						data:'action=yarpp_display_demo&domain=demo_rss',
+						data:'action=yarpp_display_demo&domain=rss',
 						beforeSend:function(){demo_rss.html(loading)},
 						success:function(html){demo_rss.html('<pre>'+html+'</pre>')},
 						dataType:'html'});

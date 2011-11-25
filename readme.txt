@@ -201,8 +201,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content.
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
 * Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
+* Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Significant code cleanup
 	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`.
+	* Created the "bypass" cache engine which is used when custom arguments are specified.
+	* Switch to bypass cache for demos.
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
 	* Performance improvements on pages with "no related posts"

@@ -9,14 +9,14 @@ class YARPP_Widget extends WP_Widget {
 
 	function widget($args, $instance) {
 		global $post;
-		if (!is_singular())
+		if ( !is_singular() )
 			return;
 
 		extract($args);
 
-		$type = ($post->post_type == 'page' ? array('page') : array('post'));
-		if (yarpp_get_option('cross_relate'))
-			$type = array('post','page');
+		$instance['post_type'] = ($post->post_type == 'page' ? array('page') : array('post'));
+		if ( yarpp_get_option('cross_relate') )
+			$instance['post_type'] = array('post','page');
 
 		$title = apply_filters('widget_title', $instance['title']);
 		echo $before_widget;
@@ -28,7 +28,9 @@ class YARPP_Widget extends WP_Widget {
 				_e('Related Posts (YARPP)','yarpp');
 			echo $after_title;
 		}
-		echo yarpp_related($type,$instance,false,false,'widget');
+
+		$instance['domain'] = 'widget';
+		echo yarpp_related(null, $instance, false);
 		echo $after_widget;
 	}
 

@@ -7,27 +7,19 @@ define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
 
 class YARPP_Cache_Postmeta {
 
+	public $name = "postmeta";
+
 	// variables used for lookup
 	private $related_postdata = array();
 	private $related_IDs = array();
 
-	public $name = "postmeta";
-
 	private $yarpp_time = false;
-	public $demo_time = false;
 
 	/**
 	 * SETUP/STATUS
 	 */
 	function __construct( &$core ) {
 		parent::__construct( $core );
-		add_filter('posts_where',array(&$this,'where_filter'));
-		add_filter('posts_orderby',array(&$this,'orderby_filter'));
-		add_filter('posts_fields',array(&$this,'fields_filter'));
-		add_filter('posts_request',array(&$this,'demo_request_filter'));
-		add_filter('post_limits',array(&$this,'limit_filter'));
-		// sets the score override flag.
-		add_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
 
 	public function is_enabled() {
@@ -68,17 +60,15 @@ class YARPP_Cache_Postmeta {
 	 */
 	public function where_filter($arg) {
 		global $wpdb;
-		if ($this->yarpp_time) {
-			$threshold = yarpp_get_option('threshold');
-			// modify the where clause to use the related ID list.
-			if (!count($this->related_IDs))
-				$this->related_IDs = array(0);
-			$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
+		$threshold = yarpp_get_option('threshold');
+		// modify the where clause to use the related ID list.
+		if (!count($this->related_IDs))
+			$this->related_IDs = array(0);
+		$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
 
-			// if we have "recent only" set, add an additional condition
-			if (yarpp_get_option("recent_only"))
-				$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
-		}
+		// if we have "recent only" set, add an additional condition
+		if (yarpp_get_option("recent_only"))
+			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
 		return $arg;
 	}
 
@@ -86,7 +76,7 @@ class YARPP_Cache_Postmeta {
 		global $wpdb;
 		// only order by score if the score function is added in fields_filter, which only happens
 		// if there are related posts in the postdata
-		if ($this->yarpp_time && $this->score_override &&
+		if ($this->score_override &&
 		    is_array($this->related_postdata) && count($this->related_postdata))
 			return str_replace("$wpdb->posts.post_date","score",$arg);
 		return $arg;
@@ -94,7 +84,7 @@ class YARPP_Cache_Postmeta {
 
 	public function fields_filter($arg) {
 		global $wpdb;
-		if ($this->yarpp_time && is_array($this->related_postdata) && count($this->related_postdata)) {
+		if (is_array($this->related_postdata) && count($this->related_postdata)) {
 			$scores = array();
 			foreach ($this->related_postdata as $related_entry) {
 				$scores[] = " WHEN {$related_entry['ID']} THEN {$related_entry['score']}";
@@ -104,21 +94,9 @@ class YARPP_Cache_Postmeta {
 		return $arg;
 	}
 
-	public function demo_request_filter($arg) {
-		global $wpdb;
-		if ($this->demo_time) {
-			$wpdb->query("set @count = 0;");
-			return "SELECT SQL_CALC_FOUND_ROWS ID + {$this->demo_limit} as ID, post_author, post_date, post_date_gmt, '" . LOREMIPSUM . "' as post_content,
-			concat('".__('Example post ','yarpp')."',@count:=@count+1) as post_title, 0 as post_category, '' as post_excerpt, 'publish' as post_status, 'open' as comment_status, 'open' as ping_status, '' as post_password, concat('example-post-',@count) as post_name, '' as to_ping, '' as pinged, post_modified, post_modified_gmt, '' as post_content_filtered, 0 as post_parent, concat('PERMALINK',@count) as guid, 0 as menu_order, 'post' as post_type, '' as post_mime_type, 0 as comment_count, 'SCORE' as score
-			FROM $wpdb->posts
-			ORDER BY ID DESC LIMIT 0, {$this->demo_limit}";
-		}
-		return $arg;
-	}
-
 	public function limit_filter($arg) {
 		global $wpdb;
-		if ($this->yarpp_time and $this->online_limit)
+		if ($this->online_limit)
 			return " limit {$this->online_limit} ";
 		return $arg;
 	}
@@ -132,16 +110,30 @@ class YARPP_Cache_Postmeta {
 	
 	public function begin_yarpp_time($reference_ID) {
 		$this->yarpp_time = true;
-		// get the related posts from postdata, and also construct the relate_IDs array
+		// get the related posts from postmeta, and also construct the relate_IDs array
 		$this->related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 		if (is_array($this->related_postdata) && count($this->related_postdata))
 			$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
+		add_filter('posts_where',array(&$this,'where_filter'));
+		add_filter('posts_orderby',array(&$this,'orderby_filter'));
+		add_filter('posts_fields',array(&$this,'fields_filter'));
+		add_filter('post_limits',array(&$this,'limit_filter'));
+		add_action('pre_get_posts',array(&$this,'add_signature'));
+		// sets the score override flag.
+		add_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
 
 	public function end_yarpp_time() {
 		$this->yarpp_time = false;
 		$this->related_IDs = array();
 		$this->related_postdata = array();
+		remove_filter('posts_where',array(&$this,'where_filter'));
+		remove_filter('posts_orderby',array(&$this,'orderby_filter'));
+		remove_filter('posts_fields',array(&$this,'fields_filter'));
+		remove_filter('post_limits',array(&$this,'limit_filter'));
+		remove_action('pre_get_posts',array(&$this,'add_signature'));
+		// sets the score override flag.
+		remove_action('parse_query',array(&$this,'set_score_override_flag'));
 	}
 
 	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
@@ -208,8 +200,10 @@ class YARPP_Cache_Postmeta {
 	public function related($reference_ID = null, $related_ID = null) {
 		global $wpdb;
 
-		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) )
-			return new WP_Error('yarpp_cache_error', "reference ID and/or related ID must be ints" );
+		if ( !is_int( $reference_ID ) && !is_int( $related_ID ) ) {
+			_doing_it_wrong( __METHOD__, 'reference ID and/or related ID must be set', '3.4' );
+			return;
+		}
 
 		if (!is_null($reference_ID) && !is_null($related_ID)) {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
