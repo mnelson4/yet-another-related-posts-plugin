@@ -110,7 +110,7 @@ abstract class YARPP_Cache {
 	 * SQL!
 	 */
 
-	function sql( $reference_ID = false, $args ) {
+	function sql( $reference_ID = false, $args = array() ) {
 		global $wpdb, $post;
 	
 		if ( is_object($post) && !$reference_ID ) {
