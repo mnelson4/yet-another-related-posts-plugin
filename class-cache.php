@@ -52,17 +52,13 @@ abstract class YARPP_Cache {
 	function save_post($post_ID, $force=true) {
 		global $wpdb;
 	
-		// new in 3.2: don't compute cache during import
-		if ( defined( 'WP_IMPORTING' ) )
+		// @since 3.2: don't compute cache during import
+		// @since 3.4: don't compute on revisions
+		if (defined('WP_IMPORTING') || wp_is_post_revision($post_ID))
 			return;
-	
-		$post = get_post( $post_ID );
-		$parent_ID = $post->post_parent;
-	
-		if ( $parent_ID != $post_ID && $parent_ID )
-			$post_ID = $parent_ID;
-	
-		$this->enforce((int) $post_ID, $force);
+
+		// @since 3.4: simply clear the cache on save; don't recompute.
+		$this->clear((int) $post_ID);
 	}
 	
 	// Clear the cache for this entry and for all posts which are "related" to it.
