@@ -1,11 +1,10 @@
 <?php
 global $yarpp;
 
-$yarpp->cache->save_post($reference_ID, false); // enforce the cache, but don't force it
-
-$keywords = $yarpp->cache->get_keywords($reference_ID);
+$yarpp->cache->enforce($reference_ID, false); // enforce the cache, but don't force it
 
 if ($yarpp->debug) {
+	$keywords = $yarpp->cache->get_keywords($reference_ID);
 	$output .= "<p>body keywords: {$keywords['body']}</p>";
 	$output .= "<p>title keywords: {$keywords['title']}</p>";
 }

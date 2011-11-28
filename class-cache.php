@@ -49,7 +49,7 @@ abstract class YARPP_Cache {
 	 * POST STATUS INTERACTIONS
 	 */
 	
-	function save_post($post_ID, $force=true) {
+	function save_post($post_ID) {
 		global $wpdb;
 	
 		// @since 3.2: don't compute cache during import
