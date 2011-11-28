@@ -267,8 +267,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		$body_terms = $this->body_keywords($ID);
 		$title_terms = $this->title_keywords($ID);
 
-		if (defined('DB_CHARSET') && DB_CHARSET) {
-			$wpdb->query('set names '.DB_CHARSET);
+		if ( !empty($wpdb->dbh) && defined('DB_CHARSET') ) {
+			$wpdb->set_charset( $wpdb->dbh, DB_CHARSET );
 		}
 
 		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " (ID,body,title) values ($ID,'$body_terms ','$title_terms ') on duplicate key update date = now(), body = '$body_terms ', title = '$title_terms '");
