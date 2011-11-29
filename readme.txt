@@ -206,6 +206,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`.
 	* Created the "bypass" cache engine which is used when custom arguments are specified.
 	* Switch to bypass cache for demos.
+	* Now only clears cache on post update, and only computes results for actual posts, not revisions (thanks to Andrei Mikhaylov).
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
 	* Performance improvements on pages with "no related posts"
