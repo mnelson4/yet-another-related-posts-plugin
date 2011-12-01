@@ -44,7 +44,7 @@ class YARPP_Admin {
 			$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 			wp_enqueue_script( 'postbox' );
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
-			wp_enqueue_script( 'yarpp_options', plugins_url( 'options.js', __FILE__ ), array('jquery'), $version );
+			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 			// wp_enqueue_script( 'thickbox' );
 			// wp_enqueue_style( 'thickbox' );
 		}
