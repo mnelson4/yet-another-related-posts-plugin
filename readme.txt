@@ -203,9 +203,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
 * Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Significant code cleanup
-	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`.
+	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`
 	* Created the "bypass" cache engine which is used when custom arguments are specified.
-	* Switch to bypass cache for demos.
+		* Switch to bypass cache for demos
+	* Now only clears cache on post update, and only computes results for actual posts, not revisions (thanks to Andrei Mikhaylov)
+	* Don't compute related posts for the metabox on the edit screen; display them via ajax instead
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
 	* Performance improvements on pages with "no related posts"

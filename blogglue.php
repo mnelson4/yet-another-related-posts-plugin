@@ -1,4 +1,10 @@
 <?php
+function yarpp_blogglue_enqueue() {
+	wp_enqueue_script( 'thickbox' );
+	wp_enqueue_style( 'thickbox' );
+}
+add_action( 'admin_enqueue_scripts', 'yarpp_blogglue_enqueue' );
+
 function add_yarpp_blogglue_meta_box() {
 	class YARPP_Meta_Box_BlogGlue extends YARPP_Meta_Box {
 		function display() {

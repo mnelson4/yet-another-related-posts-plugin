@@ -75,14 +75,14 @@ if ( !yarpp_get_option('myisam_override') ) {
 }
 
 if ( $yarpp->myisam && !$yarpp->enabled() ) {
-	echo '<div class="updated"><p>';
+	echo '<div class="updated">';
 	if ( $yarpp->activate() ) {
 		_e('The YARPP database had an error but has been fixed.','yarpp');
 	} else {
 		_e('The YARPP database has an error which could not be fixed.','yarpp');
 		printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
 	}
-	echo '</div></p>';
+	echo '</div>';
 }
 
 if (isset($_POST['update_yarpp'])) {
@@ -154,9 +154,11 @@ var spinner = '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>'
 </script>
 
 <div>
-	<p class="submit">
-		<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e("Update options",'yarpp')?>" />
-	</p>
+	<input type="submit" class='button-primary' name="update_yarpp" value="<?php _e( 'Save Changes' )?>" />
 </div>
 
+</div><!--#poststuff-->
+
 </form>
+
+</div><!--.wrap-->

@@ -18,6 +18,7 @@ class YARPP_Admin {
 		if ( defined('DOING_AJAX') && DOING_AJAX ) {
 			add_action( 'wp_ajax_yarpp_display_exclude_terms', array( $this, 'ajax_display_exclude_terms' ) );
 			add_action( 'wp_ajax_yarpp_display_demo', array( $this, 'ajax_display_demo' ) );
+			add_action( 'wp_ajax_yarpp_display', array( $this, 'ajax_display' ) );
 		}
 	}
 	
@@ -40,13 +41,14 @@ class YARPP_Admin {
 	// since 3.3
 	function enqueue() {
 		global $current_screen;
+		$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 		if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
-			$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 			wp_enqueue_script( 'postbox' );
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
-			wp_enqueue_script( 'yarpp_options', plugins_url( 'options.js', __FILE__ ), array('jquery'), $version );
-			// wp_enqueue_script( 'thickbox' );
-			// wp_enqueue_style( 'thickbox' );
+			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
+		}
+		if (is_object($current_screen) && $current_screen->id == 'post') {
+			wp_enqueue_script( 'yarpp_metabox', plugins_url( 'js/metabox.js', __FILE__ ), array('jquery'), $version );
 		}
 	}
 	
@@ -62,17 +64,15 @@ class YARPP_Admin {
 		// for proper metabox support:
 		require(YARPP_DIR.'/options.php');
 	}
-		
+
+	// since 3.4: don't actually compute results here, but use ajax instead		
 	function metabox() {
-		echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 }</style><div id="yarpp-related-posts">';
-		if ( get_the_ID() )
-			$this->core->display_related(null, array(
-				'post_type' => array('post'),
-				'domain' => 'metabox'
-			));
-		else
-			echo "<p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p>";
-		echo '</div>';
+		echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 } #yarpp_relatedposts:hover .edit-box { display: inline; }</style>';
+		if ( !get_the_ID() ) {
+			echo "<div><p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p></div>";
+		} else {
+			echo '<div id="yarpp-related-posts"><img src="' . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . '" alt="" /></div>';
+		}
 	}
 	
 	// since 3.3: default metaboxes to show:
@@ -87,6 +87,8 @@ class YARPP_Admin {
 	 */
 
 	function ajax_display_exclude_terms() {
+		// @todo nonce
+
 		if ( !isset($_REQUEST['taxonomy']) )
 			return;
 		
@@ -123,7 +125,30 @@ class YARPP_Admin {
 		exit;
 	}
 	
+	function ajax_display() {
+		// @todo nonce
+
+		if ( !isset($_REQUEST['ID']) )
+			return;
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text/html; charset=UTF-8");
+
+		$args = array(
+			'post_type' => array('post'),
+			'domain' => isset($_REQUEST['domain']) ? $_REQUEST['domain'] : 'website'
+		);
+		if ( $this->core->get_option('cross_relate') )
+			$args['post_type'] = array('post', 'page');
+			
+		$return = $this->core->display_related($_REQUEST['ID'], $args, false);
+		echo $return;
+		exit;
+	}
+
 	function ajax_display_demo() {
+		// @todo nonce?
+
 		header("HTTP/1.1 200");
 		header("Content-Type: text/html; charset=UTF-8");
 	
