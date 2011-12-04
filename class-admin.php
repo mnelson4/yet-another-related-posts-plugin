@@ -23,6 +23,13 @@ class YARPP_Admin {
 	}
 	
 	function ui_register() {
+		global $wp_version;
+		if ( get_option( 'yarpp_activated' ) && version_compare($wp_version, '3.3b1', '>=') ) {
+			delete_option( 'yarpp_activated' );
+			add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
+			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_settings' ) );
+		}
+
 		// setup admin
 		$this->hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', array( $this, 'options_page' ) );
 		// new in 3.3: load options page sections as metaboxes
@@ -52,10 +59,50 @@ class YARPP_Admin {
 		}
 	}
 	
+	// since 3.4 and WP 3.3
+	function pointer_enqueue() {
+		wp_enqueue_style( 'wp-pointer' );
+		wp_enqueue_script( 'wp-pointer' );
+	}
+	function pointer_settings() {
+		$content = '<h3>' . sprintf(__('Thank you for installing %s!', 'yarpp'), '<span style="font-style:italic; font-weight: inherit;">' . __('Yet Another Related Posts Plugin', 'yarpp') . '</span>')  . '</h3>';
+		$content .= '<p>' . __('Make sure to visit the Related Posts settings page to customize YARPP.', 'yarpp'). '</p>';
+		?>
+<script>
+jQuery(function () {
+	var menu = jQuery('#menu-settings'),
+	yarpp = menu.find("a[href='options-general.php?page=yarpp']"),
+	options = {
+		content: '<?php echo $content; ?>',
+		position: {edge: 'left', align: 'center', of: menu},
+		close: function() {
+			menu.unbind('mouseenter mouseleave', yarpp_pointer);
+		}};
+	
+	if ( !yarpp.length )
+		return;
+	
+	yarpp.pointer(options).pointer('open');
+	
+	function yarpp_pointer(e) {
+		setTimeout(function() {
+			if (yarpp.is(':visible'))
+				options.position.of = yarpp;
+			else
+				options.position.of = menu;
+			yarpp.pointer( options );
+		}, 200);
+	}
+	menu.bind('mouseenter mouseleave', yarpp_pointer);
+});
+</script>
+		<?php
+	}
+	
 	function settings_link($links, $file) {
 		$this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
 		if($file == $this_plugin) {
-			$links[] = '<a href="options-general.php?page=yarpp">' . __('Settings', 'yarpp') . '</a>';
+			$links[] = '<a href="options-general.php?page=yarpp">' . __('Settings') . '</a>';
 		}
 		return $links;
 	}

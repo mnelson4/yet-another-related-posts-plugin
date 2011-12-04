@@ -65,3 +65,8 @@ if ( !function_exists( 'self_admin_url' ) ) {
 			return admin_url($path, $scheme);
 	}
 }
+
+function yarpp_plugin_activate() {
+	update_option( 'yarpp_activated', true );
+}
+add_action( 'activate_' . plugin_basename(__FILE__), 'yarpp_plugin_activate' );
