@@ -5,7 +5,7 @@ $yarpp_storage_class = 'YARPP_Cache_Postmeta';
 define('YARPP_POSTMETA_KEYWORDS_KEY','_yarpp_keywords');
 define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
 
-class YARPP_Cache_Postmeta {
+class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 	public $name = "postmeta";
 
