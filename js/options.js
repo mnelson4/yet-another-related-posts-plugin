@@ -31,11 +31,15 @@ jQuery(function($) {
 			loaded_demo_web = true;
 			var demo_web = $('#display_demo_web');
 			$.ajax({type:'POST',
-			  url: ajaxurl,
-			  data:'action=yarpp_display_demo&domain=website',
-			  beforeSend:function(){demo_web.html(loading)},
-			  success:function(html){demo_web.html('<pre>'+html+'</pre>')},
-			  dataType:'html'});
+				url: ajaxurl,
+				data: {
+					action: 'yarpp_display_demo',
+					domain: 'website',
+					'_ajax_nonce': $('#yarpp_display_demo-nonce').val()
+				},
+				beforeSend:function(){demo_web.html(loading)},
+				success:function(html){demo_web.html('<pre>'+html+'</pre>')},
+				dataType:'html'});
 		}
 	}
 	$('#yarpp_display_web .handlediv, #yarpp_display_web-hide').click(display);
@@ -52,7 +56,11 @@ jQuery(function($) {
 				var demo_rss = $('#display_demo_rss');
 				$.ajax({type:'POST',
 						url: ajaxurl,
-						data:'action=yarpp_display_demo&domain=rss',
+						data: {
+							action: 'yarpp_display_demo',
+							domain: 'rss',
+							'_ajax_nonce': $('#yarpp_display_demo-nonce').val()
+						},
 						beforeSend:function(){demo_rss.html(loading)},
 						success:function(html){demo_rss.html('<pre>'+html+'</pre>')},
 						dataType:'html'});
@@ -109,7 +117,8 @@ jQuery(function($) {
 					url: ajaxurl,
 					data: {	action: 'yarpp_display_exclude_terms',
 							taxonomy: taxonomy,
-							offset: term_indices[taxonomy]
+							offset: term_indices[taxonomy],
+							'_ajax_nonce': $('#yarpp_display_exclude_terms-nonce').val()
 							},
 					beforeSend:function(){
 						display.append(loading)

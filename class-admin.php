@@ -27,7 +27,7 @@ class YARPP_Admin {
 		if ( get_option( 'yarpp_activated' ) && version_compare($wp_version, '3.3b1', '>=') ) {
 			delete_option( 'yarpp_activated' );
 			add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_settings' ) );
+			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
 		}
 
 		// setup admin
@@ -64,19 +64,24 @@ class YARPP_Admin {
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'wp-pointer' );
 	}
-	function pointer_settings() {
-		$content = '<h3>' . sprintf(__('Thank you for installing %s!', 'yarpp'), '<span style="font-style:italic; font-weight: inherit;">' . __('Yet Another Related Posts Plugin', 'yarpp') . '</span>')  . '</h3>';
-		$content .= '<p>' . __('Make sure to visit the Related Posts settings page to customize YARPP.', 'yarpp'). '</p>';
+	function pointer_script() {
+		$content = '<h3>' . str_replace('<span>', '<span style="font-style:italic; font-weight: inherit;">', __('Thank you for installing <span>Yet Another Related Posts Plugin</span>!', 'yarpp') )  . '</h3>';
+		$content .= '<p>' . str_replace('<a>', '<a href="' . esc_url(admin_url('options-general.php?page=yarpp')) .'">', __('Make sure to visit the <a>Related Posts settings page</a> to customize YARPP.', 'yarpp') ). '</p>';
 		?>
 <script>
-jQuery(function () {
-	var menu = jQuery('#menu-settings'),
+jQuery(function ($) {
+	var menu = $('#menu-settings'),
 	yarpp = menu.find("a[href='options-general.php?page=yarpp']"),
 	options = {
 		content: '<?php echo $content; ?>',
-		position: {edge: 'left', align: 'center', of: menu},
+		position: {
+			edge: 'left',
+			align: 'center',
+			of: menu.is('.wp-menu-open') && !menu.is('.folded *') ? yarpp : menu
+		},
 		close: function() {
 			menu.unbind('mouseenter mouseleave', yarpp_pointer);
+			$('#collapse-menu').('mouseenter mouseleave', yarpp_pointer);
 		}};
 	
 	if ( !yarpp.length )
@@ -84,16 +89,19 @@ jQuery(function () {
 	
 	yarpp.pointer(options).pointer('open');
 	
-	function yarpp_pointer(e) {
-		setTimeout(function() {
-			if (yarpp.is(':visible'))
-				options.position.of = yarpp;
-			else
-				options.position.of = menu;
-			yarpp.pointer( options );
-		}, 200);
+	if ( menu.is('.folded *') || !menu.is('.wp-menu-open') ) {
+		function yarpp_pointer(e) {
+			setTimeout(function() {
+				if (yarpp.is(':visible'))
+					options.position.of = yarpp;
+				else
+					options.position.of = menu;
+				yarpp.pointer( options );
+			}, 200);
+		}
+		menu.bind('mouseenter mouseleave', yarpp_pointer);
+		$('#collapse-menu').bind('mouseenter mouseleave', yarpp_pointer);
 	}
-	menu.bind('mouseenter mouseleave', yarpp_pointer);
 });
 </script>
 		<?php
@@ -114,10 +122,23 @@ jQuery(function () {
 
 	// since 3.4: don't actually compute results here, but use ajax instead		
 	function metabox() {
-		echo '<style>#yarpp_relatedposts h3 .postbox-title-action { right: 30px; top: 5px; position: absolute; padding: 0 } #yarpp_relatedposts:hover .edit-box { display: inline; }</style>';
+		?>
+		<style>
+		#yarpp_relatedposts h3 .postbox-title-action {
+			right: 30px;
+			top: 5px;
+			position: absolute;
+			padding: 0;
+		}
+		#yarpp_relatedposts:hover .edit-box {
+			display: inline;
+		}
+		</style>
+		<?php
 		if ( !get_the_ID() ) {
 			echo "<div><p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p></div>";
 		} else {
+			wp_nonce_field( 'yarpp_display', 'yarpp_display-nonce', false );
 			echo '<div id="yarpp-related-posts"><img src="' . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . '" alt="" /></div>';
 		}
 	}
@@ -134,8 +155,8 @@ jQuery(function () {
 	 */
 
 	function ajax_display_exclude_terms() {
-		// @todo nonce
-
+		check_ajax_referer( 'yarpp_display_exclude_terms' );
+		
 		if ( !isset($_REQUEST['taxonomy']) )
 			return;
 		
@@ -166,14 +187,13 @@ jQuery(function () {
 		}
 		
 		foreach ($terms as $term) {
-			echo "<input type='checkbox' name='exclude[$taxonomy][$term->term_id]' value='true' /> <label>" . esc_html($term->name) . "</label> ";
-			//for='exclude[$taxonomy][$cat->term_id]' it's not HTML. :(
+			echo "<span><input type='checkbox' name='exclude[{$taxonomy}][{$term->term_id}]' id='exclude_{$taxonomy}_{$term->term_id}' value='true' /> <label for='exclude_{$taxonomy}_{$term->term_id}'>" . esc_html($term->name) . "</label></span> ";
 		}
 		exit;
 	}
 	
 	function ajax_display() {
-		// @todo nonce
+		check_ajax_referer( 'yarpp_display' );
 
 		if ( !isset($_REQUEST['ID']) )
 			return;
@@ -194,7 +214,7 @@ jQuery(function () {
 	}
 
 	function ajax_display_demo() {
-		// @todo nonce?
+		check_ajax_referer( 'yarpp_display_demo' );
 
 		header("HTTP/1.1 200");
 		header("Content-Type: text/html; charset=UTF-8");
