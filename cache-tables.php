@@ -7,7 +7,6 @@ define('YARPP_TABLES_KEYWORDS_TABLE', 'yarpp_keyword_cache');
 
 class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
-	private $yarpp_time = false;
 
 	/**
 	 * SETUP/STATUS
@@ -126,10 +125,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 	/**
 	 * RELATEDNESS CACHE CONTROL
 	 */
-	public function is_yarpp_time() {
-		return $this->yarpp_time;
-	}
-	 
 	public function begin_yarpp_time() {
 		$this->yarpp_time = true;
 		add_filter('posts_join',array(&$this,'join_filter'));

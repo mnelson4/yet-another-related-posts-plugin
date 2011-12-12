@@ -124,15 +124,15 @@ if (isset($_POST['update_yarpp'])) {
 
 	<form method="post">
 
-  <div id="yarpp_author_text">
+	<div id="yarpp_author_text">
 	<small><?php printf(__('by <a href="%s" target="_blank">mitcho (Michael 芳貴 Erlewine)</a>','yarpp'), 'http://mitcho.com/');?></small>
-  </div>
-
-<!--	<div style='border:1px solid #ddd;padding:8px;'>-->
+	</div>
 
 <?php
 wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+wp_nonce_field( 'yarpp_display_demo', 'yarpp_display_demo-nonce', false );
+wp_nonce_field( 'yarpp_display_exclude_terms', 'yarpp_display_exclude_terms-nonce', false );
 ?>
 <div id="poststuff" class="metabox-holder has-right-sidebar">
 

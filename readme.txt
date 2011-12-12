@@ -198,25 +198,28 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
-* Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content.
+	* Performance improvements on pages with "no related posts"
+* Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content from The Pool.
+* Add welcome message, inviting users to check out the settings page
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
-* Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
-* Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Significant code cleanup
 	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`
 	* Created the "bypass" cache engine which is used when custom arguments are specified.
 		* Switch to bypass cache for demos
 	* Now only clears cache on post update, and only computes results for actual posts, not revisions (thanks to Andrei Mikhaylov)
-	* Don't compute related posts for the metabox on the edit screen; display them via ajax instead
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
-	* Performance improvements on pages with "no related posts"
 	* Streamlined keyword storage in `YARPP_Cache_Postmeta`
 	* Create `YARPP_Cache` abstract class
 	* Updated minor bug for computing how many results should be cached
-	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words
+	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words, yarpp_title_keywords, yarpp_body_keywords, yarpp_extract_keywords
 	* New systematic use of YARPP_ constants to communicate cache status
 	* Use `get_terms` to load terms
+* Get lazy and embrace asynchronicity:
+	* Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
+	* Don't compute related posts for the metabox on the edit screen; display them via ajax instead
+	* Only clear cache on post save, not recompute
+* Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
 * Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 * Fix formatting of the Related Posts meta box
