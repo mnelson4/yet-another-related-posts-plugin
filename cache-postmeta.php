@@ -13,8 +13,6 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	private $related_postdata = array();
 	private $related_IDs = array();
 
-	private $yarpp_time = false;
-
 	/**
 	 * SETUP/STATUS
 	 */
@@ -104,10 +102,6 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	/**
 	 * RELATEDNESS CACHE CONTROL
 	 */
-	public function is_yarpp_time() {
-		return $this->yarpp_time;
-	}
-	
 	public function begin_yarpp_time($reference_ID) {
 		$this->yarpp_time = true;
 		// get the related posts from postmeta, and also construct the relate_IDs array
