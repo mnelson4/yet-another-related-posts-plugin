@@ -40,3 +40,7 @@ a.info:hover span {
 	color:#000;
 	padding:4px;
 }
+
+.exclude_terms span {
+	display: inline-block;
+}
