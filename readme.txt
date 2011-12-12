@@ -212,7 +212,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Streamlined keyword storage in `YARPP_Cache_Postmeta`
 	* Create `YARPP_Cache` abstract class
 	* Updated minor bug for computing how many results should be cached
-	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words
+	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words, yarpp_title_keywords, yarpp_body_keywords, yarpp_extract_keywords
 	* New systematic use of YARPP_ constants to communicate cache status
 	* Use `get_terms` to load terms
 * Get lazy and embrace asynchronicity:
