@@ -136,14 +136,17 @@ class YARPP {
 	
 	// 3.4b8: $option can be a path, of the query_str variety, i.e. "option[suboption][subsuboption]"
 	function get_option( $option = null ) {
-		$options = get_option( 'yarpp' );
+		$options = (array) get_option( 'yarpp', array() );
 		// ensure defaults if not set:
 		$options = array_merge( $this->default_options, $options );
 		// some extra work is required for arrays:
 		foreach ( $this->default_options as $key => $default ) {
 			if ( !is_array($default) )
 				continue;
-			$options[$key] = array_merge( $this->default_options[$key], $options[$key] );
+			if ( isset($options[$key]) && is_array($options[$key]) )
+				$options[$key] = array_merge( $this->default_options[$key], (array) $options[$key] );
+			else
+				$options[$key] = $this->default_options[$key];
 		}
 		if ( !isset($options['weight']['tax']) )
 			$options['weight']['tax'] = $this->default_options['weight']['tax'];
