@@ -9,10 +9,15 @@ jQuery(function($) {
 		if ( !loaded_metabox ) {
 			loaded_metabox = true;
 			$.ajax({type:'POST',
-			  url: ajaxurl,
-			  data:'action=yarpp_display&domain=metabox&ID=' + $('#post_ID').val(),
-			  success:function(html){display.html(html)},
-			  dataType:'html'});
+				url: ajaxurl,
+				data: {
+					action: 'yarpp_display',
+					domain: 'metabox',
+					ID: $('#post_ID').val(),
+					'_ajax_nonce': $('#yarpp_display-nonce').val()
+				},
+				success:function(html){display.html(html)},
+				dataType:'html'});
 		}
 	}
 	$('#yarpp_relatedposts .handlediv, #yarpp_relatedposts-hide').click(

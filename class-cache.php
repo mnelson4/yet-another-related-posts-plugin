@@ -2,10 +2,11 @@
 
 abstract class YARPP_Cache {
 
-	public $core;
+	protected $core;
 	public $score_override = false;
 	public $online_limit = false;
 	public $last_sql;
+	protected $yarpp_time = false;
 
 	function __construct( &$core ) {
 		$this->core = &$core;
@@ -16,6 +17,25 @@ abstract class YARPP_Cache {
 		$query->yarpp_cache_type = $this->name;
 	}
 	
+	/**
+	 * GENERAL CACHE CONTROL
+	 */
+	public function is_yarpp_time() {
+		return $this->yarpp_time;
+	}
+
+	public function flush() {
+	}
+	
+	public function setup() {
+	}
+	
+	public function upgrade( $last_version ) {
+	}
+	
+	/**
+	 * POST CACHE CONTROL
+	 */
 	// Note: return value changed in 3.4
 	// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
 	function enforce( $reference_ID, $force = false ) {
@@ -45,7 +65,15 @@ abstract class YARPP_Cache {
 		return YARPP_RELATED;
 	}
 	
-	/*
+	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
+	public function is_cached($reference_ID) {
+		return YARPP_NOT_CACHED;
+	}
+
+	public function clear($reference_ID) {
+	}
+	
+	/**
 	 * POST STATUS INTERACTIONS
 	 */
 	
@@ -102,7 +130,7 @@ abstract class YARPP_Cache {
 		}
 	}
 
-	/*
+	/**
 	 * SQL!
 	 */
 
@@ -205,23 +233,60 @@ abstract class YARPP_Cache {
 		return $newsql;
 	}
 
-	/*
+	/**
 	 * KEYWORDS
 	 */
-	
-	public function title_keywords($ID,$max = 20) {
-		return $this->extract_keywords(get_the_title($ID),$max);
+	 
+	// @param $ID (int)
+	// @param $type (string) body | title | all
+	// @return (string|array) depending on whether "all" were requested or not
+	public function get_keywords( $ID, $type = 'all' ) {
+		if ( !$ID = absint($ID) )
+			return false;
+
+		$keywords = array(
+			'body' => $this->body_keywords($ID),
+			'title' => $this->title_keywords($ID)
+		);
+
+		if ( empty($keywords) )
+			return false;
+		
+		if ( 'all' == $type )
+			return $keywords;
+		return $keywords[$type];
 	}
 	
-	public function body_keywords( $ID, $max = 20 ) {
+	protected function title_keywords( $ID, $max = 20 ) {
+		return apply_filters( 'yarpp_title_keywords',
+			$this->extract_keywords( get_the_title($ID), $max, $ID ), $max, $ID );
+	}
+	
+	protected function body_keywords( $ID, $max = 20 ) {
 		$post = get_post( $ID );
 		if ( empty($post) )
 			return '';
 		$content = $this->apply_filters_if_white( 'the_content', $post->post_content );
-		return $this->extract_keywords( $content, $max );
+		return apply_filters( 'yarpp_body_keywords',
+			$this->extract_keywords( $content, $max, $ID ), $max, $ID );
+
 	}
 	
-	private function extract_keywords($html, $max = 20) {
+	private function extract_keywords( $html, $max = 20, $ID = 0 ) {
+	
+		/**
+		 * @filter yarpp_extract_keywords
+		 *
+		 * Use this filter to override YARPP's built-in keyword computation
+		 * Return values should be a string of space-delimited words
+		 *
+		 * @param $keywords
+		 * @param $html unfiltered HTML content
+		 * @param (int) $max maximum number of keywords
+		 * @param (int) $ID
+		 */
+		if ( $keywords = apply_filters( 'yarpp_extract_keywords', false, $html, $max, $ID ) )
+			return $keywords;
 	
 		$lang = 'en_US';
 		if ( defined('WPLANG') ) {
@@ -382,7 +447,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 	private $related_postdata = array();
 	private $related_IDs = array();
 
-	private $yarpp_time = false;
 	public $demo_time = false;
 	private $demo_limit = 0;
 
@@ -395,12 +459,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 
 	public function is_enabled() {
 		return true; // always enabled.
-	}
-
-	public function setup() {
-	}
-	
-	public function upgrade( $last_version ) {
 	}
 
 	public function cache_status() {
@@ -471,11 +529,7 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 
 	/**
 	 * RELATEDNESS CACHE CONTROL
-	 */
-	public function is_yarpp_time() {
-		return $this->yarpp_time;
-	}
-	 
+	 */	 
 	public function begin_yarpp_time( $reference_ID, $args ) {
 		global $wpdb;
 
@@ -519,15 +573,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 	}
 
 	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
-	public function is_cached($reference_ID) {
-		return YARPP_NOT_CACHED;
-	}
-
-	public function clear($reference_ID) {
-		return;
-	}
-
-	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
 	public function update($reference_ID) {
 		global $wpdb;
 
@@ -536,9 +581,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 			return YARPP_NOT_CACHED;
 
 		return YARPP_RELATED;
-	}
-
-	public function flush() {
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
@@ -569,34 +611,5 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		}
 
 		return false;
-	}
-
-	/**
-	 * KEYWORDS CACHE CONTROL
-	 */
-	 
-	// @return (array) with body and title keywords
-	private function cache_keywords($ID) {
-		return array(
-			'body' => $this->body_keywords($ID),
-			'title' => $this->title_keywords($ID)
-		);
-	}
-
-	// @param $ID (int)
-	// @param $type (string) body | title | all
-	// @return (string|array) depending on whether "all" were requested or not
-	public function get_keywords( $ID, $type = 'all' ) {
-		if ( !$ID = absint($ID) )
-			return false;
-	
-		$keywords = $this->cache_keywords($ID);
-
-		if ( empty($keywords) )
-			return false;
-		
-		if ( 'all' == $type )
-			return $keywords;
-		return $keywords[$type];
 	}
 }

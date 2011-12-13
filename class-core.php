@@ -350,13 +350,21 @@ class YARPP {
 	function upgrade_3_4b8() {
 		$options = $this->get_option();
 		$options['weight'] = array(
-			'title' => $options['title'],
-			'body' => $options['body'],
+			'title' => (int) $options['title'],
+			'body' => (int) $options['body'],
 			'tax' => array(
-				'post_tag' => $options['tags'],
-				'category' => $options['categories'],
+				'post_tag' => (int) $options['tags'],
+				'category' => (int) $options['categories'],
 			)
 		);
+		
+		// ensure that we consider something
+		if ( $options['weight']['title'] < 2 &&
+			 $options['weight']['body'] < 2 &&
+			 $options['weight']['tax']['post_tag'] < 2 &&
+			 $options['weight']['tax']['category'] < 2 )
+			$options['weight'] = $this->default_options['weight'];
+			
 		unset( $options['title'] );
 		unset( $options['body'] );
 		unset( $options['tags'] );

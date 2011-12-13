@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 3.3.3
+Stable tag: 3.4
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -20,11 +20,9 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 3. **Caching**: YARPP organically caches the related posts data as your site is visited, greatly improving performance.
 4. **Related posts in RSS feeds**: Display related posts in your RSS and Atom feeds with custom display options.
 5. **Disallowing certain tags or categories**: You can choose certain tags or categories as disallowed, meaning any page or post with such tags or categories will not be served up by the plugin.
-6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both.
+6. **Related posts and pages**: Puts you in control of pulling up related posts, pages, or both. YARPP does not yet fully support custom post types; look for these in a future version.
 
 This plugin requires PHP 5 and MySQL 4.1 or greater.
-
-YARPP does not yet support custom post types; look for these in a future version.
 
 **See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/)**.
 
@@ -50,9 +48,9 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 
 = Auto display on your website =
 
-1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and (optionally) the sample templates inside `yarpp-templates` folder into your active theme.
-
-2. Activate the plugin.
+1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and activate the plugin.
+2. (optionally) copy the sample templates inside `yarpp-templates` folder into your active theme.
+3. Go to the "Related Posts (YARPP)" settings page to customize YARPP.
 
 = Auto display in your feeds =
 
@@ -64,69 +62,46 @@ Related posts can also be displayed as a widget. Go to the Design > Widgets opti
 
 = Custom display through templates =
 
-New in version 3.0, YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
+YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email or tweet with questions.*
+If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email with questions.*
 
 = How can I move the related posts display? =
 
 If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" option in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
 
-If you would like to add the Related Posts display elsewhere, follow these directions: (*Knowledge of PHP and familiarity with editing your WordPress theme files is required.*)
-
-Edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.
-
-This method can also be used to display YARPP on pages other than single-post displays, such as on archive pages. There is a little more information on the [advanced manual installation page](http://mitcho.com/code/yarpp/manual-installation/).
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. This method can also be used to display YARPP on pages other than single-post displays, such as on archive pages.
 
 = Does YARPP slow down my blog/server? =
 
-The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. In addition, *I highly recommend all YARPP users use a page-caching plugin, such as [WP-SuperCache](http://ocaoimh.ie/wp-super-cache/).*
+The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized in version 3.4.
 
 If you find that the YARPP database calls are still too database-intensive, try the following:
 
 * turning off "cross relate posts and pages";
 * turning on "show only previous posts";
-* not considering any taxonomies (tags, categories, etc.) in the Relatedness formula and not excluding any content by taxonomy in The Pool.
 
 These options can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab. All of these can improve database performance.
 
 If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality.
 
-If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/go/order/?refdom=mitcho.com).
+If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
 
 = Every page just says "no related posts"! What's up with that? =
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: first, lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: , lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
-= How do I turn off the match score next to the related posts? =
-
-The match score display is only for administrators... you can log out of `wp-admin` and check out the post again and you will see that the score is gone.
-
-If you would like more flexibility in changing the display of your related posts, please see the [templating tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
-
-= I use DISQUS for comments. I can't access the YARPP options page! =
-
-The DISQUS plugin loads some JavaScript voodoo which is interacting in weird ways with the AJAX in YARPP's options page. You can fix this by going to the DISQUS plugin advanced settings and turning on the "Check this if you have a problem with comment counts not showing on permalinks" option.
-
-= I use DISQUS for comments. My RSS feed is now invalid and cannot be parsed by some clients! =
-
-The DISQUS plugin loads some JavaScript voodoo when related posts are displayed, even in the RSS feed. You can fix this by going to the DISQUS plugin advanced settings and turning on the "Check this if you have a problem with comment counts not showing on permalinks" option.
-
-= I get a PHP error saying "Cannot redeclare `related_posts()`" =
-
-You most likely have another related posts plugin activated at the same time. Please disactivate those other plugins first before using YARPP.
-
-= I turned off one of the relatedness criteria (titles, bodies, tags, or categories) and now every page says "no related posts"! =
-
-This has to do with the way the "match score" is computed. Every entry's match score is the weighted sum of its title-score, body-score, tag-score, and category-score. If you turn off one of the relatedness criteria, you will no doubt have to lower your match threshold to get the same number of related entries to show up. Alternatively, you can consider one of the other criteria "with extra weight".
-
-It is recommended that you tweak your match threshold whenever you make changes to the "makeup" of your match score (i.e., the settings for the titles, bodies, tags, and categories items).
+I am currently seeking information from users who cannot get related posts anywhere in order to debug this issue: [more information here](http://wordpress.org/support/topic/no-related-posts-1?replies=21#post-2464940).
 
 = Are there any plugins that are incompatible with YARPP? =
 
-Aside from the DISQUS plugin (see above), currently the only known incompatibility is [with the SEO_Pager plugin](http://wordpress.org/support/topic/267966) and the [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/) plugin. Users of SEO Pager are urged to turn off the automatic display option in SEO Pager and instead add the code manually. There are reports that the [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605) may also be incompatible with YARPP. Other related posts plugins, obviously, may also be incompatible.
+* DISQUS: go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
+* [SEO_Pager plugin](http://wordpress.org/support/topic/267966): turn off the automatic display option in SEO Pager and instead add the code manually.
+* [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
+* [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
+* Other related posts plugins, obviously, may also be incompatible.
 
 Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
 
@@ -138,49 +113,51 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 = Things are weird after I upgraded. =
 
-I highly recommend you disactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it. Visit the YARPP settings page ("Related Posts") to verify your settings.
+1. Visit the "Related Posts (YARPP)" settings page to verify your settings.
+2. Disactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it.
+3. Install the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin to flush the cache.
 
-= Can I clear my cache? =
+= Can I clear my cache? Can I build up the cache manually? =
 
-Yes, you can clear the cache by going to your YARPP settings page ("Related Posts (YARPP)") in your admin interface, and adding `&action=flush` to the URL and reloading the page. YARPP will begin the process of organically rebuilding your cache.
+The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
 
 == Localizations ==
 
 YARPP is currently localized in the following languages:
 
-* Egyptian Arabic (`ar_EG`) by Bishoy Antoun (yarpp-ar at mitcho dot com) of [cdmazika.com](http://www.cdmazika.com).
-* Standard Arabic (`ar`) by [led](http://led24.de) (yarpp-ar at mitcho dot com)
+* Egyptian Arabic (`ar_EG`) by Bishoy Antoun of [cdmazika.com](http://www.cdmazika.com).
+* Standard Arabic (`ar`) by [led](http://led24.de)
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
-* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
-* Cypriot Greek (`el_CY`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-* Dutch (`nl_NL`) by Sybrand van der Werf (yarpp-nl at mitcho dot com)
-* Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/) (yarpp-fa at mitcho dot com)
-* French (`fr_FR`) by Lionel Chollet (yarpp-fr at mitcho dot com)
-* Georgian (`ge_KA`) by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
-* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms) (yarpp-de at mitcho dot com)
-* Greek (`el_EL`) by Aristidis Tonikidis (yarpp-el at mitcho dot com) of [akouseto.gr](http://www.akouseto.gr)
-* Hebrew (`he_IL`) by Mickey Zelansky (yarpp-he at mitcho dot com) of [simpleidea.us](http://simpleidea.us)
-* Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/) (yarpp-hi at mitcho dot com)
-* Italian (`it_IT`) by Gianni Diurno (yarpp-it at mitcho dot com) of [gidibao.net](http://gidibao.net)
-* Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
-* Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) (yarpp-id at mitcho dot com) of [Kelayang](http://kelayang.com/)
+* Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
+* Cypriot Greek (`el_CY`) by Aristidis Tonikidis of [akouseto.gr](http://www.akouseto.gr)
+* Dutch (`nl_NL`) by Sybrand van der Werf
+* Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
+* French (`fr_FR`) by Lionel Chollet
+* Georgian (`ge_KA`) by Kasia Ciszewski of [Find My Hosting](www.findmyhosting.com)
+* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms)
+* Greek (`el_EL`) by Aristidis Tonikidis of [akouseto.gr](http://www.akouseto.gr)
+* Hebrew (`he_IL`) by Mickey Zelansky of [simpleidea.us](http://simpleidea.us)
+* Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/)
+* Italian (`it_IT`) by Gianni Diurno of [gidibao.net](http://gidibao.net)
+* Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com)
+* Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
 * Japanese (`ja`) by myself (yarpp at mitcho dot com)
-* Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
-* Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr) (yarpp-ko at mitcho dot com)
-* Latvian (`lv_LV`) by [Mike](http://antsar.info) (yarpp-lv at mitcho dot com)
-* Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt) (yarpp-lt at mitcho dot com)
-* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](http://www.datanerden.no) (yarpp-nb at mitcho dot com)
+* Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru)
+* Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr)
+* Latvian (`lv_LV`) by [Mike](http://antsar.info)
+* Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt)
+* Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](http://www.datanerden.no)
 * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
-* (European) Portuguese (`pt_PT`) by Stefan Mueller (yarpp-pt at mitcho.com) of [fernstadium-net](http://www.fernstudium-net.de)
-* Brazilian Portuguese (`pt_BR`) by Rafael Fischmann (yarpp-ptBR at mitcho.com) of [macmagazine.br](http://macmagazine.com.br/)
-* Russian (`ru_RU`) by Marat Latypov (yarpp-ru at mitcho.com) of [blogocms.ru](http://blogocms.ru)
-* Spanish (`es_ES`) by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
-* Swedish (`sv_SE`) by Max Elander (yarpp-sv at mitcho dot com)
-* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) (yarpp-tr at mitcho.com)
-* Vietnamese (`vi_VN`) by Vu Nguyen (yarpp-vi at mitcho dot com) of [Rubik Integration](http://rubikintegration.com/)
-* Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich) (yarpp-uk at mitcho dot com)
-* Uzbek (`uz_UZ`) by Ali Safarov (yarpp-uz at mitcho dot com) of [comfi.com](http://www.comfi.com/)
+* (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
+* Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
+* Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
+* Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
+* Swedish (`sv_SE`) by Max Elander
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com)
+* Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
+* Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
+* Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
 
 <!--We already have localizers lined up for the following languages:
 * Danish
@@ -198,28 +175,33 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
-* Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content.
+	* Performance improvements on pages with "no related posts"
+* Now can consider custom taxonomies (of posts and pages), in addition to tags and cateogories! Custom taxonomies can also be used to exclude certain content from The Pool.
+* Add welcome message, inviting users to check out the settings page
 * [Bug fix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-version-333-breaks-templates-in-widget): Custom templates could not be used in widget display
-* Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
-* Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Significant code cleanup
 	* Move many internal functions into a global object `$yarpp` of class `YARPP`; references to the global `$yarpp_cache` should now be to global `$yarpp->cache`
 	* Created the "bypass" cache engine which is used when custom arguments are specified.
 		* Switch to bypass cache for demos
 	* Now only clears cache on post update, and only computes results for actual posts, not revisions (thanks to Andrei Mikhaylov)
-	* Don't compute related posts for the metabox on the edit screen; display them via ajax instead
 	* Removed the many different options entries, replacing them with a single `yarpp` option (except `yarpp_version`)
 	* Fixed issues with display options field data escaping and slashing once and for all
-	* Performance improvements on pages with "no related posts"
 	* Streamlined keyword storage in `YARPP_Cache_Postmeta`
 	* Create `YARPP_Cache` abstract class
 	* Updated minor bug for computing how many results should be cached
-	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words
+	* Adding some filters: yarpp_settings_save, yarpp_blacklist, yarpp_blackmethods, yarpp_keywords_overused_words, yarpp_title_keywords, yarpp_body_keywords, yarpp_extract_keywords
 	* New systematic use of YARPP_ constants to communicate cache status
 	* Use `get_terms` to load terms
+* Get lazy and embrace asynchronicity:
+	* Implement lazy/infinite scrolling for the "disallow tags" and "disallow categories," so the YARPP settings screen doesn't lock up the browser for sites which have a crazy number or tags or categories
+	* Don't compute related posts for the metabox on the edit screen; display them via ajax instead
+	* Only clear cache on post save, not recompute
+* Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
-* Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 * Fix formatting of the Related Posts meta box
+* Localizations
+	* Updated `it_IT` localization
+	* Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.
 * Init YARPP on the `init` action, [for compatibility with WPML](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)
@@ -244,17 +226,17 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Localizations
 	* Quick fix to Czech word list file name
 	* Updated Italian localization (`it_IT`)
-	* Added Hungarian (`hu_HU`) by [daSSad](http://dassad.com) (yarpp-hu at mitcho dot com)
-	* Added Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru) (yarpp-kk at mitcho dot com)
-	* Added Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com) (yarpp-gb at mitcho dot com)
+	* Added Hungarian (`hu_HU`) by [daSSad](http://dassad.com)
+	* Added Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru)
+	* Added Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com)
 = 3.2.2 =
 * Now [ignores soft hyphens](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words) in keyword construction
 * Minor fix for "cross-relate posts and pages" option and more accurate `related_*()` results across post types
 * Localization updates:
 	* Updated `de_DE` German localization files
 	* Fixed an encoding issue in the `pt_PT` Portuguese localization files
-	* Added `es_ES` Spanish localization by Rene (yarpp-es at mitcho dot com) of [WordPress Webshop](http://wpwebshop.com)
-	* Added `ge_KA` Georgian by Kasia Ciszewski (yarpp-ge at mitcho dot com) of [Find My Hosting](www.findmyhosting.com)
+	* Added `es_ES` Spanish localization by Rene of [WordPress Webshop](http://wpwebshop.com)
+	* Added `ge_KA` Georgian by Kasia Ciszewski of [Find My Hosting](www.findmyhosting.com)
 	* Added Czech (`cs_CZ`) overused words list [by berniecz](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-french-overused-words)
 = 3.2.1 =
 * Bugfix: [Duplicate results shown for some users](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-yarpp-post-duplicate-related-articles)
@@ -435,7 +417,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Bugfix: [keywords did not filter tags](http://wordpress.org/support/topic/218211). (This bugfix may vastly improve "relatedness" on some blogs.)
 * Localizations:
 	* Simplified Chinese (`zh_CN`) by Jor Wang (mail at jorwang dot com) of [jorwang.com](http://jorwang.com)
-	* German (`de_DE`) by Michael Kalina (yarpp-de at mitcho dot com) of [3th.be](http://3th.be)
+	* German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be)
 * The "show excerpt" option now shows the first `n` words of the excerpt, rather than the content ([by request](http://wordpress.org/support/topic/212577))
 * Added an `echo` parameter to the `related_*()` functions, with default value of `true`. If `false`, the function will simply return the output.
 * Added support for the [AllWebMenus Pro](http://wordpress.org/extend/plugins/allwebmenus-wordpress-menu-plugin/) plugin

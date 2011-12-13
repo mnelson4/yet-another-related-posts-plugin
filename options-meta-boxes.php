@@ -79,7 +79,7 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 ?>
 			<tr valign='top'>
 				<th scope='row'><?php echo $string; ?></th>
-				<td><div class='scroll_wrapper' style="overflow:auto;max-height:100px;"><div id='exclude_<?php echo $taxonomy; ?>'>
+				<td><div class='scroll_wrapper' style="overflow:auto;max-height:100px;"><div class='exclude_terms' id='exclude_<?php echo $taxonomy; ?>'>
 <?php
 $exclude_terms = yarpp_get_option('exclude');
 if ( !empty($exclude_terms[$taxonomy]) ) {
