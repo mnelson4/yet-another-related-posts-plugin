@@ -457,7 +457,8 @@ class YARPP {
 	
 		if ($domain == 'metabox') {
 			include(YARPP_DIR.'/template-metabox.php');
-		} elseif ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
+		} elseif ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template_file);
 			$output = ob_get_contents();
