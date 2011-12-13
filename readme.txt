@@ -178,7 +178,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-some-clarification-assistance) for missing `join_filter` on bypass cache
 * Add defaults for the `post_type` arg
 * Strengthen default post ID values for `related_*` functions
-* Updated `sv_SE`, `ko_KR` localizations
+* Updated `sv_SE`, `ko_KR`, `fr_FR` localizations
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
 	* Performance improvements on pages with "no related posts"
