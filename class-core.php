@@ -586,7 +586,8 @@ class YARPP {
 		$this->prep_query( $domain == 'rss' );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ($use_template and file_exists(STYLESHEETPATH . '/' . $template_file) and $template_file != '') {
+		if ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template_file);
 			$output = ob_get_contents();
