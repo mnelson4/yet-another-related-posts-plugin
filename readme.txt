@@ -173,6 +173,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.4.1 =
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template): restore `global $post` access to custom templates
+* Updated `sv_SE`, `ko_KR` localizations
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
 	* Performance improvements on pages with "no related posts"
