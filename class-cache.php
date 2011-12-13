@@ -538,7 +538,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		$this->related_postdata = $wpdb->get_results($this->sql($reference_ID, $args), ARRAY_A);
 		$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
 
-		add_filter('posts_join',array(&$this,'join_filter'));
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
 		add_filter('posts_fields',array(&$this,'fields_filter'));
@@ -557,7 +556,6 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 
 	public function end_yarpp_time() {
 		$this->yarpp_time = false;
-		remove_filter('posts_join',array(&$this,'join_filter'));
 		remove_filter('posts_where',array(&$this,'where_filter'));
 		remove_filter('posts_orderby',array(&$this,'orderby_filter'));
 		remove_filter('posts_fields',array(&$this,'fields_filter'));
