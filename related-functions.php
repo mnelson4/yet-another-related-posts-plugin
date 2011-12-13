@@ -1,6 +1,6 @@
 <?php
 
-function yarpp_related($reference_ID, $args = array(), $echo = false) {
+function yarpp_related($reference_ID = false, $args = array(), $echo = false) {
 	global $yarpp;
 
 	if ( is_array($reference_ID) ) {
@@ -11,7 +11,7 @@ function yarpp_related($reference_ID, $args = array(), $echo = false) {
 	return $yarpp->display_related($reference_ID, $args, $echo);
 }
 
-function yarpp_related_exist($reference_ID, $args = array()) {
+function yarpp_related_exist($reference_ID = false, $args = array()) {
 	global $yarpp;
 
 	if ( is_array($reference_ID) ) {
@@ -22,7 +22,7 @@ function yarpp_related_exist($reference_ID, $args = array()) {
 	return $yarpp->related_exist($reference_ID, $args, $echo);
 }
 
-function yarpp_get_related($reference_ID, $args = array()) {
+function yarpp_get_related($reference_ID = false, $args = array()) {
 	global $yarpp;
 	return $yarpp->get_related($reference_ID, $args);
 }
