@@ -406,16 +406,17 @@ class YARPP {
 	 * @param (array) $args
 	 * @param (bool) $echo
 	 */
-	function display_related($reference_ID, $args = array(), $echo = true) {
+	function display_related($reference_ID = false, $args = array(), $echo = true) {
 		global $wp_query, $pagenow;
 	
 		$this->upgrade_check();
+
+		if ( !$reference_ID )
+			$reference_ID = get_the_ID();
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
-		if ( is_null($reference_ID) )
-			$reference_ID = get_the_ID();
 		
 		$this->setup_active_cache( $args );
 
@@ -449,7 +450,7 @@ class YARPP {
 				'orderby' => $orders[0],
 				'order' => $orders[1],
 				'showposts' => $limit,
-				'post_type' => $args['post_type']
+				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 			));
 		}
 		$this->prep_query( $current_query->is_feed );
@@ -492,14 +493,15 @@ class YARPP {
 	 * @param (int) $reference_ID - obligatory
 	 * @param (array) $args
 	 */
-	function get_related($reference_ID, $args = array()) {
+	function get_related($reference_ID = false, $args = array()) {
 		$this->upgrade_check();
+
+		if ( !$reference_ID )
+			$reference_ID = get_the_ID();
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
-		if ( is_null($reference_ID) )
-			$reference_ID = get_the_ID();
 		
 		$this->setup_active_cache( $args );
 
@@ -520,7 +522,7 @@ class YARPP {
 			'orderby' => $orders[0],
 			'order' => $orders[1],
 			'showposts' => $limit,
-			'post_type' => $args['post_type']
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 		));
 		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 	
@@ -531,14 +533,12 @@ class YARPP {
 	 * @param (int) $reference_ID
 	 * @param (array) $args
 	 */
-	function related_exist($reference_ID, $args = array()) {
-		global $post;
-	
+	function related_exist($reference_ID = false, $args = array()) {
 		$this->upgrade_check();
 	
-		if ( is_object($post) && is_null($reference_ID) )
-			$reference_ID = $post->ID;
-	
+		if ( !$reference_ID )
+			$reference_ID = get_the_ID();
+			
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
@@ -552,7 +552,11 @@ class YARPP {
 	
 		$this->active_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
 		$related_query = new WP_Query();
-		$related_query->query(array('p'=>$reference_ID,'showposts'=>1,'post_type'=>$args['post_type']));
+		$related_query->query(array(
+			'p' => $reference_ID,
+			'showposts' => 1,
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+		));
 		$return = $related_query->have_posts();
 		unset($related_query);
 		$this->active_cache->end_yarpp_time(); // YARPP time is over. :(
