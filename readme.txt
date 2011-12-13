@@ -221,8 +221,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Only clear cache on post save, not recompute
 * Added `yarpp_get_related()` function can be used similar to `get_posts()`
 * Support for [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/).
-* Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 * Fix formatting of the Related Posts meta box
+* Localizations
+	* Updated `it_IT` localization
+	* Added Portuguese stopwords by Leandro Coelho ([Logística Descomplicada](http://www.logisticadescomplicada.com))
 = 3.3.3 =
 * [Bug fix](http://wordpress.org/support/topic/no-related-posts-1): a fix for keyword computation for pages; should improve results on pages. May require flushing of cache: see FAQ for instructions.
 * Init YARPP on the `init` action, [for compatibility with WPML](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-load-sequence-yarpp-starts-before-the-wordpress-init-completes)

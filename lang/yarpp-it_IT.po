@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gianni Diurno (aka gidibao) <gidibao[at]gmail[dot]com>\n"
-"Language-Team: Gianni Diurno | gidibao.net <gidibao@gmail.com>\n"
+"Language-Team: Gianni Diurno | gidibao.net & charmingpress\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,551 +18,525 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#@ yarpp
-#: includes.php:376
+# @ yarpp
+#: class-admin.php:42
 msgid "Related Posts"
 msgstr "Articoli correlati"
 
-#@ yarpp
-#: options.php:63
+# @ yarpp
+#: options.php:61
 #, php-format
 msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "I criteri di affinità YARPP \"considera titoli\" e \"considera contenuti\" necessitano che la tua tabella <code>%s</code> possa utilizzare il <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>. Pare che sia in uso il <code>%s</code> engine. Queste due opzioni sono state disattivate."
 
-#@ yarpp
-#: options.php:65
+# @ yarpp
+#: options.php:63
 #, php-format
 msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
 msgstr "Per poter ripristinare queste funzioni dovrai aggiornare la tua tabella <code>%s</code> facendo sì che sia eseguita la seguente direttiva SQL: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . Nessun dato verrà perso modificando la tabella del motore sebbene ne verranno interessate le prestazioni."
 
-#@ yarpp
-#: options.php:67
+# @ yarpp
+#: options.php:65
 #, php-format
 msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
 msgstr "Se, nonostante questa nota, fossi certo che <code>%s</code> stia utilizzando il MyISAM engine, premi il pulsante magico:"
 
-#@ yarpp
-#: options.php:70
+# @ yarpp
+#: options.php:68
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Abbi fiducia. Lasciami utilizzare le funzioni MyISAM."
 
-#@ yarpp
-#: options.php:83
+# @ yarpp
+#: options.php:80
 msgid "The YARPP database had an error but has been fixed."
 msgstr "Il database di YARPP aveva un errore, ma é stato corretto."
 
-#@ yarpp
-#: options.php:85
+# @ yarpp
+#: options.php:82
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "Il database di YARPP ha un errore che non può essere corretto."
 
-#@ yarpp
-#: options-meta-boxes.php:38
-msgid "word"
-msgstr "parola"
-
-#@ yarpp
-#: options-meta-boxes.php:39
-msgid "tag"
-msgstr "tag"
-
-#@ yarpp
-#: options-meta-boxes.php:40
-msgid "category"
-msgstr "categoria"
-
-#@ yarpp
-#: options-meta-boxes.php:45
-#: options-meta-boxes.php:63
-#: options-meta-boxes.php:76
+# @ yarpp
+#: options-meta-boxes.php:36
+#: options-meta-boxes.php:50
 msgid "do not consider"
 msgstr "non considerare"
 
-#@ yarpp
-#: options-meta-boxes.php:46
-#: options-meta-boxes.php:64
-#: options-meta-boxes.php:78
+# @ yarpp
+#: options-meta-boxes.php:37
+#: options-meta-boxes.php:51
 msgid "consider"
 msgstr "considera"
 
-#@ yarpp
-#: options-meta-boxes.php:48
-#: options-meta-boxes.php:80
+# @ yarpp
+#: options-meta-boxes.php:38
 #, php-format
 msgid "require at least one %s in common"
 msgstr "richiedi almeno 1 %s in comune"
 
-#@ yarpp
-#: options-meta-boxes.php:50
-#: options-meta-boxes.php:82
+# @ yarpp
+#: options-meta-boxes.php:39
 #, php-format
 msgid "require more than one %s in common"
 msgstr "richiedi più di 1 %s in comune"
 
-#@ yarpp
-#: options-meta-boxes.php:65
+# @ yarpp
+#: options-meta-boxes.php:52
 msgid "consider with extra weight"
 msgstr "considera con extra weight"
 
-#@ default
-#@ yarpp
-#: options-meta-boxes.php:286
+# @ default
+# @ yarpp
+#: options-meta-boxes.php:275
 msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
 msgstr "Effettua una donazione via PayPal per mitcho (Michael Yoshitaka Erlewine) lo sviluppatore di questo plugin"
 
-#@ yarpp
-#: options.php:178
+# @ yarpp
+#: options.php:120
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Opzioni Yet Another Related Posts"
 
-#@ yarpp
-#: options-meta-boxes.php:118
+# @ yarpp
+#: options-meta-boxes.php:126
 msgid "\"The Pool\""
 msgstr "\"Veduta di insieme\""
 
-#@ yarpp
-#: options-meta-boxes.php:91
+# @ yarpp
+#: options-meta-boxes.php:100
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
 msgstr "Per \"Veduta di insieme\" si intende il totale degli articoli e pagine che sono cadidati per essere mostrati quali correlati all'articolo in merito."
 
-#@ yarpp
-#: options-meta-boxes.php:96
-msgid "Disallow by category:"
-msgstr "Escludi categorie:"
-
-#@ yarpp
-#: options-meta-boxes.php:98
-msgid "Disallow by tag:"
-msgstr "Escludi tag:"
-
-#@ yarpp
-#: options-meta-boxes.php:101
+# @ yarpp
+#: options-meta-boxes.php:108
 msgid "Show password protected posts?"
 msgstr "Desideri mostrare gli articoli protetti da una password?"
 
-#@ yarpp
-#: options-meta-boxes.php:140
+# @ yarpp
+#: options-meta-boxes.php:149
 msgid "Show only previous posts?"
 msgstr "Desideri mostrare solamente gli articoli pubblicati in precedenza?"
 
-#@ yarpp
-#: options-meta-boxes.php:148
+# @ yarpp
+#: options-meta-boxes.php:157
 msgid "\"Relatedness\" options"
 msgstr "Opzioni \"Affinità\""
 
-#@ yarpp
-#: options-meta-boxes.php:130
+# @ yarpp
+#: options-meta-boxes.php:138
 msgid "Match threshold:"
 msgstr "Valore di corrispondenza:"
 
-#@ yarpp
-#: options-meta-boxes.php:131
+# @ yarpp
+#: options-meta-boxes.php:139
 msgid "Titles: "
 msgstr "Titoli:"
 
-#@ yarpp
-#: options-meta-boxes.php:133
+# @ yarpp
+#: options-meta-boxes.php:141
 msgid "Bodies: "
 msgstr "Contenuti:"
 
-#@ yarpp
-#: options-meta-boxes.php:135
-msgid "Tags: "
-msgstr "Tag: "
-
-#@ yarpp
-#: options-meta-boxes.php:137
-msgid "Categories: "
-msgstr "Categorie:"
-
-#@ yarpp
-#: options-meta-boxes.php:139
+# @ yarpp
+#: options-meta-boxes.php:148
 msgid "Cross-relate posts and pages?"
 msgstr "Relazione incrociata per articoli e pagine?"
 
-#@ yarpp
-#: options-meta-boxes.php:139
+# @ yarpp
+#: options-meta-boxes.php:148
 msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
 msgstr "Una volta selezionata l'opzione \"Relazione incrociata articoli e pagine\", <code>related_posts()</code>, <code>related_pages()</code> e <code>related_entries()</code> forniranno tutti lo stesso output verso le pagine e gli articoli correlati."
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:212
 msgid "Display options <small>for your website</small>"
 msgstr "Opzioni di visualizzazione nel <small>tuo sito</small>"
 
-#@ yarpp
-#: magic.php:297
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#, php-format
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Articoli correlati elaborati dal plugin <a href='%s'>Yet Another Related Posts</a>."
-
-#@ yarpp
-#: options-meta-boxes.php:157
+# @ yarpp
+#: options-meta-boxes.php:166
 msgid "Automatically display related posts?"
 msgstr "Desideri mostrare in automatico gli articoli correlati?"
 
-#@ yarpp
-#: options-meta-boxes.php:157
+# @ yarpp
+#: options-meta-boxes.php:166
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
 msgstr "Questa opzione farà in modo che gli articoli correlati vengano mostrati automaticamente in coda al contenuto di ogni singola pubblicazione . Qualora questa opzione non fosse stata attivata, dovrai inserire manualmente <code>related_posts()</code> oppure le varianti (<code>related_pages()</code> e <code>related_entries()</code>) nei file del tuo tema."
 
-#@ yarpp
-#: options-meta-boxes.php:158
+# @ yarpp
+#: options-meta-boxes.php:167
 msgid "Website display code example"
 msgstr "Esempio codice"
 
-#@ yarpp
-#: options-meta-boxes.php:158
+# @ yarpp
+#: options-meta-boxes.php:167
 #: options-meta-boxes.php:221
 msgid "(Update options to reload.)"
 msgstr "(Ricarica la pagina per visualizzare l'aggiornamento)"
 
-#@ yarpp
-#: options-meta-boxes.php:160
+# @ yarpp
+#: options-meta-boxes.php:169
 #: options-meta-boxes.php:226
 msgid "Maximum number of related posts:"
 msgstr "Numero max. di articoli correlati:"
 
-#@ yarpp
-#: options-meta-boxes.php:175
+# @ yarpp
+#: options-meta-boxes.php:184
 #: options-meta-boxes.php:244
 msgid "Before / after related entries:"
 msgstr "Davanti / in coda agli articoli correlati:"
 
-#@ yarpp
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
+# @ yarpp
 #: options-meta-boxes.php:184
+#: options-meta-boxes.php:185
+#: options-meta-boxes.php:193
 #: options-meta-boxes.php:244
 #: options-meta-boxes.php:245
 #: options-meta-boxes.php:250
 msgid "For example:"
 msgstr "Esempio:"
 
-#@ yarpp
-#: options-meta-boxes.php:176
+# @ yarpp
+#: options-meta-boxes.php:185
 #: options-meta-boxes.php:245
 msgid "Before / after each related entry:"
 msgstr "Davanti / in coda ad ogni articolo correlato:"
 
-#@ yarpp
-#: options-meta-boxes.php:178
+# @ yarpp
+#: options-meta-boxes.php:187
 #: options-meta-boxes.php:247
 msgid "Show excerpt?"
 msgstr "Desideri mostrare il riassunto?"
 
-#@ yarpp
-#: options-meta-boxes.php:179
+# @ yarpp
+#: options-meta-boxes.php:188
 #: options-meta-boxes.php:248
 msgid "Excerpt length (No. of words):"
 msgstr "Lunghezza riassunto (totale parole):"
 
-#@ yarpp
-#: options-meta-boxes.php:183
+# @ yarpp
+#: options-meta-boxes.php:192
 msgid "Before / after (Excerpt):"
 msgstr "Davanti / in coda (Riassunto):"
 
-#@ yarpp
-#: options-meta-boxes.php:189
-#: options-meta-boxes.php:254
+# @ yarpp
+#: options-meta-boxes.php:61
 msgid "Order results:"
 msgstr "Disposizione dei risultati:"
 
-#@ yarpp
-#: options-meta-boxes.php:191
-#: options-meta-boxes.php:256
+# @ yarpp
+#: options-meta-boxes.php:64
 msgid "score (high relevance to low)"
 msgstr "punteggio (da massima a minima rilevanza)"
 
-#@ yarpp
-#: options-meta-boxes.php:192
-#: options-meta-boxes.php:257
+# @ yarpp
+#: options-meta-boxes.php:65
 msgid "score (low relevance to high)"
 msgstr "punteggio (da minima a massima rilevanza)"
 
-#@ yarpp
-#: options-meta-boxes.php:193
-#: options-meta-boxes.php:258
+# @ yarpp
+#: options-meta-boxes.php:66
 msgid "date (new to old)"
 msgstr "data (dal nuovo al vecchio)"
 
-#@ yarpp
-#: options-meta-boxes.php:194
-#: options-meta-boxes.php:259
+# @ yarpp
+#: options-meta-boxes.php:67
 msgid "date (old to new)"
 msgstr "data (dal vecchio al nuovo)"
 
-#@ yarpp
-#: options-meta-boxes.php:195
-#: options-meta-boxes.php:260
+# @ yarpp
+#: options-meta-boxes.php:68
 msgid "title (alphabetical)"
 msgstr "titolo (A-Z)"
 
-#@ yarpp
-#: options-meta-boxes.php:196
-#: options-meta-boxes.php:261
+# @ yarpp
+#: options-meta-boxes.php:69
 msgid "title (reverse alphabetical)"
 msgstr "titolo (Z-A)"
 
-#@ yarpp
-#: options-meta-boxes.php:201
-#: options-meta-boxes.php:266
+# @ yarpp
+#: options-meta-boxes.php:200
+#: options-meta-boxes.php:254
 msgid "Default display if no results:"
 msgstr "Testo predefinito da mostrare in assenza di risultati:"
 
-#@ yarpp
-#: includes.php:257
+# @ yarpp
+#: class-widget.php:74
 #: options-meta-boxes.php:203
-#: options-meta-boxes.php:268
+#: options-meta-boxes.php:256
 msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Desideri promuovere il plugin Yet Another Related Posts?"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
+#: options-meta-boxes.php:257
 #, php-format
 msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
 msgstr "Questa opzione aggiugerà il codice %s. Attivalo, aggiorna le opzioni e vedi l'anteprima del codice qui a lato. Ti sarei molto grato se tu mostrassi il mio link."
 
-#@ yarpp
-#: options-meta-boxes.php:276
+# @ yarpp
+#: options-meta-boxes.php:264
 msgid "Display options <small>for RSS</small>"
 msgstr "Opzioni di visualizzazione nel tuo <small>feed RSS</small>"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:221
 msgid "Display related posts in feeds?"
 msgstr "Desideri mostrare gli articoli correlati nei feed?"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:223
 msgid "Display related posts in the descriptions?"
 msgstr "Desideri mostrare gli articoli correlati nelle descrizioni?"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:223
 msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
 msgstr "Questa opzione mostrerà gli articoli correlati nei campi della descrizione del feed RSS e non solo nei contenuti. Se i tuoi feed fossero stati impostati per mostrare solamente i riassunti degli articoli, in ogni caso verrà utilizzato il campo per la descrizione quindi, questa opzione é comunque necessaria."
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:221
 msgid "RSS display code example"
 msgstr "Esempio codice"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:250
 msgid "Before / after (excerpt):"
 msgstr "Davanti / in coda (riassunto):"
 
-#@ yarpp
-#: template-builtin.php:35
+# @ yarpp
+#: template-builtin.php:20
 #, php-format
 msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f é il punteggio di affinità YARPP tra questo articolo principale ed i suoi relativi. Stai vedendo questo messaggio perché sei collegato come amministratore di WordPress. Il messaggio lo vedi solo tu."
 
-#@ yarpp
-#: includes.php:149
-#: includes.php:194
-#: includes.php:215
+# @ yarpp
+#: class-admin.php:34
+#: class-widget.php:7
+#: class-widget.php:28
 msgid "Related Posts (YARPP)"
 msgstr "Related Posts (YARPP)"
 
-#@ yarpp
-#: options.php:54
+# @ yarpp
+#: options.php:53
 msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
 msgstr "La verifica MyISAM é stata sovrascritta. Potrai da ora utilizzare \"considera titoli\" e  \"considera contenuti\" come criteri di affinità."
 
-#@ yarpp
-#: options-meta-boxes.php:124
-#: options-meta-boxes.php:139
-#: options-meta-boxes.php:157
-#: options-meta-boxes.php:161
+# @ yarpp
+#: options-meta-boxes.php:132
+#: options-meta-boxes.php:148
+#: options-meta-boxes.php:166
+#: options-meta-boxes.php:170
 #: options-meta-boxes.php:204
 #: options-meta-boxes.php:221
 #: options-meta-boxes.php:223
 #: options-meta-boxes.php:228
-#: options-meta-boxes.php:268
+#: options-meta-boxes.php:256
 msgid "more&gt;"
 msgstr "info&gt;"
 
-#@ yarpp
+# @ yarpp
 #: options.php:114
 msgid "Options saved!"
 msgstr "Le opzioni sono state salvate!"
 
-#@ yarpp
-#: options.php:280
-msgid "Do you really want to reset your configuration?"
-msgstr "Sei certo di volere ripristinare la tua configurazione?"
-
-#@ yarpp
-#: options.php:279
-msgid "Update options"
-msgstr "Aggiorna le opzioni"
-
-#@ yarpp
-#: options-meta-boxes.php:124
+# @ yarpp
+#: options-meta-boxes.php:132
 msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
 msgstr "Quanto più alto sarà il valore di corrispondenza, maggiore sarà la restrizione: otterrai di fatto un minore numero di articoli correlati. Il valore predefinito é impostato a 5. Qualora desiderassi trovare un valore appropriato per determinare le affinità, verifica gli articoli correlati di alcuni post ed il punteggio a loro associato. Potrai quindi determinare quale sia il migliore valore di corrispondenza per il tuo sito."
 
-#@ yarpp
-#: options.php:280
-msgid "Reset options"
-msgstr "Ripristina le opzioni"
-
-#@ yarpp
-#: cache-postmeta.php:105
-#: cache-tables.php:131
+# @ yarpp
+#: class-cache.php:460
 msgid "Example post "
 msgstr "Articolo di esempio:"
 
-#@ yarpp
+# @ yarpp
 #: template-metabox.php:12
 msgid "These are the related entries for this entry. Updating this post may change these related posts."
 msgstr "Questi sono gli articoli correlati per questo post. L'aggiornamento di questo post potrebbe cambiare gli articoli ad esso correlati."
 
-#@ yarpp
-#: template-metabox.php:25
+# @ yarpp
+#: template-metabox.php:28
 msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
 msgstr "La visualizzazione degli articoli correlati dipende principalmente dalle opzioni YARPP."
 
-#@ yarpp
-#: includes.php:28
-#: includes.php:39
-#: template-metabox.php:27
+# @ yarpp
+#: class-core.php:79
+#: class-core.php:90
+#: class-core.php:268
+#: class-core.php:279
+#: template-metabox.php:30
 #: template-widget.php:13
 msgid "No related posts."
 msgstr "Nessun articolo correlato."
 
-#@ yarpp
-#: options-meta-boxes.php:105
+# @ yarpp
+#: options-meta-boxes.php:113
 msgid "day(s)"
 msgstr "giorno(i)"
 
-#@ yarpp
-#: options-meta-boxes.php:106
+# @ yarpp
+#: options-meta-boxes.php:114
 msgid "week(s)"
 msgstr "settimana(e)"
 
-#@ yarpp
-#: options-meta-boxes.php:107
+# @ yarpp
+#: options-meta-boxes.php:115
 msgid "month(s)"
 msgstr "mese(i)"
 
-#@ yarpp
-#: options-meta-boxes.php:109
+# @ yarpp
+#: options-meta-boxes.php:117
 msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Mostra solamente gli articoli dalle precedenti NUMBER UNITS"
 
-#@ yarpp
-#: options.php:46
-#, php-format
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "E' disponibile una nuova (%s) beta di Yet Another Related Posts Plugin. Puoi <a href=\"%s\">scaricarla qui</a> a tuo rischio e pericolo."
-
-#@ yarpp
-#: includes.php:248
-#: options-meta-boxes.php:161
+# @ yarpp
+#: class-widget.php:65
+#: options-meta-boxes.php:170
 #: options-meta-boxes.php:228
 msgid "Display using a custom template file"
 msgstr "Mostra utilizzando un file template personalizzato"
 
-#@ yarpp
-#: includes.php:249
-#: options-meta-boxes.php:165
+# @ yarpp
+#: class-widget.php:66
+#: options-meta-boxes.php:174
 #: options-meta-boxes.php:233
 msgid "Template file:"
 msgstr "File template:"
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:221
 msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
 msgstr "Questa opzione mostra gli articoli correlati in coda ad ogni articolo nei tuoi feed RSS e Atom. Non é necessaria alcuna modifica al template."
 
-#@ yarpp
+# @ yarpp
 #: options-meta-boxes.php:228
 msgid "NEW!"
 msgstr "NUOVO!"
 
-#@ yarpp
-#: options-meta-boxes.php:161
+# @ yarpp
+#: options-meta-boxes.php:170
 #: options-meta-boxes.php:228
 msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
 msgstr "Le opzioni avanzate ti permettono una completa personalizzazione per la visualizzazione degli articoli correlati. I template (allocati nella cartella del tuo tema) sono stati scritti in PHP."
 
-#@ yarpp
-#: includes.php:26
-#: includes.php:37
+# @ yarpp
+#: class-core.php:77
+#: class-core.php:88
+#: class-core.php:266
+#: class-core.php:277
 msgid "Related posts:"
 msgstr "Articoli correlati:"
 
-#@ yarpp
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
+# @ yarpp
 #: options-meta-boxes.php:184
+#: options-meta-boxes.php:185
+#: options-meta-boxes.php:193
 #: options-meta-boxes.php:244
 #: options-meta-boxes.php:245
 #: options-meta-boxes.php:250
 msgid " or "
-msgstr "oppure"
+msgstr " oppure"
 
-#@ yarpp
-#: includes.php:169
+# @ yarpp
+#: class-admin.php:113
 msgid "Settings"
 msgstr "Impostazioni"
 
-#@ default
-#: includes.php:243
+# @ default
+#: class-widget.php:58
 msgid "Title:"
 msgstr "Titolo:"
 
-#@ yarpp
-#: includes.php:385
+# @ yarpp
+#: class-admin.php:139
 msgid "Related entries may be displayed once you save your entry"
 msgstr "Una volta salvato il contenuto, potranno essere mostrati i correlati"
 
-#@ yarpp
-#: options-meta-boxes.php:124
+# @ yarpp
+#: class-core.php:472
+#: class-core.php:585
+#: options-meta-boxes.php:205
+#: options-meta-boxes.php:257
+#, php-format
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Articoli correlati elaborati dal plugin <a href='%s'>Yet Another Related Posts</a>."
+
+# @ yarpp
+#: options-meta-boxes.php:132
 msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr "YARPP limita la lista degli articoli correlati (1) per numero massimo e (2) per <em>valore di corrispondenza</em>."
 
-#@ yarpp
-#: options-meta-boxes.php:283
+# @ yarpp
+#: options-meta-boxes.php:271
 msgid "YARPP Forum"
 msgstr "YARPP Forum"
 
-#@ yarpp
-#: options-meta-boxes.php:284
+# @ yarpp
+#: options-meta-boxes.php:272
 msgid "YARPP on Twitter"
 msgstr "YARPP su Twitter"
 
-#@ yarpp
-#: options-meta-boxes.php:285
+# @ yarpp
+#: options-meta-boxes.php:273
 msgid "YARPP on the Web"
 msgstr "YARPP nel Web"
 
-#@ yarpp
-#: options-meta-boxes.php:292
+# @ yarpp
+#: options-meta-boxes.php:310
 msgid "Contact YARPP"
 msgstr "Contatta YARPP"
 
-#@ default
-#: options.php:42
+# @ default
+#: options.php:41
 #, php-format
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
 msgstr "E' disponibile una nuova versione di %1$s. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">Versione %4$s nel dettaglio</a> oppure <a href=\"%5$s\">aggiorna automaticamente</a>."
 
-#@ yarpp
-#: options.php:86
+# @ yarpp
+#: options.php:45
+#, php-format
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "E' disponibile una nuova (%s) beta di Yet Another Related Posts Plugin. Puoi <a href=\"%s\">scaricarla qui</a> a tuo rischio e pericolo."
+
+# @ yarpp
+#: options.php:83
 #, php-format
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr "Prova il <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 
-#@ yarpp
-#: options.php:188
+# @ yarpp
+#: options.php:128
 #, php-format
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
 msgstr "di <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+# @ yarpp
+#: options-meta-boxes.php:274
+msgid "Rate YARPP on WordPress.org"
+msgstr "Vota YARPP su WordPress.org"
+
+# @ default
+#: class-admin.php:42
+msgid "Configure"
+msgstr "Configura"
+
+# @ yarpp
+#: options-meta-boxes.php:106
+#, php-format
+msgid "Disallow by %s:"
+msgstr "Rifiutato da %s:"
+
+# @ yarpp
+#: class-admin.php:68
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "Grazie per avere installato <span>Yet Another Related Posts Plugin</span>!"
+
+# @ yarpp
+#: class-admin.php:69
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+msgstr "Consulta la pagina con la <a>documentazione</a> per personalizzare YARPP."
+
+# @ default
+#: options.php:157
+msgid "Save Changes"
+msgstr "Salva le modifiche"
 
