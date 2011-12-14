@@ -171,7 +171,7 @@ abstract class YARPP_Cache {
 			// 1 means don't consider:
 			if ($value == 1)
 				continue;
-			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', termtax.term_taxonomy_id, null ))";
+			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', refterms.term_taxonomy_id, null ))";
 			$newsql .= " + " . $tax_criteria[$tax];
 		}
 	
@@ -210,7 +210,7 @@ abstract class YARPP_Cache {
 		$newsql .= " having score >= $safethreshold";
 		if ( $usedisterms ) {
 			$disterms = implode(',', $disterms);
-			$newsql .= " and bit_and(termtax.term_id in ($disterms)) = 0";
+			$newsql .= " and bit_or(termtax.term_id in ($disterms)) = 0";
 		}
 	
 		foreach ( $weight['tax'] as $tax => $value ) {
