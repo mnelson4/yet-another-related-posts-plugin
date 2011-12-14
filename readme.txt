@@ -175,6 +175,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.
+* Fix typo in `yarpp-template-random.php` example template file
+* Improve compatibility with DB Cache Reloaded plugin which doesn't properly implement `set_charset` method.
 
 = 3.4.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template): restore `global $post` access to custom templates
