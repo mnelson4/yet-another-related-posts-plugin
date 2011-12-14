@@ -173,6 +173,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.4.2 =
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.
+
 = 3.4.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template): restore `global $post` access to custom templates
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-some-clarification-assistance) for missing `join_filter` on bypass cache

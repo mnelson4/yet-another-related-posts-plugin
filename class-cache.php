@@ -183,7 +183,7 @@ abstract class YARPP_Cache {
 		$disterms = wp_parse_id_list(join(',',$exclude));
 		$usedisterms = count($disterms);
 		if ( $usedisterms || count($tax_criteria) ) {
-			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = wp_posts.ID ) \n"
+			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n"
 				. "left join $wpdb->term_taxonomy as termtax on ( terms.term_taxonomy_id = termtax.term_taxonomy_id ) \n"
 				. "left join $wpdb->term_relationships as refterms on ( terms.term_taxonomy_id = refterms.term_taxonomy_id and refterms.object_id = $reference_ID ) \n";
 		}
