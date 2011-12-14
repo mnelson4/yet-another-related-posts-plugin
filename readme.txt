@@ -182,6 +182,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template/page/2?replies=36#post-2498791): "disallow" terms were not being displayed for custom taxonomies.
 * Add defaults for the `post_type` arg
 * Strengthen default post ID values for `related_*` functions
+* Added nonce to cache flushing. If you would like to manually flush the cache now, you must use the [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin.
 * Updated `sv_SE`, `ko_KR`, `fr_FR` localizations
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
