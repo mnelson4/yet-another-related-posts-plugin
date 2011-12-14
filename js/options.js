@@ -135,7 +135,13 @@ jQuery(function($) {
 			);
 		}
 		
-		['post_tag', 'category'].forEach(function(taxonomy) {
+		$('.exclude_terms').each(function() {
+			var id = jQuery(this).attr('id'), taxonomy;
+			if (!id)
+				return;
+			
+			taxonomy = id.replace('exclude_','');
+			
 			load_disallow(taxonomy);
 			$('#exclude_' + taxonomy).parent('.scroll_wrapper').scroll(function() {
 				var parent = $(this),
@@ -143,7 +149,8 @@ jQuery(function($) {
 				if ( parent.scrollTop() + parent.height() > content.height() - 10 )
 					load_disallow(taxonomy);
 			})
-		});
+		})
+		
 	}
 	$('#yarpp_pool .handlediv, #yarpp_pool-hide').click(load_disallows);
 	load_disallows();

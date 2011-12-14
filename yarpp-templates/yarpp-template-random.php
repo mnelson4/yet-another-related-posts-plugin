@@ -12,7 +12,7 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 </ol>
 
 <?php else:
-query("orderby=rand&order=asc&limit=1");
+query_posts("orderby=rand&order=asc&limit=1");
 the_post();?>
 <p>No related posts were found, so here's a consolation prize: <a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>.</p>
 <?php endif; ?>

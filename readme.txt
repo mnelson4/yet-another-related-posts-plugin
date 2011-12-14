@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 3.4
+Stable tag: 3.4.1
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -173,11 +173,19 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.4.2 =
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.
+
 = 3.4.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template): restore `global $post` access to custom templates
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-some-clarification-assistance) for missing `join_filter` on bypass cache
+* Bugfixes to query changes:
+	* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template/page/2?replies=36#post-2498791): Shared taxonomy terms were not counted correctly
+	* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-use-2-times-related_posts-in-the-singlephp-longer-works): exclusion was not working
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template/page/2?replies=36#post-2498791): "disallow" terms were not being displayed for custom taxonomies.
 * Add defaults for the `post_type` arg
 * Strengthen default post ID values for `related_*` functions
+* Added nonce to cache flushing. If you would like to manually flush the cache now, you must use the [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin.
 * Updated `sv_SE`, `ko_KR`, `fr_FR` localizations
 = 3.4 =
 * Major optimizations to the main related posts query, in particular with regard to taxonomy lookups
