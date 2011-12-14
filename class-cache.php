@@ -171,7 +171,7 @@ abstract class YARPP_Cache {
 			// 1 means don't consider:
 			if ($value == 1)
 				continue;
-			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', termtax.term_taxonomy_id, null ))";
+			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', refterms.term_taxonomy_id, null ))";
 			$newsql .= " + " . $tax_criteria[$tax];
 		}
 	
