@@ -176,6 +176,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.4.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template): restore `global $post` access to custom templates
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-some-clarification-assistance) for missing `join_filter` on bypass cache
+* Bugfixes to query changes:
+	* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template/page/2?replies=36#post-2498791): Shared taxonomy terms were not counted correctly
+	* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-use-2-times-related_posts-in-the-singlephp-longer-works): exclusion was not working
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-34-images-problem-using-template/page/2?replies=36#post-2498791): "disallow" terms were not being displayed for custom taxonomies.
 * Add defaults for the `post_type` arg
 * Strengthen default post ID values for `related_*` functions
 * Updated `sv_SE`, `ko_KR`, `fr_FR` localizations

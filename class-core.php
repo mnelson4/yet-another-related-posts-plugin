@@ -246,6 +246,9 @@ class YARPP {
 			$this->upgrade_3_4b8();
 	
 		$this->cache->upgrade($last_version);
+		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
+		if ( $last_version && version_compare('3.4.1b5', $last_version) > 0 )
+			$this->cache->flush();
 	
 		$this->version_info(true);
 	
