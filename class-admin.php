@@ -7,6 +7,14 @@ class YARPP_Admin {
 	function __construct( &$core ) {
 		$this->core = &$core;
 		
+		// if action=flush and the nonce is correct, reset the cache
+		if ( isset($_GET['action']) && $_GET['action'] == 'flush' &&
+			 check_ajax_referer( 'yarpp_cache_flush', false, false ) !== false ) {
+			$this->core->cache->flush();
+			wp_redirect( admin_url( '/options-general.php?page=yarpp' ) );
+			exit;
+		}
+		
 		add_action( 'admin_init', array($this, 'ajax_register') );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		// new in 3.3: set default meta boxes to show:

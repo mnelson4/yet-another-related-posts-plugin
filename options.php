@@ -8,11 +8,6 @@ if ( !get_option('yarpp_version') )
 else
 	$yarpp->upgrade_check();
 
-// if action=flush, reset the cache
-if (isset($_GET['action']) && $_GET['action'] == 'flush') {
-	$yarpp->cache->flush();
-}
-
 // check to see that templates are in the right place
 $yarpp->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
 if ( !(is_array($yarpp->templates) && count($yarpp->templates)) ) {
