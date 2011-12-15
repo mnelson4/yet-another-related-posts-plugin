@@ -149,6 +149,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 		// clear each cache
 		foreach($reference_ID as $id) {
 			delete_post_meta( $id, YARPP_POSTMETA_RELATED_KEY );
+			delete_post_meta( $id, YARPP_POSTMETA_KEYWORDS_KEY );
 		}
 	}
 
