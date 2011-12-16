@@ -154,7 +154,7 @@ YARPP is currently localized in the following languages:
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
-* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com)
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
 * Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
@@ -175,6 +175,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.4.3 =
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
+* Updated Turkish localization by [Barış Ünver](http://beyn.org/).
 
 = 3.4.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.
