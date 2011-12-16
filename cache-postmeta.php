@@ -189,7 +189,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 	public function flush() {
 		global $wpdb;
-		return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "'");
+		return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "' or meta_key = '" . YARPP_POSTMETA_KEYWORDS_KEY . "'");
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
