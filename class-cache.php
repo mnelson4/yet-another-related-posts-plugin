@@ -225,7 +225,7 @@ abstract class YARPP_Cache {
 		if ( isset($args['post_type']) && is_array($args['post_type']) )
 			$post_types = $args['post_type'];
 		else
-			$post_types = $this->core->get_post_types();
+			$post_types = $this->core->get_post_types( 'name' );
 
 		$queries = array();
 		foreach ( $post_types as $post_type ) {
