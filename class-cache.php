@@ -228,7 +228,7 @@ abstract class YARPP_Cache {
 			$post_types = $this->core->get_post_types();
 
 		$queries = array();
-		foreach ( $args['post_type'] as $post_type ) {
+		foreach ( $post_types as $post_type ) {
 			$queries[] = '(' . str_replace("post_type = 'post'", "post_type = '{$post_type}'", $newsql) . ')';
 		}
 		$sql = implode( ' union ', $queries );
