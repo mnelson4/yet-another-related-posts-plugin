@@ -222,15 +222,22 @@ abstract class YARPP_Cache {
 	
 		$newsql .= " order by score desc limit $limit";
 	
-		// in caching, we cross-relate regardless of whether we're going to actually
-		// use it or not.
-		$newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+		if ( isset($args['post_type']) && is_array($args['post_type']) )
+			$post_types = $args['post_type'];
+		else
+			$post_types = $this->core->get_post_types();
+
+		$queries = array();
+		foreach ( $args['post_type'] as $post_type ) {
+			$queries[] = '(' . str_replace("post_type = 'post'", "post_type = '{$post_type}'", $newsql) . ')';
+		}
+		$sql = implode( ' union ', $queries );
 	
-		if ($this->core->debug) echo "<!--$newsql-->";
+		if ($this->core->debug) echo "<!--$sql-->";
 		
-		$this->last_sql = $newsql;
+		$this->last_sql = $sql;
 		
-		return $newsql;
+		return $sql;
 	}
 
 	/**

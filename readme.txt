@@ -177,6 +177,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
 * Postmeta cache: make sure to clear keyword cache on flush too
 * Make welcome pointer more robust
+* More custom post type support infrastructure
 * Updated Turkish localization by [Barış Ünver](http://beyn.org/).
 
 = 3.4.2 =

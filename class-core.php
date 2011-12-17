@@ -378,24 +378,46 @@ class YARPP {
 		update_option( 'yarpp', $options );
 	}
 	
-	// @todo: custom post type support
-	function get_post_types() {
-		return array('post', 'page');
+	private $post_types = null;
+	function get_post_types( $field = false ) {
+		if ( is_null($this->post_types) ) {
+			$this->post_types = get_post_types(array(), 'objects');
+			$this->post_types = array_filter( $this->post_types, array($this, 'post_type_filter') );
+		}
+		
+		if ( $field )
+			return wp_list_pluck( $this->post_types, $field );
+		return $this->post_types;
 	}
 	
-	function get_taxonomies() {
-		$taxonomies = get_taxonomies(array(), 'objects');
-		return array_filter( $taxonomies, array($this, 'taxonomy_filter') );
+	private function post_type_filter( $post_type ) {
+		if ( $post_type->_builtin && $post_type->show_ui )
+			return true;
+		if ( isset($post_type->yarpp_support) )
+			return $post_type->yarpp_support;
+		return false;
+	}
+	
+	private $taxonomies = null;
+	function get_taxonomies( $field = false ) {
+		if ( is_null($this->post_types) ) {
+			$this->taxonomies = get_taxonomies(array(), 'objects');
+			$this->taxonomies = array_filter( $this->taxonomies, array($this, 'taxonomy_filter') );
+		}
+		
+		if ( $field )
+			return wp_list_pluck( $this->taxonomies, $field );
+		return $this->taxonomies;
 	}
 	
 	private function taxonomy_filter( $taxonomy ) {
-		// if yarpp_support is set and false, or if show_ui is false, skip it
-		if ( (isset($taxonomy->yarpp_support) && !$taxonomy->yarpp_support) ||
-			 !$taxonomy->show_ui )
+		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types( 'name' ) )) )
 			return false;
-		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types() )) )
-			return false;
-		return true;
+
+		// if yarpp_support is set, follow that; otherwise include if show_ui is true
+		if ( isset($taxonomy->yarpp_support) )
+			return $taxonomy->yarpp_support;
+		return $taxonomy->show_ui;
 	}
 	
 	/*
@@ -453,7 +475,7 @@ class YARPP {
 				'orderby' => $orders[0],
 				'order' => $orders[1],
 				'showposts' => $limit,
-				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 			));
 		}
 		$this->prep_query( $current_query->is_feed );
@@ -525,7 +547,7 @@ class YARPP {
 			'orderby' => $orders[0],
 			'order' => $orders[1],
 			'showposts' => $limit,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 		));
 		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 	
@@ -558,7 +580,7 @@ class YARPP {
 		$related_query->query(array(
 			'p' => $reference_ID,
 			'showposts' => 1,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 		));
 		$return = $related_query->have_posts();
 		unset($related_query);
