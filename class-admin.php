@@ -77,8 +77,10 @@ class YARPP_Admin {
 		$content .= '<p>' . str_replace('<a>', '<a href="' . esc_url(admin_url('options-general.php?page=yarpp')) .'">', __('Make sure to visit the <a>Related Posts settings page</a> to customize YARPP.', 'yarpp') ). '</p>';
 		?>
 <script>
-jQuery(function ($) {
-	var menu = $('#menu-settings'),
+jQuery(function () {
+	var body = jQuery(document.body),
+	menu = jQuery('#menu-settings'),
+	collapse = jQuery('#collapse-menu'),
 	yarpp = menu.find("a[href='options-general.php?page=yarpp']"),
 	options = {
 		content: '<?php echo $content; ?>',
@@ -89,13 +91,13 @@ jQuery(function ($) {
 		},
 		close: function() {
 			menu.unbind('mouseenter mouseleave', yarpp_pointer);
-			$('#collapse-menu').('mouseenter mouseleave', yarpp_pointer);
+			collapse.unbind('mouseenter mouseleave', yarpp_pointer);
 		}};
 	
 	if ( !yarpp.length )
 		return;
 	
-	yarpp.pointer(options).pointer('open');
+	body.pointer(options).pointer('open');
 	
 	if ( menu.is('.folded *') || !menu.is('.wp-menu-open') ) {
 		function yarpp_pointer(e) {
@@ -104,11 +106,11 @@ jQuery(function ($) {
 					options.position.of = yarpp;
 				else
 					options.position.of = menu;
-				yarpp.pointer( options );
+				body.pointer( options );
 			}, 200);
 		}
 		menu.bind('mouseenter mouseleave', yarpp_pointer);
-		$('#collapse-menu').bind('mouseenter mouseleave', yarpp_pointer);
+		collapse.bind('mouseenter mouseleave', yarpp_pointer);
 	}
 });
 </script>
