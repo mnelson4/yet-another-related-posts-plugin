@@ -173,10 +173,13 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function clear($reference_ID) {
 		global $wpdb;
-		if (is_array($reference_ID) && count($reference_ID))
+		if (is_array($reference_ID) && count($reference_ID)) {
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
-		else if (is_int($reference_ID))
+			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
+		} else if (is_int($reference_ID)) {
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
+			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = {$reference_ID}");
+		}
 	}
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
