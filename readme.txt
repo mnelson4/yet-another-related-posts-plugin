@@ -5,7 +5,7 @@ Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 3.3
 Stable tag: 3.4.3
 
