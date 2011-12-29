@@ -19,8 +19,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		// now check for the cache tables
 		$tabledata = $wpdb->get_col("show tables");
-		if (array_search($wpdb->prefix . YARPP_TABLES_RELATED_TABLE,$tabledata) !== false &&
-			array_search($wpdb->prefix . YARPP_TABLES_KEYWORDS_TABLE,$tabledata) !== false)
+		if (in_array($wpdb->prefix . YARPP_TABLES_RELATED_TABLE,$tabledata) !== false &&
+			in_array($wpdb->prefix . YARPP_TABLES_KEYWORDS_TABLE,$tabledata) !== false)
 			return true;
 		else
 			return false;
