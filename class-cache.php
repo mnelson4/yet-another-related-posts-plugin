@@ -134,7 +134,7 @@ abstract class YARPP_Cache {
 	 * SQL!
 	 */
 
-	function sql( $reference_ID = false, $args = array() ) {
+	protected function sql( $reference_ID = false, $args = array() ) {
 		global $wpdb, $post;
 	
 		if ( is_object($post) && !$reference_ID ) {
@@ -171,7 +171,15 @@ abstract class YARPP_Cache {
 			// 1 means don't consider:
 			if ($value == 1)
 				continue;
-			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', refterms.term_taxonomy_id, null ))";
+
+			// @todo maybe reinforce the object term cache?
+			$terms = get_the_terms($reference_ID, $tax);
+			// if there are no terms of that tax, it's not worth adding it here.
+			if ( false === $terms )
+				continue;
+			
+			$tt_ids = wp_list_pluck($terms, 'term_taxonomy_id');
+			$tax_criteria[$tax] = "count(distinct if( terms.term_taxonomy_id in (" . join(',',$tt_ids) .  "), terms.term_taxonomy_id, null ))";
 			$newsql .= " + " . $tax_criteria[$tax];
 		}
 	
@@ -179,13 +187,16 @@ abstract class YARPP_Cache {
 	
 		$newsql .= "\n from $wpdb->posts \n";
 	
-		// Get disallowed categories and tags
-		$disterms = wp_parse_id_list(join(',',$exclude));
-		$usedisterms = count($disterms);
-		if ( $usedisterms || count($tax_criteria) ) {
-			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n"
-				. "left join $wpdb->term_taxonomy as termtax on ( terms.term_taxonomy_id = termtax.term_taxonomy_id ) \n"
-				. "left join $wpdb->term_relationships as refterms on ( terms.term_taxonomy_id = refterms.term_taxonomy_id and refterms.object_id = $reference_ID ) \n";
+		// @todo do this just once in a schema migration
+		// Get term_taxonomy_ids of disallowed terms
+		$exclude_tt_ids = array();
+		foreach ($exclude as $tax => $term_ids) {
+			if ( !empty($term_ids) )
+				$exclude_tt_ids = array_merge( wp_list_pluck(get_terms( $tax, array('include' => $term_ids) ), 'term_taxonomy_id'), $exclude_tt_ids );
+		}
+
+		if ( count($exclude_tt_ids) || count($tax_criteria) ) {
+			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n";
 		}
 	
 		// WHERE
@@ -208,9 +219,8 @@ abstract class YARPP_Cache {
 		// number_format fix suggested by vkovalcik! :)
 		$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
 		$newsql .= " having score >= $safethreshold";
-		if ( $usedisterms ) {
-			$disterms = implode(',', $disterms);
-			$newsql .= " and bit_or(termtax.term_id in ($disterms)) = 0";
+		if ( count($exclude_tt_ids) ) {
+			$newsql .= " and bit_or(terms.term_taxonomy_id in (" . join(',', $exclude_tt_ids) . ")) = 0";
 		}
 	
 		foreach ( $weight['tax'] as $tax => $value ) {
