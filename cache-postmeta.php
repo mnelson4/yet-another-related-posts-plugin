@@ -28,11 +28,11 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	}
 	
 	public function upgrade( $last_version ) {
-		global $wpdb;
 		if ( $last_version && version_compare('3.4b1', $last_version) > 0 ) {
 			// 3.4 moved _yarpp_body_keywords and _yarpp_title_keywords into the single
 			// postmeta _yarpp_keywords, so clear out the old data now.
-			$wpdb->query("delete from {$wpdb->postmeta} where (meta_key = '_yarpp_title_keywords' or meta_key = '_yarpp_body_keywords')");
+			delete_post_meta_by_key('_yarpp_title_keywords');
+			delete_post_meta_by_key('_yarpp_body_keywords');
 		}	
 	}
 
@@ -58,7 +58,6 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	 */
 	public function where_filter($arg) {
 		global $wpdb;
-		$threshold = yarpp_get_option('threshold');
 		// modify the where clause to use the related ID list.
 		if (!count($this->related_IDs))
 			$this->related_IDs = array(0);
@@ -93,7 +92,6 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	}
 
 	public function limit_filter($arg) {
-		global $wpdb;
 		if ($this->online_limit)
 			return " limit {$this->online_limit} ";
 		return $arg;
@@ -107,7 +105,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 		// get the related posts from postmeta, and also construct the relate_IDs array
 		$this->related_postdata = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 		if (is_array($this->related_postdata) && count($this->related_postdata))
-			$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
+			$this->related_IDs = wp_list_pluck( $this->related_postdata, 'ID' );
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
 		add_filter('posts_fields',array(&$this,'fields_filter'));
@@ -163,7 +161,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 		$original_related = $this->related($reference_ID);
 		$related = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
-		$new_related = array_map(create_function('$x','return $x["ID"];'), $related);
+		$new_related = wp_list_pluck( $related, 'ID' );
 
 		if ( count($new_related) ) {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
@@ -188,8 +186,8 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	}
 
 	public function flush() {
-		global $wpdb;
-		return $wpdb->query("delete from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "' or meta_key = '" . YARPP_POSTMETA_KEYWORDS_KEY . "'");
+		delete_post_meta_by_key( YARPP_POSTMETA_RELATED_KEY );
+		delete_post_meta_by_key( YARPP_POSTMETA_KEYWORDS_KEY );
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
@@ -214,7 +212,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 			$results = get_post_meta($reference_ID,YARPP_POSTMETA_RELATED_KEY,true);
 			if (!$results || $results == YARPP_NO_RELATED)
 				return array();
-			return array_map(create_function('$x','return $x["ID"];'), $results);
+			return wp_list_pluck( $results, 'ID' );
 		}
 
 		// return a list of entities which list this post as "related"

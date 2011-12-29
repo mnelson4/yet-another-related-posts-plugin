@@ -358,9 +358,8 @@ abstract class YARPP_Cache {
 			}
 		}
 		// Remove words which are only a letter
-		$mb_strlen_exists = function_exists('mb_strlen');
 		foreach (array_keys($tokens) as $word) {
-			if ($mb_strlen_exists)
+			if ( function_exists('mb_strlen') )
 				if (mb_strlen($word) < 2) unset($tokens[$word]);
 			else
 				if (strlen($word) < 2) unset($tokens[$word]);
@@ -553,7 +552,7 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		$this->yarpp_time = true;
 
 		$this->related_postdata = $wpdb->get_results($this->sql($reference_ID, $args), ARRAY_A);
-		$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
+		$this->related_IDs = wp_list_pluck( $this->related_postdata, 'ID' );
 
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
@@ -615,16 +614,12 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		$results = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
 		if ( !$results || !count($results) )
 			return false;
-		
+			
+		$results_ids = wp_list_pluck( $results, 'ID' );
 		if ( is_null($related_ID) ) {
-			return array_map(create_function('$x','return $x["ID"];'), $results);			
+			return $results_ids;
 		} else {
-			foreach($results as $result) {
-				if ($result['ID'] == $related_ID)
-					return true;
-			}
+			return in_array( $related_ID, $results_ids );
 		}
-
-		return false;
 	}
 }

@@ -179,6 +179,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
 * Don't clear the cache when it's already empty
 * `protect` the `sql` method as it shouldn't be `public`
+* Code cleanup using utility functions from 3.1 like `wp_list_pluck()`
 
 = 3.4.3 =
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
