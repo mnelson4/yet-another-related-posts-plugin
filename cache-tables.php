@@ -190,10 +190,12 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( !$reference_ID = absint($reference_ID) )
 			return YARPP_NOT_CACHED;
 
-		$original_related = $this->related($reference_ID);
+		$original_related = (array) @$this->related($reference_ID);
 
-		// clear out the cruft
-		$this->clear($reference_ID);
+		if ( count($original_related) ) {
+			// clear out the cruft
+			$this->clear($reference_ID);
+		}
 
 		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) " . $this->sql($reference_ID) . " on duplicate key update date = now()");
 
@@ -204,7 +206,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			if ($this->core->debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
-			if (count($original_related)) {
+			if ( count($original_related) ) {
 				$this->clear(array_diff($original_related, $new_related));
 				$this->clear(array_diff($new_related, $original_related));
 			}
@@ -244,12 +246,12 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		}
 
 		// return a list of ID's of "related" entries
-		if (!is_null($reference_ID)) {
+		if ( !is_null($reference_ID) ) {
 			return $wpdb->get_col("select distinct ID from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = $reference_ID and ID != 0");
 		}
 
 		// return a list of entities which list this post as "related"
-		if (!is_null($related_ID)) {
+		if ( !is_null($related_ID) ) {
 			return $wpdb->get_col("select distinct reference_ID from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where ID = $related_ID");
 		}
 
