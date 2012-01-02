@@ -152,6 +152,7 @@ YARPP is currently localized in the following languages:
 * (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
+* Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
@@ -166,7 +167,6 @@ YARPP is currently localized in the following languages:
 * Romanian
 * Thai
 * Bhasa Indonesian
-* Spanish
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
@@ -180,6 +180,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Don't clear the cache when it's already empty
 * `protect` the `sql` method as it shouldn't be `public`
 * Code cleanup using utility functions from 3.1 like `wp_list_pluck()`
+* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
 
 = 3.4.3 =
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
