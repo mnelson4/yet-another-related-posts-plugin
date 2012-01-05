@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 3.4.1
+Stable tag: 3.4.3
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -152,9 +152,10 @@ YARPP is currently localized in the following languages:
 * (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
+* Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
-* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com)
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
 * Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
@@ -166,12 +167,31 @@ YARPP is currently localized in the following languages:
 * Romanian
 * Thai
 * Bhasa Indonesian
-* Spanish
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
+
+= 3.4.4 =
+* Further main query optimization:
+	* What's cooler than joining four tables? Joining two.
+	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
+* Change format of `weight` paramters in options and in optional args
+* Added "consider with extra weight" to taxonomy criteria as well
+* Code cleanup:
+	* Don't clear the cache when it's already empty
+	* `protect` the `sql` method as it shouldn't be `public`
+	* Further use of utility functions from 3.1 like `wp_list_pluck()`
+	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
+* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
+
+= 3.4.3 =
+* Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
+* Postmeta cache: make sure to clear keyword cache on flush too
+* Make welcome pointer more robust
+* More custom post type support infrastructure
+* Updated Turkish localization by [Barış Ünver](http://beyn.org/).
 
 = 3.4.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.

@@ -134,7 +134,7 @@ abstract class YARPP_Cache {
 	 * SQL!
 	 */
 
-	function sql( $reference_ID = false, $args = array() ) {
+	protected function sql( $reference_ID = false, $args = array() ) {
 		global $wpdb, $post;
 	
 		if ( is_object($post) && !$reference_ID ) {
@@ -147,7 +147,7 @@ abstract class YARPP_Cache {
 			$reference_post = $post;
 		}
 	
-		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
+		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'require_tax', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
 		extract( $this->core->parse_args($args, $options) );
 		// The maximum number of items we'll ever want to cache
 		$limit = max($limit, $this->core->get_option('rss_limit'));
@@ -160,32 +160,23 @@ abstract class YARPP_Cache {
 	
 		$newsql .= 'ROUND(0';
 	
-		if ($weight['body'] != 1)
-			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". ($weight['body'] == 3 ? 3 : 1);
-		if ($weight['title'] != 1)
-			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". ($weight['title'] == 3 ? 3 : 1);
+		if ((int) @$weight['body'])
+			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". absint($weight['body']);
+		if ((int) @$weight['title'])
+			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". absint($weight['title']);
 	
 		// Build tax criteria query parts based on the weights
-		$tax_criteria = array();
-		foreach ( $weight['tax'] as $tax => $value ) {
-			// 1 means don't consider:
-			if ($value == 1)
-				continue;
-			$tax_criteria[$tax] = "count(distinct if( termtax.taxonomy = '$tax', refterms.term_taxonomy_id, null ))";
-			$newsql .= " + " . $tax_criteria[$tax];
+		foreach ( $weight['tax'] as $tax => $weight ) {
+			$newsql .= " + " . $this->tax_criteria($reference_ID, $tax) . " * " . intval($weight);
 		}
 	
 		$newsql .= ',1) as score';
 	
 		$newsql .= "\n from $wpdb->posts \n";
 	
-		// Get disallowed categories and tags
-		$disterms = wp_parse_id_list(join(',',$exclude));
-		$usedisterms = count($disterms);
-		if ( $usedisterms || count($tax_criteria) ) {
-			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n"
-				. "left join $wpdb->term_taxonomy as termtax on ( terms.term_taxonomy_id = termtax.term_taxonomy_id ) \n"
-				. "left join $wpdb->term_relationships as refterms on ( terms.term_taxonomy_id = refterms.term_taxonomy_id and refterms.object_id = $reference_ID ) \n";
+		$exclude_tt_ids = wp_parse_id_list( $exclude );
+		if ( count($exclude_tt_ids) || count($weight['tax']) || count($require_tax) ) {
+			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n";
 		}
 	
 		// WHERE
@@ -208,29 +199,43 @@ abstract class YARPP_Cache {
 		// number_format fix suggested by vkovalcik! :)
 		$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
 		$newsql .= " having score >= $safethreshold";
-		if ( $usedisterms ) {
-			$disterms = implode(',', $disterms);
-			$newsql .= " and bit_or(termtax.term_id in ($disterms)) = 0";
+		if ( count($exclude_tt_ids) ) {
+			$newsql .= " and bit_or(terms.term_taxonomy_id in (" . join(',', $exclude_tt_ids) . ")) = 0";
 		}
 	
-		foreach ( $weight['tax'] as $tax => $value ) {
-			if ( $value == 3 )
-				$newsql .= ' and '.$tax_criteria[$tax].' >= 1';
-			if ( $value == 4 )
-				$newsql .= ' and '.$tax_criteria[$tax].' >= 2';
+		foreach ( $require_tax as $tax => $number ) {
+			$newsql .= ' and ' . $this->tax_criteria($reference_ID, $tax) . ' >= ' . intval($number);
 		}
 	
 		$newsql .= " order by score desc limit $limit";
 	
-		// in caching, we cross-relate regardless of whether we're going to actually
-		// use it or not.
-		$newsql = "($newsql) union (".str_replace("post_type = 'post'","post_type = 'page'",$newsql).")";
+		if ( isset($args['post_type']) && is_array($args['post_type']) )
+			$post_types = $args['post_type'];
+		else
+			$post_types = $this->core->get_post_types( 'name' );
+
+		$queries = array();
+		foreach ( $post_types as $post_type ) {
+			$queries[] = '(' . str_replace("post_type = 'post'", "post_type = '{$post_type}'", $newsql) . ')';
+		}
+		$sql = implode( ' union ', $queries );
 	
-		if ($this->core->debug) echo "<!--$newsql-->";
+		if ($this->core->debug) echo "<!--$sql-->";
 		
-		$this->last_sql = $newsql;
+		$this->last_sql = $sql;
 		
-		return $newsql;
+		return $sql;
+	}
+	
+	private function tax_criteria( $reference_ID, $taxonomy ) {
+		// @todo maybe reinforce the object term cache?
+		$terms = get_the_terms( $reference_ID, $taxonomy );
+		// if there are no terms of that tax
+		if ( false === $terms )
+			return '(1 = 0)';
+		
+		$tt_ids = wp_list_pluck($terms, 'term_taxonomy_id');
+		return "count(distinct if( terms.term_taxonomy_id in (" . join(',',$tt_ids) .  "), terms.term_taxonomy_id, null ))";
 	}
 
 	/**
@@ -341,9 +346,8 @@ abstract class YARPP_Cache {
 			}
 		}
 		// Remove words which are only a letter
-		$mb_strlen_exists = function_exists('mb_strlen');
 		foreach (array_keys($tokens) as $word) {
-			if ($mb_strlen_exists)
+			if ( function_exists('mb_strlen') )
 				if (mb_strlen($word) < 2) unset($tokens[$word]);
 			else
 				if (strlen($word) < 2) unset($tokens[$word]);
@@ -536,7 +540,7 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		$this->yarpp_time = true;
 
 		$this->related_postdata = $wpdb->get_results($this->sql($reference_ID, $args), ARRAY_A);
-		$this->related_IDs = array_map(create_function('$x','return $x["ID"];'), $this->related_postdata);
+		$this->related_IDs = wp_list_pluck( $this->related_postdata, 'ID' );
 
 		add_filter('posts_where',array(&$this,'where_filter'));
 		add_filter('posts_orderby',array(&$this,'orderby_filter'));
@@ -598,16 +602,12 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		$results = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
 		if ( !$results || !count($results) )
 			return false;
-		
+			
+		$results_ids = wp_list_pluck( $results, 'ID' );
 		if ( is_null($related_ID) ) {
-			return array_map(create_function('$x','return $x["ID"];'), $results);			
+			return $results_ids;
 		} else {
-			foreach($results as $result) {
-				if ($result['ID'] == $related_ID)
-					return true;
-			}
+			return in_array( $related_ID, $results_ids );
 		}
-
-		return false;
 	}
 }
