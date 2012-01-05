@@ -177,9 +177,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Further main query optimization:
 	* What's cooler than joining four tables? Joining two.
 	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
-* Don't clear the cache when it's already empty
-* `protect` the `sql` method as it shouldn't be `public`
-* Code cleanup using utility functions from 3.1 like `wp_list_pluck()`
+* Change format of `weight` paramters in options and in optional args
+* Added "consider with extra weight" to taxonomy criteria as well
+* Code cleanup:
+	* Don't clear the cache when it's already empty
+	* `protect` the `sql` method as it shouldn't be `public`
+	* Further use of utility functions from 3.1 like `wp_list_pluck()`
+	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
 * Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
 
 = 3.4.3 =

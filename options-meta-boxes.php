@@ -30,29 +30,26 @@ class YARPP_Meta_Box {
 			</tr>";
 	}
 
-	function tax_importance($taxonomy) {
-		$value = yarpp_get_option("weight[tax][{$taxonomy->name}]");
+	function tax_weight($taxonomy) {
+		$weight = (int) yarpp_get_option("weight[tax][{$taxonomy->name}]");
+		$require = (int) yarpp_get_option("require_tax[{$taxonomy->name}]");
 		echo "<tr valign='top'><th scope='row'>{$taxonomy->labels->name}:</th><td><select name='weight[tax][{$taxonomy->name}]'>";
-		echo "<option value='1'". (($value == 1) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
-		echo "<option value='2'". (($value == 2) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
-		echo "<option value='3'". (($value == 3) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
-		echo "<option value='4'". (($value == 4) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='no'". ((!$weight && !$require) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
+		echo "<option value='consider'". (($weight == 1 && !$require) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
+		echo "<option value='consider_extra'". (($weight > 1 && !$require) ? ' selected="selected"': '' )."  >" . __("consider with extra weight",'yarpp') . "</option>";
+		echo "<option value='require_one'". (($require == 1) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='require_more'". (($require == 2) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
 		echo "</select></td></tr>";
 	}
 	
-	function importance2($option,$desc,$tr="<tr valign='top'>
-				<th scope='row'>",$inputplus = '') {
-		$value = yarpp_get_option($option);
-	
-		echo "		$tr$desc</th>
-				<td>
-													<select name='$option'>
-				<option $inputplus value='1'". (($value == 1) ? ' selected="selected"': '' )."  >".__("do not consider",'yarpp')."</option>
-				<option $inputplus value='2'". (($value == 2) ? ' selected="selected"': '' )."  > ".__("consider",'yarpp')."</option>
-				<option $inputplus value='3'". (($value == 3) ? ' selected="selected"': '' )."  > ".__("consider with extra weight",'yarpp')."</option>
-													</select>
-				</td>
-			</tr>";
+	function weight($option,$desc,$tr="<tr valign='top'><th scope='row'>",$inputplus = '') {
+		$weight = (int) yarpp_get_option("weight[$option]");
+		echo "$tr$desc</th><td>";
+		echo "<select name='weight[$option]'>";
+		echo "<option $inputplus value='no'". (!$weight ? ' selected="selected"': '' )."  >".__("do not consider",'yarpp')."</option>";
+		echo "<option $inputplus value='consider'". (($weight == 1) ? ' selected="selected"': '' )."  > ".__("consider",'yarpp')."</option>";
+		echo "<option $inputplus value='consider_extra'". (($weight > 1) ? ' selected="selected"': '' )."  > ".__("consider with extra weight",'yarpp')."</option>";
+		echo "</select></td></tr>";
 	}
 	
 	function displayorder( $option, $class = '' ) {
@@ -76,16 +73,18 @@ class YARPP_Meta_Box {
 
 class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 	function exclude($taxonomy, $string) {
+		global $yarpp;
 ?>
 			<tr valign='top'>
 				<th scope='row'><?php echo $string; ?></th>
 				<td><div class='scroll_wrapper' style="overflow:auto;max-height:100px;"><div class='exclude_terms' id='exclude_<?php echo $taxonomy; ?>'>
 <?php
-$exclude_terms = yarpp_get_option('exclude');
-if ( !empty($exclude_terms[$taxonomy]) ) {
-	$terms = get_terms($taxonomy, array('include' => $exclude_terms[$taxonomy]));
+$exclude_tt_ids = wp_parse_id_list(yarpp_get_option('exclude'));
+$exclude_term_ids = $yarpp->admin->get_term_ids_from_tt_ids( $taxonomy, $exclude_tt_ids );
+if ( count($exclude_term_ids) ) {
+	$terms = get_terms($taxonomy, array('include' => $exclude_term_ids));
 	foreach ($terms as $term) {
-		echo "<input type='checkbox' name='exclude[{$taxonomy}][{$term->term_id}]' value='true' checked='checked' /> <label>" . esc_html($term->name) . "</label> ";
+		echo "<input type='checkbox' name='exclude[{$term->term_taxonomy_id}]' id='exclude_{$term->term_taxonomy_id}' value='true' checked='checked' /> <label for='exclude_{$term->term_taxonomy_id}'>" . esc_html($term->name) . "</label> ";
 	}
 }
 ?>
@@ -136,13 +135,13 @@ class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 
 <?php
 	$this->textbox('threshold',__('Match threshold:','yarpp'));
-	$this->importance2('weight[title]',__("Titles: ",'yarpp'),"<tr valign='top'>
+	$this->weight('title',__("Titles: ",'yarpp'),"<tr valign='top'>
 			<th scope='row'>",( !$yarpp->myisam ? ' readonly="readonly" disabled="disabled"':'' ));
-	$this->importance2('weight[body]',__("Bodies: ",'yarpp'),"<tr valign='top'>
+	$this->weight('body',__("Bodies: ",'yarpp'),"<tr valign='top'>
 			<th scope='row'>",( !$yarpp->myisam ? ' readonly="readonly" disabled="disabled"':'' ));
 
 	foreach ($yarpp->get_taxonomies() as $taxonomy) {
-		$this->tax_importance($taxonomy);
+		$this->tax_weight($taxonomy);
 	}
 
 	$this->checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");

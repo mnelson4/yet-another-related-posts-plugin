@@ -147,7 +147,7 @@ abstract class YARPP_Cache {
 			$reference_post = $post;
 		}
 	
-		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
+		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'require_tax', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
 		extract( $this->core->parse_args($args, $options) );
 		// The maximum number of items we'll ever want to cache
 		$limit = max($limit, $this->core->get_option('rss_limit'));
@@ -160,42 +160,22 @@ abstract class YARPP_Cache {
 	
 		$newsql .= 'ROUND(0';
 	
-		if ($weight['body'] != 1)
-			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". ($weight['body'] == 3 ? 3 : 1);
-		if ($weight['title'] != 1)
-			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". ($weight['title'] == 3 ? 3 : 1);
+		if ((int) @$weight['body'])
+			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". absint($weight['body']);
+		if ((int) @$weight['title'])
+			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". absint($weight['title']);
 	
 		// Build tax criteria query parts based on the weights
-		$tax_criteria = array();
-		foreach ( $weight['tax'] as $tax => $value ) {
-			// 1 means don't consider:
-			if ($value == 1)
-				continue;
-
-			// @todo maybe reinforce the object term cache?
-			$terms = get_the_terms($reference_ID, $tax);
-			// if there are no terms of that tax, it's not worth adding it here.
-			if ( false === $terms )
-				continue;
-			
-			$tt_ids = wp_list_pluck($terms, 'term_taxonomy_id');
-			$tax_criteria[$tax] = "count(distinct if( terms.term_taxonomy_id in (" . join(',',$tt_ids) .  "), terms.term_taxonomy_id, null ))";
-			$newsql .= " + " . $tax_criteria[$tax];
+		foreach ( $weight['tax'] as $tax => $weight ) {
+			$newsql .= " + " . $this->tax_criteria($reference_ID, $tax) . " * " . intval($weight);
 		}
 	
 		$newsql .= ',1) as score';
 	
 		$newsql .= "\n from $wpdb->posts \n";
 	
-		// @todo do this just once in a schema migration
-		// Get term_taxonomy_ids of disallowed terms
-		$exclude_tt_ids = array();
-		foreach ($exclude as $tax => $term_ids) {
-			if ( !empty($term_ids) )
-				$exclude_tt_ids = array_merge( wp_list_pluck(get_terms( $tax, array('include' => $term_ids) ), 'term_taxonomy_id'), $exclude_tt_ids );
-		}
-
-		if ( count($exclude_tt_ids) || count($tax_criteria) ) {
+		$exclude_tt_ids = wp_parse_id_list( $exclude );
+		if ( count($exclude_tt_ids) || count($weight['tax']) || count($require_tax) ) {
 			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n";
 		}
 	
@@ -223,11 +203,8 @@ abstract class YARPP_Cache {
 			$newsql .= " and bit_or(terms.term_taxonomy_id in (" . join(',', $exclude_tt_ids) . ")) = 0";
 		}
 	
-		foreach ( $weight['tax'] as $tax => $value ) {
-			if ( $value == 3 )
-				$newsql .= ' and '.$tax_criteria[$tax].' >= 1';
-			if ( $value == 4 )
-				$newsql .= ' and '.$tax_criteria[$tax].' >= 2';
+		foreach ( $require_tax as $tax => $number ) {
+			$newsql .= ' and ' . $this->tax_criteria($reference_ID, $tax) . ' >= ' . intval($number);
 		}
 	
 		$newsql .= " order by score desc limit $limit";
@@ -248,6 +225,17 @@ abstract class YARPP_Cache {
 		$this->last_sql = $sql;
 		
 		return $sql;
+	}
+	
+	private function tax_criteria( $reference_ID, $taxonomy ) {
+		// @todo maybe reinforce the object term cache?
+		$terms = get_the_terms( $reference_ID, $taxonomy );
+		// if there are no terms of that tax
+		if ( false === $terms )
+			return '(1 = 0)';
+		
+		$tt_ids = wp_list_pluck($terms, 'term_taxonomy_id');
+		return "count(distinct if( terms.term_taxonomy_id in (" . join(',',$tt_ids) .  "), terms.term_taxonomy_id, null ))";
 	}
 
 	/**
