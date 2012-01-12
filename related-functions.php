@@ -1,6 +1,6 @@
 <?php
 
-function yarpp_related($reference_ID = false, $args = array(), $echo = false) {
+function yarpp_related($reference_ID = false, $args = array(), $echo = true) {
 	global $yarpp;
 
 	if ( is_array($reference_ID) ) {

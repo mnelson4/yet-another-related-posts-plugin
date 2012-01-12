@@ -1,5 +1,4 @@
 <?php
-
 global $wpdb, $wp_version, $yarpp;
 
 // Reenforce YARPP setup:
@@ -9,9 +8,8 @@ else
 	$yarpp->upgrade_check();
 
 // check to see that templates are in the right place
-$yarpp->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-if ( !(is_array($yarpp->templates) && count($yarpp->templates)) ) {
-	yarpp_set_option(array('use_template' => false, 'rss_use_template' => false));
+if ( !count($yarpp->admin->get_templates()) ) {
+	yarpp_set_option( array( 'template' => false, 'rss_template' => false) );
 }
 
 // 3.3: move version checking here, in PHP:
@@ -64,7 +62,10 @@ if ( !yarpp_get_option('myisam_override') ) {
 		."'></input></form>"
 		."</div>";
 
-		yarpp_set_option(array('title' => 1, 'body' => 1));
+		$weight = yarpp_set_option('weight');
+		unset($weight['title']);
+		unset($weight['body']);
+		yarpp_set_option(array('weight' => $weight));
 		$yarpp->myisam = false;
 	}
 }
@@ -86,22 +87,41 @@ if (isset($_POST['update_yarpp'])) {
 	foreach ($yarpp->default_options as $option => $default) {
 		if ( is_bool($default) )
 			$new_options[$option] = isset($_POST[$option]);
-		if ( (is_string($default) || is_int($default)) &&
-			isset($_POST[$option]) && is_string($_POST[$option]) )
+		// @todo: do we really want to stripslashes here anymore?
+		if ( (is_string($default) || is_int($default)) && is_string(@$_POST[$option]) )
 			$new_options[$option] = stripslashes($_POST[$option]);
 	}
 
 	if ( isset($_POST['weight']) ) {
-		$new_options['weight'] = $_POST['weight'];
+		$new_options['weight'] = array();
+		$new_options['require_tax'] = array();
+		foreach ( (array) $_POST['weight'] as $key => $value) {
+			if ( $value == 'consider' )
+				$new_options['weight'][$key] = 1;
+			if ( $value == 'consider_extra' )
+				$new_options['weight'][$key] = YARPP_EXTRA_WEIGHT;
+		}
+		foreach ( (array) $_POST['weight']['tax'] as $tax => $value) {
+			if ( $value == 'consider' )
+				$new_options['weight']['tax'][$tax] = 1;
+			if ( $value == 'consider_extra' )
+				$new_options['weight']['tax'][$tax] = YARPP_EXTRA_WEIGHT;
+			if ( $value == 'require_one' ) {
+				$new_options['weight']['tax'][$tax] = 1;
+				$new_options['require_tax'][$tax] = 1;
+			}
+			if ( $value == 'require_more' ) {
+				$new_options['weight']['tax'][$tax] = 1;
+				$new_options['require_tax'][$tax] = 2;
+			}
+		}
 	}
 
-	// excludes are different
-	$new_options['exclude'] = array();
-	if ( isset($_POST['exclude']) ) {
-		$exclude = array_merge( array('category' => array(), 'post_tag' => array()), $_POST['exclude'] );
-		$new_options['exclude']['category'] = implode(',',array_keys($exclude['category']));
-		$new_options['exclude']['post_tag'] = implode(',',array_keys($exclude['post_tag']));
-	}
+	if ( isset($_POST['exclude']) )
+		$new_options['exclude'] = implode(',',array_keys($_POST['exclude']));
+	
+	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
+	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);

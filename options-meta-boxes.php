@@ -1,10 +1,20 @@
 <?php
 
 class YARPP_Meta_Box {
-	function checkbox($option,$desc,$tr="<tr valign='top'>
-				<th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
-		echo "			$tr<input $inputplus type='checkbox' name='$option' value='true'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  /> $desc</th>$thplus
+	function checkbox($option,$desc,$tr="<tr valign='top'><th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
+		echo "$tr<input $inputplus type='checkbox' name='$option' value='true'";
+		checked(yarpp_get_option($option) == 1);
+		echo "  /> $desc</th>$thplus
 			</tr>";
+	}
+	function template_checkbox( $rss = false, $trextra = '' ) {
+		global $yarpp;
+		$pre = $rss ? 'rss_' : '';
+		$chosen_template = yarpp_get_option( "{$pre}template" );
+		echo "<tr valign='top'{$trextra}><th colspan='2'><input type='checkbox' name='{$pre}use_template' class='{$pre}template' value='true'";
+		disabled(!count($yarpp->admin->get_templates()), true);
+		checked( !!$chosen_template );
+		echo " /> " . __("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>" . "</th></tr>";
 	}
 	function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 				<th scope='row'>", $note = '') {
@@ -30,29 +40,26 @@ class YARPP_Meta_Box {
 			</tr>";
 	}
 
-	function tax_importance($taxonomy) {
-		$value = yarpp_get_option("weight[tax][{$taxonomy->name}]");
+	function tax_weight($taxonomy) {
+		$weight = (int) yarpp_get_option("weight[tax][{$taxonomy->name}]");
+		$require = (int) yarpp_get_option("require_tax[{$taxonomy->name}]");
 		echo "<tr valign='top'><th scope='row'>{$taxonomy->labels->name}:</th><td><select name='weight[tax][{$taxonomy->name}]'>";
-		echo "<option value='1'". (($value == 1) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
-		echo "<option value='2'". (($value == 2) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
-		echo "<option value='3'". (($value == 3) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
-		echo "<option value='4'". (($value == 4) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='no'". ((!$weight && !$require) ? ' selected="selected"': '' )."  > " . __("do not consider",'yarpp') . "</option>";
+		echo "<option value='consider'". (($weight == 1 && !$require) ? ' selected="selected"': '' )."  >" . __("consider",'yarpp') . "</option>";
+		echo "<option value='consider_extra'". (($weight > 1 && !$require) ? ' selected="selected"': '' )."  >" . __("consider with extra weight",'yarpp') . "</option>";
+		echo "<option value='require_one'". (($require == 1) ? ' selected="selected"': '' )."  >" . sprintf(__("require at least one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
+		echo "<option value='require_more'". (($require == 2) ? ' selected="selected"': '' )."  >" . sprintf(__("require more than one %s in common",'yarpp'),$taxonomy->labels->singular_name) . "</option>";
 		echo "</select></td></tr>";
 	}
 	
-	function importance2($option,$desc,$tr="<tr valign='top'>
-				<th scope='row'>",$inputplus = '') {
-		$value = yarpp_get_option($option);
-	
-		echo "		$tr$desc</th>
-				<td>
-													<select name='$option'>
-				<option $inputplus value='1'". (($value == 1) ? ' selected="selected"': '' )."  >".__("do not consider",'yarpp')."</option>
-				<option $inputplus value='2'". (($value == 2) ? ' selected="selected"': '' )."  > ".__("consider",'yarpp')."</option>
-				<option $inputplus value='3'". (($value == 3) ? ' selected="selected"': '' )."  > ".__("consider with extra weight",'yarpp')."</option>
-													</select>
-				</td>
-			</tr>";
+	function weight($option,$desc,$tr="<tr valign='top'><th scope='row'>",$inputplus = '') {
+		$weight = (int) yarpp_get_option("weight[$option]");
+		echo "$tr$desc</th><td>";
+		echo "<select name='weight[$option]'>";
+		echo "<option $inputplus value='no'". (!$weight ? ' selected="selected"': '' )."  >".__("do not consider",'yarpp')."</option>";
+		echo "<option $inputplus value='consider'". (($weight == 1) ? ' selected="selected"': '' )."  > ".__("consider",'yarpp')."</option>";
+		echo "<option $inputplus value='consider_extra'". (($weight > 1) ? ' selected="selected"': '' )."  > ".__("consider with extra weight",'yarpp')."</option>";
+		echo "</select></td></tr>";
 	}
 	
 	function displayorder( $option, $class = '' ) {
@@ -76,16 +83,18 @@ class YARPP_Meta_Box {
 
 class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 	function exclude($taxonomy, $string) {
+		global $yarpp;
 ?>
 			<tr valign='top'>
 				<th scope='row'><?php echo $string; ?></th>
 				<td><div class='scroll_wrapper' style="overflow:auto;max-height:100px;"><div class='exclude_terms' id='exclude_<?php echo $taxonomy; ?>'>
 <?php
-$exclude_terms = yarpp_get_option('exclude');
-if ( !empty($exclude_terms[$taxonomy]) ) {
-	$terms = get_terms($taxonomy, array('include' => $exclude_terms[$taxonomy]));
+$exclude_tt_ids = wp_parse_id_list(yarpp_get_option('exclude'));
+$exclude_term_ids = $yarpp->admin->get_term_ids_from_tt_ids( $taxonomy, $exclude_tt_ids );
+if ( count($exclude_term_ids) ) {
+	$terms = get_terms($taxonomy, array('include' => $exclude_term_ids));
 	foreach ($terms as $term) {
-		echo "<input type='checkbox' name='exclude[{$taxonomy}][{$term->term_id}]' value='true' checked='checked' /> <label>" . esc_html($term->name) . "</label> ";
+		echo "<input type='checkbox' name='exclude[{$term->term_taxonomy_id}]' id='exclude_{$term->term_taxonomy_id}' value='true' checked='checked' /> <label for='exclude_{$term->term_taxonomy_id}'>" . esc_html($term->name) . "</label> ";
 	}
 }
 ?>
@@ -136,13 +145,13 @@ class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 
 <?php
 	$this->textbox('threshold',__('Match threshold:','yarpp'));
-	$this->importance2('weight[title]',__("Titles: ",'yarpp'),"<tr valign='top'>
+	$this->weight('title',__("Titles: ",'yarpp'),"<tr valign='top'>
 			<th scope='row'>",( !$yarpp->myisam ? ' readonly="readonly" disabled="disabled"':'' ));
-	$this->importance2('weight[body]',__("Bodies: ",'yarpp'),"<tr valign='top'>
+	$this->weight('body',__("Bodies: ",'yarpp'),"<tr valign='top'>
 			<th scope='row'>",( !$yarpp->myisam ? ' readonly="readonly" disabled="disabled"':'' ));
 
 	foreach ($yarpp->get_taxonomies() as $taxonomy) {
-		$this->tax_importance($taxonomy);
+		$this->tax_weight($taxonomy);
 	}
 
 	$this->checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
@@ -167,15 +176,17 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			<th class='th-full' colspan='2' scope='row' style='width:100%;'>",'','<td rowspan="3" style="border-left:8px transparent solid;"><b>'.__("Website display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");
 		$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
-		$this->checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template"'.(!(is_array($yarpp->templates) && count($yarpp->templates))?' disabled="disabled"':'')); ?>
+		$this->template_checkbox( false );
+		?>
 		</tbody></table>
 		<table class="form-table" style="clear:none;"><tbody>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
-						<option value='<?php echo esc_attr(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
+						<?php 
+						foreach ($yarpp->admin->get_templates() as $template): ?>
+						<option value='<?php echo esc_attr($template)?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template)?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -225,7 +236,8 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 
 	$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2, "<tr valign='top' class='rss_displayed'>
 				<th scope='row'>");
-	$this->checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top' class='rss_displayed'><th colspan='2'>",' class="rss_template"'.(!(is_array($yarpp->templates) && count($yarpp->templates))?' disabled="disabled"':'')); ?>
+	$this->template_checkbox( true, " class='rss_displayed'" );
+	?>
 	</tbody></table>
 	<table class="form-table rss_displayed" style="clear:none;">
 		<tbody>
@@ -233,8 +245,10 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
-						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
+						<?php
+						$chosen_template = yarpp_get_option('rss_template');
+						foreach ($yarpp->admin->get_templates() as $template): ?>
+						<option value='<?php echo esc_attr($template);?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template);?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
