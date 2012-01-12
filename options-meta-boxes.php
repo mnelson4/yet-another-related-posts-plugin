@@ -1,10 +1,20 @@
 <?php
 
 class YARPP_Meta_Box {
-	function checkbox($option,$desc,$tr="<tr valign='top'>
-				<th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
-		echo "			$tr<input $inputplus type='checkbox' name='$option' value='true'". ((yarpp_get_option($option) == 1) ? ' checked="checked"': '' )."  /> $desc</th>$thplus
+	function checkbox($option,$desc,$tr="<tr valign='top'><th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
+		echo "$tr<input $inputplus type='checkbox' name='$option' value='true'";
+		checked(yarpp_get_option($option) == 1);
+		echo "  /> $desc</th>$thplus
 			</tr>";
+	}
+	function template_checkbox( $rss = false, $trextra = '' ) {
+		global $yarpp;
+		$pre = $rss ? 'rss_' : '';
+		$chosen_template = yarpp_get_option( "{$pre}template" );
+		echo "<tr valign='top'{$trextra}><th colspan='2'><input type='checkbox' name='{$pre}use_template' class='{$pre}template' value='true'";
+		disabled(!count($yarpp->admin->get_templates()), true);
+		checked( !!$chosen_template );
+		echo " /> " . __("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>" . "</th></tr>";
 	}
 	function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 				<th scope='row'>", $note = '') {
@@ -166,15 +176,17 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			<th class='th-full' colspan='2' scope='row' style='width:100%;'>",'','<td rowspan="3" style="border-left:8px transparent solid;"><b>'.__("Website display code example",'yarpp').'</b><br /><small>'.__("(Update options to reload.)",'yarpp').'</small><br/>'
 ."<div id='display_demo_web' style='overflow:auto;width:350px;max-height:500px;'></div></td>");
 		$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
-		$this->checkbox('use_template',__("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top'><th colspan='2'>",' class="template"'.(!(is_array($yarpp->templates) && count($yarpp->templates))?' disabled="disabled"':'')); ?>
+		$this->template_checkbox( false );
+		?>
 		</tbody></table>
 		<table class="form-table" style="clear:none;"><tbody>
 			<tr valign='top' class='templated'>
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="template_file" id="template_file">
-						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
-						<option value='<?php echo esc_attr(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
+						<?php 
+						foreach ($yarpp->admin->get_templates() as $template): ?>
+						<option value='<?php echo esc_attr($template)?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template)?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -224,7 +236,8 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 
 	$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'),2, "<tr valign='top' class='rss_displayed'>
 				<th scope='row'>");
-	$this->checkbox('rss_use_template',__("Display using a custom template file",'yarpp')." <!--<span style='color:red;'>".__('NEW!','yarpp')."</span>--> <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>","<tr valign='top' class='rss_displayed'><th colspan='2'>",' class="rss_template"'.(!(is_array($yarpp->templates) && count($yarpp->templates))?' disabled="disabled"':'')); ?>
+	$this->template_checkbox( true, " class='rss_displayed'" );
+	?>
 	</tbody></table>
 	<table class="form-table rss_displayed" style="clear:none;">
 		<tbody>
@@ -232,8 +245,10 @@ $this->checkbox('rss_excerpt_display',__("Display related posts in the descripti
 				<th><?php _e("Template file:",'yarpp');?></th>
 				<td>
 					<select name="rss_template_file" id="rss_template_file">
-						<?php foreach (glob(STYLESHEETPATH . '/yarpp-template-*.php') as $template): ?>
-						<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==yarpp_get_option('rss_template_file'))?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
+						<?php
+						$chosen_template = yarpp_get_option('rss_template');
+						foreach ($yarpp->admin->get_templates() as $template): ?>
+						<option value='<?php echo esc_attr($template);?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template);?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>

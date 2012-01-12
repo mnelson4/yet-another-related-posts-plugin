@@ -8,9 +8,8 @@ else
 	$yarpp->upgrade_check();
 
 // check to see that templates are in the right place
-$yarpp->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-if ( !(is_array($yarpp->templates) && count($yarpp->templates)) ) {
-	yarpp_set_option(array('use_template' => false, 'rss_use_template' => false));
+if ( !count($yarpp->admin->get_templates()) ) {
+	yarpp_set_option( array( 'template' => false, 'rss_template' => false) );
 }
 
 // 3.3: move version checking here, in PHP:
@@ -118,9 +117,11 @@ if (isset($_POST['update_yarpp'])) {
 		}
 	}
 
-	if ( isset($_POST['exclude']) ) {
+	if ( isset($_POST['exclude']) )
 		$new_options['exclude'] = implode(',',array_keys($_POST['exclude']));
-	}
+	
+	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
+	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);

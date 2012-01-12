@@ -14,8 +14,6 @@ class YARPP {
 	
 	public $myisam = true;
 	
-	public $templates = array();
-	
 	// here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 	public $default_options = array();
 
@@ -64,7 +62,6 @@ class YARPP {
 		$this->default_options = array(
 			'threshold' => 5,
 			'limit' => 5,
-			'template_file' => '', // new in 2.2
 			'excerpt_length' => 10,
 			'recent_number' => 12,
 			'recent_units' => 'month',
@@ -77,7 +74,6 @@ class YARPP {
 			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'order' => 'score DESC',
 			'rss_limit' => 3,
-			'rss_template_file' => '', // new in 2.2
 			'rss_excerpt_length' => 10,
 			'rss_before_title' => '<li>',
 			'rss_after_title' => '</li>',
@@ -89,10 +85,14 @@ class YARPP {
 			'rss_order' => 'score DESC',
 			'past_only' => true,
 			'show_excerpt' => false,
-			'recent_only' => false, // new in 3.0
-			'use_template' => false, // new in 2.2
 			'rss_show_excerpt' => false,
-			'rss_use_template' => false, // new in 2.2
+			'recent_only' => false, // new in 3.0
+			//'use_template' => false, // new in 2.2
+			//'rss_use_template' => false, // new in 2.2
+			//'template_file' => '', // new in 2.2
+			//'rss_template_file' => '', // new in 2.2
+			'template' => false, // new in 3.4.4
+			'rss_template' => false, // new in 3.4.4
 			'show_pass_post' => false,
 			'cross_relate' => false,
 			'auto_display' => true,
@@ -241,6 +241,8 @@ class YARPP {
 			$this->upgrade_3_4b8();
 		if ( $last_version && version_compare('3.4.4b2', $last_version) > 0 )
 			$this->upgrade_3_4_4b2();
+		if ( $last_version && version_compare('3.4.4b3', $last_version) > 0 )
+			$this->upgrade_3_4_4b3();
 	
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
@@ -414,6 +416,17 @@ class YARPP {
 		update_option( 'yarpp', $options );
 	}
 	
+	function upgrade_3_4_4b3() {
+		$options = $this->get_option();
+		$options['template'] = $options['use_template'] ? $options['template_file'] : false;
+		$options['rss_template'] = $options['rss_use_template'] ? $options['rss_template_file'] : false;
+		unset( $options['use_template'] );
+		unset( $options['template_file'] );
+		unset( $options['rss_use_template'] );
+		unset( $options['rss_template_file'] );
+		update_option( 'yarpp', $options );
+	}
+	
 	private $post_types = null;
 	function get_post_types( $field = false ) {
 		if ( is_null($this->post_types) ) {
@@ -481,7 +494,7 @@ class YARPP {
 		
 		$this->setup_active_cache( $args );
 
-		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
 		extract( $this->parse_args( $args, $options ) );
 
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -517,15 +530,15 @@ class YARPP {
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ($domain == 'metabox') {
+		if ( 'metabox' == $domain ) {
 			include(YARPP_DIR.'/template-metabox.php');
-		} elseif ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
-			include(STYLESHEETPATH . '/' . $template_file);
+			include(STYLESHEETPATH . '/' . $template);
 			$output = ob_get_contents();
 			ob_end_clean();
-		} elseif ($domain == 'widget') {
+		} elseif ( 'widget' == $domain ) {
 			include(YARPP_DIR.'/template-widget.php');
 		} else {
 			include(YARPP_DIR.'/template-builtin.php');
@@ -635,7 +648,7 @@ class YARPP {
 		if ( $this->cache_bypass->demo_time ) // if we're already in a demo YARPP loop, stop now.
 			return false;
 	
-		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
 		extract( $this->parse_args( $args, $options ) );
 	
 		$this->cache_bypass->begin_demo_time( $limit );
@@ -647,10 +660,10 @@ class YARPP {
 		$this->prep_query( $domain == 'rss' );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+		if ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
-			include(STYLESHEETPATH . '/' . $template_file);
+			include(STYLESHEETPATH . '/' . $template);
 			$output = ob_get_contents();
 			ob_end_clean();
 		} else {
@@ -668,7 +681,7 @@ class YARPP {
 	}
 	
 	public function parse_args( $args, $options ) {
-		$options_with_rss_variants = array( 'limit', 'template_file', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
+		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
 
 		$r = array();
 		foreach ( $options as $option ) {

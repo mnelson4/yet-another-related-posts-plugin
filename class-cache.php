@@ -478,15 +478,14 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 	 */
 	public function where_filter($arg) {
 		global $wpdb;
-		$threshold = yarpp_get_option('threshold');
 		// modify the where clause to use the related ID list.
 		if (!count($this->related_IDs))
 			$this->related_IDs = array(0);
 		$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
 
 		// if we have "recent only" set, add an additional condition
-		if (yarpp_get_option("recent_only"))
-			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
+		if ($this->args["recent_only"])
+			$arg .= " and post_date > date_sub(now(), interval {$this->args['recent_number']} {$this->args['recent_units']}) ";
 		return $arg;
 	}
 
@@ -538,6 +537,8 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		global $wpdb;
 
 		$this->yarpp_time = true;
+		$options = array( 'threshold', 'show_pass_post', 'past_only', 'weight', 'require_tax', 'exclude', 'recent_only', 'recent_number', 'recent_units', 'limit' );
+		$this->args = $this->core->parse_args($args, $options);
 
 		$this->related_postdata = $wpdb->get_results($this->sql($reference_ID, $args), ARRAY_A);
 		$this->related_IDs = wp_list_pluck( $this->related_postdata, 'ID' );

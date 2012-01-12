@@ -3,7 +3,7 @@
 class YARPP_Admin {
 	public $core;
 	public $hook;
-
+	
 	function __construct( &$core ) {
 		$this->core = &$core;
 		
@@ -19,6 +19,19 @@ class YARPP_Admin {
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
+	}
+	
+	private $templates = null;
+	public function get_templates() {
+		if ( is_null($this->templates) ) {
+			$this->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+			// if glob hits an error, it returns false.
+			if ( $this->templates === false )
+				$this->templates = array();
+			// get basenames only
+			$this->templates = array_map('basename', $this->templates);
+		}
+		return (array) $this->templates;
 	}
 	
 	function ajax_register() {
