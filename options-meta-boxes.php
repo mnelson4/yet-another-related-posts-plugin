@@ -110,22 +110,34 @@ if ( count($exclude_term_ids) ) {
 
 	<table class="form-table" style="margin-top: 0; clear:none;">
 		<tbody>
+		<tr><th><?php _e('Post types considered:', 'yarpp'); ?></th><td><?php echo implode(', ', $yarpp->get_post_types('label')); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other-notes'><?php _e('more&gt;','yarpp');?></a></td></tr>
 <?php
 	foreach ($yarpp->get_taxonomies() as $taxonomy) {
 		$this->exclude($taxonomy->name, sprintf(__('Disallow by %s:','yarpp'), $taxonomy->labels->singular_name));
 	}
 	$this->checkbox('show_pass_post',__("Show password protected posts?",'yarpp'));
 
-	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".esc_attr(yarpp_get_option('recent_number'))."\" size=\"2\" />";
-	$recent_units = yarpp_get_option('recent_units');
+	$recent = yarpp_get_option('recent');
+	if ( !!$recent ) {
+		list($recent_number, $recent_units) = explode(' ', $recent);
+	} else {
+		$recent_number = 12;
+		$recent_units = 'month';
+	}
+	$recent_number = "<input name=\"recent_number\" type=\"text\" id=\"recent_number\" value=\"".esc_attr($recent_number)."\" size=\"2\" />";
 	$recent_units = "<select name=\"recent_units\" id=\"recent_units\">
 		<option value='day'". (('day'==$recent_units)?" selected='selected'":'').">".__('day(s)','yarpp')."</option>
 		<option value='week'". (('week'==$recent_units)?" selected='selected'":'').">".__('week(s)','yarpp')."</option>
 		<option value='month'". (('month'==$recent_units)?" selected='selected'":'').">".__('month(s)','yarpp')."</option>
 	</select>";
-	$this->checkbox('recent_only',str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp'))));
-?>
 
+	echo "<tr valign='top'><th class='th-full' colspan='2' scope='row'><input type='checkbox' name='recent_only' value='true'";
+	checked(!!$recent);
+	echo " /> ";
+	echo str_replace('NUMBER',$recent_number,str_replace('UNITS',$recent_units,__("Show only posts from the past NUMBER UNITS",'yarpp')));
+	echo "</th></tr>";
+
+?>
 		</tbody>
 	</table>
 <?php
@@ -154,7 +166,7 @@ class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 		$this->tax_weight($taxonomy);
 	}
 
-	$this->checkbox('cross_relate',__("Cross-relate posts and pages?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts.",'yarpp')."</span></a>");
+	$this->checkbox('cross_relate',__("Display results from all post types",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When \"display results from all post types\" is off, only posts will be displayed as related to a post, only pages will be displayed as related to a page, etc.",'yarpp')."</span></a>");
 	$this->checkbox('past_only',__("Show only previous posts?",'yarpp'));
 ?>
 			</tbody>

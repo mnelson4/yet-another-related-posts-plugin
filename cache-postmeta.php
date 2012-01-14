@@ -63,9 +63,10 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 			$this->related_IDs = array(0);
 		$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
 
-		// if we have "recent only" set, add an additional condition
-		if (yarpp_get_option("recent_only"))
-			$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
+		// if recent is set, add an additional condition
+		$recent = yarpp_get_option('recent');
+		if ( !!$recent )
+			$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		return $arg;
 	}
 

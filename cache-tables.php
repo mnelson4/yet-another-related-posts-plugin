@@ -94,8 +94,9 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 			$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 
-			if (yarpp_get_option("recent_only"))
-				$arg .= " and post_date > date_sub(now(), interval ".yarpp_get_option("recent_number")." ".yarpp_get_option("recent_units").") ";
+			$recent = yarpp_get_option('recent');
+			if ( !!$recent )
+				$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		}
 		return $arg;
 	}

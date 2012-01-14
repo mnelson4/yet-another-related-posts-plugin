@@ -127,14 +127,13 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code.
 
-	yarpp_display_related(get_the_ID(), array(
+	yarpp_related(get_the_ID(), array(
 		// Pool options: these determine the "pool" of entities which are considered
 		'post_type' => array('post', 'page', ...),
 		'show_pass_post' => false, // show password-protected posts
 		'past_only' => false, // show only posts which were published before the reference post
 		'exclude' => array(), // a list of term_taxonomy_ids. entities with any of these terms will be excluded from consideration.
-		// @todo: change format of "recent" options
-		// 'recent_only', 'recent_number', 'recent_units',
+		'recent' => false, // to limit to entries published recently, set to something like '15 day', '20 week', or '12 month'.
 		
 		// Relatedness options: these determine how "relatedness" is computed
 		// Weights are used to construct the "match score" between candidates and the reference post
@@ -161,7 +160,7 @@ Developers can call YARPP's powerful relatedness algorithm from anywhere in thei
 
 Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the builtin template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
 
-If you need to use related entries programmatically or to know whether they exist, you can use the functions `yarpp_get_related($reference_ID, $args)` and `yarpp_related_exist($reference_ID, $args)`. `yarpp_get_related` returns an array of `post` objects, just like the WordPress function `get_posts`. `yarpp_related_exist` returns a boolean for whether any such related entries exist. For each function, `$args` takes the same arguments as those shown for `yarpp_display_related` above, except for the various display and template options.
+If you need to use related entries programmatically or to know whether they exist, you can use the functions `yarpp_get_related($reference_ID, $args)` and `yarpp_related_exist($reference_ID, $args)`. `yarpp_get_related` returns an array of `post` objects, just like the WordPress function `get_posts`. `yarpp_related_exist` returns a boolean for whether any such related entries exist. For each function, `$args` takes the same arguments as those shown for `yarpp_related` above, except for the various display and template options.
 
 Note that custom YARPP queries using the functions mentioned here are *not* cached in the built-in YARPP caching system. Thus, if you notice any performance hits, you may need to write your own code to cache the results.
 
@@ -226,7 +225,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.4.4 =
 * New public YARPP query API
 	* Documentation in the "other notes" section of the readme
-	* Changed format of `weight` and `template` paramters in options and in optional args
+	* Changed format of `weight`, `template`, `recent` parameters in options and in optional args
 * Further main query optimization:
 	* What's cooler than joining four tables? Joining two.
 	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s

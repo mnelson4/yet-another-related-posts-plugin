@@ -88,7 +88,8 @@ if (isset($_POST['update_yarpp'])) {
 		if ( is_bool($default) )
 			$new_options[$option] = isset($_POST[$option]);
 		// @todo: do we really want to stripslashes here anymore?
-		if ( (is_string($default) || is_int($default)) && is_string(@$_POST[$option]) )
+		if ( (is_string($default) || is_int($default)) &&
+			 isset($_POST[$option]) && is_string($_POST[$option]) )
 			$new_options[$option] = stripslashes($_POST[$option]);
 	}
 
@@ -116,6 +117,9 @@ if (isset($_POST['update_yarpp'])) {
 			}
 		}
 	}
+
+	$new_options['recent'] = isset($_POST['recent_only']) ?
+		$_POST['recent_number'] . ' ' . $_POST['recent_units'] : false;
 
 	if ( isset($_POST['exclude']) )
 		$new_options['exclude'] = implode(',',array_keys($_POST['exclude']));

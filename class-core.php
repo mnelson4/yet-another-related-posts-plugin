@@ -63,8 +63,7 @@ class YARPP {
 			'threshold' => 5,
 			'limit' => 5,
 			'excerpt_length' => 10,
-			'recent_number' => 12,
-			'recent_units' => 'month',
+			'recent' => false, // new in 3.4.4
 			'before_title' => '<li>',
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
@@ -86,11 +85,6 @@ class YARPP {
 			'past_only' => true,
 			'show_excerpt' => false,
 			'rss_show_excerpt' => false,
-			'recent_only' => false, // new in 3.0
-			//'use_template' => false, // new in 2.2
-			//'rss_use_template' => false, // new in 2.2
-			//'template_file' => '', // new in 2.2
-			//'rss_template_file' => '', // new in 2.2
 			'template' => false, // new in 3.4.4
 			'rss_template' => false, // new in 3.4.4
 			'show_pass_post' => false,
@@ -128,7 +122,7 @@ class YARPP {
 		$new_options = array_merge( $current_options, $options );
 	
 		// new in 3.1: clear cache when updating certain settings.
-		$clear_cache_options = array( 'show_pass_post', 'recent_only', 'threshold' );
+		$clear_cache_options = array( 'show_pass_post', 'recent', 'threshold' );
 		$new_options_which_require_flush = array_intersect( array_keys( array_diff_assoc($options, $current_options) ), $clear_cache_options );
 		if ( count($new_options_which_require_flush) ||
 			( $new_options['limit'] > $current_options['limit'] ) ||
@@ -243,7 +237,9 @@ class YARPP {
 			$this->upgrade_3_4_4b2();
 		if ( $last_version && version_compare('3.4.4b3', $last_version) > 0 )
 			$this->upgrade_3_4_4b3();
-	
+		if ( $last_version && version_compare('3.4.4b4', $last_version) > 0 )
+			$this->upgrade_3_4_4b4();
+			
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
 		if ( $last_version && version_compare('3.4.1b5', $last_version) > 0 )
@@ -427,6 +423,16 @@ class YARPP {
 		update_option( 'yarpp', $options );
 	}
 	
+	function upgrade_3_4_4b4() {
+		$options = $this->get_option();
+		$options['recent'] = $options['recent_only'] ?
+			$options['recent_number'] . ' ' . $options['recent_units'] : false;
+		unset( $options['recent_only'] );
+		unset( $options['recent_number'] );
+		unset( $options['recent_units'] );
+		update_option( 'yarpp', $options );
+	}
+	
 	private $post_types = null;
 	function get_post_types( $field = false ) {
 		if ( is_null($this->post_types) ) {
@@ -449,7 +455,7 @@ class YARPP {
 	
 	private $taxonomies = null;
 	function get_taxonomies( $field = false ) {
-		if ( is_null($this->post_types) ) {
+		if ( is_null($this->taxonomies) ) {
 			$this->taxonomies = get_taxonomies(array(), 'objects');
 			$this->taxonomies = array_filter( $this->taxonomies, array($this, 'taxonomy_filter') );
 		}
@@ -702,7 +708,7 @@ class YARPP {
 	
 	private function setup_active_cache( $args ) {
 		// the options which the main sql query cares about:
-		$magic_options = array( 'limit', 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'require_tax', 'recent_only', 'recent_number', 'recent_units' );
+		$magic_options = array( 'limit', 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'require_tax', 'recent' );
 
 		$defaults = $this->get_option();
 		foreach ( $magic_options as $option ) {
