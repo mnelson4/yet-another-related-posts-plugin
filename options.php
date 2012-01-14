@@ -91,9 +91,11 @@ if (isset($_POST['update_yarpp'])) {
 			$new_options[$option] = stripslashes($_POST[$option]);
 	}
 
-	if ( isset($_POST['weight']) ) {
+	if ( isset($_POST['weight']) )
 		$new_options['weight'] = $_POST['weight'];
-	}
+
+	$new_options['recent'] = isset($_POST['recent_only']) ?
+		$_POST['recent_number'] . ' ' . $_POST['recent_units'] : false;
 
 	// excludes are different
 	$new_options['exclude'] = array();
