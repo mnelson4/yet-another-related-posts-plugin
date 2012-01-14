@@ -14,12 +14,8 @@ class YARPP {
 	
 	public $myisam = true;
 	
-	public $templates = array();
-	
 	// here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 	public $default_options = array();
-	// These are options which, when updated, will trigger a clearing of the cache
-	public $clear_cache_options = array( 'show_pass_post', 'recent_only', 'threshold', 'weight');
 
 	function __construct() {
 		$this->load_default_options();
@@ -66,10 +62,8 @@ class YARPP {
 		$this->default_options = array(
 			'threshold' => 5,
 			'limit' => 5,
-			'template_file' => '', // new in 2.2
 			'excerpt_length' => 10,
-			'recent_number' => 12,
-			'recent_units' => 'month',
+			'recent' => false, // new in 3.4.4
 			'before_title' => '<li>',
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
@@ -79,7 +73,6 @@ class YARPP {
 			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'order' => 'score DESC',
 			'rss_limit' => 3,
-			'rss_template_file' => '', // new in 2.2
 			'rss_excerpt_length' => 10,
 			'rss_before_title' => '<li>',
 			'rss_after_title' => '</li>',
@@ -91,10 +84,9 @@ class YARPP {
 			'rss_order' => 'score DESC',
 			'past_only' => true,
 			'show_excerpt' => false,
-			'recent_only' => false, // new in 3.0
-			'use_template' => false, // new in 2.2
 			'rss_show_excerpt' => false,
-			'rss_use_template' => false, // new in 2.2
+			'template' => false, // new in 3.4.4
+			'rss_template' => false, // new in 3.4.4
 			'show_pass_post' => false,
 			'cross_relate' => false,
 			'auto_display' => true,
@@ -103,15 +95,16 @@ class YARPP {
 			'promote_yarpp' => false,
 			'rss_promote_yarpp' => false,
 			'myisam_override' => false,
-			'exclude' => array(), // conslidated YARPP 3.4
-			'weight' => array( // consolidated in YARPP 3.4
-				'title' => 2,
-				'body' => 2,
+			'exclude' => '', // conslidated YARPP 3.4 and further in 3.4.4
+			'weight' => array( // consolidated in YARPP 3.4, format changed in 3.4.4
+				'title' => 1,
+				'body' => 1,
 				'tax' => array(
-					'category' => 2, // changed default in 3.4
-					'post_tag' => 2
+					'category' => 1, // changed default in 3.4
+					'post_tag' => 1
 				)
-			)
+			),
+			'require_tax' => array() // new in 3.4.4
 		);
 	}
 	
@@ -119,17 +112,24 @@ class YARPP {
 		$current_options = $this->get_option();
 	
 		// we can call yarpp_set_option(key,value) if we like:
-		if ( !is_array($options) && isset($value) )
-			$options = array( $options => $value );
+		if ( !is_array($options) ) {
+			if ( isset($value) )
+				$options = array( $options => $value );
+			else
+				return false;
+		}
 	
 		$new_options = array_merge( $current_options, $options );
 	
 		// new in 3.1: clear cache when updating certain settings.
-		$new_options_which_require_flush = array_intersect( array_keys( array_diff_assoc($options, $current_options) ), $this->clear_cache_options );
+		$clear_cache_options = array( 'show_pass_post', 'recent', 'threshold' );
+		$new_options_which_require_flush = array_intersect( array_keys( array_diff_assoc($options, $current_options) ), $clear_cache_options );
 		if ( count($new_options_which_require_flush) ||
-			( isset($options['exclude']) && $options['exclude'] != $current_options['exclude'] ) ||
-			( isset($options['weight']) && $options['weight'] != $current_options['weight'] ) )
-			$this->cache->flush();		
+			( $new_options['limit'] > $current_options['limit'] ) ||
+			( $new_options['weight'] != $current_options['weight'] ) ||
+			( $new_options['exclude'] != $current_options['exclude'] ) ||
+			( $new_options['require_tax'] != $current_options['require_tax'] ) )
+			$this->cache->flush();
 	
 		update_option( 'yarpp', $new_options );
 	}
@@ -139,18 +139,7 @@ class YARPP {
 		$options = (array) get_option( 'yarpp', array() );
 		// ensure defaults if not set:
 		$options = array_merge( $this->default_options, $options );
-		// some extra work is required for arrays:
-		foreach ( $this->default_options as $key => $default ) {
-			if ( !is_array($default) )
-				continue;
-			if ( isset($options[$key]) && is_array($options[$key]) )
-				$options[$key] = array_merge( $this->default_options[$key], (array) $options[$key] );
-			else
-				$options[$key] = $this->default_options[$key];
-		}
-		if ( !isset($options['weight']['tax']) )
-			$options['weight']['tax'] = $this->default_options['weight']['tax'];
-	
+
 		if ( is_null( $option ) )
 			return $options;
 	
@@ -244,7 +233,13 @@ class YARPP {
 			$this->upgrade_3_4b5();
 		if ( $last_version && version_compare('3.4b8', $last_version) > 0 )
 			$this->upgrade_3_4b8();
-	
+		if ( $last_version && version_compare('3.4.4b2', $last_version) > 0 )
+			$this->upgrade_3_4_4b2();
+		if ( $last_version && version_compare('3.4.4b3', $last_version) > 0 )
+			$this->upgrade_3_4_4b3();
+		if ( $last_version && version_compare('3.4.4b4', $last_version) > 0 )
+			$this->upgrade_3_4_4b4();
+			
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
 		if ( $last_version && version_compare('3.4.1b5', $last_version) > 0 )
@@ -356,11 +351,11 @@ class YARPP {
 	function upgrade_3_4b8() {
 		$options = $this->get_option();
 		$options['weight'] = array(
-			'title' => (int) $options['title'],
-			'body' => (int) $options['body'],
+			'title' => (int) @$options['title'],
+			'body' => (int) @$options['body'],
 			'tax' => array(
-				'post_tag' => (int) $options['tags'],
-				'category' => (int) $options['categories'],
+				'post_tag' => (int) @$options['tags'],
+				'category' => (int) @$options['categories'],
 			)
 		);
 		
@@ -378,24 +373,106 @@ class YARPP {
 		update_option( 'yarpp', $options );
 	}
 	
-	// @todo: custom post type support
-	function get_post_types() {
-		return array('post', 'page');
+	function upgrade_3_4_4b2() {
+		$options = $this->get_option();
+
+		// update weight values; split out tax weights into weight[tax] and require_tax
+		$weight_map = array( 2 => 1, 3 => YARPP_EXTRA_WEIGHT );
+		if ((int) $options['weight']['title'] == 1)
+			unset( $options['weight']['title'] );
+		else 
+			$options['weight']['title'] = $weight_map[(int) $options['weight']['title']];
+
+		if ((int) $options['weight']['body'] == 1)
+			unset( $options['weight']['body'] );
+		else 
+			$options['weight']['body'] = $weight_map[(int) $options['weight']['body']];
+		
+		$options['require_tax'] = array();
+		foreach ( $options['weight']['tax'] as $tax => $value ) {
+			if ( $value == 3 )
+				$options['require_tax'][$tax] = 1;
+			if ( $value == 4 )
+				$options['require_tax'][$tax] = 2;			
+			
+			if ( $value > 1 )
+				$options['weight']['tax'][$tax] = 1;
+			else
+				unset( $options['weight']['tax'][$tax] );
+		}
+
+		// consolidate excludes, using tt_ids.
+		$exclude_tt_ids = array();
+		foreach ($options['exclude'] as $tax => $term_ids) {
+			if ( !empty($term_ids) )
+				$exclude_tt_ids = array_merge( wp_list_pluck(get_terms( $tax, array('include' => $term_ids) ), 'term_taxonomy_id'), $exclude_tt_ids );
+		}
+		$options['exclude'] = join(',', $exclude_tt_ids);
+
+		update_option( 'yarpp', $options );
 	}
 	
-	function get_taxonomies() {
-		$taxonomies = get_taxonomies(array(), 'objects');
-		return array_filter( $taxonomies, array($this, 'taxonomy_filter') );
+	function upgrade_3_4_4b3() {
+		$options = $this->get_option();
+		$options['template'] = $options['use_template'] ? $options['template_file'] : false;
+		$options['rss_template'] = $options['rss_use_template'] ? $options['rss_template_file'] : false;
+		unset( $options['use_template'] );
+		unset( $options['template_file'] );
+		unset( $options['rss_use_template'] );
+		unset( $options['rss_template_file'] );
+		update_option( 'yarpp', $options );
+	}
+	
+	function upgrade_3_4_4b4() {
+		$options = $this->get_option();
+		$options['recent'] = $options['recent_only'] ?
+			$options['recent_number'] . ' ' . $options['recent_units'] : false;
+		unset( $options['recent_only'] );
+		unset( $options['recent_number'] );
+		unset( $options['recent_units'] );
+		update_option( 'yarpp', $options );
+	}
+	
+	private $post_types = null;
+	function get_post_types( $field = false ) {
+		if ( is_null($this->post_types) ) {
+			$this->post_types = get_post_types(array(), 'objects');
+			$this->post_types = array_filter( $this->post_types, array($this, 'post_type_filter') );
+		}
+		
+		if ( $field )
+			return wp_list_pluck( $this->post_types, $field );
+		return $this->post_types;
+	}
+	
+	private function post_type_filter( $post_type ) {
+		if ( $post_type->_builtin && $post_type->show_ui )
+			return true;
+		if ( isset($post_type->yarpp_support) )
+			return $post_type->yarpp_support;
+		return false;
+	}
+	
+	private $taxonomies = null;
+	function get_taxonomies( $field = false ) {
+		if ( is_null($this->taxonomies) ) {
+			$this->taxonomies = get_taxonomies(array(), 'objects');
+			$this->taxonomies = array_filter( $this->taxonomies, array($this, 'taxonomy_filter') );
+		}
+		
+		if ( $field )
+			return wp_list_pluck( $this->taxonomies, $field );
+		return $this->taxonomies;
 	}
 	
 	private function taxonomy_filter( $taxonomy ) {
-		// if yarpp_support is set and false, or if show_ui is false, skip it
-		if ( (isset($taxonomy->yarpp_support) && !$taxonomy->yarpp_support) ||
-			 !$taxonomy->show_ui )
+		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types( 'name' ) )) )
 			return false;
-		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types() )) )
-			return false;
-		return true;
+
+		// if yarpp_support is set, follow that; otherwise include if show_ui is true
+		if ( isset($taxonomy->yarpp_support) )
+			return $taxonomy->yarpp_support;
+		return $taxonomy->show_ui;
 	}
 	
 	/*
@@ -423,7 +500,7 @@ class YARPP {
 		
 		$this->setup_active_cache( $args );
 
-		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
 		extract( $this->parse_args( $args, $options ) );
 
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -453,21 +530,21 @@ class YARPP {
 				'orderby' => $orders[0],
 				'order' => $orders[1],
 				'showposts' => $limit,
-				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 			));
 		}
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ($domain == 'metabox') {
+		if ( 'metabox' == $domain ) {
 			include(YARPP_DIR.'/template-metabox.php');
-		} elseif ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
-			include(STYLESHEETPATH . '/' . $template_file);
+			include(STYLESHEETPATH . '/' . $template);
 			$output = ob_get_contents();
 			ob_end_clean();
-		} elseif ($domain == 'widget') {
+		} elseif ( 'widget' == $domain ) {
 			include(YARPP_DIR.'/template-widget.php');
 		} else {
 			include(YARPP_DIR.'/template-builtin.php');
@@ -525,7 +602,7 @@ class YARPP {
 			'orderby' => $orders[0],
 			'order' => $orders[1],
 			'showposts' => $limit,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 		));
 		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 	
@@ -558,7 +635,7 @@ class YARPP {
 		$related_query->query(array(
 			'p' => $reference_ID,
 			'showposts' => 1,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
 		));
 		$return = $related_query->have_posts();
 		unset($related_query);
@@ -577,7 +654,7 @@ class YARPP {
 		if ( $this->cache_bypass->demo_time ) // if we're already in a demo YARPP loop, stop now.
 			return false;
 	
-		$options = array( 'domain', 'limit', 'use_template', 'order', 'template_file', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
 		extract( $this->parse_args( $args, $options ) );
 	
 		$this->cache_bypass->begin_demo_time( $limit );
@@ -589,10 +666,10 @@ class YARPP {
 		$this->prep_query( $domain == 'rss' );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ($use_template && file_exists(STYLESHEETPATH . '/' . $template_file) && $template_file != '') {
+		if ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
-			include(STYLESHEETPATH . '/' . $template_file);
+			include(STYLESHEETPATH . '/' . $template);
 			$output = ob_get_contents();
 			ob_end_clean();
 		} else {
@@ -610,7 +687,7 @@ class YARPP {
 	}
 	
 	public function parse_args( $args, $options ) {
-		$options_with_rss_variants = array( 'limit', 'template_file', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
+		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
 
 		$r = array();
 		foreach ( $options as $option ) {
@@ -631,7 +708,7 @@ class YARPP {
 	
 	private function setup_active_cache( $args ) {
 		// the options which the main sql query cares about:
-		$magic_options = array( 'limit', 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'recent_only', 'recent_number', 'recent_units' );
+		$magic_options = array( 'limit', 'threshold', 'show_pass_post', 'past_only', 'weight', 'exclude', 'require_tax', 'recent' );
 
 		$defaults = $this->get_option();
 		foreach ( $magic_options as $option ) {

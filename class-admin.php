@@ -3,7 +3,7 @@
 class YARPP_Admin {
 	public $core;
 	public $hook;
-
+	
 	function __construct( &$core ) {
 		$this->core = &$core;
 		
@@ -19,6 +19,19 @@ class YARPP_Admin {
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
+	}
+	
+	private $templates = null;
+	public function get_templates() {
+		if ( is_null($this->templates) ) {
+			$this->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
+			// if glob hits an error, it returns false.
+			if ( $this->templates === false )
+				$this->templates = array();
+			// get basenames only
+			$this->templates = array_map('basename', $this->templates);
+		}
+		return (array) $this->templates;
 	}
 	
 	function ajax_register() {
@@ -77,8 +90,10 @@ class YARPP_Admin {
 		$content .= '<p>' . str_replace('<a>', '<a href="' . esc_url(admin_url('options-general.php?page=yarpp')) .'">', __('Make sure to visit the <a>Related Posts settings page</a> to customize YARPP.', 'yarpp') ). '</p>';
 		?>
 <script>
-jQuery(function ($) {
-	var menu = $('#menu-settings'),
+jQuery(function () {
+	var body = jQuery(document.body),
+	menu = jQuery('#menu-settings'),
+	collapse = jQuery('#collapse-menu'),
 	yarpp = menu.find("a[href='options-general.php?page=yarpp']"),
 	options = {
 		content: '<?php echo $content; ?>',
@@ -89,13 +104,13 @@ jQuery(function ($) {
 		},
 		close: function() {
 			menu.unbind('mouseenter mouseleave', yarpp_pointer);
-			$('#collapse-menu').('mouseenter mouseleave', yarpp_pointer);
+			collapse.unbind('mouseenter mouseleave', yarpp_pointer);
 		}};
 	
 	if ( !yarpp.length )
 		return;
 	
-	yarpp.pointer(options).pointer('open');
+	body.pointer(options).pointer('open');
 	
 	if ( menu.is('.folded *') || !menu.is('.wp-menu-open') ) {
 		function yarpp_pointer(e) {
@@ -104,11 +119,11 @@ jQuery(function ($) {
 					options.position.of = yarpp;
 				else
 					options.position.of = menu;
-				yarpp.pointer( options );
+				body.pointer( options );
 			}, 200);
 		}
 		menu.bind('mouseenter mouseleave', yarpp_pointer);
-		$('#collapse-menu').bind('mouseenter mouseleave', yarpp_pointer);
+		collapse.bind('mouseenter mouseleave', yarpp_pointer);
 	}
 });
 </script>
@@ -173,16 +188,13 @@ jQuery(function ($) {
 		header("HTTP/1.1 200");
 		header("Content-Type: text/html; charset=UTF-8");
 		
-		$exclude = yarpp_get_option('exclude');
-		if ( isset($exclude[$taxonomy]) )
-			$exclude = $exclude[$taxonomy];
-		else
-			$exclude = array();
-		if ( 'category' == $taxonomy )
-			$exclude .= ',' . get_option( 'default_category' );
+		$exclude_tt_ids = wp_parse_id_list(yarpp_get_option('exclude'));
+		$exclude_term_ids = $this->get_term_ids_from_tt_ids( $taxonomy, $exclude_tt_ids );
+//		if ( 'category' == $taxonomy )
+//			$exclude .= ',' . get_option( 'default_category' );
 
 		$terms = get_terms($taxonomy, array(
-			'exclude' => $exclude,
+			'exclude' => $exclude_term_ids,
 			'hide_empty' => false,
 			'hierarchical' => false,
 			'number' => 100,
@@ -195,9 +207,17 @@ jQuery(function ($) {
 		}
 		
 		foreach ($terms as $term) {
-			echo "<span><input type='checkbox' name='exclude[{$taxonomy}][{$term->term_id}]' id='exclude_{$taxonomy}_{$term->term_id}' value='true' /> <label for='exclude_{$taxonomy}_{$term->term_id}'>" . esc_html($term->name) . "</label></span> ";
+			echo "<span><input type='checkbox' name='exclude[{$term->term_taxonomy_id}]' id='exclude_{$term->term_taxonomy_id}' value='true' /> <label for='exclude_{$term->term_taxonomy_id}'>" . esc_html($term->name) . "</label></span> ";
 		}
 		exit;
+	}
+	
+	function get_term_ids_from_tt_ids( $taxonomy, $tt_ids ) {
+		global $wpdb;
+		$tt_ids = wp_parse_id_list($tt_ids);
+		if ( empty($tt_ids) )
+			return array();
+		return $wpdb->get_col("select term_id from $wpdb->term_taxonomy where taxonomy = '{$taxonomy}' and term_taxonomy_id in (" . join(',', $tt_ids) . ")");
 	}
 	
 	function ajax_display() {

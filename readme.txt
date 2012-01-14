@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 3.4.1
+Stable tag: 3.4.3
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
 
@@ -121,6 +121,55 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 
 The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
 
+== Developing with YARPP ==
+
+= Custom displays and custom post type support =
+
+Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code.
+
+	yarpp_related(get_the_ID(), array(
+		// Pool options: these determine the "pool" of entities which are considered
+		'post_type' => array('post', 'page', ...),
+		'show_pass_post' => false, // show password-protected posts
+		'past_only' => false, // show only posts which were published before the reference post
+		'exclude' => array(), // a list of term_taxonomy_ids. entities with any of these terms will be excluded from consideration.
+		'recent' => false, // to limit to entries published recently, set to something like '15 day', '20 week', or '12 month'.
+		
+		// Relatedness options: these determine how "relatedness" is computed
+		// Weights are used to construct the "match score" between candidates and the reference post
+		'weight' => array(
+			'body' => 1,
+			'title' => 2, // larger weights mean this criteria will be weighted more heavily
+			'tax' => array(
+				'post_tag' => 1,
+				... // put any taxonomies you want to consider here with their weights
+			)
+		),
+		// Specify taxonomies and a number here to require that a certain number be shared:
+		'require_tax' => array(
+			'post_tag' => 1 // for example, this requires all results to have at least one 'post_tag' in common.
+		),
+		// The threshold which must be met by the "match score"
+		'threshold' => 5,
+
+		// Display options:
+		'template' => , // either the name of a file in your active theme or the boolean false to use the builtin template
+		'limit' => 5, // maximum number of results
+		'order' => 'score DESC'
+	));
+
+Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the builtin template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
+
+If you need to use related entries programmatically or to know whether they exist, you can use the functions `yarpp_get_related($reference_ID, $args)` and `yarpp_related_exist($reference_ID, $args)`. `yarpp_get_related` returns an array of `post` objects, just like the WordPress function `get_posts`. `yarpp_related_exist` returns a boolean for whether any such related entries exist. For each function, `$args` takes the same arguments as those shown for `yarpp_related` above, except for the various display and template options.
+
+Note that custom YARPP queries using the functions mentioned here are *not* cached in the built-in YARPP caching system. Thus, if you notice any performance hits, you may need to write your own code to cache the results.
+
+= Custom taxonomy support =
+
+Any taxonomy, including custom taxonomies, may be specified in the `weight` or `require_tax` arguments in a custom display as above. `term_taxonomy_id`s specified in the `exclude` argument may be of any taxonomy.
+
+If you would like to choose custom taxonomies to choose in the YARPP settings UI, either to exclude certain terms or to consider them in the relatedness formula via the UI, the taxonomy must (a) have either the `show_ui` or `yarpp_support` attribute set to true and (b) must apply to either the post types `post` or `page` or both.
+
 == Localizations ==
 
 YARPP is currently localized in the following languages:
@@ -152,9 +201,10 @@ YARPP is currently localized in the following languages:
 * (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
+* Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
-* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com)
+* Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
 * Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
@@ -166,12 +216,33 @@ YARPP is currently localized in the following languages:
 * Romanian
 * Thai
 * Bhasa Indonesian
-* Spanish
 -->
 
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
+
+= 3.4.4 =
+* New public YARPP query API
+	* Documentation in the "other notes" section of the readme
+	* Changed format of `weight`, `template`, `recent` parameters in options and in optional args
+* Further main query optimization:
+	* What's cooler than joining four tables? Joining two.
+	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
+* Added "consider with extra weight" to taxonomy criteria as well
+* Code cleanup:
+	* Don't clear the cache when it's already empty
+	* `protect` the `sql` method as it shouldn't be `public`
+	* Further use of utility functions from 3.1 like `wp_list_pluck()`
+	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
+* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
+
+= 3.4.3 =
+* Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
+* Postmeta cache: make sure to clear keyword cache on flush too
+* Make welcome pointer more robust
+* More custom post type support infrastructure
+* Updated Turkish localization by [Barış Ünver](http://beyn.org/).
 
 = 3.4.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-not-working-version-341-and-custom-template): 3.4 and 3.4.1 assumed existence of `wp_posts` table.
