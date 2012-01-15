@@ -14,18 +14,19 @@ class YARPP_Widget extends WP_Widget {
 
 		extract($args);
 
+		// compatibility with pre-3.5 settings:
+		if ( isset($instance['use_template']) )
+			$instance['template'] = $instance['use_template'] ? $instance['template_file'] : false;
+
 		$instance['post_type'] = ($post->post_type == 'page' ? array('page') : array('post'));
 		if ( yarpp_get_option('cross_relate') )
 			$instance['post_type'] = array('post','page');
 
 		$title = apply_filters('widget_title', $instance['title']);
 		echo $before_widget;
-		if ( !$instance['use_template'] ) {
+		if ( !$instance['template'] ) {
 			echo $before_title;
-			if ($title)
-				echo $title;
-			else
-				_e('Related Posts (YARPP)','yarpp');
+			echo $title;
 			echo $after_title;
 		}
 
@@ -35,60 +36,63 @@ class YARPP_Widget extends WP_Widget {
 	}
 
 	function update($new_instance, $old_instance) {
-		// this starts with default values.
-		$instance = array( 'promote_yarpp' => 0, 'use_template' => 0 );
-		foreach ( $instance as $field => $val ) {
-			if ( isset($new_instance[$field]) )
-				$instance[$field] = 1;
-		}
-		if ($instance['use_template']) {
-			$instance['template_file'] = $new_instance['template_file'];
+		$instance = array(
+			'promote_yarpp' => isset($new_instance['promote_yarpp']),
+			'template' => isset($new_instance['use_template']) ? $new_instance['template_file'] : false
+		);
+
+		if ( !!$instance['template'] ) // don't save the title change.
 			$instance['title'] = $old_instance['title'];
-		} else {
-			$instance['template_file'] = $old_instance['template_file'];
+		else // save the title change:
 			$instance['title'] = $new_instance['title'];
-		}
+		
 		return $instance;
 	}
 
 	function form($instance) {
-		$title = esc_attr($instance['title']);
-		$template_file = $instance['template_file'];
+		global $yarpp;
+	
+		$instance = wp_parse_args( $instance, array(
+			'title' => __('Related Posts (YARPP)','yarpp'),
+			'template' => false,
+			'promote_yarpp' => false
+		) );
+	
+		// compatibility with pre-3.5 settings:
+		if ( isset($instance['use_template']) )
+			$instance['template'] = $instance['template_file'];
+	
 		?>
-				<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" /></label></p>
 
-			<?php // if there are YARPP templates installed...
-			
-				$templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-				if ( is_array($templates) && count($templates) ): ?>
+		<?php // if there are YARPP templates installed...
+			$templates = $yarpp->admin->get_templates();
+			if ( count($templates) ): ?>
 
-				<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked($instance['use_template'], true) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
-				<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
-					<?php foreach ($templates as $template): ?>
-					<option value='<?php echo htmlspecialchars(basename($template))?>'<?php echo (basename($template)==$template_file)?" selected='selected'":'';?>><?php echo htmlspecialchars(basename($template))?></option>
-					<?php endforeach; ?>
-				</select><p>
-
-			<?php endif; ?>
-
-				<p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['images'], true) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
-
-				<script type="text/javascript">
-				jQuery(function($) {
-					function ensureTemplateChoice() {
-						if ($('#<?php echo $this->get_field_id('use_template'); ?>').attr('checked')) {
-							$('#<?php echo $this->get_field_id('title'); ?>').attr('disabled',true);
-							$('#<?php echo $this->get_field_id('template_file_p'); ?>').show();
-						} else {
-							$('#<?php echo $this->get_field_id('title'); ?>').attr('disabled',false);
-							$('#<?php echo $this->get_field_id('template_file_p'); ?>').hide();
-						}
+			<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked(!!$instance['template']) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
+			<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
+				<?php foreach ($templates as $template): ?>
+				<option value='<?php echo esc_attr($template); ?>'<?php selected($template, $instance['template']);?>><?php echo esc_html($template); ?></option>
+				<?php endforeach; ?>
+			</select><p>
+			<script type="text/javascript">
+			jQuery(function($) {
+				function ensureTemplateChoice() {
+					if ($('#<?php echo $this->get_field_id('use_template'); ?>').attr('checked')) {
+						$('#<?php echo $this->get_field_id('title'); ?>').attr('disabled',true);
+						$('#<?php echo $this->get_field_id('template_file_p'); ?>').show();
+					} else {
+						$('#<?php echo $this->get_field_id('title'); ?>').attr('disabled',false);
+						$('#<?php echo $this->get_field_id('template_file_p'); ?>').hide();
 					}
-					$('#<?php echo $this->get_field_id('use_template'); ?>').change(ensureTemplateChoice);
-					ensureTemplateChoice();
-				});
-				</script>
+				}
+				$('#<?php echo $this->get_field_id('use_template'); ?>').change(ensureTemplateChoice);
+				ensureTemplateChoice();
+			});
+			</script>
+		<?php endif; ?>
 
+		<p><input class="checkbox" id="<?php echo $this->get_field_id('promote_yarpp'); ?>" name="<?php echo $this->get_field_name('promote_yarpp'); ?>" type="checkbox" <?php checked($instance['promote_yarpp']) ?> /> <label for="<?php echo $this->get_field_id('promote_yarpp'); ?>"><?php _e("Help promote Yet Another Related Posts Plugin?",'yarpp'); ?></label></p>
 		<?php
 	}
 }
