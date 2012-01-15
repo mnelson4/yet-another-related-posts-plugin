@@ -14,7 +14,7 @@ class YARPP_Widget extends WP_Widget {
 
 		extract($args);
 
-		// compatibility with pre-3.4.4 settings:
+		// compatibility with pre-3.5 settings:
 		if ( isset($instance['use_template']) )
 			$instance['template'] = $instance['use_template'] ? $instance['template_file'] : false;
 
@@ -58,7 +58,7 @@ class YARPP_Widget extends WP_Widget {
 			'promote_yarpp' => false
 		) );
 	
-		// compatibility with pre-3.4.4 settings:
+		// compatibility with pre-3.5 settings:
 		if ( isset($instance['use_template']) )
 			$instance['template'] = $instance['template_file'];
 	

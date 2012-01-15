@@ -3,13 +3,13 @@
 Plugin Name: Yet Another Related Posts Plugin
 Plugin URI: http://yarpp.org/
 Description: Returns a list of related entries based on a unique algorithm for display on your blog and RSS feeds. A templating feature allows customization of the display.
-Version: 3.4.4b4
+Version: 3.5b4
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Donate link: http://tinyurl.com/donatetomitcho
 */
 
-define('YARPP_VERSION', '3.4.4b4');
+define('YARPP_VERSION', '3.5b4');
 define('YARPP_DIR', dirname(__FILE__));
 define('YARPP_NO_RELATED', ':(');
 define('YARPP_RELATED', ':)');
@@ -33,7 +33,7 @@ if ( !defined('WP_CONTENT_DIR') )
 if (!defined('YARPP_CACHE_TYPE'))
 	define('YARPP_CACHE_TYPE', 'tables');
 	
-// New in 3.4.4: YARPP extra weight multiplier
+// New in 3.5: YARPP extra weight multiplier
 if ( !defined('YARPP_EXTRA_WEIGHT') )
 	define( 'YARPP_EXTRA_WEIGHT', 3 );
 

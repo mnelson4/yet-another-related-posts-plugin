@@ -6,7 +6,7 @@ Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.0
-Tested up to: 3.3
+Tested up to: 3.3.1
 Stable tag: 3.4.3
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Templating allows customization of the display.
@@ -222,13 +222,14 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.4.4 =
+= 3.5 =
 * New public YARPP query API
 	* Documentation in the "other notes" section of the readme
 	* Changed format of `weight`, `template`, `recent` parameters in options and in optional args
 * Further main query optimization:
 	* What's cooler than joining four tables? Joining two.
 	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
+* Changes to the `related_*()` and `yarpp_related()` function signatures.
 * Added "consider with extra weight" to taxonomy criteria as well
 * Code cleanup:
 	* Don't clear the cache when it's already empty

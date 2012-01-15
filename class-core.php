@@ -63,7 +63,7 @@ class YARPP {
 			'threshold' => 5,
 			'limit' => 5,
 			'excerpt_length' => 10,
-			'recent' => false, // new in 3.4.4
+			'recent' => false, // new in 3.5
 			'before_title' => '<li>',
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
@@ -85,8 +85,8 @@ class YARPP {
 			'past_only' => true,
 			'show_excerpt' => false,
 			'rss_show_excerpt' => false,
-			'template' => false, // new in 3.4.4
-			'rss_template' => false, // new in 3.4.4
+			'template' => false, // new in 3.5
+			'rss_template' => false, // new in 3.5
 			'show_pass_post' => false,
 			'cross_relate' => false,
 			'auto_display' => true,
@@ -95,8 +95,8 @@ class YARPP {
 			'promote_yarpp' => false,
 			'rss_promote_yarpp' => false,
 			'myisam_override' => false,
-			'exclude' => '', // conslidated YARPP 3.4 and further in 3.4.4
-			'weight' => array( // consolidated in YARPP 3.4, format changed in 3.4.4
+			'exclude' => '', // conslidated YARPP 3.4 and further in 3.5
+			'weight' => array( // consolidated in YARPP 3.4, format changed in 3.5
 				'title' => 1,
 				'body' => 1,
 				'tax' => array(
@@ -104,7 +104,7 @@ class YARPP {
 					'post_tag' => 1
 				)
 			),
-			'require_tax' => array() // new in 3.4.4
+			'require_tax' => array() // new in 3.5
 		);
 	}
 	
