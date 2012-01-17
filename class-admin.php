@@ -236,7 +236,7 @@ jQuery(function () {
 		if ( $this->core->get_option('cross_relate') )
 			$args['post_type'] = array('post', 'page');
 			
-		$return = $this->core->display_related($_REQUEST['ID'], $args, false);
+		$return = $this->core->display_related(absint($_REQUEST['ID']), $args, false);
 		echo $return;
 		exit;
 	}

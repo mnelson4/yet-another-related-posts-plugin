@@ -482,7 +482,7 @@ class YARPP {
 	/* new in 2.1! the domain argument refers to {website,widget,rss} */
 	/* new in 3.0! new query-based approach: EXTREMELY HACKY! */
 	/* 
-	 * @param (int) $reference_ID - obligatory
+	 * @param (int) $reference_ID
 	 * @param (array) $args
 	 * @param (bool) $echo
 	 */
@@ -491,9 +491,8 @@ class YARPP {
 	
 		$this->upgrade_check();
 
-		if ( !$reference_ID )
-			$reference_ID = get_the_ID();
-	
+		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
@@ -570,14 +569,13 @@ class YARPP {
 	}
 	
 	/* 
-	 * @param (int) $reference_ID - obligatory
+	 * @param (int) $reference_ID
 	 * @param (array) $args
 	 */
 	function get_related($reference_ID = false, $args = array()) {
 		$this->upgrade_check();
 
-		if ( !$reference_ID )
-			$reference_ID = get_the_ID();
+		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -616,8 +614,7 @@ class YARPP {
 	function related_exist($reference_ID = false, $args = array()) {
 		$this->upgrade_check();
 	
-		if ( !$reference_ID )
-			$reference_ID = get_the_ID();
+		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 			
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
