@@ -486,12 +486,12 @@ class YARPP {
 	 * @param (array) $args
 	 * @param (bool) $echo
 	 */
-	function display_related($reference_ID = false, $args = array(), $echo = true) {
+	function display_related($reference_ID = null, $args = array(), $echo = true) {
 		global $wp_query, $pagenow;
 	
 		$this->upgrade_check();
 
-		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -572,10 +572,10 @@ class YARPP {
 	 * @param (int) $reference_ID
 	 * @param (array) $args
 	 */
-	function get_related($reference_ID = false, $args = array()) {
+	function get_related($reference_ID = null, $args = array()) {
 		$this->upgrade_check();
 
-		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -611,10 +611,10 @@ class YARPP {
 	 * @param (int) $reference_ID
 	 * @param (array) $args
 	 */
-	function related_exist($reference_ID = false, $args = array()) {
+	function related_exist($reference_ID = null, $args = array()) {
 		$this->upgrade_check();
 	
-		$reference_ID = ( false === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 			
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
