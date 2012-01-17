@@ -229,6 +229,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Further main query optimization:
 	* What's cooler than joining four tables? Joining two.
 	* Exclude now simply uses `term_taxonomy_id`s instead of `term_id`s
+* Bugfix: "related posts" preview metabox was not always working properly
 * Changes to the `related_*()` and `yarpp_related()` function signatures.
 * Added "consider with extra weight" to taxonomy criteria as well
 * Code cleanup:
