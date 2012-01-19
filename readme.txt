@@ -239,7 +239,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
 * Localizations:
 	* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
-	* Updated `it_IT` localization
+	* Updated `it_IT`, `ko_KR`, `fr_FR` localizations
 
 = 3.4.3 =
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
