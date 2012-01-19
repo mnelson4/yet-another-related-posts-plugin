@@ -237,7 +237,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* `protect` the `sql` method as it shouldn't be `public`
 	* Further use of utility functions from 3.1 like `wp_list_pluck()`
 	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
-* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
+* Localizations:
+	* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
+	* Updated `it_IT` localization
 
 = 3.4.3 =
 * Bugfix: keywords were not getting cleared on post update, meaning new posts (which start blank) were not getting useful title + body keyword matches. This often resulted in "no related posts" for new posts.
