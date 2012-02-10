@@ -200,6 +200,7 @@ YARPP is currently localized in the following languages:
 * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
 * (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
+* Romanian (`ro_RO`) by [Uhren Shop](http://uhrenstore.de/)
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
 * Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
@@ -213,7 +214,6 @@ YARPP is currently localized in the following languages:
 * Danish
 * Catalan
 * Hungarian
-* Romanian
 * Thai
 * Bhasa Indonesian
 -->
