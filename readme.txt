@@ -239,6 +239,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* New constant, `YARPP_EXTRA_WEIGHT` to define the "extra weight." By default, it's 3.
 * Localizations:
 	* Added Slovak (`sk_SK`) localization by [Forex](http://www.eforex.sk/)
+	* Added Romanian (`ro_RO`) localization by [Uhren Shop](http://uhrenstore.de/)
 	* Updated `it_IT`, `ko_KR`, `fr_FR`, `sv_SE`, `ja` localizations
 
 = 3.4.3 =
