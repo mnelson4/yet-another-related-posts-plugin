@@ -491,7 +491,8 @@ class YARPP {
 	
 		$this->upgrade_check();
 
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
+			get_the_ID() : absint($reference_ID);
 
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )

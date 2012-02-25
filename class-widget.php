@@ -8,7 +8,7 @@ class YARPP_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $post;
+		global $post, $yarpp;
 		if ( !is_singular() )
 			return;
 
@@ -31,7 +31,7 @@ class YARPP_Widget extends WP_Widget {
 		}
 
 		$instance['domain'] = 'widget';
-		echo yarpp_related(null, $instance, false);
+		$yarpp->display_related(null, $instance, true);
 		echo $after_widget;
 	}
 
