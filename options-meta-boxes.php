@@ -110,7 +110,7 @@ if ( count($exclude_term_ids) ) {
 
 	<table class="form-table" style="margin-top: 0; clear:none;">
 		<tbody>
-		<tr><th><?php _e('Post types considered:', 'yarpp'); ?></th><td><?php echo implode(', ', $yarpp->get_post_types('label')); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other-notes'><?php _e('more&gt;','yarpp');?></a></td></tr>
+		<tr><th><?php _e('Post types considered:', 'yarpp'); ?></th><td><?php echo implode(', ', $yarpp->get_post_types('label')); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes'><?php _e('more&gt;','yarpp');?></a></td></tr>
 <?php
 	foreach ($yarpp->get_taxonomies() as $taxonomy) {
 		$this->exclude($taxonomy->name, sprintf(__('Disallow by %s:','yarpp'), $taxonomy->labels->singular_name));
