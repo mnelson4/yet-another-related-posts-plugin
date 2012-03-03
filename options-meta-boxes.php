@@ -197,6 +197,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 				<td>
 					<select name="template_file" id="template_file">
 						<?php 
+						$chosen_template = yarpp_get_option('template');
 						foreach ($yarpp->admin->get_templates() as $template): ?>
 						<option value='<?php echo esc_attr($template)?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template)?></option>
 						<?php endforeach; ?>
