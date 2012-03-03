@@ -133,7 +133,7 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
-	yarpp_related(get_the_ID(), array(
+	yarpp_related(array(
 		// Pool options: these determine the "pool" of entities which are considered
 		'post_type' => array('post', 'page', ...),
 		'show_pass_post' => false, // show password-protected posts
@@ -162,7 +162,9 @@ Developers can call YARPP's powerful relatedness algorithm from anywhere in thei
 		'template' => , // either the name of a file in your active theme or the boolean false to use the builtin template
 		'limit' => 5, // maximum number of results
 		'order' => 'score DESC'
-	));
+	),
+	$reference_ID, // second argument: (optional) the post ID. If not included, it will use the current post.
+	true); // third argument: (optional) true to echo the HTML block; false to return it
 
 Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the builtin template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
 
