@@ -123,6 +123,8 @@ if (isset($_POST['update_yarpp'])) {
 
 	if ( isset($_POST['exclude']) )
 		$new_options['exclude'] = implode(',',array_keys($_POST['exclude']));
+	else
+		$new_options['exclude'] = '';
 	
 	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
 	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
