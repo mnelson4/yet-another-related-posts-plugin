@@ -8,7 +8,7 @@ class YARPP_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $post, $yarpp;
+		global $yarpp;
 		if ( !is_singular() )
 			return;
 
@@ -18,9 +18,12 @@ class YARPP_Widget extends WP_Widget {
 		if ( isset($instance['use_template']) )
 			$instance['template'] = $instance['use_template'] ? $instance['template_file'] : false;
 
-		$instance['post_type'] = ($post->post_type == 'page' ? array('page') : array('post'));
-		if ( yarpp_get_option('cross_relate') )
-			$instance['post_type'] = array('post','page');
+		if ( $yarpp->get_option('cross_relate') )
+			$instance['post_type'] = $yarpp->get_post_types();
+		else if ( 'page' == get_post_type() )
+			$instance['post_type'] = array( 'page' );
+		else
+			$instance['post_type'] = array( 'post' );
 
 		$title = apply_filters('widget_title', $instance['title']);
 		echo $before_widget;

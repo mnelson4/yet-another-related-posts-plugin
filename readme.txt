@@ -230,6 +230,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.5.1 =
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-catchable-fatal-error-object-of-class-stdclass-could-not-be-converted-to-string): change `$yarpp->get_post_types()` to return array of names by default
+* Ensure that all supported post types are used when "display results from all post types" is set
 = 3.5 =
 * New public YARPP query API, which supports custom post types
 	* Documentation in the "other notes" section of the readme
