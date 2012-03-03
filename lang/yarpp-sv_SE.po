@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Yet Another Related Posts Plugin v3.0b6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-13 17:45+0100\n"
+"POT-Creation-Date: 2012-01-24 15:37+0100\n"
+"PO-Revision-Date: 2012-01-24 15:47+0100\n"
 "Last-Translator: Max Elander <max@maxelander.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,551 +18,519 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#@ yarpp
-#: includes.php:149
-#: includes.php:194
-#: includes.php:215
+# @ yarpp
+#: class-admin.php:55
+#: class-widget.php:7
+#: class-widget.php:56
 msgid "Related Posts (YARPP)"
 msgstr "Relaterade inlägg (YARPP)"
 
-#@ yarpp
-#: includes.php:376
+# @ yarpp
+#: class-admin.php:63
 msgid "Related Posts"
 msgstr "Relaterade inlägg"
 
-#@ yarpp
-#: cache-postmeta.php:105
-#: cache-tables.php:131
+#: class-admin.php:63
+msgid "Configure"
+msgstr "Ställ in"
+
+# @ yarpp
+#: class-admin.php:89
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "Tack för att du installerat <span>Yet Another Related Posts Plugin</span>!"
+
+#: class-admin.php:90
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+msgstr "Kom ihåg att besöka <a>sidan med inställningar för Relaterade Poster</a> så att du kan göra inställningar för YARPP."
+
+# @ yarpp
+#: class-admin.php:136
+msgid "Settings"
+msgstr "Inställningar"
+
+# @ yarpp
+#: class-admin.php:162
+msgid "Related entries may be displayed once you save your entry"
+msgstr "Relaterade inlägg kan visas när du har sparat inlägget"
+
+# @ yarpp
+#: class-cache.php:521
 msgid "Example post "
 msgstr "Exempel på inlägg"
 
-#@ yarpp
-#: magic.php:297
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#, php-format
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Relaterade inlägg tack vare <a href='%s'>Yet Another Related Posts Plugin</a>."
-
-#@ yarpp
-#: options.php:54
-msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
-msgstr "MyISAM-kontrollen har åsidosatts. Du kan nu använda kriterierna \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\"."
-
-#@ yarpp
-#: options.php:63
-#, php-format
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPPs kriterier \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\" kräver att din <code>%s</code> tabell använder <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, men det verkar som om den använder <code>%s</code>. Därför är kriterierna inte åtkomliga."
-
-#@ yarpp
-#: options.php:65
-#, php-format
-msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
-msgstr "Vill du använda dessa funktioner måste du ändra tabellen <code>%s</code>, genom att utföra detta SQL-kommando mot din databas: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code>."
-
-#@ yarpp
-#: options.php:67
-#, php-format
-msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
-msgstr "Om du trots denna kontroll är säker på att tabellen <code>%s</code> använder MyISAM-formatet kan du klicka på denna magiska knapp:"
-
-#@ yarpp
-#: options.php:70
-msgid "Trust me. Let me use MyISAM features."
-msgstr "Lita på mig. Låt mig använda MyISAM-finesserna."
-
-#@ yarpp
-#: options.php:83
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Databasen för YARPP innehöll ett fel, men det har korrigerats nu."
-
-#@ yarpp
-#: options.php:85
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Databasen för YARPP innehåller ett fel som inte kunde korrigeras."
-
-#@ yarpp
-#: options.php:114
-msgid "Options saved!"
-msgstr "Inställningarna sparade!"
-
-#@ yarpp
-#: options-meta-boxes.php:38
-msgid "word"
-msgstr "ord"
-
-#@ yarpp
-#: options-meta-boxes.php:39
-msgid "tag"
-msgstr "etikett"
-
-#@ yarpp
-#: options-meta-boxes.php:40
-msgid "category"
-msgstr "kategori"
-
-#@ yarpp
-#: options-meta-boxes.php:45
-#: options-meta-boxes.php:63
-#: options-meta-boxes.php:76
-msgid "do not consider"
-msgstr "ta inte hänsyn till"
-
-#@ yarpp
-#: options-meta-boxes.php:46
-#: options-meta-boxes.php:64
-#: options-meta-boxes.php:78
-msgid "consider"
-msgstr "ta hänsyn till"
-
-#@ yarpp
-#: options-meta-boxes.php:48
-#: options-meta-boxes.php:80
-#, php-format
-msgid "require at least one %s in common"
-msgstr "kräv minst en gemensam %s "
-
-#@ yarpp
-#: options-meta-boxes.php:50
-#: options-meta-boxes.php:82
-#, php-format
-msgid "require more than one %s in common"
-msgstr "kräv mer än en gemensam %s"
-
-#@ yarpp
-#: options-meta-boxes.php:65
-msgid "consider with extra weight"
-msgstr "ta hänsyn till och ge extra vikt åt"
-
-#@ yarpp
-#: options.php:178
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "YARPP-inställningar"
-
-#@ default
-#@ yarpp
-#: options-meta-boxes.php:286
-msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
-msgstr "Skänk pengar till mitcho (Michael Yoshitaka Erlewine) som tack för utvecklingen av detta tillägg via PayPal"
-
-#@ yarpp
-#: options-meta-boxes.php:118
-msgid "\"The Pool\""
-msgstr "\"Din pool\""
-
-#@ yarpp
-#: options-meta-boxes.php:91
-msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
-msgstr "De inlägg och sidor som beaktas är de som finns i \"Din pool\"."
-
-#@ yarpp
-#: options-meta-boxes.php:96
-msgid "Disallow by category:"
-msgstr "Uteslut inlägg och sidor i dessa kategorier:"
-
-#@ yarpp
-#: options-meta-boxes.php:98
-msgid "Disallow by tag:"
-msgstr "Uteslut sidor och inlägg med dessa etiketter:"
-
-#@ yarpp
-#: options-meta-boxes.php:101
-msgid "Show password protected posts?"
-msgstr "Visa inlägg som skyddas med lösenord?"
-
-#@ yarpp
-#: options-meta-boxes.php:140
-msgid "Show only previous posts?"
-msgstr "Visa endast poster som är äldre än den aktuella?"
-
-#@ yarpp
-#: options-meta-boxes.php:105
-msgid "day(s)"
-msgstr "dag(ar)"
-
-#@ yarpp
-#: options-meta-boxes.php:106
-msgid "week(s)"
-msgstr "vecka (veckor)"
-
-#@ yarpp
-#: options-meta-boxes.php:107
-msgid "month(s)"
-msgstr "månad(er)"
-
-#@ yarpp
-#: options-meta-boxes.php:109
-msgid "Show only posts from the past NUMBER UNITS"
-msgstr "Visa endast inlägg från de senaste NUMBER UNITS"
-
-#@ yarpp
-#: options-meta-boxes.php:148
-msgid "\"Relatedness\" options"
-msgstr "Inställningar för \"relationsstyrka\"."
-
-#@ yarpp
-#: options-meta-boxes.php:124
-#: options-meta-boxes.php:139
-#: options-meta-boxes.php:157
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:204
-#: options-meta-boxes.php:221
-#: options-meta-boxes.php:223
-#: options-meta-boxes.php:228
-#: options-meta-boxes.php:268
-msgid "more&gt;"
-msgstr "mer&gt;"
-
-#@ yarpp
-#: options-meta-boxes.php:124
-msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
-msgstr "Ju högre tröskelvärde, desto mer restriktivt bliir filtret, och du får färre relaterade poster. Förvalt värde är 5. Om du vill hitta ett lagom värde, ta en titt på vilka värden som visas för några relaterade poster. Genom att titta på vilka värden du har för de relaterade poster som hittas kan du enklare se om du behöver sänka eller höja värdet. Sänk det om du får för få relaterade poster, och höj det om du får för många."
-
-#@ yarpp
-#: options-meta-boxes.php:130
-msgid "Match threshold:"
-msgstr "Tröskelvärde:"
-
-#@ yarpp
-#: options-meta-boxes.php:131
-msgid "Titles: "
-msgstr "Rubriker:"
-
-#@ yarpp
-#: options-meta-boxes.php:133
-msgid "Bodies: "
-msgstr "Brödtext:"
-
-#@ yarpp
-#: options-meta-boxes.php:135
-msgid "Tags: "
-msgstr "Etiketter:"
-
-#@ yarpp
-#: options-meta-boxes.php:137
-msgid "Categories: "
-msgstr "Kategorier:"
-
-#@ yarpp
-#: options-meta-boxes.php:139
-msgid "Cross-relate posts and pages?"
-msgstr "Relatera till både inlägg och sidor?"
-
-#@ yarpp
-#: options-meta-boxes.php:139
-msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
-msgstr "Om \"Relatera till både inlägg och sidor?\" är aktivt, kommer du att få samma resultat från <code>related_posts()</code>, <code>related_pages()</code> och <code>related_entries()</code>. Alla tre kommer att visa både relaterade sidor och inlägg."
-
-#@ yarpp
-#: options.php:46
-#, php-format
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Det finns en ny beta (%s) av Yet Another Related Posts Plugin. Du kan <a href=\"%s\">hämta den här</a> på egen risk."
-
-#@ yarpp
-#: options-meta-boxes.php:212
-msgid "Display options <small>for your website</small>"
-msgstr "Visningsinställningar <small>för din webbplats</small>"
-
-#@ yarpp
-#: options-meta-boxes.php:157
-msgid "Automatically display related posts?"
-msgstr "Visa relaterade inlägg automatiskt?"
-
-#@ yarpp
-#: options-meta-boxes.php:157
-msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
-msgstr "Om du aktiverar detta alternativ visas relaterade inlägg direkt efter innehållet på sidor med enstaka inlägg. Om du inte har aktiverat alternativet måste du manuellt infoga koden <code>related_posts()</code> eller någon av varianterna <code>related_pages()</code> eller <code>related_entries()</code> i ditt tema."
-
-#@ yarpp
-#: options-meta-boxes.php:158
-msgid "Website display code example"
-msgstr "Kodexempel för att visa relaterade inlägg"
-
-#@ yarpp
-#: options-meta-boxes.php:158
-#: options-meta-boxes.php:221
-msgid "(Update options to reload.)"
-msgstr "(Uppdatera inställningarna för att ladda om sidan)"
-
-#@ yarpp
-#: options-meta-boxes.php:160
-#: options-meta-boxes.php:226
-msgid "Maximum number of related posts:"
-msgstr "Maximalt antal relaterade inlägg som ska visas:"
-
-#@ yarpp
-#: includes.php:248
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:228
-msgid "Display using a custom template file"
-msgstr "Visa med en speciell mall "
-
-#@ yarpp
-#: includes.php:249
-#: options-meta-boxes.php:165
-#: options-meta-boxes.php:233
-msgid "Template file:"
-msgstr "Malldokument:"
-
-#@ yarpp
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:244
-msgid "Before / after related entries:"
-msgstr "Kod att infoga före / efter relaterade poster:"
-
-#@ yarpp
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:184
-#: options-meta-boxes.php:244
-#: options-meta-boxes.php:245
-#: options-meta-boxes.php:250
-msgid "For example:"
-msgstr "Till exempel:"
-
-#@ yarpp
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:245
-msgid "Before / after each related entry:"
-msgstr "Kod att infoga före / efter varje relaterat inlägg:"
-
-#@ yarpp
-#: options-meta-boxes.php:178
-#: options-meta-boxes.php:247
-msgid "Show excerpt?"
-msgstr "Visa utdrag?"
-
-#@ yarpp
-#: options-meta-boxes.php:179
-#: options-meta-boxes.php:248
-msgid "Excerpt length (No. of words):"
-msgstr "Utdragets längd (antal ord):"
-
-#@ yarpp
-#: options-meta-boxes.php:183
-msgid "Before / after (Excerpt):"
-msgstr "Kod att infoga före / efter utdrag:"
-
-#@ yarpp
-#: options-meta-boxes.php:189
-#: options-meta-boxes.php:254
-msgid "Order results:"
-msgstr "Sorteringsordning:"
-
-#@ yarpp
-#: options-meta-boxes.php:191
-#: options-meta-boxes.php:256
-msgid "score (high relevance to low)"
-msgstr "relevans (från hög till låg)"
-
-#@ yarpp
-#: options-meta-boxes.php:192
-#: options-meta-boxes.php:257
-msgid "score (low relevance to high)"
-msgstr "relevans (från låg till hög)"
-
-#@ yarpp
-#: options-meta-boxes.php:193
-#: options-meta-boxes.php:258
-msgid "date (new to old)"
-msgstr "ålder (ny till gammal)"
-
-#@ yarpp
-#: options-meta-boxes.php:194
-#: options-meta-boxes.php:259
-msgid "date (old to new)"
-msgstr "ålder (gammal till ny)"
-
-#@ yarpp
-#: options-meta-boxes.php:195
-#: options-meta-boxes.php:260
-msgid "title (alphabetical)"
-msgstr "rubrik (A-Ö)"
-
-#@ yarpp
-#: options-meta-boxes.php:196
-#: options-meta-boxes.php:261
-msgid "title (reverse alphabetical)"
-msgstr "rubrik (Ö-A)"
-
-#@ yarpp
-#: options-meta-boxes.php:201
-#: options-meta-boxes.php:266
-msgid "Default display if no results:"
-msgstr "Visa detta om det inte finns några relaterade inlägg:"
-
-#@ yarpp
-#: includes.php:257
-#: options-meta-boxes.php:203
-#: options-meta-boxes.php:268
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Visa reklam för YARPP?"
-
-#@ yarpp
-#: options-meta-boxes.php:205
-#: options-meta-boxes.php:269
-#, php-format
-msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
-msgstr "Detta alternativ lägger till den här koden: %s. Prova med att aktivera det, uppdatera dina inställningar och se hur det ser ut i exemplet till höger. Dessa länkar och donationer uppskattas verkligen."
-
-#@ yarpp
-#: options-meta-boxes.php:276
-msgid "Display options <small>for RSS</small>"
-msgstr "Visningsinställningar <small>för RSS</small>"
-
-#@ yarpp
-#: options-meta-boxes.php:221
-msgid "Display related posts in feeds?"
-msgstr "Visa relaterade inlägg i RSS-flöde?"
-
-#@ yarpp
-#: options-meta-boxes.php:221
-msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
-msgstr "Detta alternativ gör att relaterade inlägg redovisas efter varje post i ditt RSS- eller Atom-flöde. Du behöver inte ändra i någon mall för att det ska fungera."
-
-#@ yarpp
-#: options-meta-boxes.php:223
-msgid "Display related posts in the descriptions?"
-msgstr "Visa relaterade inlägg i beskrivningsfälten?"
-
-#@ yarpp
-#: options-meta-boxes.php:223
-msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
-msgstr "Detta alternativ gör att relaterade inlägg visas i fälten för beskrivning, inte bara innehållet. Om du har ställt in att dina RSS-flöden bara ska visa utdrag används bara beskrivningarna, så då krävs denna inställning för att relaterade inlägg ska visas alls."
-
-#@ yarpp
-#: options-meta-boxes.php:221
-msgid "RSS display code example"
-msgstr "RSS-exempel"
-
-#@ yarpp
-#: options-meta-boxes.php:250
-msgid "Before / after (excerpt):"
-msgstr "Visa före / efter utdrag:"
-
-#@ yarpp
-#: options.php:279
-msgid "Update options"
-msgstr "Updatera inställningar "
-
-#@ yarpp
-#: options.php:280
-msgid "Do you really want to reset your configuration?"
-msgstr "Vill du verkligen nollställa inställningarna?"
-
-#@ yarpp
-#: options.php:280
-msgid "Reset options"
-msgstr "Nollställ inställningar"
-
-#@ yarpp
-#: template-builtin.php:35
-#, php-format
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f är det matchningsvärde som YARPP räknat ut mellan det aktuella inlägget och detta relaterade inlägg. Du ser värdet för att du är inloggad till WordPress som adminstratör. Det visas inte för vanliga besökare."
-
-#@ yarpp
-#: template-metabox.php:12
-msgid "These are the related entries for this entry. Updating this post may change these related posts."
-msgstr "Dessa är de relaterade inläggen för detta inlägg. Uppdaterar du detta inlägg kanske du får se andra relaterade inlägg."
-
-#@ yarpp
-#: template-metabox.php:25
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Huruvida alla dessa relaterade inlägg visas och hur de visas beror på dina visningsinställningar för YARPP."
-
-#@ yarpp
-#: includes.php:28
-#: includes.php:39
-#: template-metabox.php:27
+# @ yarpp
+#: class-core.php:71
+#: class-core.php:81
+#: class-core.php:267
+#: class-core.php:278
+msgid "Related posts:"
+msgstr "Relaterade inlägg"
+
+# @ yarpp
+#: class-core.php:73
+#: class-core.php:83
+#: class-core.php:269
+#: class-core.php:280
+#: template-metabox.php:30
 #: template-widget.php:13
 msgid "No related posts."
 msgstr "Inga relaterade inlägg."
 
-#@ yarpp
-#: includes.php:26
-#: includes.php:37
-msgid "Related posts:"
-msgstr "Relaterade inlägg"
+# @ yarpp
+#: class-core.php:565
+#: class-core.php:682
+#: options-meta-boxes.php:228
+#: options-meta-boxes.php:283
+#, php-format
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Relaterade inlägg tack vare <a href='%s'>Yet Another Related Posts Plugin</a>."
 
-#@ yarpp
-#: includes.php:169
-msgid "Settings"
-msgstr "Inställningar"
-
-#@ default
-#: includes.php:243
+# @ default
+#: class-widget.php:66
 msgid "Title:"
 msgstr "Rubrik:"
 
-#@ yarpp
-#: includes.php:385
-msgid "Related entries may be displayed once you save your entry"
-msgstr "Relaterade inlägg kan visas när du har sparat inlägget"
+# @ yarpp
+#: class-widget.php:72
+#: options-meta-boxes.php:17
+msgid "Display using a custom template file"
+msgstr "Visa med en speciell mall "
 
-#@ yarpp
-#: options-meta-boxes.php:124
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP begränsar listan med relaterade inlägg efter (1) ett maximalt antal och (2) ett <em>tröskelvärde för matchning</em>."
+# @ yarpp
+#: class-widget.php:73
+#: options-meta-boxes.php:196
+#: options-meta-boxes.php:257
+msgid "Template file:"
+msgstr "Malldokument:"
 
-#@ yarpp
-#: options-meta-boxes.php:161
-#: options-meta-boxes.php:228
+# @ yarpp
+#: class-widget.php:95
+#: options-meta-boxes.php:226
+#: options-meta-boxes.php:282
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Visa reklam för YARPP?"
+
+# @ yarpp
+#: options-meta-boxes.php:17
+#: options-meta-boxes.php:113
+#: options-meta-boxes.php:153
+#: options-meta-boxes.php:169
+#: options-meta-boxes.php:187
+#: options-meta-boxes.php:227
+#: options-meta-boxes.php:244
+#: options-meta-boxes.php:246
+#: options-meta-boxes.php:282
+msgid "more&gt;"
+msgstr "mer&gt;"
+
+# @ yarpp
+#: options-meta-boxes.php:17
 msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
 msgstr "Detta avancerade alternativ ger dig möjlighet att anpassa hur relaterade inlägg visas. Mallar (i mappen med ditt tema) ska skrivas i PHP."
 
-#@ yarpp
-#: options-meta-boxes.php:175
-#: options-meta-boxes.php:176
-#: options-meta-boxes.php:184
+# @ yarpp
+#: options-meta-boxes.php:47
+#: options-meta-boxes.php:59
+msgid "do not consider"
+msgstr "ta inte hänsyn till"
+
+# @ yarpp
+#: options-meta-boxes.php:48
+#: options-meta-boxes.php:60
+msgid "consider"
+msgstr "ta hänsyn till"
+
+# @ yarpp
+#: options-meta-boxes.php:49
+#: options-meta-boxes.php:61
+msgid "consider with extra weight"
+msgstr "ta hänsyn till och ge extra vikt åt"
+
+# @ yarpp
+#: options-meta-boxes.php:50
+#, php-format
+msgid "require at least one %s in common"
+msgstr "kräv minst en gemensam %s "
+
+# @ yarpp
+#: options-meta-boxes.php:51
+#, php-format
+msgid "require more than one %s in common"
+msgstr "kräv mer än en gemensam %s"
+
+# @ yarpp
+#: options-meta-boxes.php:68
+msgid "Order results:"
+msgstr "Sorteringsordning:"
+
+# @ yarpp
+#: options-meta-boxes.php:71
+msgid "score (high relevance to low)"
+msgstr "relevans (från hög till låg)"
+
+# @ yarpp
+#: options-meta-boxes.php:72
+msgid "score (low relevance to high)"
+msgstr "relevans (från låg till hög)"
+
+# @ yarpp
+#: options-meta-boxes.php:73
+msgid "date (new to old)"
+msgstr "ålder (ny till gammal)"
+
+# @ yarpp
+#: options-meta-boxes.php:74
+msgid "date (old to new)"
+msgstr "ålder (gammal till ny)"
+
+# @ yarpp
+#: options-meta-boxes.php:75
+msgid "title (alphabetical)"
+msgstr "rubrik (A-Ö)"
+
+# @ yarpp
+#: options-meta-boxes.php:76
+msgid "title (reverse alphabetical)"
+msgstr "rubrik (Ö-A)"
+
+# @ yarpp
+#: options-meta-boxes.php:109
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr "De inlägg och sidor som beaktas är de som finns i \"Din pool\"."
+
+# @ yarpp
+#: options-meta-boxes.php:113
+msgid "Post types considered:"
+msgstr "Inläggstyper som undersöks:"
+
+# @ yarpp
+#: options-meta-boxes.php:116
+#, php-format
+msgid "Disallow by %s:"
+msgstr "Uteslut efter %s:"
+
+# @ yarpp
+#: options-meta-boxes.php:118
+msgid "Show password protected posts?"
+msgstr "Visa inlägg som skyddas med lösenord?"
+
+# @ yarpp
+#: options-meta-boxes.php:129
+msgid "day(s)"
+msgstr "dag(ar)"
+
+# @ yarpp
+#: options-meta-boxes.php:130
+msgid "week(s)"
+msgstr "vecka (veckor)"
+
+# @ yarpp
+#: options-meta-boxes.php:131
+msgid "month(s)"
+msgstr "månad(er)"
+
+# @ yarpp
+#: options-meta-boxes.php:137
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr "Visa endast inlägg från de senaste NUMBER UNITS"
+
+# @ yarpp
+#: options-meta-boxes.php:147
+msgid "\"The Pool\""
+msgstr "\"Din pool\""
+
+# @ yarpp
+#: options-meta-boxes.php:153
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP begränsar listan med relaterade inlägg efter (1) ett maximalt antal och (2) ett <em>tröskelvärde för matchning</em>."
+
+# @ yarpp
+#: options-meta-boxes.php:153
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "Ju högre tröskelvärde, desto mer restriktivt bliir filtret, och du får färre relaterade poster. Förvalt värde är 5. Om du vill hitta ett lagom värde, ta en titt på vilka värden som visas för några relaterade poster. Genom att titta på vilka värden du har för de relaterade poster som hittas kan du enklare se om du behöver sänka eller höja värdet. Sänk det om du får för få relaterade poster, och höj det om du får för många."
+
+# @ yarpp
+#: options-meta-boxes.php:159
+msgid "Match threshold:"
+msgstr "Tröskelvärde:"
+
+# @ yarpp
+#: options-meta-boxes.php:160
+msgid "Titles: "
+msgstr "Rubriker:"
+
+# @ yarpp
+#: options-meta-boxes.php:162
+msgid "Bodies: "
+msgstr "Brödtext:"
+
+# @ yarpp
+#: options-meta-boxes.php:169
+msgid "Display results from all post types"
+msgstr "Visa resultat från alla inläggstyper"
+
+#: options-meta-boxes.php:169
+msgid "When \"display results from all post types\" is off, only posts will be displayed as related to a post, only pages will be displayed as related to a page, etc."
+msgstr "När \"Visa resultat från alla inläggstyper\" är avstängt, visas bara inlägg som relaterade till ett inlägg, och sidor som relaterade till en sida etc."
+
+# @ yarpp
+#: options-meta-boxes.php:170
+msgid "Show only previous posts?"
+msgstr "Visa endast poster som är äldre än den aktuella?"
+
+# @ yarpp
+#: options-meta-boxes.php:178
+msgid "\"Relatedness\" options"
+msgstr "Inställningar för \"relationsstyrka\"."
+
+# @ yarpp
+#: options-meta-boxes.php:187
+msgid "Automatically display related posts?"
+msgstr "Visa relaterade inlägg automatiskt?"
+
+# @ yarpp
+#: options-meta-boxes.php:187
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr "Om du aktiverar detta alternativ visas relaterade inlägg direkt efter innehållet på sidor med enstaka inlägg. Om du inte har aktiverat alternativet måste du manuellt infoga koden <code>related_posts()</code> eller någon av varianterna <code>related_pages()</code> eller <code>related_entries()</code> i ditt tema."
+
+# @ yarpp
+#: options-meta-boxes.php:188
+msgid "Website display code example"
+msgstr "Kodexempel för att visa relaterade inlägg"
+
+# @ yarpp
+#: options-meta-boxes.php:188
 #: options-meta-boxes.php:244
-#: options-meta-boxes.php:245
-#: options-meta-boxes.php:250
+msgid "(Update options to reload.)"
+msgstr "(Uppdatera inställningarna för att ladda om sidan)"
+
+# @ yarpp
+#: options-meta-boxes.php:190
+#: options-meta-boxes.php:249
+msgid "Maximum number of related posts:"
+msgstr "Maximalt antal relaterade inlägg som ska visas:"
+
+# @ yarpp
+#: options-meta-boxes.php:207
+#: options-meta-boxes.php:270
+msgid "Before / after related entries:"
+msgstr "Kod att infoga före / efter relaterade poster:"
+
+# @ yarpp
+#: options-meta-boxes.php:207
+#: options-meta-boxes.php:208
+#: options-meta-boxes.php:216
+#: options-meta-boxes.php:270
+#: options-meta-boxes.php:271
+#: options-meta-boxes.php:276
+msgid "For example:"
+msgstr "Till exempel:"
+
+# @ yarpp
+#: options-meta-boxes.php:207
+#: options-meta-boxes.php:208
+#: options-meta-boxes.php:216
+#: options-meta-boxes.php:270
+#: options-meta-boxes.php:271
+#: options-meta-boxes.php:276
 msgid " or "
 msgstr "eller"
 
-#@ yarpp
-#: options-meta-boxes.php:228
-msgid "NEW!"
-msgstr "NY!"
+# @ yarpp
+#: options-meta-boxes.php:208
+#: options-meta-boxes.php:271
+msgid "Before / after each related entry:"
+msgstr "Kod att infoga före / efter varje relaterat inlägg:"
 
-#@ yarpp
+# @ yarpp
+#: options-meta-boxes.php:210
+#: options-meta-boxes.php:273
+msgid "Show excerpt?"
+msgstr "Visa utdrag?"
+
+# @ yarpp
+#: options-meta-boxes.php:211
+#: options-meta-boxes.php:274
+msgid "Excerpt length (No. of words):"
+msgstr "Utdragets längd (antal ord):"
+
+# @ yarpp
+#: options-meta-boxes.php:215
+msgid "Before / after (Excerpt):"
+msgstr "Kod att infoga före / efter utdrag:"
+
+# @ yarpp
+#: options-meta-boxes.php:223
+#: options-meta-boxes.php:280
+msgid "Default display if no results:"
+msgstr "Visa detta om det inte finns några relaterade inlägg:"
+
+# @ yarpp
+#: options-meta-boxes.php:228
 #: options-meta-boxes.php:283
+#, php-format
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "Detta alternativ lägger till den här koden: %s. Prova med att aktivera det, uppdatera dina inställningar och se hur det ser ut i exemplet till höger. Dessa länkar och donationer uppskattas verkligen."
+
+# @ yarpp
+#: options-meta-boxes.php:235
+msgid "Display options <small>for your website</small>"
+msgstr "Visningsinställningar <small>för din webbplats</small>"
+
+# @ yarpp
+#: options-meta-boxes.php:244
+msgid "Display related posts in feeds?"
+msgstr "Visa relaterade inlägg i RSS-flöde?"
+
+# @ yarpp
+#: options-meta-boxes.php:244
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "Detta alternativ gör att relaterade inlägg redovisas efter varje post i ditt RSS- eller Atom-flöde. Du behöver inte ändra i någon mall för att det ska fungera."
+
+# @ yarpp
+#: options-meta-boxes.php:244
+msgid "RSS display code example"
+msgstr "RSS-exempel"
+
+# @ yarpp
+#: options-meta-boxes.php:246
+msgid "Display related posts in the descriptions?"
+msgstr "Visa relaterade inlägg i beskrivningsfälten?"
+
+# @ yarpp
+#: options-meta-boxes.php:246
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "Detta alternativ gör att relaterade inlägg visas i fälten för beskrivning, inte bara innehållet. Om du har ställt in att dina RSS-flöden bara ska visa utdrag används bara beskrivningarna, så då krävs denna inställning för att relaterade inlägg ska visas alls."
+
+# @ yarpp
+#: options-meta-boxes.php:276
+msgid "Before / after (excerpt):"
+msgstr "Visa före / efter utdrag:"
+
+# @ yarpp
+#: options-meta-boxes.php:290
+msgid "Display options <small>for RSS</small>"
+msgstr "Visningsinställningar <small>för RSS</small>"
+
+# @ yarpp
+#: options-meta-boxes.php:297
 msgid "YARPP Forum"
 msgstr "YARPP Forum"
 
-#@ yarpp
-#: options-meta-boxes.php:284
+# @ yarpp
+#: options-meta-boxes.php:298
 msgid "YARPP on Twitter"
 msgstr "YARPP på Twitter"
 
-#@ yarpp
-#: options-meta-boxes.php:285
+# @ yarpp
+#: options-meta-boxes.php:299
 msgid "YARPP on the Web"
 msgstr "YARPP på www"
 
-#@ yarpp
-#: options-meta-boxes.php:292
+#: options-meta-boxes.php:300
+msgid "Rate YARPP on WordPress.org"
+msgstr "Betygsätt YARPP på WordPress.org"
+
+# @ default
+# @ yarpp
+#: options-meta-boxes.php:301
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "Skänk pengar till mitcho (Michael Yoshitaka Erlewine) som tack för utvecklingen av detta tillägg via PayPal"
+
+# @ yarpp
+#: options-meta-boxes.php:336
 msgid "Contact YARPP"
 msgstr "Kontakta YARPP"
 
-#@ default
-#: options.php:42
+# @ default
+#: options.php:34
 #, php-format
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\">update automatically</a>."
 msgstr "Det finns en ny version av %1$s. <a href=\"%2$s\" class=\"thickbox\" title=\"%3$s\">Läs information om version %4$s</a> eller <a href=\"%5$s\">uppdatera automatiskt</a>."
 
-#@ yarpp
-#: options.php:86
+# @ yarpp
+#: options.php:38
+#, php-format
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Det finns en ny beta (%s) av Yet Another Related Posts Plugin. Du kan <a href=\"%s\">hämta den här</a> på egen risk."
+
+# @ yarpp
+#: options.php:46
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "MyISAM-kontrollen har åsidosatts. Du kan nu använda kriterierna \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\"."
+
+# @ yarpp
+#: options.php:54
+#, php-format
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPPs kriterier \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\" kräver att din <code>%s</code> tabell använder <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, men det verkar som om den använder <code>%s</code>. Därför är kriterierna inte åtkomliga."
+
+# @ yarpp
+#: options.php:56
+#, php-format
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "Vill du använda dessa funktioner måste du ändra tabellen <code>%s</code>, genom att utföra detta SQL-kommando mot din databas: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code>."
+
+# @ yarpp
+#: options.php:58
+#, php-format
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "Om du trots denna kontroll är säker på att tabellen <code>%s</code> använder MyISAM-formatet kan du klicka på denna magiska knapp:"
+
+# @ yarpp
+#: options.php:61
+msgid "Trust me. Let me use MyISAM features."
+msgstr "Lita på mig. Låt mig använda MyISAM-finesserna."
+
+# @ yarpp
+#: options.php:76
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Databasen för YARPP innehöll ett fel, men det har korrigerats nu."
+
+# @ yarpp
+#: options.php:78
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Databasen för YARPP innehåller ett fel som inte kunde korrigeras."
+
+# @ yarpp
+#: options.php:79
 #, php-format
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr "Vänligen prova med <a href=\"%s\" target=\"_blank\">manuell SQL</a>."
 
-#@ yarpp
-#: options.php:188
+# @ yarpp
+#: options.php:133
+msgid "Options saved!"
+msgstr "Inställningarna sparade!"
+
+# @ yarpp
+#: options.php:139
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "YARPP-inställningar"
+
+# @ yarpp
+#: options.php:147
 #, php-format
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
 msgstr "av <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
+
+#: options.php:176
+msgid "Save Changes"
+msgstr "Spara ändringar"
+
+# @ yarpp
+#: template-builtin.php:21
+#, php-format
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f är det matchningsvärde som YARPP räknat ut mellan det aktuella inlägget och detta relaterade inlägg. Du ser värdet för att du är inloggad till WordPress som adminstratör. Det visas inte för vanliga besökare."
+
+# @ yarpp
+#: template-metabox.php:12
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "Dessa är de relaterade inläggen för detta inlägg. Uppdaterar du detta inlägg kanske du får se andra relaterade inlägg."
+
+# @ yarpp
+#: template-metabox.php:28
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Huruvida alla dessa relaterade inlägg visas och hur de visas beror på dina visningsinställningar för YARPP."
 
