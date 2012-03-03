@@ -131,9 +131,7 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 = Custom displays and custom post type support =
 
-[slideshare id=11045241&doc=relate-120114145145-phpapp01]
-
-Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code.
+Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
 	yarpp_related(get_the_ID(), array(
 		// Pool options: these determine the "pool" of entities which are considered
