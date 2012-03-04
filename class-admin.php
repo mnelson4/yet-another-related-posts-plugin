@@ -234,7 +234,7 @@ jQuery(function () {
 			'domain' => isset($_REQUEST['domain']) ? $_REQUEST['domain'] : 'website'
 		);
 		if ( $this->core->get_option('cross_relate') )
-			$args['post_type'] = $yarpp->get_post_types();
+			$args['post_type'] = $this->core->get_post_types();
 			
 		$return = $this->core->display_related(absint($_REQUEST['ID']), $args, false);
 		echo $return;
