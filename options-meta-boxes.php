@@ -110,7 +110,7 @@ if ( count($exclude_term_ids) ) {
 
 	<table class="form-table" style="margin-top: 0; clear:none;">
 		<tbody>
-		<tr><th><?php _e('Post types considered:', 'yarpp'); ?></th><td><?php echo implode(', ', $yarpp->get_post_types('label')); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other-notes'><?php _e('more&gt;','yarpp');?></a></td></tr>
+		<tr><th><?php _e('Post types considered:', 'yarpp'); ?></th><td><?php echo implode(', ', $yarpp->get_post_types( 'label' )); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes'><?php _e('more&gt;','yarpp');?></a></td></tr>
 <?php
 	foreach ($yarpp->get_taxonomies() as $taxonomy) {
 		$this->exclude($taxonomy->name, sprintf(__('Disallow by %s:','yarpp'), $taxonomy->labels->singular_name));
@@ -197,6 +197,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 				<td>
 					<select name="template_file" id="template_file">
 						<?php 
+						$chosen_template = yarpp_get_option('template');
 						foreach ($yarpp->admin->get_templates() as $template): ?>
 						<option value='<?php echo esc_attr($template)?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template)?></option>
 						<?php endforeach; ?>
