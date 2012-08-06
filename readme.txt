@@ -5,8 +5,8 @@ Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
-Requires at least: 3.0
-Tested up to: 3.4
+Requires at least: 3.1
+Tested up to: 3.4.1
 Stable tag: 3.5.1
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
