@@ -6,7 +6,7 @@ Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.1
-Tested up to: 3.4
+Tested up to: 3.4.1
 Stable tag: 3.5.1
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
@@ -211,6 +211,7 @@ YARPP is currently localized in the following languages:
 * Brazilian Portuguese (`pt_BR`) by Rafael Fischmann of [macmagazine.br](http://macmagazine.com.br/)
 * Romanian (`ro_RO`) by [Uhren Shop](http://uhrenstore.de/)
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
+* Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/) 
 * Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
@@ -222,7 +223,6 @@ YARPP is currently localized in the following languages:
 <!--We already have localizers lined up for the following languages:
 * Danish
 * Catalan
-* Hungarian
 * Thai
 * Bhasa Indonesian
 -->
@@ -233,7 +233,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.5.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-351-error-call-to-a-member-function): reference to `get_post_types()` failed in ajax display
-* Added Czech (`cs_CZ`) localization by [Zdenek Hejl](http://www.zdenek-hejl.com)
+* Localizations:
+	* Added Czech (`cs_CZ`) localization by [Zdenek Hejl](http://www.zdenek-hejl.com)
+	* Added Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/)
 * Clarified readme to require WordPress 3.1
 = 3.5.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-catchable-fatal-error-object-of-class-stdclass-could-not-be-converted-to-string): change `$yarpp->get_post_types()` to return array of names by default
