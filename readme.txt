@@ -232,14 +232,15 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.5.2 =
-* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): critical bugfix to an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
+* [Critical Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): fix an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-351-error-call-to-a-member-function): reference to `get_post_types()` failed in ajax display
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-warning-invalid-argument-supplied-for-foreach): sometimes a warning was printed on upgrade from YARPP < 3.4.4
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-php-warning): fixed PHP warning when no taxonomies are considered
 * Localizations:
 	* Added Czech (`cs_CZ`) localization by [Zdenek Hejl](http://www.zdenek-hejl.com)
 	* Added Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/)
 * Clarified readme to require WordPress 3.1
 * PHP 5.3+: replaced an instance of `ereg_replace`
-* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-warning-invalid-argument-supplied-for-foreach): sometimes a warning was printed on upgrade from YARPP < 3.4.4
 
 = 3.5.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-catchable-fatal-error-object-of-class-stdclass-could-not-be-converted-to-string): change `$yarpp->get_post_types()` to return array of names by default
