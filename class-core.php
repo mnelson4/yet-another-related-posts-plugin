@@ -405,9 +405,11 @@ class YARPP {
 
 		// consolidate excludes, using tt_ids.
 		$exclude_tt_ids = array();
-		foreach ($options['exclude'] as $tax => $term_ids) {
-			if ( !empty($term_ids) )
-				$exclude_tt_ids = array_merge( wp_list_pluck(get_terms( $tax, array('include' => $term_ids) ), 'term_taxonomy_id'), $exclude_tt_ids );
+		if ( isset($options['exclude']) && is_array($options['exclude']) ) {
+			foreach ($options['exclude'] as $tax => $term_ids) {
+				if ( !empty($term_ids) )
+					$exclude_tt_ids = array_merge( wp_list_pluck(get_terms( $tax, array('include' => $term_ids) ), 'term_taxonomy_id'), $exclude_tt_ids );
+			}
 		}
 		$options['exclude'] = join(',', $exclude_tt_ids);
 
