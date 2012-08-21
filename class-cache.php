@@ -209,10 +209,10 @@ abstract class YARPP_Cache {
 	
 		$newsql .= " order by score desc limit $limit";
 	
-		if ( isset($args['post_type']) && is_array($args['post_type']) )
-			$post_types = $args['post_type'];
+		if ( isset($args['post_type']) )
+			$post_types = (array) $args['post_type'];
 		else
-			$post_types = $this->core->get_post_types( 'name' );
+			$post_types = $this->core->get_post_types();
 
 		$queries = array();
 		foreach ( $post_types as $post_type ) {

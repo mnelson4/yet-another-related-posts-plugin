@@ -239,7 +239,9 @@ class YARPP {
 			$this->upgrade_3_4_4b3();
 		if ( $last_version && version_compare('3.4.4b4', $last_version) > 0 )
 			$this->upgrade_3_4_4b4();
-			
+		if ( $last_version && version_compare('3.5.2b2', $last_version) > 0 )
+			$this->upgrade_3_5_2b2();
+		
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
 		if ( $last_version && version_compare('3.4.1b5', $last_version) > 0 )
@@ -433,16 +435,31 @@ class YARPP {
 		update_option( 'yarpp', $options );
 	}
 	
+	function upgrade_3_5_2b2() {
+		// fixing the effects of a previous bug affecting non-MyISAM users
+		if ( is_null( yarpp_get_option('weight') ) ||
+			!is_array( yarpp_get_option('weight') ) ) {
+			$weight = $this->default_options['weight'];
+			// if we're still not using MyISAM
+			if ( !yarpp_get_option('myisam_override') && 
+				$this->myisam_check() !== true ) {
+				unset( $weight['title'] );
+				unset( $weight['body'] );
+			}
+			yarpp_set_option(array('weight' => $weight));
+		}
+	}
+	
 	private $post_types = null;
-	function get_post_types( $field = false ) {
+	function get_post_types( $field = 'name' ) {
 		if ( is_null($this->post_types) ) {
 			$this->post_types = get_post_types(array(), 'objects');
 			$this->post_types = array_filter( $this->post_types, array($this, 'post_type_filter') );
 		}
 		
-		if ( $field )
-			return wp_list_pluck( $this->post_types, $field );
-		return $this->post_types;
+		if ( 'objects' == $field )
+			return $this->post_types;
+		return wp_list_pluck( $this->post_types, $field );
 	}
 	
 	private function post_type_filter( $post_type ) {
@@ -466,7 +483,7 @@ class YARPP {
 	}
 	
 	private function taxonomy_filter( $taxonomy ) {
-		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types( 'name' ) )) )
+		if ( !count(array_intersect( $taxonomy->object_type, $this->get_post_types() )) )
 			return false;
 
 		// if yarpp_support is set, follow that; otherwise include if show_ui is true
@@ -491,7 +508,8 @@ class YARPP {
 	
 		$this->upgrade_check();
 
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
+			get_the_ID() : absint($reference_ID);
 
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -529,7 +547,7 @@ class YARPP {
 				'orderby' => $orders[0],
 				'order' => $orders[1],
 				'showposts' => $limit,
-				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
+				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 			));
 		}
 		$this->prep_query( $current_query->is_feed );
@@ -600,7 +618,7 @@ class YARPP {
 			'orderby' => $orders[0],
 			'order' => $orders[1],
 			'showposts' => $limit,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 		));
 		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 	
@@ -632,7 +650,7 @@ class YARPP {
 		$related_query->query(array(
 			'p' => $reference_ID,
 			'showposts' => 1,
-			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types( 'name' ) )
+			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 		));
 		$return = $related_query->have_posts();
 		unset($related_query);
@@ -740,14 +758,15 @@ class YARPP {
 	 */
 	 
 	function the_content($content) {
-		global $post;
-
 		if (is_feed())
 			return $this->the_content_rss($content);
 	
-		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if ( $this->get_option('cross_relate') )
-			$type = array('post','page');
+			$type = $this->get_post_types();
+		else if ( 'page' == get_post_type() )
+			$type = array( 'page' );
+		else
+			$type = array( 'post' );
 	
 		if ( $this->get_option('auto_display') && is_single() )
 			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'website'), false);
@@ -756,11 +775,12 @@ class YARPP {
 	}
 	
 	function the_content_rss($content) {
-		global $post;
-	
-		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if ( $this->get_option('cross_relate') )
-			$type = array('post','page');
+			$type = $this->get_post_types();
+		else if ( 'page' == get_post_type() )
+			$type = array( 'page' );
+		else
+			$type = array( 'post' );
 	
 		if ( $this->get_option('rss_display') )
 			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false);
@@ -769,11 +789,12 @@ class YARPP {
 	}
 	
 	function the_excerpt_rss($content) {
-		global $post;
-
-		$type = ($post->post_type == 'page' ? array('page') : array('post'));
 		if ( $this->get_option('cross_relate') )
-			$type = array('post','page');
+			$type = $this->get_post_types();
+		else if ( 'page' == get_post_type() )
+			$type = array( 'page' );
+		else
+			$type = array( 'post' );
 	
 		if ( $this->get_option('rss_excerpt_display') && $this->get_option('rss_display') )
 			return $content . clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
