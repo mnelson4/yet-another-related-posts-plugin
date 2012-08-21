@@ -239,7 +239,9 @@ class YARPP {
 			$this->upgrade_3_4_4b3();
 		if ( $last_version && version_compare('3.4.4b4', $last_version) > 0 )
 			$this->upgrade_3_4_4b4();
-			
+		if ( $last_version && version_compare('3.5.2b2', $last_version) > 0 )
+			$this->upgrade_3_5_2b2();
+		
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
 		if ( $last_version && version_compare('3.4.1b5', $last_version) > 0 )
@@ -431,6 +433,21 @@ class YARPP {
 		unset( $options['recent_number'] );
 		unset( $options['recent_units'] );
 		update_option( 'yarpp', $options );
+	}
+	
+	function upgrade_3_5_2b2() {
+		// fixing the effects of a previous bug affecting non-MyISAM users
+		if ( is_null( yarpp_get_option('weight') ) ||
+			!is_array( yarpp_get_option('weight') ) ) {
+			$weight = $this->default_options['weight'];
+			// if we're still not using MyISAM
+			if ( !yarpp_get_option('myisam_override') && 
+				$this->myisam_check() !== true ) {
+				unset( $weight['title'] );
+				unset( $weight['body'] );
+			}
+			yarpp_set_option(array('weight' => $weight));
+		}
 	}
 	
 	private $post_types = null;

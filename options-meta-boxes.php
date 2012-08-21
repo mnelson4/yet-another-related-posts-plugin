@@ -295,7 +295,7 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 		$pluginurl = plugin_dir_url(__FILE__);
 		?>
 		<ul class='yarpp_contacts'>
-		<li  style="background: url(<?php echo $pluginurl . 'wordpress.png'; ?>) no-repeat left bottom;"><a href="http://wordpress.org/tags/yet-another-related-posts-plugin" target="_blank"><?php _e('YARPP Forum', 'yarpp'); ?></a></li>
+		<li  style="background: url(<?php echo $pluginurl . 'wordpress.png'; ?>) no-repeat left bottom;"><a href="http://wordpress.org/support/plugin/yet-another-related-posts-plugin" target="_blank"><?php _e('YARPP Forum', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'twitter.png' ; ?>) no-repeat left bottom;"><a href="http://twitter.com/yarpp" target="_blank"><?php _e('YARPP on Twitter', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'plugin.png'; ?>) no-repeat left bottom;"><a href="http://yarpp.org" target="_blank"><?php _e('YARPP on the Web', 'yarpp'); ?></a></li>
 		<li style="background: url(<?php echo $pluginurl . 'star.png'; ?>) no-repeat 3px 2px;"><a href="http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/" target="_blank"><?php _e('Rate YARPP on WordPress.org', 'yarpp'); ?></a></li>

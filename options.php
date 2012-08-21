@@ -62,7 +62,7 @@ if ( !yarpp_get_option('myisam_override') ) {
 		."'></input></form>"
 		."</div>";
 
-		$weight = yarpp_set_option('weight');
+		$weight = yarpp_get_option('weight');
 		unset($weight['title']);
 		unset($weight['body']);
 		yarpp_set_option(array('weight' => $weight));

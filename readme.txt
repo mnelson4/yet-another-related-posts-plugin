@@ -28,7 +28,7 @@ This plugin requires PHP 5 and MySQL 4.1 or greater.
 
 = A note on support (June 2010) =
 
-I have begun instituting a stricter policy of not responding to support inquiries via email, instead directing senders to the appropriate WordPress.org forum, [here](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform).
+I have begun instituting a stricter policy of not responding to support inquiries via email, instead directing senders to the appropriate WordPress.org forum, [here](http://wordpress.org/support/plugin/yet-another-related-posts-plugin).
 
 I try to respond to inquiries on the forums on a regular basis and hope to build a community of users who can learn from each other's questions and experiences and can support one another. I ask for your understanding on this matter.
 
@@ -232,6 +232,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.5.2 =
+* [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): critical bugfix to an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-351-error-call-to-a-member-function): reference to `get_post_types()` failed in ajax display
 * Localizations:
 	* Added Czech (`cs_CZ`) localization by [Zdenek Hejl](http://www.zdenek-hejl.com)
