@@ -253,7 +253,7 @@ jQuery(function () {
 		);
 			
 		$return = $this->core->display_demo_related($args, false);
-		echo ereg_replace("[\n\r]",'',nl2br(htmlspecialchars($return)));
+		echo preg_replace("/[\n\r]/",'',nl2br(htmlspecialchars($return)));
 		exit;
 	}
 }
