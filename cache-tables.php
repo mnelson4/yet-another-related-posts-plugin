@@ -178,15 +178,20 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function clear($reference_ID) {
 		global $wpdb;
-		if (is_array($reference_ID) && count($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
-		} else if (is_int($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = {$reference_ID}");
-		}
+
+		// everything is an array now:		
+		if ( !is_array($reference_ID) )
+			$reference_ID = array( $reference_ID );
+		
+		if ( !count($reference_ID) )
+			return;
+		
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
 		// @since 3.5.2: clear is_cached_* values as well
-		wp_cache_delete( 'is_cached_' . $reference_ID, 'yarpp' );
+		foreach ( $reference_ID as $id ) {
+			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
+		}
 	}
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
