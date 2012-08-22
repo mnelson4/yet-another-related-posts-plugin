@@ -58,6 +58,10 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			  ' ADD PRIMARY KEY ( `reference_ID` , `ID` ),' .
 			  ' ADD INDEX (`score`), ADD INDEX (`ID`)');
 		}
+		if ( $last_version && version_compare('3.5.2b3', $last_version) > 0 ) {
+			// flush object cache, as bad is_cached_* values were stored before
+			wp_cache_flush();
+		}
 	}
 
 	public function cache_status() {
