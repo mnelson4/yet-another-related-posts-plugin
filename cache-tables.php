@@ -181,6 +181,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
 			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = {$reference_ID}");
 		}
+		// @since 3.5.2: clear is_cached_* values as well
+		wp_cache_delete( 'is_cached_' . $reference_ID, 'yarpp' );
 	}
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
@@ -231,6 +233,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "`");
+		// @since 3.5.2: clear object cache, used for is_cached_* values
+		wp_cache_flush();
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
