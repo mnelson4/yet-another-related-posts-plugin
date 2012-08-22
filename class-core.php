@@ -243,6 +243,8 @@ class YARPP {
 			$this->upgrade_3_4_4b4();
 		if ( $last_version && version_compare('3.5.2b2', $last_version) > 0 )
 			$this->upgrade_3_5_2b2();
+		if ( $last_version && version_compare('3.5.2b3', $last_version) > 0 )
+			$this->upgrade_3_5_2b3();
 		
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
@@ -452,6 +454,11 @@ class YARPP {
 			}
 			yarpp_set_option(array('weight' => $weight));
 		}
+	}
+	
+	function upgrade_3_5_2b3() {
+		// flush object cache, as bad is_cached_* values were stored before
+		wp_cache_flush();
 	}
 	
 	private $post_types = null;
