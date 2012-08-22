@@ -120,18 +120,20 @@ class YARPP {
 		}
 	
 		$new_options = array_merge( $current_options, $options );
+		update_option( 'yarpp', $new_options );
 	
 		// new in 3.1: clear cache when updating certain settings.
-		$clear_cache_options = array( 'show_pass_post', 'recent', 'threshold' );
-		$new_options_which_require_flush = array_intersect( array_keys( array_diff_assoc($options, $current_options) ), $clear_cache_options );
+		$clear_cache_options = array( 'show_pass_post' => 1, 'recent' => 1, 'threshold' => 1 );
+
+		$relevant_options = array_intersect_key( $options, $clear_cache_options );
+		$relevant_current_options = array_intersect_key( $current_options, $clear_cache_options );
+		$new_options_which_require_flush = array_diff_assoc($relevant_options, $relevant_current_options);
 		if ( count($new_options_which_require_flush) ||
 			( $new_options['limit'] > $current_options['limit'] ) ||
 			( $new_options['weight'] != $current_options['weight'] ) ||
 			( $new_options['exclude'] != $current_options['exclude'] ) ||
 			( $new_options['require_tax'] != $current_options['require_tax'] ) )
 			$this->cache->flush();
-	
-		update_option( 'yarpp', $new_options );
 	}
 	
 	// 3.4b8: $option can be a path, of the query_str variety, i.e. "option[suboption][subsuboption]"
