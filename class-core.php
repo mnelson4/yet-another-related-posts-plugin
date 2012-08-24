@@ -41,7 +41,7 @@ class YARPP {
 
 		// automatic display hooks:
 		add_filter( 'the_content', array( $this, 'the_content' ), 1200 );
-		add_filter( 'the_content_rss', array( $this, 'the_content_rss' ), 600 );
+		add_filter( 'the_content_feed', array( $this, 'the_content_feed' ), 600 );
 		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 600 );
 
 		if ( isset($_REQUEST['yarpp_debug']) )
@@ -706,7 +706,7 @@ class YARPP {
 	}
 	
 	public function parse_args( $args, $options ) {
-		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order' );
+		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order', 'promote_yarpp' );
 
 		$r = array();
 		foreach ( $options as $option ) {
@@ -762,8 +762,10 @@ class YARPP {
 	 */
 	 
 	function the_content($content) {
-		if (is_feed())
-			return $this->the_content_rss($content);
+		if ( is_feed() ||
+		     !$this->get_option('auto_display') || 
+		     !is_singular(array('post')) )
+			return $content;			
 	
 		if ( $this->get_option('cross_relate') )
 			$type = $this->get_post_types();
@@ -772,13 +774,13 @@ class YARPP {
 		else
 			$type = array( 'post' );
 	
-		if ( $this->get_option('auto_display') && is_single() )
-			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'website'), false);
-		else
-			return $content;
+		return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'website'), false);
 	}
 	
-	function the_content_rss($content) {
+	function the_content_feed($content) {
+		if ( !$this->get_option('rss_display') )
+			return $content;
+
 		if ( $this->get_option('cross_relate') )
 			$type = $this->get_post_types();
 		else if ( 'page' == get_post_type() )
@@ -786,13 +788,14 @@ class YARPP {
 		else
 			$type = array( 'post' );
 	
-		if ( $this->get_option('rss_display') )
-			return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false);
-		else
-			return $content;
+		return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false);
 	}
 	
 	function the_excerpt_rss($content) {
+		if ( !$this->get_option('rss_excerpt_display') || 
+		     !$this->get_option('rss_display') )
+			return $content;
+
 		if ( $this->get_option('cross_relate') )
 			$type = $this->get_post_types();
 		else if ( 'page' == get_post_type() )
@@ -800,10 +803,7 @@ class YARPP {
 		else
 			$type = array( 'post' );
 	
-		if ( $this->get_option('rss_excerpt_display') && $this->get_option('rss_display') )
-			return $content . $this->clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
-		else
-			return $content;
+		return $content . $this->clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
 	}
 	
 	/*
