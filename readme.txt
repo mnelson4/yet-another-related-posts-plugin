@@ -238,12 +238,14 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Localizations:
 	* Added Czech (`cs_CZ`) localization by [Zdenek Hejl](http://www.zdenek-hejl.com)
 	* Added Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/)
+	* Fixed bug in Dutch localization
 * Clarified readme to require WordPress 3.1
 * Code cleanup:
 	* PHP 5.3+: replaced an instance of `ereg_replace`
 	* Removed warning on settings save
 	* Sometimes [a warning]((http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-warning-invalid-argument-supplied-for-foreach)) was printed on upgrade from YARPP < 3.4.4
 	* Fixed [PHP warning](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-php-warning) when no taxonomies are considered
+	* No longer using `clear_pre` function which has been deprecated since WordPress 3.4.
 
 = 3.5.1 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-catchable-fatal-error-object-of-class-stdclass-could-not-be-converted-to-string): change `$yarpp->get_post_types()` to return array of names by default
