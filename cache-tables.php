@@ -58,6 +58,10 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			  ' ADD PRIMARY KEY ( `reference_ID` , `ID` ),' .
 			  ' ADD INDEX (`score`), ADD INDEX (`ID`)');
 		}
+		if ( $last_version && version_compare('3.5.2b3', $last_version) > 0 ) {
+			// flush object cache, as bad is_cached_* values were stored before
+			wp_cache_flush();
+		}
 	}
 
 	public function cache_status() {
@@ -174,12 +178,19 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function clear($reference_ID) {
 		global $wpdb;
-		if (is_array($reference_ID) && count($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
-		} else if (is_int($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = {$reference_ID}");
+
+		// everything is an array now:		
+		if ( !is_array($reference_ID) )
+			$reference_ID = array( $reference_ID );
+		
+		if ( !count($reference_ID) )
+			return;
+		
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
+		// @since 3.5.2: clear is_cached_* values as well
+		foreach ( $reference_ID as $id ) {
+			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
 		}
 	}
 
@@ -231,6 +242,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "`");
+		// @since 3.5.2: clear object cache, used for is_cached_* values
+		wp_cache_flush();
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
