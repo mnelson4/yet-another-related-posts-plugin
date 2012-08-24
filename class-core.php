@@ -801,7 +801,7 @@ class YARPP {
 			$type = array( 'post' );
 	
 		if ( $this->get_option('rss_excerpt_display') && $this->get_option('rss_display') )
-			return $content . clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
+			return $content . $this->clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
 		else
 			return $content;
 	}
@@ -823,5 +823,13 @@ class YARPP {
 			set_transient('yarpp_version_info', $result, 60*60*12);
 		}
 		return $result;
+	}
+	
+	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
+	function clean_pre( $text ) {
+		$text = str_replace(array('<br />', '<br/>', '<br>'), array('', '', ''), $text);
+		$text = str_replace('<p>', "\n", $text);
+		$text = str_replace('</p>', '', $text);
+		return $text;
 	}
 }
