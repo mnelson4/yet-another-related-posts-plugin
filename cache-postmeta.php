@@ -139,14 +139,14 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 		return YARPP_RELATED;
 	}
 
-	public function clear($reference_ID) {
-		if (is_int($reference_ID))
-			$reference_ID = array($reference_ID);
-		// make sure that we have a non-trivial array
-		if (!is_array($reference_ID) || !count($reference_ID))
+	public function clear( $reference_IDs ) {
+		$reference_IDs = wp_parse_id_list( $reference_IDs );
+	
+		if ( !count($reference_ID) )
 			return;
+		
 		// clear each cache
-		foreach($reference_ID as $id) {
+		foreach( $reference_IDs as $id ) {
 			delete_post_meta( $id, YARPP_POSTMETA_RELATED_KEY );
 			delete_post_meta( $id, YARPP_POSTMETA_KEYWORDS_KEY );
 		}

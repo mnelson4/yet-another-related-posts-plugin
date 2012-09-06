@@ -77,7 +77,7 @@ abstract class YARPP_Cache {
 	 * POST STATUS INTERACTIONS
 	 */
 	
-	function save_post($post_ID) {
+	function save_post( $post_ID, $post ) {
 		global $wpdb;
 	
 		// @since 3.2: don't compute cache during import
@@ -91,18 +91,18 @@ abstract class YARPP_Cache {
 	
 	// Clear the cache for this entry and for all posts which are "related" to it.
 	// New in 3.2: This is called when a post is deleted.
-	function delete_post($post_ID) {
+	function delete_post( $post_ID ) {
 		// Clear the cache for this post.
-		$this->clear($post_ID);
+		$this->clear((int) $post_ID);
 	
 		// Find all "peers" which list this post as a related post.
-		$peers = $this->related(null, $post_ID);
+		$peers = $this->related(null, (int) $post_ID);
 		// Clear the peers' caches.
 		$this->clear($peers);
 	}
 	
 	// New in 3.2.1: handle various post_status transitions
-	function transition_post_status($new_status, $old_status, $post) {
+	function transition_post_status( $new_status, $old_status, $post ) {
 		switch ($new_status) {
 			case "draft":
 				$this->delete_post($post->ID);
@@ -115,7 +115,7 @@ abstract class YARPP_Cache {
 		}
 	}
 	
-	function set_score_override_flag($q) {
+	function set_score_override_flag( $q ) {
 		if ( $this->is_yarpp_time() ) {
 			$this->score_override = ($q->query_vars['orderby'] == 'score');
 	
@@ -166,7 +166,7 @@ abstract class YARPP_Cache {
 			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". absint($weight['title']);
 	
 		// Build tax criteria query parts based on the weights
-		foreach ( $weight['tax'] as $tax => $weight ) {
+		foreach ( (array) $weight['tax'] as $tax => $weight ) {
 			$newsql .= " + " . $this->tax_criteria($reference_ID, $tax) . " * " . intval($weight);
 		}
 	
@@ -175,7 +175,7 @@ abstract class YARPP_Cache {
 		$newsql .= "\n from $wpdb->posts \n";
 	
 		$exclude_tt_ids = wp_parse_id_list( $exclude );
-		if ( count($exclude_tt_ids) || count($weight['tax']) || count($require_tax) ) {
+		if ( count($exclude_tt_ids) || count((array) $weight['tax']) || count($require_tax) ) {
 			$newsql .= "left join $wpdb->term_relationships as terms on ( terms.object_id = $wpdb->posts.ID ) \n";
 		}
 	
@@ -203,16 +203,16 @@ abstract class YARPP_Cache {
 			$newsql .= " and bit_or(terms.term_taxonomy_id in (" . join(',', $exclude_tt_ids) . ")) = 0";
 		}
 	
-		foreach ( $require_tax as $tax => $number ) {
+		foreach ( (array) $require_tax as $tax => $number ) {
 			$newsql .= ' and ' . $this->tax_criteria($reference_ID, $tax) . ' >= ' . intval($number);
 		}
 	
 		$newsql .= " order by score desc limit $limit";
 	
-		if ( isset($args['post_type']) && is_array($args['post_type']) )
-			$post_types = $args['post_type'];
+		if ( isset($args['post_type']) )
+			$post_types = (array) $args['post_type'];
 		else
-			$post_types = $this->core->get_post_types( 'name' );
+			$post_types = $this->core->get_post_types();
 
 		$queries = array();
 		foreach ( $post_types as $post_type ) {

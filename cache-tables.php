@@ -28,13 +28,20 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function setup() {
 		global $wpdb;
+
+		$charset_collate = '';
+		if ( ! empty( $wpdb->charset ) )
+			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+		if ( ! empty( $wpdb->collate ) )
+			$charset_collate .= " COLLATE $wpdb->collate";
+
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`body` text NOT NULL,
 			`title` text NOT NULL,
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY  (`ID`)
-			) ENGINE=MyISAM COMMENT='YARPP''s keyword cache table';");
+			) $charset_collate;");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
 			`reference_ID` bigint(20) unsigned NOT NULL default '0',
 			`ID` bigint(20) unsigned NOT NULL default '0',
@@ -42,7 +49,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY ( `reference_ID` , `ID` ),
 			INDEX (`score`), INDEX (`ID`)
-			) ENGINE=MyISAM;");
+			) $charset_collate;");
 	}
 	
 	public function upgrade($last_version) {
@@ -57,6 +64,10 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			  ' DROP PRIMARY KEY ,' .
 			  ' ADD PRIMARY KEY ( `reference_ID` , `ID` ),' .
 			  ' ADD INDEX (`score`), ADD INDEX (`ID`)');
+		}
+		if ( $last_version && version_compare('3.5.2b3', $last_version) > 0 ) {
+			// flush object cache, as bad is_cached_* values were stored before
+			wp_cache_flush();
 		}
 	}
 
@@ -172,15 +183,19 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		return $result;
 	}
 
-	public function clear($reference_ID) {
+	public function clear( $reference_IDs ) {
 		global $wpdb;
-		if (is_array($reference_ID) && count($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
-		} else if (is_int($reference_ID)) {
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = {$reference_ID}");
-			$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = {$reference_ID}");
-		}
+
+		$reference_IDs = wp_parse_id_list( $reference_ID );
+		
+		if ( !count($reference_IDs) )
+			return;
+		
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_IDs).")");
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_IDs).")");
+		// @since 3.5.2: clear is_cached_* values as well
+		foreach ( $reference_IDs as $id )
+			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
 	}
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
@@ -231,6 +246,8 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "`");
+		// @since 3.5.2: clear object cache, used for is_cached_* values
+		wp_cache_flush();
 	}
 
 	public function related($reference_ID = null, $related_ID = null) {
