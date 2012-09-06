@@ -231,6 +231,12 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.5.3 =
+
+* Ensure that `save_post` and `delete_post` hooks receive relevant post ID information
+* Code cleanup:
+	* [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-latin1-instead-of-utf-8?replies=3): tables should be created using WordPress charset settings
+
 = 3.5.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): fix an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
 * Fixed a bug where related posts would not be recomputed on post update, on environments using the `table` YARPP cache method and a persistent object caching system, like W3 Total Cache or memcached

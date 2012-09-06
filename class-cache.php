@@ -77,7 +77,7 @@ abstract class YARPP_Cache {
 	 * POST STATUS INTERACTIONS
 	 */
 	
-	function save_post($post_ID) {
+	function save_post( $post_ID, $post ) {
 		global $wpdb;
 	
 		// @since 3.2: don't compute cache during import
@@ -91,18 +91,18 @@ abstract class YARPP_Cache {
 	
 	// Clear the cache for this entry and for all posts which are "related" to it.
 	// New in 3.2: This is called when a post is deleted.
-	function delete_post($post_ID) {
+	function delete_post( $post_ID ) {
 		// Clear the cache for this post.
-		$this->clear($post_ID);
+		$this->clear((int) $post_ID);
 	
 		// Find all "peers" which list this post as a related post.
-		$peers = $this->related(null, $post_ID);
+		$peers = $this->related(null, (int) $post_ID);
 		// Clear the peers' caches.
 		$this->clear($peers);
 	}
 	
 	// New in 3.2.1: handle various post_status transitions
-	function transition_post_status($new_status, $old_status, $post) {
+	function transition_post_status( $new_status, $old_status, $post ) {
 		switch ($new_status) {
 			case "draft":
 				$this->delete_post($post->ID);
@@ -115,7 +115,7 @@ abstract class YARPP_Cache {
 		}
 	}
 	
-	function set_score_override_flag($q) {
+	function set_score_override_flag( $q ) {
 		if ( $this->is_yarpp_time() ) {
 			$this->score_override = ($q->query_vars['orderby'] == 'score');
 	

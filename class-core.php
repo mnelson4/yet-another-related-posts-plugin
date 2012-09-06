@@ -33,9 +33,9 @@ class YARPP {
 		register_activation_hook( __FILE__, array($this, 'activate') );
 		
 		// update cache on save
-		add_action( 'save_post', array($this->cache, 'save_post') );
+		add_action( 'save_post', array($this->cache, 'save_post'), 10, 2 );
 		// new in 3.2: update cache on delete
-		add_action( 'delete_post', array($this->cache, 'delete_post') );
+		add_action( 'delete_post', array($this->cache, 'delete_post'), 10, 1 );
 		// new in 3.2.1: handle post_status transitions
 		add_action( 'transition_post_status', array($this->cache, 'transition_post_status'), 10, 3);
 

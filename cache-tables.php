@@ -28,13 +28,20 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function setup() {
 		global $wpdb;
+
+		$charset_collate = '';
+		if ( ! empty( $wpdb->charset ) )
+			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+		if ( ! empty( $wpdb->collate ) )
+			$charset_collate .= " COLLATE $wpdb->collate";
+
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
 			`ID` bigint(20) unsigned NOT NULL default '0',
 			`body` text NOT NULL,
 			`title` text NOT NULL,
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY  (`ID`)
-			) ENGINE=MyISAM COMMENT='YARPP''s keyword cache table';");
+			) $charset_collate;");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
 			`reference_ID` bigint(20) unsigned NOT NULL default '0',
 			`ID` bigint(20) unsigned NOT NULL default '0',
@@ -42,7 +49,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY ( `reference_ID` , `ID` ),
 			INDEX (`score`), INDEX (`ID`)
-			) ENGINE=MyISAM;");
+			) $charset_collate;");
 	}
 	
 	public function upgrade($last_version) {
@@ -176,22 +183,19 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		return $result;
 	}
 
-	public function clear($reference_ID) {
+	public function clear( $reference_IDs ) {
 		global $wpdb;
 
-		// everything is an array now:		
-		if ( !is_array($reference_ID) )
-			$reference_ID = array( $reference_ID );
+		$reference_IDs = wp_parse_id_list( $reference_ID );
 		
-		if ( !count($reference_ID) )
+		if ( !count($reference_IDs) )
 			return;
 		
-		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_ID).")");
-		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_ID).")");
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_IDs).")");
+		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_IDs).")");
 		// @since 3.5.2: clear is_cached_* values as well
-		foreach ( $reference_ID as $id ) {
+		foreach ( $reference_IDs as $id )
 			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
-		}
 	}
 
 	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
