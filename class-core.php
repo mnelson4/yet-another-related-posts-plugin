@@ -32,11 +32,10 @@ class YARPP {
 
 		register_activation_hook( __FILE__, array($this, 'activate') );
 		
-		// update cache on save
-		add_action( 'save_post', array($this->cache, 'save_post'), 10, 2 );
 		// new in 3.2: update cache on delete
 		add_action( 'delete_post', array($this->cache, 'delete_post'), 10, 1 );
 		// new in 3.2.1: handle post_status transitions
+		// new in 3.5.3: use transition_post_status instead of save_post hook
 		add_action( 'transition_post_status', array($this->cache, 'transition_post_status'), 10, 3);
 
 		// automatic display hooks:
@@ -512,12 +511,16 @@ class YARPP {
 	
 		$this->upgrade_check();
 
-		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
-			get_the_ID() : absint($reference_ID);
-
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
+
+		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
+			get_the_ID() : absint($reference_ID);
+
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
 		
 		$this->setup_active_cache( $args );
 
@@ -598,6 +601,9 @@ class YARPP {
 		$this->upgrade_check();
 
 		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -636,12 +642,15 @@ class YARPP {
 	function related_exist($reference_ID = null, $args = array()) {
 		$this->upgrade_check();
 	
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
-			
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
 	
+		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
+				
 		$this->setup_active_cache( $args );
 	
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -819,8 +828,8 @@ class YARPP {
 			if (is_wp_error($remote))
 				return false;
 			
-			$result = unserialize($remote['body']);
-			set_transient('yarpp_version_info', $result, 60*60*12);
+			if ( $result = @unserialize($remote['body']) )
+				set_transient('yarpp_version_info', $result, 60*60*12);
 		}
 		return $result;
 	}
