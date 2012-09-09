@@ -233,9 +233,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.5.3 =
 
-* Ensure that `save_post` and `delete_post` hooks receive relevant post ID information
+* Ensure YARPP functions do not operate on post revisions
+* Removed one way in which it would incorrectly return "no related posts"
 * Code cleanup:
 	* [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-latin1-instead-of-utf-8?replies=3): tables should be created using WordPress charset settings
+	* YARPP_Cache_*::update methods are now protected
+	* Simplified some post status transition handling
+	* Ensure that `delete_post` hook receives relevant post ID information
 
 = 3.5.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): fix an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
