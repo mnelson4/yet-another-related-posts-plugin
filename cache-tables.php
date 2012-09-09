@@ -186,7 +186,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 	public function clear( $reference_IDs ) {
 		global $wpdb;
 
-		$reference_IDs = wp_parse_id_list( $reference_ID );
+		$reference_IDs = wp_parse_id_list( $reference_IDs );
 		
 		if ( !count($reference_IDs) )
 			return;
@@ -198,14 +198,11 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
 	}
 
-	// @return YARPP_RELATED | YARPP_NO_RELATED | YARPP_NOT_CACHED
-	public function update($reference_ID) {
+	// @return YARPP_RELATED | YARPP_NO_RELATED
+	// @used by enforce
+	protected function update($reference_ID) {
 		global $wpdb;
 		
-		// $reference_ID must be numeric
-		if ( !$reference_ID = absint($reference_ID) )
-			return YARPP_NOT_CACHED;
-
 		$original_related = (array) @$this->related($reference_ID);
 
 		if ( count($original_related) ) {
@@ -230,9 +227,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			return YARPP_RELATED;
 		} else {
 			$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " (reference_ID,ID,score) values ($reference_ID,0,0) on duplicate key update date = now()");
-
-			//if (!$wpdb->rows_affected)
-			//	return YARPP_NOT_CACHED;
 
 			// Clear the caches of those which are no longer related.
 			if ( count($original_related) )

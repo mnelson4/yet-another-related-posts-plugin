@@ -39,7 +39,11 @@ abstract class YARPP_Cache {
 	// Note: return value changed in 3.4
 	// return YARPP_NO_RELATED | YARPP_RELATED | YARPP_DONT_RUN | false if no good input
 	function enforce( $reference_ID, $force = false ) {
-		if ( !$reference_ID = absint($reference_ID) )
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
+
+		if ( !is_int( $reference_ID ) )
 			return false;
 	
 		$status = $this->is_cached($reference_ID);
@@ -50,12 +54,9 @@ abstract class YARPP_Cache {
 			return YARPP_DONT_RUN;
 	
 		// If not cached, process now:
-		if ( YARPP_NOT_CACHED == $status || $force ) {
-			$status = $this->update($reference_ID);
-			// if still not cached, there's a problem, but for the time being return NO RELATED
-			if ( YARPP_NOT_CACHED === $status )
-				return YARPP_NO_RELATED;
-		}
+		if ( YARPP_NOT_CACHED == $status || $force )
+			$status = $this->update((int) $reference_ID);
+			// status now will be YARPP_NO_RELATED | YARPP_RELATED
 	
 		// There are no related posts
 		if ( YARPP_NO_RELATED === $status )
@@ -77,42 +78,43 @@ abstract class YARPP_Cache {
 	 * POST STATUS INTERACTIONS
 	 */
 	
-	function save_post( $post_ID, $post ) {
-		global $wpdb;
-	
-		// @since 3.2: don't compute cache during import
-		// @since 3.4: don't compute on revisions
-		if (defined('WP_IMPORTING') || wp_is_post_revision($post_ID))
-			return;
-
-		// @since 3.4: simply clear the cache on save; don't recompute.
-		$this->clear((int) $post_ID);
-	}
-	
 	// Clear the cache for this entry and for all posts which are "related" to it.
 	// New in 3.2: This is called when a post is deleted.
 	function delete_post( $post_ID ) {
 		// Clear the cache for this post.
 		$this->clear((int) $post_ID);
 	
-		// Find all "peers" which list this post as a related post.
-		$peers = $this->related(null, (int) $post_ID);
-		// Clear the peers' caches.
-		$this->clear($peers);
+		// Find all "peers" which list this post as a related post and clear their caches
+		if ( $peers = $this->related(null, (int) $post_ID) )
+			$this->clear($peers);
 	}
 	
 	// New in 3.2.1: handle various post_status transitions
 	function transition_post_status( $new_status, $old_status, $post ) {
-		switch ($new_status) {
-			case "draft":
-				$this->delete_post($post->ID);
-				break;
-			case "publish":
-				// find everything which is related to this post, and clear them, so that this
-				// post might show up as related to them.
-				$related = $this->related($post->ID, null);
+		$post_ID = $post->ID;
+
+		// @since 3.4: don't compute on revisions
+		// @since 3.5: compute on the parent instead
+		if ( $the_post = wp_is_post_revision($post_ID) )
+			$post_ID = $the_post;
+
+		// unpublish
+		if ( $old_status == 'publish' && $new_status != 'publish' ) {
+			// Find all "peers" which list this post as a related post and clear their caches
+			if ( $peers = $this->related(null, (int) $post_ID) )
+				$this->clear($peers);
+		}
+		
+		// publish
+		if ( $old_status != 'publish' && $new_status == 'publish' ) {
+			// find everything which is related to this post, and clear them, so that this
+			// post might show up as related to them.
+			if ( $related = $this->related($post_ID, null) )
 				$this->clear($related);
 		}
+
+		// @since 3.4: simply clear the cache on save; don't recompute.
+		$this->clear((int) $post_ID);
 	}
 	
 	function set_score_override_flag( $q ) {
@@ -576,13 +578,10 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		remove_filter('posts_request',array(&$this,'demo_request_filter'));
 	}
 
-	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
-	public function update($reference_ID) {
+	// @return YARPP_NO_RELATED | YARPP_RELATED
+	// @used by enforce
+	protected function update($reference_ID) {
 		global $wpdb;
-
-		// $reference_ID must be numeric
-		if ( !$reference_ID = absint($reference_ID) )
-			return YARPP_NOT_CACHED;
 
 		return YARPP_RELATED;
 	}

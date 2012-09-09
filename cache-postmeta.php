@@ -152,13 +152,10 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 		}
 	}
 
-	// @return YARPP_NO_RELATED | YARPP_RELATED | YARPP_NOT_CACHED
-	public function update($reference_ID) {
+	// @return YARPP_NO_RELATED | YARPP_RELATED
+	// @used by enforce
+	protected function update($reference_ID) {
 		global $wpdb;
-
-		// $reference_ID must be numeric
-		if ( !$reference_ID = absint($reference_ID) )
-			return YARPP_NOT_CACHED;
 
 		$original_related = $this->related($reference_ID);
 		$related = $wpdb->get_results($this->sql($reference_ID), ARRAY_A);
