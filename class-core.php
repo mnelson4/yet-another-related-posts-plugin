@@ -184,6 +184,15 @@ class YARPP {
 		return false;
 	}
 	
+	// @since 3.5.2: function to enforce YARPP setup
+	// if new install, activate; else upgrade
+	function enforce() {
+		if ( !get_option('yarpp_version') )
+			$this->activate();
+		else
+			$this->upgrade();
+	}
+	
 	function activate() {
 		global $wpdb;
 	
@@ -204,10 +213,12 @@ class YARPP {
 		}
 		
 		if ( !get_option('yarpp_version') ) {
+			// new install
 			add_option( 'yarpp_version', YARPP_VERSION );
 			$this->version_info(true);
 		} else {
-			$this->upgrade_check();
+			// upgrade
+			$this->upgrade();
 		}
 	
 		return 1;
@@ -223,7 +234,7 @@ class YARPP {
 		return 'UNKNOWN';
 	}
 	
-	function upgrade_check() {
+	function upgrade() {
 		$last_version = get_option( 'yarpp_version' );
 		if (version_compare(YARPP_VERSION, $last_version) === 0)
 			return;
@@ -509,7 +520,7 @@ class YARPP {
 	function display_related($reference_ID = null, $args = array(), $echo = true) {
 		global $wp_query, $pagenow;
 	
-		$this->upgrade_check();
+		$this->enforce();
 
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
@@ -598,7 +609,7 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function get_related($reference_ID = null, $args = array()) {
-		$this->upgrade_check();
+		$this->enforce();
 
 		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
 		// @since 3.5.3: don't compute on revisions
@@ -640,7 +651,7 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function related_exist($reference_ID = null, $args = array()) {
-		$this->upgrade_check();
+		$this->enforce();
 	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )

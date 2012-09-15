@@ -235,11 +235,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 * Ensure YARPP functions do not operate on post revisions
 * Removed one way in which it would incorrectly return "no related posts"
+* [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-database-errors-upon-activation): setup wasn't automatic for network activations.
 * Code cleanup:
 	* [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-latin1-instead-of-utf-8?replies=3): tables should be created using WordPress charset settings
 	* YARPP_Cache_*::update methods are now protected
 	* Simplified some post status transition handling
 	* Ensure that `delete_post` hook receives relevant post ID information
+	* Various functions now refer to the `enforce` method which will activate if it's a new install, or else upgrade if necessary. (Part of the fix for the network activation above.)
 
 = 3.5.2 =
 * [Bugfix](http://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-bug-found-with-solution): fix an unfortunate typo which caused "no related posts" on many environments with non-MyISAM tables
