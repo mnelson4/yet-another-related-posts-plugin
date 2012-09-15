@@ -168,12 +168,14 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( false !== $result )
 			return $result;
 		
-		$min_id = $wpdb->get_var("select min(ID) as min_id from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = $reference_ID");
+		// @since 3.5.3b3: check for max instead of min, so that if ID=0 and ID=X
+		// are both saved, we act like there *are* related posts, because there are.
+		$max_id = $wpdb->get_var("select max(ID) as max_id from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID = $reference_ID");
 
-		if ( is_null( $min_id ) )
+		if ( is_null( $max_id ) )
 			return YARPP_NOT_CACHED;
 		
-		if ( 0 == $min_id )
+		if ( 0 == $max_id )
 			$result = YARPP_NO_RELATED;
 		else
 			$result = YARPP_RELATED;

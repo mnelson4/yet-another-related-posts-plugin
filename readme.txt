@@ -233,6 +233,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.5.3 =
 
+* [Potential bugfix to some "no related posts"](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-no-related-posts-7)
 * Ensure YARPP functions do not operate on post revisions
 * Removed one way in which it would incorrectly return "no related posts"
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-database-errors-upon-activation): setup wasn't automatic for network activations.

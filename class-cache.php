@@ -200,7 +200,8 @@ abstract class YARPP_Cache {
 		// HAVING
 		// number_format fix suggested by vkovalcik! :)
 		$safethreshold = number_format(max($threshold,0.1), 2, '.', '');
-		$newsql .= " having score >= $safethreshold";
+		// @since 3.5.3: ID=0 is a special value; never save such a result.
+		$newsql .= " having score >= $safethreshold and ID != 0";
 		if ( count($exclude_tt_ids) ) {
 			$newsql .= " and bit_or(terms.term_taxonomy_id in (" . join(',', $exclude_tt_ids) . ")) = 0";
 		}
