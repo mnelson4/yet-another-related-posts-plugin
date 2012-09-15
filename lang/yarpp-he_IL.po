@@ -1,0 +1,665 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-09-05 17:16+0300\n"
+"Last-Translator: admin <mickeyzel@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Hebrew\n"
+"X-Poedit-Country: ISRAEL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes.php:24
+#: includes.php:35
+#@ yarpp
+msgid "Related posts:"
+msgstr "פרסומים קשורים לנושא:"
+
+#: includes.php:26
+#: includes.php:37
+#: template-metabox.php:28
+#@ yarpp
+msgid "No related posts."
+msgstr "אין פרסומים קשורים לנושא."
+
+#: includes.php:94
+#@ yarpp
+msgid "MySQL error on adding yarpp_title"
+msgstr "שגיאת MYSQL בניסיון להוסיף yarpp_title"
+
+#: includes.php:99
+#@ yarpp
+msgid "MySQL error on adding yarpp_content"
+msgstr "שגיאת MySQL בניסיון להוסיף yarpp_content"
+
+#: includes.php:110
+#@ yarpp
+msgid "MySQL error on creating yarpp_keyword_cache table"
+msgstr "שגיאת MySQL בניסיון ליצור טבלת yarpp_keyword_cache"
+
+#: includes.php:121
+#@ yarpp
+msgid "MySQL error on creating yarpp_related_cache table"
+msgstr "שגיאת MySQL בניסיון ליצור טבלת yarpp_related_cache"
+
+#: includes.php:197
+#@ yarpp
+msgid "Related Posts (YARPP)"
+msgstr "פרסומים נוספים בנושא (YARPP)"
+
+#: includes.php:225
+#: yarpp.php:33
+#@ yarpp
+msgid "Related Posts"
+msgstr "פרסומים נוספים בנושא"
+
+#: includes.php:230
+#@ yarpp
+msgid "YARPP"
+msgstr "YARPP"
+
+#: magic.php:71
+#@ yarpp
+msgid "Example post "
+msgstr "פרסום לדוגמא"
+
+#: magic.php:342
+#: options.php:456
+#: options.php:519
+#@ yarpp
+msgid "Related posts brought to you by <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+msgstr "פרסומים נוספים בנושא הובאו אליכם על ידי <a href='http://mitcho.com/code/yarpp/'>Yet Another Related Posts Plugin</a>."
+
+#: options.php:10
+#@ yarpp
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr ""
+
+#: options.php:15
+#@ yarpp
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "לא נמצאו קבצי תבנית עיצוב בתבנית שלכם (<code>TEMPLATEPATH</code>). אפשרויות התבנית כובו."
+
+#: options.php:26
+#@ yarpp
+msgid "The MyISAM check has been overridden. You may now use the \"consider titles\" and \"consider bodies\" relatedness criteria."
+msgstr "בדיקת MyISAM בוצעה. כעת ניתן להשתמש ב  \"consider titles\" וב-  \"consider bodies\" כמדדים לשייכות לנושא הפרסום."
+
+#: options.php:35
+#, php-format
+#@ yarpp
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "מדדי השייכות \"consider titles\" ו- \"consider bodies\" דורשים את טבלת ה-<code>%s</code> שלכם כדי להשתמש במנוע האחסון <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, אבל הטבלה כנראה משתמשת במנוע <code>%s</code>. שתי האפשרויות הללו בוטלו."
+
+#: options.php:37
+#, php-format
+#@ yarpp
+msgid "To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications."
+msgstr "בכדי להפעיל מחדש אפשרויות אלה, אנא עדכנו את טבלת <code>%s</code>על ידי הרצת פקודת SQL להלן <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> למרות השפעות על הביצועים, שום מידע לא יימחק כתוצאה משינוי מנועי הטבלאות"
+
+#: options.php:39
+#, php-format
+#@ yarpp
+msgid "If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:"
+msgstr "אם למרות הבדיקה, הינכם בטוחים ש <code>%s</code> משתמש במנוע MyISAM לחצו על כפתור הקסמים הזה:"
+
+#: options.php:42
+#@ yarpp
+msgid "Trust me. Let me use MyISAM features."
+msgstr "סמוך עלי, תן לי להשתמש באפשרויות של MyISAM."
+
+#: options.php:65
+#@ yarpp
+msgid "The YARPP database had an error but has been fixed."
+msgstr "מסד הנתונים של YARPP החיל בעיה אבל היא תוקנה."
+
+#: options.php:67
+#@ yarpp
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "נמצאה בעיה במסד הנתונים של YARPP ולא ניתן לתקנה."
+
+#: options.php:68
+#@ yarpp
+msgid "Please try <A>manual SQL setup</a>."
+msgstr "בבקשה תנסו <A>להתקין SQL ידנית</a>."
+
+#: options.php:98
+#@ yarpp
+msgid "Options saved!"
+msgstr "האפשרויות נשמרו!"
+
+#: options.php:99
+#: options.php:112
+#: options.php:115
+#: options.php:528
+#@ yarpp
+msgid "Related posts cache status"
+msgstr "מצב מטמון של פרסומים בנושא"
+
+#: options.php:100
+#@ yarpp
+msgid "If you updated the \"pool\" options or \"relatedness\" options displayed, please rebuild your cache now from the <A>related posts status pane</a>."
+msgstr ""
+
+#: options.php:112
+#@ yarpp
+msgid "Your related posts cache is incomplete. Please build your cache from the <A>related posts status pane</a>."
+msgstr ""
+
+#: options.php:115
+#@ yarpp
+msgid "Your related posts cache is empty. Please build your cache from the <A>related posts status pane</a>."
+msgstr "הזיכרון המטמון של הפרסומים בנושא ריק. אנא בנו את המטמון מתוך <A>מנגנון פרסומים בנושא</a>."
+
+#: options.php:151
+#@ yarpp
+msgid "word"
+msgstr "מילה"
+
+#: options.php:152
+#@ yarpp
+msgid "tag"
+msgstr "תגית"
+
+#: options.php:153
+#@ yarpp
+msgid "category"
+msgstr "קטגוריה"
+
+#: options.php:157
+#: options.php:174
+#: options.php:186
+#@ yarpp
+msgid "do not consider"
+msgstr "אל תכלול"
+
+#: options.php:158
+#: options.php:175
+#: options.php:188
+#@ yarpp
+msgid "consider"
+msgstr "תכלול"
+
+#: options.php:160
+#: options.php:190
+#, php-format
+#@ yarpp
+msgid "require at least one %s in common"
+msgstr "וודא שיש לפחות %s אחד במשותף"
+
+#: options.php:162
+#: options.php:192
+#, php-format
+#@ yarpp
+msgid "require more than one %s in common"
+msgstr "וודא שיש יותר מ %s אחד במשותף"
+
+#: options.php:176
+#@ yarpp
+msgid "consider with extra weight"
+msgstr "התחשב במשקל כבר יותר"
+
+#: options.php:204
+#@ yarpp
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "היסטוריית גרסאות של YARPP"
+
+#: options.php:258
+#@ yarpp
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "אפשרויות תוסף YARPP, פרסומים נוספים בנושא"
+
+#: options.php:269
+#@ yarpp
+msgid "Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
+msgstr "תרמו למיכאל יושיטקה אריוינה בעזרת PayPal"
+
+#: options.php:271
+#@ yarpp
+msgid "by <a href=\"http://mitcho.com/code/\">mitcho (Michael 芳貴 Erlewine)</a>"
+msgstr ""
+
+#: options.php:271
+#@ yarpp
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr ""
+
+#: options.php:276
+#@ yarpp
+msgid "\"The Pool\""
+msgstr ""
+
+#: options.php:277
+#@ yarpp
+msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
+msgstr ""
+
+#: options.php:282
+#@ yarpp
+msgid "Disallow by category:"
+msgstr "חסום לפי קטגוריה:"
+
+#: options.php:284
+#@ yarpp
+msgid "Disallow by tag:"
+msgstr "חסום לפי תגיות:"
+
+#: options.php:286
+#@ yarpp
+msgid "Show password protected posts?"
+msgstr "האם להציג פרסומים מוגנים סיסמה?"
+
+#: options.php:292
+#@ yarpp
+msgid "day(s)"
+msgstr "ימים"
+
+#: options.php:293
+#@ yarpp
+msgid "week(s)"
+msgstr "שבועות"
+
+#: options.php:294
+#@ yarpp
+msgid "month(s)"
+msgstr "חודשים"
+
+#: options.php:296
+#@ yarpp
+msgid "Show only posts from the past NUMBER UNITS"
+msgstr ""
+
+#: options.php:304
+#@ yarpp
+msgid "\"Relatedness\" options"
+msgstr ""
+
+#: options.php:306
+#, php-format
+#@ yarpp
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr ""
+
+#: options.php:306
+#: options.php:320
+#: options.php:403
+#: options.php:408
+#: options.php:455
+#: options.php:467
+#: options.php:468
+#: options.php:472
+#: options.php:518
+#: options.php:529
+#@ yarpp
+msgid "more&gt;"
+msgstr ""
+
+#: options.php:306
+#@ yarpp
+msgid "The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post's related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site."
+msgstr "ככל שסף התאמה גבוה יותר, אתם מוגבלים יותר ותקבלו פחות פרסומים בנושא. סף התאמה ברירת המחדל הוא 5. אם אתם רוצים למצוא את סף ההתאמה המתאים, תסתכלו על כמה פירסומים של הודעות קשורות והניקוד שלהן. ניתן לראות אילו סוגים של הודעות קשורות נמצאו ועם איזה סוג של ציוני ההתאמה, ולקבוע סף התאמה עבור האתר שלכם."
+
+#: options.php:311
+#@ yarpp
+msgid "Match threshold:"
+msgstr "סף ההתאמה:"
+
+#: options.php:312
+#@ yarpp
+msgid "Titles: "
+msgstr "כותרות:"
+
+#: options.php:314
+#@ yarpp
+msgid "Bodies: "
+msgstr "גוף הפרסום:"
+
+#: options.php:316
+#@ yarpp
+msgid "Tags: "
+msgstr "תגיות:"
+
+#: options.php:318
+#@ yarpp
+msgid "Categories: "
+msgstr "קטגוריות:"
+
+#: options.php:320
+#@ yarpp
+msgid "Cross-relate posts and pages?"
+msgstr "עמודים ופרסומים מקושרים?"
+
+#: options.php:320
+#@ yarpp
+msgid "When the \"Cross-relate posts and pages\" option is selected, the <code>related_posts()</code>, <code>related_pages()</code>, and <code>related_entries()</code> all will give the same output, returning both related pages and posts."
+msgstr ""
+
+#: options.php:386
+#@ yarpp
+msgid "There is a new beta (VERSION) of Yet Another Related Posts Plugin. You can <A>download it here</a> at your own risk."
+msgstr ""
+
+#: options.php:388
+#@ yarpp
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "קיימת גרסא חדשה יותר של YARPP ותוכלו להוריד אותה <A>כאן</a>."
+
+#: options.php:399
+#@ yarpp
+msgid "Display options <small>for your website</small>"
+msgstr "אפשרויות תצוגה <small>לאתר שלכם</small>"
+
+#: options.php:403
+#@ yarpp
+msgid "Automatically display related posts?"
+msgstr "האם להציג אוטומטית פרסומים נוספים בנושא?"
+
+#: options.php:403
+#@ yarpp
+msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
+msgstr ""
+
+#: options.php:404
+#@ yarpp
+msgid "Website display code example"
+msgstr "דוגמת קוד לתצוגה באתר"
+
+#: options.php:404
+#: options.php:469
+#@ yarpp
+msgid "(Update options to reload.)"
+msgstr "(אנא עדכנו את האפשרויות כדי לרענן.)"
+
+#: options.php:407
+#: options.php:471
+#@ yarpp
+msgid "Maximum number of related posts:"
+msgstr "מספר מקסימלי של פרסומים נוספים בנושא:"
+
+#: options.php:408
+#: options.php:472
+#@ yarpp
+msgid "Display using a custom template file"
+msgstr "הצג בעזרת קובץ תבנית מותאם אישית"
+
+#: options.php:408
+#: options.php:472
+#: options.php:525
+#@ yarpp
+msgid "NEW!"
+msgstr "חדש!"
+
+#: options.php:408
+#: options.php:472
+#@ yarpp
+msgid "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP."
+msgstr "אפשרות מתקדמת זו מאפשרת לכם שליטה מלאה בצורת הצגת הפרסומים הנוספים. תבניות (נמצאות בתקיית התבניות שלכם) כתובות ב- PHP."
+
+#: options.php:410
+#: options.php:474
+#@ yarpp
+msgid "Template file:"
+msgstr "קובץ תבנית:"
+
+#: options.php:420
+#@ yarpp
+msgid "Before / after related entries:"
+msgstr "לפני / אחרי הפרסומים הנוספים בנושא:"
+
+#: options.php:421
+#: options.php:426
+#: options.php:435
+#: options.php:485
+#: options.php:490
+#: options.php:499
+#@ yarpp
+msgid "For example:"
+msgstr "לדוגמא:"
+
+#: options.php:421
+#: options.php:426
+#: options.php:435
+#: options.php:485
+#: options.php:490
+#: options.php:499
+#@ yarpp
+msgid " or "
+msgstr "או"
+
+#: options.php:425
+#: options.php:489
+#@ yarpp
+msgid "Before / after each related entry:"
+msgstr "לפני / אחרי כל פרסום בנושא:"
+
+#: options.php:429
+#: options.php:493
+#@ yarpp
+msgid "Show excerpt?"
+msgstr "להציג תקציר?"
+
+#: options.php:430
+#: options.php:494
+#@ yarpp
+msgid "Excerpt length (No. of words):"
+msgstr "אורך תקציר (מספר מילים):"
+
+#: options.php:434
+#@ yarpp
+msgid "Before / after (Excerpt):"
+msgstr "לפני / אחרי התקציר:"
+
+#: options.php:440
+#: options.php:504
+#@ yarpp
+msgid "Order results:"
+msgstr ""
+
+#: options.php:442
+#: options.php:506
+#@ yarpp
+msgid "score (high relevance to low)"
+msgstr "ציון (הקשר גבוה לנמוך)"
+
+#: options.php:443
+#: options.php:507
+#@ yarpp
+msgid "score (low relevance to high)"
+msgstr "ציון (הקשר נמוך לגבוה)"
+
+#: options.php:444
+#: options.php:508
+#@ yarpp
+msgid "date (new to old)"
+msgstr "תאריך (חדש לישן)"
+
+#: options.php:445
+#: options.php:509
+#@ yarpp
+msgid "date (old to new)"
+msgstr "תאריך (ישן לחדש)"
+
+#: options.php:446
+#: options.php:510
+#@ yarpp
+msgid "title (alphabetical)"
+msgstr "כותרת (א-ת)"
+
+#: options.php:447
+#: options.php:511
+#@ yarpp
+msgid "title (reverse alphabetical)"
+msgstr "כותרת (ת-א)"
+
+#: options.php:452
+#: options.php:516
+#@ yarpp
+msgid "Default display if no results:"
+msgstr "תצוגה ברירת מחדל אם אין תוצאות:"
+
+#: options.php:454
+#: options.php:518
+#@ yarpp
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "רוצים לעזור לקדם את התוסף?"
+
+#: options.php:456
+#: options.php:519
+#, php-format
+#@ yarpp
+msgid "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated."
+msgstr "אפשרות זאת תוסיף את הקוד %s. נסו להפעילו, לעדכן את האפשרויות ובדקו את דוגמת הקוד המופיעה משמאל. "
+
+#: options.php:462
+#@ yarpp
+msgid "Display options <small>for RSS</small>"
+msgstr "הצג אפשרויות <small>עבור RSS</small>"
+
+#: options.php:467
+#@ yarpp
+msgid "Display related posts in feeds?"
+msgstr "להציג פרסומים נוספים בנושא בתוך ההזנות (Feeds)?"
+
+#: options.php:467
+#@ yarpp
+msgid "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed."
+msgstr "אפשרות זאת תציג את הפרסומים הנוספים בנושא בתוך הזנות Atom ו- RSS. אין צורך בשינויים בתבנית העיצוב."
+
+#: options.php:468
+#@ yarpp
+msgid "Display related posts in the descriptions?"
+msgstr "להציג פרסומים נוספים בתיאורי הפרסומים?"
+
+#: options.php:468
+#@ yarpp
+msgid "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all."
+msgstr "אפשרות זאת תציג פרסומים נוספים בנושא בתוך תיאורי הזנות RSS ולא רק בתוכן. "
+
+#: options.php:469
+#@ yarpp
+msgid "RSS display code example"
+msgstr "דוגמא לקוד RSS"
+
+#: options.php:484
+#@ yarpp
+msgid "Before / after related entries display:"
+msgstr "לפני / אחרי תצוגת פרסומים נוספים בנושא:"
+
+#: options.php:498
+#@ yarpp
+msgid "Before / after (excerpt):"
+msgstr "לפני / אחרי (תקציר):"
+
+#: options.php:525
+#@ yarpp
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: options.php:528
+#@ yarpp
+msgid "Show cache status"
+msgstr "הצג מצב זיכרון מטמון"
+
+#: options.php:529
+#@ yarpp
+msgid "When the cache is incomplete, compute related posts on the fly?"
+msgstr "כאשר המטמון אינו מלא, חשב פרסומים נוספים בנושא בצורה מהירה."
+
+#: options.php:530
+#@ yarpp
+msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr ""
+
+#: options.php:560
+#@ yarpp
+msgid "'MIN minute(s) and SEC second(s) remaining'"
+msgstr "'MIN דקות ו- SEC שניות נשארו'"
+
+#: options.php:562
+#@ yarpp
+msgid "'SEC second(s) remaining'"
+msgstr "'SEC שניות נשארו'"
+
+#: options.php:566
+#@ yarpp
+msgid "Your related posts cache is now complete."
+msgstr "המטמון לפרסומים נוספים בנושא הושלם."
+
+#: options.php:566
+#@ yarpp
+msgid "The SQL queries took SEC seconds."
+msgstr "שאילתת SQL לקחה SEC שניות."
+
+#: options.php:573
+#@ yarpp
+msgid "There was an error while constructing the related posts for TITLE"
+msgstr "אראה שגיאה בניסיון ליצור פרסומים נוספים בנושא עבור TITLE"
+
+#: options.php:575
+#: options.php:581
+#@ yarpp
+msgid "Constructing the related posts timed out."
+msgstr "יצירת קישורי פרסומים נוספים בנושא הופסקה לפני הזמן."
+
+#: options.php:578
+#: options.php:583
+#@ yarpp
+msgid "Try to continue..."
+msgstr "נסה להמשיך...."
+
+#: options.php:591
+#@ yarpp
+msgid "Your related posts cache is PERCENT% complete."
+msgstr "הזיכרון המטמון עבור הפרסומים הנוספים באותו נושא הושלם ב- PERCENT%"
+
+#: options.php:597
+#@ yarpp
+msgid "starting..."
+msgstr "מתחיל..."
+
+#: options.php:604
+#@ yarpp
+msgid "Update options"
+msgstr "עדכן אפשרויות"
+
+#: options.php:605
+#@ yarpp
+msgid "Do you really want to reset your configuration?"
+msgstr "האם אתם בטוחים שברצונכם לאפס את ההגדרות?"
+
+#: options.php:605
+#@ yarpp
+msgid "Reset options"
+msgstr "איפוס אפשרויות"
+
+#: services.php:59
+#@ yarpp
+msgid "You cannot rebuild the YARPP cache."
+msgstr "אתם ךא יכולים לבנות מחדש את המטמון של YARPP."
+
+#: template-builtin.php:35
+#, php-format
+#@ yarpp
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr ""
+
+#: template-metabox.php:12
+#@ yarpp
+msgid "These are the related entries for this entry. Updating this post may change these related posts."
+msgstr "להלן הפרסומים הקשורים לפרסום זה, עדכון פרסום זה יכול להשפיע על הפרסומים הקשורים האלה."
+
+#: template-metabox.php:26
+#@ yarpp
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "אופן הצגת הפרסומים הללו תלוי בתצורת ההצגה של YARPP."
+

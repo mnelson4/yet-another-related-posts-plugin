@@ -37,9 +37,11 @@ function related_posts($args = array(), $reference_ID=false, $echo=true) {
 	}
 
 	global $yarpp;
-	$args['post_type'] = array('post');
 	if ( $yarpp->get_option('cross_relate') )
 		$args['post_type'] = $yarpp->get_post_types();
+	else
+		$args['post_type'] = array( 'post' );
+
 	return yarpp_related( $args, $reference_ID, $echo );
 }
 
@@ -50,9 +52,11 @@ function related_pages($args = array(), $reference_ID=false, $echo=true) {
 	}
 
 	global $yarpp;
-	$args['post_type'] = array('page');
 	if ( $yarpp->get_option('cross_relate') )
 		$args['post_type'] = $yarpp->get_post_types();
+	else
+		$args['post_type'] = array( 'page' );
+
 	return yarpp_related( $args, $reference_ID, $echo );
 }
 
@@ -64,27 +68,33 @@ function related_entries($args = array(), $reference_ID=false, $echo=true ) {
 
 	global $yarpp;
 	$args['post_type'] = $yarpp->get_post_types();
+
 	return yarpp_related( $args, $reference_ID, $echo );
 }
 
 function related_posts_exist($args = array(), $reference_ID=false) {
 	global $yarpp;
-	$args['post_type'] = array('post');
 	if ( $yarpp->get_option('cross_relate') )
 		$args['post_type'] = $yarpp->get_post_types();
+	else
+		$args['post_type'] = array( 'post' );
+
 	return yarpp_related_exist( $args, $reference_ID );
 }
 
 function related_pages_exist($args = array(), $reference_ID=false) {
 	global $yarpp;
-	$args['post_type'] = array('page');
 	if ( $yarpp->get_option('cross_relate') )
 		$args['post_type'] = $yarpp->get_post_types();
+	else
+		$args['post_type'] = array( 'page' );
+	
 	return yarpp_related_exist( $args, $reference_ID );
 }
 
 function related_entries_exist($args = array(),$reference_ID=false) {
 	global $yarpp;
 	$args['post_type'] = $yarpp->get_post_types();
+
 	return yarpp_related_exist( $args, $reference_ID );
 }
