@@ -298,8 +298,7 @@ abstract class YARPP_Cache {
 	
 		$lang = 'en_US';
 		if ( defined('WPLANG') ) {
-			$lang = substr(WPLANG, 0, 2);
-			switch ( $lang ) {
+			switch ( substr(WPLANG, 0, 2) ) {
 				case 'de':
 					$lang = 'de_DE';
 				case 'it':
@@ -314,6 +313,8 @@ abstract class YARPP_Cache {
 					$lang = 'cs_CZ';
 				case 'nl':
 					$lang = 'nl_NL';
+				default:
+					$lang = 'en_US';
 			}
 		}
 	

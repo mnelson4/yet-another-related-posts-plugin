@@ -307,8 +307,7 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 	function paypal_lang() {
 		if ( !defined('WPLANG') )
 			return 'en_US/';
-		$lang = substr(WPLANG, 0, 2);
-		switch ( $lang ) {
+		switch ( substr(WPLANG, 0, 2) ) {
 			case 'fr':
 				return 'fr_FR/';
 			case 'de':
