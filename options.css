@@ -15,6 +15,36 @@ ul.yarpp_contacts li a img {
 	vertical-align: bottom;
 }
 
+.icon {
+	width: 22px;
+	height: 22px;
+	position: absolute;
+	margin-left: -29px;
+	margin-top: -1px;
+	background-image: url('sprites.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+	.icon {
+		background-image: url('sprites-2x.png');
+		background-size: 110px 22px;
+	}
+}
+.icon-wordpress {
+	background-position: 0 0;
+}
+.icon-twitter {
+	background-position: -22px 0;
+}
+.icon-plugin {
+	background-position: -44px 0;
+}
+.icon-star {
+	background-position: -66px 0;
+}
+.icon-paypal {
+	background-position: -88px 0;
+}
+
 a.info{
 	position:relative;
 	z-index:24;
