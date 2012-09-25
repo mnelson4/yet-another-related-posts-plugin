@@ -45,6 +45,34 @@ ul.yarpp_contacts li a img {
 	background-position: -88px 0;
 }
 
+.icon.spin, .icon-star:hover {
+	transform-origin: 11px 12px;
+	-o-transform-origin: 11px 12px;
+	-webkit-transform-origin: 11px 12px;
+	-moz-transform-origin: 11px 12px;
+	animation: 3s ease 2s normal none 1 yarpp-spin;
+	-o-animation: 3s ease 2s normal none 1 yarpp-spin;
+	-webkit-animation: 3s ease 2s normal none 1 yarpp-spin;
+	-moz-animation: 3s ease 2s normal none 1 yarpp-spin;
+	z-index: 1;
+}
+
+@keyframes yarpp-spin {
+	0% { transform: rotate(0deg) scale(1); }
+	5% { transform: rotate(0deg) scale(1.5); }
+	100% { transform: rotate(360deg) scale(1);}
+}
+@-moz-keyframes yarpp-spin {
+	0% { -moz-transform: rotate(0deg) scale(1); }
+	5% { -moz-transform: rotate(0deg) scale(1.5); }
+	100% { -moz-transform: rotate(360deg) scale(1);}
+}
+@-webkit-keyframes yarpp-spin {
+	0% { -webkit-transform: rotate(0deg) scale(1); }
+	5% { -webkit-transform: rotate(0deg) scale(1.5); }
+	100% { -webkit-transform: rotate(360deg) scale(1);}
+}
+
 a.info{
 	position:relative;
 	z-index:24;

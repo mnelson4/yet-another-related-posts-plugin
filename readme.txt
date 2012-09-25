@@ -237,6 +237,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.5.4 =
+
+* Retina icons! Now served faster, in sprite form.
+* Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
+
 = 3.5.3 =
 
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-no-related-posts-7): Fixed a common cause of "no related posts"!

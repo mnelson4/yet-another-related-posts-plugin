@@ -464,6 +464,10 @@ class YARPP {
 		}
 	}
 	
+	function is_happy() {
+		return $this->cache->cache_status() > 0.1 && $this->get_option('promote_yarpp');
+	}
+	
 	private $post_types = null;
 	function get_post_types( $field = 'name' ) {
 		if ( is_null($this->post_types) ) {
