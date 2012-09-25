@@ -87,6 +87,11 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			WHERE p.post_status = 'publish' and c.ID IS NULL
 			LIMIT $limit OFFSET $offset");
 	}
+	
+	public function stats() {
+		global $wpdb;
+		return $wpdb->get_results("select count(*) as ct, num from (select 0 + if(id = 0, 0, count(ID)) as num from {$wpdb->prefix}yarpp_related_cache group by reference_ID) as t group by num order by num asc");
+	}
 
 	/**
 	 * MAGIC FILTERS
