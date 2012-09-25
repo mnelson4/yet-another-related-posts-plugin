@@ -474,6 +474,10 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 		return 0; // always uncached
 	}
 
+	public function stats() {
+		return array(); // always unknown
+	}
+
 	public function uncached($limit = 20, $offset = 0) {
 		return array(); // nothing to cache
 	}
