@@ -15,8 +15,9 @@ class YARPP_Admin {
 			exit;
 		}
 		
-		add_action( 'admin_init', array($this, 'ajax_register') );
+		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
+		add_action( 'yarpp_settings_page', array( $this, 'load_meta_boxes' ) );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -53,9 +54,7 @@ class YARPP_Admin {
 
 		// setup admin
 		$this->hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', array( $this, 'options_page' ) );
-		// new in 3.3: load options page sections as metaboxes
-		require_once('options-meta-boxes.php');
-
+		
 		// new in 3.0.12: add settings link to the plugins page
 		add_filter('plugin_action_links', array( $this, 'settings_link' ), 10, 2);
 
@@ -65,17 +64,23 @@ class YARPP_Admin {
 		// new in 3.3: properly enqueue scripts for admin:
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 	}
+
+	// 3.5.4: only load metabox code if we're going to be on the settings page
+	function load_meta_boxes() {
+		// new in 3.3: load options page sections as metaboxes
+		require_once('options-meta-boxes.php');		
+	}
 	
 	// since 3.3
 	function enqueue() {
-		global $current_screen;
 		$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
-		if (is_object($current_screen) && $current_screen->id == 'settings_page_yarpp') {
+		$screen = get_current_screen();
+		if ( !is_null($screen) && $screen->id == 'settings_page_yarpp' ) {
 			wp_enqueue_script( 'postbox' );
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
 			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 		}
-		if (is_object($current_screen) && $current_screen->id == 'post') {
+		if ( !is_null($screen) && $screen->id == 'post' ) {
 			wp_enqueue_script( 'yarpp_metabox', plugins_url( 'js/metabox.js', __FILE__ ), array('jquery'), $version );
 		}
 	}

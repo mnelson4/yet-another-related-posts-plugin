@@ -55,7 +55,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 	public function stats() {
 		global $wpdb;
-		return $wpdb->get_results("select count(*) as ct, num from (select 0 + if(meta_value = '" . YARPP_NO_RELATED . "', 0, substring(substring_index(meta_value,':',2),3)) as num from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "') as t group by num order by num asc");
+		return wp_list_pluck($wpdb->get_results("select num, count(*) as ct from (select 0 + if(meta_value = '" . YARPP_NO_RELATED . "', 0, substring(substring_index(meta_value,':',2),3)) as num from `{$wpdb->postmeta}` where meta_key = '" . YARPP_POSTMETA_RELATED_KEY . "') as t group by num order by num asc", OBJECT_K), 'ct');
 	}
 
 	/**
