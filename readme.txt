@@ -241,6 +241,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 * Retina icons! Now served faster, in sprite form.
 * Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
+* Add new `stats` method to `YARPP_Cache_*` objects.
 
 = 3.5.3 =
 
