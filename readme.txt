@@ -242,7 +242,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Retina icons! Now served faster, in sprite form.
 * Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
 * Added new `stats` method to `YARPP_Cache_*` objects.
-* Added `yarpp_settings_page` action to the options page and use it to load meta box code. Improves performance on admin pages.
+* Load meta boxes on `screen_option` hook. Improves performance on admin pages.
 
 = 3.5.3 =
 

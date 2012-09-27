@@ -1,8 +1,6 @@
 <?php
 global $wpdb, $wp_version, $yarpp;
 
-do_action( 'yarpp_settings_page' );
-
 // Enforce YARPP setup:
 $yarpp->enforce();
 

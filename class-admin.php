@@ -17,7 +17,7 @@ class YARPP_Admin {
 		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
-		add_action( 'yarpp_settings_page', array( $this, 'load_meta_boxes' ) );
+		add_action( 'current_screen', array( $this, 'load_meta_boxes' ), 10, 1 );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -66,9 +66,10 @@ class YARPP_Admin {
 	}
 
 	// 3.5.4: only load metabox code if we're going to be on the settings page
-	function load_meta_boxes() {
-		// new in 3.3: load options page sections as metaboxes
-		require_once('options-meta-boxes.php');		
+	function load_meta_boxes( $current_screen ) {
+		if ( $current_screen->id == 'settings_page_yarpp' )
+			// new in 3.3: load options page sections as metaboxes
+			require_once('options-meta-boxes.php');		
 	}
 	
 	// since 3.3
