@@ -465,7 +465,15 @@ class YARPP {
 	}
 	
 	function is_happy() {
-		return $this->cache->cache_status() > 0.1 && $this->get_option('promote_yarpp');
+		$stats = $this->cache->stats();
+
+		if ( !(array_sum( $stats ) > 0) )
+			return false;
+		
+		$sum = array_sum(array_map('array_product', array_map(null, array_values($stats), array_keys($stats))));
+		$avg = $sum / array_sum( $stats );
+
+		return $this->cache->cache_status() > 0.1 && $avg > 2;
 	}
 	
 	private $post_types = null;
