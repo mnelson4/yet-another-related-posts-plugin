@@ -74,7 +74,7 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the Wordpress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). *Please do not email with questions.*
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.*
 
 = How can I use the custom template feature? =
 
@@ -90,22 +90,15 @@ If you would like to add the Related Posts display elsewhere, edit your relevant
 
 The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized in version 3.5.
 
-If you find that the YARPP database calls are still too database-intensive, try the following:
-
-* turning off "cross relate posts and pages";
-* turning on "show only previous posts";
-
-These options can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab. All of these can improve database performance.
+If you find that the YARPP database calls are still too database-intensive, try turning off "display results from all post types." This option can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab.
 
 If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality.
 
 If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
 
-= Every page just says "no related posts"! What's up with that? =
+= Many pages list "no related posts". =
 
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: , lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
-
-I am currently seeking information from users who cannot get related posts anywhere in order to debug this issue: [more information here](http://wordpress.org/support/topic/no-related-posts-1?replies=21#post-2464940).
+Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" tab at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
 = Are there any plugins that are incompatible with YARPP? =
 
@@ -115,7 +108,7 @@ I am currently seeking information from users who cannot get related posts anywh
 * [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
 * Other related posts plugins, obviously, may also be incompatible.
 
-Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/tags/yet-another-related-posts-plugin?forum_id=10#postform). I check the forums regularly and will try to release a quick bugfix.
+Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
 
 = Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
@@ -163,7 +156,7 @@ Developers can call YARPP's powerful relatedness algorithm from anywhere in thei
 		),
 		// The threshold which must be met by the "match score"
 		'threshold' => 5,
-
+	
 		// Display options:
 		'template' => , // either the name of a file in your active theme or the boolean false to use the builtin template
 		'limit' => 5, // maximum number of results
@@ -239,10 +232,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.5.4 =
 
+* New Help tab, which displays help text from the readme.
 * Retina icons! Now served faster, in sprite form.
-* Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
-* Added new `stats` method to `YARPP_Cache_*` objects.
-* Added `yarpp_settings_page` action to the options page and use it to load meta box code.
+* Cleanup:
+	* Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
+	* Added new `stats` method to `YARPP_Cache_*` objects.
+	* Load meta boxes on `screen_option` hook. Improves performance on admin pages.
+	* Changed default option of "show only previous posts" to `false` and removed FAQ text, as it no longer improves performance much.
 
 = 3.5.3 =
 

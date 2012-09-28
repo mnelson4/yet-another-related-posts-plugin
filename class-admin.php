@@ -17,7 +17,7 @@ class YARPP_Admin {
 		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
-		add_action( 'yarpp_settings_page', array( $this, 'load_meta_boxes' ) );
+		add_action( 'current_screen', array( $this, 'settings_screen' ), 10, 1 );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -66,9 +66,82 @@ class YARPP_Admin {
 	}
 
 	// 3.5.4: only load metabox code if we're going to be on the settings page
-	function load_meta_boxes() {
+	function settings_screen( $current_screen ) {
+		if ( $current_screen->id != 'settings_page_yarpp' )
+			return;
+		
 		// new in 3.3: load options page sections as metaboxes
 		require_once('options-meta-boxes.php');		
+
+		$current_screen->add_help_tab(array(
+			'id' => 'faq',
+			'title' => __('Frequently Asked Questions', 'yarpp'),
+			'callback' => array( &$this, 'help_faq' )
+		));
+
+		$current_screen->add_help_tab(array(
+			'id' => 'dev',
+			'title' => __('Developing with YARPP', 'yarpp'),
+			'callback' => array( &$this, 'help_dev' )
+		));
+	}
+	
+	private $readme = null;
+	
+	public function help_faq() {
+		if ( is_null($this->readme) )
+			$this->readme = file_get_contents( YARPP_DIR . '/readme.txt' );
+		
+		$matches = array();
+		if ( preg_match('!== Frequently Asked Questions ==(.*?)^==!sm', $this->readme, $matches) )
+			echo $this->markdown( $matches[1] );
+		else
+			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/">' . __(
+			'FAQ', 'yarpp') . '</a>';
+	}
+	
+	public function help_dev() {
+		if ( is_null($this->readme) )
+			$this->readme = file_get_contents( YARPP_DIR . '/readme.txt' );
+		
+		$matches = array();
+		if ( preg_match('!== Developing with YARPP ==(.*?)^==!sm', $this->readme, $matches) )
+			echo $this->markdown( $matches[1] );
+		else
+			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/">' . __(
+			'Developing with YARPP', 'yarpp') . '</a>';
+	}
+	
+	// faux-markdown, required for the help text rendering
+	protected function markdown( $text ) {
+		$replacements = array(
+			// strip each line
+			'!\s*[\r\n] *!' => "\n",
+			
+			// headers
+			'!^=(.*?)=\s*$!m' => '<h3>\1</h3>',
+			
+			// bullets
+			'!^(\* .*([\r\n]\* .*)*)$!m' => "<ul>\n\\1\n</ul>",
+			'!^\* (.*?)$!m' => '<li>\1</li>',
+			'!^(\d+\. .*([\r\n]\d+\. .*)*)$!m' => "<ol>\n\\1\n</ol>",
+			'!^\d+\. (.*?)$!m' => '<li>\1</li>',
+			
+			// code block
+			'!^(\t.*([\r\n]\t.*)*)$!m' => "<pre>\n\\1\n</pre>",
+			
+			// wrap p
+			'!^([^<\t].*[^>])$!m' => '<p>\1</p>',
+			// bold
+			'!\*([^*]*?)\*!' => '<strong>\1</strong>',
+			// code
+			'!`([^`]*?)`!' => '<code>\1</code>',
+			// links
+			'!\[([^]]+)\]\(([^)]+)\)!' => '<a href="\2" target="_new">\1</a>',
+		);
+		$text = preg_replace(array_keys($replacements), array_values($replacements), $text);
+		
+		return $text;
 	}
 	
 	// since 3.3
