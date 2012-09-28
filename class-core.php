@@ -81,7 +81,7 @@ class YARPP {
 			'rss_after_related' => '</ol>',
 			'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'rss_order' => 'score DESC',
-			'past_only' => true,
+			'past_only' => false,
 			'show_excerpt' => false,
 			'rss_show_excerpt' => false,
 			'template' => false, // new in 3.5
@@ -299,7 +299,7 @@ class YARPP {
 			'tags' => '2',
 			'distags' => '',
 			'discats' => '',
-			'past_only' => true,
+			'past_only' => false,
 			'show_excerpt' => false,
 			'recent_only' => false, // new in 3.0
 			'use_template' => false, // new in 2.2
