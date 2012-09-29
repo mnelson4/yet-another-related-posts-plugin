@@ -90,11 +90,7 @@ If you would like to add the Related Posts display elsewhere, edit your relevant
 
 The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized in version 3.5.
 
-If you find that the YARPP database calls are still too database-intensive, try turning off "display results from all post types." This option can be found in the "Relatedness" metabox which you can display from the "Screen Options" tab.
-
-If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality.
-
-If you are in the process of looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
+If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality. If you are looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
 
 = Many pages list "no related posts". =
 
@@ -102,7 +98,7 @@ Most likely you have "no related posts" right now as the default "match threshol
 
 = Are there any plugins that are incompatible with YARPP? =
 
-* DISQUS: go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
+* [DISQUS](https://wordpress.org/extend/plugins/disqus-comment-system/): go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
 * [SEO_Pager plugin](http://wordpress.org/support/topic/267966): turn off the automatic display option in SEO Pager and instead add the code manually.
 * [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
 * [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
