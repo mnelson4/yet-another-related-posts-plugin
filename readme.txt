@@ -182,7 +182,7 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
-* Croatian (`hr`) by [gocroatia.com](http://gocroatia.com)
+* Croatian (`hr`) by [GoCroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
