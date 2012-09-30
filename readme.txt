@@ -182,6 +182,7 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
+* Croatian (`hr`) by [gocroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
@@ -230,6 +231,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 * New Help tab, which displays help text from the readme.
 * Retina icons! Now served faster, in sprite form.
+* Added Croatian (`hr`) localization by [gocroatia.com](http://gocroatia.com)
 * Cleanup:
 	* Bugfix: stopwords would not be loaded if WPLANG is defined but blank.
 	* Added new `stats` method to `YARPP_Cache_*` objects.
