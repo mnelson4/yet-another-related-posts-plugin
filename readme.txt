@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.1
 Tested up to: 3.5
-Stable tag: 3.5.3
+Stable tag: 3.5.4
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
@@ -182,7 +182,7 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
-* Croatian (`hr`) by [gocroatia.com](http://gocroatia.com)
+* Croatian (`hr`) by [GoCroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
