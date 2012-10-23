@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.1
 Tested up to: 3.5
-Stable tag: 3.5.4
+Stable tag: 3.5.5
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
@@ -227,8 +227,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.5.4 =
+= 3.5.5 =
+* Quick bugfix for how admin screen code was loaded in in WordPress < 3.3.
 
+= 3.5.4 =
 * New Help tab, which displays help text from the readme.
 * Retina icons! Now served faster, in sprite form.
 * Added Croatian (`hr`) localization by [gocroatia.com](http://gocroatia.com)
@@ -239,7 +241,6 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Changed default option of "show only previous posts" to `false` and removed FAQ text, as it no longer improves performance much.
 
 = 3.5.3 =
-
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-no-related-posts-7): Fixed a common cause of "no related posts"!
 * Better post revision handling
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-database-errors-upon-activation): setup wasn't automatic for network activations.
