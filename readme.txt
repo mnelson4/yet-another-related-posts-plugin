@@ -227,6 +227,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.5.6 =
+* Typo fix for postmeta cache
+
 = 3.5.5 =
 * Quick bugfix for how admin screen code was loaded in in WordPress < 3.3.
 
