@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.1
 Tested up to: 3.5
-Stable tag: 3.5.5
+Stable tag: 3.5.6
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
@@ -51,6 +51,12 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 </blockquote>
 
 &mdash; [Matt Cutts](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/), head of Webspam, Google
+
+<blockquote>
+"One way of getting search engines to get to your older content a bit easier, thus increasing your WordPress SEO capabilites a LOT, is by using a related posts plugin. These plugins search through your posts database to find posts with the same subject, and add links to these posts. There are quite a few related posts plugins but I tend to stick with the Yet Another Related Posts Plugin..."
+</blockquote>
+
+&mdash; [Yoast (Joost de Valk)](http://yoast.com/articles/wordpress-seo/)
 
 == Installation ==
 
@@ -182,6 +188,7 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
+* Traditional Chinese (Taiwan, `zh_TW`) by [Pseric](http://www.freegroup.org/)
 * Croatian (`hr`) by [GoCroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
@@ -229,6 +236,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.5.6 =
 * Typo fix for postmeta cache
+* Added Traditional Chinese (Taiwan, `zh_TW`) localization by [Pseric](http://www.freegroup.org/)
 
 = 3.5.5 =
 * Quick bugfix for how admin screen code was loaded in in WordPress < 3.3.
