@@ -299,7 +299,7 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 		<li><a href="http://wordpress.org/support/plugin/yet-another-related-posts-plugin" target="_blank"><span class='icon icon-wordpress'></span> <?php _e('YARPP Forum', 'yarpp'); ?></a></li>
 		<li><a href="http://twitter.com/yarpp" target="_blank"><span class='icon icon-twitter'></span> <?php _e('YARPP on Twitter', 'yarpp'); ?></a></li>
 		<li><a href="http://yarpp.org" target="_blank"><span class='icon icon-plugin'></span> <?php _e('YARPP on the Web', 'yarpp'); ?></a></li>
-		<li><a href="http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/" target="_blank"><span class='icon icon-star <?php if ($yarpp->is_happy()) echo 'spin'; ?>'></span> <?php _e('Rate YARPP on WordPress.org', 'yarpp'); ?></a></li>
+		<li><a href="http://wordpress.org/support/view/plugin-reviews/yet-another-related-posts-plugin" target="_blank"><span class='icon icon-star <?php if ($yarpp->is_happy()) echo 'spin'; ?>'></span> <?php _e('Review YARPP on WordPress.org', 'yarpp'); ?></a></li>
 		<li><a href='http://tinyurl.com/donatetomitcho' target='_new'><span class='icon icon-paypal'></span> <img src="https://www.paypal.com/<?php echo $this->paypal_lang(); ?>i/btn/btn_donate_SM.gif" name="submit" alt="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal');?>" title="<?php _e('Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal','yarpp');?>"/></a></li>
 	 </ul>
 <?php
