@@ -54,18 +54,6 @@ function yarpp_get_option($option = null) {
 	return $yarpp->get_option($option);
 }
 
-// since 3.3.2: fix for WP 3.0.x
-if ( !function_exists( 'self_admin_url' ) ) {
-	function self_admin_url($path = '', $scheme = 'admin') {
-		if ( defined( 'WP_NETWORK_ADMIN' ) && WP_NETWORK_ADMIN )
-			return network_admin_url($path, $scheme);
-		elseif ( defined( 'WP_USER_ADMIN' ) && WP_USER_ADMIN )
-			return user_admin_url($path, $scheme);
-		else
-			return admin_url($path, $scheme);
-	}
-}
-
 function yarpp_plugin_activate() {
 	update_option( 'yarpp_activated', true );
 }
