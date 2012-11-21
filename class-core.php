@@ -518,6 +518,104 @@ class YARPP {
 		return $taxonomy->show_ui;
 	}
 	
+	public function optin_data( $recompute = false ) {
+		global $wpdb, $yarpp;
+
+		if ( !$recompute && false !== ($result = get_transient('yarpp_optin_data')) )
+			return $result;
+
+		$comments = wp_count_comments();
+		$users = count_users();
+
+		$settings = get_option( 'yarpp' );
+		$collect = array_flip(array(
+			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
+			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
+			'template', 'rss_template', 'show_pass_post', 'cross_relate',
+			'auto_display', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
+			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax'
+		));
+		$check_changed = array(
+			'before_title', 'after_title', 'before_post', 'after_post',
+			'before_related', 'after_related', 'no_results', 'order',
+			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post', 				'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
+			'exclude'
+		);
+
+		$data = array(
+			'versions' => array(
+				'yarpp' => YARPP_VERSION,
+				'wp' => get_bloginfo( 'version' ),
+				'php' => phpversion()
+			),
+			'yarpp' => array(
+				'settings' => array_intersect_key( $settings, $collect ),
+				'changed_settings' => array(),
+				'cache_engine' => YARPP_CACHE_TYPE
+			),
+			'stats' => array(
+				'counts' => array(),
+				'terms' => array(),
+				'comments' => array(
+					'moderated' => $comments->moderated,
+					'approved' => $comments->approved,
+					'total' => $comments->total_comments,
+					'posts' => $wpdb->get_var( "select count(ID) from $wpdb->posts where post_type = 'post' and comment_count > 0" )
+				),
+				'users' => $wpdb->get_var("select count(ID) from $wpdb->users"),
+			),
+			'locale' => get_bloginfo( 'language' ),
+			'url' => get_bloginfo('url'),
+			'plugins' => array(
+				'active' => get_option( 'active_plugins' ),
+				'sitewide' => get_site_option( 'active_sitewide_plugins')
+			)
+		);
+		
+		foreach ( $check_changed as $key ) {
+			if ( $yarpp->default_options[$key] != $settings[$key] )
+				$data['yarpp']['changed_settings'][] = $key;
+		}
+		
+		if ( method_exists( $yarpp->cache, 'cache_status' ) )
+			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
+		if ( method_exists( $yarpp->cache, 'stats' ) )
+			$data['yarpp']['stats'] = $yarpp->cache->stats();
+			
+		if ( method_exists( $wpdb, 'db_version' ) )
+			$data['versions']['mysql'] = preg_replace('/[^0-9.].*/', '', $wpdb->db_version());
+
+		$counts = array();
+		foreach (get_post_types( array('public' => true) ) as $post_type) {
+			$counts[$post_type] = wp_count_posts($post_type);
+		}
+		$data['stats']['counts'] = wp_list_pluck($counts, 'publish');
+
+		foreach (get_taxonomies( array('public' => true) ) as $taxonomy) {
+			$data['stats']['terms'][$taxonomy] = wp_count_terms($taxonomy);
+		}
+		
+		if ( is_multisite() ) {
+			$data['multisite'] = array(
+				'url' => network_site_url(),
+				'users' => get_user_count(),
+				'sites' => get_blog_count()
+			);
+		}
+		
+		set_transient('yarpp_optin_data', $data, 60 * 60 * 24 * 7);
+		
+		return $data;
+	}
+	
+	function pretty_echo( $data ) {
+		echo "<pre>";
+		$formatted = print_r($data, true);
+		$formatted = str_replace(array('Array', '(', ')', "\n    "), array('', '', '', "\n"), $formatted);
+		echo preg_replace("/\n\s*\n/u", "\n", $formatted);
+		echo "</pre>";
+	}
+	
 	/*
 	 * CORE LOOKUP + DISPLAY FUNCTIONS
 	 */
