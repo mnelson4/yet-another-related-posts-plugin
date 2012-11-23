@@ -646,7 +646,7 @@ class YARPP {
 		
 		$this->setup_active_cache( $args );
 
-		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp', 'optin' );
 		extract( $this->parse_args( $args, $options ) );
 
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -709,6 +709,9 @@ class YARPP {
 	
 		if ($promote_yarpp && $domain != 'metabox')
 			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+		
+		if ( $optin )
+			$output .= "<img src='http://yarpp.org/pixel.png?" . md5(get_bloginfo('url')) . "'/>\n";
 	
 		if ($echo)
 			echo $output;
