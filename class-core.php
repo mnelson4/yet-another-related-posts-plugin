@@ -103,7 +103,8 @@ class YARPP {
 					'post_tag' => 1
 				)
 			),
-			'require_tax' => array() // new in 3.5
+			'require_tax' => array(), // new in 3.5
+			'optin' => false // new in 3.6
 		);
 	}
 	

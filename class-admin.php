@@ -85,6 +85,11 @@ class YARPP_Admin {
 				'title' => __('Developing with YARPP', 'yarpp'),
 				'callback' => array( &$this, 'help_dev' )
 			));
+			$current_screen->add_help_tab(array(
+				'id' => 'optin',
+				'title' => __('Optional Data Collection', 'yarpp'),
+				'callback' => array( &$this, 'help_optin' )
+			));
 		}
 		
 		return $current_screen;
@@ -114,6 +119,11 @@ class YARPP_Admin {
 		else
 			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/">' . __(
 			'Developing with YARPP', 'yarpp') . '</a>';
+	}
+
+	public function help_optin() {
+		// TODO: add text
+		echo 'rar';
 	}
 	
 	// faux-markdown, required for the help text rendering

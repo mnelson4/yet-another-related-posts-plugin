@@ -334,6 +334,23 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 	}
 }
 
+add_meta_box('yarpp_display_optin', __('Help Improve YARPP','yarpp'), array(new YARPP_Meta_Box_Optin, 'display'), 'settings_page_yarpp', 'side', 'core');
+
+class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
+	function display() {
+		global $yarpp;
+		
+		// TODO: fix this text and i18nize it
+		echo "<input type='checkbox' id='optin' name='optin' value='true'";
+		checked(yarpp_get_option('optin') == 1);
+		echo " /> ";
+		
+		echo '<label for="optin">' . __('Send YARPP settings and usage data back to YARPP.', 'yarpp') . '</label>';
+		
+		echo '<p>This is entirely optional, but will help improve future versions of YARPP. <input type="button" value="Learn more" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
+	}
+}
+
 add_meta_box('yarpp_display_contact', __('Contact YARPP','yarpp'), array(new YARPP_Meta_Box_Contact, 'display'), 'settings_page_yarpp', 'side', 'core');
 
 // since 3.3: hook for registering new YARPP meta boxes

@@ -154,4 +154,9 @@ jQuery(function($) {
 	}
 	$('#yarpp_pool .handlediv, #yarpp_pool-hide').click(load_disallows);
 	load_disallows();
+
+	$('#yarpp-optin-learnmore').click(function() {
+		$('#tab-link-optin a').click();
+		$('#contextual-help-link').click();
+	});
 });
