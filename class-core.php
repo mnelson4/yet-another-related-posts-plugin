@@ -948,7 +948,7 @@ class YARPP {
 	function version_info( $enforce_cache = false ) {
 		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 			$version = YARPP_VERSION;
-			$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
+			$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
 			
 			if (is_wp_error($remote))
 				return false;
