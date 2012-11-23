@@ -234,6 +234,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 3.6 =
+* ...
+* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
+
 = 3.5.6 =
 * Typo fix for postmeta cache
 * Added Traditional Chinese (Taiwan, `zh_TW`) localization by [Pseric](http://www.freegroup.org/)
