@@ -17,7 +17,7 @@ class YARPP_Admin {
 		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
-		add_action( 'current_screen', array( $this, 'settings_screen' ), 10, 1 );
+		add_filter( 'current_screen', array( $this, 'settings_screen' ) );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -68,22 +68,31 @@ class YARPP_Admin {
 	// 3.5.4: only load metabox code if we're going to be on the settings page
 	function settings_screen( $current_screen ) {
 		if ( $current_screen->id != 'settings_page_yarpp' )
-			return;
+			return $current_screen;
 		
 		// new in 3.3: load options page sections as metaboxes
 		require_once('options-meta-boxes.php');		
 
-		$current_screen->add_help_tab(array(
-			'id' => 'faq',
-			'title' => __('Frequently Asked Questions', 'yarpp'),
-			'callback' => array( &$this, 'help_faq' )
-		));
-
-		$current_screen->add_help_tab(array(
-			'id' => 'dev',
-			'title' => __('Developing with YARPP', 'yarpp'),
-			'callback' => array( &$this, 'help_dev' )
-		));
+		// 3.5.5: check that add_help_tab method callable (WP >= 3.3)
+		if ( is_callable(array($current_screen, 'add_help_tab')) ) {
+			$current_screen->add_help_tab(array(
+				'id' => 'faq',
+				'title' => __('Frequently Asked Questions', 'yarpp'),
+				'callback' => array( &$this, 'help_faq' )
+			));	
+			$current_screen->add_help_tab(array(
+				'id' => 'dev',
+				'title' => __('Developing with YARPP', 'yarpp'),
+				'callback' => array( &$this, 'help_dev' )
+			));
+			$current_screen->add_help_tab(array(
+				'id' => 'optin',
+				'title' => __('Optional Data Collection', 'yarpp'),
+				'callback' => array( &$this, 'help_optin' )
+			));
+		}
+		
+		return $current_screen;
 	}
 	
 	private $readme = null;
@@ -110,6 +119,11 @@ class YARPP_Admin {
 		else
 			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/">' . __(
 			'Developing with YARPP', 'yarpp') . '</a>';
+	}
+
+	public function help_optin() {
+		// TODO: add text
+		echo 'rar';
 	}
 	
 	// faux-markdown, required for the help text rendering
@@ -150,6 +164,7 @@ class YARPP_Admin {
 		$screen = get_current_screen();
 		if ( !is_null($screen) && $screen->id == 'settings_page_yarpp' ) {
 			wp_enqueue_script( 'postbox' );
+			$this->pointer_enqueue();
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
 			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 		}
