@@ -552,7 +552,6 @@ class YARPP {
 			),
 			'yarpp' => array(
 				'settings' => array_intersect_key( $settings, $collect ),
-				'changed_settings' => array(),
 				'cache_engine' => YARPP_CACHE_TYPE
 			),
 			'stats' => array(
@@ -574,10 +573,12 @@ class YARPP {
 			)
 		);
 		
+		$changed = array();
 		foreach ( $check_changed as $key ) {
 			if ( $yarpp->default_options[$key] != $settings[$key] )
-				$data['yarpp']['changed_settings'][] = $key;
+				$changed[] = $key;
 		}
+		$data['yarpp']['changed_settings'] = implode( '|', $changed );
 		
 		if ( method_exists( $yarpp->cache, 'cache_status' ) )
 			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
