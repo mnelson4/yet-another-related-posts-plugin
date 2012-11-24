@@ -340,6 +340,9 @@ class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 		
+		if ( $this->get_option('optin') )
+			$this->optin_ping();
+		
 		// TODO: fix this text and i18nize it
 		echo "<input type='checkbox' id='optin' name='optin' value='true'";
 		checked(yarpp_get_option('optin') == 1);

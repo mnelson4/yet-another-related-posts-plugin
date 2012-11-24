@@ -192,6 +192,9 @@ class YARPP {
 			$this->activate();
 		else
 			$this->upgrade();
+		
+		if ( $this->get_option('optin') )
+			$this->optin_ping();
 	}
 	
 	function activate() {
@@ -519,11 +522,8 @@ class YARPP {
 		return $taxonomy->show_ui;
 	}
 	
-	public function optin_data( $recompute = false ) {
+	public function optin_data() {
 		global $wpdb, $yarpp;
-
-		if ( !$recompute && false !== ($result = get_transient('yarpp_optin_data')) )
-			return $result;
 
 		$comments = wp_count_comments();
 		$users = count_users();
@@ -568,8 +568,8 @@ class YARPP {
 			'locale' => get_bloginfo( 'language' ),
 			'url' => get_bloginfo('url'),
 			'plugins' => array(
-				'active' => get_option( 'active_plugins' ),
-				'sitewide' => get_site_option( 'active_sitewide_plugins')
+				'active' => implode( '|', get_option( 'active_plugins', array() ) ),
+				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
 			)
 		);
 		
@@ -580,8 +580,13 @@ class YARPP {
 		
 		if ( method_exists( $yarpp->cache, 'cache_status' ) )
 			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
-		if ( method_exists( $yarpp->cache, 'stats' ) )
-			$data['yarpp']['stats'] = $yarpp->cache->stats();
+		if ( method_exists( $yarpp->cache, 'stats' ) ) {
+			$stats = $yarpp->cache->stats();
+			$flattened = array();
+			foreach ( $stats as $key => $value )
+				$flattened[] = "$key:$value";
+			$data['yarpp']['stats'] = implode( '|', $flattened );
+		}
 			
 		if ( method_exists( $wpdb, 'db_version' ) )
 			$data['versions']['mysql'] = preg_replace('/[^0-9.].*/', '', $wpdb->db_version());
@@ -603,8 +608,6 @@ class YARPP {
 				'sites' => get_blog_count()
 			);
 		}
-		
-		set_transient('yarpp_optin_data', $data, 60 * 60 * 24 * 7);
 		
 		return $data;
 	}
@@ -944,7 +947,7 @@ class YARPP {
 	 * UTILS
 	 */
 	
-	// new in 3.3: use PHP serialized format instead of JSON
+	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
 		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 			$version = YARPP_VERSION;
@@ -958,6 +961,21 @@ class YARPP {
 		}
 		return $result;
 	}
+
+	// @since 3.6: optional collection of  (default off)
+	function optin_ping() {
+		if ( get_transient( 'yarpp_optin' ) )
+			return true;
+
+		$remote = wp_remote_post( "http://yarpp.org/optin/1/", $this->optin_data() );
+		
+		if ( is_wp_error($remote) )
+			return false;
+		
+		if ( $result = $remote['body'] )
+			set_transient( 'yarpp_optin', $result, 60 * 60 * 24 * 7 );
+	}
+
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
 	function clean_pre( $text ) {
