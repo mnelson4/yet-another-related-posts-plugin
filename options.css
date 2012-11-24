@@ -100,14 +100,7 @@ a.yarpp_help:hover {
 
 .branch-3-4 .yarpp_help, .branch-3-3 .yarpp-help {
 	background-image: url('../../../wp-includes/images/wpicons.png?ver=20120720');
-	background-size: 280px 20px;
-	background-position: -260px -10px;
 }
-.branch-3-4 a.yarpp_help:hover, .branch-3-3 a.yarpp_help:hover {
-	text-decoration: none;
-	background-position: -260px -0px;
-}
-
 
 .exclude_terms span {
 	display: inline-block;
