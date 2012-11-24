@@ -968,7 +968,7 @@ class YARPP {
 		if ( get_transient( 'yarpp_optin' ) )
 			return true;
 
-		$remote = wp_remote_post( "http://yarpp.org/optin/1/", $this->optin_data() );
+		$remote = wp_remote_post( "http://yarpp.org/optin/1/", wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
 		
 		if ( is_wp_error($remote) )
 			return false;
