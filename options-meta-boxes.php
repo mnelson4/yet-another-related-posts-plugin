@@ -2,9 +2,9 @@
 
 class YARPP_Meta_Box {
 	function checkbox($option,$desc,$tr="<tr valign='top'><th class='th-full' colspan='2' scope='row'>",$inputplus = '',$thplus='') {
-		echo "$tr<input $inputplus type='checkbox' name='$option' value='true'";
+		echo "$tr<input $inputplus type='checkbox' name='$option' id='yarpp-$option' value='true'";
 		checked(yarpp_get_option($option) == 1);
-		echo "  /> $desc</th>$thplus
+		echo "  /> <label for='yarpp-$option'>$desc</label></th>$thplus
 			</tr>";
 	}
 	function template_checkbox( $rss = false, $trextra = '' ) {
@@ -14,7 +14,7 @@ class YARPP_Meta_Box {
 		echo "<tr valign='top'{$trextra}><th colspan='2'><input type='checkbox' name='{$pre}use_template' class='{$pre}template' value='true'";
 		disabled(!count($yarpp->admin->get_templates()), true);
 		checked( !!$chosen_template );
-		echo " /> " . __("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>" . "</th></tr>";
+		echo " />  <label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')."</span></a>" . "</label></th></tr>";
 	}
 	function textbox($option,$desc,$size=2,$tr="<tr valign='top'>
 				<th scope='row'>", $note = '') {
