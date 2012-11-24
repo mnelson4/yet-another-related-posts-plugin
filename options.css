@@ -102,3 +102,53 @@ a.info:hover span {
 .exclude_terms span {
 	display: inline-block;
 }
+
+.yarpp_form_row {
+	overflow: auto;
+}
+.yarpp_form_row > div {
+	padding: 8px;
+	display: inline-block;
+	vertical-align: top;
+	*display: inline;
+}
+.yarpp_form_checkbox > div {
+	vertical-align: baseline;
+}
+.yarpp_form_select > div {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.yarpp_form_label {
+	width: 200px;
+}
+.yarpp_form_textbox > .yarpp_form_label {
+	padding-top: 13px;
+}
+.yarpp_form_select > .yarpp_form_label {
+	padding-top: 8px;
+}
+
+.yarpp_code_display {
+	border-left: 8px transparent solid;
+	width: 350px;
+	float: right;
+}
+.yarpp_code_display div {
+	overflow: auto;
+	max-height: 500px;
+}
+.yarpp_scroll_wrapper {
+	overflow: auto;
+	max-height: 100px;
+	width: 60%;
+}
+
+@media all and (max-width:1200px) {
+	.yarpp_scroll_wrapper {
+		width: 50%;
+	}
+	.yarpp_code_display {
+		max-width: 60%;
+	}	
+}

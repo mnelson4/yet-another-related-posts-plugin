@@ -16,12 +16,12 @@ jQuery(function($) {
 	template();
 	
 	function excerpt() {
-		if (!$('.template').attr('checked') && $('.show_excerpt').attr('checked'))
+		if (!$('.template').attr('checked') && $('#yarpp-show_excerpt').attr('checked'))
 			$('.excerpted').show();
 		else
 			$('.excerpted').hide();
 	}
-	$('.show_excerpt,.template').click(excerpt);
+	$('#yarpp-show_excerpt, .template').click(excerpt);
 
 	var loaded_demo_web = false;
 	function display() {
@@ -49,7 +49,7 @@ jQuery(function($) {
 	function rss_display() {
 		if ( !$('#yarpp_display_rss .inside').is(':visible') )
 			return;
-		if ($('.rss_display').attr('checked')) {
+		if ($('#yarpp-rss_display').attr('checked')) {
 			$('.rss_displayed').show();
 			if ( !loaded_demo_rss ) {
 				loaded_demo_rss = true;
@@ -70,7 +70,7 @@ jQuery(function($) {
 			$('.rss_displayed').hide();
 		}
 	}
-	$('.rss_display, #yarpp_display_rss .handlediv, #yarpp_display_rss-hide').click(rss_display);
+	$('#yarpp-rss_display, #yarpp_display_rss .handlediv, #yarpp_display_rss-hide').click(rss_display);
 	rss_display();
 	
 	function rss_template() {
@@ -86,12 +86,12 @@ jQuery(function($) {
 	$('.rss_template').click(rss_template);
 	
 	function rss_excerpt() {
-		if ($('.rss_display').attr('checked') && $('.rss_show_excerpt').attr('checked'))
+		if ($('#yarpp-rss_display').attr('checked') && $('#yarpp-rss_show_excerpt').attr('checked'))
 			$('.rss_excerpted').show();
 		else
 			$('.rss_excerpted').hide();
 	}
-	$('.rss_display,.rss_show_excerpt').click(rss_excerpt);
+	$('#yarpp-rss_display, #yarpp-rss_show_excerpt').click(rss_excerpt);
 
 	var loaded_disallows = false;
 	function load_disallows() {
@@ -143,7 +143,7 @@ jQuery(function($) {
 			taxonomy = id.replace('exclude_','');
 			
 			load_disallow(taxonomy);
-			$('#exclude_' + taxonomy).parent('.scroll_wrapper').scroll(function() {
+			$('#exclude_' + taxonomy).parent('.yarpp_scroll_wrapper').scroll(function() {
 				var parent = $(this),
 					content = parent.children('div');
 				if ( parent.scrollTop() + parent.height() > content.height() - 10 )
