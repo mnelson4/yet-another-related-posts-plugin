@@ -159,4 +159,18 @@ jQuery(function($) {
 		$('#tab-link-optin a').click();
 		$('#contextual-help-link').click();
 	});
+
+	$('.yarpp_help[data-help]').hover(function() {
+		var help = '<p>' + $(this).attr('data-help') + '</p>',
+		options = {
+			content: help,
+			position: {
+				edge: 'left',
+				align: 'center',
+				of: $(this)
+			}};
+		
+		var pointer = $(this).pointer(options).pointer('open');
+		$(this).closest('.yarpp_form_row, p').mouseleave(function () { pointer.pointer('close'); });
+	});
 });

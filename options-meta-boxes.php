@@ -14,7 +14,7 @@ class YARPP_Meta_Box {
 		echo "<div class='yarpp_form_row $class'><div><input type='checkbox' name='{$pre}use_template' class='{$pre}template' value='true'";
 		disabled(!count($yarpp->admin->get_templates()), true);
 		checked( !!$chosen_template );
-		echo " />  <label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <a href='#' class='info'>" . __('more&gt;','yarpp') . "<span>" . __("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp') . "</span></a>" . "</label></div></div>";
+		echo " />  <label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')) . "'>&nbsp;</span>" . "</label></div></div>";
 	}
 	function template_file( $rss = false, $class = '' ) {
 		global $yarpp;
@@ -120,7 +120,7 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		_e('"The Pool" refers to the pool of posts and pages that are candidates for display as related to the current entry.','yarpp');
 		echo "</p>\n";
 	?>
-		<div class='yarpp_form_row'><div class='yarpp_form_label'><?php _e('Post types considered:', 'yarpp'); ?></div><div><?php echo implode(', ', $yarpp->get_post_types( 'label' )); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes'><?php _e('more&gt;','yarpp');?></a></div></div>
+		<div class='yarpp_form_row'><div class='yarpp_form_label'><?php _e('Post types considered:', 'yarpp'); ?></div><div><?php echo implode(', ', $yarpp->get_post_types( 'label' )); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes' class='yarpp_help'>&nbsp;</a></div></div>
 
 	<?php
 		foreach ($yarpp->get_taxonomies() as $taxonomy) {
@@ -157,7 +157,7 @@ class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 	?>
-		<p><?php _e('YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <a href="#" class='info'><?php _e('more&gt;','yarpp');?><span><?php _e('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post\'s related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp');?></span></a></p>
+		<p><?php _e('YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>.','yarpp');?> <span class='yarpp_help' data-help="<?php echo esc_attr(__('The higher the match threshold, the more restrictive, and you get less related posts overall. The default match threshold is 5. If you want to find an appropriate match threshhold, take a look at some post\'s related posts display and their scores. You can see what kinds of related posts are being picked up and with what kind of match scores, and determine an appropriate threshold for your site.','yarpp'));?>">&nbsp;</span></p>
 
 	<?php
 		$this->textbox( 'threshold', __('Match threshold:','yarpp') );
@@ -168,7 +168,7 @@ class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 			$this->tax_weight($taxonomy);
 		}
 	
-		$this->checkbox('cross_relate',__("Display results from all post types",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("When \"display results from all post types\" is off, only posts will be displayed as related to a post, only pages will be displayed as related to a page, etc.",'yarpp')."</span></a>");
+		$this->checkbox('cross_relate',__("Display results from all post types",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("When \"display results from all post types\" is off, only posts will be displayed as related to a post, only pages will be displayed as related to a page, etc.", 'yarpp')) . "'>&nbsp;</span>");
 		$this->checkbox('past_only',__("Show only previous posts?",'yarpp'));
 	}
 }
@@ -180,7 +180,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		global $yarpp;
 
 		echo '<div class="yarpp_code_display"><strong>' . __("Website display code example",'yarpp') . '</strong><br /><small>' . __("(Update options to reload.)", 'yarpp') . "</small><br/><div id='display_demo_web'></div></div>";
-		$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')."</span></a>");
+		$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')) . "'>&nbsp;</span>");
 
 		$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
 		$this->template_checkbox( false );
@@ -199,8 +199,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'not_templated');
 
 		$this->checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
-		." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>"
-		.sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>") ."</span></a>");
+		." <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) ."'>&nbsp;</span>");
 	}
 }
 
@@ -212,8 +211,8 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 
 		echo '<div class="rss_displayed yarpp_code_display"><b>' . __("RSS display code example",'yarpp') . '</b><br /><small>' . __("(Update options to reload.)",'yarpp') . "</small><br/><div id='display_demo_rss'></div></div>";
 	
-		$this->checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')."</span></a>",'');
-		$this->checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>".__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')."</span></a>", 'rss_displayed');
+		$this->checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')) . "'>&nbsp;</span>",'');
+		$this->checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')) . "'>&nbsp;</span>", 'rss_displayed');
 	
 		$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'), 2, 'rss_displayed');
 		$this->template_checkbox( true, 'rss_displayed' );
@@ -231,7 +230,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		
 		$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'rss_not_templated rss_displayed');
 		
-		$this->checkbox('rss_promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')." <a href='#' class='info'>".__('more&gt;','yarpp')."<span>" . sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>" . htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>") . "</span></a>",'rss_displayed');
+		$this->checkbox('rss_promote_yarpp', __("Help promote Yet Another Related Posts Plugin?",'yarpp') . " <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>" . htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) . "'>&nbsp;</span>", 'rss_displayed');
 	}
 }
 

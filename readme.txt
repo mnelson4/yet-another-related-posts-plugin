@@ -5,7 +5,7 @@ Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
-Requires at least: 3.1
+Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: 3.5.6
 License: GPLv2 or later
@@ -236,7 +236,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 3.6 =
 * ...
-* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Code cleanup:
+	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
+	* Inline help in settings screen now use WordPress pointers
+	* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
 * Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
 
 = 3.5.6 =

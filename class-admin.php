@@ -164,6 +164,7 @@ class YARPP_Admin {
 		$screen = get_current_screen();
 		if ( !is_null($screen) && $screen->id == 'settings_page_yarpp' ) {
 			wp_enqueue_script( 'postbox' );
+			$this->pointer_enqueue();
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
 			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 		}
