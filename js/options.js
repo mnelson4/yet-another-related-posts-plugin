@@ -161,16 +161,21 @@ jQuery(function($) {
 	});
 
 	$('.yarpp_help[data-help]').hover(function() {
-		var help = '<p>' + $(this).attr('data-help') + '</p>',
+		var that = $(this),
+		help = '<p>' + that.attr('data-help') + '</p>',
 		options = {
 			content: help,
 			position: {
 				edge: 'left',
 				align: 'center',
-				of: $(this)
-			}};
+				of: that
+			},
+			document: {body: that}
+		};
 		
-		var pointer = $(this).pointer(options).pointer('open');
-		$(this).closest('.yarpp_form_row, p').mouseleave(function () { pointer.pointer('close'); });
+		var pointer = that.pointer(options).pointer('open');
+		that.closest('.yarpp_form_row, p').mouseleave(function () {
+			pointer.pointer('close');
+		});
 	});
 });
