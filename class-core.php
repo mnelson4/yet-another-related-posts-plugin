@@ -266,6 +266,7 @@ class YARPP {
 		$this->version_info(true);
 	
 		update_option('yarpp_version',YARPP_VERSION);
+		delete_transient( 'yarpp_optin' );
 	}
 	
 	function upgrade_3_4b2() {
