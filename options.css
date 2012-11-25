@@ -187,8 +187,9 @@ a.yarpp_help:hover {
 	-webkit-border-radius: 3px;
 	border-radius: 7px;
 	border: 1px solid #aaa;
-	margin: 5px;
-	margin-right: 10px;
+	margin: 10px;
+	margin-right: 5px;
+	margin-bottom: 20px;
 	cursor: pointer;
 	background: #f3f3f3;
 	background-image: -webkit-linear-gradient(top, #FEFEFE, #F4F4F4);
@@ -200,16 +201,18 @@ a.yarpp_help:hover {
 	-webkit-box-shadow: 1px 1px 7px 1px #bbb;
 	box-shadow: 1px 1px 7px 1px #bbb;
 }
-.yarpp_template_button.disabled {
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-	border-color: #ddd !important;
-	color: #bbb !important;
+.yarpp_template_button.disabled, .yarpp_template_button.disabled:hover, .yarpp_template_button.disabled:active {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-color: #ddd;
 	background: #f3f3f3;
 	background-image: -webkit-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 	background-image: -moz-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 	background-image: -o-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 	background-image: linear-gradient(top, #FEFEFE, #F4F4F4) !important;
+}
+.yarpp_template_button.disabled > div.label {
+	color: #bbb !important;
 }
 .yarpp_template_button:hover {
 	border-color: #999;

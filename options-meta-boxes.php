@@ -226,7 +226,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 
-		echo "<div style='overflow:hidden'>";
+		echo "<div style='overflow:visible'>";
 			echo '<div class="yarpp_code_display"><strong>' . __("Website display code example",'yarpp') . '</strong><br /><small>' . __("(Update options to reload.)", 'yarpp') . "</small><br/><div id='display_demo_web'></div></div>";
 			$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')) . "'>&nbsp;</span>");
 	
@@ -264,7 +264,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 
-		echo "<div style='overflow:hidden'>";
+		echo "<div style='overflow:visible'>";
 			echo '<div class="rss_displayed yarpp_code_display"><b>' . __("RSS display code example",'yarpp') . '</b><br /><small>' . __("(Update options to reload.)",'yarpp') . "</small><br/><div id='display_demo_rss'></div></div>";
 	
 			$this->checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')) . "'>&nbsp;</span>",'');
