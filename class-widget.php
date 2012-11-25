@@ -43,6 +43,7 @@ class YARPP_Widget extends WP_Widget {
 			'promote_yarpp' => isset($new_instance['promote_yarpp']),
 			'template' => isset($new_instance['use_template']) ? $new_instance['template_file'] : false
 		);
+		// @todo add thumbnails support
 
 		if ( !!$instance['template'] ) // don't save the title change.
 			$instance['title'] = $old_instance['title'];

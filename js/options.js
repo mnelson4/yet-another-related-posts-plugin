@@ -3,7 +3,8 @@ jQuery(function($) {
 	postboxes.add_postbox_toggles(pagenow);
 
 	function template() {
-		if ($('.template').attr('checked')) {
+		var value = $('#yarpp-use_template').val();
+		if ( value == 'custom' ) {
 			$('.templated').show();
 			$('.not_templated').hide();
 		} else {
@@ -12,7 +13,7 @@ jQuery(function($) {
 		}
 		excerpt();
 	}
-	$('.template').click(template);
+	$('.template').change(template);
 	template();
 	
 	function excerpt() {
@@ -74,7 +75,8 @@ jQuery(function($) {
 	rss_display();
 	
 	function rss_template() {
-		if ($('.rss_template').attr('checked')) {
+		var value = $('#yarpp-rss_use_template').val();
+		if ( value == 'custom' ) {
 			$('.rss_templated').show();
 			$('.rss_not_templated').hide();
 		} else {
@@ -83,7 +85,7 @@ jQuery(function($) {
 		}
 		rss_excerpt();
 	}
-	$('.rss_template').click(rss_template);
+	$('.rss_template').change(rss_template);
 	
 	function rss_excerpt() {
 		if ($('#yarpp-rss_display').attr('checked') && $('#yarpp-rss_show_excerpt').attr('checked'))
@@ -177,6 +179,32 @@ jQuery(function($) {
 		that.closest('.yarpp_form_row, p').mouseleave(function () {
 			pointer.pointer('close');
 		});
+	});
+
+	$('.yarpp_template_button[data-help]').hover(function() {
+		var that = $(this),
+		help = '<p>' + that.attr('data-help') + '</p>',
+		options = {
+			content: help,
+			position: {
+				edge: 'left',
+				align: 'center',
+				of: that
+			},
+			document: {body: that}
+		};
+		
+		var pointer = that.pointer(options).pointer('open');
+		that.mouseleave(function () {
+			pointer.pointer('close');
+		});
+	});
+	$('.yarpp_template_button:not(.disabled)').click(function() {
+		$(this).siblings('input')
+			.val($(this).attr('data-value'))
+			.change();
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
 	});
 
 	$('.yarpp_copy_templates_button').live('click', function() {

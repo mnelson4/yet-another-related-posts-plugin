@@ -1,6 +1,12 @@
 <?php
 
 class YARPP_Meta_Box {
+	protected $template_text = '';
+	
+	function __construct() {
+		$this->template_text = __("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp');
+	}
+
 	function checkbox($option, $desc, $class = '') {
 		echo "<div class='yarpp_form_row yarpp_form_checkbox $class'><div scope='row'>";
 		echo "<input type='checkbox' name='$option' id='yarpp-$option' value='true'";
@@ -15,17 +21,44 @@ class YARPP_Meta_Box {
 	
 	function template_checkbox( $rss = false, $class = '' ) {
 		global $yarpp;
+
 		$pre = $rss ? 'rss_' : '';
 		$chosen_template = yarpp_get_option( "{$pre}template" );
-		echo "<div class='yarpp_form_row $class'><div><input type='checkbox' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='{$pre}template' value='true'";
-		disabled( !count($yarpp->admin->get_templates()), true );
-		checked( !!$chosen_template );
-		echo ' /> ';
+		$choice = false === $chosen_template ? 'builtin' :
+			( $chosen_template == 'thumbnails' ? 'thumbnails' : 'custom' );
 
-		// todo: i18n
-		$copy = "</p><p style='border-top: 1px solid #333; padding-top: 10px;'>This option is disabled because no YARPP templates were found in your theme. Would you like to copy some sample templates bundled with YARPP into your theme? <input type='button' class='button button-small yarpp_copy_templates_button' value='Copy Templates'/>";
+		echo "<div class='yarpp_form_row $class'>";
 		
-		echo "<label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp') . ( $this->offer_copy_templates() ? $copy : '')) . "'>&nbsp;</span>" . "</label></div></div>";
+			echo "<div data-value='builtin' class='yarpp_template_button";
+			if ( 'builtin' == $choice )
+				echo ' active';
+			echo "'><div class='image'></div><div class='label'>" . __('Basic list', 'yarpp') . "</div></div>";
+	
+			echo "<div data-value='thumbnails' class='yarpp_template_button disabled";
+			if ( 'thumbnails' == $choice )
+				echo ' active';
+			echo "'";
+			echo " data-help='not implemented yet -- mitcho'";
+			echo "><div class='image'></div><div class='label'>" . __('Thumbnails', 'yarpp') . "</div></div>";
+	
+			echo "<div data-value='custom' class='yarpp_template_button";
+			if ( 'custom' == $choice )
+				echo ' active';
+			if ( !count($yarpp->admin->get_templates()) )
+				echo ' disabled';
+			echo "'";
+			if ( !count($yarpp->admin->get_templates()) ) {
+				$help = __('This option is disabled because no YARPP templates were found in your theme.', 'yarpp');
+				if ( $this->offer_copy_templates() )
+					$help .= ' ' . __("Would you like to copy some sample templates bundled with YARPP into your theme?", 'yarpp') . "<input type='button' class='button button-small yarpp_copy_templates_button' value='" . esc_attr(__('Copy Templates', 'yarpp')) . "'/>";
+				echo " data-help='" . esc_attr( $help ) . "'";
+			}
+			echo "><div class='image'></div><div class='label'>" . __('Custom', 'yarpp') . "</div></div>";
+	
+			echo "<input type='hidden' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='{$pre}template' value='{$choice}' />";
+
+		echo "</div>";
+
 	}
 	function template_file( $rss = false, $class = '' ) {
 		global $yarpp;
@@ -202,6 +235,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		echo "</div>";
 
 		echo "<div class='postbox yarpp_subbox templated'>";
+			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( false );
 		echo "</div>";
 
@@ -241,6 +275,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		echo "</div>";
 		
 		echo "<div class='postbox yarpp_subbox rss_templated rss_displayed'>";
+			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( true );
 		echo "</div>";
 	

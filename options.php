@@ -123,8 +123,10 @@ if (isset($_POST['update_yarpp'])) {
 	else
 		$new_options['exclude'] = '';
 	
-	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
-	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
+	$new_options['template'] = $_POST['use_template'] == 'custom' ? $_POST['template_file'] : 
+		( $_POST['use_template'] == 'thumbnails' ? 'thumbnails' : false );
+	$new_options['rss_template'] = $_POST['rss_use_template'] == 'custom' ? $_POST['rss_template_file'] : 
+		( $_POST['rss_use_template'] == 'thumbnails' ? 'thumbnails' : false );
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);
