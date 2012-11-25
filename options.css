@@ -131,7 +131,7 @@ a.yarpp_help:hover {
 	padding-bottom: 5px;
 }
 .yarpp_form_label {
-	width: 150px;
+	width: 190px;
 }
 .yarpp_form_textbox > .yarpp_form_label {
 	padding-top: 13px;
@@ -173,5 +173,9 @@ a.yarpp_help:hover {
 }
 
 .template_file_wrap {
+	font-family: monospace;
+}
+
+.not_templated input[type=text], .rss_not_templated input[type=text] {
 	font-family: monospace;
 }

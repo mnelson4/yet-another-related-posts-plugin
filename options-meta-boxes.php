@@ -202,22 +202,22 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		echo "</div>";
 
 		echo "<div class='postbox yarpp_subbox templated'>";
-			$this->template_file( false, 'templated' );
+			$this->template_file( false );
 		echo "</div>";
 
 		echo "<div class='postbox yarpp_subbox not_templated'>";
-			$this->beforeafter(array('before_related', 'after_related'),__("Before / after related entries:",'yarpp'), 15, 'not_templated', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
-			$this->beforeafter(array('before_title', 'after_title'),__("Before / after each related entry:",'yarpp'),15, 'not_templated', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			$this->beforeafter(array('before_related', 'after_related'),__("Before / after related entries:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
+			$this->beforeafter(array('before_title', 'after_title'),__("Before / after each related entry:",'yarpp'),15, '', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 			
-			$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), 'not_templated');
+			$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), '');
 			$this->textbox('excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'excerpted');
 	
 			$this->beforeafter(array('before_post', 'after_post'), __("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 	
-			$this->displayorder('order');
-			
-			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'not_templated');
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, '');
 		echo "</div>";
+
+		$this->displayorder('order');			
 
 		$this->checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
 		." <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) ."'>&nbsp;</span>");
@@ -241,22 +241,22 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		echo "</div>";
 		
 		echo "<div class='postbox yarpp_subbox rss_templated rss_displayed'>";
-			$this->template_file( true, 'rss_templated' );
+			$this->template_file( true );
 		echo "</div>";
 	
 		echo "<div class='postbox yarpp_subbox rss_not_templated rss_displayed'>";
-			$this->beforeafter(array('rss_before_related', 'rss_after_related'),__("Before / after related entries:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
-			$this->beforeafter(array('rss_before_title', 'rss_after_title'),__("Before / after each related entry:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			$this->beforeafter(array('rss_before_related', 'rss_after_related'),__("Before / after related entries:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
+			$this->beforeafter(array('rss_before_title', 'rss_after_title'),__("Before / after each related entry:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 			
-			$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'), 'rss_not_templated rss_displayed');
+			$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'));
 			$this->textbox('rss_excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'rss_excerpted');
 		
 			$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'rss_excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 		
-			$this->displayorder('rss_order', 'rss_displayed');
-			
-			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'rss_not_templated rss_displayed');
+			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40);
 		echo "</div>";
+
+		$this->displayorder('rss_order', 'rss_displayed');			
 					
 		$this->checkbox('rss_promote_yarpp', __("Help promote Yet Another Related Posts Plugin?",'yarpp') . " <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>" . htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) . "'>&nbsp;</span>", 'rss_displayed');
 	}
