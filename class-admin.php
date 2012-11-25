@@ -14,6 +14,14 @@ class YARPP_Admin {
 			wp_redirect( admin_url( '/options-general.php?page=yarpp' ) );
 			exit;
 		}
+
+		// if action=flush and the nonce is correct, reset the cache
+		if ( isset($_GET['action']) && $_GET['action'] == 'copy_templates' &&
+			 check_ajax_referer( 'yarpp_copy_templates', false, false ) !== false ) {
+			$this->copy_templates();
+			wp_redirect( admin_url( '/options-general.php?page=yarpp' ) );
+			exit;
+		}
 		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
@@ -30,9 +38,24 @@ class YARPP_Admin {
 			if ( $this->templates === false )
 				$this->templates = array();
 			// get basenames only
-			$this->templates = array_map('basename', $this->templates);
+			$this->templates = array_map(array($this, 'get_template_data'), $this->templates);
 		}
 		return (array) $this->templates;
+	}
+	
+	public function get_template_data( $file ) {
+		$headers = array(
+			'name' => 'Template Name',
+			'description' => 'Description',
+			'author' => 'Author',
+			'uri' => 'Author URI',
+		);
+		$data = get_file_data( $file, $headers );
+		$data['file'] = $file;
+		$data['basename'] = basename($file);
+		if ( empty($data['name']) )
+			$data['name'] = $data['basename'];
+		return $data;
 	}
 	
 	function ajax_register() {
@@ -236,7 +259,7 @@ jQuery(function () {
 		require(YARPP_DIR.'/options.php');
 	}
 
-	// since 3.4: don't actually compute results here, but use ajax instead		
+	// @since 3.4: don't actually compute results here, but use ajax instead		
 	function metabox() {
 		?>
 		<style>
@@ -259,11 +282,37 @@ jQuery(function () {
 		}
 	}
 	
-	// since 3.3: default metaboxes to show:
+	// @since 3.3: default metaboxes to show:
 	function default_hidden_meta_boxes($hidden, $screen) {
 		if ( 'settings_page_yarpp' == $screen->id )
 			$hidden = array( 'yarpp_pool', 'yarpp_relatedness' );
 		return $hidden;
+	}
+	
+	// @since 3.6: UI to copy templates
+	function can_copy_templates() {
+		$theme_dir = get_stylesheet_directory();
+		// If we can't write to the theme, return false
+		if ( !is_dir($theme_dir) || !is_writable($theme_dir) )
+			return false;
+		
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem( false, get_stylesheet_directory() );
+		global $wp_filesystem;			
+		// direct method is the only method that I've tested so far
+		return $wp_filesystem->method == 'direct';
+	}
+	
+	function copy_templates() {
+		$templates_dir = trailingslashit(trailingslashit(YARPP_DIR) . 'yarpp-templates');
+		
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem( false, get_stylesheet_directory() );
+		global $wp_filesystem;
+		if ( $wp_filesystem->method != 'direct' )
+			return false;
+		
+		return copy_dir( $templates_dir, get_stylesheet_directory(), array('.svn') );
 	}
 	
 	/*

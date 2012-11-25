@@ -7,14 +7,25 @@ class YARPP_Meta_Box {
 		checked(yarpp_get_option($option) == 1);
 		echo "  /> <label for='yarpp-$option'>$desc</label></div></div>";
 	}
+	
+	private function offer_copy_templates() {
+		global $yarpp;
+		return ( !count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates() );
+	}
+	
 	function template_checkbox( $rss = false, $class = '' ) {
 		global $yarpp;
 		$pre = $rss ? 'rss_' : '';
 		$chosen_template = yarpp_get_option( "{$pre}template" );
-		echo "<div class='yarpp_form_row $class'><div><input type='checkbox' name='{$pre}use_template' class='{$pre}template' value='true'";
-		disabled(!count($yarpp->admin->get_templates()), true);
+		echo "<div class='yarpp_form_row $class'><div><input type='checkbox' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='{$pre}template' value='true'";
+		disabled( !count($yarpp->admin->get_templates()), true );
 		checked( !!$chosen_template );
-		echo " />  <label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp')) . "'>&nbsp;</span>" . "</label></div></div>";
+		echo ' /> ';
+
+		// todo: i18n
+		$copy = "</p><p style='border-top: 1px solid #333; padding-top: 10px;'>This option is disabled because no YARPP templates were found in your theme. Would you like to copy some sample templates bundled with YARPP into your theme? <input type='button' class='button button-small yarpp_copy_templates_button' value='Copy Templates'/>";
+		
+		echo "<label for='yarpp-{$pre}use_template'>" . __("Display using a custom template file",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.",'yarpp') . ( $this->offer_copy_templates() ? $copy : '')) . "'>&nbsp;</span>" . "</label></div></div>";
 	}
 	function template_file( $rss = false, $class = '' ) {
 		global $yarpp;
@@ -23,10 +34,13 @@ class YARPP_Meta_Box {
 		_e("Template file:",'yarpp');
 		echo "</div><div><select name='{$pre}template_file' id='{$pre}template_file'>";
 		$chosen_template = yarpp_get_option("{$pre}template");
-		foreach ($yarpp->admin->get_templates() as $template): ?>
-			<option value='<?php echo esc_attr($template)?>'<?php selected($template, $chosen_template);?>><?php echo esc_html($template)?></option>
-		<?php endforeach;
-		echo "</select></div></div>";
+		foreach ($yarpp->admin->get_templates() as $template) {
+			echo "<option value='" . esc_attr($template['basename']) . "'" . selected($template['basename'], $chosen_template, false);
+			foreach ( $template as $key => $value )
+				echo " data-{$key}='" . esc_attr($value) . "'";
+			echo '>' . esc_html($template['name']) . '</option>';
+		}
+		echo "</select><p class='{$pre}template_file_wrap'><span id='{$pre}template_file'></span></p><p class='{$pre}template_author_wrap'>" . __('Author:') . " <span id='{$pre}template_author'></span></p><p class='{$pre}template_description_wrap'><span id='{$pre}template_description'></span></p></div></div>";
 	}
 	function textbox($option, $desc, $size=2, $class='', $note = '') {
 		$value = esc_attr(yarpp_get_option($option));
@@ -296,7 +310,7 @@ class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 		
 		echo '<label for="optin">' . __('Send YARPP settings and usage data back to YARPP.', 'yarpp') . '</label>';
 		
-		echo '<p>This is entirely optional, but will help improve future versions of YARPP. <input type="button" value="Learn more" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
+		echo '<p>This is entirely optional, but will help improve future versions of YARPP. <input type="button" value="Learn More" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
 	}
 }
 

@@ -155,3 +155,7 @@ a.yarpp_help:hover {
 		max-width: 60%;
 	}	
 }
+
+.yarpp_copy_templates_button {
+	float: right;
+}

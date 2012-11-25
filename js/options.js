@@ -178,4 +178,8 @@ jQuery(function($) {
 			pointer.pointer('close');
 		});
 	});
+
+	$('.yarpp_copy_templates_button').live('click', function() {
+		window.location = window.location + (window.location.search.length ? '&' : '?') + 'action=copy_templates&_ajax_nonce=' + $('#yarpp_copy_templates-nonce').val();
+	});
 });
