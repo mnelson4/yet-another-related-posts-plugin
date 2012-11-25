@@ -75,7 +75,7 @@ class YARPP_Widget extends WP_Widget {
 			<p><input class="checkbox" id="<?php echo $this->get_field_id('use_template'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="checkbox" <?php checked(!!$instance['template']) ?> /> <label for="<?php echo $this->get_field_id('use_template'); ?>"><?php _e("Display using a custom template file",'yarpp');?></label></p>
 			<p id="<?php echo $this->get_field_id('template_file_p'); ?>"><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
 				<?php foreach ($templates as $template): ?>
-				<option value='<?php echo esc_attr($template); ?>'<?php selected($template, $instance['template']);?>><?php echo esc_html($template); ?></option>
+				<option value='<?php echo esc_attr($template['basename']); ?>'<?php selected($template['basename'], $instance['template']);?>><?php echo esc_html($template['name']); ?></option>
 				<?php endforeach; ?>
 			</select><p>
 			<script type="text/javascript">

@@ -78,27 +78,100 @@ a.info{
 	z-index:24;
 }
 
-a.info:hover {
-	z-index:25;
-	text-decoration:none;
+.yarpp_help {
+	display: inline-block;
+	cursor: default;
+	background-image: url('../../../wp-includes/images/wpicons-2x.png?ver=20120720');
+	background-size: 560px 40px;
+	background-position: -520px -20px;
+	cursor: default;
+	vertical-align: baseline;
+	width: 20px;
+	height: 20px;
+}
+a.yarpp_help {
+	text-decoration: none;
+	cursor: pointer;
+}
+a.yarpp_help:hover {
+	text-decoration: none;
+	background-position: -520px -0px;
 }
 
-a.info span {
-	display: none;
-}
-
-a.info:hover span {
-	display:block;
-	position:absolute;
-	top:1em;
-	left:0;
-	width:350px;
-	border:1px solid #000;
-	background-color:#ccc;
-	color:#000;
-	padding:4px;
+.branch-3-4 .yarpp_help, .branch-3-3 .yarpp-help {
+	background-image: url('../../../wp-includes/images/wpicons.png?ver=20120720');
 }
 
 .exclude_terms span {
 	display: inline-block;
+}
+
+#yarpp_display_optin {
+	border-width: 2px;
+}
+
+.yarpp_subbox {
+	margin-bottom: 5px;
+	background: #fdfdfd;
+}
+.yarpp_form_row {
+	overflow: auto;
+}
+.yarpp_form_row > div {
+	padding: 8px;
+	display: inline-block;
+	vertical-align: top;
+	*display: inline;
+}
+.yarpp_form_checkbox > div {
+	vertical-align: baseline;
+}
+.yarpp_form_select > div {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.yarpp_form_label {
+	width: 150px;
+}
+.yarpp_form_textbox > .yarpp_form_label {
+	padding-top: 13px;
+}
+.yarpp_form_select > .yarpp_form_label {
+	padding-top: 8px;
+}
+
+.yarpp_code_display {
+	border-left: 8px transparent solid;
+	width: 50%;
+	float: right;
+}
+.yarpp_code_display div {
+	overflow: auto;
+	max-height: 500px;
+}
+.yarpp_scroll_wrapper {
+	overflow: auto;
+	max-height: 100px;
+	width: 60%;
+}
+
+@media all and (max-width:1200px) {
+	.yarpp_scroll_wrapper {
+		width: 50%;
+	}
+	.yarpp_code_display {
+		max-width: 60%;
+	}	
+}
+
+.yarpp_copy_templates_button {
+	float: right;
+}
+
+.template_file_wrap, .template_author_wrap, .template_description_wrap {
+	margin: 3px 0;
+}
+
+.template_file_wrap {
+	font-family: monospace;
 }

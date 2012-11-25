@@ -103,7 +103,8 @@ class YARPP {
 					'post_tag' => 1
 				)
 			),
-			'require_tax' => array() // new in 3.5
+			'require_tax' => array(), // new in 3.5
+			'optin' => false // new in 3.6
 		);
 	}
 	
@@ -191,6 +192,9 @@ class YARPP {
 			$this->activate();
 		else
 			$this->upgrade();
+		
+		if ( $this->get_option('optin') )
+			$this->optin_ping();
 	}
 	
 	function activate() {
@@ -262,6 +266,7 @@ class YARPP {
 		$this->version_info(true);
 	
 		update_option('yarpp_version',YARPP_VERSION);
+		delete_transient( 'yarpp_optin' );
 	}
 	
 	function upgrade_3_4b2() {
@@ -518,6 +523,106 @@ class YARPP {
 		return $taxonomy->show_ui;
 	}
 	
+	public function optin_data() {
+		global $wpdb, $yarpp;
+
+		$comments = wp_count_comments();
+		$users = count_users();
+
+		$settings = get_option( 'yarpp' );
+		$collect = array_flip(array(
+			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
+			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
+			'template', 'rss_template', 'show_pass_post', 'cross_relate',
+			'auto_display', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
+			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax'
+		));
+		$check_changed = array(
+			'before_title', 'after_title', 'before_post', 'after_post',
+			'before_related', 'after_related', 'no_results', 'order',
+			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post', 				'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
+			'exclude'
+		);
+
+		$data = array(
+			'versions' => array(
+				'yarpp' => YARPP_VERSION,
+				'wp' => get_bloginfo( 'version' ),
+				'php' => phpversion()
+			),
+			'yarpp' => array(
+				'settings' => array_intersect_key( $settings, $collect ),
+				'cache_engine' => YARPP_CACHE_TYPE
+			),
+			'stats' => array(
+				'counts' => array(),
+				'terms' => array(),
+				'comments' => array(
+					'moderated' => $comments->moderated,
+					'approved' => $comments->approved,
+					'total' => $comments->total_comments,
+					'posts' => $wpdb->get_var( "select count(ID) from $wpdb->posts where post_type = 'post' and comment_count > 0" )
+				),
+				'users' => $wpdb->get_var("select count(ID) from $wpdb->users"),
+			),
+			'post_thumbnails' => current_theme_supports( 'post-thumbnails' ),
+			'locale' => get_bloginfo( 'language' ),
+			'url' => get_bloginfo('url'),
+			'plugins' => array(
+				'active' => implode( '|', get_option( 'active_plugins', array() ) ),
+				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
+			)
+		);
+		
+		$changed = array();
+		foreach ( $check_changed as $key ) {
+			if ( $yarpp->default_options[$key] != $settings[$key] )
+				$changed[] = $key;
+		}
+		$data['yarpp']['changed_settings'] = implode( '|', $changed );
+		
+		if ( method_exists( $yarpp->cache, 'cache_status' ) )
+			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
+		if ( method_exists( $yarpp->cache, 'stats' ) ) {
+			$stats = $yarpp->cache->stats();
+			$flattened = array();
+			foreach ( $stats as $key => $value )
+				$flattened[] = "$key:$value";
+			$data['yarpp']['stats'] = implode( '|', $flattened );
+		}
+			
+		if ( method_exists( $wpdb, 'db_version' ) )
+			$data['versions']['mysql'] = preg_replace('/[^0-9.].*/', '', $wpdb->db_version());
+
+		$counts = array();
+		foreach (get_post_types( array('public' => true) ) as $post_type) {
+			$counts[$post_type] = wp_count_posts($post_type);
+		}
+		$data['stats']['counts'] = wp_list_pluck($counts, 'publish');
+
+		foreach (get_taxonomies( array('public' => true) ) as $taxonomy) {
+			$data['stats']['terms'][$taxonomy] = wp_count_terms($taxonomy);
+		}
+		
+		if ( is_multisite() ) {
+			$data['multisite'] = array(
+				'url' => network_site_url(),
+				'users' => get_user_count(),
+				'sites' => get_blog_count()
+			);
+		}
+		
+		return $data;
+	}
+	
+	function pretty_echo( $data ) {
+		echo "<pre>";
+		$formatted = print_r($data, true);
+		$formatted = str_replace(array('Array', '(', ')', "\n    "), array('', '', '', "\n"), $formatted);
+		echo preg_replace("/\n\s*\n/u", "\n", $formatted);
+		echo "</pre>";
+	}
+	
 	/*
 	 * CORE LOOKUP + DISPLAY FUNCTIONS
 	 */
@@ -547,7 +652,7 @@ class YARPP {
 		
 		$this->setup_active_cache( $args );
 
-		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp', 'optin' );
 		extract( $this->parse_args( $args, $options ) );
 
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -610,6 +715,9 @@ class YARPP {
 	
 		if ($promote_yarpp && $domain != 'metabox')
 			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+		
+		if ( $optin )
+			$output .= "<img src='http://yarpp.org/pixel.png?" . md5(get_bloginfo('url')) . "'/>\n";
 	
 		if ($echo)
 			echo $output;
@@ -842,11 +950,11 @@ class YARPP {
 	 * UTILS
 	 */
 	
-	// new in 3.3: use PHP serialized format instead of JSON
+	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
 		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 			$version = YARPP_VERSION;
-			$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
+			$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
 			
 			if (is_wp_error($remote))
 				return false;
@@ -856,6 +964,21 @@ class YARPP {
 		}
 		return $result;
 	}
+
+	// @since 3.6: optional collection of  (default off)
+	function optin_ping() {
+		if ( get_transient( 'yarpp_optin' ) )
+			return true;
+
+		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
+		
+		if ( is_wp_error($remote) )
+			return false;
+		
+		if ( $result = $remote['body'] )
+			set_transient( 'yarpp_optin', $result, 60 * 60 * 24 * 7 );
+	}
+
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
 	function clean_pre( $text ) {
