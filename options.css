@@ -185,8 +185,8 @@ a.yarpp_help:hover {
 	height: 60px;
 	width: 70px;
 	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	border: 1px solid #BBB;
+	border-radius: 7px;
+	border: 1px solid #aaa;
 	margin: 5px;
 	margin-right: 10px;
 	cursor: pointer;
@@ -197,14 +197,14 @@ a.yarpp_help:hover {
 	background-image: linear-gradient(top, #FEFEFE, #F4F4F4);
 	color: #333;
 	text-shadow: 0 1px 0 white;
-	-webkit-box-shadow: 1px 1px 7px 1px #CCC;
-	box-shadow: 1px 1px 7px 1px #CCC;
+	-webkit-box-shadow: 1px 1px 7px 1px #bbb;
+	box-shadow: 1px 1px 7px 1px #bbb;
 }
 .yarpp_template_button.disabled {
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
-	border-color: #bbb !important;
-	color: #999 !important;
+	border-color: #ddd !important;
+	color: #bbb !important;
 	background: #f3f3f3;
 	background-image: -webkit-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 	background-image: -moz-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
@@ -241,7 +241,7 @@ a.yarpp_help:hover {
 	opacity: 0.8;
 }
 .yarpp_template_button.disabled > div.image {
-	opacity: 0.4 !important;
+	opacity: 0.2 !important;
 }
 .yarpp_template_button:active > div.image {
 	opacity: 1;
