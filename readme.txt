@@ -235,7 +235,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.6 =
-* ...
+* Improvements to YARPP custom template UI
+	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
+	* Header information in YARPP custom templates are now displayed to users in the settings UI. Available fields are `Template Name`, `Description`, `Author`, `Author URI`, in the same format as plugin and theme file headers. See bundled templates for examples.
 * Code cleanup:
 	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
 	* Inline help in settings screen now use WordPress pointers

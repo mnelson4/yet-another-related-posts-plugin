@@ -40,7 +40,7 @@ class YARPP_Meta_Box {
 				echo " data-{$key}='" . esc_attr($value) . "'";
 			echo '>' . esc_html($template['name']) . '</option>';
 		}
-		echo "</select><p class='{$pre}template_file_wrap'><span id='{$pre}template_file'></span></p><p class='{$pre}template_author_wrap'>" . __('Author:') . " <span id='{$pre}template_author'></span></p><p class='{$pre}template_description_wrap'><span id='{$pre}template_description'></span></p></div></div>";
+		echo "</select><p class='template_file_wrap'><span id='{$pre}template_file'></span></p><p class='template_author_wrap'>" . __('Author:') . " <span id='{$pre}template_author'></span></p><p class='template_description_wrap'><span id='{$pre}template_description'></span></p></div></div>";
 	}
 	function textbox($option, $desc, $size=2, $class='', $note = '') {
 		$value = esc_attr(yarpp_get_option($option));
@@ -193,24 +193,31 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 
-		echo '<div class="yarpp_code_display"><strong>' . __("Website display code example",'yarpp') . '</strong><br /><small>' . __("(Update options to reload.)", 'yarpp') . "</small><br/><div id='display_demo_web'></div></div>";
-		$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')) . "'>&nbsp;</span>");
+		echo "<div style='overflow:hidden'>";
+			echo '<div class="yarpp_code_display"><strong>' . __("Website display code example",'yarpp') . '</strong><br /><small>' . __("(Update options to reload.)", 'yarpp') . "</small><br/><div id='display_demo_web'></div></div>";
+			$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')) . "'>&nbsp;</span>");
+	
+			$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
+			$this->template_checkbox( false );
+		echo "</div>";
 
-		$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
-		$this->template_checkbox( false );
-		$this->template_file( false, 'templated' );
+		echo "<div class='postbox yarpp_subbox templated'>";
+			$this->template_file( false, 'templated' );
+		echo "</div>";
 
-		$this->beforeafter(array('before_related', 'after_related'),__("Before / after related entries:",'yarpp'), 15, 'not_templated', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
-		$this->beforeafter(array('before_title', 'after_title'),__("Before / after each related entry:",'yarpp'),15, 'not_templated', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
-		
-		$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), 'not_templated');
-		$this->textbox('excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'excerpted');
-
-		$this->beforeafter(array('before_post', 'after_post'), __("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
-
-		$this->displayorder('order');
-		
-		$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'not_templated');
+		echo "<div class='postbox yarpp_subbox not_templated'>";
+			$this->beforeafter(array('before_related', 'after_related'),__("Before / after related entries:",'yarpp'), 15, 'not_templated', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
+			$this->beforeafter(array('before_title', 'after_title'),__("Before / after each related entry:",'yarpp'),15, 'not_templated', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			
+			$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), 'not_templated');
+			$this->textbox('excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'excerpted');
+	
+			$this->beforeafter(array('before_post', 'after_post'), __("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+	
+			$this->displayorder('order');
+			
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'not_templated');
+		echo "</div>";
 
 		$this->checkbox('promote_yarpp',__("Help promote Yet Another Related Posts Plugin?",'yarpp')
 		." <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>".htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) ."'>&nbsp;</span>");
@@ -223,27 +230,34 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
 
-		echo '<div class="rss_displayed yarpp_code_display"><b>' . __("RSS display code example",'yarpp') . '</b><br /><small>' . __("(Update options to reload.)",'yarpp') . "</small><br/><div id='display_demo_rss'></div></div>";
+		echo "<div style='overflow:hidden'>";
+			echo '<div class="rss_displayed yarpp_code_display"><b>' . __("RSS display code example",'yarpp') . '</b><br /><small>' . __("(Update options to reload.)",'yarpp') . "</small><br/><div id='display_demo_rss'></div></div>";
 	
-		$this->checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')) . "'>&nbsp;</span>",'');
-		$this->checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')) . "'>&nbsp;</span>", 'rss_displayed');
+			$this->checkbox('rss_display',__("Display related posts in feeds?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.",'yarpp')) . "'>&nbsp;</span>",'');
+			$this->checkbox('rss_excerpt_display',__("Display related posts in the descriptions?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.",'yarpp')) . "'>&nbsp;</span>", 'rss_displayed');
 	
-		$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'), 2, 'rss_displayed');
-		$this->template_checkbox( true, 'rss_displayed' );
-		$this->template_file( true, 'rss_templated' );
-
-		$this->beforeafter(array('rss_before_related', 'rss_after_related'),__("Before / after related entries:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
-		$this->beforeafter(array('rss_before_title', 'rss_after_title'),__("Before / after each related entry:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			$this->textbox('rss_limit',__('Maximum number of related posts:','yarpp'), 2, 'rss_displayed');
+			$this->template_checkbox( true, 'rss_displayed' );
+		echo "</div>";
 		
-		$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'), 'rss_not_templated rss_displayed');
-		$this->textbox('rss_excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'rss_excerpted');
+		echo "<div class='postbox yarpp_subbox rss_templated rss_displayed'>";
+			$this->template_file( true, 'rss_templated' );
+		echo "</div>";
 	
-		$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'rss_excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
-	
-		$this->displayorder('rss_order', 'rss_displayed');
+		echo "<div class='postbox yarpp_subbox rss_not_templated rss_displayed'>";
+			$this->beforeafter(array('rss_before_related', 'rss_after_related'),__("Before / after related entries:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
+			$this->beforeafter(array('rss_before_title', 'rss_after_title'),__("Before / after each related entry:",'yarpp'), 15, 'rss_not_templated rss_displayed', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			
+			$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'), 'rss_not_templated rss_displayed');
+			$this->textbox('rss_excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'rss_excerpted');
 		
-		$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'rss_not_templated rss_displayed');
+			$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'rss_excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 		
+			$this->displayorder('rss_order', 'rss_displayed');
+			
+			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'rss_not_templated rss_displayed');
+		echo "</div>";
+					
 		$this->checkbox('rss_promote_yarpp', __("Help promote Yet Another Related Posts Plugin?",'yarpp') . " <span class='yarpp_help' data-help='" . esc_attr(sprintf(__("This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp'),"<code>" . htmlspecialchars(sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org'))."</code>")) . "'>&nbsp;</span>", 'rss_displayed');
 	}
 }

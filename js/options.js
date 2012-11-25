@@ -182,4 +182,28 @@ jQuery(function($) {
 	$('.yarpp_copy_templates_button').live('click', function() {
 		window.location = window.location + (window.location.search.length ? '&' : '?') + 'action=copy_templates&_ajax_nonce=' + $('#yarpp_copy_templates-nonce').val();
 	});
+	
+	function template_info() {
+		var template = $(this).find('option:selected'),
+		row = template.closest('.yarpp_form_row');
+		if ( !!template.attr('data-url') ) {
+			row.find('.template_author_wrap')
+				.toggle( !!template.attr('data-author') )
+				.find('span').empty().append('<a>' + template.attr('data-author') + '</a>')
+				.attr('href', template.attr('data-url'));
+		} else {
+			row.find('.template_author_wrap')
+				.toggle( !!template.attr('data-author') )
+				.find('span').text(template.attr('data-author'));
+		}
+		row.find('.template_description_wrap')
+			.toggle( !!template.attr('data-description') )
+			.find('span').text(template.attr('data-description'));
+		row.find('.template_file_wrap')
+			.toggle( !!template.attr('data-basename') )
+			.find('span').text(template.attr('data-basename'));
+	}
+	$('#template_file, #rss_template_file')
+		.each(template_info)
+		.change(template_info);
 });

@@ -106,6 +106,14 @@ a.yarpp_help:hover {
 	display: inline-block;
 }
 
+#yarpp_display_optin {
+	border-width: 2px;
+}
+
+.yarpp_subbox {
+	margin-bottom: 5px;
+	background: #fdfdfd;
+}
 .yarpp_form_row {
 	overflow: auto;
 }
@@ -123,7 +131,7 @@ a.yarpp_help:hover {
 	padding-bottom: 5px;
 }
 .yarpp_form_label {
-	width: 200px;
+	width: 150px;
 }
 .yarpp_form_textbox > .yarpp_form_label {
 	padding-top: 13px;
@@ -158,4 +166,12 @@ a.yarpp_help:hover {
 
 .yarpp_copy_templates_button {
 	float: right;
+}
+
+.template_file_wrap, .template_author_wrap, .template_description_wrap {
+	margin: 3px 0;
+}
+
+.template_file_wrap {
+	font-family: monospace;
 }
