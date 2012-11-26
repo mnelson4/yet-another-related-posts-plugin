@@ -235,7 +235,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 3.6 =
+* All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)).
 * Improvements to YARPP custom template UI
+	* A new design for the template chooser
 	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
 	* Header information in YARPP custom templates are now displayed to users in the settings UI. Available fields are `Template Name`, `Description`, `Author`, `Author URI`, in the same format as plugin and theme file headers. See bundled templates for examples.
 * Code cleanup:

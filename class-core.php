@@ -671,7 +671,6 @@ class YARPP {
 		$current_query = $wp_query;
 		$current_pagenow = $pagenow;
 	
-		$output = '';
 		$wp_query = new WP_Query();
 		if ( YARPP_NO_RELATED == $cache_status ) {
 			// If there are no related posts, get no query
@@ -688,19 +687,28 @@ class YARPP {
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 	
+		$output = "<div class='";
+		if ( 'website' == $domain )
+			$output .= "yarpp-related";
+		else
+			$output .= "yarpp-related-{$domain}";
+		$output .= "'>\n";
 		if ( 'metabox' == $domain ) {
-			include(YARPP_DIR.'/template-metabox.php');
+			include(YARPP_DIR . '/template-metabox.php');
+		} elseif ( !!$template && 'thumbnails' == $template ) {
+			include(YARPP_DIR . '/template-thumbnails.php');			
 		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template);
-			$output = ob_get_contents();
+			$output .= ob_get_contents();
 			ob_end_clean();
 		} elseif ( 'widget' == $domain ) {
-			include(YARPP_DIR.'/template-widget.php');
+			include(YARPP_DIR . '/template-widget.php');
 		} else {
-			include(YARPP_DIR.'/template-builtin.php');
+			include(YARPP_DIR . '/template-builtin.php');
 		}
+		$output = trim($output) . "\n";
 	
 		if ( YARPP_NO_RELATED == $cache_status ) {
 			// Uh, do nothing. Stay very still.
@@ -714,11 +722,13 @@ class YARPP {
 		$pagenow = $current_pagenow; unset($current_pagenow);
 	
 		if ($promote_yarpp && $domain != 'metabox')
-			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
-		
+			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
+	
 		if ( $optin )
 			$output .= "<img src='http://yarpp.org/pixel.png?" . md5(get_bloginfo('url')) . "'/>\n";
-	
+
+		$output .= "</div>\n";
+			
 		if ($echo)
 			echo $output;
 		return $output;
@@ -818,27 +828,38 @@ class YARPP {
 	
 		$this->cache_bypass->begin_demo_time( $limit );
 	
-		$output = '';
+		$output = "<div class='";
+		if ( 'website' == $domain )
+			$output .= "yarpp-related";
+		else
+			$output .= "yarpp-related-{$domain}";
+		$output .= "'>\n";
+
 		$wp_query = new WP_Query();
 		$wp_query->query('');
 	
 		$this->prep_query( $domain == 'rss' );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
+		if ( !!$template && 'thumbnails' == $template ) {
+			include(YARPP_DIR . '/template-thumbnails.php');
+		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template);
-			$output = ob_get_contents();
+			$output .= ob_get_contents();
 			ob_end_clean();
 		} else {
 			include(YARPP_DIR.'/template-builtin.php');
 		}
-	
+		$output = trim($output) . "\n";
+		
 		$this->cache_bypass->end_demo_time();
-	
+		
 		if ($promote_yarpp)
-			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
+
+		$output .= "</div>";
 	
 		if ( $echo )
 			echo $output;
