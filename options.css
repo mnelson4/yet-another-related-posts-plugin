@@ -147,7 +147,7 @@ a.yarpp_help:hover {
 }
 .yarpp_code_display div {
 	overflow: auto;
-	max-height: 500px;
+	max-height: 300px;
 }
 .yarpp_scroll_wrapper {
 	overflow: auto;

@@ -37,9 +37,7 @@ class YARPP_Meta_Box {
 			echo "<div data-value='thumbnails' class='yarpp_template_button";
 			if ( 'thumbnails' == $choice )
 				echo ' active';
-			echo "'";
-			echo " data-help='not implemented yet -- mitcho'";
-			echo "><div class='image'></div><div class='label'>" . __('Thumbnails', 'yarpp') . "</div></div>";
+			echo "'><div class='image'></div><div class='label'>" . __('Thumbnails', 'yarpp') . "</div></div>";
 	
 			echo "<div data-value='custom' class='yarpp_template_button";
 			if ( 'custom' == $choice )
@@ -55,7 +53,7 @@ class YARPP_Meta_Box {
 			}
 			echo "><div class='image'></div><div class='label'>" . __('Custom', 'yarpp') . "</div></div>";
 	
-			echo "<input type='hidden' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='{$pre}template' value='{$choice}' />";
+			echo "<input type='hidden' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='use_template' value='{$choice}' />";
 
 		echo "</div>";
 
@@ -234,21 +232,27 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			$this->template_checkbox( false );
 		echo "</div>";
 
-		echo "<div class='postbox yarpp_subbox templated'>";
+		echo "<div class='postbox yarpp_subbox template_options_custom'>";
 			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( false );
 		echo "</div>";
 
-		echo "<div class='postbox yarpp_subbox not_templated'>";
+		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
+			$this->textbox('thumbnails_heading', __('Heading:','yarpp'), 40);
+			$this->textbox('thumbnails_default', __('Default image (URL):','yarpp'), 40);
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40);
+		echo "</div>";
+
+		echo "<div class='postbox yarpp_subbox template_options_builtin'>";
 			$this->beforeafter(array('before_related', 'after_related'),__("Before / after related entries:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
 			$this->beforeafter(array('before_title', 'after_title'),__("Before / after each related entry:",'yarpp'),15, '', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 			
-			$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), '');
+			$this->checkbox('show_excerpt', __("Show excerpt?",'yarpp'), 'show_excerpt');
 			$this->textbox('excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'excerpted');
 	
 			$this->beforeafter(array('before_post', 'after_post'), __("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 	
-			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, '');
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40);
 		echo "</div>";
 
 		$this->displayorder('order');			
@@ -274,19 +278,25 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 			$this->template_checkbox( true, 'rss_displayed' );
 		echo "</div>";
 		
-		echo "<div class='postbox yarpp_subbox rss_templated rss_displayed'>";
+		echo "<div class='postbox yarpp_subbox template_options_custom rss_displayed'>";
 			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( true );
 		echo "</div>";
 	
-		echo "<div class='postbox yarpp_subbox rss_not_templated rss_displayed'>";
+		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
+			$this->textbox('rss_thumbnails_heading', __('Heading:','yarpp'), 40);
+			$this->textbox('rss_thumbnails_default', __('Default image (URL):','yarpp'), 40);
+			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40);
+		echo "</div>";
+	
+		echo "<div class='postbox yarpp_subbox template_options_builtin rss_displayed'>";
 			$this->beforeafter(array('rss_before_related', 'rss_after_related'),__("Before / after related entries:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;ol&gt;&lt;/ol&gt;' . __(' or ','yarpp') . '&lt;div&gt;&lt;/div&gt;');
 			$this->beforeafter(array('rss_before_title', 'rss_after_title'),__("Before / after each related entry:",'yarpp'), 15, '', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 			
-			$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'));
-			$this->textbox('rss_excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'rss_excerpted');
+			$this->checkbox('rss_show_excerpt', __("Show excerpt?",'yarpp'), 'show_excerpt');
+			$this->textbox('rss_excerpt_length', __('Excerpt length (No. of words):','yarpp'), 10, 'excerpted');
 		
-			$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'rss_excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
+			$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 		
 			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40);
 		echo "</div>";

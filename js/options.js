@@ -3,27 +3,29 @@ jQuery(function($) {
 	postboxes.add_postbox_toggles(pagenow);
 
 	function template() {
-		var value = $('#yarpp-use_template').val();
-		if ( value == 'custom' ) {
-			$('.templated').show();
-			$('.not_templated').hide();
-		} else {
-			$('.templated').hide();
-			$('.not_templated').show();
-		}
-		excerpt();
+		var metabox = $(this).closest('#yarpp_display_web, #yarpp_display_rss');
+		if ( !metabox.length )
+			return;
+			
+		value = metabox.find('.use_template').val();
+		
+		metabox.find('.yarpp_subbox').hide();
+		metabox.find('.template_options_' + value).show();
+		excerpt.apply(metabox);
 	}
-	$('.template').change(template);
-	template();
+	$('.use_template').each(template).change(template);
 	
 	function excerpt() {
-		if (!$('.template').attr('checked') && $('#yarpp-show_excerpt').attr('checked'))
-			$('.excerpted').show();
-		else
-			$('.excerpted').hide();
-	}
-	$('#yarpp-show_excerpt, .template').click(excerpt);
+		var metabox = $(this).closest('#yarpp_display_web, #yarpp_display_rss');
 
+		if ( metabox.find('.use_template').val() == 'builtin' &&
+			metabox.find('.show_excerpt input').attr('checked') )
+			metabox.find('.excerpted').show();
+		else
+			metabox.find('.excerpted').hide();
+	}
+	$('.show_excerpt, .use_template, #yarpp-rss_display').click(excerpt);
+	
 	var loaded_demo_web = false;
 	function display() {
 		if ( !$('#yarpp_display_web .inside').is(':visible') )
@@ -66,34 +68,13 @@ jQuery(function($) {
 						success:function(html){demo_rss.html('<pre>'+html+'</pre>')},
 						dataType:'html'});
 			}
-			rss_template();
+			$('#yarpp_display_rss').each(template);
 		} else {
 			$('.rss_displayed').hide();
 		}
 	}
 	$('#yarpp-rss_display, #yarpp_display_rss .handlediv, #yarpp_display_rss-hide').click(rss_display);
 	rss_display();
-	
-	function rss_template() {
-		var value = $('#yarpp-rss_use_template').val();
-		if ( value == 'custom' ) {
-			$('.rss_templated').show();
-			$('.rss_not_templated').hide();
-		} else {
-			$('.rss_templated').hide();
-			$('.rss_not_templated').show();
-		}
-		rss_excerpt();
-	}
-	$('.rss_template').change(rss_template);
-	
-	function rss_excerpt() {
-		if ($('#yarpp-rss_display').attr('checked') && $('#yarpp-rss_show_excerpt').attr('checked'))
-			$('.rss_excerpted').show();
-		else
-			$('.rss_excerpted').hide();
-	}
-	$('#yarpp-rss_display, #yarpp-rss_show_excerpt').click(rss_excerpt);
 
 	var loaded_disallows = false;
 	function load_disallows() {
