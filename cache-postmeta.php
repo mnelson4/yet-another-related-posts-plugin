@@ -147,7 +147,7 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 	public function clear( $reference_IDs ) {
 		$reference_IDs = wp_parse_id_list( $reference_IDs );
 	
-		if ( !count($reference_ID) )
+		if ( !count($reference_IDs) )
 			return;
 		
 		// clear each cache

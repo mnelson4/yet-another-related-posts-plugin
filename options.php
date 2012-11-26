@@ -123,8 +123,10 @@ if (isset($_POST['update_yarpp'])) {
 	else
 		$new_options['exclude'] = '';
 	
-	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
-	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
+	$new_options['template'] = $_POST['use_template'] == 'custom' ? $_POST['template_file'] : 
+		( $_POST['use_template'] == 'thumbnails' ? 'thumbnails' : false );
+	$new_options['rss_template'] = $_POST['rss_use_template'] == 'custom' ? $_POST['rss_template_file'] : 
+		( $_POST['rss_use_template'] == 'thumbnails' ? 'thumbnails' : false );
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);
@@ -151,6 +153,8 @@ wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 wp_nonce_field( 'yarpp_display_demo', 'yarpp_display_demo-nonce', false );
 wp_nonce_field( 'yarpp_display_exclude_terms', 'yarpp_display_exclude_terms-nonce', false );
+if ( !count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates() )
+	wp_nonce_field( 'yarpp_copy_templates', 'yarpp_copy_templates-nonce', false );
 ?>
 <div id="poststuff" class="metabox-holder has-right-sidebar">
 
