@@ -34,7 +34,7 @@ class YARPP_Meta_Box {
 				echo ' active';
 			echo "'><div class='image'></div><div class='label'>" . __('List', 'yarpp') . "</div></div>";
 	
-			echo "<div data-value='thumbnails' class='yarpp_template_button disabled";
+			echo "<div data-value='thumbnails' class='yarpp_template_button";
 			if ( 'thumbnails' == $choice )
 				echo ' active';
 			echo "'";

@@ -23,6 +23,8 @@ class YARPP_Admin {
 			exit;
 		}
 		
+		//add_image_size( 'yarpp-thumbnail', $width, $height, $crop );
+		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		add_filter( 'current_screen', array( $this, 'settings_screen' ) );
@@ -150,7 +152,7 @@ class YARPP_Admin {
 		// todo: i18n
 		echo '<p>' . sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
 		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
-		echo '<strong>' . "Contributing this data will make YARPP better for you and for other YARPP users." . '</strong></p>';
+		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p>';
 
 		if ( !$this->core->get_option( 'optin' ) )
 			echo '<p><a id="yarpp-optin-button" class="button">' . __('Send settings and usage data back to YARPP.', 'yarpp') . '</a><span class="yarpp-thankyou" style="display:none"><strong>' . __('Thank you!') . '</strong></span></p>';
