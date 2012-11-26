@@ -104,7 +104,11 @@ class YARPP {
 				)
 			),
 			'require_tax' => array(), // new in 3.5
-			'optin' => false // new in 3.6
+			'optin' => false, // new in 3.6
+			'thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
+			'thumbnails_default' => plugins_url( 'default.png', __FILE__ ) // new in 3.6
+			'rss_thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
+			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ) // new in 3.6
 		);
 	}
 	
@@ -541,7 +545,8 @@ class YARPP {
 			'before_title', 'after_title', 'before_post', 'after_post',
 			'before_related', 'after_related', 'no_results', 'order',
 			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post', 				'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
-			'exclude'
+			'exclude', 'thumbnails_heading', 'thumbnails_default', 'rss_thumbnails_heading',
+			'rss_thumbnails_default'
 		);
 
 		$data = array(
@@ -868,7 +873,11 @@ class YARPP {
 	}
 	
 	public function parse_args( $args, $options ) {
-		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order', 'promote_yarpp' );
+		$options_with_rss_variants = array(
+			'limit', 'template', 'excerpt_length', 'before_title',
+			'after_title', 'before_post', 'after_post', 'before_related',
+			'after_related', 'no_results', 'order', 'promote_yarpp',
+			'thumbnails_heading', 'thumbnails_default' );
 
 		$r = array();
 		foreach ( $options as $option ) {
