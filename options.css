@@ -258,3 +258,8 @@ a.yarpp_help:hover {
 .yarpp_template_button[data-value=custom] > div.image {
 	background-position: -140px 0px;
 }
+
+#optin_data_frame {
+	overflow: scroll;
+	max-height: 300px;
+}

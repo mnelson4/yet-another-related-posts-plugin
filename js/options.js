@@ -234,4 +234,39 @@ jQuery(function($) {
 	$('#template_file, #rss_template_file')
 		.each(template_info)
 		.change(template_info);
+
+	var loaded_optin_data = false;
+	function _display_optin_data() {
+		if ( !$('#optin_data_frame').is(':visible') || loaded_optin_data )
+			return;
+		loaded_optin_data = true;
+		var frame = $('#optin_data_frame');
+		$.ajax({type:'POST',
+			url: ajaxurl,
+			data: {
+				action: 'yarpp_optin_data',
+				'_ajax_nonce': $('#yarpp_optin_data-nonce').val()
+			},
+			beforeSend:function(){frame.html(loading)},
+			success:function(html){frame.html('<pre>'+html+'</pre>')},
+			dataType:'html'});
+	}
+	function display_optin_data() {
+		setTimeout(_display_optin_data, 0);
+	}
+	$('#yarpp-optin-learnmore, a[aria-controls=tab-panel-optin]').bind('click focus', display_optin_data);
+	display_optin_data();
+
+	$('#yarpp-optin-button').click(function() {
+		$(this)
+			.hide()
+			.siblings('.yarpp-thankyou').show('slow');
+		$('#yarpp-optin').attr('checked', true);
+		$.ajax({type:'POST',
+			url: ajaxurl,
+			data: {
+				action: 'yarpp_optin',
+				'_ajax_nonce': $('#yarpp_optin-nonce').val()
+			}});			
+	});
 });

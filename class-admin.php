@@ -64,6 +64,8 @@ class YARPP_Admin {
 			add_action( 'wp_ajax_yarpp_display_exclude_terms', array( $this, 'ajax_display_exclude_terms' ) );
 			add_action( 'wp_ajax_yarpp_display_demo', array( $this, 'ajax_display_demo' ) );
 			add_action( 'wp_ajax_yarpp_display', array( $this, 'ajax_display' ) );
+			add_action( 'wp_ajax_yarpp_optin_data', array( $this, 'ajax_optin_data' ) );
+			add_action( 'wp_ajax_yarpp_optin', array( $this, 'ajax_optin' ) );
 		}
 	}
 	
@@ -145,8 +147,17 @@ class YARPP_Admin {
 	}
 
 	public function help_optin() {
-		// TODO: add text
-		echo 'rar';
+		// todo: i18n
+		echo '<p>' . sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
+		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
+		echo '<strong>' . "Contributing this data will make YARPP better for you and for other YARPP users." . '</strong></p>';
+
+		if ( !$this->core->get_option( 'optin' ) )
+			echo '<p><a id="yarpp-optin-button" class="button">' . __('Send settings and usage data back to YARPP.', 'yarpp') . '</a><span class="yarpp-thankyou" style="display:none"><strong>' . __('Thank you!') . '</strong></span></p>';
+		
+		echo '<p>' . "If you opt-in, the following information is sent back to YARPP:" . '</p>';
+		echo '<div id="optin_data_frame"></div>';
+		echo '<p>' . "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used." . '</p>';
 	}
 	
 	// faux-markdown, required for the help text rendering
@@ -396,6 +407,29 @@ jQuery(function () {
 			
 		$return = $this->core->display_demo_related($args, false);
 		echo preg_replace("/[\n\r]/",'',nl2br(htmlspecialchars($return)));
+		exit;
+	}
+	
+	function ajax_optin_data() {
+		check_ajax_referer( 'yarpp_optin_data' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text/html; charset=UTF-8");
+	
+		$data = $this->core->optin_data();
+		$this->core->pretty_echo($data);
+		exit;
+	}
+
+	function ajax_optin() {
+		check_ajax_referer( 'yarpp_optin' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text; charset=UTF-8");
+		
+		$data = yarpp_set_option('optin', true);
+		$this->core->optin_ping();
+		echo 'ok';
 		exit;
 	}
 }

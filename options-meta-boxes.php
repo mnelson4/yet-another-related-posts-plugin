@@ -32,7 +32,7 @@ class YARPP_Meta_Box {
 			echo "<div data-value='builtin' class='yarpp_template_button";
 			if ( 'builtin' == $choice )
 				echo ' active';
-			echo "'><div class='image'></div><div class='label'>" . __('Basic list', 'yarpp') . "</div></div>";
+			echo "'><div class='image'></div><div class='label'>" . __('List', 'yarpp') . "</div></div>";
 	
 			echo "<div data-value='thumbnails' class='yarpp_template_button disabled";
 			if ( 'thumbnails' == $choice )
@@ -353,11 +353,11 @@ class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 			$yarpp->optin_ping();
 		
 		// TODO: fix this text and i18nize it
-		echo "<input type='checkbox' id='optin' name='optin' value='true'";
+		echo "<input type='checkbox' id='yarpp-optin' name='optin' value='true'";
 		checked(yarpp_get_option('optin') == 1);
 		echo " /> ";
 		
-		echo '<label for="optin">' . __('Send YARPP settings and usage data back to YARPP.', 'yarpp') . '</label>';
+		echo '<label for="yarpp-optin">' . __('Send settings and usage data back to YARPP.', 'yarpp') . '</label>';
 		
 		echo '<p>This is entirely optional, but will help improve future versions of YARPP. <input type="button" value="Learn More" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
 	}
