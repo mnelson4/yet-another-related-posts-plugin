@@ -176,7 +176,7 @@ a.yarpp_help:hover {
 	font-family: monospace;
 }
 
-.not_templated input[type=text], .rss_not_templated input[type=text] {
+.yarpp_subbox input[type=text], .yarpp_subbox input[type=text] {
 	font-family: monospace;
 }
 

@@ -237,17 +237,4 @@ jQuery(function($) {
 	}
 	$('#yarpp-optin-learnmore, a[aria-controls=tab-panel-optin]').bind('click focus', display_optin_data);
 	display_optin_data();
-
-	$('#yarpp-optin-button').click(function() {
-		$(this)
-			.hide()
-			.siblings('.yarpp-thankyou').show('slow');
-		$('#yarpp-optin').attr('checked', true);
-		$.ajax({type:'POST',
-			url: ajaxurl,
-			data: {
-				action: 'yarpp_optin',
-				'_ajax_nonce': $('#yarpp_optin-nonce').val()
-			}});			
-	});
 });

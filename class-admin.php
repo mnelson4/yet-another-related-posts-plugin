@@ -68,17 +68,26 @@ class YARPP_Admin {
 			add_action( 'wp_ajax_yarpp_display', array( $this, 'ajax_display' ) );
 			add_action( 'wp_ajax_yarpp_optin_data', array( $this, 'ajax_optin_data' ) );
 			add_action( 'wp_ajax_yarpp_optin', array( $this, 'ajax_optin' ) );
+			add_action( 'wp_ajax_yarpp_optin_dismiss', array( $this, 'ajax_optin_dismiss' ) );
 		}
 	}
 	
 	function ui_register() {
 		global $wp_version;
-		if ( get_option( 'yarpp_activated' ) && version_compare($wp_version, '3.3b1', '>=') ) {
-			delete_option( 'yarpp_activated' );
-			add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
+		if ( get_option( 'yarpp_activated' ) ) {
+			if ( version_compare($wp_version, '3.3b1', '>=') ) {
+				delete_option( 'yarpp_activated' );
+				add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
+				add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
+			}
+		} elseif ( !$this->core->get_option('optin') &&
+			current_user_can('manage_options') &&
+			!get_user_option( 'yarpp_saw_optin' ) ) {
+			$user = get_current_user_id();
+//			update_user_option( $user, 'yarpp_saw_optin', true );
+			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
 		}
-
+		
 		// setup admin
 		$this->hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', array( $this, 'options_page' ) );
 		
@@ -154,12 +163,45 @@ class YARPP_Admin {
 		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
 		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p>';
 
-		if ( !$this->core->get_option( 'optin' ) )
-			echo '<p><a id="yarpp-optin-button" class="button">' . __('Send settings and usage data back to YARPP.', 'yarpp') . '</a><span class="yarpp-thankyou" style="display:none"><strong>' . __('Thank you!') . '</strong></span></p>';
+		if ( !$this->core->get_option( 'optin' ) ) {
+			echo '<p>';
+			$this->print_optin_button();
+			echo '</p>';
+		}
 		
 		echo '<p>' . "If you opt-in, the following information is sent back to YARPP:" . '</p>';
 		echo '<div id="optin_data_frame"></div>';
 		echo '<p>' . "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used." . '</p>';
+	}
+	
+	function print_optin_button() {
+		echo '<a id="yarpp-optin-button" class="button">' . __('Send settings and usage data back to YARPP', 'yarpp') . '</a><span class="yarpp-thankyou" style="display:none"><strong>' . __('Thank you!', 'yarpp') . '</strong></span>';
+		wp_nonce_field( 'yarpp_optin', 'yarpp_optin-nonce', false );
+		echo "<script type='text/javascript'>
+			jQuery(function($){
+			$('#yarpp-optin-button').click(function() {
+				$(this)
+					.hide()
+					.siblings('.yarpp-thankyou').show('slow');
+				$('#yarpp-optin').attr('checked', true);
+				$.ajax({type:'POST',
+					url: ajaxurl,
+					data: {
+						action: 'yarpp_optin',
+						'_ajax_nonce': $('#yarpp_optin-nonce').val()
+					}});			
+			});
+			});
+		</script>\n";
+	}
+
+	function optin_notice() {
+		echo '<div class="updated fade">';
+		echo '<p>' . sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
+		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
+		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p><p>';
+		$this->print_optin_button();
+		echo '</p></div>';
 	}
 	
 	// faux-markdown, required for the help text rendering
@@ -258,7 +300,7 @@ jQuery(function () {
 </script>
 		<?php
 	}
-	
+		
 	function settings_link($links, $file) {
 		$this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
 		if($file == $this_plugin) {
