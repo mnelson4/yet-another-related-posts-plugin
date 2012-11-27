@@ -570,7 +570,7 @@ class YARPP {
 				),
 				'users' => $wpdb->get_var("select count(ID) from $wpdb->users"),
 			),
-			'post_thumbnails' => current_theme_supports( 'post-thumbnails' ),
+			'post_thumbnails' => current_theme_supports( 'post-thumbnails', 'post' ),
 			'locale' => get_bloginfo( 'language' ),
 			'url' => get_bloginfo('url'),
 			'plugins' => array(
