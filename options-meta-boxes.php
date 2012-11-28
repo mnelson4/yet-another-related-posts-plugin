@@ -37,10 +37,10 @@ class YARPP_Meta_Box {
 			echo "<div data-value='thumbnails' class='yarpp_template_button";
 			if ( 'thumbnails' == $choice )
 				echo ' active';
-			if ( !current_theme_supports( 'post-thumbnails', 'post' ) )
+			if ( !$yarpp->diagnostic_post_thumbnails() )
 				echo ' disabled';
 			echo "'";
-			if ( !current_theme_supports( 'post-thumbnails', 'post' ) )
+			if ( !$yarpp->diagnostic_post_thumbnails() )
 				echo ' data-help="' . esc_attr( __( 'This option is disabled because your theme does not support post thumbnails.', 'yarpp' ) ) . '"';
 			echo "><div class='image'></div><div class='label'>" . __('Thumbnails', 'yarpp') . "</div></div>";
 	

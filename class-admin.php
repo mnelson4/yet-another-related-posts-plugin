@@ -340,7 +340,7 @@ jQuery(function () {
 	// @since 3.3: default metaboxes to show:
 	function default_hidden_meta_boxes($hidden, $screen) {
 		if ( 'settings_page_yarpp' == $screen->id )
-			$hidden = array( 'yarpp_pool', 'yarpp_relatedness' );
+			$hidden = $this->core->default_hidden_metaboxes;
 		return $hidden;
 	}
 	

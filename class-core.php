@@ -16,6 +16,7 @@ class YARPP {
 	
 	// here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 	public $default_options = array();
+	public $default_hidden_metaboxes = array( 'yarpp_pool', 'yarpp_relatedness' );
 
 	function __construct() {
 		$this->load_default_options();
@@ -244,9 +245,27 @@ class YARPP {
 	}
 	
 	function diagnostic_fulltext_indices() {
-		global $wpdb;		
+		global $wpdb;
 		$wpdb->get_results("show index from $wpdb->posts where Key_name = 'yarpp_title' or Key_name = 'yarpp_content'");
 		return ( $wpdb->num_rows >= 2 );
+	}
+	
+	function diagnostic_hidden_metaboxes() {
+		global $wpdb;
+		$raw = $wpdb->get_var("select meta_value from $wpdb->usermeta where meta_key = 'metaboxhidden_settings_page_yarpp' order by length(meta_value) asc limit 1");
+		
+		if ( !$raw )
+			return $this->default_hidden_metaboxes;
+		
+		$list = maybe_unserialize( $raw );
+		if ( !is_array($list) )
+			return $this->default_hidden_metaboxes;
+
+		return implode('|', $list);
+	}
+	
+	function diagnostic_post_thumbnails() {
+		return current_theme_supports( 'post-thumbnails', 'post' );
 	}
 	
 	/*
@@ -555,7 +574,8 @@ class YARPP {
 		$check_changed = array(
 			'before_title', 'after_title', 'before_post', 'after_post',
 			'before_related', 'after_related', 'no_results', 'order',
-			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post', 				'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
+			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post',
+			'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
 			'exclude', 'thumbnails_heading', 'thumbnails_default', 'rss_thumbnails_heading',
 			'rss_thumbnails_default'
 		);
@@ -570,6 +590,12 @@ class YARPP {
 				'settings' => array_intersect_key( $settings, $collect ),
 				'cache_engine' => YARPP_CACHE_TYPE
 			),
+			'diagnostics' => array(
+				'myisam_posts' => $this->diagnostic_myisam_posts(),
+				'fulltext_indices' => $this->diagnostic_fulltext_indices(),
+				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
+				'post_thumbnails' => $this->diagnostic_post_thumbnails()
+			),
 			'stats' => array(
 				'counts' => array(),
 				'terms' => array(),
@@ -581,7 +607,6 @@ class YARPP {
 				),
 				'users' => $wpdb->get_var("select count(ID) from $wpdb->users"),
 			),
-			'post_thumbnails' => current_theme_supports( 'post-thumbnails', 'post' ),
 			'locale' => get_bloginfo( 'language' ),
 			'url' => get_bloginfo('url'),
 			'plugins' => array(
