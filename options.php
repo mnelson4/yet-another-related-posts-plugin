@@ -45,14 +45,14 @@ if (isset($_POST['myisam_override'])) {
 }
 
 if ( !yarpp_get_option('myisam_override') ) {
-	$yarpp_check_return = $yarpp->myisam_check();
+	$yarpp_check_return = $yarpp->diagnostic_myisam_posts();
 	if ($yarpp_check_return !== true) { // if it's not *exactly* true
 		echo "<div class='updated'>"
-		.sprintf(__("YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled.",'yarpp'),$wpdb->posts,$yarpp_check_return)
+		.sprintf(__("YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled.",'yarpp'), $wpdb->posts, $yarpp_check_return)
 		."<br />"
-		.sprintf(__("To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications.",'yarpp'),$wpdb->posts,$wpdb->posts)
+		.sprintf(__("To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications.",'yarpp'), $wpdb->posts, $wpdb->posts)
 		."<br />"
-		.sprintf(__("If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:",'yarpp'),$wpdb->posts)
+		.sprintf(__("If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:",'yarpp'), $wpdb->posts)
 		."<br />"
 		."<form method='post'><input type='submit' class='button' name='myisam_override' value='"
 		.__("Trust me. Let me use MyISAM features.",'yarpp')

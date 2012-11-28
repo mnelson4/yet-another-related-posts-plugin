@@ -172,23 +172,19 @@ class YARPP {
 		return $given;
 	}
 
-
 	/*
 	 * INFRASTRUCTURE
 	 */
 
 	function enabled() {
 		global $wpdb;
+
 		if ( $this->cache->is_enabled() === false )
 			return false;
-		$indexdata = $wpdb->get_results("show index from $wpdb->posts");
-		foreach ($indexdata as $index) {
-			if ($index->Key_name == 'yarpp_title')
-				return true;
-		}
-		return false;
+
+		return $this->diagnostic_fulltext_indices();
 	}
-	
+		
 	// @since 3.5.2: function to enforce YARPP setup
 	// if new install, activate; else upgrade
 	function enforce() {
@@ -204,21 +200,19 @@ class YARPP {
 	function activate() {
 		global $wpdb;
 	
-		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
-		if (!$wpdb->num_rows)
+		if ( !$this->diagnostic_fulltext_indices() ) {
 			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
-	
-		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_content'");
-		if (!$wpdb->num_rows)
 			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
-		
-		if ( !$this->enabled() ) {
-			// If we are still not enabled, run the cache abstraction's setup method.
-			$this->cache->setup();
-			// If we're still not enabled, give up.
-			if ( !$this->enabled() )
-				return 0;
 		}
+		
+		if ( $this->cache->is_enabled() === false ) {
+			// Run the cache abstraction's setup method.
+			$this->cache->setup();
+		}
+
+		// If we're not enabled, give up.
+		if ( !$this->enabled() )
+			return false;
 		
 		if ( !get_option('yarpp_version') ) {
 			// new install
@@ -229,18 +223,35 @@ class YARPP {
 			$this->upgrade();
 		}
 	
-		return 1;
+		return true;
 	}
+
+	/*
+	 * DIAGNOSTICS
+	 * @since 3.6 moved into separate functions. Note return value types can differ.
+	 */
 	
-	function myisam_check() {
+	function diagnostic_myisam_posts() {
 		global $wpdb;
 		$tables = $wpdb->get_results("show table status like '{$wpdb->posts}'");
 		foreach ($tables as $table) {
-			if ($table->Engine == 'MyISAM') return true;
-			else return $table->Engine;
+			if ($table->Engine == 'MyISAM')
+				return true;
+			else
+				return $table->Engine;
 		}
 		return 'UNKNOWN';
 	}
+	
+	function diagnostic_fulltext_indices() {
+		global $wpdb;		
+		$wpdb->get_results("show index from $wpdb->posts where Key_name = 'yarpp_title' or Key_name = 'yarpp_content'");
+		return ( $wpdb->num_rows >= 2 );
+	}
+	
+	/*
+	 * UPGRADE ROUTINES
+	 */
 	
 	function upgrade() {
 		$last_version = get_option( 'yarpp_version' );
@@ -465,7 +476,7 @@ class YARPP {
 			$weight = $this->default_options['weight'];
 			// if we're still not using MyISAM
 			if ( !yarpp_get_option('myisam_override') && 
-				$this->myisam_check() !== true ) {
+				$this->diagnostic_myisam_posts() !== true ) {
 				unset( $weight['title'] );
 				unset( $weight['body'] );
 			}
