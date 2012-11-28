@@ -84,7 +84,7 @@ class YARPP_Admin {
 			current_user_can('manage_options') &&
 			!get_user_option( 'yarpp_saw_optin' ) ) {
 			$user = get_current_user_id();
-//			update_user_option( $user, 'yarpp_saw_optin', true );
+			update_user_option( $user, 'yarpp_saw_optin', true );
 			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
 		}
 		
