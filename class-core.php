@@ -676,16 +676,18 @@ class YARPP {
 	 * @param (bool) $echo
 	 */
 	function display_related($reference_ID = null, $args = array(), $echo = true) {
-		global $wp_query, $pagenow;
-	
-		$this->enforce();
-
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
 
-		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
-			get_the_ID() : absint($reference_ID);
+		global $wp_query, $pagenow;
+	
+		$this->enforce();
+
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
 
 		// @since 3.5.3: don't compute on revisions
 		if ( $the_post = wp_is_post_revision($reference_ID) )
@@ -781,17 +783,21 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function get_related($reference_ID = null, $args = array()) {
-		$this->enforce();
-
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
-		// @since 3.5.3: don't compute on revisions
-		if ( $the_post = wp_is_post_revision($reference_ID) )
-			$reference_ID = $the_post;
-	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
-		
+
+		$this->enforce();
+
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
+
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
+			
 		$this->setup_active_cache( $args );
 
 		$options = array( 'limit', 'order' );
@@ -823,13 +829,17 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function related_exist($reference_ID = null, $args = array()) {
-		$this->enforce();
-	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
+
+		$this->enforce();	
 	
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
+
 		// @since 3.5.3: don't compute on revisions
 		if ( $the_post = wp_is_post_revision($reference_ID) )
 			$reference_ID = $the_post;

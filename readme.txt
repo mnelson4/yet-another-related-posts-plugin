@@ -239,6 +239,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* No PHP required -- just visit the settings page
 	* Edit your theme's CSS file to modify the styling
 * All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)).
+* [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
 * Improvements to YARPP custom template UI
 	* A new design for the template chooser
 	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
