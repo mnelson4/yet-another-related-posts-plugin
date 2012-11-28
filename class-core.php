@@ -16,6 +16,7 @@ class YARPP {
 	
 	// here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 	public $default_options = array();
+	public $default_hidden_metaboxes = array( 'yarpp_pool', 'yarpp_relatedness' );
 
 	function __construct() {
 		$this->load_default_options();
@@ -103,7 +104,12 @@ class YARPP {
 					'post_tag' => 1
 				)
 			),
-			'require_tax' => array() // new in 3.5
+			'require_tax' => array(), // new in 3.5
+			'optin' => false, // new in 3.6
+			'thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
+			'thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 3.6
+			'rss_thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
+			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ) // new in 3.6
 		);
 	}
 	
@@ -167,23 +173,19 @@ class YARPP {
 		return $given;
 	}
 
-
 	/*
 	 * INFRASTRUCTURE
 	 */
 
 	function enabled() {
 		global $wpdb;
+
 		if ( $this->cache->is_enabled() === false )
 			return false;
-		$indexdata = $wpdb->get_results("show index from $wpdb->posts");
-		foreach ($indexdata as $index) {
-			if ($index->Key_name == 'yarpp_title')
-				return true;
-		}
-		return false;
+
+		return $this->diagnostic_fulltext_indices();
 	}
-	
+		
 	// @since 3.5.2: function to enforce YARPP setup
 	// if new install, activate; else upgrade
 	function enforce() {
@@ -191,26 +193,27 @@ class YARPP {
 			$this->activate();
 		else
 			$this->upgrade();
+		
+		if ( $this->get_option('optin') )
+			$this->optin_ping();
 	}
 	
 	function activate() {
 		global $wpdb;
 	
-		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_title'");
-		if (!$wpdb->num_rows)
+		if ( !$this->diagnostic_fulltext_indices() ) {
 			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
-	
-		$wpdb->get_results("show index from $wpdb->posts where Key_name='yarpp_content'");
-		if (!$wpdb->num_rows)
 			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
-		
-		if ( !$this->enabled() ) {
-			// If we are still not enabled, run the cache abstraction's setup method.
-			$this->cache->setup();
-			// If we're still not enabled, give up.
-			if ( !$this->enabled() )
-				return 0;
 		}
+		
+		if ( $this->cache->is_enabled() === false ) {
+			// Run the cache abstraction's setup method.
+			$this->cache->setup();
+		}
+
+		// If we're not enabled, give up.
+		if ( !$this->enabled() )
+			return false;
 		
 		if ( !get_option('yarpp_version') ) {
 			// new install
@@ -221,18 +224,53 @@ class YARPP {
 			$this->upgrade();
 		}
 	
-		return 1;
+		return true;
 	}
+
+	/*
+	 * DIAGNOSTICS
+	 * @since 3.6 moved into separate functions. Note return value types can differ.
+	 */
 	
-	function myisam_check() {
+	function diagnostic_myisam_posts() {
 		global $wpdb;
 		$tables = $wpdb->get_results("show table status like '{$wpdb->posts}'");
 		foreach ($tables as $table) {
-			if ($table->Engine == 'MyISAM') return true;
-			else return $table->Engine;
+			if ($table->Engine == 'MyISAM')
+				return true;
+			else
+				return $table->Engine;
 		}
 		return 'UNKNOWN';
 	}
+	
+	function diagnostic_fulltext_indices() {
+		global $wpdb;
+		$wpdb->get_results("show index from $wpdb->posts where Key_name = 'yarpp_title' or Key_name = 'yarpp_content'");
+		return ( $wpdb->num_rows >= 2 );
+	}
+	
+	function diagnostic_hidden_metaboxes() {
+		global $wpdb;
+		$raw = $wpdb->get_var("select meta_value from $wpdb->usermeta where meta_key = 'metaboxhidden_settings_page_yarpp' order by length(meta_value) asc limit 1");
+		
+		if ( !$raw )
+			return $this->default_hidden_metaboxes;
+		
+		$list = maybe_unserialize( $raw );
+		if ( !is_array($list) )
+			return $this->default_hidden_metaboxes;
+
+		return implode('|', $list);
+	}
+	
+	function diagnostic_post_thumbnails() {
+		return current_theme_supports( 'post-thumbnails', 'post' );
+	}
+	
+	/*
+	 * UPGRADE ROUTINES
+	 */
 	
 	function upgrade() {
 		$last_version = get_option( 'yarpp_version' );
@@ -262,6 +300,7 @@ class YARPP {
 		$this->version_info(true);
 	
 		update_option('yarpp_version',YARPP_VERSION);
+		delete_transient( 'yarpp_optin' );
 	}
 	
 	function upgrade_3_4b2() {
@@ -456,7 +495,7 @@ class YARPP {
 			$weight = $this->default_options['weight'];
 			// if we're still not using MyISAM
 			if ( !yarpp_get_option('myisam_override') && 
-				$this->myisam_check() !== true ) {
+				$this->diagnostic_myisam_posts() !== true ) {
 				unset( $weight['title'] );
 				unset( $weight['body'] );
 			}
@@ -518,6 +557,113 @@ class YARPP {
 		return $taxonomy->show_ui;
 	}
 	
+	public function optin_data() {
+		global $wpdb, $yarpp;
+
+		$comments = wp_count_comments();
+		$users = count_users();
+
+		$settings = get_option( 'yarpp' );
+		$collect = array_flip(array(
+			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
+			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
+			'template', 'rss_template', 'show_pass_post', 'cross_relate',
+			'auto_display', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
+			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax'
+		));
+		$check_changed = array(
+			'before_title', 'after_title', 'before_post', 'after_post',
+			'before_related', 'after_related', 'no_results', 'order',
+			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post',
+			'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
+			'exclude', 'thumbnails_heading', 'thumbnails_default', 'rss_thumbnails_heading',
+			'rss_thumbnails_default'
+		);
+
+		$data = array(
+			'versions' => array(
+				'yarpp' => YARPP_VERSION,
+				'wp' => get_bloginfo( 'version' ),
+				'php' => phpversion()
+			),
+			'yarpp' => array(
+				'settings' => array_intersect_key( $settings, $collect ),
+				'cache_engine' => YARPP_CACHE_TYPE
+			),
+			'diagnostics' => array(
+				'myisam_posts' => $this->diagnostic_myisam_posts(),
+				'fulltext_indices' => $this->diagnostic_fulltext_indices(),
+				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
+				'post_thumbnails' => $this->diagnostic_post_thumbnails()
+			),
+			'stats' => array(
+				'counts' => array(),
+				'terms' => array(),
+				'comments' => array(
+					'moderated' => $comments->moderated,
+					'approved' => $comments->approved,
+					'total' => $comments->total_comments,
+					'posts' => $wpdb->get_var( "select count(ID) from $wpdb->posts where post_type = 'post' and comment_count > 0" )
+				),
+				'users' => $wpdb->get_var("select count(ID) from $wpdb->users"),
+			),
+			'locale' => get_bloginfo( 'language' ),
+			'url' => get_bloginfo('url'),
+			'plugins' => array(
+				'active' => implode( '|', get_option( 'active_plugins', array() ) ),
+				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
+			)
+		);
+		
+		$changed = array();
+		foreach ( $check_changed as $key ) {
+			if ( $yarpp->default_options[$key] != $settings[$key] )
+				$changed[] = $key;
+		}
+		$data['yarpp']['changed_settings'] = implode( '|', $changed );
+		
+		if ( method_exists( $yarpp->cache, 'cache_status' ) )
+			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
+		if ( method_exists( $yarpp->cache, 'stats' ) ) {
+			$stats = $yarpp->cache->stats();
+			$flattened = array();
+			foreach ( $stats as $key => $value )
+				$flattened[] = "$key:$value";
+			$data['yarpp']['stats'] = implode( '|', $flattened );
+		}
+			
+		if ( method_exists( $wpdb, 'db_version' ) )
+			$data['versions']['mysql'] = preg_replace('/[^0-9.].*/', '', $wpdb->db_version());
+
+		$counts = array();
+		foreach (get_post_types( array('public' => true) ) as $post_type) {
+			$counts[$post_type] = wp_count_posts($post_type);
+		}
+		$data['stats']['counts'] = wp_list_pluck($counts, 'publish');
+
+		foreach (get_taxonomies( array('public' => true) ) as $taxonomy) {
+			$data['stats']['terms'][$taxonomy] = wp_count_terms($taxonomy);
+		}
+		
+		if ( is_multisite() ) {
+			$data['multisite'] = array(
+				'url' => network_site_url(),
+				'users' => get_user_count(),
+				'sites' => get_blog_count()
+			);
+		}
+		
+		return $data;
+	}
+	
+	function pretty_echo( $data ) {
+		echo "<pre>";
+		$formatted = print_r($data, true);
+		$formatted = str_replace(array('Array', '(', ')', "\n    "), array('', '', '', "\n"), $formatted);
+		echo preg_replace("/\n\s*\n/u", "\n", $formatted);
+		echo "</pre>";
+	}
+	
 	/*
 	 * CORE LOOKUP + DISPLAY FUNCTIONS
 	 */
@@ -530,16 +676,18 @@ class YARPP {
 	 * @param (bool) $echo
 	 */
 	function display_related($reference_ID = null, $args = array(), $echo = true) {
-		global $wp_query, $pagenow;
-	
-		$this->enforce();
-
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
 
-		$reference_ID = ( null === $reference_ID || false === $reference_ID ) ?
-			get_the_ID() : absint($reference_ID);
+		global $wp_query, $pagenow;
+	
+		$this->enforce();
+
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
 
 		// @since 3.5.3: don't compute on revisions
 		if ( $the_post = wp_is_post_revision($reference_ID) )
@@ -547,7 +695,7 @@ class YARPP {
 		
 		$this->setup_active_cache( $args );
 
-		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp' );
+		$options = array( 'domain', 'limit', 'template', 'order', 'promote_yarpp', 'optin' );
 		extract( $this->parse_args( $args, $options ) );
 
 		$cache_status = $this->active_cache->enforce($reference_ID);
@@ -566,7 +714,6 @@ class YARPP {
 		$current_query = $wp_query;
 		$current_pagenow = $pagenow;
 	
-		$output = '';
 		$wp_query = new WP_Query();
 		if ( YARPP_NO_RELATED == $cache_status ) {
 			// If there are no related posts, get no query
@@ -583,19 +730,29 @@ class YARPP {
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 	
+		// @todo: add these classes after the fact and include information about whether any results were given
+		$output = "<div class='";
+		if ( 'website' == $domain )
+			$output .= "yarpp-related";
+		else
+			$output .= "yarpp-related-{$domain}";
+		$output .= "'>\n";
 		if ( 'metabox' == $domain ) {
-			include(YARPP_DIR.'/template-metabox.php');
+			include(YARPP_DIR . '/template-metabox.php');
+		} elseif ( !!$template && 'thumbnails' == $template ) {
+			include(YARPP_DIR . '/template-thumbnails.php');			
 		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template);
-			$output = ob_get_contents();
+			$output .= ob_get_contents();
 			ob_end_clean();
 		} elseif ( 'widget' == $domain ) {
-			include(YARPP_DIR.'/template-widget.php');
+			include(YARPP_DIR . '/template-widget.php');
 		} else {
-			include(YARPP_DIR.'/template-builtin.php');
+			include(YARPP_DIR . '/template-builtin.php');
 		}
+		$output = trim($output) . "\n";
 	
 		if ( YARPP_NO_RELATED == $cache_status ) {
 			// Uh, do nothing. Stay very still.
@@ -609,8 +766,13 @@ class YARPP {
 		$pagenow = $current_pagenow; unset($current_pagenow);
 	
 		if ($promote_yarpp && $domain != 'metabox')
-			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
 	
+		if ( $optin )
+			$output .= "<img src='http://yarpp.org/pixel.png?" . md5(get_bloginfo('url')) . "'/>\n";
+
+		$output .= "</div>\n";
+			
 		if ($echo)
 			echo $output;
 		return $output;
@@ -621,17 +783,21 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function get_related($reference_ID = null, $args = array()) {
-		$this->enforce();
-
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
-		// @since 3.5.3: don't compute on revisions
-		if ( $the_post = wp_is_post_revision($reference_ID) )
-			$reference_ID = $the_post;
-	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
-		
+
+		$this->enforce();
+
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
+
+		// @since 3.5.3: don't compute on revisions
+		if ( $the_post = wp_is_post_revision($reference_ID) )
+			$reference_ID = $the_post;
+			
 		$this->setup_active_cache( $args );
 
 		$options = array( 'limit', 'order' );
@@ -663,13 +829,17 @@ class YARPP {
 	 * @param (array) $args
 	 */
 	function related_exist($reference_ID = null, $args = array()) {
-		$this->enforce();
-	
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
+
+		$this->enforce();	
 	
-		$reference_ID = ( null === $reference_ID ) ? get_the_ID() : absint($reference_ID);
+		if ( is_numeric( $reference_ID ) )
+			$reference_ID = (int) $reference_ID;
+		else
+			$reference_ID = get_the_ID();
+
 		// @since 3.5.3: don't compute on revisions
 		if ( $the_post = wp_is_post_revision($reference_ID) )
 			$reference_ID = $the_post;
@@ -710,27 +880,38 @@ class YARPP {
 	
 		$this->cache_bypass->begin_demo_time( $limit );
 	
-		$output = '';
+		$output = "<div class='";
+		if ( 'website' == $domain )
+			$output .= "yarpp-related";
+		else
+			$output .= "yarpp-related-{$domain}";
+		$output .= "'>\n";
+
 		$wp_query = new WP_Query();
 		$wp_query->query('');
 	
 		$this->prep_query( $domain == 'rss' );
 		$related_query = $wp_query; // backwards compatibility
 	
-		if ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
+		if ( !!$template && 'thumbnails' == $template ) {
+			include(YARPP_DIR . '/template-thumbnails.php');
+		} elseif ( !!$template && file_exists(STYLESHEETPATH . '/' . $template) ) {
 			global $post;
 			ob_start();
 			include(STYLESHEETPATH . '/' . $template);
-			$output = ob_get_contents();
+			$output .= ob_get_contents();
 			ob_end_clean();
 		} else {
 			include(YARPP_DIR.'/template-builtin.php');
 		}
-	
+		$output = trim($output) . "\n";
+		
 		$this->cache_bypass->end_demo_time();
-	
+		
 		if ($promote_yarpp)
-			$output .= "\n<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>";
+			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
+
+		$output .= "</div>";
 	
 		if ( $echo )
 			echo $output;
@@ -738,7 +919,11 @@ class YARPP {
 	}
 	
 	public function parse_args( $args, $options ) {
-		$options_with_rss_variants = array( 'limit', 'template', 'excerpt_length', 'before_title', 'after_title', 'before_post', 'after_post', 'before_related', 'after_related', 'no_results', 'order', 'promote_yarpp' );
+		$options_with_rss_variants = array(
+			'limit', 'template', 'excerpt_length', 'before_title',
+			'after_title', 'before_post', 'after_post', 'before_related',
+			'after_related', 'no_results', 'order', 'promote_yarpp',
+			'thumbnails_heading', 'thumbnails_default' );
 
 		$r = array();
 		foreach ( $options as $option ) {
@@ -842,11 +1027,11 @@ class YARPP {
 	 * UTILS
 	 */
 	
-	// new in 3.3: use PHP serialized format instead of JSON
+	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
 		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
 			$version = YARPP_VERSION;
-			$remote = wp_remote_post("http://mitcho.com/code/yarpp/checkversion.php?format=php&version={$version}");
+			$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
 			
 			if (is_wp_error($remote))
 				return false;
@@ -856,6 +1041,21 @@ class YARPP {
 		}
 		return $result;
 	}
+
+	// @since 3.6: optional collection of  (default off)
+	function optin_ping() {
+		if ( get_transient( 'yarpp_optin' ) )
+			return true;
+
+		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
+		
+		if ( is_wp_error($remote) )
+			return false;
+		
+		if ( $result = $remote['body'] )
+			set_transient( 'yarpp_optin', $result, 60 * 60 * 24 * 7 );
+	}
+
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
 	function clean_pre( $text ) {
