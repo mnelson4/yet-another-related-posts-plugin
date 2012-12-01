@@ -769,7 +769,7 @@ class YARPP {
 			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
 	
 		if ( $optin )
-			$output .= "<img src='http://yarpp.org/pixel.png?" . md5(get_bloginfo('url')) . "'/>\n";
+			$output .= "<img src='http://yarpp.org/pixels/" . md5(get_bloginfo('url')) . "'/>\n";
 
 		$output .= "</div>\n";
 			
