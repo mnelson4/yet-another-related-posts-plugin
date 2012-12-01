@@ -237,4 +237,13 @@ jQuery(function($) {
 	}
 	$('#yarpp-optin-learnmore, a[aria-controls=tab-panel-optin]').bind('click focus', display_optin_data);
 	display_optin_data();
+	
+	function sync_no_results() {
+		var value = $(this).find('input').attr('value');
+		if ( $(this).hasClass('sync_no_results') )
+			$('.sync_no_results input').attr('value', value);
+		if ( $(this).hasClass('sync_rss_no_results') )
+			$('.sync_rss_no_results input').attr('value', value);
+	}
+	$('.sync_no_results, .sync_rss_no_results').change(sync_no_results);
 });

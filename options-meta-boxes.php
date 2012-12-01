@@ -245,7 +245,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
 			$this->textbox('thumbnails_heading', __('Heading:','yarpp'), 40);
 			$this->textbox('thumbnails_default', __('Default image (URL):','yarpp'), 40);
-			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40);
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'sync_no_results');
 		echo "</div>";
 
 		echo "<div class='postbox yarpp_subbox template_options_builtin'>";
@@ -257,7 +257,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 	
 			$this->beforeafter(array('before_post', 'after_post'), __("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 	
-			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40);
+			$this->textbox('no_results', __('Default display if no results:','yarpp'), 40, 'sync_no_results');
 		echo "</div>";
 
 		$this->displayorder('order');			
@@ -291,7 +291,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
 			$this->textbox('rss_thumbnails_heading', __('Heading:','yarpp'), 40);
 			$this->textbox('rss_thumbnails_default', __('Default image (URL):','yarpp'), 40);
-			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40);
+			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'sync_rss_no_results');
 		echo "</div>";
 	
 		echo "<div class='postbox yarpp_subbox template_options_builtin rss_displayed'>";
@@ -303,7 +303,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		
 			$this->beforeafter(array('rss_before_post', 'rss_after_post'),__("Before / after (excerpt):",'yarpp'), 10, 'excerpted', __("For example:",'yarpp') . ' &lt;li&gt;&lt;/li&gt;' . __(' or ','yarpp') . '&lt;dl&gt;&lt;/dl&gt;');
 		
-			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40);
+			$this->textbox('rss_no_results', __('Default display if no results:','yarpp'), 40, 'sync_rss_no_results');
 		echo "</div>";
 
 		$this->displayorder('rss_order', 'rss_displayed');			
