@@ -268,6 +268,18 @@ class YARPP {
 		return current_theme_supports( 'post-thumbnails', 'post' );
 	}
 	
+	function diagnostic_happy() {
+		$stats = $this->cache->stats();
+
+		if ( !(array_sum( $stats ) > 0) )
+			return false;
+		
+		$sum = array_sum(array_map('array_product', array_map(null, array_values($stats), array_keys($stats))));
+		$avg = $sum / array_sum( $stats );
+
+		return $this->cache->cache_status() > 0.1 && $avg > 2;
+	}
+	
 	/*
 	 * UPGRADE ROUTINES
 	 */
@@ -502,19 +514,7 @@ class YARPP {
 			yarpp_set_option(array('weight' => $weight));
 		}
 	}
-	
-	function is_happy() {
-		$stats = $this->cache->stats();
-
-		if ( !(array_sum( $stats ) > 0) )
-			return false;
 		
-		$sum = array_sum(array_map('array_product', array_map(null, array_values($stats), array_keys($stats))));
-		$avg = $sum / array_sum( $stats );
-
-		return $this->cache->cache_status() > 0.1 && $avg > 2;
-	}
-	
 	private $post_types = null;
 	function get_post_types( $field = 'name' ) {
 		if ( is_null($this->post_types) ) {
@@ -594,7 +594,8 @@ class YARPP {
 				'myisam_posts' => $this->diagnostic_myisam_posts(),
 				'fulltext_indices' => $this->diagnostic_fulltext_indices(),
 				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
-				'post_thumbnails' => $this->diagnostic_post_thumbnails()
+				'post_thumbnails' => $this->diagnostic_post_thumbnails(),
+				'happy' => $this->diagnostic_happy()
 			),
 			'stats' => array(
 				'counts' => array(),
