@@ -68,7 +68,7 @@ class YARPP {
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
 			'after_post' => '</small>',
-			'before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+			'before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
 			'after_related' => '</ol>',
 			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'order' => 'score DESC',
@@ -78,7 +78,7 @@ class YARPP {
 			'rss_after_title' => '</li>',
 			'rss_before_post' => ' <small>',
 			'rss_after_post' => '</small>',
-			'rss_before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+			'rss_before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
 			'rss_after_related' => '</ol>',
 			'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'rss_order' => 'score DESC',
@@ -333,7 +333,7 @@ class YARPP {
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
 			'after_post' => '</small>',
-			'before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+			'before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
 			'after_related' => '</ol>',
 			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'order' => 'score DESC',
@@ -344,7 +344,7 @@ class YARPP {
 			'rss_after_title' => '</li>',
 			'rss_before_post' => ' <small>',
 			'rss_after_post' => '</small>',
-			'rss_before_related' => '<p>'.__('Related posts:','yarpp').'</p><ol>',
+			'rss_before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
 			'rss_after_related' => '</ol>',
 			'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
 			'rss_order' => 'score DESC',
@@ -587,11 +587,10 @@ class YARPP {
 		));
 		$check_changed = array(
 			'before_title', 'after_title', 'before_post', 'after_post',
-			'before_related', 'after_related', 'no_results', 'order',
-			'rss_before_title', 'rss_after_title', 'rss_before_post', 'rss_after_post',
-			'rss_before_related', 'rss_after_related', 'rss_no_results', 'rss_order',
-			'exclude', 'thumbnails_heading', 'thumbnails_default', 'rss_thumbnails_heading',
-			'rss_thumbnails_default', 'display_code'
+			'after_related', 'no_results', 'order', 'rss_before_title',
+			'rss_after_title', 'rss_before_post', 'rss_after_post', 'rss_after_related',
+			'rss_no_results', 'rss_order', 'exclude', 'thumbnails_heading',
+			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code'
 		);
 
 		$data = array(
@@ -633,6 +632,11 @@ class YARPP {
 		$changed = array();
 		foreach ( $check_changed as $key ) {
 			if ( $yarpp->default_options[$key] != $settings[$key] )
+				$changed[] = $key;
+		}
+		foreach ( array( 'before_related', 'rss_before_related' ) as $key ) {
+			if ( $settings[$key] != '<p>'.__('Related posts:','yarpp').'</p><ol>' &&
+				$settings[$key] != $yarpp->default_options[$key] )
 				$changed[] = $key;
 		}
 		$data['yarpp']['changed_settings'] = implode( '|', $changed );
