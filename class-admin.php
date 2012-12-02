@@ -81,9 +81,10 @@ class YARPP_Admin {
 				add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
 			}
-		} elseif ( !$this->core->get_option('optin') &&
-			current_user_can('manage_options') &&
-			!get_user_option( 'yarpp_saw_optin' ) ) {
+		} elseif ( !$this->core->get_option('optin')
+// 			current_user_can('manage_options') &&
+// 			!get_user_option( 'yarpp_saw_optin' )
+			) {
 			$user = get_current_user_id();
 			update_user_option( $user, 'yarpp_saw_optin', true );
 			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
@@ -160,9 +161,9 @@ class YARPP_Admin {
 
 	public function help_optin() {
 		// todo: i18n
-		echo '<p>' . sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
-		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
-		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p>';
+		echo '<p>' . sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
+		echo __( "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.", 'yarpp' ) . ' ';
+		echo '<strong>' . __( "Contributing this data will help make YARPP better for you and for other YARPP users.", 'yarpp' ) . '</strong></p>';
 
 		if ( !$this->core->get_option( 'optin' ) ) {
 			echo '<p>';
@@ -196,13 +197,34 @@ class YARPP_Admin {
 		</script>\n";
 	}
 
-	function optin_notice() {
-		echo '<div class="updated fade">';
-		echo '<p>' . sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
-		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
-		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p><p>';
+	function optin_notice( $pool = null ) {
+		echo '<div class="updated fade"><p>';
+
+		// @todo i18n
+		if ( is_null( $pool ) );
+			$pool = $this->core->get_option( 'pools[message]' );
+		switch ( $pool ) {
+			case 0:
+				echo "Help make YARPP better by sending information about YARPP's settings and usage statistics.";
+				break;
+			case 1:
+				echo sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
+				echo __( "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.", 'yarpp' ) . ' ';
+				echo '<strong>' . __( "Contributing this data will help make YARPP better for you and for other YARPP users.", 'yarpp' ) . '</strong>';
+				break;
+			case 2:
+				echo "<strong>Help make YARPP better.</strong> ";
+				echo sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
+				echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.";
+				break;
+			case 3:
+				echo "YARPP can automatically collect diagnostic and usage information from your site and send it to YARPP's author for analysis. The information is sent only with your consent. ";
+				echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong>';
+		}
+
+		echo '</p><p>';
 		$this->print_optin_button();
-		echo '<a class="button" href="options-general.php?page=yarpp#help-optin">' . 'Learn More' . '</a>';
+		echo '<a class="button" href="options-general.php?page=yarpp#help-optin">' . __( 'Learn More', 'yarpp' ) . '</a>';
 		echo '</p></div>';
 	}
 	

@@ -112,6 +112,7 @@ class YARPP {
 			'display_code' => false, // new in 3.6
 			'auto_display_archive' => false, // new in 3.6
 			'auto_display_post_types' => array( 'post' ), // new in 3.6, replacing auto_display
+			'pools' => array( 'message' => mt_rand(0,3) ), // new in 3.6
 		);
 	}
 	
@@ -625,7 +626,8 @@ class YARPP {
 			'plugins' => array(
 				'active' => implode( '|', get_option( 'active_plugins', array() ) ),
 				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
-			)
+			),
+			'pools' => $settings['pools']
 		);
 		$data['yarpp']['settings']['auto_display_post_types'] = implode( '|', $settings['auto_display_post_types'] );
 		
