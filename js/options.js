@@ -171,8 +171,8 @@ jQuery(function($) {
 		options = {
 			content: help,
 			position: {
-				edge: 'left',
-				align: 'center',
+				edge: 'bottom',
+//				align: 'center',
 				of: that
 			},
 			document: {body: that}
