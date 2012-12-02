@@ -81,9 +81,9 @@ class YARPP_Admin {
 				add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
 			}
-		} elseif ( !$this->core->get_option('optin')
-// 			current_user_can('manage_options') &&
-// 			!get_user_option( 'yarpp_saw_optin' )
+		} elseif ( !$this->core->get_option('optin') &&
+ 			current_user_can('manage_options') &&
+			!get_user_option( 'yarpp_saw_optin' )
 			) {
 			$user = get_current_user_id();
 			update_user_option( $user, 'yarpp_saw_optin', true );
@@ -381,7 +381,7 @@ jQuery(function () {
 		return $hidden;
 	}
 	
-	// @since 3.6: UI to copy templates
+	// @since 4: UI to copy templates
 	function can_copy_templates() {
 		$theme_dir = get_stylesheet_directory();
 		// If we can't write to the theme, return false
