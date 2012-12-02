@@ -60,8 +60,8 @@ class YARPP {
 	
 	private function load_default_options() {
 		$this->default_options = array(
-			'threshold' => 4, // changed default in 3.6
-			'limit' => 4, // changed default in 3.6
+			'threshold' => 4, // changed default in 4
+			'limit' => 4, // changed default in 4
 			'excerpt_length' => 10,
 			'recent' => false, // new in 3.5
 			'before_title' => '<li>',
@@ -104,15 +104,15 @@ class YARPP {
 				)
 			),
 			'require_tax' => array(), // new in 3.5
-			'optin' => false, // new in 3.6
-			'thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
-			'thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 3.6
-			'rss_thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
-			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 3.6
-			'display_code' => false, // new in 3.6
-			'auto_display_archive' => false, // new in 3.6
-			'auto_display_post_types' => array( 'post' ), // new in 3.6, replacing auto_display
-			'pools' => array( 'message' => mt_rand(0,3) ), // new in 3.6
+			'optin' => false, // new in 4
+			'thumbnails_heading' => __('Related posts:','yarpp'), // new in 4
+			'thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 4
+			'rss_thumbnails_heading' => __('Related posts:','yarpp'), // new in 4
+			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 4
+			'display_code' => false, // new in 4
+			'auto_display_archive' => false, // new in 4
+			'auto_display_post_types' => array( 'post' ), // new in 4, replacing auto_display
+			'pools' => array( 'message' => mt_rand(0,3) ), // new in 4
 		);
 	}
 	
@@ -232,7 +232,7 @@ class YARPP {
 
 	/*
 	 * DIAGNOSTICS
-	 * @since 3.6 moved into separate functions. Note return value types can differ.
+	 * @since 4 moved into separate functions. Note return value types can differ.
 	 */
 	
 	function diagnostic_myisam_posts() {
@@ -1081,7 +1081,7 @@ class YARPP {
 		return $result;
 	}
 
-	// @since 3.6: optional collection of  (default off)
+	// @since 4: optional data collection (default off)
 	function optin_ping() {
 		if ( get_transient( 'yarpp_optin' ) )
 			return true;

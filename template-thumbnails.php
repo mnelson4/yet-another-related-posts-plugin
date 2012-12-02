@@ -1,7 +1,7 @@
 <?php
 /*
  * YARPP's built-in thumbnails template
- * @since 3.6
+ * @since 4
  *
  * This template is used when you choose the built-in thumbnails option.
  * If you want to create a new template, look at yarpp-templates/yarpp-template-example.php as an example.

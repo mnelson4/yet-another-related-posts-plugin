@@ -240,7 +240,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.6 =
+= 4.0 =
 * New thumbnail template option!
 	* No PHP required -- just visit the settings page
 	* Edit your theme's CSS file to modify the styling

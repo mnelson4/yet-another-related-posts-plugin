@@ -284,7 +284,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( !is_int($ID) )
 			return false;
 
-		// @since 3.6: compute fresh each time, instead of using cache table.
+		// @since 4: compute fresh each time, instead of using cache table.
 		// the old keyword cache would basically have to be recomputed every time the
 		// relatedness cache was recomputed, but no more, so there's no point in keeping
 		// these around separately.

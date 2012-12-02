@@ -1,7 +1,7 @@
 <?php
 /*
  * Dynamic styles for YARPP's built-in thumbnails template
- * @since 3.6
+ * @since 4
  */
 
 $height = 120;
