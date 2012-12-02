@@ -137,15 +137,14 @@ jQuery(function($) {
 	$('#yarpp_pool .handlediv, #yarpp_pool-hide').click(load_disallows);
 	load_disallows();
 
-	$('#yarpp-optin-learnmore').click(function() {
-		$('#tab-link-optin a').click();
+	function show_help( section ) {
+		$('#tab-link-' + section + ' a').click();
 		$('#contextual-help-link').click();
-	});
-
-	$('#yarpp-help-cpt').click(function() {
-		$('#tab-link-dev a').click();
-		$('#contextual-help-link').click();
-	});
+	}
+	$('#yarpp-optin-learnmore').click(function() { show_help('optin'); });
+	$('#yarpp-help-cpt').click(function() { show_help('dev'); });
+	if ( location.hash == '#help-optin' )
+		setTimeout( function() { show_help('optin'); } );
 
 	$('.yarpp_help[data-help]').hover(function() {
 		var that = $(this),

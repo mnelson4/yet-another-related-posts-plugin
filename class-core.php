@@ -581,9 +581,8 @@ class YARPP {
 			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
 			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
 			'template', 'rss_template', 'show_pass_post', 'cross_relate',
-			'auto_display_post_types', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
-			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax',
-			'auto_display_archive'
+			'rss_display', 'rss_excerpt_display', 'promote_yarpp', 'rss_promote_yarpp',
+			'myisam_override', 'weight', 'require_tax', 'auto_display_archive'
 		));
 		$check_changed = array(
 			'before_title', 'after_title', 'before_post', 'after_post',
@@ -628,6 +627,7 @@ class YARPP {
 				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
 			)
 		);
+		$data['yarpp']['settings']['auto_display_post_types'] = implode( '|', $settings['auto_display_post_types'] );
 		
 		$changed = array();
 		foreach ( $check_changed as $key ) {

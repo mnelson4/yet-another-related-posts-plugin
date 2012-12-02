@@ -202,6 +202,7 @@ class YARPP_Admin {
 		echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP." . ' ';
 		echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong></p><p>';
 		$this->print_optin_button();
+		echo '<a class="button" href="options-general.php?page=yarpp#help-optin">' . 'Learn More' . '</a>';
 		echo '</p></div>';
 	}
 	
