@@ -111,6 +111,7 @@ class YARPP {
 			'rss_thumbnails_heading' => __('Related posts:','yarpp'), // new in 3.6
 			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 3.6
 			'display_code' => false, // new in 3.6
+			'auto_display_archive' => false, // new in 3.6
 		);
 	}
 	
@@ -570,7 +571,8 @@ class YARPP {
 			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
 			'template', 'rss_template', 'show_pass_post', 'cross_relate',
 			'auto_display', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
-			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax'
+			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax',
+			'auto_display_archive'
 		));
 		$check_changed = array(
 			'before_title', 'after_title', 'before_post', 'after_post',
@@ -981,10 +983,23 @@ class YARPP {
 	 */
 	 
 	function the_content($content) {
-		if ( is_feed() ||
-		     !$this->get_option('auto_display') || 
-		     !is_singular(array('post')) )
-			return $content;			
+		// this filter doesn't handle feeds
+		if ( is_feed() )
+			return $content;
+		
+		$auto_display_post_types = array();
+ 		if ( $this->get_option('auto_display') )
+ 			$auto_display_post_types = array('post');
+
+		// if it's not an auto-display post type, return
+		if ( !in_array( get_post_type(), $auto_display_post_types ) )
+			return $content;
+
+		if ( !is_singular() && !(
+				$this->get_option('auto_display_archive') &&
+				( is_archive() || is_home() ) 
+			) )
+			return $content;
 	
 		if ( $this->get_option('cross_relate') )
 			$type = $this->get_post_types();

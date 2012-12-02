@@ -238,10 +238,13 @@ If you are a bilingual speaker of English and another language and an avid user 
 * New thumbnail template option!
 	* No PHP required -- just visit the settings page
 	* Edit your theme's CSS file to modify the styling
+* Auto display settings changes:
+	* Added an "also display in archives" option
 * All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)).
 * [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
-* Improvements to YARPP custom template UI
+* Refinements to settings UI:
 	* A new design for the template chooser
+	* Example code display is now hidden by default; turn them back on from the "screen options" tab.
 	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
 	* Header information in YARPP custom templates are now displayed to users in the settings UI. Available fields are `Template Name`, `Description`, `Author`, `Author URI`, in the same format as plugin and theme file headers. See bundled templates for examples.
 * Code cleanup:

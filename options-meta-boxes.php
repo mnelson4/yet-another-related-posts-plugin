@@ -232,6 +232,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		echo "<div style='overflow:auto'>";
 			echo '<div class="yarpp_code_display"><strong>' . __("Website display code example",'yarpp') . '</strong><br /><small>' . __("(Update options to reload.)", 'yarpp') . "</small><br/><div id='display_demo_web'></div></div>";
 			$this->checkbox('auto_display',__("Automatically display related posts?",'yarpp')." <span class='yarpp_help' data-help='" . esc_attr(__("This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.",'yarpp')) . "'>&nbsp;</span>");
+			$this->checkbox('auto_display_archive',__("Also display in archives",'yarpp'));
 	
 			$this->textbox('limit',__('Maximum number of related posts:','yarpp'));
 			$this->template_checkbox( false );
