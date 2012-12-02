@@ -220,6 +220,13 @@ class YARPP_Admin {
 			case 3:
 				echo "YARPP can automatically collect diagnostic and usage information from your site and send it to YARPP's author for analysis. The information is sent only with your consent. ";
 				echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong>';
+				break;
+			case 4:
+				echo "<strong>We'd like your help making YARPP awesome.</strong> Is it OK if YARPP occasionally collects some data about your site and its use of YARPP?";
+				break;
+			case 5:
+				echo "Would you like to help make YARPP better by sharing some technical information with YARPP's author?";
+				break;
 		}
 
 		echo '</p><p>';
