@@ -85,8 +85,6 @@ class YARPP_Admin {
  			current_user_can('manage_options') &&
 			!get_user_option( 'yarpp_saw_optin' )
 			) {
-			$user = get_current_user_id();
-			update_user_option( $user, 'yarpp_saw_optin', true );
 			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
 		}
 		
@@ -198,10 +196,17 @@ class YARPP_Admin {
 	}
 
 	function optin_notice( $pool = null ) {
+		$screen = get_current_screen();
+		if ( is_null($screen) || $screen->id == 'settings_page_yarpp' )
+			return;
+
+		$user = get_current_user_id();
+		update_user_option( $user, 'yarpp_saw_optin', true );
+
 		echo '<div class="updated fade"><p>';
 
 		// @todo i18n
-		if ( is_null( $pool ) );
+		if ( is_null( $pool ) )
 			$pool = $this->core->get_option( 'pools[message]' );
 		switch ( $pool ) {
 			case 0:
