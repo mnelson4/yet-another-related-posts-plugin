@@ -60,8 +60,8 @@ class YARPP {
 	
 	private function load_default_options() {
 		$this->default_options = array(
-			'threshold' => 5,
-			'limit' => 4,
+			'threshold' => 4, // changed default in 3.6
+			'limit' => 4, // changed default in 3.6
 			'excerpt_length' => 10,
 			'recent' => false, // new in 3.5
 			'before_title' => '<li>',
@@ -323,7 +323,7 @@ class YARPP {
 		global $wpdb;
 	
 		$yarpp_3_3_options = array(
-			'threshold' => 5,
+			'threshold' => 4,
 			'limit' => 4,
 			'template_file' => '', // new in 2.2
 			'excerpt_length' => 10,

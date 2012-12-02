@@ -130,7 +130,13 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 == Developing with YARPP ==
 
-= Custom displays and custom post type support =
+= Custom post types =
+
+To make YARPP support your custom post type, the attribute `yarpp_support` must be set to true on the custom post type when it is registered. It will then be available on options on the YARPP settings page.
+
+If you would like to programmatically control which post types are considered in an automatically-displayed related posts display, use the `yarpp_map_post_types` filter.
+
+= Custom displays =
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
@@ -253,6 +259,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
 	* Inline help in settings screen now use WordPress pointers
 	* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Default option changes:
+	* Default result count is now 4
+	* Default match threshold is now 4
 * Added `yarpp_map_post_types` filter to programmatically specify what post types should be looked at for automatic displays
 * Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
 
