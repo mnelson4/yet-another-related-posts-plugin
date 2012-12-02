@@ -263,3 +263,7 @@ a.yarpp_help:hover {
 	overflow: scroll;
 	max-height: 300px;
 }
+
+#yarpp_extra_screen_settings {
+	border-top: 1px solid #e0e0e0;
+}

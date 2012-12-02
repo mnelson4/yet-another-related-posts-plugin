@@ -30,7 +30,9 @@ jQuery(function($) {
 	function display() {
 		if ( !$('#yarpp_display_web .inside').is(':visible') )
 			return;
-		if ( !loaded_demo_web ) {
+
+		$( '.yarpp_code_display' ).toggle( $('#yarpp_display_code').is(':checked') );			
+		if ( $('#yarpp_display_web .yarpp_code_display').is(':visible') && !loaded_demo_web ) {
 			loaded_demo_web = true;
 			var demo_web = $('#display_demo_web');
 			$.ajax({type:'POST',
@@ -52,9 +54,10 @@ jQuery(function($) {
 	function rss_display() {
 		if ( !$('#yarpp_display_rss .inside').is(':visible') )
 			return;
-		if ($('#yarpp-rss_display').attr('checked')) {
+		if ( $('#yarpp-rss_display').is(':checked') ) {
 			$('.rss_displayed').show();
-			if ( !loaded_demo_rss ) {
+			$( '.yarpp_code_display' ).toggle( $('#yarpp_display_code').is(':checked') );
+			if ( $('#yarpp_display_rss .yarpp_code_display').is(':visible') && !loaded_demo_rss ) {
 				loaded_demo_rss = true;
 				var demo_rss = $('#display_demo_rss');
 				$.ajax({type:'POST',
@@ -246,4 +249,16 @@ jQuery(function($) {
 			$('.sync_rss_no_results input').attr('value', value);
 	}
 	$('.sync_no_results, .sync_rss_no_results').change(sync_no_results);
+	
+	$('#yarpp_display_code').click(function() {
+		var args = {
+			action: 'yarpp_set_display_code',
+			'_ajax_nonce': $('#yarpp_set_display_code-nonce').val()
+		};
+		if ( $(this).is(':checked') )
+			args.checked = true;
+		$.ajax({type:'POST', url: ajaxurl, data: args});
+		display();
+		rss_display();
+	});
 });

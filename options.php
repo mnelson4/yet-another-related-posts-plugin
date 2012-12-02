@@ -154,6 +154,7 @@ wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 wp_nonce_field( 'yarpp_display_demo', 'yarpp_display_demo-nonce', false );
 wp_nonce_field( 'yarpp_display_exclude_terms', 'yarpp_display_exclude_terms-nonce', false );
 wp_nonce_field( 'yarpp_optin_data', 'yarpp_optin_data-nonce', false );
+wp_nonce_field( 'yarpp_set_display_code', 'yarpp_set_display_code-nonce', false );
 if ( !count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates() )
 	wp_nonce_field( 'yarpp_copy_templates', 'yarpp_copy_templates-nonce', false );
 ?>

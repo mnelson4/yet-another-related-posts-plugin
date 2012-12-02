@@ -28,6 +28,7 @@ class YARPP_Admin {
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		add_filter( 'current_screen', array( $this, 'settings_screen' ) );
+		add_filter( 'screen_settings', array( $this, 'render_screen_settings' ), 10, 2 );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -68,7 +69,7 @@ class YARPP_Admin {
 			add_action( 'wp_ajax_yarpp_display', array( $this, 'ajax_display' ) );
 			add_action( 'wp_ajax_yarpp_optin_data', array( $this, 'ajax_optin_data' ) );
 			add_action( 'wp_ajax_yarpp_optin', array( $this, 'ajax_optin' ) );
-			add_action( 'wp_ajax_yarpp_optin_dismiss', array( $this, 'ajax_optin_dismiss' ) );
+			add_action( 'wp_ajax_yarpp_set_display_code', array( $this, 'ajax_set_display_code' ) );
 		}
 	}
 	
@@ -234,6 +235,19 @@ class YARPP_Admin {
 		$text = preg_replace(array_keys($replacements), array_values($replacements), $text);
 		
 		return $text;
+	}
+	
+	function render_screen_settings( $output, $current_screen ) {
+		if ( $current_screen->id != 'settings_page_yarpp' )
+			return $output;
+
+		$output .= "<div id='yarpp_extra_screen_settings'><label for='yarpp_display_code'><input type='checkbox' name='yarpp_display_code' id='yarpp_display_code'";
+		$output .= checked( $this->core->get_option('display_code'), true, false );
+		$output .= " />";
+		$output .= __('Show example code output', 'yarpp');
+		$output .= '</label></div>';
+
+		return $output;
 	}
 	
 	// since 3.3
@@ -473,6 +487,17 @@ jQuery(function () {
 		
 		$data = yarpp_set_option('optin', true);
 		$this->core->optin_ping();
+		echo 'ok';
+		exit;
+	}
+
+	function ajax_set_display_code() {
+		check_ajax_referer( 'yarpp_set_display_code' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text; charset=UTF-8");
+		
+		$data = yarpp_set_option( 'display_code', isset($_REQUEST['checked']) );
 		echo 'ok';
 		exit;
 	}
