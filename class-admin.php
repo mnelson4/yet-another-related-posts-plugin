@@ -14,10 +14,21 @@ class YARPP_Admin {
 			wp_redirect( admin_url( '/options-general.php?page=yarpp' ) );
 			exit;
 		}
+
+		// if action=flush and the nonce is correct, reset the cache
+		if ( isset($_GET['action']) && $_GET['action'] == 'copy_templates' &&
+			 check_ajax_referer( 'yarpp_copy_templates', false, false ) !== false ) {
+			$this->copy_templates();
+			wp_redirect( admin_url( '/options-general.php?page=yarpp' ) );
+			exit;
+		}
+		
+		//add_image_size( 'yarpp-thumbnail', $width, $height, $crop );
 		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
-		add_action( 'current_screen', array( $this, 'settings_screen' ), 10, 1 );
+		add_filter( 'current_screen', array( $this, 'settings_screen' ) );
+		add_filter( 'screen_settings', array( $this, 'render_screen_settings' ), 10, 2 );
 		// new in 3.3: set default meta boxes to show:
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
@@ -30,9 +41,24 @@ class YARPP_Admin {
 			if ( $this->templates === false )
 				$this->templates = array();
 			// get basenames only
-			$this->templates = array_map('basename', $this->templates);
+			$this->templates = array_map(array($this, 'get_template_data'), $this->templates);
 		}
 		return (array) $this->templates;
+	}
+	
+	public function get_template_data( $file ) {
+		$headers = array(
+			'name' => 'Template Name',
+			'description' => 'Description',
+			'author' => 'Author',
+			'uri' => 'Author URI',
+		);
+		$data = get_file_data( $file, $headers );
+		$data['file'] = $file;
+		$data['basename'] = basename($file);
+		if ( empty($data['name']) )
+			$data['name'] = $data['basename'];
+		return $data;
 	}
 	
 	function ajax_register() {
@@ -41,17 +67,29 @@ class YARPP_Admin {
 			add_action( 'wp_ajax_yarpp_display_exclude_terms', array( $this, 'ajax_display_exclude_terms' ) );
 			add_action( 'wp_ajax_yarpp_display_demo', array( $this, 'ajax_display_demo' ) );
 			add_action( 'wp_ajax_yarpp_display', array( $this, 'ajax_display' ) );
+			add_action( 'wp_ajax_yarpp_optin_data', array( $this, 'ajax_optin_data' ) );
+			add_action( 'wp_ajax_yarpp_optin', array( $this, 'ajax_optin' ) );
+			add_action( 'wp_ajax_yarpp_set_display_code', array( $this, 'ajax_set_display_code' ) );
 		}
 	}
 	
 	function ui_register() {
 		global $wp_version;
-		if ( get_option( 'yarpp_activated' ) && version_compare($wp_version, '3.3b1', '>=') ) {
-			delete_option( 'yarpp_activated' );
-			add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
+		if ( get_option( 'yarpp_activated' ) ) {
+			if ( version_compare($wp_version, '3.3b1', '>=') ) {
+				delete_option( 'yarpp_activated' );
+				add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
+				add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
+			}
+		} elseif ( !$this->core->get_option('optin') &&
+ 			current_user_can('manage_options') &&
+			!get_user_option( 'yarpp_saw_optin' )
+			) {
+			$user = get_current_user_id();
+			update_user_option( $user, 'yarpp_saw_optin', true );
+			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
 		}
-
+		
 		// setup admin
 		$this->hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', array( $this, 'options_page' ) );
 		
@@ -68,22 +106,31 @@ class YARPP_Admin {
 	// 3.5.4: only load metabox code if we're going to be on the settings page
 	function settings_screen( $current_screen ) {
 		if ( $current_screen->id != 'settings_page_yarpp' )
-			return;
+			return $current_screen;
 		
 		// new in 3.3: load options page sections as metaboxes
 		require_once('options-meta-boxes.php');		
 
-		$current_screen->add_help_tab(array(
-			'id' => 'faq',
-			'title' => __('Frequently Asked Questions', 'yarpp'),
-			'callback' => array( &$this, 'help_faq' )
-		));
-
-		$current_screen->add_help_tab(array(
-			'id' => 'dev',
-			'title' => __('Developing with YARPP', 'yarpp'),
-			'callback' => array( &$this, 'help_dev' )
-		));
+		// 3.5.5: check that add_help_tab method callable (WP >= 3.3)
+		if ( is_callable(array($current_screen, 'add_help_tab')) ) {
+			$current_screen->add_help_tab(array(
+				'id' => 'faq',
+				'title' => __('Frequently Asked Questions', 'yarpp'),
+				'callback' => array( &$this, 'help_faq' )
+			));	
+			$current_screen->add_help_tab(array(
+				'id' => 'dev',
+				'title' => __('Developing with YARPP', 'yarpp'),
+				'callback' => array( &$this, 'help_dev' )
+			));
+			$current_screen->add_help_tab(array(
+				'id' => 'optin',
+				'title' => __('Optional Data Collection', 'yarpp'),
+				'callback' => array( &$this, 'help_optin' )
+			));
+		}
+		
+		return $current_screen;
 	}
 	
 	private $readme = null;
@@ -110,6 +157,75 @@ class YARPP_Admin {
 		else
 			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/">' . __(
 			'Developing with YARPP', 'yarpp') . '</a>';
+	}
+
+	public function help_optin() {
+		// todo: i18n
+		echo '<p>' . sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
+		echo __( "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.", 'yarpp' ) . ' ';
+		echo '<strong>' . __( "Contributing this data will help make YARPP better for you and for other YARPP users.", 'yarpp' ) . '</strong></p>';
+
+		if ( !$this->core->get_option( 'optin' ) ) {
+			echo '<p>';
+			$this->print_optin_button();
+			echo '</p>';
+		}
+		
+		echo '<p>' . "If you opt-in, the following information is sent back to YARPP:" . '</p>';
+		echo '<div id="optin_data_frame"></div>';
+		echo '<p>' . "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used." . '</p>';
+	}
+	
+	function print_optin_button() {
+		echo '<a id="yarpp-optin-button" class="button">' . __('Send settings and usage data back to YARPP', 'yarpp') . '</a><span class="yarpp-thankyou" style="display:none"><strong>' . __('Thank you!', 'yarpp') . '</strong></span>';
+		wp_nonce_field( 'yarpp_optin', 'yarpp_optin-nonce', false );
+		echo "<script type='text/javascript'>
+			jQuery(function($){
+			$('#yarpp-optin-button').click(function() {
+				$(this)
+					.hide()
+					.siblings('.yarpp-thankyou').show('slow');
+				$('#yarpp-optin').attr('checked', true);
+				$.ajax({type:'POST',
+					url: ajaxurl,
+					data: {
+						action: 'yarpp_optin',
+						'_ajax_nonce': $('#yarpp_optin-nonce').val()
+					}});			
+			});
+			});
+		</script>\n";
+	}
+
+	function optin_notice( $pool = null ) {
+		echo '<div class="updated fade"><p>';
+
+		// @todo i18n
+		if ( is_null( $pool ) );
+			$pool = $this->core->get_option( 'pools[message]' );
+		switch ( $pool ) {
+			case 0:
+				echo "Help make YARPP better by sending information about YARPP's settings and usage statistics.";
+				break;
+			case 1:
+				echo sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
+				echo __( "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.", 'yarpp' ) . ' ';
+				echo '<strong>' . __( "Contributing this data will help make YARPP better for you and for other YARPP users.", 'yarpp' ) . '</strong>';
+				break;
+			case 2:
+				echo "<strong>Help make YARPP better.</strong> ";
+				echo sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
+				echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.";
+				break;
+			case 3:
+				echo "YARPP can automatically collect diagnostic and usage information from your site and send it to YARPP's author for analysis. The information is sent only with your consent. ";
+				echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong>';
+		}
+
+		echo '</p><p>';
+		$this->print_optin_button();
+		echo '<a class="button" href="options-general.php?page=yarpp#help-optin">' . __( 'Learn More', 'yarpp' ) . '</a>';
+		echo '</p></div>';
 	}
 	
 	// faux-markdown, required for the help text rendering
@@ -144,12 +260,26 @@ class YARPP_Admin {
 		return $text;
 	}
 	
+	function render_screen_settings( $output, $current_screen ) {
+		if ( $current_screen->id != 'settings_page_yarpp' )
+			return $output;
+
+		$output .= "<div id='yarpp_extra_screen_settings'><label for='yarpp_display_code'><input type='checkbox' name='yarpp_display_code' id='yarpp_display_code'";
+		$output .= checked( $this->core->get_option('display_code'), true, false );
+		$output .= " />";
+		$output .= __('Show example code output', 'yarpp');
+		$output .= '</label></div>';
+
+		return $output;
+	}
+	
 	// since 3.3
 	function enqueue() {
 		$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 		$screen = get_current_screen();
 		if ( !is_null($screen) && $screen->id == 'settings_page_yarpp' ) {
 			wp_enqueue_script( 'postbox' );
+			$this->pointer_enqueue();
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
 			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 		}
@@ -207,7 +337,7 @@ jQuery(function () {
 </script>
 		<?php
 	}
-	
+		
 	function settings_link($links, $file) {
 		$this_plugin = dirname(plugin_basename(__FILE__)) . '/yarpp.php';
 		if($file == $this_plugin) {
@@ -221,7 +351,7 @@ jQuery(function () {
 		require(YARPP_DIR.'/options.php');
 	}
 
-	// since 3.4: don't actually compute results here, but use ajax instead		
+	// @since 3.4: don't actually compute results here, but use ajax instead		
 	function metabox() {
 		?>
 		<style>
@@ -244,11 +374,37 @@ jQuery(function () {
 		}
 	}
 	
-	// since 3.3: default metaboxes to show:
+	// @since 3.3: default metaboxes to show:
 	function default_hidden_meta_boxes($hidden, $screen) {
 		if ( 'settings_page_yarpp' == $screen->id )
-			$hidden = array( 'yarpp_pool', 'yarpp_relatedness' );
+			$hidden = $this->core->default_hidden_metaboxes;
 		return $hidden;
+	}
+	
+	// @since 4: UI to copy templates
+	function can_copy_templates() {
+		$theme_dir = get_stylesheet_directory();
+		// If we can't write to the theme, return false
+		if ( !is_dir($theme_dir) || !is_writable($theme_dir) )
+			return false;
+		
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem( false, get_stylesheet_directory() );
+		global $wp_filesystem;			
+		// direct method is the only method that I've tested so far
+		return $wp_filesystem->method == 'direct';
+	}
+	
+	function copy_templates() {
+		$templates_dir = trailingslashit(trailingslashit(YARPP_DIR) . 'yarpp-templates');
+		
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem( false, get_stylesheet_directory() );
+		global $wp_filesystem;
+		if ( $wp_filesystem->method != 'direct' )
+			return false;
+		
+		return copy_dir( $templates_dir, get_stylesheet_directory(), array('.svn') );
 	}
 	
 	/*
@@ -332,6 +488,40 @@ jQuery(function () {
 			
 		$return = $this->core->display_demo_related($args, false);
 		echo preg_replace("/[\n\r]/",'',nl2br(htmlspecialchars($return)));
+		exit;
+	}
+	
+	function ajax_optin_data() {
+		check_ajax_referer( 'yarpp_optin_data' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text/html; charset=UTF-8");
+	
+		$data = $this->core->optin_data();
+		$this->core->pretty_echo($data);
+		exit;
+	}
+
+	function ajax_optin() {
+		check_ajax_referer( 'yarpp_optin' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text; charset=UTF-8");
+		
+		$data = yarpp_set_option('optin', true);
+		$this->core->optin_ping();
+		echo 'ok';
+		exit;
+	}
+
+	function ajax_set_display_code() {
+		check_ajax_referer( 'yarpp_set_display_code' );
+
+		header("HTTP/1.1 200");
+		header("Content-Type: text; charset=UTF-8");
+		
+		$data = yarpp_set_option( 'display_code', isset($_REQUEST['checked']) );
+		echo 'ok';
 		exit;
 	}
 }
