@@ -114,6 +114,10 @@ if (isset($_POST['update_yarpp'])) {
 			}
 		}
 	}
+	
+	if ( isset( $_POST['auto_display_post_types'] ) ) {
+		$new_options['auto_display_post_types'] = array_keys( $_POST['auto_display_post_types'] );
+	}
 
 	$new_options['recent'] = isset($_POST['recent_only']) ?
 		$_POST['recent_number'] . ' ' . $_POST['recent_units'] : false;

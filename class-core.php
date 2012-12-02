@@ -89,7 +89,6 @@ class YARPP {
 			'rss_template' => false, // new in 3.5
 			'show_pass_post' => false,
 			'cross_relate' => false,
-			'auto_display' => true,
 			'rss_display' => false, // changed default in 3.1.7
 			'rss_excerpt_display' => true,
 			'promote_yarpp' => false,
@@ -112,6 +111,7 @@ class YARPP {
 			'rss_thumbnails_default' => plugins_url( 'default.png', __FILE__ ), // new in 3.6
 			'display_code' => false, // new in 3.6
 			'auto_display_archive' => false, // new in 3.6
+			'auto_display_post_types' => array( 'post' ), // new in 3.6, replacing auto_display
 		);
 	}
 	
@@ -305,6 +305,8 @@ class YARPP {
 			$this->upgrade_3_4_4b4();
 		if ( $last_version && version_compare('3.5.2b2', $last_version) > 0 )
 			$this->upgrade_3_5_2b2();
+		if ( $last_version && version_compare('3.6b7', $last_version) > 0 )
+			$this->upgrade_3_6b7();
 		
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
@@ -516,7 +518,16 @@ class YARPP {
 			yarpp_set_option(array('weight' => $weight));
 		}
 	}
-		
+
+	function upgrade_3_6b7() {
+		// migrate auto_display setting to auto_display_post_types
+		$options = $this->get_option();
+		$options['auto_display_post_types'] = $options['auto_display'] ?
+			array( 'post' ) : array();
+		unset( $options['auto_display'] );
+		update_option( 'yarpp', $options );
+	}
+	
 	private $post_types = null;
 	function get_post_types( $field = 'name' ) {
 		if ( is_null($this->post_types) ) {
@@ -570,7 +581,7 @@ class YARPP {
 			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
 			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
 			'template', 'rss_template', 'show_pass_post', 'cross_relate',
-			'auto_display', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
+			'auto_display_post_types', 'rss_display', 'rss_excerpt_display', 'promote_yarpp',
 			'rss_promote_yarpp', 'myisam_override', 'weight', 'require_tax',
 			'auto_display_archive'
 		));
@@ -991,17 +1002,15 @@ class YARPP {
 		if ( is_feed() )
 			return $content;
 		
-		$auto_display_post_types = array();
- 		if ( $this->get_option('auto_display') )
- 			$auto_display_post_types = array('post');
+		$auto_display_post_types = $this->get_option( 'auto_display_post_types' );
 
 		// if it's not an auto-display post type, return
 		if ( !in_array( get_post_type(), $auto_display_post_types ) )
 			return $content;
 
 		if ( !is_singular() && !(
-				$this->get_option('auto_display_archive') &&
-				( is_archive() || is_home() ) 
+			  $this->get_option('auto_display_archive') &&
+			  ( is_archive() || is_home() )
 			) )
 			return $content;
 	

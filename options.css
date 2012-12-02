@@ -116,15 +116,14 @@ a.yarpp_help:hover {
 }
 .yarpp_form_row {
 	overflow: visible;
+	padding: 8px;
 }
 .yarpp_form_row > div {
-	padding: 8px;
 	display: inline-block;
-	vertical-align: top;
 	*display: inline;
+	vertical-align: baseline;
 }
 .yarpp_form_checkbox > div {
-	vertical-align: baseline;
 }
 .yarpp_form_select > div {
 	padding-top: 5px;
@@ -133,11 +132,25 @@ a.yarpp_help:hover {
 .yarpp_form_label {
 	width: 190px;
 }
+.yarpp_form_label + div {
+	padding-left: 16px;
+}
 .yarpp_form_textbox > .yarpp_form_label {
-	padding-top: 13px;
 }
 .yarpp_form_select > .yarpp_form_label {
 	padding-top: 8px;
+}
+.yarpp_form_post_types label {
+	padding-right: 15px;
+	line-height: 20px;
+}
+.yarpp_form_exclude label {
+	padding-right: 5px;
+	line-height: 15px;
+}
+.yarpp_form_template_file > .yarpp_form_label {
+	vertical-align: top;
+	padding-top: 5px;
 }
 
 .yarpp_code_display {
@@ -180,10 +193,14 @@ a.yarpp_help:hover {
 	font-family: monospace;
 }
 
+.yarpp_form_template_buttons {
+	padding: 0px;
+}
 .yarpp_template_button {
 	position: relative;
 	height: 60px;
 	width: 70px;
+	padding: 8px;
 	-webkit-border-radius: 3px;
 	border-radius: 7px;
 	border: 1px solid #aaa;
