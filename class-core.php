@@ -733,6 +733,7 @@ class YARPP {
 		}
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
+		$related_count = $related_query->post_count;
 	
 		// @todo: add these classes after the fact and include information about whether any results were given
 		$output = "<div class='";
@@ -740,7 +741,10 @@ class YARPP {
 			$output .= "yarpp-related";
 		else
 			$output .= "yarpp-related-{$domain}";
+		if ( 1 > $related_count )
+			$output .= " yarpp-related-none";
 		$output .= "'>\n";
+
 		if ( 'metabox' == $domain ) {
 			include(YARPP_DIR . '/template-metabox.php');
 		} elseif ( !!$template && 'thumbnails' == $template ) {
@@ -769,7 +773,7 @@ class YARPP {
 		wp_reset_postdata();
 		$pagenow = $current_pagenow; unset($current_pagenow);
 	
-		if ($promote_yarpp && $domain != 'metabox')
+		if ( $related_count > 0 && $promote_yarpp && $domain != 'metabox' )
 			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
 	
 		if ( $optin )

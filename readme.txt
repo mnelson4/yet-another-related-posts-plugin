@@ -240,8 +240,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Edit your theme's CSS file to modify the styling
 * Auto display settings changes:
 	* Added an "also display in archives" option
-* All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)).
 * [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
+* Changes to the output HTML:
+	* All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)). If there are no results, a `yarpp-related-none` class is added.
+	* The "related posts brought to you by YARPP" text is only added if there were results.
 * Refinements to settings UI:
 	* A new design for the template chooser
 	* Example code display is now hidden by default; turn them back on from the "screen options" tab.
