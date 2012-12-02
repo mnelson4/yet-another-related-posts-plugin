@@ -262,6 +262,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Default option changes:
 	* Default result count is now 4
 	* Default match threshold is now 4
+	* Default for "before related entries" heading uses `h3` instead of `p`
 * Added `yarpp_map_post_types` filter to programmatically specify what post types should be looked at for automatic displays
 * Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
 

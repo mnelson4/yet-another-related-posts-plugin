@@ -292,3 +292,9 @@ a.yarpp_help:hover {
 #yarpp_extra_screen_settings {
 	border-top: 1px solid #e0e0e0;
 }
+
+.help-tab-content {
+	max-height: 500px;
+	width: 100%;
+	overflow: auto;
+}

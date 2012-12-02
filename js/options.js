@@ -142,6 +142,11 @@ jQuery(function($) {
 		$('#contextual-help-link').click();
 	});
 
+	$('#yarpp-help-cpt').click(function() {
+		$('#tab-link-dev a').click();
+		$('#contextual-help-link').click();
+	});
+
 	$('.yarpp_help[data-help]').hover(function() {
 		var that = $(this),
 		help = '<p>' + that.attr('data-help') + '</p>',

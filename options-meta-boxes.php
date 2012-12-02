@@ -170,7 +170,7 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		_e( '"The Pool" refers to the pool of posts and pages that are candidates for display as related to the current entry.', 'yarpp' );
 		echo "</p>\n";
 	?>
-		<div class='yarpp_form_row'><div class='yarpp_form_label'><?php _e( 'Post types considered:', 'yarpp' ); ?></div><div><?php echo implode( ', ', $yarpp->get_post_types( 'label' ) ); ?> <a href='http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes' class='yarpp_help'>&nbsp;</a></div></div>
+		<div class='yarpp_form_row'><div class='yarpp_form_label'><?php _e( 'Post types considered:', 'yarpp' ); ?></div><div><?php echo implode( ', ', $yarpp->get_post_types( 'label' ) ); ?> <a href='#help-dev' id='yarpp-help-cpt' class='yarpp_help'>&nbsp;</a></div></div>
 
 	<?php
 		foreach ( $yarpp->get_taxonomies() as $taxonomy ) {
