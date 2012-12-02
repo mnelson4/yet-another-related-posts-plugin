@@ -5,9 +5,9 @@ Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
-Requires at least: 3.1
+Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 3.5.3
+Stable tag: 3.5.6
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
@@ -51,6 +51,12 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 </blockquote>
 
 &mdash; [Matt Cutts](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/), head of Webspam, Google
+
+<blockquote>
+"One way of getting search engines to get to your older content a bit easier, thus increasing your WordPress SEO capabilites a LOT, is by using a related posts plugin. These plugins search through your posts database to find posts with the same subject, and add links to these posts. There are quite a few related posts plugins but I tend to stick with the Yet Another Related Posts Plugin..."
+</blockquote>
+
+&mdash; [Yoast (Joost de Valk)](http://yoast.com/articles/wordpress-seo/)
 
 == Installation ==
 
@@ -124,7 +130,13 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 == Developing with YARPP ==
 
-= Custom displays and custom post type support =
+= Custom post types =
+
+To make YARPP support your custom post type, the attribute `yarpp_support` must be set to true on the custom post type when it is registered. It will then be available on options on the YARPP settings page.
+
+If you would like to programmatically control which post types are considered in an automatically-displayed related posts display, use the `yarpp_map_post_types` filter.
+
+= Custom displays =
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
@@ -182,7 +194,8 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
-* Croatian (`hr`) by [gocroatia.com](http://gocroatia.com)
+* Traditional Chinese (Taiwan, `zh_TW`) by [Pseric](http://www.freegroup.org/)
+* Croatian (`hr`) by [GoCroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
@@ -227,8 +240,40 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
-= 3.5.4 =
+= 4.0 =
+* New thumbnail template option!
+	* No PHP required -- just visit the settings page
+	* Edit your theme's CSS file to modify the styling
+* Auto display settings changes:
+	* Added an "also display in archives" option
+* [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
+* Changes to the output HTML:
+	* All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)). If there are no results, a `yarpp-related-none` class is added.
+	* The "related posts brought to you by YARPP" text is only added if there were results.
+* Refinements to settings UI:
+	* A new design for the template chooser
+	* Example code display is now hidden by default; turn them back on from the "screen options" tab.
+	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
+	* Header information in YARPP custom templates are now displayed to users in the settings UI. Available fields are `Template Name`, `Description`, `Author`, `Author URI`, in the same format as plugin and theme file headers. See bundled templates for examples.
+* Code cleanup:
+	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
+	* Inline help in settings screen now use WordPress pointers
+	* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Default option changes:
+	* Default result count is now 4
+	* Default match threshold is now 4
+	* Default for "before related entries" heading uses `h3` instead of `p`
+* Added `yarpp_map_post_types` filter to programmatically specify what post types should be looked at for automatic displays
+* Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
 
+= 3.5.6 =
+* Typo fix for postmeta cache
+* Added Traditional Chinese (Taiwan, `zh_TW`) localization by [Pseric](http://www.freegroup.org/)
+
+= 3.5.5 =
+* Quick bugfix for how admin screen code was loaded in in WordPress < 3.3.
+
+= 3.5.4 =
 * New Help tab, which displays help text from the readme.
 * Retina icons! Now served faster, in sprite form.
 * Added Croatian (`hr`) localization by [gocroatia.com](http://gocroatia.com)
@@ -239,7 +284,6 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Changed default option of "show only previous posts" to `false` and removed FAQ text, as it no longer improves performance much.
 
 = 3.5.3 =
-
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-no-related-posts-7): Fixed a common cause of "no related posts"!
 * Better post revision handling
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-database-errors-upon-activation): setup wasn't automatic for network activations.
