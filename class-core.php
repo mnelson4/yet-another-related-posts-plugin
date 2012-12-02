@@ -61,7 +61,7 @@ class YARPP {
 	private function load_default_options() {
 		$this->default_options = array(
 			'threshold' => 5,
-			'limit' => 5,
+			'limit' => 4,
 			'excerpt_length' => 10,
 			'recent' => false, // new in 3.5
 			'before_title' => '<li>',
@@ -324,7 +324,7 @@ class YARPP {
 	
 		$yarpp_3_3_options = array(
 			'threshold' => 5,
-			'limit' => 5,
+			'limit' => 4,
 			'template_file' => '', // new in 2.2
 			'excerpt_length' => 10,
 			'recent_number' => 12,
