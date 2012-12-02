@@ -27,10 +27,6 @@ if ( isset($size) ) {
 	$width = 120;
 	$height = 120;
 }
-$margin = 5;
-$width_with_margins = $width + 2 * $margin;
-$height_with_text = $height + 50;
-$extramargin = 7;
 
 // a little easter egg: if the default image URL is left blank,
 // default to the theme's header image. (hopefully it has one)
@@ -61,50 +57,4 @@ if (have_posts()) {
 	$output .= $no_results;
 }
 
-$output .= "
-<style>
-.yarpp-thumbnails-horizontal .yarpp-thumbnail, .yarpp-thumbnail-default, .yarpp-thumbnail-title {
-	display: inline-block;
-	*display: inline;
-}
-.yarpp-thumbnails-horizontal .yarpp-thumbnail {
-	border: 1px solid rgba(127,127,127,0.1);
-	width: {$width_with_margins}px;
-	height: {$height_with_text}px;
-	margin: {$margin}px;
-	margin-left: 0px;
-	vertical-align: top;
-}
-.yarpp-thumbnail > img, .yarpp-thumbnail-default {
-	width: {$width}px;
-	height: {$height}px;
-	margin: {$margin}px;
-}
-.yarpp-thumbnails-horizontal .yarpp-thumbnail > img, .yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
-	margin-bottom: 0px;
-	display: block;
-}
-.yarpp-thumbnails-horizontal .yarpp-thumbnail-title {
-	font-size: 1em;
-	max-height: 2.8em;
-	line-height: 1.4em;
-	margin: {$extramargin}px;
-	margin-top: 0px;
-	width: {$width}px;
-	text-decoration: inherit;
-	overflow: hidden;
-}
-
-.yarpp-thumbnail-default {
-	overflow: hidden;
-}
-.yarpp-thumbnail-default > img.yarpp-thumbnail-default-wide {
-	height: {$height}px;
-	max-width: none;
-}
-.yarpp-thumbnail-default > img.yarpp-thumbnail-default-tall {
-	width: {$width}px;
-	max-height: none;
-}
-</style>
-";
+wp_enqueue_style( "yarpp-thumbnails-$size", plugins_url( 'styles-thumbnails.php?' . http_build_query( compact('height','width') ), __FILE__ ), array(), YARPP_VERSION, 'all' );
