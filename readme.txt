@@ -251,6 +251,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
 	* Inline help in settings screen now use WordPress pointers
 	* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Added `yarpp_map_post_types` filter to programmatically specify what post types should be looked at for automatic displays
 * Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
 
 = 3.5.6 =
