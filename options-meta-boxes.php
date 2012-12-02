@@ -238,7 +238,6 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			echo "</div><div>";
 			$post_types = yarpp_get_option( 'auto_display_post_types' );
 			foreach ( $yarpp->get_post_types( 'objects' ) as $post_type ) {
-//				var_dump($post_type->labels->name, $post_type->name);
 				echo "<label for='yarpp_post_type_{$post_type->name}'><input id='yarpp_post_type_{$post_type->name}' name='auto_display_post_types[{$post_type->name}]' type='checkbox' ";
 				checked( in_array( $post_type->name, $post_types ) );
 				echo "/> {$post_type->labels->name}</label> ";

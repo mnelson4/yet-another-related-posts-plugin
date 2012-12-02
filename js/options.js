@@ -17,12 +17,8 @@ jQuery(function($) {
 	
 	function excerpt() {
 		var metabox = $(this).closest('#yarpp_display_web, #yarpp_display_rss');
-
-		if ( metabox.find('.use_template').val() == 'builtin' &&
-			metabox.find('.show_excerpt input').attr('checked') )
-			metabox.find('.excerpted').show();
-		else
-			metabox.find('.excerpted').hide();
+		metabox.find('.excerpted').toggle( !!(metabox.find('.use_template').val() == 'builtin' &&
+			metabox.find('.show_excerpt input').attr('checked')) );
 	}
 	$('.show_excerpt, .use_template, #yarpp-rss_display').click(excerpt);
 	
@@ -261,4 +257,14 @@ jQuery(function($) {
 		display();
 		rss_display();
 	});
+	
+	function auto_display_archive() {
+		var available = $('.yarpp_form_post_types').is(':has(input[type=checkbox]:checked)');
+		$('#yarpp-auto_display_archive')
+			.attr('disabled', !available);
+		if ( !available )
+			$('#yarpp-auto_display_archive').attr('checked', false);
+	}
+	$('.yarpp_form_post_types input[type=checkbox]').change(auto_display_archive);
+	auto_display_archive();
 });

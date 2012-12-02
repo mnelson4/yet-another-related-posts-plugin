@@ -79,7 +79,6 @@ if ( $yarpp->myisam && !$yarpp->enabled() ) {
 }
 
 if (isset($_POST['update_yarpp'])) {
-
 	$new_options = array();
 	foreach ($yarpp->default_options as $option => $default) {
 		if ( is_bool($default) )
@@ -117,6 +116,8 @@ if (isset($_POST['update_yarpp'])) {
 	
 	if ( isset( $_POST['auto_display_post_types'] ) ) {
 		$new_options['auto_display_post_types'] = array_keys( $_POST['auto_display_post_types'] );
+	} else {
+		$new_options['auto_display_post_types'] = array();
 	}
 
 	$new_options['recent'] = isset($_POST['recent_only']) ?

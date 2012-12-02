@@ -15,10 +15,6 @@ ul.yarpp_contacts li a img {
 	vertical-align: bottom;
 }
 
-.postbox input[type=checkbox] {
-	margin-top: -1px;
-}
-
 /* hide pointer dismiss buttons on this page */
 .postbox .wp-pointer-buttons {
 	display: none;
