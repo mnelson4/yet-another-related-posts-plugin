@@ -230,7 +230,10 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		global $yarpp;
 
 		echo "<div style='overflow:auto'>";
-			echo '<div class="yarpp_code_display"><strong>' . __( "Website display code example", 'yarpp' ) . '</strong><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_web'></div></div>";
+			echo '<div class="yarpp_code_display"';
+			if ( !$yarpp->get_option('code_display') )
+				echo ' style="display: none;"';
+			echo '><strong>' . __( "Website display code example", 'yarpp' ) . '</strong><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_web'></div></div>";
 			
 			echo "<div class='yarpp_form_row yarpp_form_post_types'><div class='yarpp_form_label'>";
 			_e( "Automatically display:", 'yarpp' );
@@ -250,18 +253,31 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 			$this->template_checkbox( false );
 		echo "</div>";
 
-		echo "<div class='postbox yarpp_subbox template_options_custom'>";
+		$chosen_template = yarpp_get_option( "template" );
+		$choice = false === $chosen_template ? 'builtin' :
+			( $chosen_template == 'thumbnails' ? 'thumbnails' : 'custom' );
+
+		echo "<div class='postbox yarpp_subbox template_options_custom'";
+		if ( $choice != 'custom' )
+			echo ' style="display: none;"';
+		echo ">";
 			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( false );
 		echo "</div>";
 
-		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
+		echo "<div class='postbox yarpp_subbox template_options_thumbnails'";
+		if ( $choice != 'thumbnails' )
+			echo ' style="display: none;"';
+		echo ">";
 			$this->textbox( 'thumbnails_heading', __( 'Heading:', 'yarpp' ), 40 );
 			$this->textbox( 'thumbnails_default', __( 'Default image (URL):', 'yarpp' ), 40 );
 			$this->textbox( 'no_results', __( 'Default display if no results:', 'yarpp' ), 40, 'sync_no_results' );
 		echo "</div>";
 
-		echo "<div class='postbox yarpp_subbox template_options_builtin'>";
+		echo "<div class='postbox yarpp_subbox template_options_builtin'";
+		if ( $choice != 'builtin' )
+			echo ' style="display: none;"';
+		echo ">";
 			$this->beforeafter( array( 'before_related', 'after_related' ), __( "Before / after related entries:", 'yarpp' ), 15, '', __( "For example:", 'yarpp' ) . ' &lt;ol&gt;&lt;/ol&gt;' . __( ' or ', 'yarpp' ) . '&lt;div&gt;&lt;/div&gt;' );
 			$this->beforeafter( array( 'before_title', 'after_title' ), __( "Before / after each related entry:", 'yarpp' ), 15, '', __( "For example:", 'yarpp' ) . ' &lt;li&gt;&lt;/li&gt;' . __( ' or ', 'yarpp' ) . '&lt;dl&gt;&lt;/dl&gt;' );
 			
@@ -287,7 +303,10 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 		global $yarpp;
 
 		echo "<div style='overflow:auto'>";
-			echo '<div class="rss_displayed yarpp_code_display"><b>' . __( "RSS display code example", 'yarpp' ) . '</b><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_rss'></div></div>";
+			echo '<div class="rss_displayed yarpp_code_display"';
+			if ( !$yarpp->get_option('code_display') )
+				echo ' style="display: none;"';
+			echo '><b>' . __( "RSS display code example", 'yarpp' ) . '</b><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_rss'></div></div>";
 	
 			$this->checkbox( 'rss_display', __( "Display related posts in feeds?", 'yarpp' )." <span class='yarpp_help' data-help='" . esc_attr( __( "This option displays related posts at the end of each item in your RSS and Atom feeds. No template changes are needed.", 'yarpp' ) ) . "'>&nbsp;</span>", '' );
 			$this->checkbox( 'rss_excerpt_display', __( "Display related posts in the descriptions?", 'yarpp' )." <span class='yarpp_help' data-help='" . esc_attr( __( "This option displays the related posts in the RSS description fields, not just the content. If your feeds are set up to only display excerpts, however, only the description field is used, so this option is required for any display at all.", 'yarpp' ) ) . "'>&nbsp;</span>", 'rss_displayed' );
@@ -296,18 +315,31 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 			$this->template_checkbox( true, 'rss_displayed' );
 		echo "</div>";
 		
-		echo "<div class='postbox yarpp_subbox template_options_custom rss_displayed'>";
+		$chosen_template = yarpp_get_option( "rss_template" );
+		$choice = false === $chosen_template ? 'builtin' :
+			( $chosen_template == 'thumbnails' ? 'thumbnails' : 'custom' );
+		
+		echo "<div class='postbox yarpp_subbox template_options_custom rss_displayed'";
+		if ( $choice != 'custom' )
+			echo ' style="display: none;"';
+		echo ">";
 			echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
 			$this->template_file( true );
 		echo "</div>";
 	
-		echo "<div class='postbox yarpp_subbox template_options_thumbnails'>";
+		echo "<div class='postbox yarpp_subbox template_options_thumbnails'";
+		if ( $choice != 'thumbnails' )
+			echo ' style="display: none;"';
+		echo ">";
 			$this->textbox( 'rss_thumbnails_heading', __( 'Heading:', 'yarpp' ), 40 );
 			$this->textbox( 'rss_thumbnails_default', __( 'Default image (URL):', 'yarpp' ), 40 );
 			$this->textbox( 'rss_no_results', __( 'Default display if no results:', 'yarpp' ), 40, 'sync_rss_no_results' );
 		echo "</div>";
 	
-		echo "<div class='postbox yarpp_subbox template_options_builtin rss_displayed'>";
+		echo "<div class='postbox yarpp_subbox template_options_builtin rss_displayed'";
+		if ( $choice != 'builtin' )
+			echo ' style="display: none;"';
+		echo ">";
 			$this->beforeafter( array( 'rss_before_related', 'rss_after_related' ), __( "Before / after related entries:", 'yarpp' ), 15, '', __( "For example:", 'yarpp' ) . ' &lt;ol&gt;&lt;/ol&gt;' . __( ' or ', 'yarpp' ) . '&lt;div&gt;&lt;/div&gt;' );
 			$this->beforeafter( array( 'rss_before_title', 'rss_after_title' ), __( "Before / after each related entry:", 'yarpp' ), 15, '', __( "For example:", 'yarpp' ) . ' &lt;li&gt;&lt;/li&gt;' . __( ' or ', 'yarpp' ) . '&lt;dl&gt;&lt;/dl&gt;' );
 			
@@ -370,8 +402,15 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 		}
 	}
 }
-
 add_meta_box( 'yarpp_display_optin', __( 'Help Improve YARPP', 'yarpp' ), array( new YARPP_Meta_Box_Optin, 'display' ), 'settings_page_yarpp', 'side', 'core' );
+
+// longest filter name ever
+add_filter( "postbox_classes_settings_page_yarpp_yarpp_display_optin", 'yarpp_make_optin_classy' );
+function yarpp_make_optin_classy( $classes ) {
+	if ( !yarpp_get_option( 'optin' ) )
+		$classes[] = 'yarpp_attention';
+	return $classes;
+}
 
 class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 	function display() {

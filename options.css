@@ -111,8 +111,8 @@ a.yarpp_help:hover {
 	display: inline-block;
 }
 
-#yarpp_display_optin {
-	border-width: 2px;
+#yarpp_display_optin.yarpp_attention {
+	border: 2px solid #bbb;
 }
 
 .yarpp_subbox {

@@ -165,6 +165,14 @@ if ( !count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates
 ?>
 <div id="poststuff" class="metabox-holder has-right-sidebar">
 
+<?php if ( !$yarpp->get_option('rss_display') ): ?>
+<style>
+.rss_displayed {
+	display: none;
+}
+</style>
+<?php endif; ?>
+
 <div class="inner-sidebar" id="side-info-column">
 <?php
 do_meta_boxes( 'settings_page_yarpp', 'side', array() );
