@@ -751,8 +751,7 @@ class YARPP {
 		$this->prep_query( $current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 		$related_count = $related_query->post_count;
-	
-		// @todo: add these classes after the fact and include information about whether any results were given
+
 		$output = "<div class='";
 		if ( 'website' == $domain )
 			$output .= "yarpp-related";
