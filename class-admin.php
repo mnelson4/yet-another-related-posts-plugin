@@ -169,9 +169,9 @@ class YARPP_Admin {
 			echo '</p>';
 		}
 		
-		echo '<p>' . "If you opt-in, the following information is sent back to YARPP:" . '</p>';
+		echo '<p>' . __( "If you opt-in, the following information is sent back to YARPP:", 'yarpp' ) . '</p>';
 		echo '<div id="optin_data_frame"></div>';
-		echo '<p>' . "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used." . '</p>';
+		echo '<p>' . __( "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used.", 'yarpp' ) . '</p>';
 	}
 	
 	function print_optin_button() {
@@ -210,7 +210,7 @@ class YARPP_Admin {
 			$pool = $this->core->get_option( 'pools[message]' );
 		switch ( $pool ) {
 			case 0:
-				echo "Help make YARPP better by sending information about YARPP's settings and usage statistics.";
+				echo "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics.";
 				break;
 			case 1:
 				echo sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
@@ -223,14 +223,13 @@ class YARPP_Admin {
 				echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.";
 				break;
 			case 3:
-				echo "YARPP can automatically collect diagnostic and usage information from your site and send it to YARPP's author for analysis. The information is sent only with your consent. ";
-				echo '<strong>' . "Contributing this data will help make YARPP better for you and for other YARPP users." . '</strong>';
+				echo "<strong>Help make YARPP awesome</strong> by allowing it to collect information about your site and how it uses YARPP.";
 				break;
 			case 4:
 				echo "<strong>We'd like your help making YARPP awesome.</strong> Is it OK if YARPP occasionally collects some data about your site and its use of YARPP?";
 				break;
 			case 5:
-				echo "Would you like to help make YARPP better by sharing some technical information with YARPP's author?";
+				echo "Would you like to help make YARPP better by sharing some technical information with YARPP?";
 				break;
 		}
 

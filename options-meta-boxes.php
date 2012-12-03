@@ -426,7 +426,9 @@ class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 		
 		echo '<label for="yarpp-optin">' . __( 'Send settings and usage data back to YARPP', 'yarpp' ) . '</label>';
 		
-		echo '<p>This is entirely optional, but will help improve future versions of YARPP. <input type="button" value="Learn More" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
+		echo '<p style="overflow:auto;">';
+		echo __( 'This is entirely optional, but will help improve future versions of YARPP.', 'yarpp' );
+		echo ' <input type="button" value="' . esc_attr( __( 'Learn More', 'yarpp' ) ) . '" id="yarpp-optin-learnmore" class="button button-small" style="float:right"/></p>';
 	}
 }
 
