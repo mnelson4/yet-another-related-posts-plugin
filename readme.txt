@@ -243,9 +243,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 4.0 =
 * New thumbnail template option!
-	* No PHP required---just visit the settings page
+	* No PHP required—just visit the settings page
 	* Edit your theme's CSS file to modify the styling
 * Auto display settings changes:
+	* Easily choose which post types you want related posts to display on
 	* Added an "also display in archives" option
 * [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
 * Changes to the output HTML:
