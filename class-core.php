@@ -1082,7 +1082,7 @@ class YARPP {
 
 	// @since 4: optional data collection (default off)
 	function optin_ping() {
-		if ( get_transient( 'yarpp_optin' ) )
+		if ( $this->get_timeout( 'yarpp_optin' ) )
 			return true;
 
 		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
@@ -1091,9 +1091,28 @@ class YARPP {
 			return false;
 		
 		if ( $result = $remote['body'] )
-			set_transient( 'yarpp_optin', $result, 60 * 60 * 24 * 7 );
+			$this->set_timeout( 'yarpp_optin', 60 * 60 * 24 * 7 );
+	}
+	
+	// a version of the transient functions which is unaffected by caching plugin behavior.
+	// we want to store this long.
+	private function get_timeout( $transient ) {
+		$transient_timeout = $transient . '_timeout';
+		if ( get_option( $transient_timeout ) < time() ) {
+			delete_option( $transient_timeout );
+			return false; // timed out
+		}
+		return true; // still ok
 	}
 
+	private function set_timeout( $transient, $expiration = 0 ) {
+		$transient_timeout = $transient . '_timeout';
+		if ( false === get_option( $transient_timeout ) ) {
+			add_option( $transient_timeout, time() + $expiration, '', 'no' );
+		} else {
+			update_option( $transient_timeout, time() + $expiration );
+		}
+	}
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
 	function clean_pre( $text ) {
