@@ -949,9 +949,12 @@ class YARPP {
 			'after_related', 'no_results', 'order', 'promote_yarpp',
 			'thumbnails_heading', 'thumbnails_default' );
 
+		if ( !isset($args['domain']) )
+			$args['domain'] = 'website';
+
 		$r = array();
 		foreach ( $options as $option ) {
-			if ( isset($args['domain']) && 'rss' == $args['domain'] &&
+			if ( 'rss' == $args['domain'] &&
 				 in_array( $option, $options_with_rss_variants ) )
 				$default = $this->get_option( 'rss_' . $option );
 			else
