@@ -324,6 +324,8 @@ class YARPP {
 			$this->upgrade_3_5_2b2();
 		if ( $last_version && version_compare('3.6b7', $last_version) > 0 )
 			$this->upgrade_3_6b7();
+		if ( $last_version && version_compare('4.0.1', $last_version) > 0 )
+			$this->upgrade_4_0_1();
 		
 		$this->cache->upgrade($last_version);
 		// flush cache in 3.4.1b5 as 3.4 messed up calculations.
@@ -333,7 +335,7 @@ class YARPP {
 		$this->version_info(true);
 	
 		update_option('yarpp_version',YARPP_VERSION);
-		delete_transient( 'yarpp_optin' );
+		$this->delete_transient( 'yarpp_optin' );
 	}
 	
 	function upgrade_3_4b2() {
@@ -543,6 +545,10 @@ class YARPP {
 			array( 'post' ) : array();
 		unset( $options['auto_display'] );
 		update_option( 'yarpp', $options );
+	}
+	
+	function upgrade_4_0_1() {
+		delete_transient('yarpp_version_info');
 	}
 	
 	private $post_types = null;
@@ -1089,7 +1095,7 @@ class YARPP {
 	
 	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
-		if (false === ($result = get_transient('yarpp_version_info')) || $enforce_cache) {
+		if (false === ($result = $this->get_transient('yarpp_version_info')) || $enforce_cache) {
 			$version = YARPP_VERSION;
 			$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
 			
@@ -1097,44 +1103,53 @@ class YARPP {
 				return false;
 			
 			if ( $result = @unserialize($remote['body']) )
-				set_transient('yarpp_version_info', $result, 60*60*12);
+				$this->set_transient('yarpp_version_info', $result, 60 * 60 * 24);
 		}
 		return $result;
 	}
 
 	// @since 4: optional data collection (default off)
 	function optin_ping() {
-		if ( $this->get_timeout( 'yarpp_optin' ) )
+		if ( $this->get_transient( 'yarpp_optin' ) )
 			return true;
 
 		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
 		if ( is_wp_error($remote) || !isset($remote['body']) || $remote['body'] != 'ok' ) {
 			// try again later
-			$this->set_timeout( 'yarpp_optin', 60 * 60 );
+			$this->set_transient( 'yarpp_optin', null, 60 * 60 );
 			return false;
 		}
-		$this->set_timeout( 'yarpp_optin', 60 * 60 * 24 * 7 );
+		$this->set_transient( 'yarpp_optin', null, 60 * 60 * 24 * 7 );
 		return true;
 	}
 	
 	// a version of the transient functions which is unaffected by caching plugin behavior.
-	// we want to store this long.
-	private function get_timeout( $transient ) {
+	// we want to control the lifetime of data.
+	private function get_transient( $transient ) {
 		$transient_timeout = $transient . '_timeout';
 		if ( intval( get_option( $transient_timeout ) ) < time() ) {
 			delete_option( $transient_timeout );
 			return false; // timed out
 		}
-		return true; // still ok
+		return get_option( $transient, true ); // still ok
 	}
 
-	private function set_timeout( $transient, $expiration = 0 ) {
+	private function set_transient( $transient, $data = null, $expiration = 0 ) {
 		$transient_timeout = $transient . '_timeout';
 		if ( false === get_option( $transient_timeout ) ) {
 			add_option( $transient_timeout, time() + $expiration, '', 'no' );
+			if ( !is_null( $data ) )
+				add_option( $transient, $data, '', 'no' );
 		} else {
 			update_option( $transient_timeout, time() + $expiration );
+			if ( !is_null( $data ) )
+				update_option( $transient, $data );
 		}
+	}
+	
+	private function delete_transient( $transient ) {
+		delete_option( $transient );
+		delete_option( $transient . '_timeout' );
 	}
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
