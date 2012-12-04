@@ -45,14 +45,14 @@ if (isset($_POST['myisam_override'])) {
 }
 
 if ( !yarpp_get_option('myisam_override') ) {
-	$yarpp_check_return = $yarpp->myisam_check();
+	$yarpp_check_return = $yarpp->diagnostic_myisam_posts();
 	if ($yarpp_check_return !== true) { // if it's not *exactly* true
 		echo "<div class='updated'>"
-		.sprintf(__("YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled.",'yarpp'),$wpdb->posts,$yarpp_check_return)
+		.sprintf(__("YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled.",'yarpp'), $wpdb->posts, $yarpp_check_return)
 		."<br />"
-		.sprintf(__("To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications.",'yarpp'),$wpdb->posts,$wpdb->posts)
+		.sprintf(__("To restore these features, please update your <code>%s</code> table by executing the following SQL directive: <code>ALTER TABLE `%s` ENGINE = MyISAM;</code> . No data will be erased by altering the table's engine, although there are performance implications.",'yarpp'), $wpdb->posts, $wpdb->posts)
 		."<br />"
-		.sprintf(__("If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:",'yarpp'),$wpdb->posts)
+		.sprintf(__("If, despite this check, you are sure that <code>%s</code> is using the MyISAM engine, press this magic button:",'yarpp'), $wpdb->posts)
 		."<br />"
 		."<form method='post'><input type='submit' class='button' name='myisam_override' value='"
 		.__("Trust me. Let me use MyISAM features.",'yarpp')
@@ -79,7 +79,6 @@ if ( $yarpp->myisam && !$yarpp->enabled() ) {
 }
 
 if (isset($_POST['update_yarpp'])) {
-
 	$new_options = array();
 	foreach ($yarpp->default_options as $option => $default) {
 		if ( is_bool($default) )
@@ -114,6 +113,12 @@ if (isset($_POST['update_yarpp'])) {
 			}
 		}
 	}
+	
+	if ( isset( $_POST['auto_display_post_types'] ) ) {
+		$new_options['auto_display_post_types'] = array_keys( $_POST['auto_display_post_types'] );
+	} else {
+		$new_options['auto_display_post_types'] = array();
+	}
 
 	$new_options['recent'] = isset($_POST['recent_only']) ?
 		$_POST['recent_number'] . ' ' . $_POST['recent_units'] : false;
@@ -123,8 +128,10 @@ if (isset($_POST['update_yarpp'])) {
 	else
 		$new_options['exclude'] = '';
 	
-	$new_options['template'] = isset($_POST['use_template']) ? $_POST['template_file'] : false;
-	$new_options['rss_template'] = isset($_POST['rss_use_template']) ? $_POST['rss_template_file'] : false;
+	$new_options['template'] = $_POST['use_template'] == 'custom' ? $_POST['template_file'] : 
+		( $_POST['use_template'] == 'thumbnails' ? 'thumbnails' : false );
+	$new_options['rss_template'] = $_POST['rss_use_template'] == 'custom' ? $_POST['rss_template_file'] : 
+		( $_POST['rss_use_template'] == 'thumbnails' ? 'thumbnails' : false );
 	
 	$new_options = apply_filters( 'yarpp_settings_save', $new_options );
 	yarpp_set_option($new_options);
@@ -151,8 +158,20 @@ wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 wp_nonce_field( 'yarpp_display_demo', 'yarpp_display_demo-nonce', false );
 wp_nonce_field( 'yarpp_display_exclude_terms', 'yarpp_display_exclude_terms-nonce', false );
+wp_nonce_field( 'yarpp_optin_data', 'yarpp_optin_data-nonce', false );
+wp_nonce_field( 'yarpp_set_display_code', 'yarpp_set_display_code-nonce', false );
+if ( !count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates() )
+	wp_nonce_field( 'yarpp_copy_templates', 'yarpp_copy_templates-nonce', false );
 ?>
 <div id="poststuff" class="metabox-holder has-right-sidebar">
+
+<?php if ( !$yarpp->get_option('rss_display') ): ?>
+<style>
+.rss_displayed {
+	display: none;
+}
+</style>
+<?php endif; ?>
 
 <div class="inner-sidebar" id="side-info-column">
 <?php
