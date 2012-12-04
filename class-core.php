@@ -1108,19 +1108,20 @@ class YARPP {
 			return true;
 
 		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
-		
-		if ( is_wp_error($remote) )
+		if ( is_wp_error($remote) || !isset($remote['body']) || $remote['body'] != 'ok' ) {
+			// try again later
+			$this->set_timeout( 'yarpp_optin', 60 * 60 );
 			return false;
-		
-		if ( $result = $remote['body'] )
-			$this->set_timeout( 'yarpp_optin', 60 * 60 * 24 * 7 );
+		}
+		$this->set_timeout( 'yarpp_optin', 60 * 60 * 24 * 7 );
+		return true;
 	}
 	
 	// a version of the transient functions which is unaffected by caching plugin behavior.
 	// we want to store this long.
 	private function get_timeout( $transient ) {
 		$transient_timeout = $transient . '_timeout';
-		if ( get_option( $transient_timeout ) < time() ) {
+		if ( intval( get_option( $transient_timeout ) ) < time() ) {
 			delete_option( $transient_timeout );
 			return false; // timed out
 		}
