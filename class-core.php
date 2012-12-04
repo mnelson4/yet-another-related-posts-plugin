@@ -44,6 +44,15 @@ class YARPP {
 		add_filter( 'the_content_feed', array( $this, 'the_content_feed' ), 600 );
 		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 600 );
 
+		// register yarpp-thumbnail size, if theme has not already
+		// @todo: make these UI-configurable?
+		if ( false === $this->thumbnail_size() ) {
+			$width = 120;
+			$height = 120;
+			$crop = true;
+			add_image_size( 'yarpp-thumbnail', $width, $height, $crop );
+		}
+
 		if ( isset($_REQUEST['yarpp_debug']) )
 			$this->debug = true;
 
@@ -281,6 +290,13 @@ class YARPP {
 		$avg = $sum / array_sum( $stats );
 
 		return $this->cache->cache_status() > 0.1 && $avg > 2;
+	}
+	
+	function thumbnail_size() {
+		global $_wp_additional_image_sizes;
+		if ( !isset($_wp_additional_image_sizes['yarpp-thumbnail']) )
+			return false;
+		return $_wp_additional_image_sizes['yarpp-thumbnail'];
 	}
 	
 	/*

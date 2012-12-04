@@ -23,8 +23,6 @@ class YARPP_Admin {
 			exit;
 		}
 		
-		//add_image_size( 'yarpp-thumbnail', $width, $height, $crop );
-		
 		add_action( 'admin_init', array( $this, 'ajax_register' ) );
 		add_action( 'admin_menu', array( $this, 'ui_register' ) );
 		add_filter( 'current_screen', array( $this, 'settings_screen' ) );
