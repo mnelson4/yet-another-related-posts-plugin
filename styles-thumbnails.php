@@ -10,7 +10,7 @@ $width = 120;
 if ( isset($_GET['height']) )
 	$height = (int) $_GET['height'];
 if ( isset($_GET['width']) )
-	$height = (int) $_GET['width'];
+	$width = (int) $_GET['width'];
 
 $margin = 5;
 $width_with_margins = $width + 2 * $margin;
@@ -38,7 +38,6 @@ header( 'Content-Type: text/css' );
 	margin: <?php echo $margin; ?>px;
 }
 .yarpp-thumbnails-horizontal .yarpp-thumbnail > img, .yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
-	margin-bottom: 0px;
 	display: block;
 }
 .yarpp-thumbnails-horizontal .yarpp-thumbnail-title {
@@ -55,11 +54,7 @@ header( 'Content-Type: text/css' );
 .yarpp-thumbnail-default {
 	overflow: hidden;
 }
-.yarpp-thumbnail-default > img.yarpp-thumbnail-default-wide {
-	height: <?php echo $height; ?>px;
-	max-width: none;
-}
-.yarpp-thumbnail-default > img.yarpp-thumbnail-default-tall {
-	width: <?php echo $width; ?>px;
-	max-height: none;
+.yarpp-thumbnail-default > img {
+	min-height: <?php echo $height; ?>px;
+	min-width: <?php echo $width; ?>px;
 }

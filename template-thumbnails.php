@@ -10,22 +10,16 @@
 
 $options = array( 'thumbnails_heading', 'thumbnails_default', 'no_results' );
 extract( $this->parse_args( $args, $options ) );
-
-global $_wp_additional_image_sizes;
-
-// @todo: add support for other theme-specified sizes?
-// if ( isset($_wp_additional_image_sizes['yarpp-thumbnail']) )
-// 	$size = 'yarpp-thumbnail';
-// elseif ( isset($_wp_additional_image_sizes['post-thumbnail']) )
-// 	$size = 'post-thumbnail';
-
-if ( isset($size) ) {
-	$width = (int) $_wp_additional_image_sizes[$size]['width'];
-	$height = (int) $_wp_additional_image_sizes[$size]['height'];
+if ( false !== ($dimensions = $this->thumbnail_size()) ) {
+	$width = (int) $dimensions['width'];
+	$height = (int) $dimensions['height'];
+	$size = 'yarpp-thumbnail';
 } else {
 	$size = '120x120'; // the ultimate default
 	$width = 120;
 	$height = 120;
+	$dimensions = array( $width, $height, false );
+	// @todo true for crop?
 }
 
 // a little easter egg: if the default image URL is left blank,
@@ -42,11 +36,27 @@ if (have_posts()) {
 
 		$output .= "<a class='yarpp-thumbnail' href='" . get_permalink() . "' title='" . the_title_attribute('echo=0') . "'>" . "\n";
 
-		if ( has_post_thumbnail() )
+		if ( has_post_thumbnail() ) {
+			$thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+			$downsized = image_downsize( $thumbnail_id, $size );
+			if ( $dimensions['crop'] && $downsized[1] && $downsized[2] && 
+				( $downsized[1] != $width || $downsized[2] != $height ) ) {
+				// we want to trigger recomputation of the thumbnail here
+				// (only if downsized width and height are specified, for Photon behavior)
+				$fullsizepath = get_attached_file( $thumbnail_id );
+				if ( false !== $fullsizepath && file_exists( $fullsizepath ) ) {
+					require_once(ABSPATH . 'wp-admin/includes/image.php');
+					$metadata = wp_generate_attachment_metadata( $thumbnail_id, $fullsizepath );
+					if ( !is_wp_error( $metadata ) ) {
+						wp_update_attachment_metadata( get_post_thumbnail_id( get_the_ID() ), $metadata );
+					}
+				}
+			}
 			$output .= get_the_post_thumbnail( null, $size );
-		else
-			$output .= '<span class="yarpp-thumbnail-default"><img class="yarpp-thumbnail-default-wide" src="' . esc_url($thumbnails_default) . '"/></span>';
+		} else {
+			$output .= '<span class="yarpp-thumbnail-default"><img src="' . esc_url($thumbnails_default) . '"/></span>';
 			// assume default images (header images) are wider than they are tall
+		}
 
 		$output .= '<span class="yarpp-thumbnail-title">' . get_the_title() . '</span>';
 		$output .= '</a>' . "\n";

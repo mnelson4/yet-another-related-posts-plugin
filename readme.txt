@@ -242,6 +242,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 4.0.1 =
+* Improvements to thumbnail handling
+	* Thumbnails of the appropriate size are generated on the fly, if they do not already exist
+	* Thumbnail size can be specified by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+	* Fixed a typo and simplified an item in the dynamic `styles-thumbnails.php` styles
 * Bugfix: a class of `yarpp-related-` with a stray hyphen was sometimes being produced. Now fixed so it produces `yarpp-related`.
 * Bugfix: some transients expired too soon if object caching was used
 * The `yarpp_map_post_types` filter now also applies to feeds and takes an extra argument to know whether the context is `website` or `rss`.
