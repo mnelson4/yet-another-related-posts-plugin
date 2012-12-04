@@ -241,6 +241,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 4.0.1 =
+* Bugfix: a class of `yarpp-related-` with a stray hyphen was sometimes being produced. Now fixed so it produces `yarpp-related`.
+* Bugfix: some transients expired too soon if object caching was used
+* The `yarpp_map_post_types` filter now also applies to feeds and takes an extra argument to know whether the context is `website` or `rss`.
+
 = 4.0 =
 * New thumbnail template option!
 	* No PHP required—just visit the settings page

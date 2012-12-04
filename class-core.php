@@ -1027,7 +1027,7 @@ class YARPP {
 		else
 			$post_types = array( get_post_type() );
 
-		$post_types = apply_filters( 'yarpp_map_post_types', $post_types );
+		$post_types = apply_filters( 'yarpp_map_post_types', $post_types, 'website' );
 	
 		return $content . $this->display_related(null, array(
 			'post_type' => $post_types,
@@ -1040,13 +1040,16 @@ class YARPP {
 			return $content;
 
 		if ( $this->get_option('cross_relate') )
-			$type = $this->get_post_types();
-		else if ( 'page' == get_post_type() )
-			$type = array( 'page' );
+			$post_types = $this->get_post_types();
 		else
-			$type = array( 'post' );
+			$post_types = array( get_post_type() );
+
+		$post_types = apply_filters( 'yarpp_map_post_types', $post_types, 'rss' );
 	
-		return $content . $this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false);
+		return $content . $this->display_related(null, array(
+			'post_type' => $post_types,
+			'domain' => 'rss'
+		), false);
 	}
 	
 	function the_excerpt_rss($content) {
