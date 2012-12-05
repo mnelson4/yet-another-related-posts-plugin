@@ -40,7 +40,7 @@ if (have_posts()) {
 		$output .= "<a class='yarpp-thumbnail' href='" . get_permalink() . "' title='" . the_title_attribute('echo=0') . "'>" . "\n";
 
 		if ( has_post_thumbnail() ) {
-			if ( $this->get_option( 'generate_thumbnails' ) )
+			if ( $this->diagnostic_generate_thumbnails() )
 				$this->ensure_resized_post_thumbnail( get_the_ID(), $size, $dimensions );
 			$output .= get_the_post_thumbnail( null, $size );
 		} else {

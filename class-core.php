@@ -122,7 +122,6 @@ class YARPP {
 			'auto_display_archive' => false, // new in 4
 			'auto_display_post_types' => array( 'post' ), // new in 4, replacing auto_display
 			'pools' => array( 'message' => mt_rand(0,5) ), // new in 4
-			'generate_thumbnails' => false, // new in 4.0.1
 		);
 	}
 	
@@ -291,6 +290,10 @@ class YARPP {
 		$avg = $sum / array_sum( $stats );
 
 		return $this->cache->cache_status() > 0.1 && $avg > 2;
+	}
+	
+	function diagnostic_generate_thumbnails() {
+		return defined('YARPP_GENERATE_THUMBNAILS') && YARPP_GENERATE_THUMBNAILS;
 	}
 	
 	function thumbnail_size() {
@@ -632,8 +635,7 @@ class YARPP {
 			'after_related', 'no_results', 'order', 'rss_before_title',
 			'rss_after_title', 'rss_before_post', 'rss_after_post', 'rss_after_related',
 			'rss_no_results', 'rss_order', 'exclude', 'thumbnails_heading',
-			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code',
-			'generate_thumbnails'
+			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code'
 		);
 
 		$data = array(
@@ -651,7 +653,8 @@ class YARPP {
 				'fulltext_indices' => $this->diagnostic_fulltext_indices(),
 				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
 				'post_thumbnails' => $this->diagnostic_post_thumbnails(),
-				'happy' => $this->diagnostic_happy()
+				'happy' => $this->diagnostic_happy(),
+				'generate_thumbnails' => $this->diagnostic_generate_thumbnails()
 			),
 			'stats' => array(
 				'counts' => array(),
