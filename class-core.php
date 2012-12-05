@@ -632,7 +632,8 @@ class YARPP {
 			'after_related', 'no_results', 'order', 'rss_before_title',
 			'rss_after_title', 'rss_before_post', 'rss_after_post', 'rss_after_related',
 			'rss_no_results', 'rss_order', 'exclude', 'thumbnails_heading',
-			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code'
+			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code',
+			'generate_thumbnails'
 		);
 
 		$data = array(
@@ -1133,7 +1134,7 @@ class YARPP {
 		if ( $this->get_transient( 'yarpp_optin' ) )
 			return true;
 
-		$remote = wp_remote_post( 'http://yarpp.org/optin/1/', array( 'body' => $this->optin_data() ) );
+		$remote = wp_remote_post( 'http://yarpp.org/optin/2/', array( 'body' => $this->optin_data() ) );
 		if ( is_wp_error($remote) || !isset($remote['body']) || $remote['body'] != 'ok' ) {
 			// try again later
 			$this->set_transient( 'yarpp_optin', null, 60 * 60 );
