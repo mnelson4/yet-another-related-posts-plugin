@@ -7,7 +7,7 @@ Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 4.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
@@ -83,15 +83,31 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.*
 
+= How can I move the related posts display? =
+
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
+
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.
+
+= I'm using the Thumbnails display in YARPP 4. How can I change the thumbnail size? =
+
+The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+
+Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose. See also the next question.
+
+= I'm using the Thumbnails display in YARPP 4. Why aren't the right size thumbnails being served? =
+
+By default if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal... what you really want is for YARPP to serve appropriately-sized thumbnails.
+
+There are two options for doing so:
+
+* First, you can use the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin to generate all these thumbnail-sized images in a batch process. This puts you in control of when this resizing process happens on your server (which is good because it can be processor-intensive). New images which are uploaded to WordPress should automatically get the appropriate thumbnail generated when the image is uploaded.
+
+* Second, you can turn on a feature in YARPP to auto-generate appropriate size thumbnails on the fly, if they have not yet been created. Doing this type of processing on the fly does not scale well, so this feature is turned off by default. But if you run a smaller site with less traffic, it may work for you. Simply add `define('YARPP_GENERATE_THUMBNAILS', true);` to your theme's `functions.php` file.
+
 = How can I use the custom template feature? =
 
 YARPP's [custom templates feature](http://mitcho.com/blog/projects/yarpp-3-templates/) allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
-
-= How can I move the related posts display? =
-
-If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" option in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
-
-If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. This method can also be used to display YARPP on pages other than single-post displays, such as on archive pages.
 
 = Does YARPP slow down my blog/server? =
 
@@ -243,10 +259,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 4.0.1 =
 * Improvements to thumbnail handling
-	* Thumbnail size can be specified by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
-	* YARPP now registers its thumbnail size properly. To have WordPress build thumbnails of the right size, use the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin.
+	* See new FAQ entry for practical details
+	* Thumbnail size can be specified programmatically (see FAQ)
+	* YARPP now registers its thumbnail size properly as `yarpp-thumbnail`
 	* Fixed a typo and simplified an item in the dynamic `styles-thumbnails.php` styles
-	* Thumbnails of appropriate size can be generated on the fly, if they do not already exist, by calling `yarpp_set_option('generate_thumbnails', true);`. This is turned off by default and hidden for due to performance concerns.
+	* Code to generate thumbnails of appropriate size on the fly has been added, but is turned off by default for performance reasons (see FAQ)
 * Bugfix: a class of `yarpp-related-` with a stray hyphen was sometimes being produced. Now fixed so it produces `yarpp-related`.
 * [Bugfix](http://wordpress.org/support/topic/bug-in-sql-function-in-yarpp_cache): `term_relationships` table was being joined when unnecessary
 * [Bugfix](http://wordpress.org/support/topic/no-option-to-add-widget-title-in-theme-using-hybrid-core-framework): widget options would not display if custom templates were not available
