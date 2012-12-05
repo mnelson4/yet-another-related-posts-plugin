@@ -18,7 +18,10 @@ if ( false !== ($dimensions = $this->thumbnail_size()) ) {
 	$size = '120x120'; // the ultimate default
 	$width = 120;
 	$height = 120;
-	$dimensions = array( $width, $height, false );
+	$dimensions = array(
+		'width' => $width, 
+		'height' => $height,
+		'crop' => false );
 	// @todo true for crop?
 }
 
@@ -37,21 +40,8 @@ if (have_posts()) {
 		$output .= "<a class='yarpp-thumbnail' href='" . get_permalink() . "' title='" . the_title_attribute('echo=0') . "'>" . "\n";
 
 		if ( has_post_thumbnail() ) {
-			$thumbnail_id = get_post_thumbnail_id( get_the_ID() );
-			$downsized = image_downsize( $thumbnail_id, $size );
-			if ( $dimensions['crop'] && $downsized[1] && $downsized[2] && 
-				( $downsized[1] != $width || $downsized[2] != $height ) ) {
-				// we want to trigger recomputation of the thumbnail here
-				// (only if downsized width and height are specified, for Photon behavior)
-				$fullsizepath = get_attached_file( $thumbnail_id );
-				if ( false !== $fullsizepath && file_exists( $fullsizepath ) ) {
-					require_once(ABSPATH . 'wp-admin/includes/image.php');
-					$metadata = wp_generate_attachment_metadata( $thumbnail_id, $fullsizepath );
-					if ( !is_wp_error( $metadata ) ) {
-						wp_update_attachment_metadata( get_post_thumbnail_id( get_the_ID() ), $metadata );
-					}
-				}
-			}
+			if ( $this->get_option( 'generate_thumbnails' ) )
+				$this->ensure_resized_post_thumbnail( get_the_ID(), $size, $dimensions );
 			$output .= get_the_post_thumbnail( null, $size );
 		} else {
 			$output .= '<span class="yarpp-thumbnail-default"><img src="' . esc_url($thumbnails_default) . '"/></span>';

@@ -122,6 +122,7 @@ class YARPP {
 			'auto_display_archive' => false, // new in 4
 			'auto_display_post_types' => array( 'post' ), // new in 4, replacing auto_display
 			'pools' => array( 'message' => mt_rand(0,5) ), // new in 4
+			'generate_thumbnails' => false, // new in 4.0.1
 		);
 	}
 	
@@ -297,6 +298,25 @@ class YARPP {
 		if ( !isset($_wp_additional_image_sizes['yarpp-thumbnail']) )
 			return false;
 		return $_wp_additional_image_sizes['yarpp-thumbnail'];
+	}
+	
+	// code based on Viper's Regenerate Thumbnails plugin
+	function ensure_resized_post_thumbnail( $post_id, $size, $dimensions ) {
+		$thumbnail_id = get_post_thumbnail_id( $post_id );
+		$downsized = image_downsize( $thumbnail_id, $size );
+		if ( $dimensions['crop'] && $downsized[1] && $downsized[2] && 
+			( $downsized[1] != $dimensions['width'] || $downsized[2] != $dimensions['height'] ) ) {
+			// we want to trigger recomputation of the thumbnail here
+			// (only if downsized width and height are specified, for Photon behavior)
+			$fullsizepath = get_attached_file( $thumbnail_id );
+			if ( false !== $fullsizepath && file_exists( $fullsizepath ) ) {
+				require_once(ABSPATH . 'wp-admin/includes/image.php');
+				$metadata = wp_generate_attachment_metadata( $thumbnail_id, $fullsizepath );
+				if ( !is_wp_error( $metadata ) ) {
+					wp_update_attachment_metadata( $thumbnail_id, $metadata );
+				}
+			}
+		}
 	}
 	
 	/*

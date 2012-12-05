@@ -243,9 +243,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 4.0.1 =
 * Improvements to thumbnail handling
-	* Thumbnails of the appropriate size are generated on the fly, if they do not already exist
 	* Thumbnail size can be specified by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+	* YARPP now registers its thumbnail size properly. To have WordPress build thumbnails of the right size, use the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin.
 	* Fixed a typo and simplified an item in the dynamic `styles-thumbnails.php` styles
+	* Thumbnails of appropriate size can be generated on the fly, if they do not already exist, by calling `yarpp_set_option('generate_thumbnails', true);`. This is turned off by default and hidden for due to performance concerns.
 * Bugfix: a class of `yarpp-related-` with a stray hyphen was sometimes being produced. Now fixed so it produces `yarpp-related`.
 * [Bugfix](http://wordpress.org/support/topic/bug-in-sql-function-in-yarpp_cache): `term_relationships` table was being joined when unnecessary
 * [Bugfix](http://wordpress.org/support/topic/no-option-to-add-widget-title-in-theme-using-hybrid-core-framework): widget options would not display if custom templates were not available
