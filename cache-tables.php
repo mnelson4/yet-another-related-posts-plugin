@@ -3,7 +3,6 @@
 $yarpp_storage_class = 'YARPP_Cache_Tables';
 
 define('YARPP_TABLES_RELATED_TABLE', 'yarpp_related_cache');
-define('YARPP_TABLES_KEYWORDS_TABLE', 'yarpp_keyword_cache');
 
 class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
@@ -19,8 +18,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		// now check for the cache tables
 		$tabledata = $wpdb->get_col("show tables");
-		if (in_array($wpdb->prefix . YARPP_TABLES_RELATED_TABLE,$tabledata) !== false &&
-			in_array($wpdb->prefix . YARPP_TABLES_KEYWORDS_TABLE,$tabledata) !== false)
+		if (in_array($wpdb->prefix . YARPP_TABLES_RELATED_TABLE,$tabledata) !== false)
 			return true;
 		else
 			return false;
@@ -35,13 +33,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( ! empty( $wpdb->collate ) )
 			$charset_collate .= " COLLATE $wpdb->collate";
 
-		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "` (
-			`ID` bigint(20) unsigned NOT NULL default '0',
-			`body` text NOT NULL,
-			`title` text NOT NULL,
-			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY  (`ID`)
-			) $charset_collate;");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
 			`reference_ID` bigint(20) unsigned NOT NULL default '0',
 			`ID` bigint(20) unsigned NOT NULL default '0',
@@ -68,6 +59,15 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( $last_version && version_compare('3.5.2b3', $last_version) > 0 ) {
 			// flush object cache, as bad is_cached_* values were stored before
 			wp_cache_flush();
+		}
+		if ( $last_version && version_compare('3.6b1', $last_version) > 0 ) {
+			// remove keywords table
+			if ( defined('YARPP_TABLES_KEYWORDS_TABLE') )
+				$old_keywords_table = $wpdb->prefix . YARPP_TABLES_KEYWORDS_TABLE;
+			else
+				$old_keywords_table = $wpdb->prefix . 'yarpp_keyword_cache';
+			
+			$wpdb->query("drop table if exists `$old_keywords_table`");
 		}
 	}
 
@@ -199,7 +199,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			return;
 		
 		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . " where reference_ID in (".implode(',',$reference_IDs).")");
-		$wpdb->query("delete from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID in (".implode(',',$reference_IDs).")");
 		// @since 3.5.2: clear is_cached_* values as well
 		foreach ( $reference_IDs as $id )
 			wp_cache_delete( 'is_cached_' . $id, 'yarpp' );
@@ -246,7 +245,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 	public function flush() {
 		global $wpdb;
 		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "`");
-		$wpdb->query("truncate table `{$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . "`");
 		// @since 3.5.2: clear object cache, used for is_cached_* values
 		wp_cache_flush();
 	}
@@ -277,27 +275,6 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		return false;
 	}
 
-	/**
-	 * KEYWORDS CACHE CONTROL
-	 */
-	// @return (array) with body and title keywords
-	private function cache_keywords($ID) {
-		global $wpdb;
-		$body_terms = $this->body_keywords($ID);
-		$title_terms = $this->title_keywords($ID);
-
-		if ( !empty($wpdb->dbh) && defined('DB_CHARSET') ) {
-			if ( method_exists( $wpdb, 'set_charset' ) )
-				$wpdb->set_charset( $wpdb->dbh, DB_CHARSET );
-			else
-				mysql_set_charset( DB_CHARSET, $wpdb->dbh );
-		}
-
-		$wpdb->query("insert into {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " (ID,body,title) values ($ID,'$body_terms ','$title_terms ') on duplicate key update date = now(), body = '$body_terms ', title = '$title_terms '");
-
-		return array( 'body' => $body_terms, 'title' => $title_terms );
-	}
-
 	// @param $ID (int)
 	// @param $type (string) body | title | all
 	// @return (string|array) depending on whether "all" were requested or not
@@ -307,9 +284,14 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		if ( !is_int($ID) )
 			return false;
 
-		$keywords = $wpdb->get_row("select body, title from {$wpdb->prefix}" . YARPP_TABLES_KEYWORDS_TABLE . " where ID = $ID", ARRAY_A);
-		if ( empty($keywords) ) // if empty, try caching them first.
-			$keywords = $this->cache_keywords($ID);
+		// @since 4: compute fresh each time, instead of using cache table.
+		// the old keyword cache would basically have to be recomputed every time the
+		// relatedness cache was recomputed, but no more, so there's no point in keeping
+		// these around separately.
+		$keywords = array(
+			'body' => $this->body_keywords($ID),
+			'title' => $this->title_keywords($ID)
+		);
 
 		if ( empty($keywords) )
 			return false;

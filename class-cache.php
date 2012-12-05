@@ -168,8 +168,8 @@ abstract class YARPP_Cache {
 			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". absint($weight['title']);
 	
 		// Build tax criteria query parts based on the weights
-		foreach ( (array) $weight['tax'] as $tax => $weight ) {
-			$newsql .= " + " . $this->tax_criteria($reference_ID, $tax) . " * " . intval($weight);
+		foreach ( (array) $weight['tax'] as $tax => $tax_weight ) {
+			$newsql .= " + " . $this->tax_criteria($reference_ID, $tax) . " * " . intval($tax_weight);
 		}
 	
 		$newsql .= ',1) as score';
