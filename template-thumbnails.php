@@ -39,14 +39,17 @@ if (have_posts()) {
 
 		$output .= "<a class='yarpp-thumbnail' href='" . get_permalink() . "' title='" . the_title_attribute('echo=0') . "'>" . "\n";
 
+		$post_thumbnail_html = '';
 		if ( has_post_thumbnail() ) {
 			if ( $this->diagnostic_generate_thumbnails() )
 				$this->ensure_resized_post_thumbnail( get_the_ID(), $size, $dimensions );
-			$output .= get_the_post_thumbnail( null, $size );
-		} else {
-			$output .= '<span class="yarpp-thumbnail-default"><img src="' . esc_url($thumbnails_default) . '"/></span>';
-			// assume default images (header images) are wider than they are tall
+			$post_thumbnail_html = get_the_post_thumbnail( null, $size );
 		}
+		
+		if ( trim($post_thumbnail_html) != '' )
+			$output .= $post_thumbnail_html;
+		else
+			$output .= '<span class="yarpp-thumbnail-default"><img src="' . esc_url($thumbnails_default) . '"/></span>';
 
 		$output .= '<span class="yarpp-thumbnail-title">' . get_the_title() . '</span>';
 		$output .= '</a>' . "\n";
