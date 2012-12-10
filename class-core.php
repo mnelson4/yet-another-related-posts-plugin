@@ -140,7 +140,7 @@ class YARPP {
 		update_option( 'yarpp', $new_options );
 	
 		// new in 3.1: clear cache when updating certain settings.
-		$clear_cache_options = array( 'show_pass_post' => 1, 'recent' => 1, 'threshold' => 1 );
+		$clear_cache_options = array( 'show_pass_post' => 1, 'recent' => 1, 'threshold' => 1, 'past_only' => 1 );
 
 		$relevant_options = array_intersect_key( $options, $clear_cache_options );
 		$relevant_current_options = array_intersect_key( $current_options, $clear_cache_options );
@@ -1054,6 +1054,9 @@ class YARPP {
 	function the_content($content) {
 		// this filter doesn't handle feeds
 		if ( is_feed() )
+			return $content;
+		// @since 4.0.2: only filter on main query
+		if ( !is_main_query() )
 			return $content;
 		
 		$auto_display_post_types = $this->get_option( 'auto_display_post_types' );
