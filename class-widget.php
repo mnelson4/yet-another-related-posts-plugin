@@ -89,11 +89,11 @@ class YARPP_Widget extends WP_Widget {
 		?>
 
 		<p>
-			<label style="padding-right: 10px;" for="<?php echo $this->get_field_id('use_template_builtin'); ?>"><input id="<?php echo $this->get_field_id('use_template_builtin'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="builtin" <?php checked( $choice == 'builtin' ) ?> /> <?php _e( "List", 'yarpp' ); ?></label>
+			<label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_builtin'); ?>"><input id="<?php echo $this->get_field_id('use_template_builtin'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="builtin" <?php checked( $choice == 'builtin' ) ?> /> <?php _e( "List", 'yarpp' ); ?></label>
 		
-			<label style="padding-right: 10px;" for="<?php echo $this->get_field_id('use_template_thumbnails'); ?>"><input id="<?php echo $this->get_field_id('use_template_thumbnails'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="thumbnails" <?php checked( $choice == 'thumbnails' ) ?> /> <?php _e( "Thumbnails", 'yarpp' ); ?></label>
+			<label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_thumbnails'); ?>"><input id="<?php echo $this->get_field_id('use_template_thumbnails'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="thumbnails" <?php checked( $choice == 'thumbnails' ) ?> /> <?php _e( "Thumbnails", 'yarpp' ); ?></label>
 			
-			<label style="padding-right: 10px;" for="<?php echo $this->get_field_id('use_template_custom'); ?>"><input id="<?php echo $this->get_field_id('use_template_custom'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="custom" <?php checked( $choice == 'custom' ); disabled( !count($templates) ); ?> /> <?php _e( "Custom", 'yarpp' ); ?></label>
+			<label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_custom'); ?>"><input id="<?php echo $this->get_field_id('use_template_custom'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="custom" <?php checked( $choice == 'custom' ); disabled( !count($templates) ); ?> /> <?php _e( "Custom", 'yarpp' ); ?></label>
 		</p>
 
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" /></label></p>

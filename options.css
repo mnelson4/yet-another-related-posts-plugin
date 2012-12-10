@@ -10,6 +10,9 @@ ul.yarpp_contacts li {
 	padding: 0px 0px 0px 30px;
 	line-height: 22px;
 }
+body.rtl ul.yarpp_contacts li {
+	padding: 0px 30px 0px 0px;	
+}
 
 ul.yarpp_contacts li a img {
 	vertical-align: bottom;
@@ -28,6 +31,11 @@ ul.yarpp_contacts li a img {
 	margin-top: -1px;
 	background-image: url('sprites.png');
 }
+body.rtl .icon {
+	margin-left: none;
+	margin-right: -29px;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
 	.icon {
 		background-image: url('sprites-2x.png');
