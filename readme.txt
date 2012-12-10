@@ -258,9 +258,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 4.0.2 =
-* Bugfix: cache should be cleared when the "show only previous posts?" option is changed
+* [Bugfix](http://wordpress.org/support/topic/yarpp-doesnt-update-suggestions-with-older-posts): cache should be cleared when the "show only previous posts?" option is changed
+* [Bugfix](http://wordpress.org/support/topic/no-default-image-showing?replies=4): In the thumbnail display, sometimes the default image was not displayed, even though no post thumbnail was available.
 * Localization updates
-	* Updated Polish
+	* Updated Polish, Japanese, Hebrew localizations
+	* Better right-to-left layout support
 
 = 4.0.1 =
 * Improvements to thumbnail handling
