@@ -185,7 +185,7 @@ abstract class YARPP_Cache {
 	
 		$newsql .= " where post_status in ( 'publish', 'static' ) and ID != '$reference_ID'";
 	
-		if ($past_only) // 3.1.8: revised $past_only option
+		if ( $past_only ) // 3.1.8: revised $past_only option
 			$newsql .= " and post_date <= '$reference_post->post_date' ";
 		if ( !$show_pass_post )
 			$newsql .= " and post_password ='' ";

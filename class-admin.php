@@ -15,7 +15,7 @@ class YARPP_Admin {
 			exit;
 		}
 
-		// if action=flush and the nonce is correct, reset the cache
+		// if action=copy_templates and the nonce is correct, copy templates
 		if ( isset($_GET['action']) && $_GET['action'] == 'copy_templates' &&
 			 check_ajax_referer( 'yarpp_copy_templates', false, false ) !== false ) {
 			$this->copy_templates();
