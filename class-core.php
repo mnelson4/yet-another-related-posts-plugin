@@ -1055,10 +1055,7 @@ class YARPP {
 		// this filter doesn't handle feeds
 		if ( is_feed() )
 			return $content;
-		// @since 4.0.2: only filter on main query
-		if ( !is_main_query() )
-			return $content;
-		
+
 		$auto_display_post_types = $this->get_option( 'auto_display_post_types' );
 
 		// if it's not an auto-display post type, return
