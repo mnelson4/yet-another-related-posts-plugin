@@ -257,6 +257,11 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 4.0.2 =
+* Bugfix: cache should be cleared when the "show only previous posts?" option is changed
+* Localization updates
+	* Updated Polish
+
 = 4.0.1 =
 * Improvements to thumbnail handling
 	* See new FAQ entry for practical details
