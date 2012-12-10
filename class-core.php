@@ -121,7 +121,7 @@ class YARPP {
 			'display_code' => false, // new in 4
 			'auto_display_archive' => false, // new in 4
 			'auto_display_post_types' => array( 'post' ), // new in 4, replacing auto_display
-			'pools' => array( 'message' => mt_rand(0,5) ), // new in 4
+			'pools' => array(), // new in 4
 		);
 	}
 	

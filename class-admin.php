@@ -193,7 +193,7 @@ class YARPP_Admin {
 		</script>\n";
 	}
 
-	function optin_notice( $pool = null ) {
+	function optin_notice() {
 		$screen = get_current_screen();
 		if ( is_null($screen) || $screen->id == 'settings_page_yarpp' )
 			return;
@@ -202,34 +202,7 @@ class YARPP_Admin {
 		update_user_option( $user, 'yarpp_saw_optin', true );
 
 		echo '<div class="updated fade"><p>';
-
-		// @todo i18n
-		if ( is_null( $pool ) )
-			$pool = $this->core->get_option( 'pools[message]' );
-		switch ( $pool ) {
-			case 0:
-				echo "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics.";
-				break;
-			case 1:
-				echo sprintf( __( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", 'yarpp' ), '<code>yarpp.org</code>') . ' ';
-				echo __( "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.", 'yarpp' ) . ' ';
-				echo '<strong>' . __( "Contributing this data will help make YARPP better for you and for other YARPP users.", 'yarpp' ) . '</strong>';
-				break;
-			case 2:
-				echo "<strong>Help make YARPP better.</strong> ";
-				echo sprintf( "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s.", '<code>yarpp.org</code>') . ' ';
-				echo "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP.";
-				break;
-			case 3:
-				echo "<strong>Help make YARPP awesome</strong> by allowing it to collect information about your site and how it uses YARPP.";
-				break;
-			case 4:
-				echo "<strong>We'd like your help making YARPP awesome.</strong> Is it OK if YARPP occasionally collects some data about your site and its use of YARPP?";
-				break;
-			case 5:
-				echo "Would you like to help make YARPP better by sharing some technical information with YARPP?";
-				break;
-		}
+		_e( "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics.", 'yarpp' );
 
 		echo '</p><p>';
 		$this->print_optin_button();
