@@ -152,7 +152,7 @@ jQuery(function($) {
 		options = {
 			content: help,
 			position: {
-				edge: 'left',
+				edge: isRtl ? 'right' : 'left',
 				align: 'center',
 				of: that
 			},
