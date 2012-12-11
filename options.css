@@ -23,6 +23,10 @@ ul.yarpp_contacts li a img {
 	display: none;
 }
 
+#tab-panel-faq, #tab-panel-dev {
+	direction: ltr;
+}
+
 .icon {
 	width: 22px;
 	height: 22px;
@@ -159,10 +163,19 @@ a.yarpp_help:hover {
 .yarpp_form_post_types label {
 	padding-right: 15px;
 	line-height: 20px;
+	display: inline-block;
+}
+body.rtl .yarpp_form_post_types label {
+	padding-right: inherit;
+	padding-left: 15px;
 }
 .yarpp_form_exclude label {
 	padding-right: 5px;
 	line-height: 15px;
+}
+body.rtl .yarpp_form_exclude label {
+	padding-right: inherit;
+	padding-left: 5px;
 }
 .yarpp_form_template_file > .yarpp_form_label {
 	vertical-align: top;
@@ -174,9 +187,15 @@ a.yarpp_help:hover {
 	width: 50%;
 	float: right;
 }
+body.rtl .yarpp_code_display {
+	float: left;
+}
 .yarpp_code_display div {
 	overflow: auto;
 	max-height: 300px;
+}
+.yarpp_code_display pre {
+	direction: ltr;
 }
 .yarpp_scroll_wrapper {
 	overflow: auto;
@@ -195,6 +214,16 @@ a.yarpp_help:hover {
 
 .yarpp_copy_templates_button {
 	float: right;
+}
+body.rtl .yarpp_copy_templates_button {
+	float: left;
+}
+
+#yarpp-optin-learnmore {
+	float: right;
+}
+body.rtl #yarpp-optin-learnmore {
+	float: left;
 }
 
 .template_file_wrap, .template_author_wrap, .template_description_wrap {
@@ -295,6 +324,7 @@ a.yarpp_help:hover {
 #optin_data_frame {
 	overflow: scroll;
 	max-height: 300px;
+	direction: ltr;
 }
 
 #yarpp_extra_screen_settings {

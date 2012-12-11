@@ -140,7 +140,7 @@ class YARPP_Admin {
 			echo $this->markdown( $matches[1] );
 		else
 			echo '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/">' . __(
-			'FAQ', 'yarpp') . '</a>';
+			'Frequently Asked Questions', 'yarpp') . '</a>';
 	}
 	
 	public function help_dev() {
