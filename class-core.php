@@ -43,10 +43,11 @@ class YARPP {
 		add_filter( 'the_content', array( $this, 'the_content' ), 1200 );
 		add_filter( 'the_content_feed', array( $this, 'the_content_feed' ), 600 );
 		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 600 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_thumbnails' ) );
 
 		// register yarpp-thumbnail size, if theme has not already
 		// @todo: make these UI-configurable?
-		if ( false === $this->thumbnail_size() ) {
+		if ( !($dimensions = $this->thumbnail_dimensions()) || isset($dimensions['_default']) ) {
 			$width = 120;
 			$height = 120;
 			$crop = true;
@@ -300,17 +301,55 @@ class YARPP {
 		return defined('YARPP_GENERATE_THUMBNAILS') && YARPP_GENERATE_THUMBNAILS;
 	}
 	
-	function thumbnail_size() {
+	private $default_dimensions = array(
+		'width' => 120, 
+		'height' => 120,
+		'crop' => false, // @todo true for crop?
+		'size' => '120x120',
+		'_default' => true
+	);
+	function thumbnail_dimensions() {
 		global $_wp_additional_image_sizes;
 		if ( !isset($_wp_additional_image_sizes['yarpp-thumbnail']) )
-			return false;
-		return $_wp_additional_image_sizes['yarpp-thumbnail'];
+			return $this->default_dimensions;
+
+		$dimensions = $_wp_additional_image_sizes['yarpp-thumbnail'];
+		$dimensions['size'] = 'yarpp-thumbnail';
+		
+		// ensure YARPP dimensions format:
+		$dimensions['width'] = (int) $dimensions['width'];
+		$dimensions['height'] = (int) $dimensions['height'];
+		return $dimensions;
+	}
+
+	function maybe_enqueue_thumbnails() {
+		if ( is_feed() )
+			return;
+
+		$auto_display_post_types = $this->get_option( 'auto_display_post_types' );
+
+		// if it's not an auto-display post type, return
+		if ( !in_array( get_post_type(), $auto_display_post_types ) )
+			return;
+
+		if ( !is_singular() && !(
+			  $this->get_option('auto_display_archive') &&
+			  ( is_archive() || is_home() )
+			) )
+			return;
+
+		$this->enqueue_thumbnails( $this->thumbnail_dimensions() );
+	}
+
+	function enqueue_thumbnails( $dimensions ) {
+		wp_enqueue_style( "yarpp-thumbnails-" . $dimensions['size'], plugins_url( 'styles-thumbnails.php?' . http_build_query( array( 'width' => $dimensions['width'], 'height' => $dimensions['height'] ) ), __FILE__ ), array(), YARPP_VERSION, 'all' );
 	}
 	
 	// code based on Viper's Regenerate Thumbnails plugin
-	function ensure_resized_post_thumbnail( $post_id, $size, $dimensions ) {
+	// $dimensions must be an array with size, crop, height, width attributes
+	function ensure_resized_post_thumbnail( $post_id, $dimensions ) {
 		$thumbnail_id = get_post_thumbnail_id( $post_id );
-		$downsized = image_downsize( $thumbnail_id, $size );
+		$downsized = image_downsize( $thumbnail_id, $dimensions['size'] );
 		if ( $dimensions['crop'] && $downsized[1] && $downsized[2] && 
 			( $downsized[1] != $dimensions['width'] || $downsized[2] != $dimensions['height'] ) ) {
 			// we want to trigger recomputation of the thumbnail here
@@ -605,6 +644,10 @@ class YARPP {
 	function upgrade_4_0_1() {
 		delete_transient('yarpp_version_info');
 	}
+	
+	/*
+	 * UTILITIES
+	 */
 	
 	private $post_types = null;
 	function get_post_types( $field = 'name' ) {
