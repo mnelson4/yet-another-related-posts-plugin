@@ -16,7 +16,7 @@ class YARPP_Meta_Box {
 	
 	private function offer_copy_templates() {
 		global $yarpp;
-		return ( !count( $yarpp->admin->get_templates() ) && $yarpp->admin->can_copy_templates() );
+		return ( !$yarpp->diagnostic_custom_templates() && $yarpp->admin->can_copy_templates() );
 	}
 	
 	function template_checkbox( $rss = false, $class = '' ) {
@@ -47,10 +47,10 @@ class YARPP_Meta_Box {
 			echo "<div data-value='custom' class='yarpp_template_button";
 			if ( 'custom' == $choice )
 				echo ' active';
-			if ( !count( $yarpp->admin->get_templates() ) )
+			if ( !$yarpp->diagnostic_custom_templates() )
 				echo ' disabled';
 			echo "'";
-			if ( !count( $yarpp->admin->get_templates() ) ) {
+			if ( !$yarpp->diagnostic_custom_templates() ) {
 				$help = __( 'This option is disabled because no YARPP templates were found in your theme.', 'yarpp' );
 				if ( $this->offer_copy_templates() )
 					$help .= ' ' . __( "Would you like to copy some sample templates bundled with YARPP into your theme?", 'yarpp' ) . "<input type='button' class='button button-small yarpp_copy_templates_button' value='" . esc_attr( __( 'Copy Templates', 'yarpp' ) ) . "'/>";
@@ -70,7 +70,7 @@ class YARPP_Meta_Box {
 		_e( "Template file:", 'yarpp' );
 		echo "</div><div><select name='{$pre}template_file' id='{$pre}template_file'>";
 		$chosen_template = yarpp_get_option( "{$pre}template" );
-		foreach ( $yarpp->admin->get_templates() as $template ) {
+		foreach ( $yarpp->get_templates() as $template ) {
 			echo "<option value='" . esc_attr( $template['basename'] ) . "'" . selected( $template['basename'], $chosen_template, false );
 			foreach ( $template as $key => $value )
 				echo " data-{$key}='" . esc_attr( $value ) . "'";

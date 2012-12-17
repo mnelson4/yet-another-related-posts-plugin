@@ -31,32 +31,9 @@ class YARPP_Admin {
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'default_hidden_meta_boxes' ), 10, 2 );
 	}
 	
-	private $templates = null;
 	public function get_templates() {
-		if ( is_null($this->templates) ) {
-			$this->templates = glob(STYLESHEETPATH . '/yarpp-template-*.php');
-			// if glob hits an error, it returns false.
-			if ( $this->templates === false )
-				$this->templates = array();
-			// get basenames only
-			$this->templates = array_map(array($this, 'get_template_data'), $this->templates);
-		}
-		return (array) $this->templates;
-	}
-	
-	public function get_template_data( $file ) {
-		$headers = array(
-			'name' => 'Template Name',
-			'description' => 'Description',
-			'author' => 'Author',
-			'uri' => 'Author URI',
-		);
-		$data = get_file_data( $file, $headers );
-		$data['file'] = $file;
-		$data['basename'] = basename($file);
-		if ( empty($data['name']) )
-			$data['name'] = $data['basename'];
-		return $data;
+		// @since 4.0.3 mv function to Core
+		return $this->core->get_templates();
 	}
 	
 	function ajax_register() {

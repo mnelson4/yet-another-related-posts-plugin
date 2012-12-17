@@ -82,8 +82,8 @@ class YARPP_Widget extends WP_Widget {
 			( $instance['template'] == 'thumbnails' ? 'thumbnails' : 'custom' );
 
 		// if there are YARPP templates installed...
-		$templates = $yarpp->admin->get_templates();
-		if ( !count($templates) && $choice == 'custom' )
+		$templates = $yarpp->get_templates();
+		if ( !$yarpp->diagnostic_custom_templates() && $choice == 'custom' )
 			$choice = 'builtin';
 		
 		?>
