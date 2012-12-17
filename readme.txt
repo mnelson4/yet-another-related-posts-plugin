@@ -257,6 +257,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 4.0.3 =
+* Bugfix: on sites where custom templates are not available, the "thumbnails" display option would get reset when visiting the YARPP settings page
+* Updated Polish localization
+
 = 4.0.2 =
 * [Bugfix](http://wordpress.org/support/topic/yarpp-doesnt-update-suggestions-with-older-posts): cache should be cleared when the "show only previous posts?" option is changed
 * [Bugfix](http://wordpress.org/support/topic/no-default-image-showing?replies=4): In the thumbnail display, sometimes the default image was not displayed, even though no post thumbnail was available.
