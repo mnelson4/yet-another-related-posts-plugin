@@ -5,8 +5,13 @@ global $wpdb, $wp_version, $yarpp;
 $yarpp->enforce();
 
 // check to see that templates are in the right place
-if ( !count($yarpp->admin->get_templates()) ) {
-	yarpp_set_option( array( 'template' => false, 'rss_template' => false) );
+if ( !$yarpp->diagnostic_custom_templates() ) {
+	$template_option = yarpp_get_option( 'template' );
+	if ( $template_option !== false && 'thumbnails' != $template_option )
+		yarpp_set_option( 'template', false );
+	$template_option = yarpp_get_option( 'rss_template' );
+	if ( $template_option !== false && 'thumbnails' != $template_option )
+		yarpp_set_option( 'rss_template', false );
 }
 
 // 3.3: move version checking here, in PHP:
