@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YARPP_PL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 10:07+0100\n"
-"PO-Revision-Date: 2012-12-03 10:29+0100\n"
+"POT-Creation-Date: 2012-12-11 10:22+0100\n"
+"PO-Revision-Date: 2012-12-11 10:23+0100\n"
 "Last-Translator: Bartosz Arendt <info@digitalfactory.pl>\n"
 "Language-Team: Digital Factory <info@digitalfactory.pl>\n"
 "Language: pl_PL\n"
@@ -20,36 +20,32 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 # @ yarpp
-#: ../class-admin.php:92 ../class-widget.php:7 ../class-widget.php:72
+#: ../class-admin.php:90 ../class-widget.php:7 ../class-widget.php:72
 msgid "Related Posts (YARPP)"
 msgstr "Powiązane wpisy"
 
 # @ yarpp
-#: ../class-admin.php:98
+#: ../class-admin.php:96
 msgid "Related Posts"
 msgstr "Powiązane wpisy"
 
-#: ../class-admin.php:98
+#: ../class-admin.php:96
 msgid "Configure"
 msgstr "Konfiguruj"
 
-#: ../class-admin.php:116
+#: ../class-admin.php:114 ../class-admin.php:143
 msgid "Frequently Asked Questions"
 msgstr "Często zadawane pytania"
 
-#: ../class-admin.php:121 ../class-admin.php:157
+#: ../class-admin.php:119 ../class-admin.php:155
 msgid "Developing with YARPP"
 msgstr "Programowanie z YARPP"
 
-#: ../class-admin.php:126
+#: ../class-admin.php:124
 msgid "Optional Data Collection"
 msgstr "Szybkie zbieranie danych"
 
-#: ../class-admin.php:145
-msgid "FAQ"
-msgstr "FAQ"
-
-#: ../class-admin.php:162 ../class-admin.php:216
+#: ../class-admin.php:160
 #, php-format
 msgid ""
 "With your permission, YARPP will send information about YARPP's settings, "
@@ -59,7 +55,7 @@ msgstr ""
 "ustawieniach, sposobie użycia i środowisku w którym pracuje do centralnego "
 "serwera zlokalizowanego w %s."
 
-#: ../class-admin.php:163 ../class-admin.php:217
+#: ../class-admin.php:161
 msgid ""
 "This information will be used to improve YARPP in the future and help decide "
 "future development decisions for YARPP."
@@ -67,7 +63,7 @@ msgstr ""
 "Informacje te będą wykorzystywane do usprawniania YARPP w przyszłości i "
 "pomoże w podejmowaniu decyzji o kierunkach jej rozwoju."
 
-#: ../class-admin.php:164 ../class-admin.php:218
+#: ../class-admin.php:162
 msgid ""
 "Contributing this data will help make YARPP better for you and for other "
 "YARPP users."
@@ -75,11 +71,11 @@ msgstr ""
 "Przesyłanie tych danych pomoże zarówno Tobie, jak i innym osobom, które z "
 "YARPP korzystają."
 
-#: ../class-admin.php:172
+#: ../class-admin.php:170
 msgid "If you opt-in, the following information is sent back to YARPP:"
 msgstr "Jeśli potwierdzisz, następujące dane będą przesyłane do YARPP:"
 
-#: ../class-admin.php:174
+#: ../class-admin.php:172
 msgid ""
 "In addition, YARPP also loads an invisible pixel image with your YARPP "
 "results to know how often YARPP is being used."
@@ -87,28 +83,36 @@ msgstr ""
 "Dodatkowo, wtyczka YARPP wczytuje także niewidoczy obrazek z wynikami "
 "powiązanych wpisów, aby zorientować się jak często jest wykorzystywana."
 
-#: ../class-admin.php:178 ../options-meta-boxes.php:427
+#: ../class-admin.php:176 ../options-meta-boxes.php:424
 msgid "Send settings and usage data back to YARPP"
 msgstr "Wyślij ustawienia i dane o wykorzystaniu z powrotem do YARPP"
 
-#: ../class-admin.php:178
+#: ../class-admin.php:176
 msgid "Thank you!"
 msgstr "Dziękujemy!"
 
-#: ../class-admin.php:238 ../options-meta-boxes.php:431
+#: ../class-admin.php:205
+msgid ""
+"<strong>Help make YARPP better</strong> by sending information about YARPP's "
+"settings and usage statistics."
+msgstr ""
+"<strong>Pomóż usprawnić wtyczkę YARPP</strong> przesyłając informacje o jej "
+"ustawieniach i sposobach wykorzystania."
+
+#: ../class-admin.php:209 ../options-meta-boxes.php:428
 msgid "Learn More"
 msgstr "Dowiedz się więcej"
 
-#: ../class-admin.php:281
+#: ../class-admin.php:252
 msgid "Show example code output"
 msgstr "Pokaż przykładowy kod"
 
 # @ yarpp
-#: ../class-admin.php:308
+#: ../class-admin.php:279
 msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr "Dziękujemy za zainstalowanie wtyczki<span>Powiązane wpisy</span>!"
 
-#: ../class-admin.php:309
+#: ../class-admin.php:280
 msgid ""
 "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
 msgstr ""
@@ -116,12 +120,12 @@ msgstr ""
 "skonfigurować."
 
 # @ yarpp
-#: ../class-admin.php:355
+#: ../class-admin.php:326
 msgid "Settings"
 msgstr "Ustawienia"
 
 # @ yarpp
-#: ../class-admin.php:381
+#: ../class-admin.php:352
 msgid "Related entries may be displayed once you save your entry"
 msgstr "Powiązane wpisy pojawią się, kiedy zapiszesz swój wpis"
 
@@ -131,20 +135,20 @@ msgid "Example post "
 msgstr "Przykładowy wpis"
 
 # @ yarpp
-#: ../class-core.php:71 ../class-core.php:81 ../class-core.php:108
-#: ../class-core.php:110 ../class-core.php:337 ../class-core.php:348
-#: ../class-core.php:640
+#: ../class-core.php:80 ../class-core.php:90 ../class-core.php:117
+#: ../class-core.php:119 ../class-core.php:378 ../class-core.php:389
+#: ../class-core.php:686
 msgid "Related posts:"
 msgstr "Powiązane wpisy:"
 
 # @ yarpp
-#: ../class-core.php:73 ../class-core.php:83 ../class-core.php:339
-#: ../class-core.php:350 ../template-metabox.php:30 ../template-widget.php:13
+#: ../class-core.php:82 ../class-core.php:92 ../class-core.php:380
+#: ../class-core.php:391 ../template-metabox.php:30 ../template-widget.php:13
 msgid "No related posts."
 msgstr "Brak powiązanych wpisów."
 
 # @ yarpp
-#: ../class-core.php:793 ../class-core.php:936 ../options-meta-boxes.php:295
+#: ../class-core.php:839 ../class-core.php:982 ../options-meta-boxes.php:295
 #: ../options-meta-boxes.php:356
 #, php-format
 msgid ""
@@ -154,30 +158,30 @@ msgstr ""
 "Powiązane wpisy wygenerowane przez <a href='%s'>wtyczkę Yet Another Related "
 "Posts</a>."
 
-#: ../class-widget.php:89 ../options-meta-boxes.php:35
+#: ../class-widget.php:92 ../options-meta-boxes.php:35
 msgid "List"
 msgstr "Lista"
 
-#: ../class-widget.php:91 ../options-meta-boxes.php:45
+#: ../class-widget.php:94 ../options-meta-boxes.php:45
 msgid "Thumbnails"
 msgstr "Miniatury"
 
-#: ../class-widget.php:93 ../options-meta-boxes.php:59
+#: ../class-widget.php:96 ../options-meta-boxes.php:59
 msgid "Custom"
 msgstr "Własny"
 
 # @ default
-#: ../class-widget.php:96
+#: ../class-widget.php:99
 msgid "Title:"
 msgstr "Tytuł:"
 
 # @ yarpp
-#: ../class-widget.php:98 ../options-meta-boxes.php:70
+#: ../class-widget.php:101 ../options-meta-boxes.php:70
 msgid "Template file:"
 msgstr "Plik szablonu:"
 
 # @ yarpp
-#: ../class-widget.php:117 ../options-meta-boxes.php:294
+#: ../class-widget.php:119 ../options-meta-boxes.php:294
 #: ../options-meta-boxes.php:356
 msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Chcesz pomóc promować YARPP?"
@@ -582,7 +586,7 @@ msgstr ""
 msgid "Help Improve YARPP"
 msgstr "Pomóż ulepszać YARPP"
 
-#: ../options-meta-boxes.php:430
+#: ../options-meta-boxes.php:427
 msgid ""
 "This is entirely optional, but will help improve future versions of YARPP."
 msgstr ""
@@ -590,7 +594,7 @@ msgstr ""
 "wersji YARPP."
 
 # @ yarpp
-#: ../options-meta-boxes.php:435
+#: ../options-meta-boxes.php:432
 msgid "Contact YARPP"
 msgstr "Kontakt z YARRP"
 
@@ -737,3 +741,6 @@ msgid ""
 msgstr ""
 "To, czy lista powiązanych wpisów jest wyświetlana i jakie są to wpisy, jest "
 "zależne od konfiguracji wtyczki YARPP."
+
+#~ msgid "FAQ"
+#~ msgstr "FAQ"
