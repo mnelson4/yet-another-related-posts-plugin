@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Random
+YARPP Template: Random
 Description: This template gives you a random other post in case there are no related posts
 Author: mitcho (Michael Yoshitaka Erlewine)
 */ ?>

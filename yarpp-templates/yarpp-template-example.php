@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Simple
+YARPP Template: Simple
 Author: mitcho (Michael Yoshitaka Erlewine)
 Description: A simple example YARPP template.
 */

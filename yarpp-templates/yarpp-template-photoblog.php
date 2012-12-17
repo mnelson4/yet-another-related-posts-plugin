@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Yet Another Photoblog
+YARPP Template: Yet Another Photoblog
 Description: Requires the Yet Another Photoblog plugin
 Author: mitcho (Michael Yoshitaka Erlewine)
 */ ?>

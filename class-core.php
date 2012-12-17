@@ -380,7 +380,7 @@ class YARPP {
 	
 	public function get_template_data( $file ) {
 		$headers = array(
-			'name' => 'Template Name',
+			'name' => 'YARPP Template',
 			'description' => 'Description',
 			'author' => 'Author',
 			'uri' => 'Author URI',

@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: WPML
+YARPP Template: WPML
 Description: An example template for use with the WPML plugin
 Author: mitcho (Michael Yoshitaka Erlewine)
 */
