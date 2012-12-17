@@ -261,6 +261,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * YARPP template files no longer recognize `Template Name` fields in their headers, instead using `YARPP Template`. This is to avoid confusion with regular page templates.
 * Bugfix: on sites where custom templates are not available, the "thumbnails" display option would get reset when visiting the YARPP settings page
 * [Bugfix](http://wordpress.org/support/topic/yarpp-css-is-delayed-or-doesnt-load): the CSS for YARPP's thumbnails display would load at the foot of the page, and therefore would cause some style-flashing. This is fixed for automatic includes, but not for widgets or manual calls.
+* Added "Related Posts" meta box to other "auto display" post types
 * Updated Polish localization
 
 = 4.0.2 =
