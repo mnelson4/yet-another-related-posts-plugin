@@ -69,8 +69,14 @@ class YARPP_Admin {
 		// new in 3.0.12: add settings link to the plugins page
 		add_filter('plugin_action_links', array( $this, 'settings_link' ), 10, 2);
 
-		// new in 3.0: add meta box		
-		add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp') . ' <span class="postbox-title-action"><a href="' . esc_url( admin_url('options-general.php?page=yarpp') ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>', array( $this, 'metabox' ), 'post', 'normal' );
+		$metabox_post_types = $this->core->get_option( 'auto_display_post_types' );
+		if ( !in_array( 'post', $metabox_post_types ) )
+			$metabox_post_types[] = 'post';
+
+		// new in 3.0: add meta box
+		foreach ( $metabox_post_types as $post_type ) {
+			add_meta_box( 'yarpp_relatedposts', __( 'Related Posts' , 'yarpp') . ' <span class="postbox-title-action"><a href="' . esc_url( admin_url('options-general.php?page=yarpp') ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>', array( $this, 'metabox' ), $post_type, 'normal' );
+		}
 		
 		// new in 3.3: properly enqueue scripts for admin:
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
@@ -242,7 +248,9 @@ class YARPP_Admin {
 			wp_enqueue_style( 'yarpp_options', plugins_url( 'options.css', __FILE__ ), array(), $version );
 			wp_enqueue_script( 'yarpp_options', plugins_url( 'js/options.js', __FILE__ ), array('jquery'), $version );
 		}
-		if ( !is_null($screen) && $screen->id == 'post' ) {
+
+		$metabox_post_types = $this->core->get_option( 'auto_display_post_types' );
+		if ( !is_null($screen) && ($screen->id == 'post' || in_array( $screen->id, $metabox_post_types )) ) {
 			wp_enqueue_script( 'yarpp_metabox', plugins_url( 'js/metabox.js', __FILE__ ), array('jquery'), $version );
 		}
 	}
