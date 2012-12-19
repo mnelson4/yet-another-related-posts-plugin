@@ -887,7 +887,7 @@ class YARPP {
 				'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 			));
 		}
-		$this->prep_query( $current_query->is_feed );
+		$this->prep_query( $this->current_query->is_feed );
 		$related_query = $wp_query; // backwards compatibility
 		$related_count = $related_query->post_count;
 
