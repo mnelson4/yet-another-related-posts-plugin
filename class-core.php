@@ -649,6 +649,27 @@ class YARPP {
 	 * UTILITIES
 	 */
 	
+	private $current_post;
+	private $current_query;
+	private $current_pagenow;
+	// so we can return to normal later
+	function save_post_context() {
+		global $wp_query, $pagenow, $post;
+		$this->current_query = $wp_query;
+		$this->current_pagenow = $pagenow;
+		$this->current_post = $post;
+	}
+	function restore_post_context() {
+		global $wp_query, $pagenow, $post;
+		if ( isset($this->current_post) ) {
+			$post = $this->current_post;
+			setup_postdata( $post );
+			unset($this->current_post);
+		}
+		$pagenow = $this->current_pagenow; unset($this->current_pagenow);
+		$wp_query = $this->current_query; unset($this->current_query);
+	}
+	
 	private $post_types = null;
 	function get_post_types( $field = 'name' ) {
 		if ( is_null($this->post_types) ) {
@@ -821,8 +842,6 @@ class YARPP {
 		// if we're already in a YARPP loop, stop now.
 		if ( $this->cache->is_yarpp_time() || $this->cache_bypass->is_yarpp_time() )
 			return false;
-
-		global $wp_query, $pagenow;
 	
 		$this->enforce();
 
@@ -852,10 +871,9 @@ class YARPP {
 			$this->active_cache->begin_yarpp_time($reference_ID, $args);
 		}
 	
-		// so we can return to normal later
-		$current_query = $wp_query;
-		$current_pagenow = $pagenow;
-	
+		$this->save_post_context();
+
+		global $wp_query;	
 		$wp_query = new WP_Query();
 		if ( YARPP_NO_RELATED == $cache_status ) {
 			// If there are no related posts, get no query
@@ -904,11 +922,9 @@ class YARPP {
 		} else {
 			$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 		}
-	
-		// restore the older wp_query.
-		$wp_query = $current_query; unset($current_query); unset($related_query);
-		wp_reset_postdata();
-		$pagenow = $current_pagenow; unset($current_pagenow);
+
+		unset( $related_query );
+		$this->restore_post_context();
 	
 		if ( $related_count > 0 && $promote_yarpp && $domain != 'metabox' )
 			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
@@ -1014,9 +1030,7 @@ class YARPP {
 	 * @param (array) $args
 	 * @param (bool) $echo
 	 */
-	function display_demo_related($args = array(), $echo = true) {
-		global $wp_query;
-	
+	function display_demo_related($args = array(), $echo = true) {	
 		if ( $this->cache_bypass->demo_time ) // if we're already in a demo YARPP loop, stop now.
 			return false;
 	
@@ -1032,6 +1046,7 @@ class YARPP {
 			$output .= "yarpp-related-{$domain}";
 		$output .= "'>\n";
 
+		global $wp_query;
 		$wp_query = new WP_Query();
 		$wp_query->query('');
 	
