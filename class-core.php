@@ -338,6 +338,9 @@ class YARPP {
 			) )
 			return;
 
+		if ( $this->get_option('template') !== 'thumbnails' )
+			return;
+
 		$this->enqueue_thumbnails( $this->thumbnail_dimensions() );
 	}
 
