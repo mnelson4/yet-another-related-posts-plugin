@@ -385,7 +385,7 @@ abstract class YARPP_Cache {
 		static $blacklist, $blackmethods;
 	
 		if ( is_null($blacklist) || is_null($blackmethods) ) {
-			$yarpp_blacklist = array('diggZEt_AddBut', 'reddZEt_AddBut', 'dzoneZEt_AddBut', 'wp_syntax_before_filter', 'wp_syntax_after_filter', 'wp_codebox_before_filter', 'wp_codebox_after_filter', 'do_shortcode', 'sharing_display');//,'insert_tweet_this'
+			$yarpp_blacklist = array('diggZEt_AddBut', 'reddZEt_AddBut', 'dzoneZEt_AddBut', 'wp_syntax_before_filter', 'wp_syntax_after_filter', 'wp_codebox_before_filter', 'wp_codebox_after_filter', 'do_shortcode', 'sharing_display', 'really_simple_share_content');//,'insert_tweet_this'
 			$yarpp_blackmethods = array('addinlinejs', 'replacebbcode', 'filter_content');
 		
 			$blacklist = (array) apply_filters( 'yarpp_blacklist', $yarpp_blacklist );
