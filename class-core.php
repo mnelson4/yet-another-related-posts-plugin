@@ -664,13 +664,13 @@ class YARPP {
 	}
 	function restore_post_context() {
 		global $wp_query, $pagenow, $post;
+		$wp_query = $this->current_query; unset($this->current_query);
+		$pagenow = $this->current_pagenow; unset($this->current_pagenow);
 		if ( isset($this->current_post) ) {
 			$post = $this->current_post;
 			setup_postdata( $post );
 			unset($this->current_post);
 		}
-		$pagenow = $this->current_pagenow; unset($this->current_pagenow);
-		$wp_query = $this->current_query; unset($this->current_query);
 	}
 	
 	private $post_types = null;

@@ -258,6 +258,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = 4.0.4 =
+* [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
 * Updated French localization and stopword list
 
 = 4.0.3 =
