@@ -257,6 +257,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 4.0.4 =
+* Updated French localization and stopword list
+
 = 4.0.3 =
 * Bugfix: on sites where custom templates are not available, the "thumbnails" display option would get reset when visiting the YARPP settings page
 * [Bugfix](http://wordpress.org/support/topic/yarpp-css-is-delayed-or-doesnt-load): the CSS for YARPP's thumbnails display would load at the foot of the page, and therefore would cause some style-flashing. This is fixed for automatic includes, but not for widgets or manual calls.
