@@ -770,7 +770,7 @@ class YARPP {
 			'url' => get_bloginfo('url'),
 			'plugins' => array(
 				'active' => implode( '|', get_option( 'active_plugins', array() ) ),
-				'sitewide' => implode( '|', get_site_option( 'active_sitewide_plugins', array() ) )
+				'sitewide' => implode( '|', array_keys( get_site_option( 'active_sitewide_plugins', array() ) ) )
 			),
 			'pools' => $settings['pools']
 		);
