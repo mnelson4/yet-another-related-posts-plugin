@@ -259,6 +259,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 4.0.4 =
 * [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
+* [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
 * Updated French localization and stopword list
 
 = 4.0.3 =

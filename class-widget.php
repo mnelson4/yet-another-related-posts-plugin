@@ -18,13 +18,10 @@ class YARPP_Widget extends WP_Widget {
 		if ( isset($instance['use_template']) )
 			$instance['template'] = $instance['use_template'] ? $instance['template_file'] : false;
 
-// 		$choice = false === $instance['template'] ? 'builtin' :
-// 			( $instance['template'] == 'thumbnails' ? 'thumbnails' : 'custom' );
-
 		if ( $yarpp->get_option('cross_relate') )
 			$instance['post_type'] = $yarpp->get_post_types();
-		else if ( 'page' == get_post_type() )
-			$instance['post_type'] = array( 'page' );
+		else if ( in_array(get_post_type(), $yarpp->get_post_types()) )
+			$instance['post_type'] = array( get_post_type() );
 		else
 			$instance['post_type'] = array( 'post' );
 
