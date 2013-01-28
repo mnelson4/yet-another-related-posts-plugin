@@ -1212,16 +1212,23 @@ class YARPP {
 	
 	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
-		if (false === ($result = $this->get_transient('yarpp_version_info')) || $enforce_cache) {
-			$version = YARPP_VERSION;
-			$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
-			
-			if (is_wp_error($remote))
-				return false;
-			
-			if ( $result = @unserialize($remote['body']) )
-				$this->set_transient('yarpp_version_info', $result, 60 * 60 * 24);
+		if ( !$enforce_cache && false !== ($result = $this->get_transient('yarpp_version_info')) )
+			return $result;
+
+		$version = YARPP_VERSION;
+		$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
+		
+		if ( is_wp_error($remote) ||
+			 wp_remote_retrieve_response_code( $remote ) != 200 ||
+			 !isset($remote['body']) ) {
+			// try again later
+			$this->set_transient('yarpp_version_info', null, 60 * 60);
+			return false;
 		}
+		
+		if ( $result = @unserialize($remote['body']) )
+			$this->set_transient('yarpp_version_info', $result, 60 * 60 * 24);
+
 		return $result;
 	}
 
@@ -1231,7 +1238,10 @@ class YARPP {
 			return true;
 
 		$remote = wp_remote_post( 'http://yarpp.org/optin/2/', array( 'body' => $this->optin_data() ) );
-		if ( is_wp_error($remote) || !isset($remote['body']) || $remote['body'] != 'ok' ) {
+		if ( is_wp_error($remote) ||
+			 wp_remote_retrieve_response_code( $remote ) != 200 ||
+			 !isset($remote['body']) ||
+			 $remote['body'] != 'ok' ) {
 			// try again later
 			$this->set_transient( 'yarpp_optin', null, 60 * 60 );
 			return false;
@@ -1262,11 +1272,24 @@ class YARPP {
 			if ( !is_null( $data ) )
 				update_option( $transient, $data );
 		}
+		$this->kick_other_caches();
 	}
 	
 	private function delete_transient( $transient ) {
 		delete_option( $transient );
 		delete_option( $transient . '_timeout' );
+	}
+	
+	// 4.0.4: helper function to force other caching systems which are too aggressive
+	// <cough>DB Cache Reloaded (Fix)</cough> to flush when YARPP transients are set.
+	private function kick_other_caches() {
+		if ( class_exists( 'DBCacheReloaded' ) ) {
+			global $wp_db_cache_reloaded;
+			if ( is_object( $wp_db_cache_reloaded ) && is_a( $wp_db_cache_reloaded, 'DBCacheReloaded' ) ) {
+				// if DBCR offered a more granualar way of just flushing options, I'd love that.
+				$wp_db_cache_reloaded->dbcr_clear();
+			}
+		}
 	}
 	
 	// 3.5.2: clean_pre is deprecated in WP 3.4, so implement here.
