@@ -6,7 +6,7 @@ Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.6
 Stable tag: 4.0.3
 License: GPLv2 or later
 
@@ -260,6 +260,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 4.0.4 =
 * [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
 * [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
+* Added the filter `yarpp_results`
 * Updated French localization and stopword list
 * Bugfix: forces the DB Cache Reloaded (Fix) plugins to flush when necessary
 

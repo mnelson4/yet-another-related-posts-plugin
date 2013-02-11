@@ -891,6 +891,12 @@ class YARPP {
 			));
 		}
 		$this->prep_query( $this->current_query->is_feed );
+		
+		$wp_query->posts = apply_filters('yarpp_results', $wp_query->posts, array(
+			'function' => 'display_related',
+			'args' => $args,
+			'related_ID' => $reference_ID));
+		
 		$related_query = $wp_query; // backwards compatibility
 		$related_count = $related_query->post_count;
 
@@ -983,6 +989,12 @@ class YARPP {
 			'showposts' => $limit,
 			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 		));
+	
+		$related_query->posts = apply_filters('yarpp_results', $related_query->posts, array(
+			'function' => 'get_related',
+			'args' => $args,
+			'related_ID' => $reference_ID));
+	
 		$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 	
 		return $related_query->posts;
@@ -1022,6 +1034,12 @@ class YARPP {
 			'showposts' => 1,
 			'post_type' => ( isset($args['post_type']) ? $args['post_type'] : $this->get_post_types() )
 		));
+		
+		$related_query->posts = apply_filters('yarpp_results', $related_query->posts, array(
+			'function' => 'related_exist',
+			'args' => $args,
+			'related_ID' => $reference_ID));
+		
 		$return = $related_query->have_posts();
 		unset($related_query);
 		$this->active_cache->end_yarpp_time(); // YARPP time is over. :(
