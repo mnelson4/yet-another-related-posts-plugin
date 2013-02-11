@@ -239,6 +239,7 @@ YARPP is currently localized in the following languages:
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
 * Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/) 
 * Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
+* Slovenian (`sl_SI`) by [Silvo Katalenić](http://www.twitter.com/silvoslaf)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
@@ -262,7 +263,9 @@ If you are a bilingual speaker of English and another language and an avid user 
 * [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
 * Bugfix: widget control JS was not working right when first adding a widget
 * Added the filter `yarpp_results`
-* Updated French localization and stopword list
+* Localizations:
+	* Updated French localization and stopword list
+	* Added Slovenian (`sl_SI`) localization by [Silvo Katalenić](http://www.twitter.com/silvoslaf)
 * Bugfix: forces the DB Cache Reloaded (Fix) plugins to flush when necessary
 
 = 4.0.3 =
