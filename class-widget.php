@@ -85,7 +85,7 @@ class YARPP_Widget extends WP_Widget {
 		
 		?>
 
-		<p>
+		<p class='yarpp-widget-type-control'>
 			<label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_builtin'); ?>"><input id="<?php echo $this->get_field_id('use_template_builtin'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="builtin" <?php checked( $choice == 'builtin' ) ?> /> <?php _e( "List", 'yarpp' ); ?></label>
 		
 			<label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_thumbnails'); ?>"><input id="<?php echo $this->get_field_id('use_template_thumbnails'); ?>" name="<?php echo $this->get_field_name('use_template'); ?>" type="radio" value="thumbnails" <?php checked( $choice == 'thumbnails' ) ?> /> <?php _e( "Thumbnails", 'yarpp' ); ?></label>
@@ -102,14 +102,23 @@ class YARPP_Widget extends WP_Widget {
 		</select><p>
 		<script type="text/javascript">
 		jQuery(function($) {
-			function ensureTemplateChoice() {
-				var custom = $('#<?php echo $this->get_field_id('use_template_custom'); ?>').prop('checked');
-				var builtin = $('#<?php echo $this->get_field_id('use_template_builtin'); ?>').prop('checked');
-				$('#<?php echo $this->get_field_id('title'); ?>').closest('p').toggle(!!builtin);
-				$('#<?php echo $this->get_field_id('template_file'); ?>').closest('p').toggle(!!custom);
+			function ensureTemplateChoice(e) {
+				if (typeof e == 'object' && 'type' in e)
+					e.stopImmediatePropagation();
+				var this_form = $(this).closest('form');
+				var widget_id = this_form.find('.widget-id').val();
+				// if this widget is just in staging:
+				if ( /__i__$/.test(widget_id) )
+					return;
+				
+				var custom = $('#widget-' + widget_id + '-use_template_custom').prop('checked');
+				var builtin = $('#widget-' + widget_id + '-use_template_builtin').prop('checked');
+				console.log(this_form, widget_id, custom, builtin);
+				$('#widget-' + widget_id + '-title').closest('p').toggle(!!builtin);
+				$('#widget-' + widget_id + '-template_file').closest('p').toggle(!!custom);
 			}
-			$('input[name="<?php echo $this->get_field_name('use_template'); ?>"]').change(ensureTemplateChoice);
-			ensureTemplateChoice();
+			$('#wpbody').on('change', '.yarpp-widget-type-control input', ensureTemplateChoice);
+			$('.yarpp-widget-type-control').each(ensureTemplateChoice);
 		});
 		</script>
 
