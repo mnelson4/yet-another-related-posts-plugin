@@ -61,6 +61,7 @@ class YARPP {
 		if ( is_admin() ) {
 			require_once(YARPP_DIR . '/class-admin.php');
 			$this->admin = new YARPP_Admin( $this );
+			$this->enforce();
 		}
 	}
 		
@@ -431,7 +432,8 @@ class YARPP {
 	
 		$this->version_info(true);
 	
-		update_option('yarpp_version',YARPP_VERSION);
+		update_option( 'yarpp_version', YARPP_VERSION );
+		update_option( 'yarpp_upgraded', true );
 		$this->delete_transient( 'yarpp_optin' );
 	}
 	

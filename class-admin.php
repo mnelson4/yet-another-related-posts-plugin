@@ -51,16 +51,20 @@ class YARPP_Admin {
 	function ui_register() {
 		global $wp_version;
 		if ( get_option( 'yarpp_activated' ) ) {
-			if ( version_compare($wp_version, '3.3b1', '>=') ) {
-				delete_option( 'yarpp_activated' );
-				add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-				add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
-			}
+			delete_option( 'yarpp_activated' );
+ 			delete_option( 'yarpp_upgraded' );
+			add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
+			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
 		} elseif ( !$this->core->get_option('optin') &&
  			current_user_can('manage_options') &&
 			!get_user_option( 'yarpp_saw_optin' )
 			) {
 			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
+		} elseif ( !$this->core->get_option('optin') &&
+ 			current_user_can('manage_options') &&
+ 			get_option( 'yarpp_upgraded' )
+ 			) {
+			add_action( 'admin_notices', array( $this, 'upgrade_notice' ) );
 		}
 		
 		// setup admin
@@ -176,21 +180,31 @@ class YARPP_Admin {
 		</script>\n";
 	}
 
-	function optin_notice() {
+	function optin_notice( $upgrade = false ) {
 		$screen = get_current_screen();
 		if ( is_null($screen) || $screen->id == 'settings_page_yarpp' )
 			return;
 
-		$user = get_current_user_id();
-		update_user_option( $user, 'yarpp_saw_optin', true );
+		if ( $upgrade ) {
+ 			delete_option( 'yarpp_upgraded' );
+		} else {
+			$user = get_current_user_id();
+			update_user_option( $user, 'yarpp_saw_optin', true );
+		}
 
 		echo '<div class="updated fade"><p>';
+		if ( $upgrade )
+			echo '<strong>' . sprintf( __('%1$s updated successfully.'), 'Yet Another Related Posts Plugin' ) . '</strong> ';
 		_e( "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics.", 'yarpp' );
 
 		echo '</p><p>';
 		$this->print_optin_button();
 		echo '<a class="button" href="options-general.php?page=yarpp#help-optin">' . __( 'Learn More', 'yarpp' ) . '</a>';
 		echo '</p></div>';
+	}
+
+	function upgrade_notice() {
+		$this->optin_notice( true );
 	}
 	
 	// faux-markdown, required for the help text rendering
