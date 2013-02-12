@@ -58,6 +58,11 @@ class YARPP_Widget extends WP_Widget {
 			$instance['title'] = $old_instance['title'];
 		else // save the title change:
 			$instance['title'] = $new_instance['title'];
+
+		if ( !!$instance['thumbnails_heading'] ) // don't save the title change.
+			$instance['thumbnails_heading'] = $old_instance['thumbnails_heading'];
+		else // save the title change:
+			$instance['thumbnails_heading'] = $new_instance['thumbnails_heading'];
 		
 		return $instance;
 	}
@@ -67,6 +72,7 @@ class YARPP_Widget extends WP_Widget {
 	
 		$instance = wp_parse_args( $instance, array(
 			'title' => __('Related Posts (YARPP)','yarpp'),
+			'thumbnails_heading' => $yarpp->get_option('thumbnails_heading'),
 			'template' => false,
 			'promote_yarpp' => false
 		) );
@@ -95,6 +101,8 @@ class YARPP_Widget extends WP_Widget {
 
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" /></label></p>
 
+		<p><label for="<?php echo $this->get_field_id('thumbnails_heading'); ?>"><?php _e( 'Heading:', 'yarpp' ); ?> <input class="widefat" id="<?php echo $this->get_field_id('thumbnails_heading'); ?>" name="<?php echo $this->get_field_name('thumbnails_heading'); ?>" type="text" value="<?php echo esc_attr($instance['thumbnails_heading']); ?>" /></label></p>
+
 		<p><label for="<?php echo $this->get_field_id('template_file'); ?>"><?php _e("Template file:",'yarpp');?></label> <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
 			<?php foreach ($templates as $template): ?>
 			<option value='<?php echo esc_attr($template['basename']); ?>'<?php selected($template['basename'], $instance['template']);?>><?php echo esc_html($template['name']); ?></option>
@@ -111,11 +119,13 @@ class YARPP_Widget extends WP_Widget {
 				if ( /__i__$/.test(widget_id) )
 					return;
 				
-				var custom = $('#widget-' + widget_id + '-use_template_custom').prop('checked');
-				var builtin = $('#widget-' + widget_id + '-use_template_builtin').prop('checked');
-				console.log(this_form, widget_id, custom, builtin);
-				$('#widget-' + widget_id + '-title').closest('p').toggle(!!builtin);
-				$('#widget-' + widget_id + '-template_file').closest('p').toggle(!!custom);
+				var builtin = !!$('#widget-' + widget_id + '-use_template_builtin').prop('checked');
+				var thumbnails = !!$('#widget-' + widget_id + '-use_template_thumbnails').prop('checked');
+				var custom = !!$('#widget-' + widget_id + '-use_template_custom').prop('checked');
+				$('#widget-' + widget_id + '-title').closest('p').toggle(builtin);
+				$('#widget-' + widget_id + '-thumbnails_heading').closest('p').toggle(thumbnails);
+				$('#widget-' + widget_id + '-template_file').closest('p').toggle(custom);
+				console.log(widget_id, custom, builtin);
 			}
 			$('#wpbody').on('change', '.yarpp-widget-type-control input', ensureTemplateChoice);
 			$('.yarpp-widget-type-control').each(ensureTemplateChoice);

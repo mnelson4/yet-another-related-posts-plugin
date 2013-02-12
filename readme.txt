@@ -262,6 +262,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
 * [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
 * Bugfix: widget control JS was not working right when first adding a widget
+* Added ability to set widget-specific heading for the thumbnails view, [by request](https://wordpress.org/support/topic/yarpp-on-pages-in-sidebar-even-when-turned-off-in-settings)
 * Added the filter `yarpp_results`
 * Localizations:
 	* Updated French localization and stopword list
