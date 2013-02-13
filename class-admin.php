@@ -67,6 +67,9 @@ class YARPP_Admin {
 			add_action( 'admin_notices', array( $this, 'upgrade_notice' ) );
 		}
 		
+		if ( $this->core->get_option('optin') )
+			delete_option( 'yarpp_upgraded' );
+		
 		// setup admin
 		$this->hook = add_options_page(__('Related Posts (YARPP)','yarpp'),__('Related Posts (YARPP)','yarpp'), 'manage_options', 'yarpp', array( $this, 'options_page' ) );
 		
