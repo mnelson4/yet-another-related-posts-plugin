@@ -624,16 +624,16 @@ class YARPP {
 	
 	function upgrade_3_5_2b2() {
 		// fixing the effects of a previous bug affecting non-MyISAM users
-		if ( is_null( yarpp_get_option('weight') ) ||
-			!is_array( yarpp_get_option('weight') ) ) {
+		if ( is_null( $this->get_option('weight') ) ||
+			!is_array( $this->get_option('weight') ) ) {
 			$weight = $this->default_options['weight'];
 			// if we're still not using MyISAM
-			if ( !yarpp_get_option('myisam_override') && 
+			if ( !$this->get_option('myisam_override') && 
 				$this->diagnostic_myisam_posts() !== true ) {
 				unset( $weight['title'] );
 				unset( $weight['body'] );
 			}
-			yarpp_set_option(array('weight' => $weight));
+			$this->set_option(array('weight' => $weight));
 		}
 	}
 

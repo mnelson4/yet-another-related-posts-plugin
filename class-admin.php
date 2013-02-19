@@ -406,7 +406,7 @@ jQuery(function () {
 		header("HTTP/1.1 200");
 		header("Content-Type: text/html; charset=UTF-8");
 		
-		$exclude_tt_ids = wp_parse_id_list(yarpp_get_option('exclude'));
+		$exclude_tt_ids = wp_parse_id_list($this->core->get_option('exclude'));
 		$exclude_term_ids = $this->get_term_ids_from_tt_ids( $taxonomy, $exclude_tt_ids );
 //		if ( 'category' == $taxonomy )
 //			$exclude .= ',' . get_option( 'default_category' );
@@ -492,7 +492,7 @@ jQuery(function () {
 		header("HTTP/1.1 200");
 		header("Content-Type: text; charset=UTF-8");
 		
-		$data = yarpp_set_option('optin', true);
+		$data = $this->core->set_option('optin', true);
 		$this->core->optin_ping();
 		echo 'ok';
 		exit;
@@ -504,7 +504,7 @@ jQuery(function () {
 		header("HTTP/1.1 200");
 		header("Content-Type: text; charset=UTF-8");
 		
-		$data = yarpp_set_option( 'display_code', isset($_REQUEST['checked']) );
+		$data = $this->core->set_option( 'display_code', isset($_REQUEST['checked']) );
 		echo 'ok';
 		exit;
 	}

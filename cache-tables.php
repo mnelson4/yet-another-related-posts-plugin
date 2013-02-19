@@ -118,12 +118,12 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function where_filter($arg) {
 		global $wpdb;
-		$threshold = yarpp_get_option('threshold');
+		$threshold = $this->core->get_option('threshold');
 		if ($this->yarpp_time) {
 
 			$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 
-			$recent = yarpp_get_option('recent');
+			$recent = $this->core->get_option('recent');
 			if ( !!$recent )
 				$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		}
