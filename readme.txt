@@ -258,6 +258,10 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 == Changelog ==
 
+= 4.0.5 =
+* [Bugfix](https://wordpress.org/support/topic/bug-in-upgrading-from-yarp-3_5_2b2): Some upgrade code would try to access the global $yarpp before it was properly initialized
+* Added experimental graph data method to the YARPP table cache class
+
 = 4.0.4 =
 * [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
 * [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
