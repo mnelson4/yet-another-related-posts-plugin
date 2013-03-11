@@ -1181,6 +1181,10 @@ class YARPP {
 			) )
 			return $content;
 	
+		// if the content includes <!--noyarpp-->, don't display
+		if ( stristr($content, '<!--noyarpp-->') !== false )
+			return $content;
+	
 		if ( $this->get_option('cross_relate') )
 			$post_types = $this->get_post_types();
 		else
@@ -1196,6 +1200,10 @@ class YARPP {
 	
 	function the_content_feed($content) {
 		if ( !$this->get_option('rss_display') )
+			return $content;
+
+		// if the content includes <!--noyarpp-->, don't display
+		if ( stristr($content, '<!--noyarpp-->') !== false )
 			return $content;
 
 		if ( $this->get_option('cross_relate') )
@@ -1214,6 +1222,10 @@ class YARPP {
 	function the_excerpt_rss($content) {
 		if ( !$this->get_option('rss_excerpt_display') || 
 		     !$this->get_option('rss_display') )
+			return $content;
+
+		// if the content includes <!--noyarpp-->, don't display
+		if ( stristr($content, '<!--noyarpp-->') !== false )
 			return $content;
 
 		if ( $this->get_option('cross_relate') )
