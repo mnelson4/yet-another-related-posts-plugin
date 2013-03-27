@@ -255,6 +255,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 
 = 4.0.6 =
 * YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
+* Bundled `yarpp-template-wpml.php` is now called `yarpp-template-multilingual.php`, following [discussion with the author of the Polylang plugin](https://wordpress.org/support/topic/better-integration-of-yarpp-and-polylang).
 * Localizations
 	* Added Estonian (`est_EST`) by [JOURNAL](http://journal24.info/)
 	* Added Gujrati (`gu_IN`) by [Vikas Arora](http://www.wiznicworld.com/)
