@@ -201,10 +201,10 @@ class YARPP {
 	}
 		
 	// @since 3.5.2: function to enforce YARPP setup
-	// if new install, activate; else upgrade
+	// if not ready, activate; else upgrade
 	function enforce() {
-		if ( !get_option('yarpp_version') )
-			$this->activate();
+		if ( !$this->enabled() )
+			$this->activate(); // activate calls upgrade later, so it's covered.
 		else
 			$this->upgrade();
 		

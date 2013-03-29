@@ -54,7 +54,7 @@ function yarpp_get_option($option = null) {
 	return $yarpp->get_option($option);
 }
 
-function yarpp_plugin_activate() {
+function yarpp_plugin_activate( $network_wide ) {
 	update_option( 'yarpp_activated', true );
 }
-add_action( 'activate_' . plugin_basename(__FILE__), 'yarpp_plugin_activate' );
+add_action( 'activate_' . plugin_basename(__FILE__), 'yarpp_plugin_activate', 10, 1 );
