@@ -54,35 +54,8 @@ class YARPP_Admin {
 		if ( get_option( 'yarpp_activated' ) ) {
 			delete_option( 'yarpp_activated' );
  			delete_option( 'yarpp_upgraded' );
-
-			if ( $this->core->get_option('optin') ) {
-				$install_notice = 0; // default
-			} else {
-				$install_notice = $this->core->get_option( 'pools[install_notice]' );
-				if ( is_null( $install_notice ) ) {
-					$install_notice = mt_rand(0, 2);
-					$pools = $this->core->get_option( 'pools' );
-					if ( !is_array($pools) )
-						$pools = array();
-					$pools['install_notice'] = $install_notice;
-					$this->core->set_option( 'pools', $pools );
-				}
- 			}
- 			
-			switch ( $install_notice ) {
-				case 1:
-					add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-					add_action( 'admin_print_footer_scripts', array( $this, 'optin_button_script' ) );
-					add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script_variant' ) );
-					break;
-				case 2:
-					add_action( 'admin_notices', array( $this, 'install_notice' ) );
-					break;
-				default:
-					add_action( 'admin_enqueue_scripts', array( $this, 'pointer_enqueue' ) );
-					add_action( 'admin_print_footer_scripts', array( $this, 'pointer_script' ) );
-					break;
-			}
+ 			if ( !$this->core->get_option('optin') )
+				add_action( 'admin_notices', array( $this, 'install_notice' ) );
 		} elseif ( !$this->core->get_option('optin') &&
  			current_user_can('manage_options') &&
  			get_option( 'yarpp_upgraded' )
@@ -325,63 +298,6 @@ class YARPP_Admin {
 	function pointer_enqueue() {
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'wp-pointer' );
-	}
-	function pointer_script( $variant = false ) {
-		$content = '<h3>' . str_replace('<span>', '<span style="font-style:italic; font-weight: inherit;">', __('Thank you for installing <span>Yet Another Related Posts Plugin</span>!', 'yarpp') )  . '</h3>';
-
-		if ( $variant ) {
-			$content .= '<p>' . __( "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics.", 'yarpp' ) . '</p><p>' . $this->the_optin_button();
-			
-			$content .= '<a class="button" style="margin-top: 10px" href="options-general.php?page=yarpp#help-optin">' . __( 'Learn More', 'yarpp' ) . '</a>' . '</p>';
-			
-			$content = str_replace("'", "\\'", $content);
-		} else {
-			$content .= '<p>' . str_replace('<a>', '<a href="' . esc_url(admin_url('options-general.php?page=yarpp')) .'">', __('Make sure to visit the <a>Related Posts settings page</a> to customize YARPP.', 'yarpp') ). '</p>';
-		}
-		?>
-<script>
-jQuery(function () {
-	var body = jQuery(document.body),
-	menu = jQuery('#menu-settings'),
-	collapse = jQuery('#collapse-menu'),
-	yarpp = menu.find("a[href='options-general.php?page=yarpp']"),
-	options = {
-		content: '<?php echo $content; ?>',
-		position: {
-			edge: 'left',
-			align: 'center',
-			of: menu.is('.wp-menu-open') && !menu.is('.folded *') ? yarpp : menu
-		},
-		close: function() {
-			menu.unbind('mouseenter mouseleave', yarpp_pointer);
-			collapse.unbind('mouseenter mouseleave', yarpp_pointer);
-		}};
-	
-	if ( !yarpp.length )
-		return;
-	
-	body.pointer(options).pointer('open');
-	
-	if ( menu.is('.folded *') || !menu.is('.wp-menu-open') ) {
-		function yarpp_pointer(e) {
-			setTimeout(function() {
-				if (yarpp.is(':visible'))
-					options.position.of = yarpp;
-				else
-					options.position.of = menu;
-				body.pointer( options );
-			}, 200);
-		}
-		menu.bind('mouseenter mouseleave', yarpp_pointer);
-		collapse.bind('mouseenter mouseleave', yarpp_pointer);
-	}
-});
-</script>
-		<?php
-	}
-	
-	function pointer_script_variant() {
-		$this->pointer_script( true );
 	}
 	
 	function settings_link($links, $file) {
