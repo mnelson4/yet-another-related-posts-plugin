@@ -5,24 +5,25 @@ Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
 Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
-Requires at least: 3.1
-Tested up to: 3.5
-Stable tag: 3.5.3
+Requires at least: 3.3
+Tested up to: 3.6
+Stable tag: 4.0.5
 License: GPLv2 or later
 
-Display a list of related entries on your site and feeds based on a unique algorithm. Now with custom post type support!
+Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
 
 == Description ==
 
 Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages related to the current entry, introducing the reader to other relevant content on your site.
 
-1. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) lets you control how your posts are displayed.
+1. **Thumbnails**: a beautiful new thumbnail display, for themes which use post thumbnails (featured images) **New in YARPP 4!**
 2. **Related posts, pages, and custom post types**: [Learn about CPT support](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/).
-3. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/).
-4. **Caching**: YARPP is performant, caching related posts data as your site is visited.
-5. **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
+3. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) gives you advanced control of how your results are displayed.
+4. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/).
+5. **Caching**: YARPP is performant, caching related posts data as your site is visited.
+6. **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
 
-This plugin requires PHP 5, MySQL 4.1, and WordPress 3.1 or greater.
+This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater.
 
 See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/).
 
@@ -52,12 +53,18 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 
 &mdash; [Matt Cutts](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/), head of Webspam, Google
 
+<blockquote>
+"One way of getting search engines to get to your older content a bit easier, thus increasing your WordPress SEO capabilites a LOT, is by using a related posts plugin. These plugins search through your posts database to find posts with the same subject, and add links to these posts. There are quite a few related posts plugins but I tend to stick with the Yet Another Related Posts Plugin..."
+</blockquote>
+
+&mdash; [Yoast (Joost de Valk)](http://yoast.com/articles/wordpress-seo/)
+
 == Installation ==
 
 = Auto display on your website =
 
 1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and activate the plugin.
-2. (optionally) copy the sample templates inside `yarpp-templates` folder into your active theme.
+2. (optionally) copy the sample template files inside the `yarpp-templates` folder into your active theme.
 3. Go to the "Related Posts (YARPP)" settings page to customize YARPP.
 
 = Auto display in your feeds =
@@ -76,15 +83,31 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.*
 
+= How can I move the related posts display? =
+
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
+
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.
+
+= I'm using the Thumbnails display in YARPP 4. How can I change the thumbnail size? =
+
+The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+
+Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose. See also the next question.
+
+= I'm using the Thumbnails display in YARPP 4. Why aren't the right size thumbnails being served? =
+
+By default if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal... what you really want is for YARPP to serve appropriately-sized thumbnails.
+
+There are two options for doing so:
+
+* First, you can use the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin to generate all these thumbnail-sized images in a batch process. This puts you in control of when this resizing process happens on your server (which is good because it can be processor-intensive). New images which are uploaded to WordPress should automatically get the appropriate thumbnail generated when the image is uploaded.
+
+* Second, you can turn on a feature in YARPP to auto-generate appropriate size thumbnails on the fly, if they have not yet been created. Doing this type of processing on the fly does not scale well, so this feature is turned off by default. But if you run a smaller site with less traffic, it may work for you. Simply add `define('YARPP_GENERATE_THUMBNAILS', true);` to your theme's `functions.php` file.
+
 = How can I use the custom template feature? =
 
 YARPP's [custom templates feature](http://mitcho.com/blog/projects/yarpp-3-templates/) allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
-
-= How can I move the related posts display? =
-
-If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" option in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
-
-If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. This method can also be used to display YARPP on pages other than single-post displays, such as on archive pages.
 
 = Does YARPP slow down my blog/server? =
 
@@ -124,7 +147,13 @@ The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-exper
 
 == Developing with YARPP ==
 
-= Custom displays and custom post type support =
+= Custom post types =
+
+To make YARPP support your custom post type, the attribute `yarpp_support` must be set to true on the custom post type when it is registered. It will then be available on options on the YARPP settings page.
+
+If you would like to programmatically control which post types are considered in an automatically-displayed related posts display, use the `yarpp_map_post_types` filter.
+
+= Custom displays =
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
@@ -182,21 +211,24 @@ YARPP is currently localized in the following languages:
 * Belarussian (`by_BY`) by [Fat Cow](http://www.fatcow.com)
 * Bulgarian (`bg_BG`) by [Flash Gallery](http://www.flashgallery.org)
 * Simplified Chinese (`zh_CN`) by Jor Wang of [jorwang.com](http://jorwang.com)
-* Croatian (`hr`) by [gocroatia.com](http://gocroatia.com)
+* Traditional Chinese (Taiwan, `zh_TW`) by [Pseric](http://www.freegroup.org/)
+* Croatian (`hr`) by [GoCroatia.com](http://gocroatia.com)
 * Czech (`cs_CZ`) by [Zdenek Hejl](http://www.zdenek-hejl.com)
 * Dutch (`nl_NL`) by Sybrand van der Werf
+* Estonian (`est_EST`) by [JOURNAL](http://journal24.info/)
 * Farsi/Persian (`fa_IR`) by [Moshen Derakhshan](http://webdesigner.downloadkar.com/)
 * French (`fr_FR`) by Lionel Chollet
 * Georgian (`ge_KA`) by Kasia Ciszewski of [Find My Hosting](www.findmyhosting.com)
 * German (`de_DE`) by Michael Kalina of [3th.be](http://3th.be) and Nils Armgart of [movie-blog.de.ms](http://www.movie-blog.de.ms)
 * Cypriot Greek (`el_CY`) by Aristidis Tonikidis of [akouseto.gr](http://www.akouseto.gr)
 * Greek (`el_EL`) by Aristidis Tonikidis of [akouseto.gr](http://www.akouseto.gr)
-* Hebrew (`he_IL`) by Mickey Zelansky of [simpleidea.us](http://simpleidea.us)
+* Gujrati (`gu_IN`) by [Vikas Arora](http://www.wiznicworld.com/)
+* Hebrew (`he_IL`) by Mickey Zelansky of [simpleidea.us](http://simpleidea.us) and [Hadas Kotek](http://web.mit.edu/hkotek/www)
 * Hindi (`hi_IN`) by [Outshine Solutions](http://outshinesolutions.com/)
 * Italian (`it_IT`) by Gianni Diurno of [gidibao.net](http://gidibao.net)
 * Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com)
 * Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
-* Japanese (`ja`) by myself (yarpp at mitcho dot com)
+* Japanese (`ja`) by [myself](http://mitcho.com)
 * Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru)
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info)
@@ -209,6 +241,7 @@ YARPP is currently localized in the following languages:
 * Russian (`ru_RU`) by Marat Latypov of [blogocms.ru](http://blogocms.ru)
 * Serbian (`sr_RS`) by [Zarko Zivkovic](http://www.zarkozivkovic.com/) 
 * Slovak (`sk_SK`) by [Forex](http://www.eforex.sk/)
+* Slovenian (`sl_SI`) by [Silvo Katalenić](http://www.twitter.com/silvoslaf)
 * Spanish (`es_ES`) by Rene of [WordPress Webshop](http://wpwebshop.com)
 * Swedish (`sv_SE`) by Max Elander
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
@@ -216,19 +249,97 @@ YARPP is currently localized in the following languages:
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
 
-<!--We already have localizers lined up for the following languages:
-* Danish
-* Catalan
-* Thai
-* Bhasa Indonesian
--->
-
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
 
-= 3.5.4 =
+= 4.0.6 =
+* YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
+* Bundled `yarpp-template-wpml.php` is now called `yarpp-template-multilingual.php`, following [discussion with the author of the Polylang plugin](https://wordpress.org/support/topic/better-integration-of-yarpp-and-polylang).
+* More robust activation handling, particularly when network-activated.
+* Improved handling of exceptions, for example when fulltext indexes cannot be created or non-MyISAM tables are used.
+* Localizations
+	* Added Estonian (`est_EST`) by [JOURNAL](http://journal24.info/)
+	* Added Gujrati (`gu_IN`) by [Vikas Arora](http://www.wiznicworld.com/)
 
+= 4.0.5 =
+* [Bugfix](https://wordpress.org/support/topic/bug-in-upgrading-from-yarp-3_5_2b2): Some upgrade code would try to access the global $yarpp before it was properly initialized
+* Added experimental graph data method to the YARPP table cache class
+
+= 4.0.4 =
+* [Bugfix](https://wordpress.org/support/topic/yarp-403-breaks-paginated-posts): 4.0.3 broke some paginated post displays
+* [Bugfix](https://wordpress.org/support/topic/custom-post-type-support-on-widget): custom post type support was not working properly in widget displays
+* Bugfix: widget control JS was not working right when first adding a widget
+* Added ability to set widget-specific heading for the thumbnails view, [by request](https://wordpress.org/support/topic/yarpp-on-pages-in-sidebar-even-when-turned-off-in-settings)
+* Added the filter `yarpp_results`
+* Localizations:
+	* Updated French localization and stopword list
+	* Added Slovenian (`sl_SI`) localization by [Silvo Katalenić](http://www.twitter.com/silvoslaf)
+* Bugfix: forces the DB Cache Reloaded (Fix) plugins to flush when necessary
+
+= 4.0.3 =
+* Bugfix: on sites where custom templates are not available, the "thumbnails" display option would get reset when visiting the YARPP settings page
+* [Bugfix](http://wordpress.org/support/topic/yarpp-css-is-delayed-or-doesnt-load): the CSS for YARPP's thumbnails display would load at the foot of the page, and therefore would cause some style-flashing. This is fixed for automatic includes, but not for widgets or manual calls.
+* Restoration of the `$post` global after YARPP is now more robust. Fixes the display of incorrect metadata on some complex themes.
+* YARPP template files no longer recognize `Template Name` fields in their headers, instead using `YARPP Template`. This is to avoid confusion with regular page templates.
+* Added "Related Posts" meta box to other "auto display" post types
+* Updated Polish localization
+
+= 4.0.2 =
+* [Bugfix](http://wordpress.org/support/topic/yarpp-doesnt-update-suggestions-with-older-posts): cache should be cleared when the "show only previous posts?" option is changed
+* [Bugfix](http://wordpress.org/support/topic/no-default-image-showing?replies=4): In the thumbnail display, sometimes the default image was not displayed, even though no post thumbnail was available.
+* Localization updates
+	* Updated Polish, Japanese, Hebrew localizations
+	* Better right-to-left layout support
+
+= 4.0.1 =
+* Improvements to thumbnail handling
+	* See new FAQ entry for practical details
+	* Thumbnail size can be specified programmatically (see FAQ)
+	* YARPP now registers its thumbnail size properly as `yarpp-thumbnail`
+	* Fixed a typo and simplified an item in the dynamic `styles-thumbnails.php` styles
+	* Code to generate thumbnails of appropriate size on the fly has been added, but is turned off by default for performance reasons (see FAQ)
+* Bugfix: a class of `yarpp-related-` with a stray hyphen was sometimes being produced. Now fixed so it produces `yarpp-related`.
+* [Bugfix](http://wordpress.org/support/topic/bug-in-sql-function-in-yarpp_cache): `term_relationships` table was being joined when unnecessary
+* [Bugfix](http://wordpress.org/support/topic/no-option-to-add-widget-title-in-theme-using-hybrid-core-framework): widget options would not display if custom templates were not available
+* Bugfix: some transients expired too soon if object caching was used
+* The `yarpp_map_post_types` filter now also applies to feeds and takes an extra argument to know whether the context is `website` or `rss`.
+
+= 4.0 =
+* New thumbnail template option!
+	* No PHP required—just visit the settings page
+	* Edit your theme's CSS file to modify the styling
+* Auto display settings changes:
+	* Easily choose which post types you want related posts to display on
+	* Added an "also display in archives" option
+* [Bugfix](https://wordpress.org/support/topic/related-posts-disappearing-cache-issue): uses of `related_posts_exist()` and `get_related()` without explicit reference ID parameter would incorrectly return no related posts.
+* Changes to the output HTML:
+	* All YARPP output is now wrapped in a `div` with class `yarpp-related`, `yarpp-related-widget`, or `yarpp-related-rss` as appropriate ([by request](https://wordpress.org/support/topic/adding-a-main-div-to-default-template)). If there are no results, a `yarpp-related-none` class is added.
+	* The "related posts brought to you by YARPP" text is only added if there were results.
+* Refinements to settings UI:
+	* A new design for the template chooser
+	* Example code display is now hidden by default; turn them back on from the "screen options" tab.
+	* A new "copy templates" button allows one-button installation of bundled templates into the current theme, if filesystem permissions make it possible.
+	* Header information in YARPP custom templates are now displayed to users in the settings UI. Available fields are `YARPP Template`, `Description`, `Author`, `Author URI`, in the same format as plugin and theme file headers. See bundled templates for examples.
+* Code cleanup:
+	* Settings screen UI have been rewritten to use `div`s rather than `table`s!
+	* Inline help in settings screen now use WordPress pointers
+	* Removed keyword cache table, as it does not ctually improve performance much and the overhead of an additional table is not worth it.
+* Default option changes:
+	* Default result count is now 4
+	* Default match threshold is now 4
+	* Default for "before related entries" heading uses `h3` instead of `p`
+* Added `yarpp_map_post_types` filter to programmatically specify what post types should be looked at for automatic displays
+* Added option to send YARPP setting and usage information back to YARPP (off by default). This information will be used to make more informed decisions about future YARPP development. More info available in the settings.
+
+= 3.5.6 =
+* Typo fix for postmeta cache
+* Added Traditional Chinese (Taiwan, `zh_TW`) localization by [Pseric](http://www.freegroup.org/)
+
+= 3.5.5 =
+* Quick bugfix for how admin screen code was loaded in in WordPress < 3.3.
+
+= 3.5.4 =
 * New Help tab, which displays help text from the readme.
 * Retina icons! Now served faster, in sprite form.
 * Added Croatian (`hr`) localization by [gocroatia.com](http://gocroatia.com)
@@ -239,7 +350,6 @@ If you are a bilingual speaker of English and another language and an avid user 
 	* Changed default option of "show only previous posts" to `false` and removed FAQ text, as it no longer improves performance much.
 
 = 3.5.3 =
-
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-no-related-posts-7): Fixed a common cause of "no related posts"!
 * Better post revision handling
 * [Bugfix](https://wordpress.org/support/topic/plugin-yet-another-related-posts-plugin-database-errors-upon-activation): setup wasn't automatic for network activations.
