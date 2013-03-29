@@ -1083,7 +1083,7 @@ class YARPP {
 		if ( YARPP_NO_RELATED == $cache_status )
 			return false;
 	
-		$this->active_cache->begin_yarpp_time($reference_ID); // get ready for YARPP TIME!
+		$this->active_cache->begin_yarpp_time($reference_ID, $args); // get ready for YARPP TIME!
 		$related_query = new WP_Query();
 		$related_query->query(array(
 			'p' => $reference_ID,
