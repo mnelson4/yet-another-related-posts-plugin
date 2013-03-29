@@ -162,9 +162,9 @@ abstract class YARPP_Cache {
 	
 		$newsql .= 'ROUND(0';
 	
-		if ((int) @$weight['body'])
+		if ( isset($weight['body']) && (int) $weight['body'] )
 			$newsql .= " + (MATCH (post_content) AGAINST ('".$wpdb->escape($keywords['body'])."')) * ". absint($weight['body']);
-		if ((int) @$weight['title'])
+		if ( isset($weight['body']) && (int) $weight['title'] )
 			$newsql .= " + (MATCH (post_title) AGAINST ('".$wpdb->escape($keywords['title'])."')) * ". absint($weight['title']);
 	
 		// Build tax criteria query parts based on the weights

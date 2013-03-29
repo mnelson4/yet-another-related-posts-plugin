@@ -116,13 +116,13 @@ class YARPP_Meta_Box {
 		$weight = (int) yarpp_get_option( "weight[$option]" );
 		
 		// both require MyISAM fulltext indexing:
-		$myisam = !$yarpp->myisam ? ' readonly="readonly" disabled="disabled"' : '';
+		$fulltext = $yarpp->diagnostic_fulltext_disabled() ? ' readonly="readonly" disabled="disabled"' : '';
 		
 		echo "<div class='yarpp_form_row yarpp_form_select'><div class='yarpp_form_label'>$desc</div><div>";
 		echo "<select name='weight[$option]'>";
-		echo "<option $myisam value='no'". ( !$weight ? ' selected="selected"': '' )."  >".__( "do not consider", 'yarpp' )."</option>";
-		echo "<option $myisam value='consider'". ( ( $weight == 1 ) ? ' selected="selected"': '' )."  > ".__( "consider", 'yarpp' )."</option>";
-		echo "<option $myisam value='consider_extra'". ( ( $weight > 1 ) ? ' selected="selected"': '' )."  > ".__( "consider with extra weight", 'yarpp' )."</option>";
+		echo "<option $fulltext value='no'". ( !$weight ? ' selected="selected"': '' )."  >".__( "do not consider", 'yarpp' )."</option>";
+		echo "<option $fulltext value='consider'". ( ( $weight == 1 ) ? ' selected="selected"': '' )."  > ".__( "consider", 'yarpp' )."</option>";
+		echo "<option $fulltext value='consider_extra'". ( ( $weight > 1 ) ? ' selected="selected"': '' )."  > ".__( "consider with extra weight", 'yarpp' )."</option>";
 		echo "</select></div></div>";
 	}
 	

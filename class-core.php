@@ -12,8 +12,6 @@ class YARPP {
 	public $admin;
 	private $storage_class;
 	
-	public $myisam = true;
-	
 	// here's a list of all the options YARPP uses (except version), as well as their default values, sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating settings (options.php) and other tasks.
 	public $default_options = array();
 	public $default_hidden_metaboxes = array( 'yarpp_pool', 'yarpp_relatedness' );
@@ -197,7 +195,10 @@ class YARPP {
 		if ( $this->cache->is_enabled() === false )
 			return false;
 
-		return $this->diagnostic_fulltext_indices();
+		if ( !$this->diagnostic_fulltext_disabled() )
+			return $this->diagnostic_fulltext_indices();
+		
+		return true;
 	}
 		
 	// @since 3.5.2: function to enforce YARPP setup
@@ -215,9 +216,9 @@ class YARPP {
 	function activate() {
 		global $wpdb;
 	
-		if ( !$this->diagnostic_fulltext_indices() ) {
-			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
-			$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
+		// if it's not known to be disabled, but the indexes aren't there:
+		if ( !$this->diagnostic_fulltext_disabled() && !$this->diagnostic_fulltext_indices() ) {
+			$this->enable_fulltext();
 		}
 		
 		if ( $this->cache->is_enabled() === false ) {
@@ -231,6 +232,7 @@ class YARPP {
 		
 		if ( !get_option('yarpp_version') ) {
 			// new install
+			
 			add_option( 'yarpp_version', YARPP_VERSION );
 			$this->version_info(true);
 		} else {
@@ -256,6 +258,54 @@ class YARPP {
 				return $table->Engine;
 		}
 		return 'UNKNOWN';
+	}
+	
+	function diagnostic_fulltext_disabled() {
+		return get_option( 'yarpp_fulltext_disabled', false );
+	}
+	
+	function enable_fulltext( $override_myisam = false ) {
+		global $wpdb;
+
+		// todo: check the myisam_override option instead.
+		if ( !$override_myisam ) {
+			$table_type = $this->diagnostic_myisam_posts();
+			if ( $table_type !== true ) {
+				$this->disable_fulltext();
+				return;
+			}
+		}
+
+		// temporarily ensure that errors are not displayed:
+		$previous_value = $wpdb->hide_errors();
+
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` ( `post_title` )");
+		if ( !empty($wpdb->last_error) )
+			$this->disable_fulltext();
+
+		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` ( `post_content` )");
+		if ( !empty($wpdb->last_error) )
+			$this->disable_fulltext();
+		
+		// restore previous setting
+		$wpdb->show_errors( $previous_value );
+	}
+	
+	function disable_fulltext() {
+		if ( get_option( 'yarpp_fulltext_disabled', false ) == true )
+			return;
+	
+		// rm title and body weights:
+		$weight = $this->get_option('weight');
+		unset($weight['title']);
+		unset($weight['body']);
+		$this->set_option(array('weight' => $weight));
+
+		// cut threshold by half:
+		$threshold = (float) $this->get_option('threshold');
+		$this->set_option(array('threshold' => round($threshold / 2) ));
+
+		update_option( 'yarpp_fulltext_disabled', true );
 	}
 	
 	function diagnostic_fulltext_indices() {
@@ -751,6 +801,7 @@ class YARPP {
 			),
 			'diagnostics' => array(
 				'myisam_posts' => $this->diagnostic_myisam_posts(),
+				'fulltext_disabled' => $this->diagnostic_fulltext_disabled(),
 				'fulltext_indices' => $this->diagnostic_fulltext_indices(),
 				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
 				'post_thumbnails' => $this->diagnostic_post_thumbnails(),
