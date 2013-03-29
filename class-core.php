@@ -54,6 +54,9 @@ class YARPP {
 
 		if ( isset($_REQUEST['yarpp_debug']) )
 			$this->debug = true;
+		
+		if ( !get_option('yarpp_version') )
+			update_option( 'yarpp_activated', true );
 
 		// new in 3.4: only load UI if we're in the admin
 		if ( is_admin() ) {
@@ -768,7 +771,7 @@ class YARPP {
 	}
 	
 	public function optin_data() {
-		global $wpdb, $yarpp;
+		global $wpdb;
 
 		$comments = wp_count_comments();
 		$users = count_users();
@@ -831,20 +834,20 @@ class YARPP {
 		
 		$changed = array();
 		foreach ( $check_changed as $key ) {
-			if ( $yarpp->default_options[$key] != $settings[$key] )
+			if ( $this->default_options[$key] != $settings[$key] )
 				$changed[] = $key;
 		}
 		foreach ( array( 'before_related', 'rss_before_related' ) as $key ) {
 			if ( $settings[$key] != '<p>'.__('Related posts:','yarpp').'</p><ol>' &&
-				$settings[$key] != $yarpp->default_options[$key] )
+				$settings[$key] != $this->default_options[$key] )
 				$changed[] = $key;
 		}
 		$data['yarpp']['changed_settings'] = implode( '|', $changed );
 		
-		if ( method_exists( $yarpp->cache, 'cache_status' ) )
-			$data['yarpp']['cache_status'] = $yarpp->cache->cache_status();
-		if ( method_exists( $yarpp->cache, 'stats' ) ) {
-			$stats = $yarpp->cache->stats();
+		if ( method_exists( $this->cache, 'cache_status' ) )
+			$data['yarpp']['cache_status'] = $this->cache->cache_status();
+		if ( method_exists( $this->cache, 'stats' ) ) {
+			$stats = $this->cache->stats();
 			$flattened = array();
 			foreach ( $stats as $key => $value )
 				$flattened[] = "$key:$value";
