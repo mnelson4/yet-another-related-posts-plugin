@@ -43,9 +43,12 @@ class YARPP {
 		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 600 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_thumbnails' ) );
 
-		// register yarpp-thumbnail size, if theme has not already
+		// if we're using thumbnails, register yarpp-thumbnail size, if theme has not already
 		// @todo: make these UI-configurable?
-		if ( !($dimensions = $this->thumbnail_dimensions()) || isset($dimensions['_default']) ) {
+		// Note: see FAQ in the readme if you would like to change the YARPP thumbnail size.
+		
+		if ( $this->diagnostic_using_thumbnails() &&
+			( !($dimensions = $this->thumbnail_dimensions()) || isset($dimensions['_default']) ) ) {
 			$width = 120;
 			$height = 120;
 			$crop = true;
@@ -125,6 +128,7 @@ class YARPP {
 			'auto_display_archive' => false, // new in 4
 			'auto_display_post_types' => array( 'post' ), // new in 4, replacing auto_display
 			'pools' => array(), // new in 4
+			'manually_using_thumbnails' => false, // new in 4.0.6
 		);
 	}
 	
@@ -362,6 +366,17 @@ class YARPP {
 		'size' => '120x120',
 		'_default' => true
 	);
+
+	function diagnostic_using_thumbnails() {
+		if ( $this->get_option( 'manually_using_thumbnails' ) )
+			return true;
+		if ( $this->get_option( 'template' ) == 'thumbnails' )
+			return true;
+		if ( $this->get_option( 'rss_template' ) == 'thumbnails' && $this->get_option( 'rss_display' ) )
+			return true;
+		return false;
+	}
+
 	function thumbnail_dimensions() {
 		global $_wp_additional_image_sizes;
 		if ( !isset($_wp_additional_image_sizes['yarpp-thumbnail']) )
@@ -809,7 +824,8 @@ class YARPP {
 				'hidden_metaboxes' => $this->diagnostic_hidden_metaboxes(),
 				'post_thumbnails' => $this->diagnostic_post_thumbnails(),
 				'happy' => $this->diagnostic_happy(),
-				'generate_thumbnails' => $this->diagnostic_generate_thumbnails()
+				'using_thumbnails' => $this->diagnostic_using_thumbnails(),
+				'generate_thumbnails' => $this->diagnostic_generate_thumbnails(),
 			),
 			'stats' => array(
 				'counts' => array(),

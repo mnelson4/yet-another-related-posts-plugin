@@ -8,6 +8,9 @@
  * More information on the custom templates is available at http://mitcho.com/blog/projects/yarpp-3-templates/
  */
 
+if ( !$this->diagnostic_using_thumbnails() )
+	$this->set_option( 'manually_using_thumbnails', true );
+
 $options = array( 'thumbnails_heading', 'thumbnails_default', 'no_results' );
 extract( $this->parse_args( $args, $options ) );
 

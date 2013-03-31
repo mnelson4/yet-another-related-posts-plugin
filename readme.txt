@@ -257,6 +257,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 * YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
 * More robust activation handling, particularly when network-activated.
 * Improved handling of exceptions, for example when fulltext indexes cannot be created or non-MyISAM tables are used.
+* YARPP no longer triggers the generation of YARPP-thumbnail-sized images (120x120) when YARPP thumbnails are not used.
+	* If you are using YARPP programmatically and using the thumbnails view and having troubles with YARPP's thumbnail size being registered, a manual control to force image size registration has been added to the [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin.
 * [Bugfix](https://wordpress.org/support/topic/yarpp_related_exist-and-begin_yarpp_time-error): calls to `yarpp_related_exist()` type functions were causing errors.
 * Bundled `yarpp-template-wpml.php` is now called `yarpp-template-multilingual.php`, following [discussion with the author of the Polylang plugin](https://wordpress.org/support/topic/better-integration-of-yarpp-and-polylang).
 * Localizations
