@@ -233,6 +233,7 @@ YARPP is currently localized in the following languages:
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info)
 * Lithuanian (`lt_LT`) by [Karolis Vyčius](http://vycius.co.cc) and [Mantas Malcius](http://mantas.malcius.lt)
+* Macedonian (`mk_MK`) by [WPdiscounts](http://wpdiscounts.com)
 * Norwegian (`nb_NO`) by [Tom Arne Sundtjønn](http://www.datanerden.no)
 * Polish (`pl_PL`) by [Perfecta](http://perfecta.pro/wp-pl/)
 * (European) Portuguese (`pt_PT`) by Stefan Mueller of [fernstadium-net](http://www.fernstudium-net.de)
@@ -252,6 +253,9 @@ YARPP is currently localized in the following languages:
 If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
+
+= The future =
+* Added Macedonian (`mk_MK`) localization by [WPdiscounts](http://wpdiscounts.com)
 
 = 4.0.6 =
 * YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
