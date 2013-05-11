@@ -126,8 +126,13 @@ Most likely you have "no related posts" right now as the default "match threshol
 * [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
 * [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
 * Other related posts plugins, obviously, may also be incompatible.
+* [WPML](http://wpml.org): various incompatibilities have been reported. The multilingual plugin [Polylang](https://polylang.wordpress.com/) has great support for YARPP and is suggested as a replacement for WPML.
 
 Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
+
+= I want to use YARPP on a site with content in multiple languages =
+
+The recommended solution in such cases is to use the [Polylang](https://polylang.wordpress.com/). Polylang has posted [a tutorial for using YARPP with Polylang](https://polylang.wordpress.com/2013/05/03/polylang-and-yarpp/).
 
 = Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
@@ -255,6 +260,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = The future =
+* [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options
+* Added Polylang information to FAQ
 * Added Macedonian (`mk_MK`) localization by [WPdiscounts](http://wpdiscounts.com)
 
 = 4.0.6 =
