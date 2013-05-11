@@ -791,7 +791,7 @@ class YARPP {
 		$comments = wp_count_comments();
 		$users = count_users();
 
-		$settings = get_option( 'yarpp' );
+		$settings = get_option( 'yarpp', array() );
 		$collect = array_flip(array(
 			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
 			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
