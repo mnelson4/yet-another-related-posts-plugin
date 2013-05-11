@@ -260,6 +260,8 @@ If you are a bilingual speaker of English and another language and an avid user 
 == Changelog ==
 
 = The future =
+* [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options
+* Added Polylang information to FAQ
 * Added Macedonian (`mk_MK`) localization by [WPdiscounts](http://wpdiscounts.com)
 
 = 4.0.6 =

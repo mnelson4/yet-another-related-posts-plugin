@@ -1194,6 +1194,9 @@ class YARPP {
 			} else {
 				$r[$option] = $default;
 			}
+			
+			if ( $option == 'weight' && !isset( $r[$option]['tax'] ) )
+				$r[$option]['tax'] = array();
 		}
 		return $r;
 	}
