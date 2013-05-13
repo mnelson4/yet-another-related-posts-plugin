@@ -1008,7 +1008,7 @@ class YARPP {
 		$this->restore_post_context();
 	
 		if ( $related_count > 0 && $promote_yarpp && $domain != 'metabox' )
-			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
+			$output .= "<p class='yarpp-promote'>" . sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.org' ) . "</p>\n";
 	
 		if ( $optin )
 			$output .= "<img src='http://yarpp.org/pixels/" . md5(get_bloginfo('url')) . "'/>\n";
@@ -1161,8 +1161,8 @@ class YARPP {
 		
 		$this->cache_bypass->end_demo_time();
 		
-		if ($promote_yarpp)
-			$output .= "<p>".sprintf(__("Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",'yarpp'), 'http://yarpp.org')."</p>\n";
+		if ( $promote_yarpp )
+			$output .= "<p class='yarpp-promote'>" . sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.org' ) . "</p>\n";
 
 		$output .= "</div>";
 	
