@@ -269,7 +269,7 @@ YARPP is currently localized in the following languages:
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
 
-If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
+If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Get in touch through the [YARPP support forums](https://wordpress.org/support/plugin/yet-another-related-posts-plugin).
 
 == Changelog ==
 

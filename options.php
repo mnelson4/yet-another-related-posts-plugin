@@ -72,8 +72,8 @@ if ( !yarpp_get_option('myisam_override') && $yarpp->diagnostic_fulltext_disable
 if ( !$yarpp->enabled() && !$yarpp->activate() ) {
 	echo '<div class="updated">';
 	_e('The YARPP database has an error which could not be fixed.','yarpp');
-	echo ' ';
-	printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
+	// echo ' ';
+	// printf(__('Please try <a href="%s" target="_blank">manual SQL setup</a>.','yarpp'), 'http://mitcho.com/code/yarpp/sql.php?prefix='.urlencode($wpdb->prefix));
 	echo '</div>';
 }
 
