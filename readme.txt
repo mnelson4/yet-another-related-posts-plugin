@@ -18,7 +18,7 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 1. **Thumbnails**: a beautiful new thumbnail display, for themes which use post thumbnails (featured images) **New in YARPP 4!**
 2. **Related posts, pages, and custom post types**: [Learn about CPT support](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/).
-3. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) gives you advanced control of how your results are displayed.
+3. **Templating**: [A powerful templating system](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/) gives you advanced control of how your results are displayed.
 4. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/).
 5. **Caching**: YARPP is performant, caching related posts data as your site is visited.
 6. **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
@@ -77,7 +77,7 @@ Related posts can also be displayed as a widget. Go to the Design > Widgets opti
 
 = Custom display through templates =
 
-YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
+YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available in the [Developing with YARPP](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/) section of this readme.
 
 == Frequently Asked Questions ==
 
@@ -107,7 +107,7 @@ There are two options for doing so:
 
 = How can I use the custom template feature? =
 
-YARPP's [custom templates feature](http://mitcho.com/blog/projects/yarpp-3-templates/) allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
+YARPP's [custom templates feature](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/) allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
 
 = Does YARPP slow down my blog/server? =
 
@@ -151,6 +151,20 @@ However, YARPP does have difficulty with languages that don't place spaces betwe
 The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
 
 == Developing with YARPP ==
+
+= Custom templates =
+
+YARPP allows you to write your own template PHP file which will be used to render the related posts display. These custom templates use the same [template tags](https://codex.wordpress.org/Template_Tags) as regular WordPress themes.
+
+Custom templates must be in your active theme directory, and be named using the format `yarpp-template-....php`. In the YARPP settings sections for your website and for RSS, choose "custom" and you can then choose your custom template. Some sample templates are bundled with YARPP, in the `yarpp-templates` subdirectory.
+
+To see the structure of a YARPP custom template, it's best to take a look at an example template, like `yarpp-template-example.php`. There are two basic parts to this (and most all) YARPP template: (a) what you display when there are related posts and (b) what you display when there aren't. We make this switch with the conditional `if (have_posts())`. If there are related posts, we introduce an ordered list and use the `while` loop to loop over all the related posts. For each post, we use the snippet `the_post();` to load the appropriate post data, then print the line item.
+
+You’ll notice that we're using familiar [template tags](https://codex.wordpress.org/Template_Tags) here such as `the_permalink()` and `the_title()`. If you've ever had to tweak or build a WordPress theme before, you'll immediately feel at home.
+
+One big advantage of this new templating system is that you can control exactly how the posts are listed, breaking out of all of the previous structural limitations. For example, in the `yarpp-template-list.php` sample template, we put the information for each related post in an array and then concatenate the strings with `implode`. This way, we produce a comma-separated list for our readers without any stray commas before or after the list, which is impossible without a custom template. You can also run any arbitrary PHP in the template file, though modifying the WP Query is not recommended.
+
+As mentioned before, the tags we use in these YARPP templates are the same as the [template tags](https://codex.wordpress.org/Template_Tags) used in any WordPress template. In fact, any WordPress template tag will work in the YARPP Loop. You can use these template tags to display the excerpt, the post date, the comment count, or even some custom metadata. There are also two special template tags which only work within a YARPP Loop: `the_score()` and `get_the_score()`. As you may expect, this will print or return the match score of that particular related post.
 
 = Custom post types =
 
@@ -665,7 +679,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.0 =
 * Major new release!
 * Caching for better SQL performance
-* A new [templating feature](http://mitcho.com/blog/projects/yarpp-3-templates/) for custom related posts displays
+* A new [templating feature](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/) for custom related posts displays
 * Cleaned up options page
 * New and updated localizations
 = 2.1.6 =
