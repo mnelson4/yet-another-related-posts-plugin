@@ -263,6 +263,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options
 * Added Polylang information to FAQ
 * Added Macedonian (`mk_MK`) localization by [WPdiscounts](http://wpdiscounts.com)
+* The optional YARPP promotional text now comes with class `yarpp-promote` so it can be styled, [by request](https://wordpress.org/support/topic/yarpp-promotion-style)
 
 = 4.0.6 =
 * YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
