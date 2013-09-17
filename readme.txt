@@ -25,8 +25,6 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater.
 
-See [other plugins by mitcho](http://profiles.wordpress.org/users/mitchoyoshitaka/).
-
 = A note on support (June 2010) =
 
 I have begun instituting a stricter policy of not responding to support inquiries via email, instead directing senders to the appropriate WordPress.org forum, [here](http://wordpress.org/support/plugin/yet-another-related-posts-plugin).
