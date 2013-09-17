@@ -3,10 +3,9 @@ Contributors: mitchoyoshitaka
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
-Donate link: http://tinyurl.com/donatetomitcho
 Tags: related, posts, post, pages, page, RSS, feed, feeds
 Requires at least: 3.3
-Tested up to: 3.6
+Tested up to: 3.6.1
 Stable tag: 4.0.6
 License: GPLv2 or later
 
@@ -18,7 +17,7 @@ Yet Another Related Posts Plugin (YARPP) gives you a list of posts and/or pages 
 
 1. **Thumbnails**: a beautiful new thumbnail display, for themes which use post thumbnails (featured images) **New in YARPP 4!**
 2. **Related posts, pages, and custom post types**: [Learn about CPT support](http://wordpress.org/extend/plugins/yet-another-related-posts-plugin/other_notes/).
-3. **Templating**: The [YARPP templating system](http://mitcho.com/blog/projects/yarpp-3-templates/) gives you advanced control of how your results are displayed.
+3. **Templating**: The YARPP templating system gives you advanced control of how your results are displayed.
 4. **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn more](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/).
 5. **Caching**: YARPP is performant, caching related posts data as your site is visited.
 6. **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
@@ -75,7 +74,7 @@ Related posts can also be displayed as a widget. Go to the Design > Widgets opti
 
 = Custom display through templates =
 
-YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism. More information is available [in this tutorial](http://mitcho.com/blog/projects/yarpp-3-templates/).
+YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism.
 
 == Frequently Asked Questions ==
 
@@ -105,7 +104,7 @@ There are two options for doing so:
 
 = How can I use the custom template feature? =
 
-YARPP's [custom templates feature](http://mitcho.com/blog/projects/yarpp-3-templates/) allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
+YARPP's custom templates feature allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
 
 = Does YARPP slow down my blog/server? =
 
@@ -231,7 +230,7 @@ YARPP is currently localized in the following languages:
 * Italian (`it_IT`) by Gianni Diurno of [gidibao.net](http://gidibao.net)
 * Irish (`gb_IR`) by [Ray Gren](http://letsbefamous.com)
 * Bahasa Indonesia (`id_ID`) by [Hendry Lee](http://hendrylee.com/) of [Kelayang](http://kelayang.com/)
-* Japanese (`ja`) by [myself](http://mitcho.com)
+* Japanese (`ja`) by [Michael Yoshitaka Erlewine](http://mitcho.com)
 * Kazakh (`kk_KZ`) by [DachaDecor](http://DachaDecor.ru)
 * Korean (`ko_KR`) by [Jong-In Kim](http://incommunity.codex.kr)
 * Latvian (`lv_LV`) by [Mike](http://antsar.info)
@@ -252,8 +251,6 @@ YARPP is currently localized in the following languages:
 * Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
 * Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
-
-If you are a bilingual speaker of English and another language and an avid user of YARPP, I would love to talk to you about localizing YARPP! Localizing YARPP can be pretty easy using [the Codestyling Localization plugin](http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en). Please [contact me](mailto:yarpp@mitcho.com) *first* before translating to make sure noone else is working on your language. Thanks!
 
 == Changelog ==
 
@@ -662,7 +659,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 = 3.0 =
 * Major new release!
 * Caching for better SQL performance
-* A new [templating feature](http://mitcho.com/blog/projects/yarpp-3-templates/) for custom related posts displays
+* A new templating feature for custom related posts displays
 * Cleaned up options page
 * New and updated localizations
 = 2.1.6 =
@@ -672,7 +669,7 @@ If you are a bilingual speaker of English and another language and an avid user 
 * Bugfix: The `related_*()` functions were missing the `echo` parameter
 * Some localization bugfixes
 * Localizations:
-	* Japanese (`ja`) by myself ([mitcho (Michael Yoshitaka Erlewine)](http://mitcho.com))
+	* Japanese (`ja`) by [Michael Yoshitaka Erlewine](http://mitcho.com)
 = 2.1.4 =
 * Bugfix: [Settings' sumbmit button took you to PayPal](http://wordpress.org/support/topic/214090)
 * Bugfix: Fixed [keyword algorithm for users without `mbstring`](http://wordpress.org/support/topic/216420)

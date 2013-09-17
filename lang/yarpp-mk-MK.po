@@ -146,14 +146,6 @@ msgstr "smetaj so ekstra tezina"
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts Plugin Options"
 
-# @ default
-# @ yarpp
-#: options-meta-boxes.php:302
-msgid ""
-"Donate to mitcho (Michael Yoshitaka Erlewine) for this plugin via PayPal"
-msgstr ""
-"Doniraj na mitcho (Michael Yoshitaka Erlewine) za ovoj plagin preky PayPal"
-
 # @ yarpp
 #: options-meta-boxes.php:147
 msgid "\"The Pool\""

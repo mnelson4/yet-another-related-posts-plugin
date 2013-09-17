@@ -6,7 +6,6 @@ Description: Returns a list of related entries based on a unique algorithm for d
 Version: 4.0.7b1
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
-Donate link: http://tinyurl.com/donatetomitcho
 */
 
 define('YARPP_VERSION', '4.0.7b1');
@@ -24,6 +23,7 @@ require_once(YARPP_DIR.'/class-widget.php');
 if ( !defined('WP_CONTENT_URL') )
 	define('WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
 if ( !defined('WP_CONTENT_DIR') )
+    /* TODO: ABSPATH should not be used */
 	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
 
 // New in 3.2: load YARPP cache engine
