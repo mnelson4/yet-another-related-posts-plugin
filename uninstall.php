@@ -1,7 +1,7 @@
 <?php
 /**
  * Uninstall procedure.
- * @since Version 4.0.7b1
+ * @since Version 4.0.7
  * @author Eliezer Vargas
  */
 
