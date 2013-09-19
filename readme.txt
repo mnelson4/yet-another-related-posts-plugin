@@ -1,12 +1,12 @@
-=== Yet Another Related Posts Plugin ===
-Contributors: mitchoyoshitaka
+=== Yet Another Related Posts Plugin (YARPP) ===
+Contributors: jeffparker
 Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 Plugin URI: http://yarpp.org/
-Tags: related, posts, post, pages, page, RSS, feed, feeds
+Tags: related, posts, post, pages, page, RSS, feed, feeds, YARPP
 Requires at least: 3.3
 Tested up to: 3.6.1
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
@@ -78,23 +78,59 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.*
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.* I’d also appreciate if you would tell me how you found out about YARPP, by taking this simple three-question survey. [Thanks for your feedback!](http://www.surveymonkey.com/s/Z278L88).
 
 = How can I move the related posts display? =
 
 If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
 
-If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.(Make sure you don’t add echo `related_posts();` or  you may end up with duplicates in your related posts section.)
 
-= I'm using the Thumbnails display in YARPP 4. How can I change the thumbnail size? =
+= How can I limit related posts to a certain time frame? For instance, I don’t want to show posts from two years ago. =
 
-The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+Yes. In Wordpress, go to “Settings” and “Related Posts (YARPP)” and make sure “The Pool” is checked in the “Screen Options” section at the top of the page.  In “The Pool” section, check the box next to “Show only posts from the past ___ months.”
+
+= Where do I tell YARPP to display related posts only by tags? =
+
+In WordPress, go to “Settings” and “Related Posts (YARPP)” and make sure “Relatedness” is checked in the “Screen Options” section at the top of the page.  In the “Relatedness” section, configure the dropdown boxes next to “Titles,” “Bodies,” “Categories,” and “Tags.”
+
+= Can I specify related posts? =
+
+Sorry, but specifying related posts, displaying related posts from external WordPress sites, and pulling content from the Comments section are all outside the scope of YARPP at this time.
+
+= I’m seeing related posts displayed on the home page. How do I prevent that? =
+
+Some WordPress themes treat the home page as an archive or a “page.” Go to “Settings” then “Related Posts (YARPP)” and view the “Display Options” section. Make sure “Pages” and “Also display in archives” are not checked.
+
+= How can I prevent the “related posts” list from displaying on specific posts? =
+
+If you have several posts where you don’t want to display related posts and they all share a similar category or tag, you could use “Disallow by Category” or “Disallow by Tag” in “The Pool” section. (Go to “Settings” and “Related Posts (YARPP)” and make sure “The Pool” is checked in the “Screen Options” section at the top of the page.)
+
+You could also add <!--noyarpp--> to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using “Automatic Display” in the “Display Options” section. If you are programatically calling related_posts() from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
+
+= I’m using the Thumbnails display in YARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I’d like, I’d like to center the thumbnails, etc. =
+
+If you’re familiar with CSS, you can override any YARPP styles by editing your theme’s style.css file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme’s CSS file, go to “Appearance” then “Editor” and then click style.css in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add !important after each style declaration, to make sure they’ll override the YARPP rules.
+
+Some common overrides that YARPP users have added are:
+
+/* Reduces the title font size and displays more than two title lines */
+.yarpp-thumbnail {height: 200px !important;}
+.yarpp-thumbnail-title {font-size:0.8em !important; max-height: 4em !important;}
+/* Centers the thumbnail section */
+.yarpp-related-widget {text-align:center !important;}
+
+Once you save any CSS changes, empty your browser’s cache and reload your page to see the effect.
+
+= I'm using the Thumbnails display. How can I change the thumbnail size? =
+
+The default YARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
 
 Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose. See also the next question.
 
-= I'm using the Thumbnails display in YARPP 4. Why aren't the right size thumbnails being served? =
+= I'm using the Thumbnails display. Why aren't the right size thumbnails being served? =
 
-By default if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal... what you really want is for YARPP to serve appropriately-sized thumbnails.
+By default, if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal... what you really want is for YARPP to serve appropriately-sized thumbnails.
 
 There are two options for doing so:
 
@@ -102,9 +138,17 @@ There are two options for doing so:
 
 * Second, you can turn on a feature in YARPP to auto-generate appropriate size thumbnails on the fly, if they have not yet been created. Doing this type of processing on the fly does not scale well, so this feature is turned off by default. But if you run a smaller site with less traffic, it may work for you. Simply add `define('YARPP_GENERATE_THUMBNAILS', true);` to your theme's `functions.php` file.
 
+= I'm using the Thumbnails display. Why are some of my posts missing appropriate images? =
+
+YARPP’s thumbnail view requires that a WordPress “featured image” be set for each post. If you have many posts that never had a featured image set, I recommend the plugin [Auto Post Thumbnail](http://wordpress.org/extend/plugins/auto-post-thumbnail/), which will generate post thumbnails for you.
+
 = How can I use the custom template feature? =
 
 YARPP's custom templates feature allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
+
+= Is YARPP compatible with WordPress Multisite? =
+
+YARPP should work fine in a multisite environment, and many users are running it without any issues using WordPress Multisite. It will, however, only get results within each blog. It will not display related posts results from across your network.
 
 = Does YARPP slow down my blog/server? =
 
@@ -137,10 +181,14 @@ YARPP works fine with full-width (double-byte) characters, assuming your WordPre
 
 However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
 
+= YARPP seems to be broken since I upgraded to WordPress X.X. =
+
+Before upgrading to a new WordPress version, you should first deactivate all plugins, then upgrade your WordPress, and then reactivate your plugins. Even then, you may still find that something went wrong with your YARPP functionality. If so, try these steps:
+
 = Things are weird after I upgraded. =
 
 1. Visit the "Related Posts (YARPP)" settings page to verify your settings.
-2. Disactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it.
+2. Deactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it.
 3. Install the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin to flush the cache.
 
 = Can I clear my cache? Can I build up the cache manually? =
@@ -254,10 +302,12 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
-= The future =
-* [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options
-* Added Polylang information to FAQ
-* Added Macedonian (`mk_MK`) localization by [WPdiscounts](http://wpdiscounts.com)
+= 4.0.7 =
+* [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options.
+* Updated plugin de-activate functionality to drop all tables. Prior to fix some legacy tables remained which required manual deletion in wp_options from phpmyadmin.
+* Updated FAQs section.
+* Modification of YARPP’s data collection terms and conditions.
+* Added Macedonian (`mk_MK`) localization by [WPdiscounts] (http://wpdiscounts.com).
 
 = 4.0.6 =
 * YARPP's automatic display will not run on posts which include the HTML comment `<!--noyarpp-->` [by request](https://wordpress.org/support/topic/disabling-yarrp-on-specific-pages).
