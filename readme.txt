@@ -6,7 +6,7 @@ Plugin URI: http://yarpp.org/
 Tags: related, posts, post, pages, page, RSS, feed, feeds, YARPP
 Requires at least: 3.3
 Tested up to: 3.6.1
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
@@ -78,13 +78,17 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.* I’d also appreciate if you would tell me how you found out about YARPP, by taking this simple three-question survey. [Thanks for your feedback!](http://www.surveymonkey.com/s/Z278L88).
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.* I’d also appreciate if you would tell me how you found out about YARPP, by taking [this simple three-question survey](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
+
+= Many pages list "no related posts." =
+
+Most likely you have "no related posts" right now because the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" tab at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
 = How can I move the related posts display? =
 
-If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets".
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets."
 
-If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts.(Make sure you don’t add echo `related_posts();` or  you may end up with duplicates in your related posts section.)
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. (Make sure you don’t add `echo related_posts();` or you may end up with duplicates in your related posts section.)
 
 = How can I limit related posts to a certain time frame? For instance, I don’t want to show posts from two years ago. =
 
@@ -106,31 +110,34 @@ Some WordPress themes treat the home page as an archive or a “page.” Go to �
 
 If you have several posts where you don’t want to display related posts and they all share a similar category or tag, you could use “Disallow by Category” or “Disallow by Tag” in “The Pool” section. (Go to “Settings” and “Related Posts (YARPP)” and make sure “The Pool” is checked in the “Screen Options” section at the top of the page.)
 
-You could also add <!--noyarpp--> to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using “Automatic Display” in the “Display Options” section. If you are programatically calling related_posts() from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
+You could also add `<!--noyarpp-->` to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using “Automatic Display” in the “Display Options” section. If you are programatically calling `related_posts()` from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
 
 = I’m using the Thumbnails display in YARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I’d like, I’d like to center the thumbnails, etc. =
 
-If you’re familiar with CSS, you can override any YARPP styles by editing your theme’s style.css file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme’s CSS file, go to “Appearance” then “Editor” and then click style.css in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add !important after each style declaration, to make sure they’ll override the YARPP rules.
+If you’re familiar with CSS, you can override any YARPP styles by editing your theme’s `style.css` file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme’s CSS file, go to “Appearance” then “Editor” and then click `style.css` in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add `!important` after each style declaration, to make sure they’ll override the YARPP rules.
 
 Some common overrides that YARPP users have added are:
 
+`
 /* Reduces the title font size and displays more than two title lines */
 .yarpp-thumbnail {height: 200px !important;}
-.yarpp-thumbnail-title {font-size:0.8em !important; max-height: 4em !important;}
+.yarpp-thumbnail-title {font-size:0.8em !important; max-height: 4em !important
+
 /* Centers the thumbnail section */
 .yarpp-related-widget {text-align:center !important;}
+`
 
 Once you save any CSS changes, empty your browser’s cache and reload your page to see the effect.
 
 = I'm using the Thumbnails display. How can I change the thumbnail size? =
 
-The default YARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this... feedback is requested on whether this is a good idea.
+The default YARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size( 'yarpp-thumbnail', $width, $height, true );` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this. Feedback is requested on whether this is a good idea.
 
 Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose. See also the next question.
 
 = I'm using the Thumbnails display. Why aren't the right size thumbnails being served? =
 
-By default, if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal... what you really want is for YARPP to serve appropriately-sized thumbnails.
+By default, if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal. What you really want is for YARPP to serve appropriately-sized thumbnails.
 
 There are two options for doing so:
 
@@ -148,32 +155,11 @@ YARPP's custom templates feature allows you to uber-customize the related posts 
 
 = Is YARPP compatible with WordPress Multisite? =
 
-YARPP should work fine in a multisite environment, and many users are running it without any issues using WordPress Multisite. It will, however, only get results within each blog. It will not display related posts results from across your network.
+YARPP should work fine in a multisite environment, and many users are running it without any issues using WordPress Multisite. It will, however, only get results *within* each blog. It will not display related posts results from across your network.
 
-= Does YARPP slow down my blog/server? =
+= I want to use YARPP on a site with content in multiple languages. =
 
-The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized in version 3.5.
-
-If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality. If you are looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
-
-= Many pages list "no related posts". =
-
-Most likely you have "no related posts" right now as the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: lower your match threshold in the YARPP options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" tab at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
-
-= Are there any plugins that are incompatible with YARPP? =
-
-* [DISQUS](https://wordpress.org/extend/plugins/disqus-comment-system/): go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
-* [SEO_Pager plugin](http://wordpress.org/support/topic/267966): turn off the automatic display option in SEO Pager and instead add the code manually.
-* [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
-* [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
-* Other related posts plugins, obviously, may also be incompatible.
-* [WPML](http://wpml.org): various incompatibilities have been reported. The multilingual plugin [Polylang](https://polylang.wordpress.com/) has great support for YARPP and is suggested as a replacement for WPML.
-
-Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
-
-= I want to use YARPP on a site with content in multiple languages =
-
-The recommended solution in such cases is to use the [Polylang](https://polylang.wordpress.com/). Polylang has posted [a tutorial for using YARPP with Polylang](https://polylang.wordpress.com/2013/05/03/polylang-and-yarpp/).
+The recommended solution in such cases is to use the [Polylang](https://polylang.wordpress.com/) plugin. Polylang has posted [a tutorial for using YARPP with Polylang](https://polylang.wordpress.com/2013/05/03/polylang-and-yarpp/).
 
 = Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
@@ -181,11 +167,26 @@ YARPP works fine with full-width (double-byte) characters, assuming your WordPre
 
 However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
 
-= YARPP seems to be broken since I upgraded to WordPress X.X. =
+= Does YARPP slow down my blog/server? =
+
+The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized since version 3.5.
+
+If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality. If you are looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
+
+= Are there any plugins that are incompatible with YARPP? =
+
+* [DISQUS](https://wordpress.org/extend/plugins/disqus-comment-system/): go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
+* [SEO_Pager plugin](http://wordpress.org/support/topic/267966): turn off the automatic display option in SEO Pager and instead add the code manually.
+* [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
+* [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
+* [WPML](http://wpml.org): various incompatibilities have been reported. The multilingual plugin [Polylang](https://polylang.wordpress.com/) has great support for YARPP and is suggested as a replacement for WPML.
+* Other related posts plugins, obviously, may also be incompatible.
+
+Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
+
+= YARPP seems to be broken since I upgraded to WordPress X.X. =
 
 Before upgrading to a new WordPress version, you should first deactivate all plugins, then upgrade your WordPress, and then reactivate your plugins. Even then, you may still find that something went wrong with your YARPP functionality. If so, try these steps:
-
-= Things are weird after I upgraded. =
 
 1. Visit the "Related Posts (YARPP)" settings page to verify your settings.
 2. Deactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it.
@@ -194,6 +195,10 @@ Before upgrading to a new WordPress version, you should first deactivate all plu
 = Can I clear my cache? Can I build up the cache manually? =
 
 The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
+
+= I removed the YARPP plugin but I still see YARPP-related database tables. Shouldn't those be removed, too? = 
+
+Beginning with version 4.0.7, YARPP includes clean uninstall functionality. If you no longer wish to use YARPP, first deactivate YARPP using the "Plugins" page in WordPress, then click the "Delete" link found on the same page. This process will automatically remove all YARPP-related files, including temp tables. If you manually try to remove YARPP files instead of going through WordPress, some files or temp tables could remain.
 
 == Developing with YARPP ==
 
@@ -304,9 +309,9 @@ YARPP is currently localized in the following languages:
 
 = 4.0.7 =
 * [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options.
-* Updated plugin de-activate functionality to drop all tables. Prior to fix some legacy tables remained which required manual deletion in wp_options from phpmyadmin.
+* Updated plugin de-activate/delete functionality to drop all tables. Prior to fix some legacy tables remained which required manual deletion in wp_options from phpmyadmin.
 * Updated FAQs section.
-* Modification of YARPP’s data collection terms and conditions.
+* Update to YARPP’s data collection terms and conditions.
 * Added Macedonian (`mk_MK`) localization by [WPdiscounts] (http://wpdiscounts.com).
 
 = 4.0.6 =
