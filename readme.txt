@@ -33,7 +33,7 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 = Testimonials =
 
 <blockquote>
-"One of my favorite [plugin]s I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on."
+"One of my favorite plugin's I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on."
 </blockquote>
 
 &mdash; [Matt Mullenweg](http://ma.tt), WordPress creator
@@ -42,8 +42,8 @@ I try to respond to inquiries on the forums on a regular basis and hope to build
 "The first one I ended up trying was Yet Another Related Posts Plugin (YARPP), and mitcho has really done a fantastic job on it:
 
 <ul>
-<li>It’s trivial to install.</li>
-<li>You don’t have to edit your WordPress template.</li>
+<li>It's trivial to install.</li>
+<li>You don't have to edit your WordPress template.</li>
 <li>The relevance is good: the suggested posts are related, and you can tweak thresholds and how things are computed if you want."</li>
 </ul>
 </blockquote>
@@ -78,7 +78,7 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.* I’d also appreciate if you would tell me how you found out about YARPP, by taking [this simple three-question survey](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). *Please do not email with questions.* I'd also appreciate if you would tell me how you found out about YARPP, by taking [this simple three-question survey](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
 
 = Many pages list "no related posts." =
 
@@ -88,33 +88,33 @@ Most likely you have "no related posts" right now because the default "match thr
 
 If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets."
 
-If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. (Make sure you don’t add `echo related_posts();` or you may end up with duplicates in your related posts section.)
+If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. (Make sure you don't add `echo related_posts();` or you may end up with duplicates in your related posts section.)
 
-= How can I limit related posts to a certain time frame? For instance, I don’t want to show posts from two years ago. =
+= How can I limit related posts to a certain time frame? For instance, I don't want to show posts from two years ago. =
 
-Yes. In Wordpress, go to “Settings” and “Related Posts (YARPP)” and make sure “The Pool” is checked in the “Screen Options” section at the top of the page.  In “The Pool” section, check the box next to “Show only posts from the past ___ months.”
+Yes. In Wordpress, go to "Settings" and "Related Posts (YARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.  In "The Pool" section, check the box next to "Show only posts from the past *X* months."
 
 = Where do I tell YARPP to display related posts only by tags? =
 
-In WordPress, go to “Settings” and “Related Posts (YARPP)” and make sure “Relatedness” is checked in the “Screen Options” section at the top of the page.  In the “Relatedness” section, configure the dropdown boxes next to “Titles,” “Bodies,” “Categories,” and “Tags.”
+In WordPress, go to "Settings" and "Related Posts (YARPP)" and make sure "Relatedness" is checked in the "Screen Options" section at the top of the page.  In the "Relatedness" section, configure the dropdown boxes next to "Titles," "Bodies," "Categories," and "Tags."
 
 = Can I specify related posts? =
 
 Sorry, but specifying related posts, displaying related posts from external WordPress sites, and pulling content from the Comments section are all outside the scope of YARPP at this time.
 
-= I’m seeing related posts displayed on the home page. How do I prevent that? =
+= I'm seeing related posts displayed on the home page. How do I prevent that? =
 
-Some WordPress themes treat the home page as an archive or a “page.” Go to “Settings” then “Related Posts (YARPP)” and view the “Display Options” section. Make sure “Pages” and “Also display in archives” are not checked.
+Some WordPress themes treat the home page as an archive or a "page." Go to "Settings" then "Related Posts (YARPP)" and view the "Display Options" section. Make sure "Pages" and "Also display in archives" are not checked.
 
-= How can I prevent the “related posts” list from displaying on specific posts? =
+= How can I prevent the "related posts" list from displaying on specific posts? =
 
-If you have several posts where you don’t want to display related posts and they all share a similar category or tag, you could use “Disallow by Category” or “Disallow by Tag” in “The Pool” section. (Go to “Settings” and “Related Posts (YARPP)” and make sure “The Pool” is checked in the “Screen Options” section at the top of the page.)
+If you have several posts where you don't want to display related posts and they all share a similar category or tag, you could use "Disallow by Category" or "Disallow by Tag" in "The Pool" section. (Go to "Settings" and "Related Posts (YARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.)
 
-You could also add `<!--noyarpp-->` to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using “Automatic Display” in the “Display Options” section. If you are programatically calling `related_posts()` from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
+You could also add `<!--noyarpp-->` to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using "Automatic Display" in the "Display Options" section. If you are programatically calling `related_posts()` from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
 
-= I’m using the Thumbnails display in YARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I’d like, I’d like to center the thumbnails, etc. =
+= I'm using the Thumbnails display in YARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I'd like, I'd like to center the thumbnails, etc. =
 
-If you’re familiar with CSS, you can override any YARPP styles by editing your theme’s `style.css` file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme’s CSS file, go to “Appearance” then “Editor” and then click `style.css` in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add `!important` after each style declaration, to make sure they’ll override the YARPP rules.
+If you're familiar with CSS, you can override any YARPP styles by editing your theme's `style.css` file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme's CSS file, go to "Appearance" then "Editor" and then click `style.css` in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add `!important` after each style declaration, to make sure they'll override the YARPP rules.
 
 Some common overrides that YARPP users have added are:
 
@@ -127,7 +127,7 @@ Some common overrides that YARPP users have added are:
 .yarpp-related-widget {text-align:center !important;}
 `
 
-Once you save any CSS changes, empty your browser’s cache and reload your page to see the effect.
+Once you save any CSS changes, empty your browser's cache and reload your page to see the effect.
 
 = I'm using the Thumbnails display. How can I change the thumbnail size? =
 
@@ -147,7 +147,7 @@ There are two options for doing so:
 
 = I'm using the Thumbnails display. Why are some of my posts missing appropriate images? =
 
-YARPP’s thumbnail view requires that a WordPress “featured image” be set for each post. If you have many posts that never had a featured image set, I recommend the plugin [Auto Post Thumbnail](http://wordpress.org/extend/plugins/auto-post-thumbnail/), which will generate post thumbnails for you.
+YARPP's thumbnail view requires that a WordPress "featured image" be set for each post. If you have many posts that never had a featured image set, I recommend the plugin [Auto Post Thumbnail](http://wordpress.org/extend/plugins/auto-post-thumbnail/), which will generate post thumbnails for you.
 
 = How can I use the custom template feature? =
 
@@ -210,8 +210,9 @@ If you would like to programmatically control which post types are considered in
 
 = Custom displays =
 
-Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in [my slides from my WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
+Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in my slides from my [WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
+<blockquote>
 	yarpp_related(array(
 		// Pool options: these determine the "pool" of entities which are considered
 		'post_type' => array('post', 'page', ...),
@@ -244,6 +245,7 @@ Developers can call YARPP's powerful relatedness algorithm from anywhere in thei
 	),
 	$reference_ID, // second argument: (optional) the post ID. If not included, it will use the current post.
 	true); // third argument: (optional) true to echo the HTML block; false to return it
+</blockquote>
 
 Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the builtin template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
 
@@ -302,7 +304,7 @@ YARPP is currently localized in the following languages:
 * Swedish (`sv_SE`) by Max Elander
 * Turkish (`tr_TR`) by [Nurullah](http://www.ndemir.com) and [Barış Ünver](http://beyn.org/)
 * Vietnamese (`vi_VN`) by Vu Nguyen of [Rubik Integration](http://rubikintegration.com/)
-* Ukrainian (`uk_UA`) by [Onore](http://Onore.kiev.ua) (Alexander Musevich)
+* Ukrainian (`uk_UA`) by [Onore(Alexander Musevich)](http://Onore.kiev.ua)
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
 
 == Changelog ==
@@ -311,7 +313,7 @@ YARPP is currently localized in the following languages:
 * [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options.
 * Updated plugin de-activate/delete functionality to drop all tables. Prior to fix some legacy tables remained which required manual deletion in wp_options from phpmyadmin.
 * Updated FAQs section.
-* Update to YARPP’s data collection terms and conditions.
+* Update to YARPP's data collection terms and conditions.
 * Added Macedonian (`mk_MK`) localization by [WPdiscounts] (http://wpdiscounts.com).
 
 = 4.0.6 =
