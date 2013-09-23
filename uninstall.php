@@ -16,6 +16,7 @@ $optNames = array(
     'yarpp_fulltext_disabled',
     'yarpp_optin_timeout',
     'yarpp_version',
+    'yarpp_version_info',
     'yarpp_version_info_timeout',
     'yarpp_activated'
 );
