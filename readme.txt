@@ -212,41 +212,6 @@ If you would like to programmatically control which post types are considered in
 
 Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in my slides from my [WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
-	yarpp_related(
-	    array(
-            // Pool options: these determine the "pool" of entities which are considered
-            'post_type' => array('post', 'page', ...),
-            'show_pass_post' => false, // show password-protected posts
-            'past_only' => false, // show only posts which were published before the reference post
-            'exclude' => array(), // a list of term_taxonomy_ids. entities with any of these terms will be excluded from consideration.
-            'recent' => false, // to limit to entries published recently, set to something like '15 day', '20 week', or '12 month'.
-
-            // Relatedness options: these determine how "relatedness" is computed
-            // Weights are used to construct the "match score" between candidates and the reference post
-            'weight' => array(
-                'body' => 1,
-                'title' => 2, // larger weights mean this criteria will be weighted more heavily
-                'tax' => array(
-                    'post_tag' => 1,
-                    ... // put any taxonomies you want to consider here with their weights
-                )
-            ),
-            // Specify taxonomies and a number here to require that a certain number be shared:
-            'require_tax' => array(
-                'post_tag' => 1 // for example, this requires all results to have at least one 'post_tag' in common.
-            ),
-            // The threshold which must be met by the "match score"
-            'threshold' => 5,
-
-            // Display options:
-            'template' => true, // either the name of a file in your active theme or the boolean false to use the builtin template
-            'limit' => 5, // maximum number of results
-            'order' => 'score DESC'
-        )',
-        $reference_ID. // second argument: (optional) the post ID. If not included, it will use the current post.
-        true
-	); // third argument: (optional) true to echo the HTML block; false to return it.
-
 Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the builtin template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
 
 If you need to use related entries programmatically or to know whether they exist, you can use the functions `yarpp_get_related($args, $reference_ID)` and `yarpp_related_exist($args, $reference_ID)`. `yarpp_get_related` returns an array of `post` objects, just like the WordPress function `get_posts`. `yarpp_related_exist` returns a boolean for whether any such related entries exist. For each function, `$args` takes the same arguments as those shown for `yarpp_related` above, except for the various display and template options.
