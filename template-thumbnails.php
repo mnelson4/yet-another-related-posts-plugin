@@ -5,7 +5,7 @@
  *
  * This template is used when you choose the built-in thumbnails option.
  * If you want to create a new template, look at yarpp-templates/yarpp-template-example.php as an example.
- * More information on the custom templates is in the Developing with YARPP section of the readme.
+ * More information on the custom templates is available at http://mitcho.com/blog/projects/yarpp-3-templates/
  */
 
 if ( !$this->diagnostic_using_thumbnails() )
