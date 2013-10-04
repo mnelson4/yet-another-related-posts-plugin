@@ -1008,7 +1008,7 @@ class YARPP {
 			$this->active_cache->end_yarpp_time(); // YARPP time is over... :(
 		}
 
-		unset( $related_query );
+		unset($related_query);
 		$this->restore_post_context();
 	
 		if ($related_count > 0 && $promote_yarpp && $domain != 'metabox') {
@@ -1021,8 +1021,7 @@ class YARPP {
                 "</p>\n";
         }
 
-		if ( $optin ) $output .= "<img src='http://yarpp.org/pixels/".md5(get_bloginfo('url'))."'/>\n";
-
+		$output .= '<img src="http://yarpp.org/pixels/'.md5(get_bloginfo('url')).'" alt="Yarpp"/>'."\n";
 		$output .= "</div>\n";
 			
 		if ($echo) echo $output;
@@ -1327,13 +1326,13 @@ class YARPP {
 	
 	// @since 3.3: use PHP serialized format instead of JSON
 	function version_info( $enforce_cache = false ) {
-		if ( !$enforce_cache && false !== ($result = $this->get_transient('yarpp_version_info')) )
+		if (!$enforce_cache && false !== ($result = $this->get_transient('yarpp_version_info')) )
 			return $result;
 
 		$version = YARPP_VERSION;
 		$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
 		
-		if ( is_wp_error($remote) ||
+		if (is_wp_error($remote) ||
 			 wp_remote_retrieve_response_code( $remote ) != 200 ||
 			 !isset($remote['body'])) {
 			// try again later
@@ -1369,8 +1368,8 @@ class YARPP {
 	// a version of the transient functions which is unaffected by caching plugin behavior.
 	// we want to control the lifetime of data.
 	private function get_transient( $transient ) {
-		$transient_timeout = $transient . '_timeout';
-		if ( intval( get_option( $transient_timeout ) ) < time() ) {
+		$transient_timeout = $transient.'_timeout';
+		if ( intval(get_option($transient_timeout)) < time()) {
 			delete_option( $transient_timeout );
 			return false; // timed out
 		}
