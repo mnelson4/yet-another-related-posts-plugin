@@ -1021,7 +1021,9 @@ class YARPP {
                 "</p>\n";
         }
 
-		$output .= '<img src="http://yarpp.org/pixels/'.md5(get_bloginfo('url')).'" alt="Yarpp"/>'."\n";
+		if($optin){
+		    $output .= '<img src="http://yarpp.org/pixels/'.md5(get_bloginfo('url')).'" alt="Yarpp"/>'."\n";
+		}
 		$output .= "</div>\n";
 			
 		if ($echo) echo $output;
