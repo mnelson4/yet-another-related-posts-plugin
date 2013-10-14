@@ -274,6 +274,9 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
+= 4.0.8 =
+* The recent 4.0.7 YARPP update included a settings modification to opt in users to our tracking pixel by default. By doing so, our intent was to use this expanded information to better understand the geographic reach of the popular plugin. We have been made aware that this change infringed upon the WordPress guidelines. We apologize for the issue and have remedied the situation in update 4.0.8. Going forward, we would really appreciate your input to help us continue to improve the product. We are primarily looking for country, domain, and date installed information. Please help us make YARPP better by opting in to this information and by filling out our quick, [5 question survey](http://www.surveymonkey.com/s/Z278L88). Thank you.
+
 = 4.0.7 =
 * [Bugfix](https://wordpress.org/support/topic/orderby-error): Now more robust against certain custom options.
 * Updated plugin de-activate/delete functionality to drop all tables. Prior to fix some legacy tables remained which required manual deletion in wp_options from phpmyadmin.
