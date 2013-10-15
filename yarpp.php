@@ -8,7 +8,7 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 Author URI: http://mitcho.com/
 */
 
-define('YARPP_VERSION', '4.0.88888888');
+define('YARPP_VERSION', '4.0.8');
 define('YARPP_DIR', dirname(__FILE__));
 define('YARPP_NO_RELATED', ':(');
 define('YARPP_RELATED', ':)');
