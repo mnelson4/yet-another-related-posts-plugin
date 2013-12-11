@@ -6,8 +6,9 @@ function the_score() {
 	echo get_the_score();
 }
 
-function get_the_score() { // returns the score
+function get_the_score() {
 	global $post;
+
 	$score = $post->score;
 	return apply_filters('get_the_score', $score);
 }

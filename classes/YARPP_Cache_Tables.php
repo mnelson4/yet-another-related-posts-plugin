@@ -1,9 +1,5 @@
 <?php
 
-$yarpp_storage_class = 'YARPP_Cache_Tables';
-
-define('YARPP_TABLES_RELATED_TABLE', 'yarpp_related_cache');
-
 class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
 
@@ -28,19 +24,20 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 
 		$charset_collate = '';
-		if ( ! empty( $wpdb->charset ) )
-			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-		if ( ! empty( $wpdb->collate ) )
-			$charset_collate .= " COLLATE $wpdb->collate";
+		if (!empty($wpdb->charset)) $charset_collate = "DEFAULT CHARACTER SET ".$wpdb->charset;
+		if (!empty($wpdb->collate)) $charset_collate .= " COLLATE ".$wpdb->collate;
 
-		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
-			`reference_ID` bigint(20) unsigned NOT NULL default '0',
-			`ID` bigint(20) unsigned NOT NULL default '0',
-			`score` float unsigned NOT NULL default '0',
-			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY ( `reference_ID` , `ID` ),
-			INDEX (`score`), INDEX (`ID`)
-			) $charset_collate;");
+		$wpdb->query(
+            "CREATE TABLE IF NOT EXISTS `".$wpdb->prefix.YARPP_TABLES_RELATED_TABLE."` (
+			    `reference_ID`  bigint(20) unsigned NOT NULL default '0',
+			    `ID`            bigint(20) unsigned NOT NULL default '0',
+			    `score`         float unsigned NOT NULL default '0',
+			    `date`          timestamp NOT NULL default CURRENT_TIMESTAMP,
+			PRIMARY KEY (`reference_ID`,`ID`),
+			INDEX (`score`),
+			INDEX (`ID`)
+			)$charset_collate;"
+        );
 	}
 	
 	public function upgrade($last_version) {
@@ -124,8 +121,7 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 			$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 
 			$recent = $this->core->get_option('recent');
-			if ( !!$recent )
-				$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
+			if ((bool) $recent) $arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		}
 		return $arg;
 	}

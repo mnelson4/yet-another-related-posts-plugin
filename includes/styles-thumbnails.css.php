@@ -1,24 +1,17 @@
 <?php
-/*
+/**
  * Dynamic styles for YARPP's built-in thumbnails template
- * @since 4
+ * @since 4.0
  */
 
-$height = 120;
-$width = 120;
+$height             = (isset($_GET['height'])) ? (int) $_GET['height'] : 120;
+$width              = (isset($_GET['width']))  ? (int) $_GET['width']  : 120;
+$margin             = 5;
+$width_with_margins = ($margin * 2) + $width;
+$height_with_text   = $height + 50;
+$extra_margin        = 7;
 
-if ( isset($_GET['height']) )
-	$height = (int) $_GET['height'];
-if ( isset($_GET['width']) )
-	$width = (int) $_GET['width'];
-
-$margin = 5;
-$width_with_margins = $width + 2 * $margin;
-$height_with_text = $height + 50;
-$extramargin = 7;
-
-header( 'Content-Type: text/css' );
-
+header('Content-Type: text/css');
 ?>
 .yarpp-thumbnails-horizontal .yarpp-thumbnail, .yarpp-thumbnail-default, .yarpp-thumbnail-title {
 	display: inline-block;
@@ -44,7 +37,7 @@ header( 'Content-Type: text/css' );
 	font-size: 1em;
 	max-height: 2.8em;
 	line-height: 1.4em;
-	margin: <?php echo $extramargin; ?>px;
+	margin: <?php echo $extra_margin; ?>px;
 	margin-top: 0px;
 	width: <?php echo $width; ?>px;
 	text-decoration: inherit;
