@@ -15,7 +15,7 @@ Display a list of related entries on your site and feeds based on a unique algor
 
 Yet Another Related Posts Plugin (YARPP) displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
 
-YARPP Basic Features
+**YARPP Basic Features**
 -----------------------------------------
 * **Thumbnails or list view** of related content.
 * **Related posts, pages, and custom post types**.
@@ -26,7 +26,7 @@ YARPP Basic Features
 
 This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FAQ](http://wordpress.org/plugins/yet-another-related-posts-plugin/faq/) for answers to common questions.
 
-Enable YARPP Pro for Powerful Enhancements
+**Enable YARPP Pro for Powerful Enhancements**
 -------------------------------------------
 * Make money by displaying relevant sponsored ads.
 * Customize thumbnail display through the user interface.
