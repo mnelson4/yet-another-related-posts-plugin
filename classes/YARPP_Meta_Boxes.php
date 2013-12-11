@@ -1,132 +1,146 @@
 <?php
 
 class YARPP_Meta_Box {
-	protected $template_text = '';
+	protected $template_text = null;
 	
 	function __construct() {
-		$this->template_text = __( "This advanced option gives you full power to customize how your related posts are displayed. Templates (stored in your theme folder) are written in PHP.", 'yarpp' );
+		$this->template_text =
+            __(
+                "This advanced option gives you full power to customize how your related posts are displayed.&nbsp;".
+                "Templates (stored in your theme folder) are written in PHP.",
+                'yarpp'
+            );
 	}
 
-	function checkbox( $option, $desc, $class = '' ) {
-		echo "<div class='yarpp_form_row yarpp_form_checkbox $class'><div scope='row'>";
-		echo "<input type='checkbox' name='$option' id='yarpp-$option' value='true'";
-		checked( yarpp_get_option( $option ) == 1 );
-		echo "  /> <label for='yarpp-$option'>$desc</label></div></div>";
+	function checkbox($option, $desc, $class=null) {
+		$out =
+            "<div class='yarpp_form_row yarpp_form_checkbox $class'><div scope='row'>".
+		    "<input type='checkbox' name='$option' id='yarpp-$option' value='true'".
+		    checked(yarpp_get_option($option), true, false).
+		    " /> <label for='yarpp-$option'>$desc</label></div></div>";
+
+        echo $out;
 	}
 	
 	private function offer_copy_templates() {
 		global $yarpp;
-		return ( !$yarpp->diagnostic_custom_templates() && $yarpp->admin->can_copy_templates() );
+		return (!$yarpp->diagnostic_custom_templates() && $yarpp->admin->can_copy_templates());
 	}
 	
-	function template_checkbox( $rss = false, $class = '' ) {
+	public function template_checkbox($rss=false, $class=null) {
 		global $yarpp;
 
-		$pre = $rss ? 'rss_' : '';
-		$chosen_template = yarpp_get_option( "{$pre}template" );
-		$choice = false === $chosen_template ? 'builtin' :
-			( $chosen_template == 'thumbnails' ? 'thumbnails' : 'custom' );
+		$pre = ($rss) ? 'rss_' : '';
+		$chosen_template = yarpp_get_option($pre."template");
+		$choice = ($chosen_template === false)
+            ? 'builtin'
+            : (($chosen_template === 'thumbnails') ? 'thumbnails' : 'custom');
 
-		echo "<div class='yarpp_form_row yarpp_form_template_buttons $class'>";
+		echo '<div class="yarpp_form_row yarpp_form_template_buttons '.$class.'">';
 		
 			echo "<div data-value='builtin' class='yarpp_template_button";
-			if ( 'builtin' == $choice )
-				echo ' active';
+			if ($choice === 'builtin') echo ' active';
 			echo "'><div class='image'></div><div class='label'>" . __( 'List', 'yarpp' ) . "</div></div>";
 	
 			echo "<div data-value='thumbnails' class='yarpp_template_button";
-			if ( 'thumbnails' == $choice )
-				echo ' active';
-			if ( !$yarpp->diagnostic_post_thumbnails() )
-				echo ' disabled';
+			if ($choice === 'thumbnails') echo ' active';
+			if (!$yarpp->diagnostic_post_thumbnails()) echo ' disabled';
 			echo "'";
-			if ( !$yarpp->diagnostic_post_thumbnails() )
-				echo ' data-help="' . esc_attr( __( 'This option is disabled because your theme does not support post thumbnails.', 'yarpp' ) ) . '"';
-			echo "><div class='image'></div><div class='label'>" . __( 'Thumbnails', 'yarpp' ) . "</div></div>";
+			if (!$yarpp->diagnostic_post_thumbnails()) {
+				echo ' data-help="'.esc_attr(__('This option is disabled because your theme does not support post thumbnails.', 'yarpp')).'"';
+            }
+			echo "><div class='image'></div><div class='label'>".__('Thumbnails', 'yarpp')."</div></div>";
 	
 			echo "<div data-value='custom' class='yarpp_template_button";
-			if ( 'custom' == $choice )
-				echo ' active';
-			if ( !$yarpp->diagnostic_custom_templates() )
-				echo ' disabled';
+			if ($choice === 'custom') echo ' active';
+			if (!$yarpp->diagnostic_custom_templates()) echo ' disabled';
 			echo "'";
-			if ( !$yarpp->diagnostic_custom_templates() ) {
-				$help = __( 'This option is disabled because no YARPP templates were found in your theme.', 'yarpp' );
-				if ( $this->offer_copy_templates() )
-					$help .= ' ' . __( "Would you like to copy some sample templates bundled with YARPP into your theme?", 'yarpp' ) . "<input type='button' class='button button-small yarpp_copy_templates_button' value='" . esc_attr( __( 'Copy Templates', 'yarpp' ) ) . "'/>";
-				echo " data-help='" . esc_attr( $help ) . "'";
+			if (!$yarpp->diagnostic_custom_templates()) {
+				$help = __('This option is disabled because no YARPP templates were found in your theme.', 'yarpp');
+				if ($this->offer_copy_templates()) {
+					$help .= ' '.__("Would you like to copy some sample templates bundled with YARPP into your theme?", 'yarpp')."<input type='button' class='button button-small yarpp_copy_templates_button' value='".esc_attr(__('Copy Templates', 'yarpp'))."'/>";
+                }
+				echo " data-help='".esc_attr($help)."'";
 			}
-			echo "><div class='image'></div><div class='label'>" . __( 'Custom', 'yarpp' ) . "</div></div>";
+			echo "><div class='image'></div><div class='label'>".__('Custom', 'yarpp')."</div></div>";
 	
 			echo "<input type='hidden' name='{$pre}use_template' id='yarpp-{$pre}use_template' class='use_template' value='{$choice}' />";
 
 		echo "</div>";
 
 	}
-	function template_file( $rss = false, $class = '' ) {
+
+	public function template_file($rss=false, $class=null) {
 		global $yarpp;
-		$pre = $rss ? 'rss_' : '';
+		$pre = ($rss) ? 'rss_' : '';
+
 		echo "<div class='yarpp_form_row yarpp_form_template_file $class'><div class='yarpp_form_label'>";
-		_e( "Template file:", 'yarpp' );
+		_e("Template file:", 'yarpp');
 		echo "</div><div><select name='{$pre}template_file' id='{$pre}template_file'>";
-		$chosen_template = yarpp_get_option( "{$pre}template" );
-		foreach ( $yarpp->get_templates() as $template ) {
-			echo "<option value='" . esc_attr( $template['basename'] ) . "'" . selected( $template['basename'], $chosen_template, false );
-			foreach ( $template as $key => $value )
-				echo " data-{$key}='" . esc_attr( $value ) . "'";
-			echo '>' . esc_html( $template['name'] ) . '</option>';
+
+		$chosen_template = yarpp_get_option("{$pre}template");
+		foreach ($yarpp->get_templates() as $template) {
+			echo "<option value='".esc_attr($template['basename'])."'".selected($template['basename'], $chosen_template, false);
+			foreach ($template as $key => $value) {
+				echo " data-{$key}='".esc_attr($value)."'";
+            }
+			echo '>'.esc_html($template['name']).'</option>';
 		}
-		echo "</select><p class='template_file_wrap'><span id='{$pre}template_file'></span></p><p class='template_author_wrap'>" . __( 'Author:' ) . " <span id='{$pre}template_author'></span></p><p class='template_description_wrap'><span id='{$pre}template_description'></span></p></div></div>";
+		echo "</select><p class='template_file_wrap'><span id='{$pre}template_file'></span></p><p class='template_author_wrap'>".__( 'Author:' )." <span id='{$pre}template_author'></span></p><p class='template_description_wrap'><span id='{$pre}template_description'></span></p></div></div>";
 	}
-	function textbox( $option, $desc, $size=2, $class='', $note = '' ) {
-		$value = esc_attr( yarpp_get_option( $option ) );
+
+	public function textbox($option, $desc, $size=2, $class=null, $note=null) {
+		$value = esc_attr(yarpp_get_option($option));
 		echo "<div class='yarpp_form_row yarpp_form_textbox $class'><div class='yarpp_form_label'>";
-		echo "$desc</div>
-				<div><input name='$option' type='text' id='$option' value='$value' size='$size' />";
-		if ( !empty( $note ) )
+		echo "{$desc}</div><div><input name='{$option}' type='text' id='{$option}' value='{$value}' size='{$size}' />";
+		if ($note) {
 			echo " <em><small>{$note}</small></em>";
-		echo "</div></div>";
-	}
-	function beforeafter( $options, $desc, $size=10, $class='', $note = '' ) {
-		echo "<div class='yarpp_form_row yarpp_form_textbox $class'><div class='yarpp_form_label'>$desc</div><div>";
-		$value = esc_attr( yarpp_get_option( $options[0] ) );
-		echo "<input name='{$options[0]}' type='text' id='{$options[0]}' value='$value' size='$size' /> <span class='yarpp_divider'>/</span> ";
-		$value = esc_attr( yarpp_get_option( $options[1] ) );
-		echo "<input name='{$options[1]}' type='text' id='{$options[1]}' value='$value' size='$size' />";
-		if ( !empty( $note ) )
-			echo " <em><small>{$note}</small></em>";
+        }
 		echo "</div></div>";
 	}
 
-	function tax_weight( $taxonomy ) {
-		$weight = (int) yarpp_get_option( "weight[tax][{$taxonomy->name}]" );
-		$require = (int) yarpp_get_option( "require_tax[{$taxonomy->name}]" );
+	public function beforeafter($options, $desc, $size=10, $class=null, $note=null) {
+		echo "<div class='yarpp_form_row yarpp_form_textbox {$class}'><div class='yarpp_form_label'>{$desc}</div><div>";
+		$value = esc_attr( yarpp_get_option( $options[0] ) );
+		echo "<input name='{$options[0]}' type='text' id='{$options[0]}' value='{$value}' size='{$size}' /> <span class='yarpp_divider'>/</span> ";
+		$value = esc_attr( yarpp_get_option( $options[1] ) );
+		echo "<input name='{$options[1]}' type='text' id='{$options[1]}' value='{$value}' size='{$size}' />";
+		if ($note){
+			echo " <em><small>{$note}</small></em>";
+        }
+		echo "</div></div>";
+	}
+
+	public function tax_weight($taxonomy) {
+		$weight     = (int) yarpp_get_option("weight[tax][{$taxonomy->name}]");
+		$require    = (int) yarpp_get_option("require_tax[{$taxonomy->name}]");
+
 		echo "<div class='yarpp_form_row yarpp_form_select'><div class='yarpp_form_label'>{$taxonomy->labels->name}:</div><div><select name='weight[tax][{$taxonomy->name}]'>";
-		echo "<option value='no'". ( ( !$weight && !$require ) ? ' selected="selected"': '' )."  > " . __( "do not consider", 'yarpp' ) . "</option>";
-		echo "<option value='consider'". ( ( $weight == 1 && !$require ) ? ' selected="selected"': '' )."  >" . __( "consider", 'yarpp' ) . "</option>";
-		echo "<option value='consider_extra'". ( ( $weight > 1 && !$require ) ? ' selected="selected"': '' )."  >" . __( "consider with extra weight", 'yarpp' ) . "</option>";
-		echo "<option value='require_one'". ( ( $require == 1 ) ? ' selected="selected"': '' )."  >" . sprintf( __( "require at least one %s in common", 'yarpp' ), $taxonomy->labels->singular_name ) . "</option>";
-		echo "<option value='require_more'". ( ( $require == 2 ) ? ' selected="selected"': '' )."  >" . sprintf( __( "require more than one %s in common", 'yarpp' ), $taxonomy->labels->singular_name ) . "</option>";
+		echo "<option value='no'".((!$weight && !$require) ? ' selected="selected"': '' )."  > ".__("do not consider", 'yarpp')."</option>";
+		echo "<option value='consider'".(($weight == 1 && !$require) ? ' selected="selected"': '' )."  >".__("consider", 'yarpp')."</option>";
+		echo "<option value='consider_extra'".(($weight > 1 && !$require) ? ' selected="selected"': '' )."  >".__("consider with extra weight", 'yarpp')."</option>";
+		echo "<option value='require_one'".(($require == 1) ? ' selected="selected"': '' )."  >".sprintf(__("require at least one %s in common", 'yarpp'), $taxonomy->labels->singular_name)."</option>";
+		echo "<option value='require_more'".(($require == 2) ? ' selected="selected"': '' )."  >".sprintf(__("require more than one %s in common", 'yarpp'), $taxonomy->labels->singular_name)."</option>";
 		echo "</select></div></div>";
 	}
 	
-	function weight( $option, $desc ) {
+	public function weight($option, $desc) {
 		global $yarpp;
 		
-		$weight = (int) yarpp_get_option( "weight[$option]" );
+		$weight = (int) yarpp_get_option("weight[$option]");
 		
-		// both require MyISAM fulltext indexing:
+		/* Both require MyISAM fulltext indexing: */
 		$fulltext = $yarpp->diagnostic_fulltext_disabled() ? ' readonly="readonly" disabled="disabled"' : '';
 		
-		echo "<div class='yarpp_form_row yarpp_form_select'><div class='yarpp_form_label'>$desc</div><div>";
-		echo "<select name='weight[$option]'>";
-		echo "<option $fulltext value='no'". ( !$weight ? ' selected="selected"': '' )."  >".__( "do not consider", 'yarpp' )."</option>";
-		echo "<option $fulltext value='consider'". ( ( $weight == 1 ) ? ' selected="selected"': '' )."  > ".__( "consider", 'yarpp' )."</option>";
-		echo "<option $fulltext value='consider_extra'". ( ( $weight > 1 ) ? ' selected="selected"': '' )."  > ".__( "consider with extra weight", 'yarpp' )."</option>";
+		echo "<div class='yarpp_form_row yarpp_form_select'><div class='yarpp_form_label'>{$desc}</div><div>";
+		echo "<select name='weight[{$option}]'>";
+		echo "<option {$fulltext} value='no'".((!$weight) ? ' selected="selected"': '')."  >".__("do not consider", 'yarpp')."</option>";
+		echo "<option {$fulltext} value='consider'".(($weight == 1) ? ' selected="selected"': '')."  > ".__("consider", 'yarpp')."</option>";
+		echo "<option {$fulltext} value='consider_extra'".(($weight > 1) ? ' selected="selected"': '')."  > ".__("consider with extra weight", 'yarpp')."</option>";
 		echo "</select></div></div>";
 	}
 	
-	function displayorder( $option, $class = '' ) {
+	public function displayorder($option, $class=null) {
 		echo "<div class='yarpp_form_row yarpp_form_select $class'><div class='yarpp_form_label'>";
 		_e( "Order results:", 'yarpp' );
 		echo "</div><div><select name='$option' id='<?php echo $option; ?>'>";
@@ -144,7 +158,7 @@ class YARPP_Meta_Box {
 }
 
 class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
-	function exclude( $taxonomy, $string ) {
+	public function exclude($taxonomy, $string) {
 		global $yarpp;
 
 		echo "<div class='yarpp_form_row yarpp_form_exclude'><div class='yarpp_form_label'>";
@@ -152,7 +166,7 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		echo "</div><div class='yarpp_scroll_wrapper'><div class='exclude_terms' id='exclude_{$taxonomy}'>";
 
 		$exclude_tt_ids = wp_parse_id_list( yarpp_get_option( 'exclude' ) );
-		$exclude_term_ids = $yarpp->admin->get_term_ids_from_tt_ids( $taxonomy, $exclude_tt_ids );
+		$exclude_term_ids = $yarpp->admin->get_term_ids_from_tt_ids($taxonomy, $exclude_tt_ids);
 		if ( count( $exclude_term_ids ) ) {
 			$terms = get_terms( $taxonomy, array( 'include' => $exclude_term_ids ) );
 			foreach ( $terms as $term ) {
@@ -163,7 +177,7 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		echo "</div></div></div>";
 	}
 
-	function display() {
+	public function display() {
 		global $yarpp;
 
 		echo "<p>";
@@ -173,13 +187,13 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		<div class='yarpp_form_row'><div class='yarpp_form_label'><?php _e( 'Post types considered:', 'yarpp' ); ?></div><div><?php echo implode( ', ', $yarpp->get_post_types( 'label' ) ); ?> <a href='#help-dev' id='yarpp-help-cpt' class='yarpp_help'>&nbsp;</a></div></div>
 
 	<?php
-		foreach ( $yarpp->get_taxonomies() as $taxonomy ) {
+		foreach ($yarpp->get_taxonomies() as $taxonomy) {
 			$this->exclude( $taxonomy->name, sprintf( __( 'Disallow by %s:', 'yarpp' ), $taxonomy->labels->singular_name ) );
 		}
 		$this->checkbox( 'show_pass_post', __( "Show password protected posts?", 'yarpp' ) );
 	
 		$recent = yarpp_get_option( 'recent' );
-		if ( !!$recent ) {
+		if ((bool) $recent) {
 			list( $recent_number, $recent_units ) = explode( ' ', $recent );
 		} else {
 			$recent_number = 12;
@@ -193,15 +207,23 @@ class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 		</select>";
 	
 		echo "<div class='yarpp_form_row yarpp_form_checkbox'><div><input type='checkbox' name='recent_only' value='true'";
-		checked( !!$recent );
+		checked((bool) $recent);
 		echo " /> ";
 		echo str_replace( 'NUMBER', $recent_number, str_replace( 'UNITS', $recent_units, __( "Show only posts from the past NUMBER UNITS", 'yarpp' ) ) );
 		echo "</div></div>";
 
 	}
-}
 
-add_meta_box( 'yarpp_pool', __( '"The Pool"', 'yarpp' ), array( new YARPP_Meta_Box_Pool, 'display' ), 'settings_page_yarpp', 'normal', 'core' );
+}/*end class*/
+
+add_meta_box(
+    'yarpp_pool',
+    __( '"The Pool"', 'yarpp' ),
+    array(new YARPP_Meta_Box_Pool, 'display'),
+    'settings_page_yarpp',
+    'normal',
+    'core'
+);
 
 class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
 	function display() {
@@ -292,7 +314,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 		$this->displayorder( 'order' );			
 
 		$this->checkbox( 'promote_yarpp', __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' )
-		." <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.org' ) ) . "</code>" ) ) ."'>&nbsp;</span>" );
+		." <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.com' ) ) . "</code>" ) ) ."'>&nbsp;</span>" );
 	}
 }
 
@@ -353,7 +375,7 @@ class YARPP_Meta_Box_Display_Feed extends YARPP_Meta_Box {
 
 		$this->displayorder( 'rss_order', 'rss_displayed' );			
 					
-		$this->checkbox( 'rss_promote_yarpp', __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ) . " <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.org' ) )."</code>" ) ) . "'>&nbsp;</span>", 'rss_displayed' );
+		$this->checkbox( 'rss_promote_yarpp', __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ) . " <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://yarpp.com' ) )."</code>" ) ) . "'>&nbsp;</span>", 'rss_displayed' );
 	}
 }
 
@@ -362,9 +384,6 @@ add_meta_box('yarpp_display_rss', __('Display options <small>for RSS</small>', '
 class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 	function display() {
 		global $yarpp;
-
-        /* TODO: Remove */
-//		$pluginurl = plugin_dir_url( __FILE__ );
 
         $happy = ($yarpp->diagnostic_happy()) ? 'spin' : null;
 
@@ -381,8 +400,8 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
                 '</a>'.
             '</li>'.
             '<li>'.
-                '<a href="http://yarpp.org" target="_blank">'.
-                    '<span class="icon icon-plugin"></span> '.__('YARPP on the Web', 'yarpp').
+                '<a href="http://yarpp.com" target="_blank">'.
+                    '<span class="icon icon-pro"></span> Learn more about YARPP'.
                 '</a>'.
             '</li>'.
             '<li>'.
@@ -399,7 +418,7 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
 
 add_meta_box(
     'yarpp_display_optin',
-    __( 'Help Improve YARPP', 'yarpp' ),
+    __('Help Improve YARPP', 'yarpp'),
     array(
         new YARPP_Meta_Box_Optin,
         'display'
@@ -453,8 +472,15 @@ class YARPP_Meta_Box_Optin extends YARPP_Meta_Box {
 
 }/*YARPP_Meta_Box_Optin*/
 
-add_meta_box( 'yarpp_display_contact', __( 'Contact YARPP', 'yarpp' ), array( new YARPP_Meta_Box_Contact, 'display' ), 'settings_page_yarpp', 'side', 'core' );
+add_meta_box(
+    'yarpp_display_contact',
+    __('Contact YARPP', 'yarpp'),
+    array(new YARPP_Meta_Box_Contact, 'display'),
+    'settings_page_yarpp',
+    'side',
+    'core'
+);
 
 // since 3.3: hook for registering new YARPP meta boxes
-do_action( 'add_meta_boxes_settings_page_yarpp' );
+do_action('add_meta_boxes_settings_page_yarpp');
 

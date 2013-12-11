@@ -33,7 +33,7 @@ ul.yarpp_contacts li a img {
 	position: absolute;
 	margin-left: -29px;
 	margin-top: -1px;
-	background-image: url('sprites.png');
+	background-image: url('../images/sprites.png');
 }
 body.rtl .icon {
 	margin-left: none;
@@ -42,10 +42,11 @@ body.rtl .icon {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
 	.icon {
-		background-image: url('sprites-2x.png');
+		background-image: url('../images/sprites-2x.png');
 		background-size: 110px 22px;
 	}
 }
+
 .icon-wordpress {
 	background-position: 0 0;
 }
@@ -57,6 +58,9 @@ body.rtl .icon {
 }
 .icon-star {
 	background-position: -66px 0;
+}
+.icon-pro {
+	background-position: -88px 0;
 }
 
 .icon.spin, .icon-star:hover {
@@ -95,7 +99,7 @@ a.info{
 .yarpp_help {
 	display: inline-block;
 	cursor: default;
-	background-image: url('../../../wp-includes/images/wpicons-2x.png?ver=20120720');
+	background-image: url('../../../../wp-includes/images/wpicons-2x.png?ver=20120720');
 	background-size: 560px 40px;
 	background-position: -520px -20px;
 	cursor: default;
@@ -103,17 +107,19 @@ a.info{
 	width: 20px;
 	height: 20px;
 }
+
 a.yarpp_help {
 	text-decoration: none;
 	cursor: pointer;
 }
+
 a.yarpp_help:hover {
 	text-decoration: none;
 	background-position: -520px -0px;
 }
 
 .branch-3-4 .yarpp_help, .branch-3-3 .yarpp-help {
-	background-image: url('../../../wp-includes/images/wpicons.png?ver=20120720');
+	background-image: url('../../../../wp-includes/images/wpicons.png?ver=20120720');
 }
 
 .exclude_terms span {
@@ -298,7 +304,7 @@ body.rtl #yarpp-optin-learnmore {
 .yarpp_template_button > div.image {
 	width: 70px;
 	height: 40px;
-	background-image: url('template-buttons-2x.png');
+	background-image: url('../images/template-buttons-2x.png');
 	background-size: 210px 40px;
 	opacity: 0.8;
 }
