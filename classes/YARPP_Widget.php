@@ -188,3 +188,5 @@ class YARPP_Widget extends WP_Widget {
  * @since 2.0 Add as a widget
  */
 add_action('widgets_init', function(){register_widget('YARPP_Widget');});
+
+?>
