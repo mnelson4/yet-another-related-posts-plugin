@@ -6,7 +6,7 @@ Plugin URI: http://yarpp.com/
 Tags: feeds, pages, posts, related, rss, yarpp, ads, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
 Tested up to: 3.7.1
-Stable tag: 4.1
+Stable tag: 4.1.1
 License: GPLv2 or later
 
 Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
