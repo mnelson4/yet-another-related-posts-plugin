@@ -322,6 +322,9 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
+= 4.1.1 =
+* Bugfix: Incompatibility with PHP < 5.3.x
+
 = 4.1 =
 * Added optional YARPP Pro enhancements:
     + Revenue-generating ad content interspersed with related posts display
