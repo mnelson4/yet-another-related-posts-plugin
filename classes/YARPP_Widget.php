@@ -1,7 +1,8 @@
 <?php
-
-// vaguely based on code by MK Safi
-// http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
+/*
+ * Vaguely based on code by MK Safi
+ * http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
+ */
 class YARPP_Widget extends WP_Widget {
 
 	public function __construct() {
@@ -187,4 +188,8 @@ class YARPP_Widget extends WP_Widget {
 /**
  * @since 2.0 Add as a widget
  */
-add_action('widgets_init', function(){register_widget('YARPP_Widget');});
+function yarpp_widget_init() {
+    register_widget('YARPP_Widget');
+}
+
+add_action('widgets_init', 'yarpp_widget_init');
