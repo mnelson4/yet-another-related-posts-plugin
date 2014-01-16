@@ -36,32 +36,6 @@ Yet Another Related Posts Plugin (YARPP) displays pages, posts, and custom post 
 
 This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FAQ](http://wordpress.org/plugins/yet-another-related-posts-plugin/faq/) for answers to common questions.
 
-= Testimonials =
-
-<blockquote>
-"One of my favorite plugines I just activated on my blog is called Yet Another Related Posts Plugin... I've been blogging seven or eight years now so I have a lot of archives, and it actually surprises me sometimes when I blog about something and I visit the permalink to see I've written about it before... and it also increases the traffic on your blog because when they come in just to one entry, they'll see this other stuff going on."
-</blockquote>
-
-&mdash; [Matt Mullenweg](http://ma.tt), WordPress creator
-
-<blockquote>
-"The first one I ended up trying was Yet Another Related Posts Plugin (YARPP), and mitcho has really done a fantastic job on it:
-
-<ul>
-<li>It's trivial to install.</li>
-<li>You don't have to edit your WordPress template.</li>
-<li>The relevance is good: the suggested posts are related, and you can tweak thresholds and how things are computed if you want."</li>
-</ul>
-</blockquote>
-
-&mdash; [Matt Cutts](http://www.mattcutts.com/blog/wordpress-plugin-related-posts/), head of Webspam, Google
-
-<blockquote>
-"One way of getting search engines to get to your older content a bit easier, thus increasing your WordPress SEO capabilites a LOT, is by using a related posts plugin. These plugins search through your posts database to find posts with the same subject, and add links to these posts. There are quite a few related posts plugins but I tend to stick with the Yet Another Related Posts Plugin..."
-</blockquote>
-
-&mdash; [Yoast (Joost de Valk)](http://yoast.com/articles/wordpress-seo/)
-
 == Installation ==
 
 = Auto display on your website =
