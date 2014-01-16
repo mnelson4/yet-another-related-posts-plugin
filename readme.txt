@@ -9,7 +9,7 @@ Tested up to: 3.8
 Stable tag: 4.1.2
 License: GPLv2 or later
 
-Display a list of related entries on your site and feeds based on a unique algorithm. Now with thumbnail support built-in!
+Display a list of related posts on your site based on a powerful unique algorithm. Earn money by including sponsored content!
 
 == Description ==
 
@@ -297,7 +297,7 @@ YARPP is currently localized in the following languages:
 = 4.1.2 =
 * Tested on Wordpress 3.8.
 * Added field boxes with API Key information to Domain page.
-* MyISAM check notice message was updated to better express what itb does and a feedback message was added in case the fulltext index creation fails.
+* MyISAM check notice message was updated to better express what it does and a feedback message was added in case the fulltext index creation fails.
 * Bugfix: MyISAM check overwrite was broken since 4.1.x release.
 * Bugfix: PHP title not defined warning when creating new cache entry.
 * Bugfix: Uninstall script now deletes options with empty, false or 0 values.
