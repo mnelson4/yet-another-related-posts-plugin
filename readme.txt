@@ -62,7 +62,7 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 Below are Frequently Asked Questions about YARPP basic. For questions about the new YARPP Pro enhancements, please visit the [YARPP Pro FAQ](http://www.yarpp.com/faq).
 
-If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). We'd also appreciate if you would tell us how you found out about YARPP, by taking [this quick five-question survey](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). We'd also appreciate if you would help us improve YARPP by [answering a few survey questions](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
 
 = Many pages list "no related posts." =
 
