@@ -105,7 +105,7 @@ Some common overrides that YARPP users have added are:
 `
 /* Reduces the title font size and displays more than two title lines */
 .yarpp-thumbnail {height: 200px !important;}
-.yarpp-thumbnail-title {font-size:0.8em !important; max-height: 4em !important
+.yarpp-thumbnail-title {font-size:0.8em !important; max-height: 4em !important}
 
 /* Centers the thumbnail section */
 .yarpp-related-widget {text-align:center !important;}
