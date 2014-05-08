@@ -1,0 +1,152 @@
+<div class="yarpp-widget-settings-switch">
+    <p>
+        <label for="<?php echo $this->get_field_id('use_yarpp_pro') ?>">Display widget using </label>
+        <select
+            class="yarpp-mode-switch"
+            name="<?php echo $this->get_field_name('use_pro') ?>"
+            <?php echo ($yarpp->yarppPro['active']) ? null : 'disabled' ?>>
+            <option value="0" <?php echo selected($instance['use_pro']) ?>>Yarpp Basic</option>
+            <option value="1" <?php echo selected($instance['use_pro']) ?>>Yarpp Pro</option>
+        </select>
+        
+        <?php if (!$yarpp->yarppPro['active']): ?>
+        <div class="yarpp_pro_msg">
+            <p>
+                <strong>YARPP Pro is not active!</strong>
+                <br/>
+                Take advantage of YARPP Pro&apos;s enhanced features by creating your free account today.
+            </p>
+            <a href="options-general.php?page=yarpp&mode=pro" class="button" style="width: 100%; text-align: center">
+                Take me to YARPP Pro setting&apos;s page
+            </a>
+        </div>
+        <?php endif ?>
+    
+    </p>
+
+    <div class="yarpp-widget-pro-settings" style="display: <?php echo ($instance['use_pro']) ? 'block' : 'none' ?>">
+        <p>
+            To show relevant sponsored content in this sidebar, copy and paste the correct Widget ID from your YARPP Pro dashboard.
+            <br/>
+            <br/>
+            <label>Widget ID: </label>
+            <input
+                type="text"
+                id="<?php echo $this->get_field_id('use_yarpp_pro_dpid') ?>"
+                name="<?php echo $this->get_field_name('pro_dpid') ?>"
+                value="<?php echo esc_attr($instance['pro_dpid']) ?>"
+            />
+            <span class="yarpp_help">
+                <span class="yarpp_help_msg">
+                    Create an account through the “YARPP Pro” tab on the “Settings” page, create your widget style,
+                    and click “Get Code” to find your Widget ID.
+                </span>
+            </span>
+        </p>
+    </div>
+
+    <div class="yarpp-widget-basic-settings" style="display: <?php echo ($instance['use_pro']) ? 'none' : 'block' ?>">
+        <p class='yarpp-widget-type-control'>
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_builtin'); ?>">
+                <input
+                    type="radio"
+                    id="<?php echo $this->get_field_id('use_template_builtin'); ?>"
+                    name="<?php echo $this->get_field_name('use_template'); ?>"
+                    value="builtin" <?php checked($choice === 'builtin' ) ?>
+                />
+                <?php _e("List",'yarpp'); ?>
+            </label>
+            <br/>
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_thumbnails'); ?>">
+                <input
+                    type="radio"
+                    id="<?php echo $this->get_field_id('use_template_thumbnails'); ?>"
+                    name="<?php echo $this->get_field_name('use_template'); ?>"
+                    value="thumbnails" <?php checked($choice === 'thumbnails') ?>
+                />
+                <?php _e("Thumbnails", 'yarpp'); ?>
+            </label>
+            <br/>
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_custom'); ?>">
+                <input
+                    type="radio"
+                    id="<?php echo $this->get_field_id('use_template_custom'); ?>"
+                    name="<?php echo $this->get_field_name('use_template'); ?>"
+                    value="custom" <?php checked($choice === 'custom'); disabled(!count($templates)); ?>
+                />
+                <?php _e("Custom", 'yarpp'); ?>
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('title') ?>">
+                <?php _e('Title:'); ?>
+                <input
+                    type="text"
+                    class="widefat"
+                    id="<?php echo $this->get_field_id('title') ?>"
+                    name="<?php echo $this->get_field_name('title') ?>"
+                    value="<?php echo esc_attr($instance['title']) ?>"/>
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('thumbnails_heading') ?>">
+                <?php _e('Heading:', 'yarpp') ?>
+                <input
+                    type="text"
+                    class="widefat"
+                    id="<?php echo $this->get_field_id('thumbnails_heading') ?>"
+                    name="<?php echo $this->get_field_name('thumbnails_heading') ?>"
+                    value="<?php echo esc_attr($instance['thumbnails_heading']) ?>"/>
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('template_file'); ?>">
+                <?php _e("Template file:",'yarpp');?>
+            </label>
+            <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
+                <?php foreach ($templates as $template): ?>
+                    <option value='<?php echo esc_attr($template['basename']); ?>' <?php selected($template['basename'], $instance['template']);?>>
+                        <?php echo esc_html($template['name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </p>
+        <br/>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQuery(function($) {
+    $('.yarpp-widget-type-control','#wpbody').each(ensureTemplateChoice);
+    $('.yarpp-widget-type-control input','#wpbody').on('change', ensureTemplateChoice);
+    $('.yarpp-widget-settings-switch .yarpp-mode-switch', '#wpbody').on('change', makeTheSwitch);
+
+    function ensureTemplateChoice(e) {
+        if (typeof e === 'object' && 'type' in e) e.stopImmediatePropagation();
+        var this_form = $(this).closest('form'),
+            widget_id = this_form.find('.widget-id').val();
+        // if this widget is just in staging:
+        if (/__i__$/.test(widget_id)) return;
+        var builtin     = !! $('#widget-'+widget_id+'-use_template_builtin').prop('checked'),
+            thumbnails  = !! $('#widget-'+widget_id+'-use_template_thumbnails').prop('checked'),
+            custom      = !! $('#widget-'+widget_id+'-use_template_custom').prop('checked');
+        $('#widget-'+widget_id+'-title').closest('p').toggle(builtin);
+        $('#widget-'+widget_id+'-thumbnails_heading').closest('p').toggle(thumbnails);
+        $('#widget-'+widget_id+'-template_file').closest('p').toggle(custom);
+    }
+
+    function makeTheSwitch(e){
+        if (typeof e === 'object' && 'type' in e) e.stopImmediatePropagation();
+        var $context = $(this).closest('.yarpp-widget-settings-switch');
+        if ($(this).val() === '1') {
+            $('.yarpp-widget-basic-settings', $context).fadeOut('fast',function(){
+                $('.yarpp-widget-pro-settings', $context).fadeIn('fast');
+            });
+        } else {
+            $('.yarpp-widget-pro-settings', $context).fadeOut('fast',function(){
+                $('.yarpp-widget-basic-settings', $context).fadeIn('fast');
+            });
+        }
+    }
+});
+</script>

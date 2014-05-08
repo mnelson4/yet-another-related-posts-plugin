@@ -10,6 +10,7 @@ ul.yarpp_contacts li {
 	padding: 0px 0px 0px 30px;
 	line-height: 22px;
 }
+
 body.rtl ul.yarpp_contacts li {
 	padding: 0px 30px 0px 0px;	
 }
@@ -35,6 +36,7 @@ ul.yarpp_contacts li a img {
 	margin-top: -1px;
 	background-image: url('../images/sprites.png');
 }
+
 body.rtl .icon {
 	margin-left: none;
 	margin-right: -29px;
@@ -50,18 +52,23 @@ body.rtl .icon {
 .icon-wordpress {
 	background-position: 0 0;
 }
+
 .icon-twitter {
 	background-position: -22px 0;
 }
+
 .icon-plugin {
 	background-position: -44px 0;
 }
+
 .icon-star {
 	background-position: -66px 0;
 }
+
 .icon-pro {
 	background-position: -88px 0;
 }
+
 .icon-facebook {
 	background-position: -110px 0;
 }
@@ -83,11 +90,13 @@ body.rtl .icon {
 	5% { transform: rotate(0deg) scale(1.5); }
 	100% { transform: rotate(360deg) scale(1);}
 }
+
 @-moz-keyframes yarpp-spin {
 	0% { -moz-transform: rotate(0deg) scale(1); }
 	5% { -moz-transform: rotate(0deg) scale(1.5); }
 	100% { -moz-transform: rotate(360deg) scale(1);}
 }
+
 @-webkit-keyframes yarpp-spin {
 	0% { -webkit-transform: rotate(0deg) scale(1); }
 	5% { -webkit-transform: rotate(0deg) scale(1.5); }
@@ -100,15 +109,11 @@ a.info{
 }
 
 .yarpp_help {
-	display: inline-block;
-	cursor: default;
-	background-image: url('../../../../wp-includes/images/wpicons-2x.png?ver=20120720');
-	background-size: 560px 40px;
-	background-position: -520px -20px;
-	cursor: default;
-	vertical-align: baseline;
-	width: 20px;
-	height: 20px;
+    display: inline-block;
+    background: transparent url('../../../../wp-includes/images/wpicons.png') no-repeat -520px -20px;
+    vertical-align: text-bottom;
+    width: 20px;
+    height: 20px;
 }
 
 a.yarpp_help {
@@ -122,7 +127,7 @@ a.yarpp_help:hover {
 }
 
 .branch-3-4 .yarpp_help, .branch-3-3 .yarpp-help {
-	background-image: url('../../../../wp-includes/images/wpicons.png?ver=20120720');
+	background-image: url('../../../../wp-includes/images/wpicons.png');
 }
 
 .exclude_terms span {
@@ -137,52 +142,67 @@ a.yarpp_help:hover {
 	margin-bottom: 5px;
 	background: #fdfdfd;
 }
+
 .yarpp_form_row {
 	overflow: visible;
 	padding: 8px;
 }
+
 .yarpp_form_row > div {
 	display: inline-block;
 	*display: inline;
 	vertical-align: baseline;
 }
+
 .yarpp_form_checkbox > div {
 }
+
 .yarpp_form_select > div {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+
 .yarpp_form_select + .yarpp_form_select {
 	padding-top: 0px;
 }
+
 .yarpp_form_label {
-	width: 190px;
+	width: 25%;
 }
+
 .yarpp_form_label + div {
 	padding-left: 16px;
+	width: 70%;
 }
+
 .yarpp_form_textbox > .yarpp_form_label {
 }
+
 .yarpp_form_select > .yarpp_form_label {
 	padding-top: 8px;
 }
+
 .yarpp_form_post_types label {
 	padding-right: 15px;
 	line-height: 20px;
 	display: inline-block;
 }
+
 body.rtl .yarpp_form_post_types label {
 	padding-right: inherit;
 	padding-left: 15px;
 }
+
 .yarpp_form_exclude label {
 	padding-right: 5px;
 	line-height: 15px;
 }
+
 body.rtl .yarpp_form_exclude label {
 	padding-right: inherit;
 	padding-left: 5px;
 }
+
 .yarpp_form_template_file > .yarpp_form_label {
 	vertical-align: top;
 	padding-top: 5px;
@@ -193,20 +213,26 @@ body.rtl .yarpp_form_exclude label {
 	width: 50%;
 	float: right;
 }
+
 body.rtl .yarpp_code_display {
 	float: left;
 }
+
 .yarpp_code_display div {
 	overflow: auto;
 	max-height: 300px;
 }
+
 .yarpp_code_display pre {
 	direction: ltr;
 }
+
 .yarpp_scroll_wrapper {
 	overflow: auto;
+	min-height: 25px;
 	max-height: 100px;
 	width: 60%;
+    vertical-align: middle !important;
 }
 
 @media all and (max-width:1200px) {
@@ -221,6 +247,7 @@ body.rtl .yarpp_code_display {
 .yarpp_copy_templates_button {
 	float: right;
 }
+
 body.rtl .yarpp_copy_templates_button {
 	float: left;
 }
@@ -228,6 +255,7 @@ body.rtl .yarpp_copy_templates_button {
 #yarpp-optin-learnmore {
 	float: right;
 }
+
 body.rtl #yarpp-optin-learnmore {
 	float: left;
 }
@@ -242,11 +270,13 @@ body.rtl #yarpp-optin-learnmore {
 
 .yarpp_subbox input[type=text], .yarpp_subbox input[type=text] {
 	font-family: monospace;
+    width: 35%
 }
 
 .yarpp_form_template_buttons {
 	padding: 0px;
 }
+
 .yarpp_template_button {
 	position: relative;
 	height: 60px;
@@ -269,6 +299,7 @@ body.rtl #yarpp-optin-learnmore {
 	-webkit-box-shadow: 1px 1px 7px 1px #bbb;
 	box-shadow: 1px 1px 7px 1px #bbb;
 }
+
 .yarpp_template_button.disabled, .yarpp_template_button.disabled:hover, .yarpp_template_button.disabled:active {
 	-webkit-box-shadow: none;
 	box-shadow: none;
@@ -279,13 +310,16 @@ body.rtl #yarpp-optin-learnmore {
 	background-image: -o-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 	background-image: linear-gradient(top, #FEFEFE, #F4F4F4) !important;
 }
+
 .yarpp_template_button.disabled > div.label {
 	color: #bbb !important;
 }
+
 .yarpp_template_button:hover {
 	border-color: #999;
 	color: #222;
 }
+
 .yarpp_template_button:active, .yarpp_template_button.active {
 	background: #eee;
 	background-image: -webkit-linear-gradient(top, #eee, #f4f4f4);
@@ -297,6 +331,7 @@ body.rtl #yarpp-optin-learnmore {
 	-webkit-box-shadow: inset 0 2px 8px -2px rgba( 0, 0, 0, 0.5 );
 	box-shadow: inset 0 2px 8px -2px rgba( 0, 0, 0, 0.5 );
 }
+
 .yarpp_template_button > div.label {
 	width: 70px;
 	bottom: 8px;
@@ -311,18 +346,23 @@ body.rtl #yarpp-optin-learnmore {
 	background-size: 210px 40px;
 	opacity: 0.8;
 }
+
 .yarpp_template_button.disabled > div.image {
 	opacity: 0.2 !important;
 }
+
 .yarpp_template_button:active > div.image {
 	opacity: 1;
 }
+
 .yarpp_template_button[data-value=builtin] > div.image {
 	background-position: 0px 0px;
 }
+
 .yarpp_template_button[data-value=thumbnails] > div.image {
 	background-position: -70px 0px;
 }
+
 .yarpp_template_button[data-value=custom] > div.image {
 	background-position: -140px 0px;
 }
