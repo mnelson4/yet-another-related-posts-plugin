@@ -1,0 +1,27 @@
+<div class="yarpp_form_row yarpp_form_textbox <?php echo $class ?>">
+    <div class="yarpp_form_label">
+        <?php echo $desc ?> 
+    </div>
+    <div>
+        <?php $value = esc_attr(yarpp_get_option($options[0])) ?>
+        <input
+            name="<?php echo $options[0] ?>"
+            type="text"
+            id="<?php echo $options[0] ?>"
+            value="<?php echo $value ?>" 
+            size="<?php echo $size ?>"
+        />
+        <span class="yarpp_divider">/</span>
+        <?php $value = esc_attr(yarpp_get_option($options[1])) ?>
+        <input 
+            name="<?php echo $options[1] ?>" 
+            type="text" 
+            id="<?php echo $options[1] ?>" 
+            value="<?php echo $value ?>" 
+            size="<?php echo $size ?>" 
+        />
+        <?php if($note): ?>
+        &nbsp;<em><small><?php echo $note ?></small></em>
+        <?php endif ?>
+    </div>
+</div>
