@@ -9,10 +9,10 @@ function switchYarppPro($status){
     $yarpp      = get_option('yarpp');
 
     if($status){
-        $yarppPro['optin']  = (bool) $yarpp['optin'];
-        $yarpp['optin']     = false;
+        $yarppPro['optin']                   = (bool) $yarpp['optin'];
+        $yarpp['optin']                      = false;
     } else {
-        $yarpp['optin']     = (bool) $yarppPro['optin'];
+        $yarpp['optin']                   = (bool) $yarppPro['optin'];
     }
 
     $yarppPro['active'] = $status;

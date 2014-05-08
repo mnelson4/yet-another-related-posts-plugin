@@ -1,0 +1,73 @@
+<div class="wrap">
+    <?php include(YARPP_DIR.'/includes/phtmls/yarpp_settings_header.phtml') ?>
+
+    <div id="yarpp_switch_container">
+        <ul id="yarpp_switch_tabs">
+            <li>
+                <a href="options-general.php?page=yarpp&mode=basic">YARPP Basic</a>
+            </li>
+            <li class="disabled">
+                <a href="options-general.php?page=yarpp&mode=pro">YARPP Pro</a>
+            </li>
+        </ul>
+
+        <div class="yarpp_switch_content">
+            <?php if ($yarpp->yarppPro['active']): ?>
+            <p>
+               The settings below allow you to configure the Basic version of Yet Another Related Plugin (YARPP).
+            </p>
+            <p>
+                <strong>&ldquo;YARPP Pro&rdquo;</strong>&nbsp;&nbsp; is also active on this installation. Click on the 
+                &nbsp;&nbsp;<strong>&ldquo;YARPP Pro&rdquo;</strong>&nbsp;&nbsp; tab to access the enhanced features dashboard
+            </p>
+            <?php else: ?>
+            <p>
+                The settings bellow allow you to configure the Basic version of Yet Another Related Post Plugin (YARPP).
+            </p>
+            <p>
+                Click on the <em>"YARPP Pro"</em> tab for additional enhancements: <strong>Earn money</strong> from sponsored ads,
+                easily <strong>customize thumbnail layout</strong> and the <strong>new sidebar format</strong>, pull
+                related posts from <strong>multiple sites</strong>, and get <strong>detailed reporting.</strong>
+                &nbsp;&nbsp;<a href="http://www.yarpp.com" target="_blank">Learn more.</a>
+            </p>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <form method="post">
+
+        <div id="poststuff" class="metabox-holder has-right-sidebar">
+
+            <?php if (!$yarpp->get_option('rss_display')): ?>
+                <style>
+                    .rss_displayed {
+                        display: none;
+                    }
+                </style>
+            <?php endif ?>
+
+            <!-- Side column -->
+            <div class="inner-sidebar" id="side-info-column">
+                <?php do_meta_boxes('settings_page_yarpp', 'side', array()) ?>
+            </div>
+
+            <!-- Main Content -->
+
+            <div id="post-body-content">
+                <?php do_meta_boxes('settings_page_yarpp', 'normal', array()) ?>
+            </div>
+
+            <script language="javascript">
+                var spinner = '<?php echo esc_url(admin_url('images/wpspin_light.gif')) ?>',
+                    loading = '<img class="loading" src="'+spinner+'" alt="loading..."/>';
+            </script>
+
+            <div>
+                <input type="submit" class='button-primary' name="update_yarpp" value="<?php _e('Save Changes')?>" />
+            </div>
+
+        </div><!--#poststuff-->
+
+    </form>
+
+</div>

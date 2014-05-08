@@ -82,6 +82,13 @@ a{
     list-style: disc;
 }
 
+.yarpp_switch_content .to_corner {
+    display: block;
+    position: absolute;
+    right: -32%;
+    text-align: center;
+}
+
 #yarpp_pro_dashboard_wrapper{
     position: relative;
     top: 0;
@@ -128,4 +135,48 @@ a{
     border: none !important;
     padding: 8px !important;
     margin: 1px !important;
+}
+
+#yarpp-display-mode {
+    margin: 1em 2em;
+}
+
+#yarpp-display-mode label {
+    margin-right: 1em;
+}
+
+#yarpp-display-mode .spinner{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}
+
+#yarpp_pro_disable_overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #EEE;
+    opacity: 0.7;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+#yarpp_pro_disable_confirm{
+    position: fixed;
+    top: 250px;
+    left: 38%;
+    background-color: #FFF;
+    box-shadow: 0 0 1em -0.1em #F33;
+    border: 2px solid #F55;
+    text-align: justify;
+    width: 25%;
+    margin: 0;
+    padding:1em 2em;
+    z-index: 1001;
 }
