@@ -6,7 +6,7 @@ Plugin URI: http://www.yarpp.com/
 Tags: feeds, pages, posts, related, rss, yarpp, ads, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
 Tested up to: 3.9.1
-Stable tag: 4.2
+Stable tag: 4.1.2
 License: GPLv2 or later
 
 Display a list of related posts on your site based on a powerful unique algorithm. Earn money by including sponsored content!
