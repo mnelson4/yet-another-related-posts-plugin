@@ -6,20 +6,6 @@ class YARPP_Admin {
 	
 	function __construct(&$core) {
 		$this->core = &$core;
-
-        /* YARPP Pro Default Options */
-        add_option(
-            'yarpp_pro',
-            array(
-                'active' => '0',
-                'aid'    => null,
-                'st'     => null,
-                'v'      => null,
-                'dpid'   => null,
-                'optin'  => false,
-                'auto_display_post_types' => array('post')
-            )
-        );
 		
 		/* If action = flush and the nonce is correct, reset the cache */
 		if (isset($_GET['action']) && $_GET['action'] === 'flush' && check_ajax_referer('yarpp_cache_flush', false, false) !== false) {

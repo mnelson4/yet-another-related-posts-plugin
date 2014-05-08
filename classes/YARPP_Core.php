@@ -11,6 +11,7 @@ class YARPP {
      * settings (yarpp_options.php) and other tasks.
      */
     public $default_options             = array();
+    public $pro_default_options         = array();
     public $default_hidden_metaboxes    = array();
     public $debug                       = false;
     public $yarppPro                    = null;
@@ -29,9 +30,8 @@ class YARPP {
                                          );
 
 	public function __construct() {
-
-        $this->yarppPro = get_option('yarpp_pro');
 		$this->load_default_options();
+        $this->yarppPro = $this->get_pro_options();
 
 		/* Loads the plugin's translated strings. */
 		load_plugin_textdomain('yarpp', false, plugin_basename(YARPP_DIR).'/lang');
@@ -88,6 +88,19 @@ class YARPP {
 	/*
 	 * OPTIONS
 	 */
+    private function load_pro_default_options() {
+        return
+            array(
+                'active' => '0',
+                'aid'    => null,
+                'st'     => null,
+                'v'      => null,
+                'dpid'   => null,
+                'optin'  => false,
+                'auto_display_post_types' => array('post')
+            );
+    }
+
 	private function load_default_options() {
 		$this->default_options = array(
 			'threshold' => 4,
@@ -203,6 +216,21 @@ class YARPP {
 
 		return $current;
 	}
+
+    private function get_pro_options(){
+        $current  = get_option('yarpp_pro');
+        $defaults = $this->load_pro_default_options();
+
+        if ($current) {
+            $out = array_merge($defaults,$current);
+            update_option('yarpp_pro', $out);
+        } else {
+            $out = $defaults;
+            add_option('yarpp_pro',$out);
+        }
+
+        return $out;
+    }
 	
 	private function array_flatten($array, $given = array()) {
 		foreach ($array as $key => $val) {
@@ -226,7 +254,6 @@ class YARPP {
         } else {
             $this->upgrade();
         }
-
         if ($this->get_option('optin')) $this->optin_ping();
     }
 
@@ -237,7 +264,6 @@ class YARPP {
 	}
 	
 	public function activate() {
-	
 		/*
 		 * If it's not known to be disabled, but the indexes aren't there.
 		 */
@@ -493,8 +519,8 @@ class YARPP {
 	
 	public function upgrade() {
 		$last_version = get_option('yarpp_version');
+
 		if (version_compare(YARPP_VERSION, $last_version) === 0) return;
-	
 		if ($last_version && version_compare('3.4b2',   $last_version) > 0) $this->upgrade_3_4b2();
 		if ($last_version && version_compare('3.4b5',   $last_version) > 0) $this->upgrade_3_4b5();
 		if ($last_version && version_compare('3.4b8',   $last_version) > 0) $this->upgrade_3_4b8();
@@ -743,6 +769,12 @@ class YARPP {
 	public function upgrade_4_0_1() {
 		delete_transient('yarpp_version_info');
 	}
+
+    public function upgrade_4_2(){
+        $this->load_pro_default_options();
+        $new = array_merge($this->pro_default_options,$this->yarppPro);
+        update_option('yarpp_pro', $new);
+    }
 	
 	/*
 	 * UTILITIES
