@@ -1,0 +1,19 @@
+<div class="yarpp_form_row yarpp_form_textbox <?php echo $class ?>">
+    <div class="yarpp_form_label">
+         <?php echo $desc ?>
+    </div>
+    <div>
+    
+        <input
+            name="<?php echo $option ?>"
+            type="text" id="<?php echo $option ?>"
+            value="<?php echo $value ?>" 
+            size="<?php echo $size ?>"
+        />
+
+    <?php if ($note): ?>
+    &nbsp;<em><small><?php echo $note ?></small></em><br/>
+    <?php endif ?>
+
+    </div>
+</div>

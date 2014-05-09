@@ -1,0 +1,106 @@
+<div class="wrap">
+    <?php include(YARPP_DIR.'/includes/phtmls/yarpp_settings_header.phtml') ?>
+
+    <div id="yarpp_switch_container">
+        <ul id="yarpp_switch_tabs">
+            <li class="<?php echo (($switch) ? null : 'disabled')?>">
+                <a href="options-general.php?page=yarpp&mode=basic">YARPP Basic</a>
+            </li>
+            <li class="<?php echo (($switch) ? 'disabled': null)?>">
+                <a href="options-general.php?page=yarpp&mode=pro">YARPP Pro</a>
+            </li>
+        </ul>
+        <div class="yarpp_switch_content">
+            <p>
+                <?php if ($yarpp->yarppPro['active']): ?>
+                Welcome to your <strong>YARPP Pro</strong> dashboard! Here you have access to the most powerful features of YARPP.
+                <a
+                    href="<?php echo plugins_url('/', dirname(__FILE__))?>/yarpp_switch.php"
+                    class="yarpp_switch_button button to_corner" data-go="basic">
+                    Deactivate &nbsp;<strong>YARPP Pro</strong>&nbsp;
+                </a>
+                <?php else: ?>
+                <strong>Access more powerful features by activating YARPP Pro!</strong>
+                <?php endif ?>
+                <br/>
+                <ul>
+                    <li>
+                        Earn money from sponsored content
+                        <br/>
+                        <em>(now available as a flexible sidebar widget!)</em>
+                    </li>
+                    <li>Pull related content from multiples sites</li>
+                </ul>
+                <ul>
+                    <li>Easily customize thumbnail layout</li>
+                    <li>Get detailed traffic reports</li>
+                </ul>
+            </p>
+
+            <div class="clear"></div>
+
+            <?php if (!$yarpp->yarppPro['active']): ?>
+            <p>
+                <a
+                    href="<?php echo plugins_url('/', dirname(__FILE__))?>yarpp_switch.php"
+                    class="yarpp_switch_button button-primary" data-go="pro">
+                    Activate <strong>YARPP Pro</strong> Now
+                </a>
+            </p>
+            <?php endif ?>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <?php if ($yarpp->yarppPro['active']): ?>
+
+    <div class="yarpp_switch_content">
+        <div id="yarpp-display-mode">
+            Automatically display related and/or sponsored content from <strong>YARPP Pro</strong> on: &nbsp;&nbsp;
+            <?php
+            $types_url = plugins_url('/', dirname(__FILE__)).'yarpp_pro_set_display_types.php';
+            $post_types = $yarpp->yarppPro['auto_display_post_types'];
+            foreach ($yarpp->get_post_types('objects') as $post_type):
+            $checked = checked(in_array( $post_type->name, $post_types), true, false);
+            ?>
+            <input
+                type="checkbox"
+                id="yarpp_post_type_post"
+                name="types[]"
+                value="<?php echo $post_type->name ?>"
+                data-href="<?php echo $types_url ?>"
+                <?php echo $checked ?>
+            />
+            <label for="yarpp_post_type_post"> <?php echo $post_type->labels->name ?></label>
+            <?php endforeach ?>
+            
+            <a href="<?php echo $types_url ?>" id="yarpp-display-mode-save" class="button-primary" style="vertical-align:middle">
+            Save Changes
+            </a>
+            <br/>
+            <br/>
+            <span>
+                To display in the sidebar, add a &nbsp;<em>&ldquo;Related Posts (YARPP)&rdquo;</em>&nbsp;
+                widget and select &nbsp<em>&ldquo;YARPP Pro&rdquo;</em>&nbsp; from the drop-down setting of the widget options.
+                Widgets are located under &nbsp;<a href="widgets.php">&ldquo;Appearance&rdquo; > &ldquo;Widgets&rdquo;</a>.
+            </span>
+        </div>
+    </div>
+
+    <div id="yarpp_pro_dashboard_wrapper">
+        <iframe
+            style="border: 0"
+            id="yarpp_pro_dashboard"
+            src="<?php echo $url ?>"
+            frameborder="0"
+            border="0"
+            cellspacing="0"
+            scrolling="yes"
+            >
+        </iframe>
+    </div>
+
+    <script>jQuery("#screen-options-link-wrap").hide();</script>
+    <?php endif ?>
+</div>

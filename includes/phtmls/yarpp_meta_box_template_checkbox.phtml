@@ -1,0 +1,49 @@
+<?php
+    $customHelp = null;
+    if (!$this->yarpp->diagnostic_custom_templates()) {
+        $customHelp = __('This option is disabled because no YARPP templates were found in your theme.', 'yarpp');
+    }
+    if ($this->offer_copy_templates()) {
+        $customHelp .=
+        ' '.__('Would you like to copy some sample templates bundled with YARPP into your theme?', 'yarpp').
+        '<input type="button" class="button button-small yarpp_copy_templates_button" value="'.esc_attr(__('Copy Templates', 'yarpp')).'"/>';
+    }
+?>
+
+<div class="yarpp_form_row yarpp_form_template_buttons <?php echo $class ?>">
+
+    <div data-value="builtin" class="yarpp_template_button <?php echo $builtIn ?>">
+        <div class="image"></div>
+        <div class="label"><?php _e('List', 'yarpp') ?></div>
+    </div>
+
+    <div
+        data-value="thumbnails"
+        class="yarpp_template_button <?php echo $thumbnails ?> <?php echo $diagPostThumbs ?>"
+        <?php if (!$this->yarpp->diagnostic_post_thumbnails()): ?>
+        data-help="<?php echo esc_attr(__('This option is disabled because your theme does not support post thumbnails.', 'yarpp'))?>"
+        <?php endif ?>
+    >
+        <div class="image"></div>
+        <div class="label"><?php _e('Thumbnails', 'yarpp') ?></div>
+    </div>
+
+    <div
+        data-value="custom"
+        class="yarpp_template_button <?php echo $custom ?> <?php echo $diagCustTemplt ?>"
+        <?php if($customHelp): ?>
+        data-help="<?php echo esc_attr($customHelp) ?>"
+        <?php endif ?>
+    >
+        <div class="image"></div>
+        <div class="label"><?php _e('Custom', 'yarpp') ?></div>
+    </div>
+
+    <input
+        type="hidden"
+        name="<?php echo $pre ?>use_template"
+        id="yarpp-<?php echo $pre ?>use_template"
+        class="use_template" value="<?php echo $choice ?>"
+    />
+
+</div>
