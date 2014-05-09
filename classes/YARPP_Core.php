@@ -1141,7 +1141,11 @@ class YARPP {
         $this->restore_post_context();
 
         if ($related_count > 0 && $promote_yarpp && $domain != 'metabox') {
-            $output .= '<p><a href="http://www.yarpp.com" class="yarpp-promote" target="_blank">Powered by</a></p>';
+            $output .=
+            '<p>'.
+                '<div style="display:none;">YARPP powered by AdBistro</div>'.
+                '<a href="http://www.yarpp.com" class="yarpp-promote" target="_blank">Powered by</a>'.
+            '</p>';
         }
 
         $output .= ($optin) ? '<img src="http://yarpp.org/pixels/'.md5(get_bloginfo('url')).'" alt="YARPP"/>'."\n" : null;
@@ -1422,7 +1426,6 @@ class YARPP {
 		/* If the content includes <!--noyarpp-->, don't display */
 		if (!stristr($content, '<!--noyarpp-->')) {
             $content .= $this->display_basic();
-            $content .= '<br/>';
             $content .= $this->display_pro('website');
         }
 	

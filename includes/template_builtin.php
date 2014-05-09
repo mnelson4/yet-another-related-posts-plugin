@@ -22,9 +22,6 @@ $options = array(
     );
 
 extract($this->parse_args($args, $options));
-$link       = get_permalink();
-$tooltip    = esc_attr((get_the_title()) ? get_the_title() : get_the_ID());
-$title      = get_the_title();
 
 
 if (have_posts()) {
@@ -33,10 +30,13 @@ if (have_posts()) {
     
 	while (have_posts()) {
 		the_post();
-        $round  = round(get_the_score(),1);
-        $score  = (current_user_can('manage_options') && $domain !== 'rss' && !is_admin())
-                ? '<abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),$round).'">('.$round.')</abbr>'
-                : null;
+        $link       = get_permalink();
+        $tooltip    = esc_attr((get_the_title()) ? get_the_title() : get_the_ID());
+        $title      = get_the_title();
+        $round      = round(get_the_score(),1);
+        $score      = (current_user_can('manage_options') && $domain !== 'rss' && !is_admin())
+                    ? '<abbr title="'.sprintf(__('%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),$round).'">('.$round.')</abbr>'
+                    : null;
 
 		$output .=
         $before_title.

@@ -5,8 +5,8 @@ Author URI: http://www.yarpp.com/
 Plugin URI: http://www.yarpp.com/
 Tags: feeds, pages, posts, related, rss, yarpp, ads, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
-Tested up to: 3.8
-Stable tag: 4.1.2
+Tested up to: 3.9.1
+Stable tag: 4.2.2
 License: GPLv2 or later
 
 Display a list of related posts on your site based on a powerful unique algorithm. Earn money by including sponsored content!
@@ -298,8 +298,13 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
+= 4.2.2 =
+* Tested on WordPress 3.9.1.
+* Bugfix: Duplicate related post links removed.
+* Bugfix: Removed extra &lt;br&gt; at the end of post content.
+
 = 4.2.1 =
-* FIXBUG: YARPP Pro options not been updated on plugin upgrade.
+* Bugfix: Resolved the issue related to "Warning: in_array() expects parameter 2 to be array, null given".
 
 = 4.2 =
 * Tested on WordPress 3.9.

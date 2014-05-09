@@ -66,7 +66,12 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
 
         $this->displayorder( 'order' );
 
-        $this->checkbox( 'promote_yarpp', __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' )
-            ." <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'http://www.yarpp.com' ) ) . "</code>" ) ) ."'>&nbsp;</span>" );
+        $this->checkbox(
+            'promote_yarpp',
+            __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ).
+            '<span class="yarpp_help" data-help="'.
+            'This option will add the line &ldquo;powered by AdBistro&rdquo; beneath the related posts section. '.
+            'This link is greatly appreciated."></span>'
+        );
     }
 }
