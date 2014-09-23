@@ -24,7 +24,7 @@
 
 .yarpp-related .yarpp-promote{ 
     clear: both !important;
-    background: url(http://api.engage.bidsystem.com/adk_mini_logo.png) no-repeat !important;
+    background: url(//api.engage.bidsystem.com/adk_mini_logo.png) no-repeat !important;
     float: right !important;
     text-indent: -1000px !important;
     cursor: pointer !important;
