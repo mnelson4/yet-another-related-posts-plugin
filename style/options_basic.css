@@ -232,7 +232,7 @@ body.rtl .yarpp_code_display {
 	min-height: 25px;
 	max-height: 100px;
 	width: 60%;
-    vertical-align: middle !important;
+    vertical-align: middle;
 }
 
 @media all and (max-width:1200px) {
@@ -305,14 +305,14 @@ body.rtl #yarpp-optin-learnmore {
 	box-shadow: none;
 	border-color: #ddd;
 	background: #f3f3f3;
-	background-image: -webkit-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
-	background-image: -moz-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
-	background-image: -o-linear-gradient(top, #FEFEFE, #F4F4F4) !important;
-	background-image: linear-gradient(top, #FEFEFE, #F4F4F4) !important;
+	background-image: -webkit-linear-gradient(top, #FEFEFE, #F4F4F4);
+	background-image: -moz-linear-gradient(top, #FEFEFE, #F4F4F4);
+	background-image: -o-linear-gradient(top, #FEFEFE, #F4F4F4);
+	background-image: linear-gradient(top, #FEFEFE, #F4F4F4);
 }
 
 .yarpp_template_button.disabled > div.label {
-	color: #bbb !important;
+	color: #bbb;
 }
 
 .yarpp_template_button:hover {
@@ -348,7 +348,7 @@ body.rtl #yarpp-optin-learnmore {
 }
 
 .yarpp_template_button.disabled > div.image {
-	opacity: 0.2 !important;
+	opacity: 0.2;
 }
 
 .yarpp_template_button:active > div.image {
