@@ -32,8 +32,8 @@ a{
 }
 
 .disabled{
-    background: #ededed !important;
-    border-bottom-color: #dfdfdf !important;
+    background: #ededed;
+    border-bottom-color: #dfdfdf;
 }
 
 #yarpp_switch_tabs a{
@@ -41,9 +41,9 @@ a{
 }
 
 .disabled>a:hover{
-    color: #000 !important;
-    text-shadow: 1px 1px 0.1em #aaa !important;
-    margin-top: -1px !important;
+    color: #000;
+    text-shadow: 1px 1px 0.1em #aaa;
+    margin-top: -1px;
 }
 
 .yarpp_switch_content{
@@ -132,9 +132,9 @@ a{
 }
 
 #yarpp_pro_api_settings #yarpp_pro_settings_submit[disabled]{
-    border: none !important;
-    padding: 8px !important;
-    margin: 1px !important;
+    border: none;
+    padding: 8px;
+    margin: 1px;
 }
 
 #yarpp-display-mode {

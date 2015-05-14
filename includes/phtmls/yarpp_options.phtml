@@ -64,6 +64,7 @@
 
             <div>
                 <input type="submit" class='button-primary' name="update_yarpp" value="<?php _e('Save Changes')?>" />
+				<?php wp_nonce_field( 'update_yarpp', 'update_yarpp-nonce' ); ?>
             </div>
 
         </div><!--#poststuff-->
