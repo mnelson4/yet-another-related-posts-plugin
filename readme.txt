@@ -298,6 +298,9 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
+= 4.2.6 =
+* Added "post__not_in" query parameter
+
 = 4.2.5 =
 * Tested on WordPress 4.2.2.
 * Styling fix: User can now override all YARPP CSS styling
