@@ -1,12 +1,12 @@
 === Yet Another Related Posts Plugin (YARPP) ===
-Contributors: jeffparker
-Author: Adknowledge
-Author URI: http://www.yarpp.com/
-Plugin URI: http://www.yarpp.com/
+Contributors: jeffparker, mnelson4
+Author: Jeff Parker
+Author URI: https://cmljnelson.wordpress.com
+Plugin URI: https://github.com/mnelson4/yet-another-related-posts-plugin
 Tags: feeds, pages, posts, related, rss, yarpp, ads, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
-Tested up to: 4.2.2
-Stable tag: 4.2.5
+Tested up to: 5.1
+Stable tag: 4.2.6
 License: GPLv2 or later
 
 Display a list of related posts on your site based on a powerful unique algorithm. Earn money by including sponsored content!
@@ -299,6 +299,7 @@ YARPP is currently localized in the following languages:
 == Changelog ==
 
 = 4.2.6 =
+* Tested on WordPress 5.1.0.
 * Added "post__not_in" query parameter
 
 = 4.2.5 =
