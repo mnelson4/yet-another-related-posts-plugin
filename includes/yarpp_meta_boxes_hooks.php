@@ -3,7 +3,6 @@ include_once(YARPP_DIR.'/classes/YARPP_Meta_Box.php');
 include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Contact.php');
 include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Display_Feed.php');
 include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Display_Web.php');
-include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Optin.php');
 include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Pool.php');
 include_once(YARPP_DIR.'/classes/YARPP_Meta_Box_Relatedness.php');
 
@@ -53,20 +52,6 @@ add_meta_box(
     'normal',
     'core'
 );
-
-if (!$yarpp->yarppPro['active']) {
-    add_meta_box(
-        'yarpp_display_optin',
-        'Get the Most Out of YARPP',
-        array(
-            new YARPP_Meta_Box_Optin,
-            'display'
-        ),
-        'settings_page_yarpp',
-        'side',
-        'core'
-    );
-}
 
 add_meta_box(
     'yarpp_display_contact',

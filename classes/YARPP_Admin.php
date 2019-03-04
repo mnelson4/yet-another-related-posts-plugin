@@ -60,11 +60,9 @@ class YARPP_Admin {
 			delete_option('yarpp_activated');
  			delete_option('yarpp_upgraded');
 
-            /* Optin/Pro message */
+            /* Optin message */
             add_action('admin_notices', array($this, 'install_notice'));
 
-		} elseif (get_option('yarpp_upgraded') && current_user_can('manage_options') && $this->core->get_option('optin')) {
-			add_action('admin_notices', array($this, 'upgrade_notice'));
 		}
 		
 		if ($this->core->get_option('optin')) delete_option('yarpp_upgraded');
@@ -258,11 +256,6 @@ class YARPP_Admin {
 
 	}
 
-    function upgrade_notice() {
-        $optinAction = ($this->core->get_option('optin')) ? 'disable' : 'enable';
-        $this->optin_notice('upgrade', $optinAction);
-    }
-
     public function install_notice(){
         $optinAction = ($this->core->get_option('optin')) ? 'disable' : 'enable';
         $this->optin_notice('install', $optinAction);
@@ -291,34 +284,6 @@ class YARPP_Admin {
 		if ($type === 'install'){
             $tmp  = __('Thank you for installing <span>Yet Another Related Posts Plugin</span>!', 'yarpp');
 			$out .= '<strong>'.str_replace('<span>','<span style="font-style:italic; font-weight: inherit;">', $tmp).'</strong>';
-        }
-
-        if($this->core->yarppPro['active']){
-
-            $out .=
-                '<p>'.
-                    'You currently have <strong>YARPP Basic</strong> and <strong>YARPP Pro</strong> enabled.<br/><br/>'.
-                    '<a href="options-general.php?page=yarpp" class="button">Take me to the settings page</a>'.
-                '</p>';
-
-        } else {
-
-            $out .=
-                '<p>'.
-                'We would really appreciate your input to help us continue to <a href="http://www.yarpp.com" target="_blank">improve the product</a>. We are primarily looking '.
-                'for country, domain, and date installed information. Please help us make YARPP better by providing this information and by filling '.
-                'out our quick, 5 question survey: <a href="http://www.surveymonkey.com/s/Z278L88" target="_blank">http://www.surveymonkey.com/s/Z278L88</a>'.
-                '</p>';
-
-            $out .= '</p><p>';
-            if($optinAction !== 'disable'){
-                $out .= $this->the_donothing_button('No, thanks').'&nbsp;&nbsp;';
-            } else {
-                $out .= $this->the_donothing_button('Yes, keep sending usage data').'&nbsp;&nbsp;';
-            }
-            $out .= $this->the_optin_button($optinAction);
-            $out .= $this->optin_button_script($optinAction);
-
         }
 
         echo $out.'</div>';
@@ -402,12 +367,7 @@ class YARPP_Admin {
 	}
 	
 	public function options_page() {
-        $mode = (isset($_GET['mode'])) ? htmlentities(strtolower($_GET['mode'])) : null;
-        if ($mode !== 'basic' && ($mode === 'pro' || $this->core->yarppPro['active'])){
-            include_once(YARPP_DIR.'/includes/yarpp_pro_options.php');
-        } else {
-            include_once(YARPP_DIR . '/includes/yarpp_options.php');
-        }
+	    include_once(YARPP_DIR . '/includes/yarpp_options.php');
 	}
 
 	// @since 3.4: don't actually compute results here, but use ajax instead		

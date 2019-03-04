@@ -24,11 +24,6 @@ class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
                 '</a>'.
             '</li>'.
             '<li>'.
-                '<a href="http://www.yarpp.com" target="_blank">'.
-                    '<span class="icon icon-pro"></span> Learn more about YARPP'.
-                '</a>'.
-            '</li>'.
-            '<li>'.
                 '<a href="http://wordpress.org/support/view/plugin-reviews/yet-another-related-posts-plugin" target="_blank">'.
                     '<span class="icon icon-star '.$happy.'"></span> '.__('Review YARPP on WordPress.org', 'yarpp').
                 '</a>'.

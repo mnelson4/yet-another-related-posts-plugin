@@ -280,7 +280,6 @@ class YARPP {
 
 		if (!get_option('yarpp_version')) {
 			add_option('yarpp_version', YARPP_VERSION);
-			$this->version_info(true);
 		} else {
 			$this->upgrade();
 		}
@@ -534,8 +533,6 @@ class YARPP {
 		$this->cache->upgrade($last_version);
 		/* flush cache in 3.4.1b5 as 3.4 messed up calculations. */
 		if ($last_version && version_compare('3.4.1b5', $last_version) > 0) $this->cache->flush();
-	
-		$this->version_info(true);
 	
 		update_option('yarpp_version', YARPP_VERSION);
 		update_option('yarpp_upgraded', true);
@@ -1471,29 +1468,6 @@ class YARPP {
         }
 	
 		return $content . $this->clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
-	}
-	
-	/*
-	 * UTILS
-	 */
-
-    /**
-	 * @since 3.3  Use PHP serialized format instead of JSON.
-     */
-	public function version_info($enforce_cache = false) {
-		if (!$enforce_cache && false !== ($result = $this->get_transient('yarpp_version_info'))) return $result;
-
-		$version = YARPP_VERSION;
-		$remote = wp_remote_post("http://yarpp.org/checkversion.php?format=php&version={$version}");
-
-		if (is_wp_error($remote) || wp_remote_retrieve_response_code($remote) != 200 || !isset($remote['body'])){
-			$this->set_transient('yarpp_version_info', null, 60*60);
-			return false;
-        }
-		
-		if ($result = @unserialize($remote['body'])) $this->set_transient('yarpp_version_info', $result, 60*60*24);
-
-		return $result;
 	}
 
     /**

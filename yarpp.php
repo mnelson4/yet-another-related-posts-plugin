@@ -1,8 +1,8 @@
 <?php
 /*----------------------------------------------------------------------------------------------------------------------
 Plugin Name: Yet Another Related Posts Plugin
-Description: Adds related posts to your site and in RSS feeds, based on a powerful, customizable algorithm. Enabling YARPP Pro gives you access to even more powerful features. <a href="http://www.yarpp.com" target="_blank">Find out more</a>.
-Version: 4.2.6
+Description: Adds related posts to your site and in RSS feeds, based on a powerful, customizable algorithm.
+Version: 5.0.0
 Author: Jeff Parker, Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
 Plugin URI: https://github.com/mnelson4/yet-another-related-posts-plugin
@@ -14,7 +14,7 @@ if(!defined('WP_CONTENT_DIR')){
     define('WP_CONTENT_DIR', substr($tr,0,strrpos($tr,'/')));
 }
 
-define('YARPP_VERSION', '4.2.6');
+define('YARPP_VERSION', '5.0.0');
 define('YARPP_DIR', dirname(__FILE__));
 define('YARPP_URL', plugins_url('',__FILE__));
 define('YARPP_NO_RELATED', ':(');

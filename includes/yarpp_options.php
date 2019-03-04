@@ -18,57 +18,6 @@ if (!$yarpp->diagnostic_custom_templates()) {
     if ($template_option !== false && $template_option !== 'thumbnails') yarpp_set_option('rss_template', false);
 }
 
-/**
- * @since 3.3  Move version checking here, in PHP.
- */
-if (current_user_can('update_plugins')) {
-    $yarpp_version_info = $yarpp->version_info();
-
-    /*
-     * These strings are not localizable, as long as the plugin data on wordpress.org cannot be.
-     */
-    $slug = 'yet-another-related-posts-plugin';
-    $plugin_name = 'Yet Another Related Posts Plugin';
-    $file = basename(YARPP_DIR).'/yarpp.php';
-    if ($yarpp_version_info['result'] === 'new') {
-
-        /* Make sure the update system is aware of this version. */
-        $current = get_site_transient('update_plugins');
-        if (!isset($current->response[$file])) {
-            delete_site_transient('update_plugins');
-            wp_update_plugins();
-        }
-
-        echo '<div class="updated"><p>';
-        $details_url = self_admin_url('plugin-install.php?tab=plugin-information&plugin='.$slug.'&TB_iframe=true&width=600&height=800');
-        printf(
-            __(
-               'There is a new version of %1$s available.'.
-               '<a href="%2$s" class="thickbox" title="%3$s">View version %4$s details</a>'.
-               'or <a href="%5$s">update automatically</a>.', 'yarpp'),
-            $plugin_name,
-            esc_url($details_url),
-            esc_attr($plugin_name),
-            $yarpp_version_info['current']['version'],
-            wp_nonce_url( self_admin_url('update.php?action=upgrade-plugin&plugin=').$file, 'upgrade-plugin_'.$file)
-        );
-        echo '</p></div>';
-
-    } else if ($yarpp_version_info['result'] === 'newbeta') {
-
-        echo '<div class="updated"><p>';
-        printf(
-            __(
-                "There is a new beta (%s) of Yet Another Related Posts Plugin. ".
-                "You can <a href=\"%s\">download it here</a> at your own risk.", "yarpp"),
-            $yarpp_version_info['beta']['version'],
-            $yarpp_version_info['beta']['url']
-        );
-        echo '</p></div>';
-
-    }
-}
-
 /* MyISAM Check */
 include 'yarpp_myisam_notice.php';
 
