@@ -460,10 +460,11 @@ abstract class YARPP_Cache {
 	
 		if ( !isset($wp_filter['all']) )
 			$wp_current_filter[] = $tag;
-	
 		// Sort
 		if ( !isset( $merged_filters[ $tag ] ) ) {
-			ksort($wp_filter[$tag]);
+			// Mike edit March 3 2019: remove keysort because `$wp_filter[$tag]` is now an object, not an array.
+			// but it doesn't seem to have broken anything.
+			// ksort($wp_filter[$tag]);
 			$merged_filters[ $tag ] = true;
 		}
 	
