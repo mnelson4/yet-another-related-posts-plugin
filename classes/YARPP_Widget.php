@@ -31,34 +31,14 @@ class YARPP_Widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', $instance['title']);
         $output = $before_widget;
-        if ($instance['use_pro']) {
-            if((isset($yarpp->yarppPro['active']) && $yarpp->yarppPro['active']) &&
-               (isset($yarpp->yarppPro['aid']) && isset($yarpp->yarppPro['v']))  &&
-               ($yarpp->yarppPro['aid'] && $yarpp->yarppPro['v'])) {
 
-                $aid  = $yarpp->yarppPro['aid'];
-                $v    = $yarpp->yarppPro['v'];
-                $dpid = $instance['pro_dpid'];
-                $ru   = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-
-                /* TODO: Put this on a template */
-                $output .=
-                    "\n".
-                    '<div id="adkengage_ssp_div"></div>'.
-                    '<script type="text/javascript" '.
-                    'src="http://adkengage.com/pshandler.js?aid='.$aid.'&v='.$v.'&dpid='.$dpid.'&ru='.$ru.'">'.
-                    '</script>'.
-                    "\n";
-            }
-        } else {
-            if (!$instance['template']) {
-                $output .= $before_title;
-                $output .= $title;
-                $output .= $after_title;
-            }
-            $instance['domain'] = 'widget';
-            $output .= $yarpp->display_related(null, $instance, false);
+        if (!$instance['template']) {
+            $output .= $before_title;
+            $output .= $title;
+            $output .= $after_title;
         }
+        $instance['domain'] = 'widget';
+        $output .= $yarpp->display_related(null, $instance, false);
 
         $output .= $after_widget;
         echo $output;
@@ -69,7 +49,6 @@ class YARPP_Widget extends WP_Widget {
             'template'           => false,
             'title'              => $new_instance['title'],
             'thumbnails_heading' => $new_instance['thumbnails_heading'],
-            'use_pro'            => (isset($new_instance['use_pro']))  ? $new_instance['use_pro']  : false,
             'pro_dpid'           => (isset($new_instance['pro_dpid'])) ? $new_instance['pro_dpid'] : null,
             'promote_yarpp'      => false,
         );

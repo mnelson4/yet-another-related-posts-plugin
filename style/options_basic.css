@@ -130,10 +130,6 @@ a.yarpp_help:hover {
 	display: inline-block;
 }
 
-#yarpp_display_optin.yarpp_attention {
-	border: 2px solid #bbb;
-}
-
 .yarpp_subbox {
 	margin-bottom: 5px;
 	background: #fdfdfd;
@@ -250,10 +246,6 @@ body.rtl .yarpp_copy_templates_button {
 
 #yarpp-optin-learnmore {
 	float: right;
-}
-
-body.rtl #yarpp-optin-learnmore {
-	float: left;
 }
 
 .template_file_wrap, .template_author_wrap, .template_description_wrap {
@@ -377,4 +369,39 @@ body.rtl #yarpp-optin-learnmore {
 	max-height: 500px;
 	width: 100%;
 	overflow: auto;
+}
+nbr {
+    white-space: nowrap;
+}
+
+a{
+    text-decoration: none;
+    outline: none;
+}
+
+
+.yarpp_warning {
+    display: none;
+    color: #F00;
+    background-color: #ffcfd4;
+    border: 1px solid #F00;
+    padding: 2px 6px;
+    margin-left: 1em;
+    border-radius: 3px;
+}
+
+#yarpp-display-mode {
+    margin: 1em 2em;
+}
+
+#yarpp-display-mode label {
+    margin-right: 1em;
+}
+
+#yarpp-display-mode .spinner{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
 }

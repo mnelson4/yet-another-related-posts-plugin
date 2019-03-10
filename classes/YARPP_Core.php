@@ -14,7 +14,6 @@ class YARPP {
     public $pro_default_options         = array();
     public $default_hidden_metaboxes    = array();
     public $debug                       = false;
-    public $yarppPro                    = null;
     public $cache_bypass;
     public $cache;
     public $admin;
@@ -31,7 +30,6 @@ class YARPP {
 
 	public function __construct() {
 		$this->load_default_options();
-        $this->yarppPro = $this->get_pro_options();
 
 		/* Loads the plugin's translated strings. */
 		load_plugin_textdomain('yarpp', false, plugin_basename(YARPP_DIR).'/lang');
@@ -96,7 +94,6 @@ class YARPP {
                 'st'     => null,
                 'v'      => null,
                 'dpid'   => null,
-                'optin'  => false,
                 'auto_display_post_types' => array('post')
             );
     }
@@ -216,21 +213,6 @@ class YARPP {
 
 		return $current;
 	}
-
-    private function get_pro_options(){
-        $current  = get_option('yarpp_pro');
-        $defaults = $this->load_pro_default_options();
-
-        if ($current) {
-            $out = array_merge($defaults,$current);
-            update_option('yarpp_pro', $out);
-        } else {
-            $out = $defaults;
-            add_option('yarpp_pro',$out);
-        }
-
-        return $out;
-    }
 	
 	private function array_flatten($array, $given = array()) {
 		foreach ($array as $key => $val) {
@@ -254,7 +236,6 @@ class YARPP {
         } else {
             $this->upgrade();
         }
-        if ($this->get_option('optin')) $this->optin_ping();
     }
 
 	public function enabled() {
@@ -768,9 +749,6 @@ class YARPP {
 	}
 
     public function upgrade_4_2(){
-        $this->load_pro_default_options();
-        $new = array_merge($this->pro_default_options,$this->yarppPro);
-        update_option('yarpp_pro', $new);
     }
 	
 	/*
@@ -843,127 +821,6 @@ class YARPP {
 		return $taxonomy->show_ui;
 	}
 
-    /**
-     * Gather optin data.
-     * @return array
-     */
-    public function optin_data() {
-		global $wpdb;
-
-		$comments   = wp_count_comments();
-		$users      = $wpdb->get_var("SELECT COUNT(ID) FROM ".$wpdb->users); //count_users();
-        $posts      = $wpdb->get_var("SELECT COUNT(ID) FROM ".$wpdb->posts." WHERE post_type = 'post' AND comment_count > 0");
-		$settings   = $this->get_option();
-
-		$collect = array_flip(array(
-			'threshold', 'limit', 'excerpt_length', 'recent', 'rss_limit',
-			'rss_excerpt_length', 'past_only', 'show_excerpt', 'rss_show_excerpt',
-			'template', 'rss_template', 'show_pass_post', 'cross_relate',
-			'rss_display', 'rss_excerpt_display', 'promote_yarpp', 'rss_promote_yarpp',
-			'myisam_override', 'weight', 'require_tax', 'auto_display_archive'
-		));
-
-		$check_changed = array(
-			'before_title', 'after_title', 'before_post', 'after_post',
-			'after_related', 'no_results', 'order', 'rss_before_title',
-			'rss_after_title', 'rss_before_post', 'rss_after_post', 'rss_after_related',
-			'rss_no_results', 'rss_order', 'exclude', 'thumbnails_heading',
-			'thumbnails_default', 'rss_thumbnails_heading', 'rss_thumbnails_default', 'display_code'
-		);
-
-		$data = array(
-			'versions' => array(
-				'yarpp' => YARPP_VERSION,
-				'wp'    => get_bloginfo('version'),
-				'php'   => phpversion()
-			),
-			'yarpp' => array(
-				'settings'      => array_intersect_key($settings, $collect),
-				'cache_engine'  => YARPP_CACHE_TYPE
-			),
-			'diagnostics' => array(
-				'myisam_posts'          => $this->diagnostic_myisam_posts(),
-				'fulltext_disabled'     => $this->diagnostic_fulltext_disabled(),
-				'fulltext_indices'      => $this->diagnostic_fulltext_indices(),
-				'hidden_metaboxes'      => $this->diagnostic_hidden_metaboxes(),
-				'post_thumbnails'       => $this->diagnostic_post_thumbnails(),
-				'happy'                 => $this->diagnostic_happy(),
-				'using_thumbnails'      => $this->diagnostic_using_thumbnails(),
-				'generate_thumbnails'   => $this->diagnostic_generate_thumbnails(),
-			),
-			'stats' => array(
-				'counts' => array(),
-				'terms' => array(),
-				'comments' => array(
-					'moderated' => $comments->moderated,
-					'approved'  => $comments->approved,
-					'total'     => $comments->total_comments,
-					'posts'     => $posts
-				),
-				'users' => $users,
-			),
-			'locale'    => get_bloginfo('language'),
-			'url'       => get_bloginfo('url'),
-			'plugins'   => array(
-				'active'    => implode('|', get_option('active_plugins', array())),
-				'sitewide'  => implode('|', array_keys(get_site_option('active_sitewide_plugins', array())))
-			),
-			'pools' => $settings['pools']
-		);
-
-		$data['yarpp']['settings']['auto_display_post_types'] = implode('|',$settings['auto_display_post_types']);
-		
-		$changed = array();
-		foreach ($check_changed as $key) {
-			if ($this->default_options[$key] !== $settings[$key]) $changed[] = $key;
-		}
-
-		foreach (array('before_related','rss_before_related') as $key) {
-			if ($settings[$key] !== '<p>'.__('Related posts:','yarpp').'</p><ol>'
-                && $settings[$key] !== $this->default_options[$key]
-            ) {
-				$changed[] = $key;
-            }
-		}
-
-		$data['yarpp']['changed_settings'] = implode('|', $changed);
-		
-		if (method_exists($this->cache, 'cache_status')) $data['yarpp']['cache_status'] = $this->cache->cache_status();
-
-        if (method_exists($this->cache, 'stats')) {
-			$stats      = $this->cache->stats();
-			$flattened  = array();
-
-            foreach ($stats as $key => $value) $flattened[] = "$key:$value";
-			$data['yarpp']['stats'] = implode('|', $flattened);
-		}
-			
-		if (method_exists($wpdb, 'db_version')) {
-            $data['versions']['mysql'] = preg_replace('/[^0-9.].*/', '', $wpdb->db_version());
-        }
-
-		$counts = array();
-		foreach (get_post_types(array('public' => true)) as $post_type) {
-			$counts[$post_type] = wp_count_posts($post_type);
-		}
-
-		$data['stats']['counts'] = wp_list_pluck($counts, 'publish');
-
-		foreach (get_taxonomies(array('public' => true)) as $taxonomy) {
-			$data['stats']['terms'][$taxonomy] = wp_count_terms($taxonomy);
-		}
-		
-		if (is_multisite()) {
-			$data['multisite'] = array(
-				'url'   => network_site_url(),
-				'users' => get_user_count(),
-				'sites' => get_blog_count()
-			);
-		}
-
-		return $data;
-	}
-
 	public function pretty_echo($data) {
 		echo "<pre>";
 		$formatted = print_r($data, true);
@@ -999,28 +856,6 @@ class YARPP {
             ),
             false
         );
-    }
-
-    public function display_pro($domain) {
-        if ((is_archive() || is_home() || $domain !== 'website')) return null;
-        if (!in_array(get_post_type(), $this->yarppPro['auto_display_post_types'])) return null;
-        if (!(isset($this->yarppPro['active']) && $this->yarppPro['active'])) return null;
-        if (!(isset($this->yarppPro['aid']) && isset($this->yarppPro['v'])) ||
-            !($this->yarppPro['aid'] && $this->yarppPro['v'])) return null;
-
-        $output = null;
-        $aid    = $this->yarppPro['aid'];
-        $v      = $this->yarppPro['v'];
-        $dpid   = (isset($this->yarppPro['dpid'])) ? $this->yarppPro['dpid'] : null;
-        $ru     = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        $ssp    = ($dpid) ? '_ssp' : null;
-
-        ob_start();
-        include(YARPP_DIR.'/includes/phtmls/yarpp_pro_tag'.$ssp.'.phtml');
-        $output .= ob_get_contents();
-        ob_end_clean();
-
-        return $output;
     }
 
     /**
@@ -1140,12 +975,9 @@ class YARPP {
         if ($related_count > 0 && $promote_yarpp && $domain != 'metabox') {
             $output .=
             '<p>'.
-                '<div style="display:none;">YARPP powered by AdBistro</div>'.
-                '<a href="http://www.yarpp.com" class="yarpp-promote" target="_blank">Powered by</a>'.
+                '<a href="https://github.com/mnelson4/yet-another-related-posts-plugin" class="yarpp-promote" target="_blank">Powered by YARPP</a>'.
             '</p>';
         }
-
-        $output .= ($optin) ? '<img src="http://yarpp.org/pixels/'.md5(get_bloginfo('url')).'" alt="YARPP"/>'."\n" : null;
         $output .= "</div>\n";
 
         if ($echo) echo $output;
@@ -1317,7 +1149,7 @@ class YARPP {
                             "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",
                             'yarpp'
                         ),
-                        'http://www.yarpp.com'
+                        'https://github.com/mnelson4/yet-another-related-posts-plugin'
                     ).
                 "</p>\n";
         }
@@ -1423,7 +1255,6 @@ class YARPP {
 		/* If the content includes <!--noyarpp-->, don't display */
 		if (!stristr($content, '<!--noyarpp-->')) {
             $content .= $this->display_basic();
-            $content .= $this->display_pro('website');
         }
 	
 		return $content;
@@ -1468,29 +1299,6 @@ class YARPP {
         }
 	
 		return $content . $this->clean_pre($this->display_related(null, array('post_type' => $type, 'domain' => 'rss'), false));
-	}
-
-    /**
-	 * @since 4.0 Optional data collection (default off)
-     */
-	public function optin_ping() {
-		if ($this->get_transient('yarpp_optin')) return true;
-
-		$remote = wp_remote_post('http://yarpp.org/optin/2/', array('body' => $this->optin_data()));
-
-		if (is_wp_error($remote)
-            || wp_remote_retrieve_response_code($remote) != 200
-            || !isset($remote['body'])
-            || $remote['body'] !== 'ok'
-        ) {
-			/* try again later */
-			$this->set_transient('yarpp_optin', null, 60*60);
-			return false;
-		}
-
-		$this->set_transient('yarpp_optin', null, 60*60*24*7);
-
-		return true;
 	}
 
     /**

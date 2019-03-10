@@ -62,17 +62,5 @@ add_meta_box(
     'core'
 );
 
-
-function yarpp_make_optin_classy($classes) {
-	if (!yarpp_get_option('optin') )
-		$classes[] = 'yarpp_attention';
-	return $classes;
-}
-
-add_filter(
-    "postbox_classes_settings_page_yarpp_yarpp_display_optin",
-    'yarpp_make_optin_classy'
-);
-
 /** @since 3.3: hook for registering new YARPP meta boxes */
 //do_action('add_meta_boxes_settings_page_yarpp');

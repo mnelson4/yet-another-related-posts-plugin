@@ -70,7 +70,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
             'promote_yarpp',
             __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ).
             '<span class="yarpp_help" data-help="'.
-            'This option will add the line &ldquo;powered by AdBistro&rdquo; beneath the related posts section. '.
+            'This option will add the line &ldquo;powered by YARPP&rdquo; beneath the related posts section. '.
             'This link is greatly appreciated."></span>'
         );
     }
