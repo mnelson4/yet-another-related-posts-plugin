@@ -224,10 +224,6 @@ class YARPP_Admin {
 		$version = defined('WP_DEBUG') && WP_DEBUG ? time() : YARPP_VERSION;
 		$screen = get_current_screen();
 		if (!is_null($screen) && $screen->id === 'settings_page_yarpp') {
-
-            //wp_enqueue_style('yarpp_switch_options',  plugins_url('style/options_switch.css', dirname(__FILE__)), array(), $version );
-            //wp_enqueue_script('yarpp_switch_options', plugins_url('js/options_switch.js', dirname(__FILE__)), array('jquery'), $version );
-
             wp_enqueue_style('wp-pointer');
             wp_enqueue_style('yarpp_options', plugins_url('style/options_basic.css', dirname(__FILE__)), array(), $version );
 

@@ -11,7 +11,7 @@ class YARPP_Meta_Box_Display_Web extends YARPP_Meta_Box {
         echo '><strong>' . __( "Website display code example", 'yarpp' ) . '</strong><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_web'></div></div>";
 
         echo "<div class='yarpp_form_row yarpp_form_post_types'><div>";
-        echo 'Automatically display related content from YARPP Basic on: ';
+        echo 'Automatically display related content from YARPP on: ';
         echo " <span class='yarpp_help' data-help='" . esc_attr( __( "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.", 'yarpp' ) ) . "'>&nbsp;</span>&nbsp;&nbsp;";
         echo "</div><div>";
         $post_types = yarpp_get_option( 'auto_display_post_types' );
