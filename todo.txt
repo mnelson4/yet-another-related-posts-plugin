@@ -1,3 +1,0 @@
-optin
-http
-ad3
