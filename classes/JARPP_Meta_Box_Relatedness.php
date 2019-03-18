@@ -1,6 +1,6 @@
 <?php
 
-class YARPP_Meta_Box_Relatedness extends YARPP_Meta_Box {
+class JARPP_Meta_Box_Relatedness extends JARPP_Meta_Box {
     public function display() {
         global $yarpp;
         ?>

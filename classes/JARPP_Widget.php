@@ -3,7 +3,7 @@
  * Vaguely based on code by MK Safi
  * http://msafi.com/fix-yet-another-related-posts-plugin-yarpp-widget-and-add-it-to-the-sidebar/
  */
-class YARPP_Widget extends WP_Widget {
+class JARPP_Widget extends WP_Widget {
 
 	public function __construct() {
 		parent::WP_Widget(false, 'Related Posts (YARPP)', array('description' => 'Related Posts and/or Sponsored Content'));
@@ -94,7 +94,7 @@ class YARPP_Widget extends WP_Widget {
  * @since 2.0 Add as a widget
  */
 function yarpp_widget_init() {
-    register_widget('YARPP_Widget');
+    register_widget('JARPP_Widget');
 }
 
 add_action('widgets_init', 'yarpp_widget_init');

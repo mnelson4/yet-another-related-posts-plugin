@@ -1,6 +1,6 @@
 <?php
 
-class YARPP_Admin {
+class JARPP_Admin {
 	public $core;
 	public $hook;
 	

@@ -1,6 +1,6 @@
 <?php
 
-class YARPP_Cache_Tables extends YARPP_Cache {
+class JARPP_Cache_Tables extends JARPP_Cache {
 	public $name = "custom tables";
 
 	/**

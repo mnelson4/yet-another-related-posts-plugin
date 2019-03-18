@@ -51,11 +51,11 @@ include_once(YARPP_DIR.'/includes/init_functions.php');
 include_once(YARPP_DIR.'/includes/related_functions.php');
 include_once(YARPP_DIR.'/includes/template_functions.php');
 
-include_once(YARPP_DIR.'/classes/YARPP_Core.php');
-include_once(YARPP_DIR.'/classes/YARPP_Widget.php');
-include_once(YARPP_DIR.'/classes/YARPP_Cache.php');
-include_once(YARPP_DIR.'/classes/YARPP_Cache_Bypass.php');
-include_once(YARPP_DIR.'/classes/YARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE).'.php');
+include_once(YARPP_DIR.'/classes/JARPP_Core.php');
+include_once(YARPP_DIR.'/classes/JARPP_Widget.php');
+include_once(YARPP_DIR.'/classes/JARPP_Cache.php');
+include_once(YARPP_DIR.'/classes/JARPP_Cache_Bypass.php');
+include_once(YARPP_DIR.'/classes/JARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE).'.php');
 
 /* WP hooks ----------------------------------------------------------------------------------------------------------*/
 add_action('init', 'yarpp_init');

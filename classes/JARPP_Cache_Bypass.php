@@ -1,6 +1,6 @@
 <?php
 
-class YARPP_Cache_Bypass extends YARPP_Cache {
+class JARPP_Cache_Bypass extends JARPP_Cache {
 
     public $name                = "bypass";
     public $demo_time           = false;
@@ -201,7 +201,7 @@ class YARPP_Cache_Bypass extends YARPP_Cache {
 
         // reverse lookup
         if ( is_int($related_ID) && is_null($reference_ID) ) {
-            _doing_it_wrong( __METHOD__, 'YARPP_Cache_Bypass::related cannot do a reverse lookup', '3.4' );
+            _doing_it_wrong( __METHOD__, 'JARPP_Cache_Bypass::related cannot do a reverse lookup', '3.4' );
             return;
         }
 

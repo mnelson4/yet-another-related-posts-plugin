@@ -35,9 +35,9 @@ class YARPP {
 		load_plugin_textdomain('yarpp', false, plugin_basename(YARPP_DIR).'/lang');
 
 		/* Load cache object. */
-		$this->storage_class    = 'YARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE);
+		$this->storage_class    = 'JARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE);
 		$this->cache            = new $this->storage_class($this);
-		$this->cache_bypass     = new YARPP_Cache_Bypass($this);
+		$this->cache_bypass     = new JARPP_Cache_Bypass($this);
 
 		register_activation_hook(__FILE__, array($this, 'activate'));
 
@@ -77,8 +77,8 @@ class YARPP {
 		 * @since 3.4 Only load UI if we're in the admin.
          */
 		if (is_admin()) {
-			require_once(YARPP_DIR.'/classes/YARPP_Admin.php');
-			$this->admin = new YARPP_Admin($this);
+			require_once(YARPP_DIR.'/classes/JARPP_Admin.php');
+			$this->admin = new JARPP_Admin($this);
 			$this->enforce();
 		}
 	}
