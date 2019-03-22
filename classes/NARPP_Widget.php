@@ -86,7 +86,7 @@ class NARPP_Widget extends WP_Widget {
 
 		if (!$yarpp->diagnostic_custom_templates() && $choice === 'custom') $choice = 'builtin';
 
-		include(YARPP_DIR.'/includes/phtmls/yarpp_widget_form.phtml');
+		include(YARPP_DIR . '/includes/phtmls/narpp_widget_form.phtml');
 	}
 }
 
