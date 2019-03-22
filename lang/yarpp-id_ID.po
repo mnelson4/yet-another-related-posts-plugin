@@ -27,8 +27,8 @@ msgstr "Tulisan Terkait"
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Kriteria kaitan \"pertimbangkan judul\" dan \"pertimbangkan batang tubuh\" YARPP mengharuskan tabel <code>%s</code> Anda mempergunakan <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>mesin penyimpan MyISAM</a>, tapi tabel kelihatannya menggunakan mesin <code>%s</code>. Dua opsi ini telah dinonaktifkan."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Kriteria kaitan \"pertimbangkan judul\" dan \"pertimbangkan batang tubuh\" NARPP mengharuskan tabel <code>%s</code> Anda mempergunakan <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>mesin penyimpan MyISAM</a>, tapi tabel kelihatannya menggunakan mesin <code>%s</code>. Dua opsi ini telah dinonaktifkan."
 
 #: narpp_options.php:65
 #, php-format
@@ -49,13 +49,13 @@ msgstr "Percaya pada saya. Izinkan saya memakai fitur MyISAM."
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Database YARPP memilik galat tapi telah diperbaiki."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Database NARPP memilik galat tapi telah diperbaiki."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Database YARPP mempunyai galat yang tidak dapat diperbaiki."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Database NARPP mempunyai galat yang tidak dapat diperbaiki."
 
 #: options-meta-boxes.php:38
 #@ yarpp
@@ -354,15 +354,15 @@ msgstr "Sebelum / sesudah (cuplikan):"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f adalah skor kecocokan YARPP antara entri terkini dan entri terkait ini. Anda melihat nilai ini karena Anda masuk log sebagai administrator Wordpress. Ia tidak akan ditampilkan untuk pengunjung biasa."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f adalah skor kecocokan NARPP antara entri terkini dan entri terkait ini. Anda melihat nilai ini karena Anda masuk log sebagai administrator Wordpress. Ia tidak akan ditampilkan untuk pengunjung biasa."
 
 #: includes.php:149
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Tulisan Terkait (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Tulisan Terkait (NARPP)"
 
 #: narpp_options.php:54
 #@ yarpp
@@ -420,8 +420,8 @@ msgstr "Berikut ini entri-entri terkait untuk entri ini. Memperbarui tulisan ini
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Apakah semua entri terkait ini ditampilkan atau bagaimana mereka ditampilkan tergantung dari opsi tampilan YARPP Anda."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Apakah semua entri terkait ini ditampilkan atau bagaimana mereka ditampilkan tergantung dari opsi tampilan NARPP Anda."
 
 #: includes.php:28
 #: includes.php:39
@@ -520,27 +520,27 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:42

@@ -57,8 +57,8 @@ msgstr "خطأ في قاعدة البيانات أثناء إنشاء yarpp_rela
 #: includes.php:229
 #: includes.php:243
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "محتويات ذات الصلة: (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "محتويات ذات الصلة: (NARPP)"
 
 #: includes.php:205
 #@ yarpp
@@ -95,12 +95,12 @@ msgstr "إضافة المحتويات ذات الصلة مقدم لكم بواس
 
 #:  narpp_options.php:10
 #@ yarpp
-msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgid "Please move the NARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
 msgstr "برجاء نفل ملفات القوالب إلي مجلد التصميم للإنتهاء من عملية التثبيت. فقط قم بنقل الملفات الموجودة داخال المجلد <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code> إلى المجلد <code>TEMPLATEPATH</code>"
 
 #:  narpp_options.php:15
 #@ yarpp
-msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgid "No NARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
 msgstr "لم يتم العثور على القوالب بداخل مجلد التصميم الخاص بك (<code>TEMPLATEPATH</code>) لذلك سوف يتم إيقاف خاصية القوالب"
 
 #:  narpp_options.php:26
@@ -111,7 +111,7 @@ msgstr "لقد تم لإستبدال الMyISAM. يمكنك الآن إستخد�
 #:  narpp_options.php:35
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "معايير التشابه \"consider titles\" و \"consider bodies\" تحتاج إلى جدول <code>%s</code> الخاص بك لإستخدام <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>محرك التخزين MyISAM</a>, و لكن الجدول الآن يستخدم  <code>%s</code>. لقد تم إيقاف هاتان الخاصياتان."
 
 #:  narpp_options.php:37
@@ -133,13 +133,13 @@ msgstr "ثق بي. اسمحوا لي أن استخدام ميزات MyISAM."
 
 #:  narpp_options.php:65
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "قاعدة بيانات YARPP حدث بها خطأ ولكن تم إصلاحه."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "قاعدة بيانات NARPP حدث بها خطأ ولكن تم إصلاحه."
 
 #:  narpp_options.php:67
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "قاعدة بيانات YARPP  قد حدث بها خطأ لم نتمكن من إصلاحه."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "قاعدة بيانات NARPP  قد حدث بها خطأ لم نتمكن من إصلاحه."
 
 #:  narpp_options.php:68
 #@ yarpp
@@ -202,12 +202,12 @@ msgstr "النظر مع الإعتبار الزائد"
 #:  narpp_options.php:188
 #@ yarpp
 msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
-msgstr "تاريخ إصدار إضافة المحتويات ذات الصلة YARPP (RSS 2.0)"
+msgstr "تاريخ إصدار إضافة المحتويات ذات الصلة NARPP (RSS 2.0)"
 
 #:  narpp_options.php:242
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "إعدادات إضافة المحتويات ذات الصلة YARPP"
+msgstr "إعدادات إضافة المحتويات ذات الصلة NARPP"
 
 #:  narpp_options.php:255
 #@ yarpp
@@ -274,8 +274,8 @@ msgstr "خيارات \"العلاقة\""
 #:  narpp_options.php:310
 #, php-format
 #@ yarpp
-msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP مختلفة عن <a href=\\\"http://wasabi.pbwiki.com/Related%20Entries\\\">الإضافات السابقة و ما تستند إليه</a> لأنه يحد من المحتويات المتشابهه قائمة من قبل (1) والحد الأقصى لعدد (2) على <em>عتبة المباراة.</em>"
+msgid "NARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP مختلفة عن <a href=\\\"http://wasabi.pbwiki.com/Related%20Entries\\\">الإضافات السابقة و ما تستند إليه</a> لأنه يحد من المحتويات المتشابهه قائمة من قبل (1) والحد الأقصى لعدد (2) على <em>عتبة المباراة.</em>"
 
 #:  narpp_options.php:310
 #:  narpp_options.php:324
@@ -338,7 +338,7 @@ msgstr "تم إصدار نسخة تجريبية جديدة من إضافة ال�
 #:  narpp_options.php:387
 #@ yarpp
 msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "تم إصدار نسخة جديدة من إضافة المحتويات المتشابهه (YARPP)! يمكنك <A>تحميلها من هنا</a>."
+msgstr "تم إصدار نسخة جديدة من إضافة المحتويات المتشابهه (NARPP)! يمكنك <A>تحميلها من هنا</a>."
 
 #:  narpp_options.php:401
 #@ yarpp
@@ -557,7 +557,7 @@ msgstr "إستيعاد الخيارات"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f هي نسبة التشابه بين المحتوى الحالي و المحتويات ذات الصلة. أنت تراه لأنك سجلت دخول كأدمين للورد بريس. لن يتم إظهار هذه النسبة للعامة. "
 
 #: template-metabox.php:12
@@ -567,6 +567,6 @@ msgstr "هذه هي المحتويات ذات الصلة لهذا الموضوع
 
 #: template-metabox.php:26
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "إذا كانت جميع هذه المحتويات ذات الصلة هي في الواقع معروضة و كيفية عرضها فهذه تتوقف على الخيارات الخاصة بــYARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "إذا كانت جميع هذه المحتويات ذات الصلة هي في الواقع معروضة و كيفية عرضها فهذه تتوقف على الخيارات الخاصة بــNARPP."
 

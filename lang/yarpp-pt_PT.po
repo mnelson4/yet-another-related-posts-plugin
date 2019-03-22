@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP_PT\n"
+"Project-Id-Version: NARPP_PT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Contribuições parecidas (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Contribuições parecidas (NARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "Contribuições parecidas"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f é a concordância determinada pelo YARPP entre este artigo e o artigo parecido (Valor de relevância). Consegue ver este artigo porque está a utilizar uma conta de administrador da WordPress. Visitantes normais não o vêem."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f é a concordância determinada pelo NARPP entre este artigo e o artigo parecido (Valor de relevância). Consegue ver este artigo porque está a utilizar uma conta de administrador da WordPress. Visitantes normais não o vêem."
 
 #: magic.php:297
 #: options-meta-boxes.php:205
@@ -53,8 +53,8 @@ msgstr "O MyISAM-Check foi suspenso. Pode agora utilizar \"consider titles\" e \
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPPs \"consider titles\" und \"consider bodies\" Os critérios \"consider titles\" und \"consider bodies\" de relevância da YARPP requerem que a sua tabela <code>%s</code> utilize a <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, mas a tabela parece utilizar a <code>%s</code>-Engine. As duas opções foram desactivadas."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPPs \"consider titles\" und \"consider bodies\" Os critérios \"consider titles\" und \"consider bodies\" de relevância da NARPP requerem que a sua tabela <code>%s</code> utilize a <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, mas a tabela parece utilizar a <code>%s</code>-Engine. As duas opções foram desactivadas."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,13 +75,13 @@ msgstr "Acredite em mim. Deixe-me usar as MyISAM-Features."
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Ocorreu um erro na base de dados da YARPP que pode contudo ser corrigido."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Ocorreu um erro na base de dados da NARPP que pode contudo ser corrigido."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Ocorreu um erro na base de dados da YARPP que não pode ser corrigido."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Ocorreu um erro na base de dados da NARPP que não pode ser corrigido."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -105,7 +105,7 @@ msgstr "ter especialmente em conta"
 #: narpp_options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "Opções da YARPP"
+msgstr "Opções da NARPP"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -314,7 +314,7 @@ msgstr "Código-fonte quando forem encontrados 0 artigos relevantes:"
 #: options-meta-boxes.php:268
 #@ yarpp
 msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Aplicar a YARPP discretamente?"
+msgstr "Aplicar a NARPP discretamente?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -500,7 +500,7 @@ msgstr ""
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
 msgstr ""
 
 #: includes.php:169
@@ -520,27 +520,27 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:42

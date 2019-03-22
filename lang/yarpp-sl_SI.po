@@ -23,7 +23,7 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:72
 #@ yarpp
-msgid "Related Posts (YARPP)"
+msgid "Related Posts (NARPP)"
 msgstr "Sorodni članki"
 
 #: class-admin.php:78
@@ -45,8 +45,8 @@ msgstr "Nedavno postavljena vprašanja"
 #: class-admin.php:102
 #: class-admin.php:138
 #@ yarpp
-msgid "Developing with YARPP"
-msgstr "V razvoju z YARPP-om"
+msgid "Developing with NARPP"
+msgstr "V razvoju z NARPP-om"
 
 #: class-admin.php:107
 #@ yarpp
@@ -56,34 +56,34 @@ msgstr "Dovoli zbiranje podatkov"
 #: class-admin.php:143
 #, php-format
 #@ yarpp
-msgid "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s."
-msgstr "Z vašim dovoljenjem bo YARPP pošiljal YARPP-ove podatke o nastavitvah, okolju in porabi nazaj k centralnemu serverju na %s."
+msgid "With your permission, NARPP will send information about NARPP's settings, usage, and environment back to a central server at %s."
+msgstr "Z vašim dovoljenjem bo NARPP pošiljal NARPP-ove podatke o nastavitvah, okolju in porabi nazaj k centralnemu serverju na %s."
 
 #: class-admin.php:144
 #@ yarpp
-msgid "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP."
-msgstr "Te informacije bomo uporabili za izboljšanje YARPP-a v prihodnje in nam bo v pomoč pri odločitvah v nadaljnem razvoju."
+msgid "This information will be used to improve NARPP in the future and help decide future development decisions for NARPP."
+msgstr "Te informacije bomo uporabili za izboljšanje NARPP-a v prihodnje in nam bo v pomoč pri odločitvah v nadaljnem razvoju."
 
 #: class-admin.php:145
 #@ yarpp
-msgid "Contributing this data will help make YARPP better for you and for other YARPP users."
-msgstr "S prispevkom vaših podatkov boste pomagali izboljšati YARPP kakor za vas, kakor tudi za ostale uporabnike."
+msgid "Contributing this data will help make NARPP better for you and for other NARPP users."
+msgstr "S prispevkom vaših podatkov boste pomagali izboljšati NARPP kakor za vas, kakor tudi za ostale uporabnike."
 
 #: class-admin.php:153
 #@ yarpp
-msgid "If you opt-in, the following information is sent back to YARPP:"
-msgstr "Če pristanete, bodo sledeči podatki poslani nazaj YARPP-u."
+msgid "If you opt-in, the following information is sent back to NARPP:"
+msgstr "Če pristanete, bodo sledeči podatki poslani nazaj NARPP-u."
 
 #: class-admin.php:155
 #@ yarpp
-msgid "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used."
-msgstr "Omenimo še to, da bo YARPP skupaj z vašimi rezultati naložil še neviden pixel, kateri nam pomaga analizirati uporabo YARPP-a."
+msgid "In addition, NARPP also loads an invisible pixel image with your NARPP results to know how often NARPP is being used."
+msgstr "Omenimo še to, da bo NARPP skupaj z vašimi rezultati naložil še neviden pixel, kateri nam pomaga analizirati uporabo NARPP-a."
 
 #: class-admin.php:159
 #: options-meta-boxes.php:424
 #@ yarpp
-msgid "Send settings and usage data back to YARPP"
-msgstr "Pošlji podatke o nastavitvah in uporabi nazaj YARPP-u."
+msgid "Send settings and usage data back to NARPP"
+msgstr "Pošlji podatke o nastavitvah in uporabi nazaj NARPP-u."
 
 #: class-admin.php:159
 #@ yarpp
@@ -92,8 +92,8 @@ msgstr "Hvala!"
 
 #: class-admin.php:188
 #@ yarpp
-msgid "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics."
-msgstr "<strong>Pomagajte izboljšati YARPP</strong> tako, da nam pošiljate informacije o YARPP-ovih nastavitvah in statistiko o uporabi."
+msgid "<strong>Help make NARPP better</strong> by sending information about NARPP's settings and usage statistics."
+msgstr "<strong>Pomagajte izboljšati NARPP</strong> tako, da nam pošiljate informacije o NARPP-ovih nastavitvah in statistiko o uporabi."
 
 #: class-admin.php:192
 #: options-meta-boxes.php:428
@@ -113,8 +113,8 @@ msgstr "Hvala da ste si namestili <span>Yet Another Related Posts Plugin</span>!
 
 #: class-admin.php:265
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
-msgstr "Ne pozabite obiskati <a>nastavitveno stran sorodnih člankov,</a> da si namestite YARPP po vaši meri."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+msgstr "Ne pozabite obiskati <a>nastavitveno stran sorodnih člankov,</a> da si namestite NARPP po vaši meri."
 
 #: class-admin.php:311
 #@ default
@@ -209,13 +209,13 @@ msgstr "Ta opcija je začasno izključena, ker vaša trenutna tema ne podpira sl
 
 #: options-meta-boxes.php:54
 #@ yarpp
-msgid "This option is disabled because no YARPP templates were found in your theme."
-msgstr "Ta opcija je začasno izključena, ker v vaši trenutni temi nismo našli YARPP-ovih predlogov."
+msgid "This option is disabled because no NARPP templates were found in your theme."
+msgstr "Ta opcija je začasno izključena, ker v vaši trenutni temi nismo našli NARPP-ovih predlogov."
 
 #: options-meta-boxes.php:56
 #@ yarpp
-msgid "Would you like to copy some sample templates bundled with YARPP into your theme?"
-msgstr "Bi želeli kopirati nekaj YARPP-ovih skupinskih vzorčnih predlogov v vašo temo?"
+msgid "Would you like to copy some sample templates bundled with NARPP into your theme?"
+msgstr "Bi želeli kopirati nekaj NARPP-ovih skupinskih vzorčnih predlogov v vašo temo?"
 
 #: options-meta-boxes.php:56
 #@ yarpp
@@ -340,8 +340,8 @@ msgstr "\"The Pool\""
 
 #: options-meta-boxes.php:210
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP je omejil sorodne članke na (1) maksimalno število in (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP je omejil sorodne članke na (1) maksimalno število in (2) a <em>match threshold</em>."
 
 #: options-meta-boxes.php:210
 #@ yarpp
@@ -529,39 +529,39 @@ msgstr "Prikaži možnosti <small>za RSS vir</small>"
 
 #: options-meta-boxes.php:368
 #@ yarpp
-msgid "YARPP Forum"
-msgstr "YARPP forum"
+msgid "NARPP Forum"
+msgstr "NARPP forum"
 
 #: options-meta-boxes.php:369
 #@ yarpp
-msgid "YARPP on Twitter"
-msgstr "YARPP na Twitterju"
+msgid "NARPP on Twitter"
+msgstr "NARPP na Twitterju"
 
 #: options-meta-boxes.php:370
 #@ yarpp
-msgid "YARPP on the Web"
-msgstr "YARPP na spletu"
+msgid "NARPP on the Web"
+msgstr "NARPP na spletu"
 
 #: options-meta-boxes.php:371
 #@ yarpp
-msgid "Review YARPP on WordPress.org"
-msgstr "Oceni YARPP na WordPress.org"
+msgid "Review NARPP on WordPress.org"
+msgstr "Oceni NARPP na WordPress.org"
 
 
 #: options-meta-boxes.php:405
 #@ yarpp
-msgid "Help Improve YARPP"
-msgstr "Pomagaj izboljšati YARPP"
+msgid "Help Improve NARPP"
+msgstr "Pomagaj izboljšati NARPP"
 
 #: options-meta-boxes.php:427
 #@ yarpp
-msgid "This is entirely optional, but will help improve future versions of YARPP."
-msgstr "To je povsem opcijsko, vendar boste s tem pomagali izboljšati prihodnje verzije YARPP-a."
+msgid "This is entirely optional, but will help improve future versions of NARPP."
+msgstr "To je povsem opcijsko, vendar boste s tem pomagali izboljšati prihodnje verzije NARPP-a."
 
 #: options-meta-boxes.php:432
 #@ yarpp
-msgid "Contact YARPP"
-msgstr "Kontaktiraj YARPP"
+msgid "Contact NARPP"
+msgstr "Kontaktiraj NARPP"
 
 #: narpp_options.php:36
 #, php-format
@@ -583,8 +583,8 @@ msgstr "MyISAM check je bil prenastavljen. Sedaj lahko uporabite \"upoštevaj na
 #: narpp_options.php:56
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP-ova \"upoštevaj naslove\" ali \"upoštevaj vsebino\" merila sorodnosti zahtevajo vašo <code>%s</code> tabelo za uporabo <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, ampak tabele izgledajo da uporabljajo <code>%s</code> engine. Ti dve opciji sta bili onemogočeni."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP-ova \"upoštevaj naslove\" ali \"upoštevaj vsebino\" merila sorodnosti zahtevajo vašo <code>%s</code> tabelo za uporabo <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, ampak tabele izgledajo da uporabljajo <code>%s</code> engine. Ti dve opciji sta bili onemogočeni."
 
 #: narpp_options.php:58
 #, php-format
@@ -605,13 +605,13 @@ msgstr "Zaupajte mi. Dovolite mi uporabiti MyISAM funkcije."
 
 #: narpp_options.php:78
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP-ova podatkovna baza je imela napako, ki pa je zdaj popravljena."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP-ova podatkovna baza je imela napako, ki pa je zdaj popravljena."
 
 #: narpp_options.php:80
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP-ova podatkovna baza je imela nako, katero nismo zmogli popraviti."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP-ova podatkovna baza je imela nako, katero nismo zmogli popraviti."
 
 #: narpp_options.php:81
 #, php-format
@@ -643,8 +643,8 @@ msgstr ""
 #: template-builtin.php:22
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f je YARPP-ova ujemalna ocena med trenutnim vnosom in tem sorodnim vnosom. To vrednost vidite zato, ker ste v WordPress prijavljeni kot administrator. To ni prikazano rednim obiskovalcem."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f je NARPP-ova ujemalna ocena med trenutnim vnosom in tem sorodnim vnosom. To vrednost vidite zato, ker ste v WordPress prijavljeni kot administrator. To ni prikazano rednim obiskovalcem."
 
 #: template-metabox.php:12
 #@ yarpp
@@ -653,6 +653,6 @@ msgstr "To so sorodni vnosi za ta vpis. Posodobitev te objave lahko spremenijo t
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Če so ti sorodni vnosi dejansko prikazani in kako bodo prikazani, je odvisno od vaših YARPP nastavitev."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Če so ti sorodni vnosi dejansko prikazani in kako bodo prikazani, je odvisno od vaših NARPP nastavitev."
 

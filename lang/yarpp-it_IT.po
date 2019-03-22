@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP in italiano\n"
+"Project-Id-Version: NARPP in italiano\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-19 18:16+0100\n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:56
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Related Posts (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Related Posts (NARPP)"
 
 #: class-admin.php:63
 #@ yarpp
@@ -43,8 +43,8 @@ msgstr "Grazie per avere installato <span>Yet Another Related Posts Plugin</span
 
 #: class-admin.php:90
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
-msgstr "Consulta la pagina con la <a>documentazione</a> per personalizzare YARPP."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+msgstr "Consulta la pagina con la <a>documentazione</a> per personalizzare NARPP."
 
 #: class-admin.php:136
 #@ default
@@ -244,8 +244,8 @@ msgstr "\"Veduta di insieme\""
 
 #: options-meta-boxes.php:153
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP limita la lista degli articoli correlati (1) per numero massimo e (2) per <em>valore di corrispondenza</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP limita la lista degli articoli correlati (1) per numero massimo e (2) per <em>valore di corrispondenza</em>."
 
 #: options-meta-boxes.php:153
 #@ yarpp
@@ -418,28 +418,28 @@ msgstr "Opzioni di visualizzazione nel tuo <small>feed RSS</small>"
 
 #: options-meta-boxes.php:297
 #@ yarpp
-msgid "YARPP Forum"
-msgstr "YARPP Forum"
+msgid "NARPP Forum"
+msgstr "NARPP Forum"
 
 #: options-meta-boxes.php:298
 #@ yarpp
-msgid "YARPP on Twitter"
-msgstr "YARPP su Twitter"
+msgid "NARPP on Twitter"
+msgstr "NARPP su Twitter"
 
 #: options-meta-boxes.php:299
 #@ yarpp
-msgid "YARPP on the Web"
-msgstr "YARPP nel Web"
+msgid "NARPP on the Web"
+msgstr "NARPP nel Web"
 
 #: options-meta-boxes.php:300
 #@ yarpp
-msgid "Rate YARPP on WordPress.org"
-msgstr "Vota YARPP su WordPress.org"
+msgid "Rate NARPP on WordPress.org"
+msgstr "Vota NARPP su WordPress.org"
 
 #: options-meta-boxes.php:336
 #@ yarpp
-msgid "Contact YARPP"
-msgstr "Contatta YARPP"
+msgid "Contact NARPP"
+msgstr "Contatta NARPP"
 
 #: narpp_options.php:34
 #, php-format
@@ -461,8 +461,8 @@ msgstr "La verifica MyISAM é stata sovrascritta. Potrai da ora utilizzare \"con
 #: narpp_options.php:54
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "I criteri di affinità YARPP \"considera titoli\" e \"considera contenuti\" necessitano che la tua tabella <code>%s</code> possa utilizzare il <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>. Pare che sia in uso il <code>%s</code> engine. Queste due opzioni sono state disattivate."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "I criteri di affinità NARPP \"considera titoli\" e \"considera contenuti\" necessitano che la tua tabella <code>%s</code> possa utilizzare il <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>. Pare che sia in uso il <code>%s</code> engine. Queste due opzioni sono state disattivate."
 
 #: narpp_options.php:56
 #, php-format
@@ -483,13 +483,13 @@ msgstr "Abbi fiducia. Lasciami utilizzare le funzioni MyISAM."
 
 #: narpp_options.php:76
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Il database di YARPP aveva un errore, ma é stato corretto."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Il database di NARPP aveva un errore, ma é stato corretto."
 
 #: narpp_options.php:78
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Il database di YARPP ha un errore che non può essere corretto."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Il database di NARPP ha un errore che non può essere corretto."
 
 #: narpp_options.php:79
 #, php-format
@@ -521,8 +521,8 @@ msgstr "Salva le modifiche"
 #: template-builtin.php:21
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f é il punteggio di affinità YARPP tra questo articolo principale ed i suoi relativi. Stai vedendo questo messaggio perché sei collegato come amministratore di WordPress. Il messaggio lo vedi solo tu."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f é il punteggio di affinità NARPP tra questo articolo principale ed i suoi relativi. Stai vedendo questo messaggio perché sei collegato come amministratore di WordPress. Il messaggio lo vedi solo tu."
 
 #: template-metabox.php:12
 #@ yarpp
@@ -531,6 +531,6 @@ msgstr "Questi sono gli articoli correlati per questo post. L'aggiornamento di q
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "La visualizzazione degli articoli correlati dipende principalmente dalle opzioni YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "La visualizzazione degli articoli correlati dipende principalmente dalle opzioni NARPP."
 

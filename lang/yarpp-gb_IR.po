@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP_GB\n"
+"Project-Id-Version: NARPP_GB\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-17 14:23+0100\n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Related Poist (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Related Poist (NARPP)"
 
 #: includes.php:380
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "Related Poist "
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "Is %f den scór cluiche YARPP idir an iontráil reatha agus ar an iontráil seo  a bhaineann leo. Tá tú ag  féachaint ar  an luacha seo toisc go bhfuil tú logáilte  isteach chun  WordPress  mar riarthóir. Níl sé léirithe le cuairteoirí rialta."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "Is %f den scór cluiche NARPP idir an iontráil reatha agus ar an iontráil seo  a bhaineann leo. Tá tú ag  féachaint ar  an luacha seo toisc go bhfuil tú logáilte  isteach chun  WordPress  mar riarthóir. Níl sé léirithe le cuairteoirí rialta."
 
 #: narpp_options.php:26
 #@ yarpp
@@ -45,8 +45,8 @@ msgstr "Tá an seiceáil MyISAM a shárú. Is féidir leat úsáid a bhaint anoi
 #: narpp_options.php:35
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP s \"a mheas teidil \" agus \"comhlachtaí a mheas \" a cheangal ar  na critéir  relatedness  do<code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>,ach is cosúil leis an tábla a bheidh le baint úsáide as an <code>%s</code>inneall. Tá an dá rogha a bheith curtha faoi mhíchumas."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP s \"a mheas teidil \" agus \"comhlachtaí a mheas \" a cheangal ar  na critéir  relatedness  do<code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>,ach is cosúil leis an tábla a bheidh le baint úsáide as an <code>%s</code>inneall. Tá an dá rogha a bheith curtha faoi mhíchumas."
 
 #: narpp_options.php:37
 #, php-format
@@ -67,13 +67,13 @@ msgstr "Iontaobhas dom. Lig dom úsáid gnéithe MyISAM."
 
 #: narpp_options.php:55
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Tá an bunachar sonraí YARPP raibh earráid ach tá socraithe."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Tá an bunachar sonraí NARPP raibh earráid ach tá socraithe."
 
 #: narpp_options.php:57
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Tá an bunachar sonraí  YARPP  earráid  nach bhféadfaí a bheith seasta."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Tá an bunachar sonraí  NARPP  earráid  nach bhféadfaí a bheith seasta."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -486,8 +486,8 @@ msgstr "s iad seo na hiontrálacha a bhaineann leis  an iontráil seo.  D'fhéad
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Cibé acu a bhaineann le gach ceann de na  hiontrálacha  ar taispeáint iarbhír agus an chaoi a gcuirtear ar taispeáint iad ag brath ar  do roghanna taispeána YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Cibé acu a bhaineann le gach ceann de na  hiontrálacha  ar taispeáint iarbhír agus an chaoi a gcuirtear ar taispeáint iad ag brath ar  do roghanna taispeána NARPP."
 
 #: includes.php:169
 #@ yarpp
@@ -512,7 +512,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:205
@@ -523,22 +523,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:58

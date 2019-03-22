@@ -22,8 +22,8 @@ msgstr ""
 #: class-admin.php:55
 #: class-widget.php:7
 #: class-widget.php:56
-msgid "Related Posts (YARPP)"
-msgstr "Relaterade inlägg (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Relaterade inlägg (NARPP)"
 
 # @ yarpp
 #: class-admin.php:63
@@ -40,8 +40,8 @@ msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr "Tack för att du installerat <span>Yet Another Related Posts Plugin</span>!"
 
 #: class-admin.php:90
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
-msgstr "Kom ihåg att besöka <a>sidan med inställningar för Relaterade Poster</a> så att du kan göra inställningar för YARPP."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+msgstr "Kom ihåg att besöka <a>sidan med inställningar för Relaterade Poster</a> så att du kan göra inställningar för NARPP."
 
 # @ yarpp
 #: class-admin.php:136
@@ -108,7 +108,7 @@ msgstr "Malldokument:"
 #: options-meta-boxes.php:226
 #: options-meta-boxes.php:282
 msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Visa reklam för YARPP?"
+msgstr "Visa reklam för NARPP?"
 
 # @ yarpp
 #: options-meta-boxes.php:17
@@ -241,8 +241,8 @@ msgstr "\"Din pool\""
 
 # @ yarpp
 #: options-meta-boxes.php:153
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP begränsar listan med relaterade inlägg efter (1) ett maximalt antal och (2) ett <em>tröskelvärde för matchning</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP begränsar listan med relaterade inlägg efter (1) ett maximalt antal och (2) ett <em>tröskelvärde för matchning</em>."
 
 # @ yarpp
 #: options-meta-boxes.php:153
@@ -414,27 +414,27 @@ msgstr "Visningsinställningar <small>för RSS</small>"
 
 # @ yarpp
 #: options-meta-boxes.php:297
-msgid "YARPP Forum"
-msgstr "YARPP Forum"
+msgid "NARPP Forum"
+msgstr "NARPP Forum"
 
 # @ yarpp
 #: options-meta-boxes.php:298
-msgid "YARPP on Twitter"
-msgstr "YARPP på Twitter"
+msgid "NARPP on Twitter"
+msgstr "NARPP på Twitter"
 
 # @ yarpp
 #: options-meta-boxes.php:299
-msgid "YARPP on the Web"
-msgstr "YARPP på www"
+msgid "NARPP on the Web"
+msgstr "NARPP på www"
 
 #: options-meta-boxes.php:300
-msgid "Rate YARPP on WordPress.org"
-msgstr "Betygsätt YARPP på WordPress.org"
+msgid "Rate NARPP on WordPress.org"
+msgstr "Betygsätt NARPP på WordPress.org"
 
 # @ yarpp
 #: options-meta-boxes.php:336
-msgid "Contact YARPP"
-msgstr "Kontakta YARPP"
+msgid "Contact NARPP"
+msgstr "Kontakta NARPP"
 
 # @ default
 #: narpp_options.php:34
@@ -456,8 +456,8 @@ msgstr "MyISAM-kontrollen har åsidosatts. Du kan nu använda kriterierna \"ta h
 # @ yarpp
 #: narpp_options.php:54
 #, php-format
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPPs kriterier \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\" kräver att din <code>%s</code> tabell använder <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, men det verkar som om den använder <code>%s</code>. Därför är kriterierna inte åtkomliga."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPPs kriterier \"ta hänsyn till rubriker\" och \"ta hänsyn till innehåll\" kräver att din <code>%s</code> tabell använder <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a>, men det verkar som om den använder <code>%s</code>. Därför är kriterierna inte åtkomliga."
 
 # @ yarpp
 #: narpp_options.php:56
@@ -478,13 +478,13 @@ msgstr "Lita på mig. Låt mig använda MyISAM-finesserna."
 
 # @ yarpp
 #: narpp_options.php:76
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Databasen för YARPP innehöll ett fel, men det har korrigerats nu."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Databasen för NARPP innehöll ett fel, men det har korrigerats nu."
 
 # @ yarpp
 #: narpp_options.php:78
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Databasen för YARPP innehåller ett fel som inte kunde korrigeras."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Databasen för NARPP innehåller ett fel som inte kunde korrigeras."
 
 # @ yarpp
 #: narpp_options.php:79
@@ -500,7 +500,7 @@ msgstr "Inställningarna sparade!"
 # @ yarpp
 #: narpp_options.php:139
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "YARPP-inställningar"
+msgstr "NARPP-inställningar"
 
 # @ yarpp
 #: narpp_options.php:147
@@ -515,8 +515,8 @@ msgstr "Spara ändringar"
 # @ yarpp
 #: template-builtin.php:21
 #, php-format
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f är det matchningsvärde som YARPP räknat ut mellan det aktuella inlägget och detta relaterade inlägg. Du ser värdet för att du är inloggad till WordPress som adminstratör. Det visas inte för vanliga besökare."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f är det matchningsvärde som NARPP räknat ut mellan det aktuella inlägget och detta relaterade inlägg. Du ser värdet för att du är inloggad till WordPress som adminstratör. Det visas inte för vanliga besökare."
 
 # @ yarpp
 #: template-metabox.php:12
@@ -525,6 +525,6 @@ msgstr "Dessa är de relaterade inläggen för detta inlägg. Uppdaterar du dett
 
 # @ yarpp
 #: template-metabox.php:28
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Huruvida alla dessa relaterade inlägg visas och hur de visas beror på dina visningsinställningar för YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Huruvida alla dessa relaterade inlägg visas och hur de visas beror på dina visningsinställningar för NARPP."
 

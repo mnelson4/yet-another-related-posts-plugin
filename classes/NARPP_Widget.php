@@ -6,7 +6,7 @@
 class NARPP_Widget extends WP_Widget {
 
 	public function __construct() {
-		parent::WP_Widget(false, 'Related Posts (YARPP)', array('description' => 'Related Posts and/or Sponsored Content'));
+		parent::WP_Widget(false, 'Related Posts (NARPP)', array('description' => 'Related Posts and/or Sponsored Content'));
         wp_enqueue_style('yarppWidgetCss', YARPP_URL.'/style/widget.css');
 	}
 
@@ -65,7 +65,7 @@ class NARPP_Widget extends WP_Widget {
 		$instance = wp_parse_args(
             $instance,
             array(
-                'title'                 => 'Related Posts (YARPP)',
+                'title'                 => 'Related Posts (NARPP)',
                 'thumbnails_heading'    => $yarpp->get_option('thumbnails_heading'),
                 'template'              => false,
                 'use_pro'               => false,

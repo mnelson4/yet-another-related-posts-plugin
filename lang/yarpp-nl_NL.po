@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:59
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Gerelateerde bijdragen (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Gerelateerde bijdragen (NARPP)"
 
 #: class-admin.php:63
 #@ yarpp
@@ -53,8 +53,8 @@ msgstr "De MyISAM controle is overgeslagen. Je kunt nu de \"overweeg titels\" en
 #: narpp_options.php:54
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP's \"Overweeg titels\" en \"overweeg bijdragen\" gerelateerdheidscriteria vereisen je <code>%s</code> tabel om de <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM engine</a> te gebruiken, maar de tabel lijkt de <code>%s</code> engine te gebruiken. Deze twee opties zijn uitgeschakeld."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP's \"Overweeg titels\" en \"overweeg bijdragen\" gerelateerdheidscriteria vereisen je <code>%s</code> tabel om de <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM engine</a> te gebruiken, maar de tabel lijkt de <code>%s</code> engine te gebruiken. Deze twee opties zijn uitgeschakeld."
 
 #: narpp_options.php:56
 #, php-format
@@ -75,13 +75,13 @@ msgstr "Vertrouw me. Laat mij MyISAM mogelijkheden gebruiken."
 
 #: narpp_options.php:76
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "De YARPP database had een foutje maar is hersteld."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "De NARPP database had een foutje maar is hersteld."
 
 #: narpp_options.php:78
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "De YARPP database heeft en fout die niet opgelost kon worden."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "De NARPP database heeft en fout die niet opgelost kon worden."
 
 #: narpp_options.php:135
 #@ yarpp
@@ -389,8 +389,8 @@ msgstr "Voor / na (uittreksel):"
 #: template-builtin.php:21
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f is de YARPP overeenkomst tussen de huidige bijdrage en de gerelateerde bijdrage. Je ziet deze resultaten omdat je ingelogd bent in WordPress als Administrator. Dit wordt niet getoond aan normale bezoekers."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f is de NARPP overeenkomst tussen de huidige bijdrage en de gerelateerde bijdrage. Je ziet deze resultaten omdat je ingelogd bent in WordPress als Administrator. Dit wordt niet getoond aan normale bezoekers."
 
 #: template-metabox.php:12
 #@ yarpp
@@ -399,8 +399,8 @@ msgstr "Er zijn gerelateerde bijdragen voor deze bijdrage. Het bijwerken van dez
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Of al deze gelateerde bijdragen getoond worden op de manier zoals je ze getoond wilt hebben hangt af van je YARPP instellingen."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Of al deze gelateerde bijdragen getoond worden op de manier zoals je ze getoond wilt hebben hangt af van je NARPP instellingen."
 
 #: class-core.php:73
 #: class-core.php:83
@@ -447,27 +447,27 @@ msgstr ""
 
 #: options-meta-boxes.php:153
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:298
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:299
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:300
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:337
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:34
@@ -500,7 +500,7 @@ msgstr ""
 
 #: class-admin.php:90
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
 msgstr ""
 
 #: options-meta-boxes.php:113
@@ -526,7 +526,7 @@ msgstr ""
 
 #: options-meta-boxes.php:301
 #@ yarpp
-msgid "Rate YARPP on WordPress.org"
+msgid "Rate NARPP on WordPress.org"
 msgstr ""
 
 #: narpp_options.php:178

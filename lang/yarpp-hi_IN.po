@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP_HI\n"
+"Project-Id-Version: NARPP_HI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-17 14:23+0100\n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "संबंधित पोस्ट  (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "संबंधित पोस्ट  (NARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "संबंधित पोस्ट"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f मौजूदा प्रवेश और इस से संबंधित प्रविष्टि के बीच YARPP मैच स्कोर है.. तुम इस मूल्य क्योंकि आप में एक व्यवस्थापक के रूप में WordPress के लिए लॉग इन कर रहे हैं देख रहे हैं. यह नियमित रूप से दर्शकों को नहीं दिखाया है."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f मौजूदा प्रवेश और इस से संबंधित प्रविष्टि के बीच NARPP मैच स्कोर है.. तुम इस मूल्य क्योंकि आप में एक व्यवस्थापक के रूप में WordPress के लिए लॉग इन कर रहे हैं देख रहे हैं. यह नियमित रूप से दर्शकों को नहीं दिखाया है."
 
 #: magic.php:297
 #: options-meta-boxes.php:205
@@ -53,8 +53,8 @@ msgstr "MyISAM जांच अधिरोहित रहा है. अब �
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPPs \"consider titles\" und \"consider bodies\" Kriterien zur Relevanz verlangen, dass Ihre <code>%s</code> Tabelle die <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a> verwendet, die Tabelle scheint aber die <code>%s</code>-Engine zu verwenden. Die zwei Einstellungen wurden deaktiviert."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPPs \"consider titles\" und \"consider bodies\" Kriterien zur Relevanz verlangen, dass Ihre <code>%s</code> Tabelle die <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a> verwendet, die Tabelle scheint aber die <code>%s</code>-Engine zu verwenden. Die zwei Einstellungen wurden deaktiviert."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,13 +75,13 @@ msgstr "मेरा विश्वास करो. Lassen Sie mich MyISAM-Fea
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP डाटाबेस में एक त्रुटि थी लेकिन तय हो चुकी है."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP डाटाबेस में एक त्रुटि थी लेकिन तय हो चुकी है."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP डाटाबेस में एक त्रुटि थी लेकिन तय हो चुकी है."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP डाटाबेस में एक त्रुटि थी लेकिन तय हो चुकी है."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -203,7 +203,7 @@ msgstr "स्वचालित रूप से संबंधित पद�
 #: options-meta-boxes.php:157
 #@ yarpp
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
-msgstr "Wenn aktiviert, hängt YARPP die Ausgabe ähnlicher Beiträge einfach an den aktuellen Artikel an. Ist sie deaktiviert, müssen Sie sich um die Darstellung im Template mit den Funktionn <code>related_posts()</code> oder Varianten (<code>related_pages()</code> oder <code>related_entries()</code>) selbst kümmern."
+msgstr "Wenn aktiviert, hängt NARPP die Ausgabe ähnlicher Beiträge einfach an den aktuellen Artikel an. Ist sie deaktiviert, müssen Sie sich um die Darstellung im Template mit den Funktionn <code>related_posts()</code> oder Varianten (<code>related_pages()</code> oder <code>related_entries()</code>) selbst kümmern."
 
 #: options-meta-boxes.php:158
 #@ yarpp
@@ -500,8 +500,8 @@ msgstr "इस प्रविष्टि के लिए संबंधि�
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "इन संबंधित सभी प्रविष्टियों का क्या वास्तव में प्रदर्शित किए जाते हैं,और कैसे वे प्रदर्शित कर रहे हैं आपके YARPP प्रदर्शन विकल्पों पर निर्भर करता है."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "इन संबंधित सभी प्रविष्टियों का क्या वास्तव में प्रदर्शित किए जाते हैं,और कैसे वे प्रदर्शित कर रहे हैं आपके NARPP प्रदर्शन विकल्पों पर निर्भर करता है."
 
 #: includes.php:169
 #@ yarpp
@@ -520,27 +520,27 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:42

@@ -22,8 +22,8 @@ msgstr ""
 #: includes.php:149
 #: includes.php:194
 #: includes.php:215
-msgid "Related Posts (YARPP)"
-msgstr "legate de posturi(YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "legate de posturi(NARPP)"
 
 #@ yarpp
 #: includes.php:376
@@ -33,8 +33,8 @@ msgstr "legate de posturi"
 #@ yarpp
 #: template-builtin.php:35
 #, php-format
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f - YARPP este coeficientul similitudinii a postului curent și celui asociat. Vedeți  aceasta deoarece, că sunteţi conectat în Wordpress admin. Aceasta  nu se arată unui vizitator simplu"
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f - NARPP este coeficientul similitudinii a postului curent și celui asociat. Vedeți  aceasta deoarece, că sunteţi conectat în Wordpress admin. Aceasta  nu se arată unui vizitator simplu"
 
 #@ yarpp
 #: magic.php:297
@@ -52,8 +52,8 @@ msgstr "Verificarea  MyISAM a fost efectuată. Acum puteți utiliza criteriile d
 #@ yarpp
 #: narpp_options.php:63
 #, php-format
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Utilizarea funcțiilor YARPP \"consider titles\" și \"consider bodies\" necesită, ca tabelul dvs. <code>%s</code> să utilizeze motorul <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, însă, probabil că tabelul utilizează motorul <code>%s</code>. Aceste două funcții  sunt dezactivate."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Utilizarea funcțiilor NARPP \"consider titles\" și \"consider bodies\" necesită, ca tabelul dvs. <code>%s</code> să utilizeze motorul <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, însă, probabil că tabelul utilizează motorul <code>%s</code>. Aceste două funcții  sunt dezactivate."
 
 #@ yarpp
 #: narpp_options.php:65
@@ -74,13 +74,13 @@ msgstr " Aveți  încredere în mine. Permiteţi-mi de a utiliza MyISAM."
 
 #@ yarpp
 #: narpp_options.php:83
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Baza de date YARPP coonținea erori, dar acestea au fost corectate."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Baza de date NARPP coonținea erori, dar acestea au fost corectate."
 
 #@ yarpp
 #: narpp_options.php:85
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Baza de date  YARPP conține o eroare, care nu poate fi corectată."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Baza de date  NARPP conține o eroare, care nu poate fi corectată."
 
 #@ yarpp
 #: options-meta-boxes.php:45
@@ -104,7 +104,7 @@ msgstr " a lua în considerare cu greutate suplimentară "
 #@ yarpp
 #: narpp_options.php:178
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "Opțiuni YARPP"
+msgstr "Opțiuni NARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:118
@@ -313,7 +313,7 @@ msgstr "Afișare default dacă nu sunt rezultate:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "A contribui la promovarea plugin YARPP?"
+msgstr "A contribui la promovarea plugin NARPP?"
 
 #@ yarpp
 #: options-meta-boxes.php:205
@@ -436,7 +436,7 @@ msgstr " Afişare posturi doar în ultimul NUMBER UNITS"
 #: narpp_options.php:46
 #, php-format
 msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Aceasta este noua beta (%s) plugin YARPP. Puteți să o <a href=\"%s\">descărcați aici</a> pe propriul risc."
+msgstr "Aceasta este noua beta (%s) plugin NARPP. Puteți să o <a href=\"%s\">descărcați aici</a> pe propriul risc."
 
 #@ yarpp
 #: includes.php:248
@@ -464,8 +464,8 @@ msgstr "Acestea sunt posturi aferente pentru postul dat. Modificarea postului da
 
 #@ yarpp
 #: template-metabox.php:25
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr " Com vor fi afişate toate aceste posturi  şi modul în care acestea vor fi afişate, depinde de  opțiunile dvs. YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr " Com vor fi afişate toate aceste posturi  şi modul în care acestea vor fi afişate, depinde de  opțiunile dvs. NARPP."
 
 #@ yarpp
 #: includes.php:28
@@ -509,8 +509,8 @@ msgstr " Înregistrările pot fi afişate în cazul când veți salva înregistr
 
 #@ yarpp
 #: options-meta-boxes.php:124
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr " YARPP limitează lista de posturi aferente de (1) numărul maxim și (2) <em>pragul corespunzător</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr " NARPP limitează lista de posturi aferente de (1) numărul maxim și (2) <em>pragul corespunzător</em>."
 
 #@ yarpp
 #: options-meta-boxes.php:175
@@ -524,23 +524,23 @@ msgstr "sau"
 
 #@ yarpp
 #: options-meta-boxes.php:283
-msgid "YARPP Forum"
-msgstr "Forum YARPP"
+msgid "NARPP Forum"
+msgstr "Forum NARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:284
-msgid "YARPP on Twitter"
-msgstr "YARPP în Twiter"
+msgid "NARPP on Twitter"
+msgstr "NARPP în Twiter"
 
 #@ yarpp
 #: options-meta-boxes.php:285
-msgid "YARPP on the Web"
-msgstr " YARPP pe Web "
+msgid "NARPP on the Web"
+msgstr " NARPP pe Web "
 
 #@ yarpp
 #: options-meta-boxes.php:292
-msgid "Contact YARPP"
-msgstr "Contact YARPP "
+msgid "Contact NARPP"
+msgstr "Contact NARPP "
 
 #@ default
 #: narpp_options.php:42

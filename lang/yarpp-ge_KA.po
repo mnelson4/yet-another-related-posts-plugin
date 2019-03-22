@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "დაკავშირებული ჩანაწერები (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "დაკავშირებული ჩანაწერები (NARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,7 +34,7 @@ msgstr "დაკავშირებული ჩანაწერები"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f არის მიმდინარე და მსგავსი ჩანაწერების მსგავსების კოეფიციენტი. თქვენ მას იმიტომ ხედავთ, რომ Wordpress-ში შეხვედრით ადმინისტრატორის უფლებით. ამას ვერ ხედავენ ჩვეულებრივი სტუმრები."
 
 #: magic.php:297
@@ -53,8 +53,8 @@ msgstr "MyISAM შემოწმდა. ახლა შეგიძლია�
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP “სათაურების განხილვისა” და “ტექსტის განხილვის” მსგავსების კრიტერიუმების გამოყენებისთვის საჭიროა, რომ თქვენმა <code>%s</code> ცხრილმა გამოიყენოს <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM შემნახავი სისტემა</a>, მაგრამ, როგორც ჩანს, ცხრილი იყენებს <code>%s</code> სისტემას. ეს ორი ოფცია გამორთულია."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP “სათაურების განხილვისა” და “ტექსტის განხილვის” მსგავსების კრიტერიუმების გამოყენებისთვის საჭიროა, რომ თქვენმა <code>%s</code> ცხრილმა გამოიყენოს <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM შემნახავი სისტემა</a>, მაგრამ, როგორც ჩანს, ცხრილი იყენებს <code>%s</code> სისტემას. ეს ორი ოფცია გამორთულია."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,13 +75,13 @@ msgstr "მენდეთ. ნება მომეცით გამოვ�
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP მონაცემთა ბაზა შეიცავდა შეცდომას, მაგრამ ის გასწორდა."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP მონაცემთა ბაზა შეიცავდა შეცდომას, მაგრამ ის გასწორდა."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP მონაცემთა ბაზა შეიცავდა შეცდომას, რომელიც არ გასწორდა.."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP მონაცემთა ბაზა შეიცავდა შეცდომას, რომელიც არ გასწორდა.."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -105,7 +105,7 @@ msgstr "განიხილე დამატებითი წონით"
 #: narpp_options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "YARPP-ის სხვა შესაბამისი ჩანაწერები"
+msgstr "NARPP-ის სხვა შესაბამისი ჩანაწერები"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -314,7 +314,7 @@ msgstr "თუ შედეგები არ არის, ავტომა�
 #: options-meta-boxes.php:268
 #@ yarpp
 msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "გსურთ დახმარება YARPP-ის რეკლამირებაში?"
+msgstr "გსურთ დახმარება NARPP-ის რეკლამირებაში?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -437,7 +437,7 @@ msgstr "ნაჩვენები იქნას მხოლოდ შემ
 #, php-format
 #@ yarpp
 msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "გამოვიდა YARPP-ის ახალი ბეტა ვერსია. შეგიძლიათ <A>ჩამოტვირთოთ იგი აქედან</a>, საკუთარი რისკით."
+msgstr "გამოვიდა NARPP-ის ახალი ბეტა ვერსია. შეგიძლიათ <A>ჩამოტვირთოთ იგი აქედან</a>, საკუთარი რისკით."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -465,8 +465,8 @@ msgstr "ეს არის ამ ჩანაწერთან დაკა�
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "გამოჩნდება თუ არა ყველა ეს ჩანაწერი და თუ როგორ გამოჩნდება ისინი დამოკიდებულია თქვენს მიერ არჩეულ YARPP პარამეტრებზე."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "გამოჩნდება თუ არა ყველა ეს ჩანაწერი და თუ როგორ გამოჩნდება ისინი დამოკიდებულია თქვენს მიერ არჩეულ NARPP პარამეტრებზე."
 
 #: includes.php:28
 #: includes.php:39
@@ -510,7 +510,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:175
@@ -525,22 +525,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:42

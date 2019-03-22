@@ -5,7 +5,7 @@ global $wpdb, $wp_version, $yarpp;
 $yarpp->enforce();
 
 if(!$yarpp->enabled() && !$yarpp->activate()) {
-    echo '<div class="updated">'.__('The YARPP database has an error which could not be fixed.','yarpp').'</div>';
+    echo '<div class="updated">'.__('The NARPP database has an error which could not be fixed.','yarpp').'</div>';
 }
 
 /* Check to see that templates are in the right place */

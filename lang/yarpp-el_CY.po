@@ -54,8 +54,8 @@ msgstr "Λάθος MySQL στην δημιουργία του πίνακα yarpp
 
 #: includes.php:197
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Σχετικά Άρθρα (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Σχετικά Άρθρα (NARPP)"
 
 #: includes.php:225
 #: yarpp.php:34
@@ -65,8 +65,8 @@ msgstr "Σχετικά άρθρα:"
 
 #: includes.php:230
 #@ yarpp
-msgid "YARPP"
-msgstr "YARPP"
+msgid "NARPP"
+msgstr "NARPP"
 
 #: magic.php:71
 #@ yarpp
@@ -82,13 +82,13 @@ msgstr "Τα Σχετικά Άρθρα είναι κατασκεύασμα το�
 
 #: narpp_options.php:10
 #@ yarpp
-msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgid "Please move the NARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
 msgstr "Για να ολοκληρωθεί η εγκατάσταση τα πρότυπα αρχεία στον κατάλογο του τρέχοντος θέματος του blog σας. Απλά μεταφέρετε τα αρχεία που βρίσκονται στον φάκελο <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code> στον φάκελο <code>TEMPLATEPATH</code>."
 
 #: narpp_options.php:15
 #@ yarpp
-msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
-msgstr "Δεν βρέθηκαν πρότυπα αρχεία YARPP στο τρέχον θέμα <code>TEMPLATEPATH</code> έτσι η δυνατότητα αυτή έχει απενεργοποιηθεί."
+msgid "No NARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Δεν βρέθηκαν πρότυπα αρχεία NARPP στο τρέχον θέμα <code>TEMPLATEPATH</code> έτσι η δυνατότητα αυτή έχει απενεργοποιηθεί."
 
 #: narpp_options.php:26
 #@ yarpp
@@ -98,7 +98,7 @@ msgstr "Ο έλεγχος MyISAM παρακάμθηκε. Τώρα μπορείτ
 #: narpp_options.php:35
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr "Τα κριτήρια σχετικότητας \"τίτλοι\" και \"bodies\" χρειάζονται τον <code>%s</code> πίνακα για την χρήση του <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>μηχανισμό αποθήκευσης MyISAM </a>. Ο πίνακας όμως φαίνεται ότι χρησιμοποιεί τον μηχανισμό <code>%s</code>. Αυτές οι δύο επιλογές έχουν απενεργοποιηθεί."
 
 #: narpp_options.php:37
@@ -120,13 +120,13 @@ msgstr "Δείξε εμπιστοσύνη. Επέτρεψε μου να χρησ
 
 #: narpp_options.php:65
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Η βάση δεδομένων του YARPP είχε ένα λάθος το οποίο έχει διορθωθεί."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Η βάση δεδομένων του NARPP είχε ένα λάθος το οποίο έχει διορθωθεί."
 
 #: narpp_options.php:67
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Η βάση δεδομένων του YARPP έχει ένα σφάλμα το οποίο δεν μπορεί να παρακαμθει."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Η βάση δεδομένων του NARPP έχει ένα σφάλμα το οποίο δεν μπορεί να παρακαμθει."
 
 #: narpp_options.php:68
 #@ yarpp
@@ -277,8 +277,8 @@ msgstr "Επιλογές \"Σχετικότητας\""
 #: narpp_options.php:311
 #, php-format
 #@ yarpp
-msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "Το YARPP είναι διαφορετικό από  <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">προηγούμενα plugins</a> αφού δημιουργεί την λίστα των σχετικών άρθρων βάσει (1) έναν μέγιστο αριθμό και (2) ένα <em>όριο σχετικότητας</em>."
+msgid "NARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "Το NARPP είναι διαφορετικό από  <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">προηγούμενα plugins</a> αφού δημιουργεί την λίστα των σχετικών άρθρων βάσει (1) έναν μέγιστο αριθμό και (2) ένα <em>όριο σχετικότητας</em>."
 
 #: narpp_options.php:311
 #: narpp_options.php:325
@@ -567,8 +567,8 @@ msgstr "Όταν η προσωρινή μνήμη δεν έχει συμπληρ
 
 #: narpp_options.php:535
 #@ yarpp
-msgid "If a displayed post's related posts are not cached and this option is on, YARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
-msgstr "Αν τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί και η επιλογή αυτή έχει επιλεχθεί τότε το YARPP θα τα υπολογίσει με πιο χαλαρά κριτήρια. Αν η επιλογή είναι αποπεπιλεγμένη και τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί τότε δεν θα εμφανίζονται σχετικά άρθρα."
+msgid "If a displayed post's related posts are not cached and this option is on, NARPP will compute them on the fly.<br />If this option is off and a post's related posts have not been cached, it will display as if it has no related posts."
+msgstr "Αν τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί και η επιλογή αυτή έχει επιλεχθεί τότε το NARPP θα τα υπολογίσει με πιο χαλαρά κριτήρια. Αν η επιλογή είναι αποπεπιλεγμένη και τα σχετικά άρθρα ενός άρθρου δεν έχουν υπολογιστεί τότε δεν θα εμφανίζονται σχετικά άρθρα."
 
 #: narpp_options.php:565
 #@ yarpp
@@ -634,14 +634,14 @@ msgstr "Επαναφορά επιλογών"
 
 #: services.php:59
 #@ yarpp
-msgid "You cannot rebuild the YARPP cache."
-msgstr "Δεν μπορείτε να επαναδημιουργήσετε την προσωρινή μνήμη YARPP."
+msgid "You cannot rebuild the NARPP cache."
+msgstr "Δεν μπορείτε να επαναδημιουργήσετε την προσωρινή μνήμη NARPP."
 
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f είναι η βαθμολογία σχετικότητας του YARPP μεταξύ του εκάστοτε άρθρου και των σχετικών άρθρων. Εσείς μπορείτε να δείτε την βαθμολογία επειδή έχετε εισέλθει ως administrator στο Wordpress και δεν εμφανίζεται στους επισκέπτες σας."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f είναι η βαθμολογία σχετικότητας του NARPP μεταξύ του εκάστοτε άρθρου και των σχετικών άρθρων. Εσείς μπορείτε να δείτε την βαθμολογία επειδή έχετε εισέλθει ως administrator στο Wordpress και δεν εμφανίζεται στους επισκέπτες σας."
 
 #: template-metabox.php:12
 #@ yarpp
@@ -650,6 +650,6 @@ msgstr "Αυτά τα άρθρα φαίνεται ότι ταιριάζουν μ
 
 #: template-metabox.php:26
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Ο τρόπος με τον οποίο εμφανίζονται αλλά και ο τρόπος με τον οποίο υπολογίζονται τα σχετικά άρθρα του εκάστοτε άρθρου εξαρτάται από της ρυθμίσεις του YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Ο τρόπος με τον οποίο εμφανίζονται αλλά και ο τρόπος με τον οποίο υπολογίζονται τα σχετικά άρθρα του εκάστοτε άρθρου εξαρτάται από της ρυθμίσεις του NARPP."
 

@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:28
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Súvisiace články (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Súvisiace články (NARPP)"
 
 #: class-admin.php:50
 #@ yarpp
@@ -43,8 +43,8 @@ msgstr "Ďakujeme Vám za inštaláciu <span>Yet Another Related Posts Plugin</s
 
 #: class-admin.php:77
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
-msgstr "Navštívte <a>stránku s nastaveniami</a> pre úpravu pluginu YARPP."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+msgstr "Navštívte <a>stránku s nastaveniami</a> pre úpravu pluginu NARPP."
 
 #: class-admin.php:123
 #@ default
@@ -221,8 +221,8 @@ msgstr "\"Pokročilé nastavenia\""
 
 #: options-meta-boxes.php:132
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP zoraďuje súvisiace články podľa  (1) čísla zobrazovaných článkov (2)  <em>podľa zhody</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP zoraďuje súvisiace články podľa  (1) čísla zobrazovaných článkov (2)  <em>podľa zhody</em>."
 
 #: options-meta-boxes.php:132
 #: options-meta-boxes.php:148
@@ -419,28 +419,28 @@ msgstr "Nastavenie zobrazenie <small>pre RSS</small>"
 
 #: options-meta-boxes.php:271
 #@ yarpp
-msgid "YARPP Forum"
-msgstr "YARPP Fórum"
+msgid "NARPP Forum"
+msgstr "NARPP Fórum"
 
 #: options-meta-boxes.php:272
 #@ yarpp
-msgid "YARPP on Twitter"
-msgstr "YARPP na Twittri"
+msgid "NARPP on Twitter"
+msgstr "NARPP na Twittri"
 
 #: options-meta-boxes.php:273
 #@ yarpp
-msgid "YARPP on the Web"
-msgstr "YARPP na Webe"
+msgid "NARPP on the Web"
+msgstr "NARPP na Webe"
 
 #: options-meta-boxes.php:274
 #@ yarpp
-msgid "Rate YARPP on WordPress.org"
-msgstr "Ohodnoťte plugin YARPP na stránke WordPress.org"
+msgid "Rate NARPP on WordPress.org"
+msgstr "Ohodnoťte plugin NARPP na stránke WordPress.org"
 
 #: options-meta-boxes.php:310
 #@ yarpp
-msgid "Contact YARPP"
-msgstr "Kontaktovať YARPP"
+msgid "Contact NARPP"
+msgstr "Kontaktovať NARPP"
 
 #: narpp_options.php:36
 #, php-format
@@ -462,8 +462,8 @@ msgstr "MyISAM kontrola bola prepísaná. Teraz môžte použiť  \"consider tit
 #: narpp_options.php:56
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP  \"consider titles\" and \"consider bodies\" kritériá podobnosti vyžadujú Vašu <code>%s</code> tabuľku <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, no zdá sa, že tabuľka používa  <code>%s</code>. Tieto dve možnosti boli vypnuté."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP  \"consider titles\" and \"consider bodies\" kritériá podobnosti vyžadujú Vašu <code>%s</code> tabuľku <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, no zdá sa, že tabuľka používa  <code>%s</code>. Tieto dve možnosti boli vypnuté."
 
 #: narpp_options.php:58
 #, php-format
@@ -484,13 +484,13 @@ msgstr "Verte mi, je lepšie, keď používate funkcie MyISAM."
 
 #: narpp_options.php:75
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP databáza obsahovala chybu, ktorú sme už stihli opraviť."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP databáza obsahovala chybu, ktorú sme už stihli opraviť."
 
 #: narpp_options.php:77
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "V databáze YARPP je závažná chyba, ktorá sa nedá opraviť."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "V databáze NARPP je závažná chyba, ktorá sa nedá opraviť."
 
 #: narpp_options.php:78
 #, php-format
@@ -522,7 +522,7 @@ msgstr "Uložiť zmeny"
 #: template-builtin.php:20
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f je zhoda medzi aktuálnym príspevkom a súvisiacim článkom. Túto možnosť môžete vidieť len ako administrátor. Návštevníci túto hodnotu neuvidia."
 
 #: template-metabox.php:12
@@ -532,6 +532,6 @@ msgstr "Toto sú súvisiace články pre tento príspevok. Aktualizácia tohoto 
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "To, či sú všetky aktuálne príspevky zobrazené a ako sú zobrazené, závisí na nastavení Vášho YARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "To, či sú všetky aktuálne príspevky zobrazené a ako sú zobrazené, závisí na nastavení Vášho NARPP."
 

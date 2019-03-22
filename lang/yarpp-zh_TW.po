@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:59
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "相關文章 (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "相關文章 (NARPP)"
 
 #: class-admin.php:62
 #@ yarpp
@@ -44,8 +44,8 @@ msgstr "常見問題"
 #: class-admin.php:85
 #: class-admin.php:116
 #@ yarpp
-msgid "Developing with YARPP"
-msgstr "YARPP 開發"
+msgid "Developing with NARPP"
+msgstr "NARPP 開發"
 
 #: class-admin.php:104
 #@ yarpp
@@ -59,8 +59,8 @@ msgstr "感謝您安裝 <span>Yet Another Related Posts Plugin</span> ！"
 
 #: class-admin.php:172
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
-msgstr "請務必前往<a>相關文章設定頁面</a>來自訂 YARPP。"
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+msgstr "請務必前往<a>相關文章設定頁面</a>來自訂 NARPP。"
 
 #: class-admin.php:218
 #@ default
@@ -215,7 +215,7 @@ msgstr "標題（按字母逆向排序）"
 #: options-meta-boxes.php:109
 #@ yarpp
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
-msgstr "你可以在「全域設定」裡排除關聯某些分類或標籤，使 YARPP 不再關聯顯示它們。"
+msgstr "你可以在「全域設定」裡排除關聯某些分類或標籤，使 NARPP 不再關聯顯示它們。"
 
 #: options-meta-boxes.php:113
 #@ yarpp
@@ -260,8 +260,8 @@ msgstr "全域設定"
 
 #: options-meta-boxes.php:153
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP 相關文章列表受兩項因素限制：(1) 最大值和 (2) <em>相關值</em>。"
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP 相關文章列表受兩項因素限制：(1) 最大值和 (2) <em>相關值</em>。"
 
 #: options-meta-boxes.php:153
 #@ yarpp
@@ -434,28 +434,28 @@ msgstr "RSS 相關設定"
 
 #: options-meta-boxes.php:299
 #@ yarpp
-msgid "YARPP Forum"
-msgstr "YARPP 討論區"
+msgid "NARPP Forum"
+msgstr "NARPP 討論區"
 
 #: options-meta-boxes.php:300
 #@ yarpp
-msgid "YARPP on Twitter"
-msgstr "YARPP Twitter"
+msgid "NARPP on Twitter"
+msgstr "NARPP Twitter"
 
 #: options-meta-boxes.php:301
 #@ yarpp
-msgid "YARPP on the Web"
-msgstr "YARPP 官方網站"
+msgid "NARPP on the Web"
+msgstr "NARPP 官方網站"
 
 #: options-meta-boxes.php:302
 #@ yarpp
-msgid "Rate YARPP on WordPress.org"
-msgstr "在 WordPress.org 給 YARPP 評分"
+msgid "Rate NARPP on WordPress.org"
+msgstr "在 WordPress.org 給 NARPP 評分"
 
 #: options-meta-boxes.php:337
 #@ yarpp
-msgid "Contact YARPP"
-msgstr "聯絡 YARPP"
+msgid "Contact NARPP"
+msgstr "聯絡 NARPP"
 
 #: narpp_options.php:31
 #, php-format
@@ -477,7 +477,7 @@ msgstr "MyISAM 檢查已被重寫。你現在也許可以用 \"consider titles\"
 #: narpp_options.php:51
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr ""
 
 #: narpp_options.php:53
@@ -499,13 +499,13 @@ msgstr "相信我。讓我使用 MyISAM 功能。"
 
 #: narpp_options.php:73
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP 資料庫發生錯誤，但已經修復。"
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP 資料庫發生錯誤，但已經修復。"
 
 #: narpp_options.php:75
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP 資料庫發生一個無法修復的錯誤。"
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP 資料庫發生一個無法修復的錯誤。"
 
 #: narpp_options.php:76
 #, php-format
@@ -537,8 +537,8 @@ msgstr ""
 #: template-builtin.php:21
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f 是當前內容和這篇文章的 YARPP 相關性評分。你以 WordPress 系統管理員權限登入所以看得到此數值。它不會被一般的使用者看到。"
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f 是當前內容和這篇文章的 NARPP 相關性評分。你以 WordPress 系統管理員權限登入所以看得到此數值。它不會被一般的使用者看到。"
 
 #: template-metabox.php:12
 #@ yarpp
@@ -547,6 +547,6 @@ msgstr "這是此內容的相關文章。更新這篇文章，可能會改變這
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "所有相關文章怎麼顯示、以及實際顯示的樣式，取決於你的 YARPP 設定。"
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "所有相關文章怎麼顯示、以及實際顯示的樣式，取決於你的 NARPP 設定。"
 

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP in italiano\n"
+"Project-Id-Version: NARPP in italiano\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
@@ -27,7 +27,7 @@ msgstr "پست های مرتبط"
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 msgstr ""
 
 #: narpp_options.php:65
@@ -49,13 +49,13 @@ msgstr "  استفاده کنم MyISAM به من اطمینان کم. اجازه
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The YARPP database had an error but has been fixed."
-msgstr " با یک اشکال مواجه شده که  ترمیم شد  YARPP پایگاه داده"
+msgid "The NARPP database had an error but has been fixed."
+msgstr " با یک اشکال مواجه شده که  ترمیم شد  NARPP پایگاه داده"
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The YARPP database has an error which could not be fixed."
-msgstr " با یک اشکال مواجه شده که قابل ترمیم نیست YARPP پایگاه داده   "
+msgid "The NARPP database has an error which could not be fixed."
+msgstr " با یک اشکال مواجه شده که قابل ترمیم نیست NARPP پایگاه داده   "
 
 #: options-meta-boxes.php:38
 #@ yarpp
@@ -108,7 +108,7 @@ msgstr "بسیارمهم در نظر گرفته شود"
 #: narpp_options.php:178
 #@ yarpp
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "تـنظیمات افزونه YARPP"
+msgstr "تـنظیمات افزونه NARPP"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -354,15 +354,15 @@ msgstr "قبل/ بعد از (چکیده):"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f امتیاز تطبیق بین پست فعلی و پست مرتبط به آن است. شما این پیغام را دریافت کردید زیرا به عنوان مدیر وارد وردپرس شده اید"
 
 #: includes.php:149
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (YARPP)"
-msgstr "Related Posts (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Related Posts (NARPP)"
 
 #: narpp_options.php:54
 #@ yarpp
@@ -420,8 +420,8 @@ msgstr "مطالب مرتبط با این موضوع به شرح زیر است. 
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "از طریق تنظیمات YARPP شما می توانیدمشخص کنید که نحوه نمایش پست های مرتبط چگونه باشد."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "از طریق تنظیمات NARPP شما می توانیدمشخص کنید که نحوه نمایش پست های مرتبط چگونه باشد."
 
 #: includes.php:28
 #: includes.php:39
@@ -520,27 +520,27 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "YARPP on the Web"
+msgid "NARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr ""
 
 #: narpp_options.php:42

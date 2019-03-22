@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: YARPP_PL\n"
+"Project-Id-Version: NARPP_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-11 10:22+0100\n"
 "PO-Revision-Date: 2012-12-11 10:23+0100\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 # @ yarpp
 #: ../class-admin.php:90 ../class-widget.php:7 ../class-widget.php:72
-msgid "Related Posts (YARPP)"
+msgid "Related Posts (NARPP)"
 msgstr "Powiązane wpisy"
 
 # @ yarpp
@@ -38,8 +38,8 @@ msgid "Frequently Asked Questions"
 msgstr "Często zadawane pytania"
 
 #: ../class-admin.php:119 ../class-admin.php:155
-msgid "Developing with YARPP"
-msgstr "Programowanie z YARPP"
+msgid "Developing with NARPP"
+msgstr "Programowanie z NARPP"
 
 #: ../class-admin.php:124
 msgid "Optional Data Collection"
@@ -48,44 +48,44 @@ msgstr "Szybkie zbieranie danych"
 #: ../class-admin.php:160
 #, php-format
 msgid ""
-"With your permission, YARPP will send information about YARPP's settings, "
+"With your permission, NARPP will send information about NARPP's settings, "
 "usage, and environment back to a central server at %s."
 msgstr ""
-"Za Twoją zgodą, wtyczka YARPP będzię wysyłać informacje o swoich  "
+"Za Twoją zgodą, wtyczka NARPP będzię wysyłać informacje o swoich  "
 "ustawieniach, sposobie użycia i środowisku w którym pracuje do centralnego "
 "serwera zlokalizowanego w %s."
 
 #: ../class-admin.php:161
 msgid ""
-"This information will be used to improve YARPP in the future and help decide "
-"future development decisions for YARPP."
+"This information will be used to improve NARPP in the future and help decide "
+"future development decisions for NARPP."
 msgstr ""
-"Informacje te będą wykorzystywane do usprawniania YARPP w przyszłości i "
+"Informacje te będą wykorzystywane do usprawniania NARPP w przyszłości i "
 "pomoże w podejmowaniu decyzji o kierunkach jej rozwoju."
 
 #: ../class-admin.php:162
 msgid ""
-"Contributing this data will help make YARPP better for you and for other "
-"YARPP users."
+"Contributing this data will help make NARPP better for you and for other "
+"NARPP users."
 msgstr ""
 "Przesyłanie tych danych pomoże zarówno Tobie, jak i innym osobom, które z "
-"YARPP korzystają."
+"NARPP korzystają."
 
 #: ../class-admin.php:170
-msgid "If you opt-in, the following information is sent back to YARPP:"
-msgstr "Jeśli potwierdzisz, następujące dane będą przesyłane do YARPP:"
+msgid "If you opt-in, the following information is sent back to NARPP:"
+msgstr "Jeśli potwierdzisz, następujące dane będą przesyłane do NARPP:"
 
 #: ../class-admin.php:172
 msgid ""
-"In addition, YARPP also loads an invisible pixel image with your YARPP "
-"results to know how often YARPP is being used."
+"In addition, NARPP also loads an invisible pixel image with your NARPP "
+"results to know how often NARPP is being used."
 msgstr ""
-"Dodatkowo, wtyczka YARPP wczytuje także niewidoczy obrazek z wynikami "
+"Dodatkowo, wtyczka NARPP wczytuje także niewidoczy obrazek z wynikami "
 "powiązanych wpisów, aby zorientować się jak często jest wykorzystywana."
 
 #: ../class-admin.php:176 ../options-meta-boxes.php:424
-msgid "Send settings and usage data back to YARPP"
-msgstr "Wyślij ustawienia i dane o wykorzystaniu z powrotem do YARPP"
+msgid "Send settings and usage data back to NARPP"
+msgstr "Wyślij ustawienia i dane o wykorzystaniu z powrotem do NARPP"
 
 #: ../class-admin.php:176
 msgid "Thank you!"
@@ -93,10 +93,10 @@ msgstr "Dziękujemy!"
 
 #: ../class-admin.php:205
 msgid ""
-"<strong>Help make YARPP better</strong> by sending information about YARPP's "
+"<strong>Help make NARPP better</strong> by sending information about NARPP's "
 "settings and usage statistics."
 msgstr ""
-"<strong>Pomóż usprawnić wtyczkę YARPP</strong> przesyłając informacje o jej "
+"<strong>Pomóż usprawnić wtyczkę NARPP</strong> przesyłając informacje o jej "
 "ustawieniach i sposobach wykorzystania."
 
 #: ../class-admin.php:209 ../options-meta-boxes.php:428
@@ -114,7 +114,7 @@ msgstr "Dziękujemy za zainstalowanie wtyczki<span>Powiązane wpisy</span>!"
 
 #: ../class-admin.php:280
 msgid ""
-"Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+"Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
 msgstr ""
 "Nie zapomnij odwiedzić <a>strony ustawień Powiązanych wpisów</a> aby je "
 "skonfigurować."
@@ -184,7 +184,7 @@ msgstr "Plik szablonu:"
 #: ../class-widget.php:119 ../options-meta-boxes.php:294
 #: ../options-meta-boxes.php:356
 msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Chcesz pomóc promować YARPP?"
+msgstr "Chcesz pomóc promować NARPP?"
 
 # @ yarpp
 #: ../options-meta-boxes.php:7
@@ -205,18 +205,18 @@ msgstr ""
 
 #: ../options-meta-boxes.php:54
 msgid ""
-"This option is disabled because no YARPP templates were found in your theme."
+"This option is disabled because no NARPP templates were found in your theme."
 msgstr ""
 "Ta opcja jest wyłączona ponieważ w Twoim motywie nie znaleziono szablonów "
-"YARPP."
+"NARPP."
 
 #: ../options-meta-boxes.php:56
 msgid ""
-"Would you like to copy some sample templates bundled with YARPP into your "
+"Would you like to copy some sample templates bundled with NARPP into your "
 "theme?"
 msgstr ""
 "Chciałbyś skopiować do swojego motywu niektóre przykładowe szablony "
-"dostarczone wraz z YARPP?"
+"dostarczone wraz z NARPP?"
 
 #: ../options-meta-boxes.php:56
 msgid "Copy Templates"
@@ -341,7 +341,7 @@ msgstr "\"Pula\""
 # @ yarpp
 #: ../options-meta-boxes.php:210
 msgid ""
-"YARPP limits the related posts list by (1) a maximum number and (2) a "
+"NARPP limits the related posts list by (1) a maximum number and (2) a "
 "<em>match threshold</em>."
 msgstr ""
 "YARRP limituje ilość wyświetlanych wpisów do (1) maksymalnej zdefiniowanej "
@@ -556,37 +556,37 @@ msgstr "Włącz opcje dla <small>kanału RSS</small>"
 
 # @ yarpp
 #: ../options-meta-boxes.php:368
-msgid "YARPP Forum"
-msgstr "Forum YARPP"
+msgid "NARPP Forum"
+msgstr "Forum NARPP"
 
 # @ yarpp
 #: ../options-meta-boxes.php:369
-msgid "YARPP on Twitter"
+msgid "NARPP on Twitter"
 msgstr "YARRP na Twitterze"
 
 # @ yarpp
 #: ../options-meta-boxes.php:370
-msgid "YARPP on the Web"
-msgstr "YARPP w Sieci"
+msgid "NARPP on the Web"
+msgstr "NARPP w Sieci"
 
 #: ../options-meta-boxes.php:371
-msgid "Review YARPP on WordPress.org"
-msgstr "Oceń YARPP na WordPress.org"
+msgid "Review NARPP on WordPress.org"
+msgstr "Oceń NARPP na WordPress.org"
 
 #: ../options-meta-boxes.php:405
-msgid "Help Improve YARPP"
-msgstr "Pomóż ulepszać YARPP"
+msgid "Help Improve NARPP"
+msgstr "Pomóż ulepszać NARPP"
 
 #: ../options-meta-boxes.php:427
 msgid ""
-"This is entirely optional, but will help improve future versions of YARPP."
+"This is entirely optional, but will help improve future versions of NARPP."
 msgstr ""
 "Jest to całkowicie dobrowolne, ale pomogłoby w usprawnieniu przyszłych "
-"wersji YARPP."
+"wersji NARPP."
 
 # @ yarpp
 #: ../options-meta-boxes.php:432
-msgid "Contact YARPP"
+msgid "Contact NARPP"
 msgstr "Kontakt z YARRP"
 
 # @ default
@@ -624,13 +624,13 @@ msgstr ""
 #: ../options.php:51
 #, php-format
 msgid ""
-"YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
+"NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
 "require your <code>%s</code> table to use the <a href='http://dev.mysql.com/"
 "doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the "
 "table seems to be using the <code>%s</code> engine. These two options have "
 "been disabled."
 msgstr ""
-"Opcje YARPP \"uwzględniaj tytuły\" i \"uwzględniaj treść główną\" wymagają, "
+"Opcje NARPP \"uwzględniaj tytuły\" i \"uwzględniaj treść główną\" wymagają, "
 "aby tabela <code>%s</code> używała <a href='http://dev.mysql.com/doc/"
 "refman/5.0/en/storage-engines.html'>mechanizmu MyISAM</a>, ale powyższa "
 "tabela używa mechanizmu <code>%s</code>. Te dwie opcje zostały wyłączone."
@@ -666,13 +666,13 @@ msgstr "Zaufaj mi. Pozwól uzywać właściwości MyISAM."
 
 # @ yarpp
 #: ../options.php:73
-msgid "The YARPP database had an error but has been fixed."
-msgstr "Baza danych YARPP zawierała błąd, ale został on naprawiony."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "Baza danych NARPP zawierała błąd, ale został on naprawiony."
 
 # @ yarpp
 #: ../options.php:75
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "Baza danych YARPP zawiera błąd, którego nie można naprawić."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "Baza danych NARPP zawiera błąd, którego nie można naprawić."
 
 # @ yarpp
 #: ../options.php:76
@@ -690,7 +690,7 @@ msgstr "Opcje zapisane!"
 # @ yarpp
 #: ../options.php:145
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "Opcje YARPP"
+msgstr "Opcje NARPP"
 
 # @ yarpp
 #: ../options.php:153
@@ -707,12 +707,12 @@ msgstr "Zapisz zmiany"
 #: ../template-builtin.php:22
 #, php-format
 msgid ""
-"%f is the YARPP match score between the current entry and this related "
+"%f is the NARPP match score between the current entry and this related "
 "entry. You are seeing this value because you are logged in to WordPress as "
 "an administrator. It is not shown to regular visitors."
 msgstr ""
 "%f to wartość podobieństwa między tym i linkowanym wpisem, wyliczona przez "
-"algorytm YARPP. Widzisz tę liczbę, ponieważ jesteś zalogowany jako "
+"algorytm NARPP. Widzisz tę liczbę, ponieważ jesteś zalogowany jako "
 "administrator bloga. Nie jest ona pokazywana normalnym użytkownikom strony."
 
 # @ yarpp
@@ -728,10 +728,10 @@ msgstr ""
 #: ../template-metabox.php:28
 msgid ""
 "Whether all of these related entries are actually displayed and how they are "
-"displayed depends on your YARPP display options."
+"displayed depends on your NARPP display options."
 msgstr ""
 "To, czy lista powiązanych wpisów jest wyświetlana i jakie są to wpisy, jest "
-"zależne od konfiguracji wtyczki YARPP."
+"zależne od konfiguracji wtyczki NARPP."
 
 #~ msgid "FAQ"
 #~ msgstr "FAQ"

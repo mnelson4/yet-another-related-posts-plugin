@@ -36,8 +36,8 @@ msgstr "Benzer yazı yok."
 #: includes.php:149
 #: includes.php:194
 #: includes.php:215
-msgid "Related Posts (YARPP)"
-msgstr "Benzer Yazılar (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Benzer Yazılar (NARPP)"
 
 #@ yarpp
 #: includes.php:169
@@ -71,8 +71,8 @@ msgstr "MyISAM kontrolü artık geçersiz. Artık \"başlıkları göz önünde 
 #@ yarpp
 #: narpp_options.php:63
 #, php-format
-msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "YARPP'ın \"başlıkları göz önünde bulundur\" ve \"içerikleri göz önünde bulundur\" kriterleri, veritabanındaki <code>%s</code> tablosunun <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM motoruyla</a> çalışmasını gerektirir. Ama tablolar <code>%s</code> motorunu kullanıyor gibi gözüküyor. Bu iki özellik devre dışı bırakıldı."
+msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "NARPP'ın \"başlıkları göz önünde bulundur\" ve \"içerikleri göz önünde bulundur\" kriterleri, veritabanındaki <code>%s</code> tablosunun <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM motoruyla</a> çalışmasını gerektirir. Ama tablolar <code>%s</code> motorunu kullanıyor gibi gözüküyor. Bu iki özellik devre dışı bırakıldı."
 
 #@ yarpp
 #: narpp_options.php:65
@@ -93,13 +93,13 @@ msgstr "Bana güvenebilirsin :). MYISAM özelliklerini kullanmama izin ver."
 
 #@ yarpp
 #: narpp_options.php:83
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP veritabanında bir hata oluştu ama hata giderildi."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP veritabanında bir hata oluştu ama hata giderildi."
 
 #@ yarpp
 #: narpp_options.php:85
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP veritabanında bir hata oluştu ve hata giderilemedi."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP veritabanında bir hata oluştu ve hata giderilemedi."
 
 #@ yarpp
 #: narpp_options.php:114
@@ -489,8 +489,8 @@ msgstr "Ayarları sıfırla"
 #@ yarpp
 #: template-builtin.php:35
 #, php-format
-msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f, YARPP eklentisinin belirlediği ve mevcut yazıyla bu benzer yazı arasındaki benzerlik skorudur. Bu değeri, blogunuzda yönetici olarak giriş yaptığınız için görüyorsunuz. Ziyaretçileriniz bu değerleri göremez."
+msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f, NARPP eklentisinin belirlediği ve mevcut yazıyla bu benzer yazı arasındaki benzerlik skorudur. Bu değeri, blogunuzda yönetici olarak giriş yaptığınız için görüyorsunuz. Ziyaretçileriniz bu değerleri göremez."
 
 #@ yarpp
 #: template-metabox.php:12
@@ -499,8 +499,8 @@ msgstr "Bunlar, bu yazı için benzer gönderilerdir. Yazıyı güncellediğiniz
 
 #@ yarpp
 #: template-metabox.php:25
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
-msgstr "Bu benzer gönderilerin kaçının gösterileceği ve nasıl gösterileceği, düzenlediğiniz YARPP seçeneklerine bağlıdır."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgstr "Bu benzer gönderilerin kaçının gösterileceği ve nasıl gösterileceği, düzenlediğiniz NARPP seçeneklerine bağlıdır."
 
 #@ default
 #: includes.php:243
@@ -514,8 +514,8 @@ msgstr "Benzer gönderiler, gönderinizi kaydettikten sonra görüntülenebilece
 
 #@ yarpp
 #: options-meta-boxes.php:124
-msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "YARPP, benzer yazı listesini (1) bir sayı sınırıyla, (2) bir <em>eşleşme eşiğiyle</em> belirler."
+msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "NARPP, benzer yazı listesini (1) bir sayı sınırıyla, (2) bir <em>eşleşme eşiğiyle</em> belirler."
 
 #@ yarpp
 #: options-meta-boxes.php:140
@@ -524,23 +524,23 @@ msgstr "Yalnızca önceki yazıları göster?"
 
 #@ yarpp
 #: options-meta-boxes.php:283
-msgid "YARPP Forum"
-msgstr "YARPP Forumu"
+msgid "NARPP Forum"
+msgstr "NARPP Forumu"
 
 #@ yarpp
 #: options-meta-boxes.php:284
-msgid "YARPP on Twitter"
-msgstr "Twitter'da YARPP"
+msgid "NARPP on Twitter"
+msgstr "Twitter'da NARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:285
-msgid "YARPP on the Web"
-msgstr "Web'de YARPP"
+msgid "NARPP on the Web"
+msgstr "Web'de NARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:292
-msgid "Contact YARPP"
-msgstr "YARPP'a ulaşın"
+msgid "Contact NARPP"
+msgstr "NARPP'a ulaşın"
 
 #@ default
 #: narpp_options.php:42

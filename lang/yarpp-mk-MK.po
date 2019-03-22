@@ -21,8 +21,8 @@ msgstr ""
 
 # @ yarpp
 #: class-admin.php:55 class-widget.php:7 class-widget.php:59
-msgid "Related Posts (YARPP)"
-msgstr "Povrzani postovi (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "Povrzani postovi (NARPP)"
 
 # @ yarpp
 #: class-admin.php:63
@@ -58,13 +58,13 @@ msgstr ""
 #: narpp_options.php:54
 #, php-format
 msgid ""
-"YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
+"NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
 "require your <code>%s</code> table to use the <a href='http://dev.mysql.com/"
 "doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the "
 "table seems to be using the <code>%s</code> engine. These two options have "
 "been disabled."
 msgstr ""
-" Povrzanosta na \"smetaj gi naslovite\" i \"smetaj gi tekstovite\" na YARPP "
+" Povrzanosta na \"smetaj gi naslovite\" i \"smetaj gi tekstovite\" na NARPP "
 "barrat vasata<code>%s</code> tabla da gi upotrebuva <a href='http://dev."
 "mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, "
 "no tablate izgleda go upotrebuva <code>%s</code> engine. Ovie dve opcii se "
@@ -101,13 +101,13 @@ msgstr "Veruvaj mi. Dozvoli mi da gi koristam MyISAM funkciite."
 
 # @ yarpp
 #: narpp_options.php:76
-msgid "The YARPP database had an error but has been fixed."
-msgstr "YARPP bazata na podatoci imase greska, ama e ispravena."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "NARPP bazata na podatoci imase greska, ama e ispravena."
 
 # @ yarpp
 #: narpp_options.php:78
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "YARPP bazata na podatoci ima greska koja sto ne moze da se ispravi."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "NARPP bazata na podatoci ima greska koja sto ne moze da se ispravi."
 
 # @ yarpp
 #: narpp_options.php:135
@@ -447,11 +447,11 @@ msgstr "Pred/Posle (izvod)"
 #: template-builtin.php:21
 #, php-format
 msgid ""
-"%f is the YARPP match score between the current entry and this related "
+"%f is the NARPP match score between the current entry and this related "
 "entry. You are seeing this value because you are logged in to WordPress as "
 "an administrator. It is not shown to regular visitors."
 msgstr ""
-"%f e YARPP rezultat na podudaranje pomegu momentalniot vnes i ovoj povrzan "
+"%f e NARPP rezultat na podudaranje pomegu momentalniot vnes i ovoj povrzan "
 "vnes. Ja gledate ovaa vrednost zatoa sto ste logirani na WordPress kako "
 "administrator. Ne e prikazana na regularni posetiteli."
 
@@ -468,10 +468,10 @@ msgstr ""
 #: template-metabox.php:28
 msgid ""
 "Whether all of these related entries are actually displayed and how they are "
-"displayed depends on your YARPP display options."
+"displayed depends on your NARPP display options."
 msgstr ""
 "Da li ovie povrzani postovi ke bidat prikazani i kako ke bidat prikazani "
-"zavisi od vasite YARPP opcii za prikazuvanje."
+"zavisi od vasite NARPP opcii za prikazuvanje."
 
 # @ yarpp
 #: class-core.php:73 class-core.php:83 class-core.php:273 class-core.php:284
@@ -511,31 +511,31 @@ msgstr ""
 # @ yarpp
 #: options-meta-boxes.php:153
 msgid ""
-"YARPP limits the related posts list by (1) a maximum number and (2) a "
+"NARPP limits the related posts list by (1) a maximum number and (2) a "
 "<em>match threshold</em>."
 msgstr ""
-"YARPP ja ogranicuva listata na povrzani postovi so (1) maksimum broj i (2) "
+"NARPP ja ogranicuva listata na povrzani postovi so (1) maksimum broj i (2) "
 "na <em>podudarna vrednost</em>."
 
 # @ yarpp
 #: options-meta-boxes.php:298
-msgid "YARPP Forum"
-msgstr "YARPP Forum"
+msgid "NARPP Forum"
+msgstr "NARPP Forum"
 
 # @ yarpp
 #: options-meta-boxes.php:299
-msgid "YARPP on Twitter"
-msgstr "YARPP na Twitter"
+msgid "NARPP on Twitter"
+msgstr "NARPP na Twitter"
 
 # @ yarpp
 #: options-meta-boxes.php:300
-msgid "YARPP on the Web"
-msgstr "YARPP na Web"
+msgid "NARPP on the Web"
+msgstr "NARPP na Web"
 
 # @ yarpp
 #: options-meta-boxes.php:337
-msgid "Contact YARPP"
-msgstr "YARPP kontakt"
+msgid "Contact NARPP"
+msgstr "NARPP kontakt"
 
 # @ default
 #: narpp_options.php:34
@@ -574,10 +574,10 @@ msgstr "Fala za instaliranje na <span>Yet Another Related Posts Plugin</span>!"
 # @ yarpp
 #: class-admin.php:90
 msgid ""
-"Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+"Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
 msgstr ""
 "Posetete <a>Povrzani Postovi stranica za podesuvanja</a> za da go podesite "
-"YARPP."
+"NARPP."
 
 # @ yarpp
 #: options-meta-boxes.php:113
@@ -608,8 +608,8 @@ msgstr ""
 
 # @ yarpp
 #: options-meta-boxes.php:301
-msgid "Rate YARPP on WordPress.org"
-msgstr "Oceni go YARPP na WordPress.org"
+msgid "Rate NARPP on WordPress.org"
+msgstr "Oceni go NARPP na WordPress.org"
 
 # @ default
 #: narpp_options.php:178

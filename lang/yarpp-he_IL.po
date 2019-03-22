@@ -21,8 +21,8 @@ msgstr ""
 
 # @ yarpp
 #: class-admin.php:90 class-widget.php:7 class-widget.php:72
-msgid "Related Posts (YARPP)"
-msgstr "פוסטים נוספים בנושא (YARPP)"
+msgid "Related Posts (NARPP)"
+msgstr "פוסטים נוספים בנושא (NARPP)"
 
 # @ yarpp
 #: class-admin.php:96
@@ -38,8 +38,8 @@ msgid "Frequently Asked Questions"
 msgstr "שאלות נפוצות"
 
 #: class-admin.php:119 class-admin.php:155
-msgid "Developing with YARPP"
-msgstr "שימוש ב-YARPP למפתחים"
+msgid "Developing with NARPP"
+msgstr "שימוש ב-NARPP למפתחים"
 
 #: class-admin.php:124
 msgid "Optional Data Collection"
@@ -48,43 +48,43 @@ msgstr "איסוף מידע"
 #: class-admin.php:160
 #, php-format
 msgid ""
-"With your permission, YARPP will send information about YARPP's settings, "
+"With your permission, NARPP will send information about NARPP's settings, "
 "usage, and environment back to a central server at %s."
 msgstr ""
-"אם תסכימו, YARPP יאסוף מידע אודות השימוש בתוסף, ההגדרות שלו והאופן שבו האתר "
+"אם תסכימו, NARPP יאסוף מידע אודות השימוש בתוסף, ההגדרות שלו והאופן שבו האתר "
 "שלכם משתמש בתוסף. המידע יועבר לשרת מרכזי ב-%s. "
 
 #: class-admin.php:161
 msgid ""
-"This information will be used to improve YARPP in the future and help decide "
-"future development decisions for YARPP."
+"This information will be used to improve NARPP in the future and help decide "
+"future development decisions for NARPP."
 msgstr ""
-"המידע נאסף על מנת לשפר את YARPP וכדי לעזור בקבלת החלטות עתידיות לגבי YARPP."
+"המידע נאסף על מנת לשפר את NARPP וכדי לעזור בקבלת החלטות עתידיות לגבי NARPP."
 
 #: class-admin.php:162
 msgid ""
-"Contributing this data will help make YARPP better for you and for other "
-"YARPP users."
+"Contributing this data will help make NARPP better for you and for other "
+"NARPP users."
 msgstr ""
-"אם תסכימו לשלוח את המידע שלכם ל-YARPP, תוכלו לעזור לשפר את YARPP עבורכם "
+"אם תסכימו לשלוח את המידע שלכם ל-NARPP, תוכלו לעזור לשפר את NARPP עבורכם "
 "ועבור שאר המשתמשים בתוסף."
 
 #: class-admin.php:170
-msgid "If you opt-in, the following information is sent back to YARPP:"
+msgid "If you opt-in, the following information is sent back to NARPP:"
 msgstr ""
-"אם תבחרו לשתף את המידע שלכם עם YARPP, המידע שלמטה יישלח בחזרה ל-YARPP. "
+"אם תבחרו לשתף את המידע שלכם עם NARPP, המידע שלמטה יישלח בחזרה ל-NARPP. "
 
 #: class-admin.php:172
 msgid ""
-"In addition, YARPP also loads an invisible pixel image with your YARPP "
-"results to know how often YARPP is being used."
+"In addition, NARPP also loads an invisible pixel image with your NARPP "
+"results to know how often NARPP is being used."
 msgstr ""
-"בנוסף, YARPP יטען תמונה בלתי נראית בגודל פיקסל אחד בכל פעם ש-YARPP יופעל, על "
+"בנוסף, NARPP יטען תמונה בלתי נראית בגודל פיקסל אחד בכל פעם ש-NARPP יופעל, על "
 "מנת לדעת באיזו תדירות נעשה שימוש בתוסף."
 
 #: class-admin.php:176 options-meta-boxes.php:424
-msgid "Send settings and usage data back to YARPP"
-msgstr "שלחו מידע אודות השימוש בתוסף וההגדרות שלו למפתחי YARPP"
+msgid "Send settings and usage data back to NARPP"
+msgstr "שלחו מידע אודות השימוש בתוסף וההגדרות שלו למפתחי NARPP"
 
 #: class-admin.php:176
 msgid "Thank you!"
@@ -92,11 +92,11 @@ msgstr "תודה רבה! "
 
 #: class-admin.php:205
 msgid ""
-"<strong>Help make YARPP better</strong> by sending information about YARPP's "
+"<strong>Help make NARPP better</strong> by sending information about NARPP's "
 "settings and usage statistics."
 msgstr ""
-"<strong>עזרו לשפר את YARPP.</strong>  שלחו מידע אודות השימוש בתוסף וההגדרות "
-"שלו למפתחי YARPP."
+"<strong>עזרו לשפר את NARPP.</strong>  שלחו מידע אודות השימוש בתוסף וההגדרות "
+"שלו למפתחי NARPP."
 
 #: class-admin.php:209 options-meta-boxes.php:428
 msgid "Learn More"
@@ -109,14 +109,14 @@ msgstr "הצגת דוגמת קוד פלט"
 # @ yarpp
 #: class-admin.php:279
 msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
-msgstr "תודה שהתקנתם את תוסף הפוסטים הנוספים בנושא, YARPP. "
+msgstr "תודה שהתקנתם את תוסף הפוסטים הנוספים בנושא, NARPP. "
 
 #: class-admin.php:280
 msgid ""
-"Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+"Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
 msgstr ""
 "אל תשכחו לבקר בדף ההגדרות של <a>פוסטים נוספים בנושא</a> על מנת לשנות את "
-"ההגדרות של YARPP"
+"ההגדרות של NARPP"
 
 #: class-admin.php:326
 msgid "Settings"
@@ -198,14 +198,14 @@ msgstr "האפשרות הזאת אינה זמינה משום שהעיצוב של
 
 #: options-meta-boxes.php:54
 msgid ""
-"This option is disabled because no YARPP templates were found in your theme."
-msgstr "האפשרות הזאת לא זמינה משום שאין תבניות של YARPP בעיצוב שלך."
+"This option is disabled because no NARPP templates were found in your theme."
+msgstr "האפשרות הזאת לא זמינה משום שאין תבניות של NARPP בעיצוב שלך."
 
 #: options-meta-boxes.php:56
 msgid ""
-"Would you like to copy some sample templates bundled with YARPP into your "
+"Would you like to copy some sample templates bundled with NARPP into your "
 "theme?"
-msgstr "האם תרצה להעתיק תבניות לדוגמא שכלולות ב-YARPP לעיצוב שלך?"
+msgstr "האם תרצה להעתיק תבניות לדוגמא שכלולות ב-NARPP לעיצוב שלך?"
 
 #: options-meta-boxes.php:56
 msgid "Copy Templates"
@@ -327,10 +327,10 @@ msgstr "\"המועמדים\"ֿֿ"
 
 #: options-meta-boxes.php:210
 msgid ""
-"YARPP limits the related posts list by (1) a maximum number and (2) a "
+"NARPP limits the related posts list by (1) a maximum number and (2) a "
 "<em>match threshold</em>."
 msgstr ""
-"YARPP    מחליט כמה פוסטים נוספים בנושא להציג לפי  ההגדרות של (1) מספר "
+"NARPP    מחליט כמה פוסטים נוספים בנושא להציג לפי  ההגדרות של (1) מספר "
 "הפוסטים מקסימלי ו- (2) ציון ההתאמה המינימלי."
 
 # @ yarpp
@@ -536,35 +536,35 @@ msgstr "אפשרויות תצוגה <small>עבור RSS</small>"
 
 # @ yarpp
 #: options-meta-boxes.php:368
-msgid "YARPP Forum"
+msgid "NARPP Forum"
 msgstr "פורום"
 
 #: options-meta-boxes.php:369
-msgid "YARPP on Twitter"
-msgstr "חשבון הטוויטר של YARPP"
+msgid "NARPP on Twitter"
+msgstr "חשבון הטוויטר של NARPP"
 
 #: options-meta-boxes.php:370
-msgid "YARPP on the Web"
-msgstr "אתר האינטרנט של YARPP"
+msgid "NARPP on the Web"
+msgstr "אתר האינטרנט של NARPP"
 
 #: options-meta-boxes.php:371
-msgid "Review YARPP on WordPress.org"
-msgstr "כתבו חוות דעת על YARPP ב-WordPress.org"
+msgid "Review NARPP on WordPress.org"
+msgstr "כתבו חוות דעת על NARPP ב-WordPress.org"
 
 #: options-meta-boxes.php:405
-msgid "Help Improve YARPP"
-msgstr "עזרו לנו לשפר את YARPP"
+msgid "Help Improve NARPP"
+msgstr "עזרו לנו לשפר את NARPP"
 
 #: options-meta-boxes.php:427
 msgid ""
-"This is entirely optional, but will help improve future versions of YARPP."
+"This is entirely optional, but will help improve future versions of NARPP."
 msgstr ""
 "אינכם חייבים לשלוח את המידע הזה, אבל שליחת המידע תסייע לשפר גרסאות עתידיות "
-"של YARPP. "
+"של NARPP. "
 
 #: options-meta-boxes.php:432
-msgid "Contact YARPP"
-msgstr "צרו קשר עם YARPP"
+msgid "Contact NARPP"
+msgstr "צרו קשר עם NARPP"
 
 #: narpp_options.php:31
 #, php-format
@@ -583,7 +583,7 @@ msgid ""
 "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
-"קיימת גרסא חדשה יותר (%s) של YARPP ותוכלו להוריד אותה <a href=\"%s\">כאן</a>."
+"קיימת גרסא חדשה יותר (%s) של NARPP ותוכלו להוריד אותה <a href=\"%s\">כאן</a>."
 
 # @ yarpp
 #: narpp_options.php:43
@@ -598,7 +598,7 @@ msgstr ""
 #: narpp_options.php:51
 #, php-format
 msgid ""
-"YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
+"NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
 "require your <code>%s</code> table to use the <a href='http://dev.mysql.com/"
 "doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the "
 "table seems to be using the <code>%s</code> engine. These two options have "
@@ -639,13 +639,13 @@ msgstr "סמוך עלי, תן לי להשתמש באפשרויות של MyISAM."
 
 # @ yarpp
 #: narpp_options.php:73
-msgid "The YARPP database had an error but has been fixed."
-msgstr "למסד הנתונים של YARPP הייתה בעיה אבל היא תוקנה."
+msgid "The NARPP database had an error but has been fixed."
+msgstr "למסד הנתונים של NARPP הייתה בעיה אבל היא תוקנה."
 
 # @ yarpp
 #: narpp_options.php:75
-msgid "The YARPP database has an error which could not be fixed."
-msgstr "נמצאה בעיה במסד הנתונים של YARPP ולא ניתן לתקנה."
+msgid "The NARPP database has an error which could not be fixed."
+msgstr "נמצאה בעיה במסד הנתונים של NARPP ולא ניתן לתקנה."
 
 # @ yarpp
 #: narpp_options.php:76
@@ -661,7 +661,7 @@ msgstr "האפשרויות נשמרו!"
 # @ yarpp
 #: narpp_options.php:145
 msgid "Yet Another Related Posts Plugin Options"
-msgstr "אפשרויות תוסף YARPP, פוסטים נוספים בנושא"
+msgstr "אפשרויות תוסף NARPP, פוסטים נוספים בנושא"
 
 #: narpp_options.php:153
 #, php-format
@@ -677,11 +677,11 @@ msgstr "שמור שינויים"
 #: template-builtin.php:22
 #, php-format
 msgid ""
-"%f is the YARPP match score between the current entry and this related "
+"%f is the NARPP match score between the current entry and this related "
 "entry. You are seeing this value because you are logged in to WordPress as "
 "an administrator. It is not shown to regular visitors."
 msgstr ""
-"%f הוא הציון ש-YARPP נותן להתאמה בין הרשומה הנוכחית לפוסט הקשור הזה. אתם "
+"%f הוא הציון ש-NARPP נותן להתאמה בין הרשומה הנוכחית לפוסט הקשור הזה. אתם "
 "רואים את הערך הזה כי נכנסתם לוורדפרס כמנהל. המידע הזה לא נגיש למשתמשים "
 "רגילים."
 
@@ -698,5 +698,5 @@ msgstr ""
 #: template-metabox.php:28
 msgid ""
 "Whether all of these related entries are actually displayed and how they are "
-"displayed depends on your YARPP display options."
-msgstr "אופן הצגת הפוסטים הללו תלוי בתצורת ההצגה של YARPP."
+"displayed depends on your NARPP display options."
+msgstr "אופן הצגת הפוסטים הללו תלוי בתצורת ההצגה של NARPP."
