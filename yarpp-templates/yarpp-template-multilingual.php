@@ -6,11 +6,11 @@ Author: mitcho (Michael Yoshitaka Erlewine)
 */
 
 if (function_exists("icl_register_string")) {
-	icl_register_string("Yet Another Related Posts Plugin", "related posts header", "Related Posts");
-	icl_register_string("Yet Another Related Posts Plugin", "no related posts message", "No related posts.");
+	icl_register_string("Not Another Related Posts Plugin", "related posts header", "Related Posts");
+	icl_register_string("Not Another Related Posts Plugin", "no related posts message", "No related posts.");
 }
 
-?><h3><?php echo (function_exists("icl_t") ? icl_t("Yet Another Related Posts Plugin", "related posts header", "Related Posts") : "Related Posts") ?></h3>
+?><h3><?php echo (function_exists("icl_t") ? icl_t("Not Another Related Posts Plugin", "related posts header", "Related Posts") : "Related Posts") ?></h3>
 <?php if (have_posts()):?>
 <ol>
 	<?php while (have_posts()) : the_post(); ?>
@@ -18,5 +18,5 @@ if (function_exists("icl_register_string")) {
 	<?php endwhile; ?>
 </ol>
 <?php else: ?>
-<p><?php echo (function_exists("icl_t") ? icl_t("Yet Another Related Posts Plugin", "no related posts message", "No related posts.") : "No related posts.") ?></p>
+<p><?php echo (function_exists("icl_t") ? icl_t("Not Another Related Posts Plugin", "no related posts message", "No related posts.") : "No related posts.") ?></p>
 <?php endif; ?>

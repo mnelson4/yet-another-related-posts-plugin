@@ -42,8 +42,8 @@ msgstr "Az %f a NARPP hasonlósági eredményt jelképezi az adott és a hasonl�
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Hasonló Bejegyzések bitosítva a  <a href='%s'>Yet Another Related Posts Plugin</a> segtségével."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Hasonló Bejegyzések bitosítva a  <a href='%s'>Not Another Related Posts Plugin</a> segtségével."
 
 #: narpp_options.php:54
 #@ yarpp
@@ -104,7 +104,7 @@ msgstr "különlegesként kezeld"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "NARPP beállítások"
 
 #: options-meta-boxes.php:118
@@ -313,7 +313,7 @@ msgstr "Alap megjelenítés ha nincs találat:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "A NARPP reklámozása?"
 
 #: options-meta-boxes.php:205
@@ -450,7 +450,7 @@ msgstr "Csak az előbbi számhalmazokból jelenítsen meg"
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Új BETA verzója van a NARPP pluginak. Az új verziót <a href=\"%s\">itt letöltheted</a> saját felelősségedre."
 
 #: includes.php:248

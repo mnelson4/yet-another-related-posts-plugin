@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin in Indonesian\n"
+"Project-Id-Version: Not Another Related Posts Plugin in Indonesian\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2011-01-25 09:50+0700\n"
@@ -107,8 +107,8 @@ msgstr "pertimbangkan dengan berat ekstra"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "Opsi Yet Another Related Posts Plugin"
+msgid "Not Another Related Posts Plugin Options"
+msgstr "Opsi Not Another Related Posts Plugin"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -190,8 +190,8 @@ msgstr "Tampilkan opsi <small>untuk situs web Anda</small>"
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Tulisan terkait dibawakan kepada Anda oleh <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Tulisan terkait dibawakan kepada Anda oleh <a href='%s'>Not Another Related Posts Plugin</a>."
 
 #: options-meta-boxes.php:157
 #@ yarpp
@@ -311,8 +311,8 @@ msgstr "Tampilan bawaan jika tidak ada hasil:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Bantu promosi Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
+msgstr "Bantu promosi Not Another Related Posts Plugin?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -454,7 +454,7 @@ msgstr "Tampilkan tulisan dari JUMLAH UNIT terdahulu saja"
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Ada beta baru (%s) dari Plugin Yet Another Related Posts. Anda dapat <a href=\"%s\">mengunduhnya di sini</a> dengan risiko Anda sendiri."
 
 #: includes.php:248

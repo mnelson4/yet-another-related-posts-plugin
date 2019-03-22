@@ -42,7 +42,7 @@ msgstr "%f मौजूदा प्रवेश और इस से संब�
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "संबंधित पोस्ट आप द्वारा लाया <a href='%s'>अभी तक एक अन्य संबंधित प्लगइन डाक</a>."
 
 #: narpp_options.php:54
@@ -104,7 +104,7 @@ msgstr "अतिरिक्त वजन के साथ विचार"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "अभी तक एक अन्य संबंधित पोस्ट प्लगइन विकल्प"
 
 #: options-meta-boxes.php:118
@@ -313,7 +313,7 @@ msgstr "डिफ़ॉल्ट प्रदर्शन अगर कोई �
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "फिर भी मदद को बढ़ावा देने के एक अन्य संबंधित प्लगइन पोस्ट?"
 
 #: options-meta-boxes.php:205
@@ -450,7 +450,7 @@ msgstr "दिखाएँ पिछले NUMBER इकाइयों से �
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "वहाँ एक नया बीटा (%s) फिर भी एक अन्य संबंधित प्लगइन पोस्ट है.आप इसे डाउनलोड कर सकते हैं <a href=\"%s\"> यहाँ </a> अपने जोखिम पर."
 
 #: includes.php:248

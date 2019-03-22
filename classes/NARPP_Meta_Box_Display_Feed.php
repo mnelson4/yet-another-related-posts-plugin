@@ -55,6 +55,6 @@ class NARPP_Meta_Box_Display_Feed extends NARPP_Meta_Box {
 
         $this->displayorder( 'rss_order', 'rss_displayed' );
 
-        $this->checkbox( 'rss_promote_yarpp', __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ) . " <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.", 'yarpp' ), 'https://github.com/mnelson4/yet-another-related-posts-plugin' ) )."</code>" ) ) . "'>&nbsp;</span>", 'rss_displayed' );
+        $this->checkbox( 'rss_promote_yarpp', __( "Help promote Not Another Related Posts Plugin?", 'yarpp' ) . " <span class='yarpp_help' data-help='" . esc_attr( sprintf( __( "This option will add the code %s. Try turning it on, updating your options, and see the code in the code example to the right. These links and donations are greatly appreciated.", 'yarpp' ), "<code>" . htmlspecialchars( sprintf( __( "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>.", 'yarpp' ), 'https://github.com/mnelson4/yet-another-related-posts-plugin' ) )."</code>" ) ) . "'>&nbsp;</span>", 'rss_displayed' );
     }
 }

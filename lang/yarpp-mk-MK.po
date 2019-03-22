@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin\n"
+"Project-Id-Version: Not Another Related Posts Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2013-03-30 21:27+0100\n"
@@ -143,8 +143,8 @@ msgstr "smetaj so ekstra tezina"
 
 # @ yarpp
 #: narpp_options.php:141
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
+msgstr "Not Another Related Posts Plugin Options"
 
 # @ yarpp
 #: options-meta-boxes.php:147
@@ -240,10 +240,10 @@ msgstr "Tekstovi:"
 #: narpp_options.php:38
 #, php-format
 msgid ""
-"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
-"Postoi nova beta (%s) na Yet Another Related Posts Plugin. Mozete da go <a "
+"Postoi nova beta (%s) na Not Another Related Posts Plugin. Mozete da go <a "
 "href=\"%s\"> prezemete tuka na sopstvena odgovornost. "
 
 # @ yarpp
@@ -380,8 +380,8 @@ msgstr "Podrazbirano prikazuvanje dokolku nema rezultati:"
 
 # @ yarpp
 #: class-widget.php:98 options-meta-boxes.php:227 options-meta-boxes.php:283
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Pomogni vo promocija na Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
+msgstr "Pomogni vo promocija na Not Another Related Posts Plugin?"
 
 # @ yarpp
 #: options-meta-boxes.php:229 options-meta-boxes.php:284
@@ -568,8 +568,8 @@ msgstr "Konfiguriraj"
 
 # @ yarpp
 #: class-admin.php:89
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
-msgstr "Fala za instaliranje na <span>Yet Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgstr "Fala za instaliranje na <span>Not Another Related Posts Plugin</span>!"
 
 # @ yarpp
 #: class-admin.php:90

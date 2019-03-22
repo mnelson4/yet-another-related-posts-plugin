@@ -38,8 +38,8 @@ msgstr "Configura"
 
 #: class-admin.php:89
 #@ yarpp
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
-msgstr "Grazie per avere installato <span>Yet Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgstr "Grazie per avere installato <span>Not Another Related Posts Plugin</span>!"
 
 #: class-admin.php:90
 #@ yarpp
@@ -85,7 +85,7 @@ msgstr "Nessun articolo correlato."
 #: options-meta-boxes.php:283
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "Articoli correlati elaborati dal plugin <a href='%s'>Yet Another Related Posts</a>."
 
 #: class-widget.php:66
@@ -110,7 +110,7 @@ msgstr "File template:"
 #: options-meta-boxes.php:226
 #: options-meta-boxes.php:282
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Desideri promuovere il plugin Yet Another Related Posts?"
 
 #: options-meta-boxes.php:17
@@ -450,8 +450,8 @@ msgstr "E' disponibile una nuova versione di %1$s. <a href=\"%2$s\" class=\"thic
 #: narpp_options.php:38
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "E' disponibile una nuova (%s) beta di Yet Another Related Posts Plugin. Puoi <a href=\"%s\">scaricarla qui</a> a tuo rischio e pericolo."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "E' disponibile una nuova (%s) beta di Not Another Related Posts Plugin. Puoi <a href=\"%s\">scaricarla qui</a> a tuo rischio e pericolo."
 
 #: narpp_options.php:46
 #@ yarpp
@@ -504,7 +504,7 @@ msgstr "Le opzioni sono state salvate!"
 
 #: narpp_options.php:139
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Opzioni Yet Another Related Posts"
 
 #: narpp_options.php:147

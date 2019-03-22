@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-05-06 10:40+0300\n"
@@ -51,7 +51,7 @@ msgstr "%f - وكانت النتيجة مطابقة NARPP بين دخول الح
 #:  narpp_options.php:462
 #:  narpp_options.php:530
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "الوظائف ذات الصلة يقدمها لكم من جانب آخر على href='%s'> <aالمشاركات ذات البرنامج المساعد</a>."
 
 #:  narpp_options.php:26
@@ -113,12 +113,12 @@ msgstr "النظر مع الوزن الزائد"
 
 #:  narpp_options.php:188
 #@ yarpp
-msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgid "Not Another Related Posts Plugin version history (RSS 2.0)"
 msgstr "بعد إصدار آخر ذات الوظائف البرنامج المساعد التاريخ (RSS 2.0)"
 
 #:  narpp_options.php:242
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "بعد آخر على الوظائف ذات المساعد الخيارات"
 
 #:  narpp_options.php:274
@@ -332,7 +332,7 @@ msgstr "إذا لم يكن العرض الافتراضي النتائج :"
 #:  narpp_options.php:460
 #:  narpp_options.php:529
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "تساعد على تعزيز آخر على الوظائف ذات البرنامج المساعد؟"
 
 #:  narpp_options.php:462
@@ -448,7 +448,7 @@ msgstr "سبيل المثال وظيفة"
 
 #:  narpp_options.php:255
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
 msgstr "يتبع<a href=\"http://twitter.com/yarpp/\">بعد آخر على الوظائف ذات المساعد على التغريد</a>"
 
 #:  narpp_options.php:290
@@ -473,12 +473,12 @@ msgstr "عرض وظيفة فقط من الماضي  NUMBER UNITS"
 
 #:  narpp_options.php:388
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "الإصدار التجريبي الجديد (نسخة) سد NARPP. يمكنك تحميله من هنا <a></ أ> على مسؤوليتك الخاصة."
 
 #:  narpp_options.php:390
 #@ yarpp
-msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgid "There is a new version (VERSION) of Not Another Related Posts Plugin available! You can <A>download it here</a>."
 msgstr "الإصدار الجديد (الإصدار) سد NARPP. يمكنك تحميله من هنا <a></ أ>."
 
 #: includes.php:270

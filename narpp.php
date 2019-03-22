@@ -1,6 +1,6 @@
 <?php
 /*----------------------------------------------------------------------------------------------------------------------
-Plugin Name: Yet Another Related Posts Plugin
+Plugin Name: Not Another Related Posts Plugin
 Description: Adds related posts to your site and in RSS feeds, based on a powerful, customizable algorithm.
 Version: 5.0.0
 Author: Jeff Parker, Michael Nelson

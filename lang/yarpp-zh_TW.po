@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.5.5\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.5.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-11-09 15:19:57+0000\n"
@@ -54,8 +54,8 @@ msgstr "FAQ"
 
 #: class-admin.php:171
 #@ yarpp
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
-msgstr "感謝您安裝 <span>Yet Another Related Posts Plugin</span> ！"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgstr "感謝您安裝 <span>Not Another Related Posts Plugin</span> ！"
 
 #: class-admin.php:172
 #@ yarpp
@@ -101,8 +101,8 @@ msgstr "沒有相關文章。"
 #: options-meta-boxes.php:284
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "相關文章由 <a href='%s'>Yet Another Related Posts Plugin</a>提供。"
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "相關文章由 <a href='%s'>Not Another Related Posts Plugin</a>提供。"
 
 #: class-widget.php:69
 #@ default
@@ -126,8 +126,8 @@ msgstr "模版檔案："
 #: options-meta-boxes.php:227
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "協助推廣 Yet Another Related Posts Plugin？"
+msgid "Help promote Not Another Related Posts Plugin?"
+msgstr "協助推廣 Not Another Related Posts Plugin？"
 
 #: options-meta-boxes.php:17
 #: options-meta-boxes.php:113
@@ -466,8 +466,8 @@ msgstr ""
 #: narpp_options.php:35
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "這是 Yet Another Related Posts Plugin 程式的新 beta 版本 (%s)。你可以<a href=\"%s\">點這裡下載</a>。"
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "這是 Not Another Related Posts Plugin 程式的新 beta 版本 (%s)。你可以<a href=\"%s\">點這裡下載</a>。"
 
 #: narpp_options.php:43
 #@ yarpp
@@ -520,7 +520,7 @@ msgstr "設定已儲存！"
 
 #: narpp_options.php:138
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts 設定"
 
 #: narpp_options.php:146

@@ -41,7 +41,7 @@ msgstr "%f એફ વર્તમાન પ્રવેશ અને આ સં�
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
 #, php-format
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "સંબંધિત પોસ્ટ્સ <a href='%s'> છતાં અન્ય સંબંધિત પોસ્ટ્સ દ્વારા તમે લાવ્યા પ્લગઇન કરો </ a>."
 
 #@ yarpp
@@ -103,7 +103,7 @@ msgstr "વધારાનું વજન સાથે વિચારણા"
 
 #@ yarpp
 #: narpp_options.php:178
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "હજુ સુધી અન્ય સંબંધિત પોસ્ટ્સ પ્લગઇન વિકલ્પો"
 
 #@ yarpp
@@ -312,7 +312,7 @@ msgstr "કોઈ પરિણામો જો મૂળભૂત ડિસ્�
 #: includes.php:257
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "મદદ છતાં અન્ય સંબંધિત પોસ્ટ્સ પ્લગઇન પ્રોત્સાહન?"
 
 #@ yarpp
@@ -449,7 +449,7 @@ msgstr "ભૂતકાળમાં NUMBER UNITS માત્ર પોસ્ટ
 #@ yarpp
 #: narpp_options.php:46
 #, php-format
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "ત્યાં છતાં અન્ય સંબંધિત પોસ્ટ્સ પ્લગઇન એક નવી બીટા (% s) છે. તમે <a href=\"%s\"> તેને અહીં ડાઉનલોડ કરી શકો છો </ a> તમારા પોતાના જોખમે."
 
 #@ yarpp

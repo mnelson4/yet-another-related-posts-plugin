@@ -68,7 +68,7 @@ class NARPP_Meta_Box_Display_Web extends NARPP_Meta_Box {
 
         $this->checkbox(
             'promote_yarpp',
-            __( "Help promote Yet Another Related Posts Plugin?", 'yarpp' ).
+            __( "Help promote Not Another Related Posts Plugin?", 'yarpp' ).
             '<span class="yarpp_help" data-help="'.
             'This option will add the line &ldquo;powered by NARPP&rdquo; beneath the related posts section. '.
             'This link is greatly appreciated."></span>'

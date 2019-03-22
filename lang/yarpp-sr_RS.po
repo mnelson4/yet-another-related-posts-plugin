@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.5.1\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-06-02 19:33:10+0000\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: class-admin.php:89
 #@ yarpp
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
 msgstr "Hvala vam što ste instalirali <span>I Još Jedan Plugin o Povezanim Postovima</span>!"
 
 #: class-admin.php:90
@@ -85,8 +85,8 @@ msgstr "Nema povezanih postova:"
 #: options-meta-boxes.php:284
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Povezani postovi omogućeni od strane <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Povezani postovi omogućeni od strane <a href='%s'>Not Another Related Posts Plugin</a>."
 
 #: class-widget.php:69
 #@ default
@@ -110,7 +110,7 @@ msgstr "Templejt fajl:"
 #: options-meta-boxes.php:227
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Pomozite da promovišemo I Još Jedan Plugin o Povezanim Postovima?"
 
 #: options-meta-boxes.php:17
@@ -450,7 +450,7 @@ msgstr ""
 #: narpp_options.php:38
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Postoji nova beta (%s) NARPP-a. Možete je <a href=\"%s\">skinuti ovde</a> na spostveni rizik."
 
 #: narpp_options.php:46
@@ -504,7 +504,7 @@ msgstr "Opcije snimljene!"
 
 #: narpp_options.php:141
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "NARPP Opcije"
 
 #: narpp_options.php:149

@@ -48,8 +48,8 @@ msgstr "Įrašo pavyzdys "
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Panašius įrašus pateikia „<a href='%s'>Yet Another Related Posts Plugin</a>“ įskiepis."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Panašius įrašus pateikia „<a href='%s'>Not Another Related Posts Plugin</a>“ įskiepis."
 
 #: template-builtin.php:35
 #, php-format
@@ -150,8 +150,8 @@ msgstr "Turi didelę reikšmę"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "„Yet Another Related Posts Plugin“ įskiepio nuostatos"
+msgid "Not Another Related Posts Plugin Options"
+msgstr "„Not Another Related Posts Plugin“ įskiepio nuostatos"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -264,8 +264,8 @@ msgstr "Rodyti tik ankstesnius įrašus?"
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Yra nauja „Yet Another Related Posts Plugin“ beta versija (%s) . Galite <a href=\"%s\">ją atsisiųsti iš čia</a> (neatsakome už riziką)."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Yra nauja „Not Another Related Posts Plugin“ beta versija (%s) . Galite <a href=\"%s\">ją atsisiųsti iš čia</a> (neatsakome už riziką)."
 
 #: options-meta-boxes.php:212
 #@ yarpp
@@ -420,8 +420,8 @@ msgstr "Nesant panašių įrašų, rodyti:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Prisidėti prie „Yet Another Related Posts Plugin“ įskiepio populiarinimo?"
+msgid "Help promote Not Another Related Posts Plugin?"
+msgstr "Prisidėti prie „Not Another Related Posts Plugin“ įskiepio populiarinimo?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269

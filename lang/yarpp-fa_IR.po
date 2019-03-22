@@ -107,7 +107,7 @@ msgstr "بسیارمهم در نظر گرفته شود"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "تـنظیمات افزونه NARPP"
 
 #: options-meta-boxes.php:118
@@ -190,7 +190,7 @@ msgstr "نمایش تنظیمات <small>برای وب سایت شما</small>"
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "سازنده سایر پست های مرتبط <a href='%s'>Yet Another Related Posts</a>."
 
 #: options-meta-boxes.php:157
@@ -311,7 +311,7 @@ msgstr "در صورت عدم وجود نتیجه این را نشان بده:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "کمک به  ترقی این افزونه ؟"
 
 #: options-meta-boxes.php:205
@@ -454,7 +454,7 @@ msgstr "نمایش پست ها از NUMBER UNITS پیش"
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "نسخه بتای جدید این افزونه در دسترس است. در صورتی که مایلید می توانید آن را <a href=\"%s\">از اینجا دریافت کنید</a> و با مسئولیت خود از آن استفاده کنید"
 
 #: includes.php:248

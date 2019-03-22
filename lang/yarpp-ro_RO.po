@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin\n"
+"Project-Id-Version: Not Another Related Posts Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-02-10 17:27+0100\n"
@@ -41,8 +41,8 @@ msgstr "%f - NARPP este coeficientul similitudinii a postului curent și celui a
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
 #, php-format
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Lista de posturi similare este prezentată de plugin-ul <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Lista de posturi similare este prezentată de plugin-ul <a href='%s'>Not Another Related Posts Plugin</a>."
 
 #@ yarpp
 #: narpp_options.php:54
@@ -103,7 +103,7 @@ msgstr " a lua în considerare cu greutate suplimentară "
 
 #@ yarpp
 #: narpp_options.php:178
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Opțiuni NARPP"
 
 #@ yarpp
@@ -312,7 +312,7 @@ msgstr "Afișare default dacă nu sunt rezultate:"
 #: includes.php:257
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "A contribui la promovarea plugin NARPP?"
 
 #@ yarpp
@@ -435,7 +435,7 @@ msgstr " Afişare posturi doar în ultimul NUMBER UNITS"
 #@ yarpp
 #: narpp_options.php:46
 #, php-format
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Aceasta este noua beta (%s) plugin NARPP. Puteți să o <a href=\"%s\">descărcați aici</a> pe propriul risc."
 
 #@ yarpp

@@ -1146,7 +1146,7 @@ class YARPP {
                 '<p>'.
                     sprintf(
                         __(
-                            "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>.",
+                            "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>.",
                             'yarpp'
                         ),
                         'https://github.com/mnelson4/yet-another-related-posts-plugin'

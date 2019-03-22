@@ -109,7 +109,7 @@ msgstr "Pokaż przykładowy kod"
 
 # @ yarpp
 #: ../class-admin.php:279
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
 msgstr "Dziękujemy za zainstalowanie wtyczki<span>Powiązane wpisy</span>!"
 
 #: ../class-admin.php:280
@@ -183,7 +183,7 @@ msgstr "Plik szablonu:"
 # @ yarpp
 #: ../class-widget.php:119 ../options-meta-boxes.php:294
 #: ../options-meta-boxes.php:356
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Chcesz pomóc promować NARPP?"
 
 # @ yarpp
@@ -605,7 +605,7 @@ msgstr ""
 #: ../options.php:35
 #, php-format
 msgid ""
-"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 "Istnieje nowa wersja beta (%s) wtyczki Yet Another Related Posts. Możesz <a "
@@ -689,7 +689,7 @@ msgstr "Opcje zapisane!"
 
 # @ yarpp
 #: ../options.php:145
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Opcje NARPP"
 
 # @ yarpp

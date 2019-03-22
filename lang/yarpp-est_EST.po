@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2013-03-25 13:12+0100\n"
@@ -131,7 +131,7 @@ msgstr "ravitud lisaraskusega"
 
 # @ yarpp
 #: narpp_options.php:178
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Valikud NARPP"
 
 # @ yarpp
@@ -336,7 +336,7 @@ msgstr "Kuvar vaikimisi kui tühi:"
 
 # @ yarpp
 #: includes.php:257 options-meta-boxes.php:203 options-meta-boxes.php:268
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Aidata edendada pistik NARPP?"
 
 # @ yarpp
@@ -478,7 +478,7 @@ msgstr "Näita ainult postitusi viimasest  NUMBER UNITS"
 #: narpp_options.php:46
 #, php-format
 msgid ""
-"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 "Uus beeta (% s) pistik NARPP. Saate <a href=\"%s\"> alla laadida siit </ a> "

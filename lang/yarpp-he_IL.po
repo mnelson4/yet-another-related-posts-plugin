@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.11\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.11\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-10 17:17-0500\n"
 "PO-Revision-Date: 2012-12-10 19:49-0500\n"
@@ -108,7 +108,7 @@ msgstr "הצגת דוגמת קוד פלט"
 
 # @ yarpp
 #: class-admin.php:279
-msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
 msgstr "תודה שהתקנתם את תוסף הפוסטים הנוספים בנושא, NARPP. "
 
 #: class-admin.php:280
@@ -178,7 +178,7 @@ msgstr "קובץ תבנית:"
 
 # @ yarpp
 #: class-widget.php:119 options-meta-boxes.php:294 options-meta-boxes.php:356
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "רוצים לעזור לקדם את התוסף?"
 
 # @ yarpp
@@ -580,7 +580,7 @@ msgstr ""
 #: narpp_options.php:35
 #, php-format
 msgid ""
-"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 "קיימת גרסא חדשה יותר (%s) של NARPP ותוכלו להוריד אותה <a href=\"%s\">כאן</a>."
@@ -660,7 +660,7 @@ msgstr "האפשרויות נשמרו!"
 
 # @ yarpp
 #: narpp_options.php:145
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "אפשרויות תוסף NARPP, פוסטים נוספים בנושא"
 
 #: narpp_options.php:153

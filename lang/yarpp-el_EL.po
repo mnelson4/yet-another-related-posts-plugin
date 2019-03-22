@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.8\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-08-01 14:15-0500\n"
@@ -77,8 +77,8 @@ msgstr "Παράδειγμα άρθρου"
 #: narpp_options.php:461
 #: narpp_options.php:524
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Τα Σχετικά Άρθρα είναι κατασκεύασμα του <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Τα Σχετικά Άρθρα είναι κατασκεύασμα του <a href='%s'>Not Another Related Posts Plugin</a>."
 
 #: narpp_options.php:10
 #@ yarpp
@@ -211,18 +211,18 @@ msgstr "να ληφθεί ιδιαίτερα υπόψιν"
 
 #: narpp_options.php:204
 #@ yarpp
-msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
-msgstr "Yet Another Related Posts Plugin ιστορικό εκδόσεων (RSS 2.0)"
+msgid "Not Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Not Another Related Posts Plugin ιστορικό εκδόσεων (RSS 2.0)"
 
 #: narpp_options.php:258
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "Ρυθμίσεις του Yet Another Related Posts Plugin"
+msgid "Not Another Related Posts Plugin Options"
+msgstr "Ρυθμίσεις του Not Another Related Posts Plugin"
 
 #: narpp_options.php:276
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
-msgstr "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin στο Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
+msgstr "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin στο Twitter</a>"
 
 #: narpp_options.php:281
 #@ yarpp
@@ -336,13 +336,13 @@ msgstr "Όταν είναι επιλεγμένη τότε τα <code>related_pos
 
 #: narpp_options.php:391
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Yet Another Related Posts Plugin. Μπορείτε και εσείς να το κατεβάσετε <a href=\"%s\">από εδώ</a> με δική σας ευθύνη."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Not Another Related Posts Plugin. Μπορείτε και εσείς να το κατεβάσετε <a href=\"%s\">από εδώ</a> με δική σας ευθύνη."
 
 #: narpp_options.php:393
 #@ yarpp
-msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Yet Another Related Posts Plugin! Κατεβάστε το από <A> εδώ</a>."
+msgid "There is a new version (VERSION) of Not Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Έχει ήδη κυκλοφορήσει μια νέα έκδοση beta του Not Another Related Posts Plugin! Κατεβάστε το από <A> εδώ</a>."
 
 #: narpp_options.php:404
 #@ yarpp
@@ -500,7 +500,7 @@ msgstr "Αν δεν υπάρχουν σχετικά άρθρα θα εμφανί
 #: narpp_options.php:459
 #: narpp_options.php:523
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Να εμφανίζονται credits του plugin;"
 
 #: narpp_options.php:461

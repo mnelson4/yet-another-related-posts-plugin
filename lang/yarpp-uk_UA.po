@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.9\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-08-18 08:34+0200\n"
@@ -42,8 +42,8 @@ msgstr "%f - это коэффициэнт NARPP текущго поста и с
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Список схожих записів надано вам плагіном <a href='%s'>Yet Another Related Posts Plugin</ a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Список схожих записів надано вам плагіном <a href='%s'>Not Another Related Posts Plugin</ a>."
 
 #: narpp_options.php:54
 #@ yarpp
@@ -104,7 +104,7 @@ msgstr "розглядати з додатковою вагою"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Опції NARPP"
 
 #: options-meta-boxes.php:118
@@ -313,7 +313,7 @@ msgstr "За замовчуванням  показувати якщо нема�
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Допомогти просувати плагин NARPP?"
 
 #: options-meta-boxes.php:205
@@ -436,7 +436,7 @@ msgstr "Показувати тільки пости за останні  NUMBER
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Вийшла нова beta (%s) плагина NARPP. Ви можете <a href=\"%s\">скачать її тут</a> на свій риск."
 
 #: includes.php:248

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.2.1\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2011-02-25 00:23+0100\n"
@@ -73,8 +73,8 @@ msgstr "Archivo de plantilla:"
 #: includes.php:245
 #: narpp_options.php:470
 #: narpp_options.php:539
-msgid "Help promote Yet Another Related Posts Plugin?"
-msgstr "Ayuda para promover aún Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
+msgstr "Ayuda para promover aún Not Another Related Posts Plugin?"
 
 #@ yarpp
 #: includes.php:368
@@ -90,8 +90,8 @@ msgstr "Entradas relacionadas podrían ser visualizadas una vez que Guardes tu E
 #: magic.php:297
 #: narpp_options.php:472
 #: narpp_options.php:540
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
-msgstr "Publicaciones relacionadas que recibes por <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgstr "Publicaciones relacionadas que recibes por <a href='%s'>Not Another Related Posts Plugin</a>."
 
 #@ yarpp
 #: narpp_options.php:21
@@ -201,13 +201,13 @@ msgstr "considerar con peso extra"
 
 #@ yarpp
 #: narpp_options.php:240
-msgid "Yet Another Related Posts Plugin Options"
-msgstr "Yet Another Related Posts Plugin Opciones"
+msgid "Not Another Related Posts Plugin Options"
+msgstr "Not Another Related Posts Plugin Opciones"
 
 #@ yarpp
 #: narpp_options.php:255
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
-msgstr "Segúir <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin en Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
+msgstr "Segúir <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin en Twitter</a>"
 
 #@ default
 #: narpp_options.php:272
@@ -333,13 +333,13 @@ msgstr "Mostrar solo Previas Publicaciones?"
 
 #@ yarpp
 #: narpp_options.php:394
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Hay una Nueva Versión Beta (%s) de Yet Another Related Posts Plugin. Puedes descargarlo aquí <a href=\"%s\">descargarlo aquí</a> bajo tu propio riesgo."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Hay una Nueva Versión Beta (%s) de Not Another Related Posts Plugin. Puedes descargarlo aquí <a href=\"%s\">descargarlo aquí</a> bajo tu propio riesgo."
 
 #@ yarpp
 #: narpp_options.php:399
-msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "Hay una Nueva Versión (VERSIÓN) de Yet Another Related Posts Plugin. Puedes descargarlo aquí <a>descargarlo aquí</a> bajo tu propio riesgo."
+msgid "There is a new version (VERSION) of Not Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Hay una Nueva Versión (VERSIÓN) de Not Another Related Posts Plugin. Puedes descargarlo aquí <a>descargarlo aquí</a> bajo tu propio riesgo."
 
 #@ yarpp
 #: narpp_options.php:414

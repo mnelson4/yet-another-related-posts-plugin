@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Yet Another Related Posts Plugin v3.0.13\n"
+"Project-Id-Version: Not Another Related Posts Plugin v3.0.13\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2011-12-16 13:05+0200\n"
@@ -60,7 +60,7 @@ msgstr "Örnek yazı"
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
 #, php-format
-msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
 msgstr "Benzer yazılar <a href='%s'>Yet Another Related Posts Eklentisini</a> ile listelendi."
 
 #@ yarpp
@@ -156,7 +156,7 @@ msgstr "daha çok göz önünde bulundur"
 
 #@ yarpp
 #: narpp_options.php:178
-msgid "Yet Another Related Posts Plugin Options"
+msgid "Not Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts Ayarları"
 
 #@ yarpp
@@ -265,7 +265,7 @@ msgstr "\"Sayfa ve yazıları birbiriyle ilişkilendir\" seçeneği seçiliyse, 
 #@ yarpp
 #: narpp_options.php:46
 #, php-format
-msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "Bu eklentinin BETA (%s) sürümü mevcut. <a href=\"%s\">Buradan indirebilirsiniz.</a>"
 
 #@ yarpp
@@ -426,7 +426,7 @@ msgstr "Sonuç yoksa, şunu göster:"
 #: includes.php:257
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
-msgid "Help promote Yet Another Related Posts Plugin?"
+msgid "Help promote Not Another Related Posts Plugin?"
 msgstr "Yet Another Related Posts eklentisini yay!"
 
 #@ yarpp
