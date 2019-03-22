@@ -51,7 +51,7 @@ msgstr ""
 "Nimekiri seotud ametikohta Plugin pakutakse teile <a href='%s'> YARPP </ a>."
 
 # @ yarpp
-#: yarpp_options.php:54
+#: narpp_options.php:54
 msgid ""
 "The MyISAM check has been overridden. You may now use the \"consider titles"
 "\" and \"consider bodies\" relatedness criteria."
@@ -60,7 +60,7 @@ msgstr ""
 "päiseid\" ja \"kaardid teksti.\""
 
 # @ yarpp
-#: yarpp_options.php:63
+#: narpp_options.php:63
 #, php-format
 msgid ""
 "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
@@ -75,7 +75,7 @@ msgstr ""
 "mootor ilmselt <code>% s </ code>. Need kaks võimalust on keelatud."
 
 # @ yarpp
-#: yarpp_options.php:65
+#: narpp_options.php:65
 #, php-format
 msgid ""
 "To restore these features, please update your <code>%s</code> table by "
@@ -88,7 +88,7 @@ msgstr ""
 "Kui tabeli andmed ei tohiks jagada, kuid seal võib olla tagajärjed."
 
 # @ yarpp
-#: yarpp_options.php:67
+#: narpp_options.php:67
 #, php-format
 msgid ""
 "If, despite this check, you are sure that <code>%s</code> is using the "
@@ -98,17 +98,17 @@ msgstr ""
 "code> kasutab MyISAM, klõpsa magic nuppu:"
 
 # @ yarpp
-#: yarpp_options.php:70
+#: narpp_options.php:70
 msgid "Trust me. Let me use MyISAM features."
 msgstr "Usu mind. Lubage mul kasutada MyISAM."
 
 # @ yarpp
-#: yarpp_options.php:83
+#: narpp_options.php:83
 msgid "The YARPP database had an error but has been fixed."
 msgstr "YARPP andmebaas sisaldas vigu, kuid neid parandada."
 
 # @ yarpp
-#: yarpp_options.php:85
+#: narpp_options.php:85
 msgid "The YARPP database has an error which could not be fixed."
 msgstr "YARPP andmebaas sisaldab viga, mida ei saa parandada."
 
@@ -130,7 +130,7 @@ msgid "consider with extra weight"
 msgstr "ravitud lisaraskusega"
 
 # @ yarpp
-#: yarpp_options.php:178
+#: narpp_options.php:178
 msgid "Yet Another Related Posts Plugin Options"
 msgstr "Valikud YARPP"
 
@@ -415,7 +415,7 @@ msgid "require more than one %s in common"
 msgstr "rohkem kui %s peab olema ühine"
 
 # @ yarpp
-#: yarpp_options.php:114
+#: narpp_options.php:114
 msgid "Options saved!"
 msgstr "Seaded on salvestatud!"
 
@@ -435,17 +435,17 @@ msgstr ""
 "sarnased, mis võivad määrata vastuvõetava tasemeni saidile."
 
 # @ yarpp
-#: yarpp_options.php:279
+#: narpp_options.php:279
 msgid "Update options"
 msgstr "Muuda seadeid"
 
 # @ yarpp
-#: yarpp_options.php:280
+#: narpp_options.php:280
 msgid "Do you really want to reset your configuration?"
 msgstr "Tahad taastada oma seadeid?"
 
 # @ yarpp
-#: yarpp_options.php:280
+#: narpp_options.php:280
 msgid "Reset options"
 msgstr "Reset valikuid"
 
@@ -475,7 +475,7 @@ msgid "Show only posts from the past NUMBER UNITS"
 msgstr "Näita ainult postitusi viimasest  NUMBER UNITS"
 
 # @ yarpp
-#: yarpp_options.php:46
+#: narpp_options.php:46
 #, php-format
 msgid ""
 "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
@@ -597,7 +597,7 @@ msgid "Contact YARPP"
 msgstr ""
 
 # @ default
-#: yarpp_options.php:42
+#: narpp_options.php:42
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox"
@@ -606,13 +606,13 @@ msgid ""
 msgstr ""
 
 # @ yarpp
-#: yarpp_options.php:86
+#: narpp_options.php:86
 #, php-format
 msgid "Please try <a href=\"%s\" target=\"_blank\">manual SQL setup</a>."
 msgstr ""
 
 # @ yarpp
-#: yarpp_options.php:188
+#: narpp_options.php:188
 #, php-format
 msgid "by <a href=\"%s\" target=\"_blank\">mitcho (Michael 芳貴 Erlewine)</a>"
 msgstr ""

@@ -8,7 +8,7 @@ class YARPP {
     /*
      * Here's a list of all the options YARPP uses (except version), as well as their default values,
      * sans the yarpp_ prefix, split up into binary options and value options. These arrays are used in updating
-     * settings (yarpp_options.php) and other tasks.
+     * settings (narpp_options.php) and other tasks.
      */
     public $default_options             = array();
     public $pro_default_options         = array();
@@ -570,13 +570,13 @@ class YARPP {
 			'rss_promote_yarpp' => false
         );
 	
-		$yarpp_options = array();
+		$narpp_options = array();
 		foreach ($yarpp_3_3_options as $key => $default) {
 			$value = get_option("yarpp_$key", null);
 			if (is_null($value)) continue;
 
 			if (is_bool($default)) {
-				$yarpp_options[$key] = (boolean) $value;
+				$narpp_options[$key] = (boolean) $value;
 				continue;
 			}
 
@@ -586,18 +586,18 @@ class YARPP {
 			$value = rtrim($value, ' ');
 			
 			if (is_int($default)) {
-				$yarpp_options[$key] = absint($value);
+				$narpp_options[$key] = absint($value);
             } else {
-				$yarpp_options[$key] = $value;
+				$narpp_options[$key] = $value;
             }
 		}
 		
 		// add the options directly first, then call set_option which will ensure defaults,
 		// in case any new options have been added.
-		update_option('yarpp', $yarpp_options);
-		$this->set_option($yarpp_options);
+		update_option('yarpp', $narpp_options);
+		$this->set_option($narpp_options);
 		
-		$option_keys = array_keys($yarpp_options);
+		$option_keys = array_keys($narpp_options);
 		// append some keys for options which are long deprecated:
 		$option_keys[] = 'ad_hoc_caching';
 		$option_keys[] = 'excerpt_len';

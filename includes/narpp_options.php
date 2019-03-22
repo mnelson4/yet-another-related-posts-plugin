@@ -19,7 +19,7 @@ if (!$yarpp->diagnostic_custom_templates()) {
 }
 
 /* MyISAM Check */
-include 'yarpp_myisam_notice.php';
+include 'narpp_myisam_notice.php';
 
 /* This is not a yarpp pluging update, it is an yarpp option update */
 if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update_yarpp-nonce')) {

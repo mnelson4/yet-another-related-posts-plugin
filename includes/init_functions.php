@@ -2,7 +2,7 @@
 /* Init Functions ---------------------------------------------------------------------------------------------------*/
 
 function yarpp_init() {
-	global $yarpp;
+	global $yarpp, $narpp;
 	$yarpp = new YARPP;
 }
 

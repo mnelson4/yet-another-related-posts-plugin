@@ -105,7 +105,7 @@ class NARPP_Admin {
 		/**
          * @since 3.3: Load options page sections as meta-boxes.
          */
-		include_once(YARPP_DIR.'/includes/yarpp_meta_boxes_hooks.php');
+		include_once(YARPP_DIR . '/includes/narpp_meta_boxes_hooks.php');
 
 		/**
          * @since 3.5.5 Check that add_help_tab method callable (WP >= 3.3).
@@ -225,11 +225,11 @@ class NARPP_Admin {
 		$screen = get_current_screen();
 		if (!is_null($screen) && $screen->id === 'settings_page_yarpp') {
             wp_enqueue_style('wp-pointer');
-            wp_enqueue_style('yarpp_options', plugins_url('style/options_basic.css', dirname(__FILE__)), array(), $version );
+            wp_enqueue_style('narpp_options', plugins_url('style/options_basic.css', dirname(__FILE__)), array(), $version );
 
             wp_enqueue_script('postbox');
             wp_enqueue_script('wp-pointer');
-            wp_enqueue_script('yarpp_options', plugins_url('js/options_basic.js', dirname(__FILE__)), array('jquery'), $version );
+            wp_enqueue_script('narpp_options', plugins_url('js/options_basic.js', dirname(__FILE__)), array('jquery'), $version );
 
 		}
 
@@ -248,7 +248,7 @@ class NARPP_Admin {
 	}
 	
 	public function options_page() {
-	    include_once(YARPP_DIR . '/includes/yarpp_options.php');
+	    include_once(YARPP_DIR . '/includes/narpp_options.php');
 	}
 
 	// @since 3.4: don't actually compute results here, but use ajax instead		
