@@ -231,7 +231,7 @@ class NARPP_Cache_Tables extends NARPP_Cache {
 		if ( $wpdb->rows_affected ) {
 			$new_related = $this->related($reference_ID);
 
-			if ($this->core->debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+			if ($this->core->debug) echo "<!--NARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if ( count($original_related) ) {

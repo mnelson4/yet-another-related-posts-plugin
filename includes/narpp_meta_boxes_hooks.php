@@ -1,6 +1,5 @@
 <?php
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box.php');
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Contact.php');
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Feed.php');
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Web.php');
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Pool.php');
@@ -50,15 +49,6 @@ add_meta_box(
     ),
     'settings_page_yarpp',
     'normal',
-    'core'
-);
-
-add_meta_box(
-    'yarpp_display_contact',
-    __('Contact YARPP', 'yarpp'),
-    array(new NARPP_Meta_Box_Contact, 'display'),
-    'settings_page_yarpp',
-    'side',
     'core'
 );
 

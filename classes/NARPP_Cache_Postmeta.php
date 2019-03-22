@@ -162,7 +162,7 @@ class NARPP_Cache_Postmeta extends NARPP_Cache {
 
 		if ( count($new_related) ) {
 			update_post_meta($reference_ID, YARPP_POSTMETA_RELATED_KEY, $related);
-			if ($this->core->debug) echo "<!--YARPP just set the cache for post $reference_ID-->";
+			if ($this->core->debug) echo "<!--NARPP just set the cache for post $reference_ID-->";
 
 			// Clear the caches of any items which are no longer related or are newly related.
 			if (count($original_related)) {
