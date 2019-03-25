@@ -6,6 +6,7 @@ Version: 5.0.0
 Author: Michael Yoshitaka Erlewine, Alexander Malov, Mike Lu, Peter Bowyer, Jeff Parker, Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
 Plugin URI: https://github.com/mnelson4/yet-another-related-posts-plugin
+Text Domain: narpp
 ----------------------------------------------------------------------------------------------------------------------*/
 
 if(!defined('WP_CONTENT_URL')) define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
