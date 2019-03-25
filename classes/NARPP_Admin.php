@@ -83,7 +83,7 @@ class NARPP_Admin {
             foreach ($metabox_post_types as $post_type) {
                 $optionsUrl    = esc_url(admin_url('options-general.php?page=yarpp'));
                 $title  =
-                    __('Related Posts' , 'yarpp').
+                    __('Related Posts' , 'narpp').
                     '<span class="postbox-title-action">'.
                         '<a href="'.$optionsUrl. '" class="edit-box open-box">'.__('Configure').'</a>'.
                     '</span>';
@@ -113,13 +113,13 @@ class NARPP_Admin {
 		if (is_callable(array($current_screen, 'add_help_tab'))) {
 			$current_screen->add_help_tab(array(
 				'id'        => 'faq',
-				'title'     => __('Frequently Asked Questions', 'yarpp'),
+				'title'     => __('Frequently Asked Questions', 'narpp'),
 				'callback'  => array(&$this, 'help_faq')
 			));
 
 			$current_screen->add_help_tab(array(
 				'id'        => 'dev',
-				'title'     => __('Developing with NARPP', 'yarpp'),
+				'title'     => __('Developing with NARPP', 'narpp'),
 				'callback'  => array(&$this, 'help_dev')
 			));
 		}
@@ -137,7 +137,7 @@ class NARPP_Admin {
         } else {
 			echo(
                 '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/">'.
-                    __('Frequently Asked Questions', 'yarpp').
+                    __('Frequently Asked Questions', 'narpp').
                 '</a>'
             );
         }
@@ -151,7 +151,7 @@ class NARPP_Admin {
         } else {
 			echo(
                 '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/" target="_blank">'.
-                    __('Developing with NARPP', 'yarpp').
+                    __('Developing with NARPP', 'narpp').
                 '</a>'
             );
         }
@@ -213,7 +213,7 @@ class NARPP_Admin {
 		$output .= "<div id='yarpp_extra_screen_settings'><label for='yarpp_display_code'><input type='checkbox' name='yarpp_display_code' id='yarpp_display_code'";
 		$output .= checked($this->core->get_option('display_code'), true, false);
 		$output .= " />";
-		$output .= __('Show example code output', 'yarpp');
+		$output .= __('Show example code output', 'narpp');
 		$output .= '</label></div>';
 
 		return $output;
@@ -267,7 +267,7 @@ class NARPP_Admin {
 		</style>
 		<?php
 		if ( !get_the_ID() ) {
-			echo "<div><p>".__("Related entries may be displayed once you save your entry",'yarpp').".</p></div>";
+			echo "<div><p>".__("Related entries may be displayed once you save your entry",'narpp').".</p></div>";
 		} else {
 			wp_nonce_field( 'yarpp_display', 'yarpp_display-nonce', false );
 			echo '<div id="yarpp-related-posts"><img src="' . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . '" alt="" /></div>';

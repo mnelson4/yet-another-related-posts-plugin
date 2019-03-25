@@ -96,7 +96,7 @@ class NARPP_Cache_Bypass extends NARPP_Cache {
                 post_date,
                 post_date_gmt,
                 '{$loremipsum}' as post_content,
-		        concat('".__('Example post ','yarpp')."', @count:=@count+1) as post_title,
+		        concat('".__('Example post ','narpp')."', @count:=@count+1) as post_title,
 		        0 as post_category,
 		        '' as post_excerpt,
 		        'publish' as post_status,

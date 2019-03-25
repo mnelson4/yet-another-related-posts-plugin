@@ -5,7 +5,7 @@ global $wpdb, $wp_version, $yarpp;
 $yarpp->enforce();
 
 if(!$yarpp->enabled() && !$yarpp->activate()) {
-    echo '<div class="updated">'.__('The NARPP database has an error which could not be fixed.','yarpp').'</div>';
+    echo '<div class="updated">'.__('The NARPP database has an error which could not be fixed.','narpp').'</div>';
 }
 
 /* Check to see that templates are in the right place */
@@ -79,7 +79,7 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
     $new_options = apply_filters( 'yarpp_settings_save', $new_options );
     yarpp_set_option($new_options);
 
-    echo '<div class="updated fade"><p>'.__('Options saved!','yarpp').'</p></div>';
+    echo '<div class="updated fade"><p>'.__('Options saved!','narpp').'</p></div>';
 }
 
 wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false);

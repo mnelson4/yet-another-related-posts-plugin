@@ -74,24 +74,24 @@ class NARPP_Meta_Box {
 
         echo "<div class='yarpp_form_row yarpp_form_select'><div class='yarpp_form_label'>{$desc}</div><div>";
         echo "<select name='weight[{$option}]'>";
-        echo "<option {$fulltext} value='no'".((!$weight) ? ' selected="selected"': '')."  >".__("do not consider", 'yarpp')."</option>";
-        echo "<option {$fulltext} value='consider'".(($weight == 1) ? ' selected="selected"': '')."  > ".__("consider", 'yarpp')."</option>";
-        echo "<option {$fulltext} value='consider_extra'".(($weight > 1) ? ' selected="selected"': '')."  > ".__("consider with extra weight", 'yarpp')."</option>";
+        echo "<option {$fulltext} value='no'".((!$weight) ? ' selected="selected"': '')."  >".__("do not consider", 'narpp')."</option>";
+        echo "<option {$fulltext} value='consider'".(($weight == 1) ? ' selected="selected"': '')."  > ".__("consider", 'narpp')."</option>";
+        echo "<option {$fulltext} value='consider_extra'".(($weight > 1) ? ' selected="selected"': '')."  > ".__("consider with extra weight", 'narpp')."</option>";
         echo "</select></div></div>";
     }
 
     public function displayorder($option, $class=null) {
         echo "<div class='yarpp_form_row yarpp_form_select $class'><div class='yarpp_form_label'>";
-            _e( "Order results:", 'yarpp' );
+            _e( "Order results:", 'narpp');
             echo "</div><div><select name='$option' id='<?php echo $option; ?>'>";
                 $order = yarpp_get_option( $option );
                 ?>
-                <option value="score DESC" <?php echo ( $order == 'score DESC'?' selected="selected"':'' )?>><?php _e( "score (high relevance to low)", 'yarpp' ); ?></option>
-                <option value="score ASC" <?php echo ( $order == 'score ASC'?' selected="selected"':'' )?>><?php _e( "score (low relevance to high)", 'yarpp' ); ?></option>
-                <option value="post_date DESC" <?php echo ( $order == 'post_date DESC'?' selected="selected"':'' )?>><?php _e( "date (new to old)", 'yarpp' ); ?></option>
-                <option value="post_date ASC" <?php echo ( $order == 'post_date ASC'?' selected="selected"':'' )?>><?php _e( "date (old to new)", 'yarpp' ); ?></option>
-                <option value="post_title ASC" <?php echo ( $order == 'post_title ASC'?' selected="selected"':'' )?>><?php _e( "title (alphabetical)", 'yarpp' ); ?></option>
-                <option value="post_title DESC" <?php echo ( $order == 'post_title DESC'?' selected="selected"':'' )?>><?php _e( "title (reverse alphabetical)", 'yarpp' ); ?></option>
+                <option value="score DESC" <?php echo ( $order == 'score DESC'?' selected="selected"':'' )?>><?php _e( "score (high relevance to low)", 'narpp'); ?></option>
+                <option value="score ASC" <?php echo ( $order == 'score ASC'?' selected="selected"':'' )?>><?php _e( "score (low relevance to high)", 'narpp'); ?></option>
+                <option value="post_date DESC" <?php echo ( $order == 'post_date DESC'?' selected="selected"':'' )?>><?php _e( "date (new to old)", 'narpp'); ?></option>
+                <option value="post_date ASC" <?php echo ( $order == 'post_date ASC'?' selected="selected"':'' )?>><?php _e( "date (old to new)", 'narpp'); ?></option>
+                <option value="post_title ASC" <?php echo ( $order == 'post_title ASC'?' selected="selected"':'' )?>><?php _e( "title (alphabetical)", 'narpp'); ?></option>
+                <option value="post_title DESC" <?php echo ( $order == 'post_title DESC'?' selected="selected"':'' )?>><?php _e( "title (reverse alphabetical)", 'narpp'); ?></option>
                 <?php
         echo "</select></div></div>";
     }

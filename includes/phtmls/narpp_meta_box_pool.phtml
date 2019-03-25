@@ -9,9 +9,9 @@
 
 <?php
     foreach ($yarpp->get_taxonomies() as $taxonomy) {
-        $this->exclude($taxonomy->name, sprintf(__('Disallow by %s:', 'yarpp'), $taxonomy->labels->singular_name));
+        $this->exclude($taxonomy->name, sprintf(__('Disallow by %s:', 'narpp'), $taxonomy->labels->singular_name));
     }
-    $this->checkbox('show_pass_post', __('Show password protected posts?', 'yarpp'));
+    $this->checkbox('show_pass_post', __('Show password protected posts?', 'narpp'));
 
     $recent = yarpp_get_option('recent');
     if ((bool) $recent) {
@@ -25,15 +25,15 @@
 
     $recent_units  =
     '<select name="recent_units" id="recent_units" style="vertical-align:inherit">'.
-        '<option value="day" '  .(($recent_units === 'day')   ? 'selected' : null).'>'.__('day(s)', 'yarpp').'</option>'.
-        '<option value="week" ' .(($recent_units === 'week')  ? 'selected' : null).'>'.__('week(s)', 'yarpp').'</option>'.
-        '<option value="month" '.(($recent_units === 'month') ? 'selected' : null).'>'.__('month(s)', 'yarpp').'</option>'.
+        '<option value="day" '  .(($recent_units === 'day')   ? 'selected' : null).'>'.__('day(s)', 'narpp').'</option>'.
+        '<option value="week" ' .(($recent_units === 'week')  ? 'selected' : null).'>'.__('week(s)', 'narpp').'</option>'.
+        '<option value="month" '.(($recent_units === 'month') ? 'selected' : null).'>'.__('month(s)', 'narpp').'</option>'.
     '</select>';
 ?>
 
 <div class='yarpp_form_row yarpp_form_checkbox'>
     <div>
         <input type='checkbox' name='recent_only' value='true' <?php checked((bool) $recent) ?> />
-        <?php echo str_replace('NUMBER', $recent_number, str_replace('UNITS', $recent_units, __("Show only posts from the past NUMBER UNITS", 'yarpp'))); ?>
+        <?php echo str_replace('NUMBER', $recent_number, str_replace('UNITS', $recent_units, __("Show only posts from the past NUMBER UNITS", 'narpp'))); ?>
     </div>
 </div>

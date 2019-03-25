@@ -32,7 +32,7 @@ class YARPP {
 		$this->load_default_options();
 
 		/* Loads the plugin's translated strings. */
-		load_plugin_textdomain('yarpp', false, plugin_basename(YARPP_DIR).'/lang');
+		load_plugin_textdomain('narpp', false, plugin_basename(YARPP_DIR).'/lang');
 
 		/* Load cache object. */
 		$this->storage_class    = 'NARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE);
@@ -108,9 +108,9 @@ class YARPP {
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
 			'after_post' => '</small>',
-			'before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
+			'before_related' => '<h3>'.__('Related posts:','narpp').'</h3><ol>',
 			'after_related' => '</ol>',
-			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
+			'no_results' => '<p>'.__('No related posts.','narpp').'</p>',
 			'order' => 'score DESC',
 			'rss_limit' => 3,
 			'rss_excerpt_length' => 10,
@@ -118,9 +118,9 @@ class YARPP {
 			'rss_after_title' => '</li>',
 			'rss_before_post' => ' <small>',
 			'rss_after_post' => '</small>',
-			'rss_before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
+			'rss_before_related' => '<h3>'.__('Related posts:','narpp').'</h3><ol>',
 			'rss_after_related' => '</ol>',
-			'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
+			'rss_no_results' => '<p>'.__('No related posts.','narpp').'</p>',
 			'rss_order' => 'score DESC',
 			'past_only' => false,
 			'show_excerpt' => false,
@@ -145,9 +145,9 @@ class YARPP {
 			),
 			'require_tax' => array(),
 			'optin' => false,
-			'thumbnails_heading' => __('Related posts:','yarpp'),
+			'thumbnails_heading' => __('Related posts:','narpp'),
 			'thumbnails_default' => plugins_url('images/default.png', dirname(__FILE__)),
-			'rss_thumbnails_heading' => __('Related posts:','yarpp'),
+			'rss_thumbnails_heading' => __('Related posts:','narpp'),
 			'rss_thumbnails_default' => plugins_url('images/default.png', dirname( __FILE__)),
 			'display_code' => false,
 			'auto_display_archive' => false,
@@ -534,9 +534,9 @@ class YARPP {
 			'after_title' => '</li>',
 			'before_post' => ' <small>',
 			'after_post' => '</small>',
-			'before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
+			'before_related' => '<h3>'.__('Related posts:','narpp').'</h3><ol>',
 			'after_related' => '</ol>',
-			'no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
+			'no_results' => '<p>'.__('No related posts.','narpp').'</p>',
 			'order' => 'score DESC',
 			'rss_limit' => 3,
 			'rss_template_file' => '',
@@ -545,9 +545,9 @@ class YARPP {
 			'rss_after_title' => '</li>',
 			'rss_before_post' => ' <small>',
 			'rss_after_post' => '</small>',
-			'rss_before_related' => '<h3>'.__('Related posts:','yarpp').'</h3><ol>',
+			'rss_before_related' => '<h3>'.__('Related posts:','narpp').'</h3><ol>',
 			'rss_after_related' => '</ol>',
-			'rss_no_results' => '<p>'.__('No related posts.','yarpp').'</p>',
+			'rss_no_results' => '<p>'.__('No related posts.','narpp').'</p>',
 			'rss_order' => 'score DESC',
 			'title' => '2',
 			'body' => '2',

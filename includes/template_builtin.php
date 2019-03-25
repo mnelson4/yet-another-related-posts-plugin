@@ -35,7 +35,7 @@ if (have_posts()) {
         $title      = get_the_title();
         $round      = round(get_the_score(),1);
         $score      = (current_user_can('manage_options') && $domain !== 'rss' && !is_admin())
-                    ? '<abbr title="'.sprintf(__('%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','yarpp'),$round).'">('.$round.')</abbr>'
+                    ? '<abbr title="'.sprintf(__('%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','narpp'),$round).'">('.$round.')</abbr>'
                     : null;
 
 		$output .=
