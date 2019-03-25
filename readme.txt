@@ -1,8 +1,8 @@
 ===  (NARPP) ===
-Contributors: jeffparker
-Author: Adknowledge
+Contributors: mitcho, jeffparker, mnelson4
+Author: Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
-Tags: feeds, pages, posts, related, rss, yarpp, multisite, multilingual, thumbnails, related posts, related content
+Tags: feeds, pages, posts, related, rss, narpp, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
 Tested up to: 5.1
 Stable tag: 4.4
@@ -12,9 +12,11 @@ Display a list of related posts on your site based on a powerful unique algorith
 
 == Description ==
 
- (NARPP) displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
+NARPP displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
 
-**NARPP Basic for Standard Features**
+NARPP is a fork of the popular, [but abandoned, plugin YARPP ("Yet Another Related Posts Plugin")](https://letswp.io/what-happened-yarpp-yet-another-related-posts-plugin/). It is designed to be a backward-compatible replacement, so your old YARPP settings, custom templates, and untegration will work with NARPP just like it did with YARPP.
+
+**Features**
 -------------------------------------------
 * **Thumbnail or list view** of related content.
 * **Related posts, pages, and custom post types.**
@@ -28,7 +30,7 @@ This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FA
 
 = Auto display on your website =
 
-1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and activate the plugin.
+1. Copy the folder `narpp` into the directory `wp-content/plugins/` and activate the plugin.
 2. (optionally) copy the sample template files inside the `yarpp-templates` folder into your active theme.
 3. Go to the "Related Posts (NARPP)" settings page to customize NARPP.
 
@@ -38,9 +40,9 @@ Make sure the "display related posts in feeds" option is turned on if you would 
 
 = Widget =
 
-Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (NARPP)" widget. Choose to display content from NARPP Basic. The widget will only be displayed on single entry (permalink) pages.
+Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (NARPP)" widget. The widget will only be displayed on single entry (permalink) pages.
 
-The NARPP Basic widget can be used even if the "auto display" option is turned off.
+The NARPP widget can be used even if the "auto display" option is turned off.
 
 = Custom display through templates =
 
@@ -48,7 +50,7 @@ NARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-**Common Questions about NARPP Basic**
+**Common Questions about NARPP**
 
 Below are Frequently Asked Questions about NARPP basic.
 

@@ -3,7 +3,7 @@
 Plugin Name: Not Another Related Posts Plugin
 Description: Adds related posts to your site and in RSS feeds, based on a powerful, customizable algorithm.
 Version: 5.0.0
-Author: Jeff Parker, Michael Nelson
+Author: Michael Yoshitaka Erlewine, Alexander Malov, Mike Lu, Peter Bowyer, Jeff Parker, Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
 Plugin URI: https://github.com/mnelson4/yet-another-related-posts-plugin
 ----------------------------------------------------------------------------------------------------------------------*/
