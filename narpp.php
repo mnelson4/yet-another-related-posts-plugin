@@ -9,11 +9,6 @@ Plugin URI: https://github.com/mnelson4/not-another-related-posts-plugin
 Text Domain: narpp
 ----------------------------------------------------------------------------------------------------------------------*/
 
-if(!defined('WP_CONTENT_URL')) define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
-if(!defined('WP_CONTENT_DIR')){
-    $tr = get_theme_root();
-    define('WP_CONTENT_DIR', substr($tr,0,strrpos($tr,'/')));
-}
 add_action('plugins_loaded', 'narpp_load_after_other_plugins');
 function narpp_load_after_other_plugins()
 {
