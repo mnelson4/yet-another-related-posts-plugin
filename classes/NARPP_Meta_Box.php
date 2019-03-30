@@ -83,7 +83,7 @@ class NARPP_Meta_Box {
     public function displayorder($option, $class=null) {
         echo "<div class='yarpp_form_row yarpp_form_select $class'><div class='yarpp_form_label'>";
             _e( "Order results:", 'narpp');
-            echo "</div><div><select name='$option' id='<?php echo $option; ?>'>";
+            echo "</div><div><select name='$option' id='" . $option . "'>";
                 $order = yarpp_get_option( $option );
                 ?>
                 <option value="score DESC" <?php echo ( $order == 'score DESC'?' selected="selected"':'' )?>><?php _e( "score (high relevance to low)", 'narpp'); ?></option>

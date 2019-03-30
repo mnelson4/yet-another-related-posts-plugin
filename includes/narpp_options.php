@@ -25,6 +25,21 @@ include 'narpp_myisam_notice.php';
 if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update_yarpp-nonce')) {
     $new_options = array();
     foreach ($yarpp->default_options as $option => $default) {
+        if(in_array(
+            $option,
+            [
+                'weight',
+                'auto_display_post_types',
+                'recent',
+                'exclude',
+                'template',
+                'rss_template',
+                'recent_number',
+                'recent_units'
+            ]
+        )){
+            continue;
+        }
         if ( is_bool($default) ) {
             $new_options[ $option ] = isset($_POST[ $option ]);
         }
@@ -76,17 +91,37 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
         }
     }
 
-    if ( isset( $_POST['auto_display_post_types'] ) ) {
-        $new_options['auto_display_post_types'] = array_keys( $_POST['auto_display_post_types'] );
+    if (isset($_POST['auto_display_post_types'])) {
+        $new_options['auto_display_post_types'] = array_intersect(
+            get_post_types([], 'names'),
+            array_keys($_POST['auto_display_post_types'])
+        );
     } else {
         $new_options['auto_display_post_types'] = array();
     }
+    if(isset($_POST['recent_only'])){
+        $recent_number = intval($_POST['recent_number']);
+        $recent_units = in_array(
+            $_POST['recent_units'],
+            [
+                'day',
+                'week',
+                'month',
+            ])
+            ? $_POST['recent_units']
+            : 'month';
+        $new_options['recent'] =  $recent_number . ' ' .  $recent_units;
+    }
 
-    $new_options['recent'] = isset($_POST['recent_only']) ?
-        $_POST['recent_number'] . ' ' . $_POST['recent_units'] : false;
 
     if ( isset($_POST['exclude']) )
-        $new_options['exclude'] = implode(',',array_keys($_POST['exclude']));
+        $new_options['exclude'] = implode(
+            ',',
+            array_map(
+                'intval',
+                array_keys($_POST['exclude'])
+            )
+        );
     else
         $new_options['exclude'] = '';
 
