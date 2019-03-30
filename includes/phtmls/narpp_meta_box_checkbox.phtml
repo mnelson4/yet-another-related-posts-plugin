@@ -1,12 +1,12 @@
-<div class="yarpp_form_row yarpp_form_checkbox <?php echo $class ?>">
+<div class="yarpp_form_row yarpp_form_checkbox <?php echo esc_attr($class) ?>">
     <div scope="row">
         <input 
             type="checkbox" 
-            name="<?php echo $option ?>" 
-            id="yarpp-<?php echo $option ?>" 
+            name="<?php echo esc_attr($option)?>"
+            id="yarpp-<?php echo esc_attr($option)?>"
             value="true" 
             <?php checked(yarpp_get_option($option)) ?>
         />
-        <label for="yarpp-<?php echo $option ?>"><?php echo $desc ?></label>
+        <label for="yarpp-<?php echo esc_attr($option);?>"><?php echo $desc ?></label>
     </div>
 </div>

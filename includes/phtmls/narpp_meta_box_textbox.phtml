@@ -1,14 +1,14 @@
-<div class="yarpp_form_row yarpp_form_textbox <?php echo $class ?>">
+<div class="yarpp_form_row yarpp_form_textbox <?php echo esc_attr($class); ?>">
     <div class="yarpp_form_label">
-         <?php echo $desc ?>
+         <?php echo esc_html($desc); ?>
     </div>
     <div>
     
         <input
-            name="<?php echo $option ?>"
-            type="text" id="<?php echo $option ?>"
-            value="<?php echo $value ?>" 
-            size="<?php echo $size ?>"
+            name="<?php echo esc_attr($option);?>"
+            type="text" id="<?php echo esc_attr($option);?>"
+            value="<?php echo esc_attr($value);?>"
+            size="<?php echo esc_attr($size);?>"
         />
 
     <?php if ($note): ?>

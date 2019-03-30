@@ -1,63 +1,63 @@
 <div class="yarpp-widget-settings-switch">
     <div class="yarpp-widget-basic-settings" >
         <p class='yarpp-widget-type-control'>
-            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_builtin'); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>">
                 <input
-                    type="radio"
-                    id="<?php echo $this->get_field_id('use_template_builtin'); ?>"
-                    name="<?php echo $this->get_field_name('use_template'); ?>"
-                    value="builtin" <?php checked($choice === 'builtin' ) ?>
+                        type="radio"
+                        id="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>"
+                        name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
+                        value="builtin" <?php checked($choice === 'builtin') ?>
                 />
                 <?php _e("List",'narpp'); ?>
             </label>
             <br/>
-            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_thumbnails'); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_thumbnails')); ?>">
                 <input
                     type="radio"
-                    id="<?php echo $this->get_field_id('use_template_thumbnails'); ?>"
-                    name="<?php echo $this->get_field_name('use_template'); ?>"
+                    id="<?php echo esc_attr($this->get_field_id('use_template_thumbnails')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
                     value="thumbnails" <?php checked($choice === 'thumbnails') ?>
                 />
                 <?php _e("Thumbnails", 'narpp'); ?>
             </label>
             <br/>
-            <label style="padding-right: 10px; display: inline-block;" for="<?php echo $this->get_field_id('use_template_custom'); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_custom')); ?>">
                 <input
                     type="radio"
-                    id="<?php echo $this->get_field_id('use_template_custom'); ?>"
-                    name="<?php echo $this->get_field_name('use_template'); ?>"
+                    id="<?php echo esc_attr($this->get_field_id('use_template_custom')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
                     value="custom" <?php checked($choice === 'custom'); disabled(!count($templates)); ?>
                 />
                 <?php _e("Custom", 'narpp'); ?>
             </label>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('title') ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('title')) ?>">
                 <?php _e('Title:'); ?>
                 <input
                     type="text"
                     class="widefat"
-                    id="<?php echo $this->get_field_id('title') ?>"
-                    name="<?php echo $this->get_field_name('title') ?>"
-                    value="<?php echo esc_attr($instance['title']) ?>"/>
+                    id="<?php echo esc_attr($this->get_field_id('title')) ?>"
+                    name="<?php echo esc_attr($this->get_field_name('title')) ?>"
+                    value="<?php echo esc_attr($instance['title']); ?>"/>
             </label>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('thumbnails_heading') ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('thumbnails_heading')) ?>">
                 <?php _e('Heading:', 'narpp') ?>
                 <input
                     type="text"
                     class="widefat"
-                    id="<?php echo $this->get_field_id('thumbnails_heading') ?>"
-                    name="<?php echo $this->get_field_name('thumbnails_heading') ?>"
-                    value="<?php echo esc_attr($instance['thumbnails_heading']) ?>"/>
+                    id="<?php echo esc_attr($this->get_field_id('thumbnails_heading')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('thumbnails_heading')) ?>"
+                    value="<?php echo esc_attr(esc_attr($instance['thumbnails_heading'])) ?>"/>
             </label>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('template_file'); ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('template_file')); ?>">
                 <?php _e("Template file:",'narpp');?>
             </label>
-            <select name="<?php echo $this->get_field_name('template_file'); ?>" id="<?php echo $this->get_field_id('template_file'); ?>">
+            <select name="<?php echo esc_attr($this->get_field_name('template_file')); ?>" id="<?php echo esc_attr($this->get_field_id('template_file')); ?>">
                 <?php foreach ($templates as $template): ?>
                     <option value='<?php echo esc_attr($template['basename']); ?>' <?php selected($template['basename'], $instance['template']);?>>
                         <?php echo esc_html($template['name']); ?>

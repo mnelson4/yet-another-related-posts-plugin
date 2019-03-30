@@ -18,7 +18,7 @@ function narpp_load_after_other_plugins()
         add_action(
             'admin_notices',
             function(){
-                echo '<div class="notice notice-error">' . esc_html__('Not Another Related Posts Plugin cannot run while its predecessor, Yet Another Related Posts Plugin, is active. Please deactivate Yet Another Related Posts Plugin.', 'event_espresso') . '</div>';
+                echo '<div class="notice notice-error">' . esc_html__('Not Another Related Posts Plugin cannot run while its predecessor, Yet Another Related Posts Plugin, is active. Please deactivate Yet Another Related Posts Plugin.', 'narpp') . '</div>';
             }
         );
     } else {

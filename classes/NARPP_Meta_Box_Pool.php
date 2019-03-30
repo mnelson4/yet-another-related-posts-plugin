@@ -6,14 +6,22 @@ class NARPP_Meta_Box_Pool extends NARPP_Meta_Box {
 
 		echo "<div class='yarpp_form_row yarpp_form_exclude'><div class='yarpp_form_label'>";
 		echo $string;
-		echo "</div><div class='yarpp_scroll_wrapper'><div class='exclude_terms' id='exclude_{$taxonomy}'>";
+		echo "</div><div class='yarpp_scroll_wrapper'><div class='exclude_terms' id='exclude_"
+             . esc_attr($taxonomy)
+             . "'>";
 
 		$exclude_tt_ids = wp_parse_id_list( yarpp_get_option( 'exclude' ) );
 		$exclude_term_ids = $yarpp->admin->get_term_ids_from_tt_ids($taxonomy, $exclude_tt_ids);
 		if ( count( $exclude_term_ids ) ) {
 			$terms = get_terms( $taxonomy, array( 'include' => $exclude_term_ids ) );
 			foreach ( $terms as $term ) {
-				echo "<input type='checkbox' name='exclude[{$term->term_taxonomy_id}]' id='exclude_{$term->term_taxonomy_id}' value='true' checked='checked' /> <label for='exclude_{$term->term_taxonomy_id}'>" . esc_html( $term->name ) . "</label> ";
+				echo "<input type='checkbox' name='exclude["
+                     . esc_attr($term->term_taxonomy_id)
+                     . "]' id='exclude_"
+                     . esc_attr($term->term_taxonomy_id)
+                     . "' value='true' checked='checked' /> <label for='exclude_"
+                     . esc_attr($term->term_taxonomy_id)
+                     ."'>" . esc_html( $term->name ) . "</label> ";
 			}
 		}
 

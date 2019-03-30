@@ -136,7 +136,7 @@ class NARPP_Admin {
 			echo $this->markdown($matches[1]);
         } else {
 			echo(
-                '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/">'.
+                '<a href="https://wordpress.org/plugins/narpp#faq">'.
                     __('Frequently Asked Questions', 'narpp').
                 '</a>'
             );
@@ -150,24 +150,10 @@ class NARPP_Admin {
 			echo $this->markdown( $matches[1] );
         } else {
 			echo(
-                '<a href="https://wordpress.org/extend/plugins/yet-another-related-posts-plugin/faq/" target="_blank">'.
+                '<a href="https://wordpress.org/plugins/narpp#faq" target="_blank">'.
                     __('Developing with NARPP', 'narpp').
                 '</a>'
             );
-        }
-	}
-
-
-
-	function the_donothing_button($msg, $echo = false) {
-
-        $out ='<a href="options-general.php?page=yarpp" class="button">'.$msg.'</a>';
-
-        if ($echo){
-            echo $out;
-            return null;
-        } else {
-            return $out;
         }
 	}
 
@@ -338,7 +324,15 @@ class NARPP_Admin {
 		}
 		
 		foreach ($terms as $term) {
-			echo "<span><input type='checkbox' name='exclude[{$term->term_taxonomy_id}]' id='exclude_{$term->term_taxonomy_id}' value='true' /> <label for='exclude_{$term->term_taxonomy_id}'>" . esc_html($term->name) . "</label></span> ";
+			echo "<span><input type='checkbox' name='exclude["
+                 . esc_attr($term->term_taxonomy_id)
+                 . "]' id='exclude_"
+                 . esc_attr($term->term_taxonomy_id)
+                 . "' value='true' /> <label for='exclude_"
+                 . esc_attr($term->term_taxonomy_id)
+                 . "'>"
+                 . esc_html($term->name)
+                 . "</label></span> ";
 		}
 		exit;
 	}

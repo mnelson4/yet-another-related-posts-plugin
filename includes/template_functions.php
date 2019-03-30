@@ -9,6 +9,6 @@ function the_score() {
 function get_the_score() {
 	global $post;
 
-	$score = $post->score;
+	$score = (float) $post->score;
 	return apply_filters('get_the_score', $score);
 }

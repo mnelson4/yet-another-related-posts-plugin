@@ -25,7 +25,9 @@ class NARPP_Meta_Box_Display_Feed extends NARPP_Meta_Box {
         if ( $choice != 'custom' )
             echo ' style="display: none;"';
         echo ">";
-        echo '<div class="yarpp_form_row"><div>' . $this->template_text . '</div></div>';
+        echo '<div class="yarpp_form_row"><div>'
+             . $this->template_text
+             . '</div></div>';
         $this->template_file( true );
         echo "</div>";
 

@@ -975,7 +975,7 @@ class YARPP {
         if ($related_count > 0 && $promote_yarpp && $domain != 'metabox') {
             $output .=
             '<p>'.
-                '<a href="https://github.com/mnelson4/yet-another-related-posts-plugin" class="yarpp-promote" target="_blank">Powered by NARPP</a>'.
+                '<a href="https://github.com/mnelson4/not-another-related-posts-plugin" class="yarpp-promote" target="_blank">Powered by NARPP</a>'.
             '</p>';
         }
         $output .= "</div>\n";
@@ -1140,7 +1140,6 @@ class YARPP {
 		$output = trim($output)."\n";
 		
 		$this->cache_bypass->end_demo_time();
-		
 		if ($promote_yarpp) {
 			$output .=
                 '<p>'.
@@ -1149,7 +1148,7 @@ class YARPP {
                             "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>.",
                             'yarpp'
                         ),
-                        'https://github.com/mnelson4/yet-another-related-posts-plugin'
+                        esc_url('https://github.com/mnelson4/not-another-related-posts-plugin')
                     ).
                 "</p>\n";
         }
