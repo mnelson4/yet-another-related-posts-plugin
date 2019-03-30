@@ -25,11 +25,30 @@ include 'narpp_myisam_notice.php';
 if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update_yarpp-nonce')) {
     $new_options = array();
     foreach ($yarpp->default_options as $option => $default) {
-        if ( is_bool($default) )
-            $new_options[$option] = isset($_POST[$option]);
-        if ( (is_string($default) || is_int($default)) &&
-             isset($_POST[$option]) && is_string($_POST[$option]) )
-            $new_options[$option] = stripslashes($_POST[$option]);
+        if ( is_bool($default) ) {
+            $new_options[ $option ] = isset($_POST[ $option ]);
+        }
+        if ( isset($_POST[$option]) && is_string($_POST[$option]) ){
+            if(is_bool($default)){
+                $new_options[$option] = (bool)$_POST[$option];
+            }else if(is_int($default)){
+                $new_options[$option] = intval($_POST[$option]);
+            } elseif($default === 'score DESC') {
+                $order_parts = explode(' ', $order, 2);
+                if(in_array(strtolower($order_parts[1]),['asc','desc'])) {
+                    // FYI the first part will be passed into WP_Query's "orderby" field, so it will be sanitized there.
+                    $new_options[$option] = implode(' ', $order_parts);
+                }
+            } else {
+                if(current_user_can('unfiltered_html')){
+                    // Ok, let them put HTML in there. This will be passed to update_option which guards against
+                    // SQL injection
+                    $new_options[$option] = stripslashes($_POST[$option]);
+                } else {
+                    $new_options[$option] = wp_kses((string) $_POST[$option], wp_kses_allowed_html('post'));
+                }
+            }
+        }
     }
 
     if ( isset($_POST['weight']) ) {
