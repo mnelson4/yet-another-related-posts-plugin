@@ -25,7 +25,8 @@ include 'narpp_myisam_notice.php';
 if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update_yarpp-nonce')) {
     $new_options = array();
     foreach ($yarpp->default_options as $option => $default) {
-        if(in_array(
+        // Skip options we'll handle separately.
+        if (in_array(
             $option,
             [
                 'weight',
@@ -35,9 +36,9 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
                 'template',
                 'rss_template',
                 'recent_number',
-                'recent_units'
+                'recent_units',
             ]
-        )){
+        )) {
             continue;
         }
         if ( is_bool($default) ) {
@@ -69,10 +70,16 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
     if ( isset($_POST['weight']) ) {
         $new_options['weight'] = array();
         $new_options['require_tax'] = array();
-        foreach ( (array) $_POST['weight'] as $key => $value) {
-            if ( $value == 'consider' )
+        foreach ( (array) ['title','body'] as $key) {
+            $value = isset(
+                $_POST['weight'],
+                $_POST['weight'][$key]
+            )
+            ? $_POST['weight'][$key]
+            : '';
+            if ( $value === 'consider' )
                 $new_options['weight'][$key] = 1;
-            if ( $value == 'consider_extra' )
+            if ( $value === 'consider_extra' )
                 $new_options['weight'][$key] = YARPP_EXTRA_WEIGHT;
         }
         foreach ( (array) $_POST['weight']['tax'] as $tax => $value) {
