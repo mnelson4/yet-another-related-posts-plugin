@@ -82,12 +82,16 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
             if ( $value === 'consider_extra' )
                 $new_options['weight'][$key] = YARPP_EXTRA_WEIGHT;
         }
+        $real_taxonomies = get_taxonomies(array(),'names');
         foreach ( (array) $_POST['weight']['tax'] as $tax => $value) {
-            if ( $value == 'consider' )
+            if(! in_array($tax, $real_taxonomies)){
+                continue;
+            }
+            if ( $value === 'consider' )
                 $new_options['weight']['tax'][$tax] = 1;
-            if ( $value == 'consider_extra' )
+            if ( $value === 'consider_extra' )
                 $new_options['weight']['tax'][$tax] = YARPP_EXTRA_WEIGHT;
-            if ( $value == 'require_one' ) {
+            if ( $value === 'require_one' ) {
                 $new_options['weight']['tax'][$tax] = 1;
                 $new_options['require_tax'][$tax] = 1;
             }
