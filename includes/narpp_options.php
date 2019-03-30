@@ -28,7 +28,7 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
         // Skip options we'll handle separately.
         if (in_array(
             $option,
-            [
+            array(
                 'weight',
                 'auto_display_post_types',
                 'recent',
@@ -37,7 +37,7 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
                 'rss_template',
                 'recent_number',
                 'recent_units',
-            ]
+            )
         )) {
             continue;
         }
@@ -104,7 +104,7 @@ if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update
 
     if (isset($_POST['auto_display_post_types'])) {
         $new_options['auto_display_post_types'] = array_intersect(
-            get_post_types([], 'names'),
+            get_post_types(array(), 'names'),
             array_keys($_POST['auto_display_post_types'])
         );
     } else {
