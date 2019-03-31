@@ -3,7 +3,7 @@
 
 function yarpp_init() {
 	global $yarpp, $narpp;
-	$yarpp = new YARPP;
+	$yarpp = new NARPP_Core;
 }
 
 function yarpp_plugin_activate($network_wide) {

@@ -3,7 +3,7 @@
 /**
  * @since 3.4 Put everything YARPP into an object, expected to be a singleton global $yarpp.
  */
-class YARPP {
+class NARPP_Core {
 
     /*
      * Here's a list of all the options YARPP uses (except version), as well as their default values,
@@ -689,7 +689,7 @@ class YARPP {
 		}
 		$options['exclude'] = join(',', $exclude_tt_ids);
 
-		update_option( 'yarpp', $options );
+		update_option('yarpp', $options );
 	}
 	
 	public function upgrade_3_4_4b3() {
@@ -1146,7 +1146,7 @@ class YARPP {
                     sprintf(
                         __(
                             "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>.",
-                            'yarpp'
+                            'narpp'
                         ),
                         esc_url('https://github.com/mnelson4/not-another-related-posts-plugin')
                     ).
