@@ -1,7 +1,6 @@
 <?php
 
-if (isset($_POST['myisam_override'])) {
-
+if (isset($_POST['myisam_override'], $_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'], 'narpp_myisam_override')) {
     yarpp_set_option('myisam_override', true);
     $enabled = $yarpp->enable_fulltext();
 
@@ -72,6 +71,7 @@ if (!(bool) yarpp_get_option('myisam_override') && (bool) $yarpp->diagnostic_ful
                 $wpdb->posts
             ).
                 '<form method="post" style="display:inline-block;margin:1.5em 1em">'.
+                    "<input type='hidden' name='_wpnonce' value='" . wp_create_nonce('narpp_myisam_override') . "'>".
                     "<input type='submit' class='button' name='myisam_override' value='Create fulltext indexes'/>".
                 "</form>".
                 '</li>'.
