@@ -22,7 +22,10 @@ if (!$yarpp->diagnostic_custom_templates()) {
 include 'narpp_myisam_notice.php';
 
 /* This is not a yarpp pluging update, it is an yarpp option update */
-if (isset($_POST['update_yarpp']) && check_admin_referer('update_yarpp', 'update_yarpp-nonce')) {
+if (isset($_POST['update_yarpp'])
+    && check_admin_referer('update_yarpp', 'update_yarpp-nonce')
+    && current_user_can('manage_options')
+) {
     $new_options = array();
     foreach ($yarpp->default_options as $option => $default) {
         // Skip options we'll handle separately.

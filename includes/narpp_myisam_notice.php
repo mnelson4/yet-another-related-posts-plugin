@@ -1,6 +1,9 @@
 <?php
 
-if (isset($_POST['myisam_override'], $_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'], 'narpp_myisam_override')) {
+if (isset($_POST['myisam_override'])
+    && check_admin_referer( 'narpp_myisam_override')
+    && current_user_can('manage_options')
+) {
     yarpp_set_option('myisam_override', true);
     $enabled = $yarpp->enable_fulltext();
 
