@@ -936,7 +936,7 @@ class YARPP {
         if ($domain === 'website') {
             $output .= "yarpp-related";
         } else {
-            $output .= "yarpp-related-{$domain}";
+            $output .= "yarpp-related-" . esc_attr($domain);
         }
 
         if ($related_count < 1) {
@@ -1116,7 +1116,7 @@ class YARPP {
 		if ($domain === 'website') {
 			$output .= "yarpp-related";
         } else {
-			$output .= "yarpp-related-{$domain}";
+			$output .= "yarpp-related-" . esc_attr($domain);
         }
 		$output .= "'>\n";
 
@@ -1363,4 +1363,27 @@ class YARPP {
 		$text = str_replace('</p>', '', $text);
 		return $text;
 	}
+
+
+    /**
+     * Sanitizes the domain argument.
+     * @since $VID:$
+     * @param string $domain_input
+     * @return string
+     */
+	public function sanitize_domain($domain_input)
+    {
+	    if (in_array(
+	        $domain_input,
+            array(
+                'website',
+                'widget',
+                'rss'
+            ),
+            true
+        )) {
+	        return $domain_input;
+        }
+        return 'website';
+    }
 }

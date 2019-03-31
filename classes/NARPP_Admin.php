@@ -315,7 +315,7 @@ class NARPP_Admin {
 			'hide_empty' => false,
 			'hierarchical' => false,
 			'number' => 100,
-			'offset' => $_REQUEST['offset']
+			'offset' => (int) $_REQUEST['offset']
 		));
 		
 		if ( !count($terms) ) {
@@ -352,7 +352,7 @@ class NARPP_Admin {
 
 		$args = array(
 			'post_type' => array('post'),
-			'domain' => isset($_REQUEST['domain']) ? $_REQUEST['domain'] : 'website'
+			'domain' => isset($_REQUEST['domain']) ? $this->core->sanitize_domain($_REQUEST['domain']) : 'website'
 		);
 
 		if ($this->core->get_option('cross_relate')) $args['post_type'] = $this->core->get_post_types();
@@ -374,7 +374,7 @@ class NARPP_Admin {
 	
 		$args = array(
 			'post_type' => array('post'),
-			'domain'    => (isset($_REQUEST['domain'])) ? $_REQUEST['domain'] : 'website'
+			'domain'    => (isset($_REQUEST['domain'])) ? $this->core->sanitize_domain($_REQUEST['domain']) : 'website'
 		);
 			
 		$return = $this->core->display_demo_related($args, false);
