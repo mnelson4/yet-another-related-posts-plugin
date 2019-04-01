@@ -1,7 +1,7 @@
 <?php
 /* Init Functions ---------------------------------------------------------------------------------------------------*/
 
-function narpp_init() {
+function yarpp_init() {
 	global $yarpp, $narpp;
 	$yarpp = new NARPP_Core;
 }

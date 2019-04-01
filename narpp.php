@@ -66,7 +66,7 @@ function narpp_load_after_other_plugins()
         include_once(YARPP_DIR.'/classes/NARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE).'.php');
 
         /* WP hooks ----------------------------------------------------------------------------------------------------------*/
-        add_action('init', 'narpp_init');
+        add_action('init', 'yarpp_init');
         add_action('activate_'.plugin_basename(__FILE__), 'yarpp_plugin_activate', 10, 1);
     }
 }
