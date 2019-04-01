@@ -7,7 +7,8 @@
  */
 
 /* Exit if plugin delete hasn't be called */
-if (!defined('WP_UNINSTALL_PLUGIN')) exit();
+if (!defined('WP_UNINSTALL_PLUGIN') || ! defined( 'ABSPATH' )) exit();
+
 
 global $wpdb;
 

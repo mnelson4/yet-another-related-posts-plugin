@@ -8,6 +8,9 @@ Author URI: https://cmljnelson.wordpress.com
 Plugin URI: https://github.com/mnelson4/not-another-related-posts-plugin
 Text Domain: narpp
 ----------------------------------------------------------------------------------------------------------------------*/
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
 
 add_action('plugins_loaded', 'narpp_load_after_other_plugins');
 function narpp_load_after_other_plugins()

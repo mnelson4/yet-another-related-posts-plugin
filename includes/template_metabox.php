@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 global $yarpp;
 
 $yarpp->cache->enforce((int) $reference_ID, false); // enforce the cache, but don't force it

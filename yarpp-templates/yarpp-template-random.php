@@ -1,4 +1,8 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
+
 /*
 YARPP Template: Random
 Description: This template gives you a random other post in case there are no related posts

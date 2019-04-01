@@ -1,4 +1,7 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
 
 class NARPP_Cache_Bypass extends NARPP_Cache {
 

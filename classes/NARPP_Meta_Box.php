@@ -1,4 +1,7 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
 
 class NARPP_Meta_Box {
     protected $template_text = null;

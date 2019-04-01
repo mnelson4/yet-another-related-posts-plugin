@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // two YARPP-specific Template Tags, to be used in the YARPP-template Loop.
 

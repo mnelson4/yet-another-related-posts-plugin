@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box.php');
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Feed.php');
 include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Web.php');

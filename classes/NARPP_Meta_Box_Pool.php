@@ -1,4 +1,7 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
 
 class NARPP_Meta_Box_Pool extends NARPP_Meta_Box {
 	public function exclude($taxonomy, $string) {

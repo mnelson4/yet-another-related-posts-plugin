@@ -1,4 +1,8 @@
-<?php 
+<?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
+
 /*
 YARPP Template: Simple
 Author: mitcho (Michael Yoshitaka Erlewine)

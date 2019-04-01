@@ -1,4 +1,8 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
+
 /*
 YARPP Template: List
 Description: This template returns the related posts as a comma-separated list.

@@ -1,7 +1,11 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
 
 /**
- * @since 3.4 Put everything YARPP into an object, expected to be a singleton global $yarpp.
+ * @since 3.4 Put everything NARPP into an object, expected to be a singleton global $narpp (and $yarpp for backward-
+ * compatibility.)
  */
 class NARPP_Core {
 

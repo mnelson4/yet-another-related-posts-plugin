@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if (isset($_POST['myisam_override'])
     && check_admin_referer( 'narpp_myisam_override')
