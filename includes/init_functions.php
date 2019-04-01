@@ -6,7 +6,7 @@ function narpp_init() {
 	$yarpp = new NARPP_Core;
 }
 
-function narpp_plugin_activate($network_wide) {
+function yarpp_plugin_activate($network_wide) {
     update_option('yarpp_activated', true);
 }
 

@@ -67,7 +67,7 @@ function narpp_load_after_other_plugins()
 
         /* WP hooks ----------------------------------------------------------------------------------------------------------*/
         add_action('init', 'narpp_init');
-        add_action('activate_'.plugin_basename(__FILE__), 'narpp_plugin_activate', 10, 1);
+        add_action('activate_'.plugin_basename(__FILE__), 'yarpp_plugin_activate', 10, 1);
     }
 }
 
