@@ -1,17 +1,22 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 // two YARPP-specific Template Tags, to be used in the YARPP-template Loop.
 
-function narpp_the_score() {
-	echo get_the_score();
+function narpp_the_score()
+{
+    echo get_the_score();
 }
 
-function narpp_get_the_score() {
-	global $post;
 
-	$score = (float) $post->score;
-	return apply_filters('get_the_score', $score);
+function narpp_get_the_score()
+{
+    global $post;
+
+    $score = (float) $post->score;
+    return apply_filters('get_the_score', $score);
 }
 
 
@@ -20,14 +25,16 @@ function narpp_get_the_score() {
  * already using them, and if they won't conflict with other plugins. Remember this gets loaded on 'init' priority 10
  * so if another plugin defines them, they probably have already done so.
  */
-if (! function_exists('the_score')){
-    function the_score(){
+if (! function_exists('the_score')) {
+    function the_score()
+    {
         narpp_the_score();
     }
 }
 
-if (! function_exists('get_the_score')){
-    function get_the_score(){
+if (! function_exists('get_the_score')) {
+    function get_the_score()
+    {
         return narpp_get_the_score();
     }
 }

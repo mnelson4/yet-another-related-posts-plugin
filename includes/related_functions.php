@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 /*---------------------------------------------------------------------------------------------------------------------
 Here are the related_WHATEVER functions, as introduced in 1.1.
@@ -7,31 +9,36 @@ Since YARPP 2.1, these functions receive (optionally) one array argument.
 Since NARPP 5.0 the UNnamespaced related_WHATEVER functions are only defined if they won't conflict with other functions.
 ----------------------------------------------------------------------------------------------------------------------*/
 
-function yarpp_related($args = array(), $reference_ID = false, $echo = true) {
-	global $yarpp;
+function yarpp_related($args = array(), $reference_ID = false, $echo = true)
+{
+    global $yarpp;
 
-	if (is_array($reference_ID)){
-		_doing_it_wrong( __FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
-		return;
-	}
-	
-	return $yarpp->display_related($reference_ID, $args, $echo);
+    if (is_array($reference_ID)) {
+        _doing_it_wrong(__FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
+        return;
+    }
+
+    return $yarpp->display_related($reference_ID, $args, $echo);
 }
 
-function yarpp_related_exist($args = array(), $reference_ID = false) {
-	global $yarpp;
 
-	if (is_array($reference_ID)) {
-		_doing_it_wrong( __FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
-		return;
-	}
-	
-	return $yarpp->related_exist($reference_ID, $args);
+function yarpp_related_exist($args = array(), $reference_ID = false)
+{
+    global $yarpp;
+
+    if (is_array($reference_ID)) {
+        _doing_it_wrong(__FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
+        return;
+    }
+
+    return $yarpp->related_exist($reference_ID, $args);
 }
 
-function yarpp_get_related($args = array(), $reference_ID = false) {
-	global $yarpp;
-	return $yarpp->get_related($reference_ID, $args);
+
+function yarpp_get_related($args = array(), $reference_ID = false)
+{
+    global $yarpp;
+    return $yarpp->get_related($reference_ID, $args);
 }
 
 

@@ -1,17 +1,19 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box.php');
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Feed.php');
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Display_Web.php');
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Pool.php');
-include_once(YARPP_DIR.'/classes/NARPP_Meta_Box_Relatedness.php');
+include_once(YARPP_DIR . '/classes/NARPP_Meta_Box.php');
+include_once(YARPP_DIR . '/classes/NARPP_Meta_Box_Display_Feed.php');
+include_once(YARPP_DIR . '/classes/NARPP_Meta_Box_Display_Web.php');
+include_once(YARPP_DIR . '/classes/NARPP_Meta_Box_Pool.php');
+include_once(YARPP_DIR . '/classes/NARPP_Meta_Box_Relatedness.php');
 
 global $yarpp;
 
 add_meta_box(
     'yarpp_pool',
-    __( '"The Pool"', 'narpp'),
+    __('"The Pool"', 'narpp'),
     array(new NARPP_Meta_Box_Pool, 'display'),
     'settings_page_yarpp',
     'normal',
@@ -20,10 +22,10 @@ add_meta_box(
 
 add_meta_box(
     'yarpp_relatedness',
-    __( '"Relatedness" options', 'narpp'),
+    __('"Relatedness" options', 'narpp'),
     array(
         new NARPP_Meta_Box_Relatedness,
-        'display'
+        'display',
     ),
     'settings_page_yarpp',
     'normal',
@@ -35,7 +37,7 @@ add_meta_box(
     __('Display options <small>for your website</small>', 'narpp'),
     array(
         new NARPP_Meta_Box_Display_Web,
-        'display'
+        'display',
     ),
     'settings_page_yarpp',
     'normal',
@@ -47,7 +49,7 @@ add_meta_box(
     __('Display options <small>for RSS</small>', 'narpp'),
     array(
         new NARPP_Meta_Box_Display_Feed,
-        'display'
+        'display',
     ),
     'settings_page_yarpp',
     'normal',

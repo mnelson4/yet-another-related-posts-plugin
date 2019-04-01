@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly ?>
 <p>
     <?php
     _e(
@@ -9,32 +11,51 @@
 </p>
 
 <?php
-    foreach ($yarpp->get_taxonomies() as $taxonomy) {
-        $this->exclude($taxonomy->name, sprintf(__('Disallow by %s:', 'narpp'), $taxonomy->labels->singular_name));
-    }
-    $this->checkbox('show_pass_post', __('Show password protected posts?', 'narpp'));
+foreach ($yarpp->get_taxonomies() as $taxonomy) {
+    $this->exclude($taxonomy->name, sprintf(__('Disallow by %s:', 'narpp'), $taxonomy->labels->singular_name));
+}
+$this->checkbox('show_pass_post', __('Show password protected posts?', 'narpp'));
 
-    $recent = yarpp_get_option('recent');
-    if ((bool) $recent) {
-        list($recent_number, $recent_units) = explode(' ', $recent);
-    } else {
-        $recent_number = 12;
-        $recent_units = 'month';
-    }
+$recent = yarpp_get_option('recent');
+if ((bool) $recent) {
+    list($recent_number, $recent_units) = explode(' ', $recent);
+} else {
+    $recent_number = 12;
+    $recent_units = 'month';
+}
 
-    $recent_number = '<input name="recent_number" type="text" id="recent_number" value="'.esc_attr($recent_number).'" size="2" />';
+$recent_number = '<input name="recent_number" type="text" id="recent_number" value="' . esc_attr(
+        $recent_number
+    ) . '" size="2" />';
 
-    $recent_units  =
-    '<select name="recent_units" id="recent_units" style="vertical-align:inherit">'.
-        '<option value="day" '  .(($recent_units === 'day')   ? 'selected' : null).'>'.__('day(s)', 'narpp').'</option>'.
-        '<option value="week" ' .(($recent_units === 'week')  ? 'selected' : null).'>'.__('week(s)', 'narpp').'</option>'.
-        '<option value="month" '.(($recent_units === 'month') ? 'selected' : null).'>'.__('month(s)', 'narpp').'</option>'.
+$recent_units =
+    '<select name="recent_units" id="recent_units" style="vertical-align:inherit">' .
+    '<option value="day" ' . (($recent_units === 'day') ? 'selected' : null) . '>' . __(
+        'day(s)',
+        'narpp'
+    ) . '</option>' .
+    '<option value="week" ' . (($recent_units === 'week') ? 'selected' : null) . '>' . __(
+        'week(s)',
+        'narpp'
+    ) . '</option>' .
+    '<option value="month" ' . (($recent_units === 'month') ? 'selected' : null) . '>' . __(
+        'month(s)',
+        'narpp'
+    ) . '</option>' .
     '</select>';
 ?>
 
 <div class='yarpp_form_row yarpp_form_checkbox'>
     <div>
         <input type='checkbox' name='recent_only' value='true' <?php checked((bool) $recent) ?> />
-        <?php echo str_replace('NUMBER', $recent_number, str_replace('UNITS', $recent_units, __("Show only posts from the past NUMBER UNITS", 'narpp'))); ?>
+        <?php echo str_replace(
+            'NUMBER',
+            $recent_number,
+            str_replace(
+                'UNITS',
+                $recent_units,
+                __("Show only posts from the past NUMBER UNITS", 'narpp')
+            )
+        ); ?>
     </div>
 </div>

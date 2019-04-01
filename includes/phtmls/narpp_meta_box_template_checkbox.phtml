@@ -1,14 +1,18 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly ?>
 <?php
-    $customHelp = null;
-    if (!$this->yarpp->diagnostic_custom_templates()) {
-        $customHelp = __('This option is disabled because no NARPP templates were found in your theme.', 'narpp');
-    }
-    if ($this->offer_copy_templates()) {
-        $customHelp .=
-        ' '.__('Would you like to copy some sample templates bundled with NARPP into your theme?', 'narpp').
-        '<input type="button" class="button button-small yarpp_copy_templates_button" value="'.esc_attr(__('Copy Templates', 'narpp')).'"/>';
-    }
+$customHelp = null;
+if (! $this->yarpp->diagnostic_custom_templates()) {
+    $customHelp = __('This option is disabled because no NARPP templates were found in your theme.', 'narpp');
+}
+if ($this->offer_copy_templates()) {
+    $customHelp .=
+        ' ' . __('Would you like to copy some sample templates bundled with NARPP into your theme?', 'narpp') .
+        '<input type="button" class="button button-small yarpp_copy_templates_button" value="' . esc_attr(
+            __('Copy Templates', 'narpp')
+        ) . '"/>';
+}
 ?>
 
 <div class="yarpp_form_row yarpp_form_template_buttons <?php echo esc_attr($class); ?>">
@@ -19,10 +23,12 @@
     </div>
 
     <div
-        data-value="thumbnails"
-        class="yarpp_template_button <?php echo esc_attr($thumbnails); ?> <?php echo esc_attr($diagPostThumbs); ?>"
-        <?php if (!$this->yarpp->diagnostic_post_thumbnails()): ?>
-        data-help="<?php echo esc_attr(__('This option is disabled because your theme does not support post thumbnails.', 'narpp'))?>"
+            data-value="thumbnails"
+            class="yarpp_template_button <?php echo esc_attr($thumbnails); ?> <?php echo esc_attr($diagPostThumbs); ?>"
+        <?php if (! $this->yarpp->diagnostic_post_thumbnails()): ?>
+            data-help="<?php echo esc_attr(
+                __('This option is disabled because your theme does not support post thumbnails.', 'narpp')
+            ) ?>"
         <?php endif ?>
     >
         <div class="image"></div>
@@ -30,10 +36,10 @@
     </div>
 
     <div
-        data-value="custom"
-        class="yarpp_template_button <?php echo esc_attr($custom); ?> <?php echo $diagCustTemplt ?>"
-        <?php if($customHelp): ?>
-        data-help="<?php echo esc_attr($customHelp);?>"
+            data-value="custom"
+            class="yarpp_template_button <?php echo esc_attr($custom); ?> <?php echo $diagCustTemplt ?>"
+        <?php if ($customHelp): ?>
+            data-help="<?php echo esc_attr($customHelp); ?>"
         <?php endif ?>
     >
         <div class="image"></div>
@@ -41,10 +47,10 @@
     </div>
 
     <input
-        type="hidden"
-        name="<?php echo esc_attr($pre);?>use_template"
-        id="yarpp-<?php echo esc_attr($pre);?>use_template"
-        class="use_template" value="<?php echo esc_attr($choice);?>"
+            type="hidden"
+            name="<?php echo esc_attr($pre); ?>use_template"
+            id="yarpp-<?php echo esc_attr($pre); ?>use_template"
+            class="use_template" value="<?php echo esc_attr($choice); ?>"
     />
 
 </div>

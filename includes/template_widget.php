@@ -1,15 +1,17 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 if (have_posts()) {
-	$output .= '<ol>';
-	while (have_posts()) {
-		the_post();
-		$output .= '<li><a href="'.get_permalink().'" rel="bookmark">'.get_the_title().'</a>';
+    $output .= '<ol>';
+    while (have_posts()) {
+        the_post();
+        $output .= '<li><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
 //		$output .= ' ('.round(get_the_score(),3).')';
-		$output .= '</li>';
-	}
-	$output .= '</ol>';
+        $output .= '</li>';
+    }
+    $output .= '</ol>';
 } else {
-	$output .= '<p><em>'.__('No related posts.','narpp').'</em></p>';
+    $output .= '<p><em>' . __('No related posts.', 'narpp') . '</em></p>';
 }

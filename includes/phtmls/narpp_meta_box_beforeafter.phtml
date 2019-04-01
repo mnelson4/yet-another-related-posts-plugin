@@ -1,27 +1,31 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly ?>
 <div class="yarpp_form_row yarpp_form_textbox <?php echo esc_attr($class); ?>">
     <div class="yarpp_form_label">
-        <?php echo $desc ?> 
+        <?php echo $desc ?>
     </div>
     <div>
         <?php $value = esc_attr(yarpp_get_option($options[0])); ?>
         <input
-            name="<?php echo esc_attr($options[0]); ?>"
-            type="text"
-            id="<?php echo esc_attr( $options[0]); ?>"
-            value="<?php echo esc_attr($value); ?>"
-            size="<?php echo esc_attr($size); ?>"
+                name="<?php echo esc_attr($options[0]); ?>"
+                type="text"
+                id="<?php echo esc_attr($options[0]); ?>"
+                value="<?php echo esc_attr($value); ?>"
+                size="<?php echo esc_attr($size); ?>"
         />
         <span class="yarpp_divider">/</span>
-        <input 
-            name="<?php echo esc_attr($options[1]); ?>"
-            type="text" 
-            id="<?php echo esc_attr($options[1]); ?>"
-            value="<?php echo esc_attr(yarpp_get_option($options[1])); ?>"
-            size="<?php echo esc_attr($size); ?>"
+        <input
+                name="<?php echo esc_attr($options[1]); ?>"
+                type="text"
+                id="<?php echo esc_attr($options[1]); ?>"
+                value="<?php echo esc_attr(yarpp_get_option($options[1])); ?>"
+                size="<?php echo esc_attr($size); ?>"
         />
-        <?php if($note): ?>
-        &nbsp;<em><small><?php echo $note ?></small></em>
+        <?php if ($note): ?>
+            &nbsp;<em>
+                <small><?php echo $note ?></small>
+            </em>
         <?php endif ?>
     </div>
 </div>
