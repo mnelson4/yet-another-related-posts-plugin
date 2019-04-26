@@ -23,7 +23,7 @@ class NARPP_Meta_Box {
     }
 
     public function checkbox($option, $desc, $class = null) {
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_checkbox.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_checkbox.phtml');
     }
 
     public function template_checkbox($rss=false, $class = null) {
@@ -40,24 +40,24 @@ class NARPP_Meta_Box {
         $custom          = ($choice === 'custom') ? 'active' : null;
         $diagCustTemplt  = (!$this->yarpp->diagnostic_custom_templates()) ? 'disabled' : null;
         
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_template_checkbox.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_template_checkbox.phtml');
     }
 
     public function template_file($rss=false, $class=null) {
         $pre             = ($rss) ? 'rss_' : '';
         $chosen_template = yarpp_get_option($pre.'template');
         
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_template_file.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_template_file.phtml');
     }
 
     public function textbox($option, $desc, $size = 2, $class = null, $note = null) {
         $value = esc_attr(yarpp_get_option($option));
         
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_textbox.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_textbox.phtml');   
     }
 
     public function beforeafter($options, $desc, $size = 10, $class = null, $note = null) {
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_beforeafter.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_beforeafter.phtml');
     }
 
     /* MARK: Last cleaning spot */
@@ -65,7 +65,7 @@ class NARPP_Meta_Box {
         $weight     = (int) yarpp_get_option("weight[tax][{$taxonomy->name}]");
         $require    = (int) yarpp_get_option("require_tax[{$taxonomy->name}]");
         
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_tax_weight.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_tax_weight.phtml');
     }
 
     /* MARK: Last cleaning spot */

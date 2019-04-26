@@ -38,7 +38,7 @@ class NARPP_Meta_Box_Pool extends NARPP_Meta_Box {
             'uncheck the appropriate box in the &ldquo;Display Options&rdquo; panel below. Make sure you '.
             'click the &ldquo;Save Changes button&rdquo; at the bottom of this page.';
 
-        include(YARPP_DIR . '/includes/phtmls/narpp_meta_box_pool.phtml');
+        include(YARPP_DIR.'/includes/phtmls/yarpp_meta_box_pool.phtml');
 	}
 
 }

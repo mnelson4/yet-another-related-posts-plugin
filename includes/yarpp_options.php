@@ -162,4 +162,4 @@ if (!count($yarpp->admin->get_templates()) && $yarpp->admin->can_copy_templates(
     wp_nonce_field('yarpp_copy_templates', 'yarpp_copy_templates-nonce', false);
 }
 
-include(YARPP_DIR . '/includes/phtmls/narpp_options.phtml');
+include(YARPP_DIR.'/includes/phtmls/yarpp_options.phtml');
