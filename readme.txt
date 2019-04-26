@@ -14,8 +14,6 @@ Display a list of related posts on your site based on a powerful unique algorith
 
 YARPP displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
 
-YARPP is a fork of the popular, [but abandoned, plugin YARPP ("Yet Another Related Posts Plugin")](https://letswp.io/what-happened-yarpp-yet-another-related-posts-plugin/). It is designed to be a backward-compatible replacement, so your old YARPP settings, custom templates, and untegration will work with YARPP just like it did with YARPP.
-
 **Features**
 -------------------------------------------
 * **Thumbnail or list view** of related content.
@@ -284,8 +282,11 @@ YARPP is currently localized in the following languages:
 
 == Changelog ==
 
+= 5.0.1 =
+* Revert name back to YARPP
+
 = 5.0 =
-* YARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
+* NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
 
 = 4.4 =
 * Discontinuing the YARPP Pro service
