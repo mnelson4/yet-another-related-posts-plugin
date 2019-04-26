@@ -11,7 +11,7 @@ global $yarpp;
 
 add_meta_box(
     'yarpp_pool',
-    __( '"The Pool"', 'narpp'),
+    __( '"The Pool"', 'yarpp' ),
     array(new NARPP_Meta_Box_Pool, 'display'),
     'settings_page_yarpp',
     'normal',
@@ -20,7 +20,7 @@ add_meta_box(
 
 add_meta_box(
     'yarpp_relatedness',
-    __( '"Relatedness" options', 'narpp'),
+    __( '"Relatedness" options', 'yarpp' ),
     array(
         new NARPP_Meta_Box_Relatedness,
         'display'
@@ -32,7 +32,7 @@ add_meta_box(
 
 add_meta_box(
     'yarpp_display_web',
-    __('Display options <small>for your website</small>', 'narpp'),
+    __('Display options <small>for your website</small>', 'yarpp'),
     array(
         new NARPP_Meta_Box_Display_Web,
         'display'
@@ -44,7 +44,7 @@ add_meta_box(
 
 add_meta_box(
     'yarpp_display_rss',
-    __('Display options <small>for RSS</small>', 'narpp'),
+    __('Display options <small>for RSS</small>', 'yarpp'),
     array(
         new NARPP_Meta_Box_Display_Feed,
         'display'

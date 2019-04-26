@@ -11,5 +11,5 @@ if (have_posts()) {
 	}
 	$output .= '</ol>';
 } else {
-	$output .= '<p><em>'.__('No related posts.','narpp').'</em></p>';
+	$output .= '<p><em>'.__('No related posts.','yarpp').'</em></p>';
 }

@@ -2,12 +2,12 @@
 <?php
     $customHelp = null;
     if (!$this->yarpp->diagnostic_custom_templates()) {
-        $customHelp = __('This option is disabled because no NARPP templates were found in your theme.', 'narpp');
+        $customHelp = __('This option is disabled because no NARPP templates were found in your theme.', 'yarpp');
     }
     if ($this->offer_copy_templates()) {
         $customHelp .=
-        ' '.__('Would you like to copy some sample templates bundled with NARPP into your theme?', 'narpp').
-        '<input type="button" class="button button-small yarpp_copy_templates_button" value="'.esc_attr(__('Copy Templates', 'narpp')).'"/>';
+        ' '.__('Would you like to copy some sample templates bundled with NARPP into your theme?', 'yarpp').
+        '<input type="button" class="button button-small yarpp_copy_templates_button" value="'.esc_attr(__('Copy Templates', 'yarpp')).'"/>';
     }
 ?>
 
@@ -15,18 +15,18 @@
 
     <div data-value="builtin" class="yarpp_template_button <?php echo esc_attr($builtIn) ?>">
         <div class="image"></div>
-        <div class="label"><?php _e('List', 'narpp') ?></div>
+        <div class="label"><?php _e('List', 'yarpp') ?></div>
     </div>
 
     <div
         data-value="thumbnails"
         class="yarpp_template_button <?php echo esc_attr($thumbnails); ?> <?php echo esc_attr($diagPostThumbs); ?>"
         <?php if (!$this->yarpp->diagnostic_post_thumbnails()): ?>
-        data-help="<?php echo esc_attr(__('This option is disabled because your theme does not support post thumbnails.', 'narpp'))?>"
+        data-help="<?php echo esc_attr(__('This option is disabled because your theme does not support post thumbnails.', 'yarpp'))?>"
         <?php endif ?>
     >
         <div class="image"></div>
-        <div class="label"><?php _e('Thumbnails', 'narpp') ?></div>
+        <div class="label"><?php _e('Thumbnails', 'yarpp') ?></div>
     </div>
 
     <div
@@ -37,7 +37,7 @@
         <?php endif ?>
     >
         <div class="image"></div>
-        <div class="label"><?php _e('Custom', 'narpp') ?></div>
+        <div class="label"><?php _e('Custom', 'yarpp') ?></div>
     </div>
 
     <input

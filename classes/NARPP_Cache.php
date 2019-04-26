@@ -13,7 +13,7 @@ abstract class NARPP_Cache {
 
 	function __construct( &$core ) {
 		$this->core = &$core;
-		$this->name = __($this->name, 'narpp');
+		$this->name = __($this->name, 'yarpp');
 	}
 	
 	function add_signature( $query ) {
