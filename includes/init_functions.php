@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /* Init Functions ---------------------------------------------------------------------------------------------------*/
 
 function yarpp_init() {
-	global $yarpp, $narpp;
+	global $yarpp;
 	$yarpp = new YARPP;
 }
 
