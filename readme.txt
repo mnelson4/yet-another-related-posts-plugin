@@ -286,19 +286,9 @@ NARPP is currently localized in the following languages:
 
 = 5.0 =
 * NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features)
-* removed references to yarpp.com and yarpp.org
 * renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
 * the_score, get_the_score, and related_* functions only defined if there is no conflicting functions
 * introduced narpp_the_score, and narpp_get_the_score
-* prevent direct file access to PHP files
-* add nonce check for myisam notice
-* check current user capabilities on form submissions (don't just rely on nonces)
-* sanitize all the input
-* escape all the output
-* changed default images (the previous authors might have trademarked them etc)
-* changed plugin translations textdomain to narpp (previously narpp)
-* re-added old plugin contributors
-* reformatted PHP code to PSR-2 standards (personal preference over WordPress core coding standards)
 
 = 4.4 =
 * Discontinuing the YARPP Pro service
