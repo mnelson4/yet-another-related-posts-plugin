@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: NARPP v2.1.3\n"
+"Project-Id-Version: YARPP v2.1.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2008-11-10 08:40-0600\n"

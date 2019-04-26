@@ -1,4 +1,4 @@
-===  (NARPP) ===
+===  (YARPP) ===
 Contributors: mitcho, jeffparker, mnelson4
 Author: Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
@@ -12,16 +12,16 @@ Display a list of related posts on your site based on a powerful unique algorith
 
 == Description ==
 
-NARPP displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
+YARPP displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
 
-NARPP is a fork of the popular, [but abandoned, plugin YARPP ("Yet Another Related Posts Plugin")](https://letswp.io/what-happened-yarpp-yet-another-related-posts-plugin/). It is designed to be a backward-compatible replacement, so your old YARPP settings, custom templates, and untegration will work with NARPP just like it did with YARPP.
+YARPP is a fork of the popular, [but abandoned, plugin YARPP ("Yet Another Related Posts Plugin")](https://letswp.io/what-happened-yarpp-yet-another-related-posts-plugin/). It is designed to be a backward-compatible replacement, so your old YARPP settings, custom templates, and untegration will work with YARPP just like it did with YARPP.
 
 **Features**
 -------------------------------------------
 * **Thumbnail or list view** of related content.
 * **Related posts, pages, and custom post types.**
-* **Templating**: The NARPP templating system gives you advanced control of how your results are displayed.
-* **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, NARPP finds related content from across your site. [Learn More.](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
+* **Templating**: The YARPP templating system gives you advanced control of how your results are displayed.
+* **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn More.](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
 * **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
 
 This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FAQ](http://wordpress.org/plugins/yet-another-related-posts-plugin/faq/) for answers to common questions.
@@ -32,7 +32,7 @@ This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FA
 
 1. Copy the folder `yarpp` into the directory `wp-content/plugins/` and activate the plugin.
 2. (optionally) copy the sample template files inside the `yarpp-templates` folder into your active theme.
-3. Go to the "Related Posts (NARPP)" settings page to customize NARPP.
+3. Go to the "Related Posts (YARPP)" settings page to customize YARPP.
 
 = Auto display in your feeds =
 
@@ -40,59 +40,59 @@ Make sure the "display related posts in feeds" option is turned on if you would 
 
 = Widget =
 
-Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (NARPP)" widget. The widget will only be displayed on single entry (permalink) pages.
+Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (YARPP)" widget. The widget will only be displayed on single entry (permalink) pages.
 
-The NARPP widget can be used even if the "auto display" option is turned off.
+The YARPP widget can be used even if the "auto display" option is turned off.
 
 = Custom display through templates =
 
-NARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism.
+YARPP allows the advanced user with knowledge of PHP to customize the display of related posts using a templating mechanism.
 
 == Frequently Asked Questions ==
 
-**Common Questions about NARPP**
+**Common Questions about YARPP**
 
-Below are Frequently Asked Questions about NARPP basic.
+Below are Frequently Asked Questions about YARPP basic.
 
 If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin).
 
 = Many pages list "no related posts." =
 
-Most likely you have "no related posts" right now because the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: lower your match threshold in the NARPP "Relatedness" options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" tab at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
+Most likely you have "no related posts" right now because the default "match threshold" is too high. Here's what I recommend to find an appropriate match threshold: lower your match threshold in the YARPP "Relatedness" options to something very low, like 1. (If you don't see the match threshold, you may need to display the "Relatedness" options via the "Screen Options" tab at the top.) Most likely the really low threshold will pull up many posts that aren't actually related (false positives), so look at some of your posts' related posts and their match scores. This will help you find an appropriate threshold. You want it lower than what you have now, but high enough so it doesn't have many false positives.
 
 = How can I move the related posts display? =
 
-If you do not want to show the Related Posts display in its default position (right below the post content), first go to NARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, NARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets."
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets."
 
 If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. (Make sure you don't add `echo related_posts();` or you may end up with duplicates in your related posts section.)
 
 = How can I limit related posts to a certain time frame? For instance, I don't want to show posts from two years ago. =
 
-Yes. In Wordpress, go to "Settings" and "Related Posts (NARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.  In "The Pool" section, check the box next to "Show only posts from the past *X* months."
+Yes. In Wordpress, go to "Settings" and "Related Posts (YARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.  In "The Pool" section, check the box next to "Show only posts from the past *X* months."
 
-= Where do I tell NARPP to display related posts only by tags? =
+= Where do I tell YARPP to display related posts only by tags? =
 
-In WordPress, go to "Settings" and "Related Posts (NARPP)" and make sure "Relatedness" is checked in the "Screen Options" section at the top of the page.  In the "Relatedness" section, configure the dropdown boxes next to "Titles," "Bodies," "Categories," and "Tags."
+In WordPress, go to "Settings" and "Related Posts (YARPP)" and make sure "Relatedness" is checked in the "Screen Options" section at the top of the page.  In the "Relatedness" section, configure the dropdown boxes next to "Titles," "Bodies," "Categories," and "Tags."
 
 = Can I specify related posts? =
 
-Sorry, but specifying related posts, displaying related posts from external WordPress sites, and pulling content from the Comments section are all outside the scope of NARPP at this time.
+Sorry, but specifying related posts, displaying related posts from external WordPress sites, and pulling content from the Comments section are all outside the scope of YARPP at this time.
 
 = I'm seeing related posts displayed on the home page. How do I prevent that? =
 
-Some WordPress themes treat the home page as an archive or a "page." Go to "Settings" then "Related Posts (NARPP)" and view the "Display Options" section. Make sure "Pages" and "Also display in archives" are not checked.
+Some WordPress themes treat the home page as an archive or a "page." Go to "Settings" then "Related Posts (YARPP)" and view the "Display Options" section. Make sure "Pages" and "Also display in archives" are not checked.
 
 = How can I prevent the "related posts" list from displaying on specific posts? =
 
-If you have several posts where you don't want to display related posts and they all share a similar category or tag, you could use "Disallow by Category" or "Disallow by Tag" in "The Pool" section. (Go to "Settings" and "Related Posts (NARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.)
+If you have several posts where you don't want to display related posts and they all share a similar category or tag, you could use "Disallow by Category" or "Disallow by Tag" in "The Pool" section. (Go to "Settings" and "Related Posts (YARPP)" and make sure "The Pool" is checked in the "Screen Options" section at the top of the page.)
 
 You could also add `<!--noyarpp-->` to the HTML code of any post to prevent related posts from displaying. This solution will only work if you are using "Automatic Display" in the "Display Options" section. If you are programatically calling `related_posts()` from PHP code, you'll have to do your own checking to see if related posts are appropriate to display or not.
 
-= I'm using the Thumbnails display in NARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I'd like, I'd like to center the thumbnails, etc. =
+= I'm using the Thumbnails display in YARPP 4. How do I override the style of the text that displays? The title only shows two lines, the font is larger than I'd like, I'd like to center the thumbnails, etc. =
 
-If you're familiar with CSS, you can override any NARPP styles by editing your theme's `style.css` file, or any other CSS file you may have created that loads after the NARPP one. To edit your theme's CSS file, go to "Appearance" then "Editor" and then click `style.css` in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add `!important` after each style declaration, to make sure they'll override the NARPP rules.
+If you're familiar with CSS, you can override any YARPP styles by editing your theme's `style.css` file, or any other CSS file you may have created that loads after the YARPP one. To edit your theme's CSS file, go to "Appearance" then "Editor" and then click `style.css` in the right sidebar. Add changes at the bottom of the file and click "Save." If you do edit this file, just make sure you add `!important` after each style declaration, to make sure they'll override the YARPP rules.
 
-Some common overrides that NARPP users have added are:
+Some common overrides that YARPP users have added are:
 
 `
 /* Reduces the title font size and displays more than two title lines */
@@ -107,86 +107,86 @@ Once you save any CSS changes, empty your browser's cache and reload your page t
 
 = I'm using the Thumbnails display. How can I change the thumbnail size? =
 
-The default NARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size('yarpp-thumbnail', $width, $height, true);` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this. Feedback is requested on whether this is a good idea.
+The default YARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size('yarpp-thumbnail', $width, $height, true);` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this. Feedback is requested on whether this is a good idea.
 
-Each time you change NARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose.
+Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose.
 
 = I'm using the Thumbnails display. Why aren't the right size thumbnails being served? =
 
-By default, if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal. What you really want is for NARPP to serve appropriately-sized thumbnails.
+By default, if an appropriately sized thumbnail is not available in WordPress, a larger image will be served and will be made to fit in the thumbnail space via CSS. Sometimes this means images will be scaled down in a weird way, so it is not ideal. What you really want is for YARPP to serve appropriately-sized thumbnails.
 
 There are two options for doing so:
 
 * First, you can use the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin to generate all these thumbnail-sized images in a batch process. This puts you in control of when this resizing process happens on your server (which is good because it can be processor-intensive). New images which are uploaded to WordPress should automatically get the appropriate thumbnail generated when the image is uploaded.
 
-* Second, you can turn on a feature in NARPP to auto-generate appropriate size thumbnails on the fly, if they have not yet been created. Doing this type of processing on the fly does not scale well, so this feature is turned off by default. But if you run a smaller site with less traffic, it may work for you. Simply add `define('NARPP_GENERATE_THUMBNAILS', true);` to your theme's `functions.php` file.
+* Second, you can turn on a feature in YARPP to auto-generate appropriate size thumbnails on the fly, if they have not yet been created. Doing this type of processing on the fly does not scale well, so this feature is turned off by default. But if you run a smaller site with less traffic, it may work for you. Simply add `define('YARPP_GENERATE_THUMBNAILS', true);` to your theme's `functions.php` file.
 
 = I'm using the Thumbnails display. Why are some of my posts missing appropriate images? =
 
-NARPP's thumbnail view requires that a WordPress "featured image" be set for each post. If you have many posts that never had a featured image set, I recommend the plugin [Auto Post Thumbnail](http://wordpress.org/extend/plugins/auto-post-thumbnail/), which will generate post thumbnails for you.
+YARPP's thumbnail view requires that a WordPress "featured image" be set for each post. If you have many posts that never had a featured image set, I recommend the plugin [Auto Post Thumbnail](http://wordpress.org/extend/plugins/auto-post-thumbnail/), which will generate post thumbnails for you.
 
 = How can I use the custom template feature? =
 
-NARPP's custom templates feature allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by NARPP. If your theme did not ship with NARPP templates, move the files in the `yarpp-templates` directory which ships with NARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
+YARPP's custom templates feature allows you to uber-customize the related posts display using the same coding conventions and [Template Tags](http://codex.wordpress.org/Template_Tags) as in WordPress themes. Custom templates must be in your *active theme's main directory* in order to be recognized by YARPP. If your theme did not ship with YARPP templates, move the files in the `yarpp-templates` directory which ships with YARPP into your active theme's main directory. Be sure to move the *files* (which must be named `yarpp-template-`...`.php`) to your theme, not the entire directory.
 
-= Is NARPP compatible with WordPress Multisite? =
+= Is YARPP compatible with WordPress Multisite? =
 
-NARPP should work fine in a multisite environment, and many users are running it without any issues using WordPress Multisite. It will, however, only get results *within* each blog. It will not display related posts results from across your network.
+YARPP should work fine in a multisite environment, and many users are running it without any issues using WordPress Multisite. It will, however, only get results *within* each blog. It will not display related posts results from across your network.
 
-= I want to use NARPP on a site with content in multiple languages. =
+= I want to use YARPP on a site with content in multiple languages. =
 
-The recommended solution in such cases is to use the [Polylang](https://polylang.wordpress.com/) plugin. Polylang has posted [a tutorial for using NARPP with Polylang](https://polylang.wordpress.com/2013/05/03/polylang-and-yarpp/).
+The recommended solution in such cases is to use the [Polylang](https://polylang.wordpress.com/) plugin. Polylang has posted [a tutorial for using YARPP with Polylang](https://polylang.wordpress.com/2013/05/03/polylang-and-yarpp/).
 
-= Does NARPP work with full-width characters or languages that don't use spaces between words? =
+= Does YARPP work with full-width characters or languages that don't use spaces between words? =
 
-NARPP works fine with full-width (double-byte) characters, assuming your WordPress database is set up with Unicode support. 99% of the time, if you're able to write blog posts with full-width characters and they're displayed correctly, NARPP will work on your blog.
+YARPP works fine with full-width (double-byte) characters, assuming your WordPress database is set up with Unicode support. 99% of the time, if you're able to write blog posts with full-width characters and they're displayed correctly, YARPP will work on your blog.
 
-However, NARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
+However, YARPP does have difficulty with languages that don't place spaces between words (Chinese, Japanese, etc.). For these languages, the "consider body" and "consider titles" options in the "Relatedness options" may not be very helpful. Using only tags and categories may work better for these languages.
 
-= Does NARPP slow down my blog/server? =
+= Does YARPP slow down my blog/server? =
 
-The NARPP calculation of related content does make a little impact, yes. However, NARPP caches all of its results, so any post's results need only be calculated once. NARPP's queries have been significantly optimized since version 3.5.
+The YARPP calculation of related content does make a little impact, yes. However, YARPP caches all of its results, so any post's results need only be calculated once. YARPP's queries have been significantly optimized since version 3.5.
 
-If you are running a large site and need to throttle NARPP's computation, try the official [NARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality. If you are looking for a hosting provider whose databases will not balk under NARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
+If you are running a large site and need to throttle YARPP's computation, try the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin which adds this throttling functionality. If you are looking for a hosting provider whose databases will not balk under YARPP, I personally have had great success with [MediaTemple](http://www.mediatemple.net/#a_aid=4ed59d7ac5dae).
 
-= Are there any plugins that are incompatible with NARPP? =
+= Are there any plugins that are incompatible with YARPP? =
 
 * [DISQUS](https://wordpress.org/extend/plugins/disqus-comment-system/): go to the DISQUS plugin advanced settings and turn on the "Check this if you have a problem with comment counts not showing on permalinks".
 * [SEO_Pager plugin](http://wordpress.org/support/topic/267966): turn off the automatic display option in SEO Pager and instead add the code manually.
 * [Pagebar 2](http://www.elektroelch.de/hacks/wp/pagebar/);
 * [WP Contact Form III plugin and Contact Form Plugin](http://wordpress.org/support/topic/392605);
-* [WPML](http://wpml.org): various incompatibilities have been reported. The multilingual plugin [Polylang](https://polylang.wordpress.com/) has great support for NARPP and is suggested as a replacement for WPML.
+* [WPML](http://wpml.org): various incompatibilities have been reported. The multilingual plugin [Polylang](https://polylang.wordpress.com/) has great support for YARPP and is suggested as a replacement for WPML.
 * Other related posts plugins, obviously, may also be incompatible.
 
 Please submit similar bugs by starting a new thread on [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). I check the forums regularly and will try to release a quick bugfix.
 
-= NARPP seems to be broken since I upgraded to WordPress X.X. =
+= YARPP seems to be broken since I upgraded to WordPress X.X. =
 
-Before upgrading to a new WordPress version, you should first deactivate all plugins, then upgrade your WordPress, and then reactivate your plugins. Even then, you may still find that something went wrong with your NARPP functionality. If so, try these steps:
+Before upgrading to a new WordPress version, you should first deactivate all plugins, then upgrade your WordPress, and then reactivate your plugins. Even then, you may still find that something went wrong with your YARPP functionality. If so, try these steps:
 
-1. Visit the "Related Posts (NARPP)" settings page to verify your settings.
-2. Deactivate NARPP, replace the NARPP files on the server with a fresh copy of the new version, and then reactivate it.
-3. Install the official [NARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin to flush the cache.
+1. Visit the "Related Posts (YARPP)" settings page to verify your settings.
+2. Deactivate YARPP, replace the YARPP files on the server with a fresh copy of the new version, and then reactivate it.
+3. Install the official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin to flush the cache.
 
 = Can I clear my cache? Can I build up the cache manually? =
 
-The official [NARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
+The official [YARPP Experiments](http://wordpress.org/extend/plugins/yarpp-experiments/) plugin adds manual cache controls, letting you flush the cache and build it up manually.
 
-= I removed the NARPP plugin but I still see NARPP-related database tables. Shouldn't those be removed, too? =
+= I removed the YARPP plugin but I still see YARPP-related database tables. Shouldn't those be removed, too? =
 
-Beginning with version 4.0.7, NARPP includes clean uninstall functionality. If you no longer wish to use NARPP, first deactivate NARPP using the "Plugins" page in WordPress, then click the "Delete" link found on the same page. This process will automatically remove all NARPP-related files, including temp tables. If you manually try to remove NARPP files instead of going through WordPress, some files or temp tables could remain.
+Beginning with version 4.0.7, YARPP includes clean uninstall functionality. If you no longer wish to use YARPP, first deactivate YARPP using the "Plugins" page in WordPress, then click the "Delete" link found on the same page. This process will automatically remove all YARPP-related files, including temp tables. If you manually try to remove YARPP files instead of going through WordPress, some files or temp tables could remain.
 
-= Does NARPP support custom post types? =
+= Does YARPP support custom post types? =
 
-Yes. To make NARPP support your custom post type, the attribute `yarpp_support` must be set to true on the custom post type when it is registered. It will then be available on options on the NARPP settings page.
+Yes. To make YARPP support your custom post type, the attribute `yarpp_support` must be set to true on the custom post type when it is registered. It will then be available on options on the YARPP settings page.
 
 `'yarpp_support' => true`
 
 If you would like to programmatically control which post types are considered in an automatically-displayed related posts display, use the `yarpp_map_post_types` filter.
 
-= Can I customize how NARPP displays? =
+= Can I customize how YARPP displays? =
 
-Yes. Developers can call NARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in my slides from my [WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
+Yes. Developers can call YARPP's powerful relatedness algorithm from anywhere in their own code. Some examples and more details are in my slides from my [WordCamp Birmingham talk](http://www.slideshare.net/mitcho/relate-all-the-things).
 
 `
 yarpp_related(array(
@@ -222,21 +222,21 @@ $reference_ID, // second argument: (optional) the post ID. If not included, it w
 true); // third argument: (optional) true to echo the HTML block; false to return it
 `
 
-Options which are not specified will default to those specified in the NARPP settings page. Additionally, if you are using the built-in template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
+Options which are not specified will default to those specified in the YARPP settings page. Additionally, if you are using the built-in template rather than specifying a custom template file in `template`, the following arguments can be used to override the various parts of the builtin template: `before_title`, `after_title`, `before_post`, `after_post`, `before_related`, `after_related`, `no_results`, `excerpt_length`.
 
 If you need to use related entries programmatically or to know whether they exist, you can use the functions `yarpp_get_related( $args, $reference_ID )`  and  `yarpp_related_exist( $args, $reference_ID )`. `yarpp_get_related` returns an array of `post` objects, just like the WordPress function `get_posts`. `yarpp_related_exist` returns a boolean for whether any such related entries exist. For each function, `$args` takes the same arguments as those shown for `yarpp_related` above, except for the various display and template options.
 
-Note that custom NARPP queries using the functions mentioned here are *not* cached in the built-in NARPP caching system. Thus, if you notice any performance hits, you may need to write your own code to cache the results.
+Note that custom YARPP queries using the functions mentioned here are *not* cached in the built-in YARPP caching system. Thus, if you notice any performance hits, you may need to write your own code to cache the results.
 
-= Does NARPP support custom taxonomies? =
+= Does YARPP support custom taxonomies? =
 
 Yes. Any taxonomy, including custom taxonomies, may be specified in the `weight` or `require_tax` arguments in a custom display as above. `term_taxonomy_id` specified in the `exclude` argument may be of any taxonomy.
 
-If you would like to choose custom taxonomies to choose in the NARPP settings UI, either to exclude certain terms or to consider them in the relatedness formula via the UI, the taxonomy must (a) have either the `show_ui` or `yarpp_support` attribute set to true and (b) must apply to either the post types `post` or `page` or both.
+If you would like to choose custom taxonomies to choose in the YARPP settings UI, either to exclude certain terms or to consider them in the relatedness formula via the UI, the taxonomy must (a) have either the `show_ui` or `yarpp_support` attribute set to true and (b) must apply to either the post types `post` or `page` or both.
 
-= Which languages does NARPP support? =
+= Which languages does YARPP support? =
 
-NARPP is currently localized in the following languages:
+YARPP is currently localized in the following languages:
 
 * Egyptian Arabic (`ar_EG`) by Bishoy Antoun of [cdmazika.com](http://www.cdmazika.com).
 * Standard Arabic (`ar`) by [led](http://led24.de)
@@ -285,7 +285,7 @@ NARPP is currently localized in the following languages:
 == Changelog ==
 
 = 5.0 =
-* NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
+* YARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
 
 = 4.4 =
 * Discontinuing the YARPP Pro service
