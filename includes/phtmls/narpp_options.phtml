@@ -1,13 +1,11 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <div class="wrap">
     <?php include(YARPP_DIR . '/includes/phtmls/narpp_settings_header.phtml') ?>
     <form method="post">
 
         <div id="poststuff" class="metabox-holder has-right-sidebar">
 
-            <?php if (! $yarpp->get_option('rss_display')): ?>
+            <?php if (!$yarpp->get_option('rss_display')): ?>
                 <style>
                     .rss_displayed {
                         display: none;
@@ -27,13 +25,13 @@
             </div>
 
             <script language="javascript">
-							var spinner = '<?php echo esc_url(admin_url('images/wpspin_light.gif')) ?>',
-								loading = '<img class="loading" src="' + spinner + '" alt="loading..."/>';
+                var spinner = '<?php echo esc_url(admin_url('images/wpspin_light.gif')) ?>',
+                    loading = '<img class="loading" src="'+spinner+'" alt="loading..."/>';
             </script>
 
             <div>
-                <input type="submit" class='button-primary' name="update_yarpp" value="<?php _e('Save Changes') ?>"/>
-                <?php wp_nonce_field('update_yarpp', 'update_yarpp-nonce'); ?>
+                <input type="submit" class='button-primary' name="update_yarpp" value="<?php _e('Save Changes')?>" />
+				<?php wp_nonce_field( 'update_yarpp', 'update_yarpp-nonce' ); ?>
             </div>
 
         </div><!--#poststuff-->

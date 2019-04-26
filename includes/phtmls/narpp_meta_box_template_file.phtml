@@ -1,26 +1,20 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php
-$options = null;
-foreach ($this->yarpp->get_templates() as $template) {
-    $options .= '<option value="' . esc_attr($template['basename']) . '"' . selected(
-            $template['basename'],
-            $chosen_template,
-            false
-        );
-    foreach ($template as $key => $value) {
-        $options .= ' data-' . $key . '="' . esc_attr($value) . '"';
+    $options = null;
+    foreach ($this->yarpp->get_templates() as $template) {
+        $options .= '<option value="'.esc_attr($template['basename']).'"'.selected($template['basename'], $chosen_template, false);
+        foreach ($template as $key => $value) {
+            $options .= ' data-'.$key.'="'.esc_attr($value).'"';
+        }
+        $options .= '>'.esc_html($template['name']).'</option>';
     }
-    $options .= '>' . esc_html($template['name']) . '</option>';
-}
 ?>
 
-<div class="yarpp_form_row yarpp_form_template_file <?php echo esc_attr($class) ?>">
-    <div class="yarpp_form_label">
-        <?php _e('Template file:', 'narpp') ?>
-    </div>
-    <div>
+        <div class="yarpp_form_row yarpp_form_template_file <?php echo esc_attr($class) ?>">
+            <div class="yarpp_form_label">
+            <?php _e('Template file:', 'narpp') ?>
+            </div>
+        <div>
 
         <select name="<?php echo esc_attr($pre); ?>template_file" id="<?php echo esc_attr($pre); ?>template_file">
             <?php echo $options ?>
@@ -31,7 +25,7 @@ foreach ($this->yarpp->get_templates() as $template) {
         </p>
 
         <p class="template_author_wrap">
-            <?php _e('Author:') ?> <span id="<?php echo esc_attr($pre); ?>template_author"></span>
+            <?php _e( 'Author:' ) ?> <span id="<?php echo esc_attr($pre); ?>template_author"></span>
         </p>
 
         <p class="template_description_wrap">

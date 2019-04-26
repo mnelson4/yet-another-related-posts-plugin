@@ -1,15 +1,13 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <div class="yarpp_form_row yarpp_form_checkbox <?php echo esc_attr($class) ?>">
     <div scope="row">
-        <input
-                type="checkbox"
-                name="<?php echo esc_attr($option) ?>"
-                id="yarpp-<?php echo esc_attr($option) ?>"
-                value="true"
+        <input 
+            type="checkbox" 
+            name="<?php echo esc_attr($option)?>"
+            id="yarpp-<?php echo esc_attr($option)?>"
+            value="true" 
             <?php checked(yarpp_get_option($option)) ?>
         />
-        <label for="yarpp-<?php echo esc_attr($option); ?>"><?php echo $desc ?></label>
+        <label for="yarpp-<?php echo esc_attr($option);?>"><?php echo $desc ?></label>
     </div>
 </div>

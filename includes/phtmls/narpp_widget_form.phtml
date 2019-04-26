@@ -1,22 +1,18 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <div class="yarpp-widget-settings-switch">
-    <div class="yarpp-widget-basic-settings">
+    <div class="yarpp-widget-basic-settings" >
         <p class='yarpp-widget-type-control'>
-            <label style="padding-right: 10px; display: inline-block;"
-                   for="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>">
                 <input
-                    type="radio"
-                    id="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>"
-                    name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
-                    value="builtin" <?php checked($choice === 'builtin') ?>
+                        type="radio"
+                        id="<?php echo esc_attr($this->get_field_id('use_template_builtin')); ?>"
+                        name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
+                        value="builtin" <?php checked($choice === 'builtin') ?>
                 />
-                <?php _e("List", 'narpp'); ?>
+                <?php _e("List",'narpp'); ?>
             </label>
             <br/>
-            <label style="padding-right: 10px; display: inline-block;"
-                   for="<?php echo esc_attr($this->get_field_id('use_template_thumbnails')); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_thumbnails')); ?>">
                 <input
                     type="radio"
                     id="<?php echo esc_attr($this->get_field_id('use_template_thumbnails')); ?>"
@@ -26,14 +22,12 @@
                 <?php _e("Thumbnails", 'narpp'); ?>
             </label>
             <br/>
-            <label style="padding-right: 10px; display: inline-block;"
-                   for="<?php echo esc_attr($this->get_field_id('use_template_custom')); ?>">
+            <label style="padding-right: 10px; display: inline-block;" for="<?php echo esc_attr($this->get_field_id('use_template_custom')); ?>">
                 <input
                     type="radio"
                     id="<?php echo esc_attr($this->get_field_id('use_template_custom')); ?>"
                     name="<?php echo esc_attr($this->get_field_name('use_template')); ?>"
-                    value="custom" <?php checked($choice === 'custom');
-                disabled(! count($templates)); ?>
+                    value="custom" <?php checked($choice === 'custom'); disabled(!count($templates)); ?>
                 />
                 <?php _e("Custom", 'narpp'); ?>
             </label>
@@ -62,17 +56,13 @@
         </p>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('template_file')); ?>">
-                <?php _e("Template file:", 'narpp'); ?>
+                <?php _e("Template file:",'narpp');?>
             </label>
-            <select name="<?php echo esc_attr($this->get_field_name('template_file')); ?>"
-                    id="<?php echo esc_attr($this->get_field_id('template_file')); ?>">
+            <select name="<?php echo esc_attr($this->get_field_name('template_file')); ?>" id="<?php echo esc_attr($this->get_field_id('template_file')); ?>">
                 <?php foreach ($templates as $template): ?>
-                <option value='<?php echo esc_attr($template['basename']); ?>' <?php selected(
-                    $template['basename'],
-                    $instance['template']
-                ); ?>>
-                    <?php echo esc_html($template['name']); ?>
-                </option>
+                    <option value='<?php echo esc_attr($template['basename']); ?>' <?php selected($template['basename'], $instance['template']);?>>
+                        <?php echo esc_html($template['name']); ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </p>
@@ -81,26 +71,22 @@
 </div>
 
 <script type="text/javascript">
-	jQuery( function( $ ) {
-		$( '.yarpp-widget-type-control', '#wpbody' ).each( ensureTemplateChoice );
-		$( '.yarpp-widget-type-control input', '#wpbody' ).on( 'change', ensureTemplateChoice );
+jQuery(function($) {
+    $('.yarpp-widget-type-control','#wpbody').each(ensureTemplateChoice);
+    $('.yarpp-widget-type-control input','#wpbody').on('change', ensureTemplateChoice);
 
-		function ensureTemplateChoice( e ) {
-			if ( typeof e === 'object' && 'type' in e ) {
-				e.stopImmediatePropagation();
-			}
-			var this_form = $( this ).closest( 'form' ),
-				widget_id = this_form.find( '.widget-id' ).val();
-			// if this widget is just in staging:
-			if ( /__i__$/.test( widget_id ) ) {
-				return;
-			}
-			var builtin = !!$( '#widget-' + widget_id + '-use_template_builtin' ).prop( 'checked' ),
-				thumbnails = !!$( '#widget-' + widget_id + '-use_template_thumbnails' ).prop( 'checked' ),
-				custom = !!$( '#widget-' + widget_id + '-use_template_custom' ).prop( 'checked' );
-			$( '#widget-' + widget_id + '-title' ).closest( 'p' ).toggle( builtin );
-			$( '#widget-' + widget_id + '-thumbnails_heading' ).closest( 'p' ).toggle( thumbnails );
-			$( '#widget-' + widget_id + '-template_file' ).closest( 'p' ).toggle( custom );
-		}
-	} );
+    function ensureTemplateChoice(e) {
+        if (typeof e === 'object' && 'type' in e) e.stopImmediatePropagation();
+        var this_form = $(this).closest('form'),
+            widget_id = this_form.find('.widget-id').val();
+        // if this widget is just in staging:
+        if (/__i__$/.test(widget_id)) return;
+        var builtin     = !! $('#widget-'+widget_id+'-use_template_builtin').prop('checked'),
+            thumbnails  = !! $('#widget-'+widget_id+'-use_template_thumbnails').prop('checked'),
+            custom      = !! $('#widget-'+widget_id+'-use_template_custom').prop('checked');
+        $('#widget-'+widget_id+'-title').closest('p').toggle(builtin);
+        $('#widget-'+widget_id+'-thumbnails_heading').closest('p').toggle(thumbnails);
+        $('#widget-'+widget_id+'-template_file').closest('p').toggle(custom);
+    }
+});
 </script>

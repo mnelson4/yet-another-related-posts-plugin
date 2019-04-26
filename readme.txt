@@ -285,10 +285,7 @@ NARPP is currently localized in the following languages:
 == Changelog ==
 
 = 5.0 =
-* NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features)
-* renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
-* the_score, get_the_score, and related_* functions only defined if there is no conflicting functions
-* introduced narpp_the_score, and narpp_get_the_score
+* NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
 
 = 4.4 =
 * Discontinuing the YARPP Pro service

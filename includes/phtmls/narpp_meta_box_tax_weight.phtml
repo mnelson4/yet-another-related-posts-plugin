@@ -1,32 +1,24 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <div class="yarpp_form_row yarpp_form_select">
     <div class="yarpp_form_label">
         <?php echo esc_html($taxonomy->labels->name); ?>:
     </div>
     <div>
         <select name="weight[tax][<?php echo esc_attr($taxonomy->name) ?>]">
-            <option value="no" <?php echo((! $weight && ! $require) ? 'selected' : null) ?> >
+            <option value="no" <?php echo ((!$weight && !$require) ? 'selected' : null) ?> > 
                 <?php _e("do not consider", "yarpp") ?>
             </option>
-            <option value="consider" <?php echo(($weight == 1 && ! $require) ? 'selected' : null) ?> >
+            <option value="consider" <?php echo (($weight == 1 && !$require) ? 'selected' : null) ?> >
                 <?php _e("consider", "yarpp") ?>
             </option>
-            <option value="consider_extra" <?php echo(($weight > 1 && ! $require) ? 'selected' : null) ?> >
+            <option value="consider_extra" <?php echo (($weight > 1 && !$require) ? 'selected' : null) ?> >
                 <?php _e("consider with extra weight", "yarpp") ?>
             </option>
-            <option value="require_one" <?php echo(($require == 1) ? 'selected' : null) ?>>
-                <?php echo sprintf(
-                    __("require at least one %s in common", "yarpp"),
-                    esc_html($taxonomy->labels->singular_name)
-                ) ?>
+            <option value="require_one" <?php echo (($require == 1) ? 'selected' : null) ?>>
+                <?php echo sprintf(__("require at least one %s in common", "yarpp"), esc_html($taxonomy->labels->singular_name)) ?>
             </option>
-            <option value="require_more" <?php echo(($require == 2) ? 'selected' : null) ?>>
-                <?php echo sprintf(
-                    __("require more than one %s in common", "yarpp"),
-                    esc_html($taxonomy->labels->singular_name)
-                ) ?>
+            <option value="require_more" <?php echo (($require == 2) ? 'selected' : null) ?>>
+                <?php echo sprintf(__("require more than one %s in common", "yarpp"), esc_html($taxonomy->labels->singular_name)) ?>
             </option>
         </select>
     </div>

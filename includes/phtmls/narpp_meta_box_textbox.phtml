@@ -1,24 +1,20 @@
-<?php if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <div class="yarpp_form_row yarpp_form_textbox <?php echo esc_attr($class); ?>">
     <div class="yarpp_form_label">
-        <?php echo esc_html($desc); ?>
+         <?php echo esc_html($desc); ?>
     </div>
     <div>
-
+    
         <input
-                name="<?php echo esc_attr($option); ?>"
-                type="text" id="<?php echo esc_attr($option); ?>"
-                value="<?php echo esc_attr($value); ?>"
-                size="<?php echo esc_attr($size); ?>"
+            name="<?php echo esc_attr($option);?>"
+            type="text" id="<?php echo esc_attr($option);?>"
+            value="<?php echo esc_attr($value);?>"
+            size="<?php echo esc_attr($size);?>"
         />
 
-        <?php if ($note): ?>
-            &nbsp;<em>
-                <small><?php echo $note ?></small>
-            </em><br/>
-        <?php endif ?>
+    <?php if ($note): ?>
+    &nbsp;<em><small><?php echo $note ?></small></em><br/>
+    <?php endif ?>
 
     </div>
 </div>

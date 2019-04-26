@@ -1,9 +1,8 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {exit;} // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Dynamic styles for YARPP's built-in thumbnails template
- *
  * @since 4.0
  */
 
@@ -17,45 +16,40 @@ $extra_margin        = 7;
 header('Content-Type: text/css');
 ?>
 .yarpp-thumbnails-horizontal .yarpp-thumbnail, .yarpp-thumbnail-default, .yarpp-thumbnail-title {
-    display: inline-block;
-    *display: inline;
+	display: inline-block;
+	*display: inline;
 }
-
 .yarpp-thumbnails-horizontal .yarpp-thumbnail {
-    border: 1px solid rgba(127, 127, 127, 0.1);
-    width: <?php echo (int) $width_with_margins; ?>px;
-    height: <?php echo (int) $height_with_text; ?>px;
-    margin: <?php echo (int) $margin; ?>px;
-    margin-left: 0px;
-    vertical-align: top;
+	border: 1px solid rgba(127,127,127,0.1);
+	width: <?php echo (int) $width_with_margins; ?>px;
+	height: <?php echo (int) $height_with_text; ?>px;
+	margin: <?php echo (int) $margin; ?>px;
+	margin-left: 0px;
+	vertical-align: top;
 }
-
 .yarpp-thumbnail > img, .yarpp-thumbnail-default {
-    width: <?php echo (int) $width; ?>px;
-    height: <?php echo (int) $height; ?>px;
-    margin: <?php echo (int) $margin; ?>px;
+	width: <?php echo (int) $width; ?>px;
+	height: <?php echo (int) $height; ?>px;
+	margin: <?php echo (int) $margin; ?>px;
 }
-
 .yarpp-thumbnails-horizontal .yarpp-thumbnail > img, .yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
-    display: block;
+	display: block;
 }
-
 .yarpp-thumbnails-horizontal .yarpp-thumbnail-title {
-    font-size: 1em;
-    max-height: 2.8em;
-    line-height: 1.4em;
-    margin: <?php echo (int) $extra_margin; ?>px;
-    margin-top: 0px;
-    width: <?php echo (int) $width; ?>px;
-    text-decoration: inherit;
-    overflow: hidden;
+	font-size: 1em;
+	max-height: 2.8em;
+	line-height: 1.4em;
+	margin: <?php echo (int) $extra_margin; ?>px;
+	margin-top: 0px;
+	width: <?php echo (int) $width; ?>px;
+	text-decoration: inherit;
+	overflow: hidden;
 }
 
 .yarpp-thumbnail-default {
-    overflow: hidden;
+	overflow: hidden;
 }
-
 .yarpp-thumbnail-default > img {
-    min-height: <?php echo (int) $height; ?>px;
-    min-width: <?php echo (int) $width; ?>px;
+	min-height: <?php echo (int) $height; ?>px;
+	min-width: <?php echo (int) $width; ?>px;
 }

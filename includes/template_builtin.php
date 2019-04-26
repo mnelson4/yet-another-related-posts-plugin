@@ -1,7 +1,5 @@
 <?php
-if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*
  * YARPP's built-in "template"
@@ -14,58 +12,55 @@ if (! defined('ABSPATH')) {
 get_currentuserinfo();
 
 $options = array(
-    'before_title',
-    'after_title',
-    'show_excerpt',
-    'excerpt_length',
-    'before_post',
-    'after_post',
-    'before_related',
-    'after_related',
-    'no_results',
-);
+        'before_title',
+        'after_title',
+        'show_excerpt',
+        'excerpt_length', 
+        'before_post', 
+        'after_post', 
+        'before_related', 
+        'after_related', 
+        'no_results' 
+    );
 
 extract($this->parse_args($args, $options));
 
 
 if (have_posts()) {
+    
+	$output .= $before_related."\n";
+    
+	while (have_posts()) {
+		the_post();
+        $link       = get_permalink();
+        $tooltip    = esc_attr((get_the_title()) ? get_the_title() : get_the_ID());
+        $title      = get_the_title();
+        $round      = round(get_the_score(),1);
+        $score      = (current_user_can('manage_options') && $domain !== 'rss' && !is_admin())
+                    ? '<abbr title="'.sprintf(__('%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.','narpp'),$round).'">('.$round.')</abbr>'
+                    : null;
 
-    $output .= $before_related . "\n";
-
-    while (have_posts()) {
-        the_post();
-        $link = get_permalink();
-        $tooltip = esc_attr((get_the_title()) ? get_the_title() : get_the_ID());
-        $title = get_the_title();
-        $round = round(get_the_score(), 1);
-        $score = (current_user_can('manage_options') && $domain !== 'rss' && ! is_admin())
-            ? '<abbr title="' . sprintf(
-                __(
-                    '%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors.',
-                    'narpp'
-                ),
-                $round
-            ) . '">(' . $round . ')</abbr>'
-            : null;
-
-        $output .=
-            $before_title .
-            '<a href="' . $link . '" rel="bookmark" title="' . $tooltip . '">' .
-            $title . ' ' . $score .
-            '</a>';
-
+		$output .=
+        $before_title.
+        '<a href="'.$link.'" rel="bookmark" title="'.$tooltip.'">'.
+            $title.' '.$score.
+        '</a>';
+		
         if ($show_excerpt) {
-            $excerpt = strip_tags((string) get_the_excerpt());
-            preg_replace('/([,;.-]+)\s*/', '\1 ', $excerpt);
-            $excerpt = implode(' ', array_slice(preg_split('/\s+/', $excerpt), 0, $excerpt_length)) . '...';
-            $output .= $before_post . $excerpt . $after_post;
-        }
+			$excerpt = strip_tags((string) get_the_excerpt());
+			preg_replace('/([,;.-]+)\s*/','\1 ', $excerpt);
+			$excerpt = implode(' ', array_slice(preg_split('/\s+/',$excerpt), 0, $excerpt_length)).'...';
+			$output .= $before_post.$excerpt.$after_post;
+		}
+        
+		$output .=  $after_title."\n";
 
-        $output .= $after_title . "\n";
-    }
-
-    $output .= $after_related . "\n";
+	}
+    
+	$output .= $after_related."\n";
+    
 } else {
-
-    $output .= $no_results;
+    
+	$output .= $no_results;
+    
 }
