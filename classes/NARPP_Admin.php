@@ -229,7 +229,7 @@ class NARPP_Admin {
 	}
 	
 	public function settings_link($links, $file) {
-		$this_plugin = dirname(plugin_basename(dirname(__FILE__))).'/narpp.php';
+		$this_plugin = dirname(plugin_basename(dirname(__FILE__))).'/yarpp.php';
 		if($file == $this_plugin) {
 			$links[] = '<a href="options-general.php?page=yarpp">'.__('Settings').'</a>';
 		}
