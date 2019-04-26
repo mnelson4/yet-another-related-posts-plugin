@@ -42,8 +42,8 @@ msgstr "Publicaciones no relacionadas."
 #: includes.php:149
 #: includes.php:182
 #: includes.php:203
-msgid "Related Posts (NARPP)"
-msgstr "Publicaciones relacionadas (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Publicaciones relacionadas (YARPP)"
 
 #@ yarpp
 #: includes.php:158
@@ -95,13 +95,13 @@ msgstr "Publicaciones relacionadas que recibes por <a href='%s'>Not Another Rela
 
 #@ yarpp
 #: narpp_options.php:21
-msgid "Please move the NARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
-msgstr "Favor de mover el archivo de plantillas NARPP a tu tema para completar Instalación. Simplemente mover las mismas muestras de plantillas (actualmente en <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) al directorio <code>TEMPLATEPATH</code>."
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Favor de mover el archivo de plantillas YARPP a tu tema para completar Instalación. Simplemente mover las mismas muestras de plantillas (actualmente en <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) al directorio <code>TEMPLATEPATH</code>."
 
 #@ yarpp
 #: narpp_options.php:26
-msgid "No NARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
-msgstr "Ningunos archivos de plantillas NARPP fueron encontradas en su tema (<code>TEMPLATEPATH</code>) así que las carácterísticas de la plantillas se han deshabilitado."
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Ningunos archivos de plantillas YARPP fueron encontradas en su tema (<code>TEMPLATEPATH</code>) así que las carácterísticas de la plantillas se han deshabilitado."
 
 #@ yarpp
 #: narpp_options.php:37
@@ -111,8 +111,8 @@ msgstr "La revisión MyISAM ha sido anulada. Ahora podrías usar \"consider titl
 #@ yarpp
 #: narpp_options.php:46
 #, php-format
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPP's \"consider titles\" y \"consider bodies\" criterios de relaciones, requieren tu <code>%s</code> tabla para usar <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, pero la tabla parece estar usando <code>%s</code> engine. Estas dos opciones han sido deshabilitadas."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP's \"consider titles\" y \"consider bodies\" criterios de relaciones, requieren tu <code>%s</code> tabla para usar <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, pero la tabla parece estar usando <code>%s</code> engine. Estas dos opciones han sido deshabilitadas."
 
 #@ yarpp
 #: narpp_options.php:48
@@ -133,13 +133,13 @@ msgstr "Confía en mi. Permíteme usar las caracyerísticas de MyISAM."
 
 #@ yarpp
 #: narpp_options.php:66
-msgid "The NARPP database had an error but has been fixed."
-msgstr "La base de datos NARPP tuvo un error pero ha sido solucionado."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "La base de datos YARPP tuvo un error pero ha sido solucionado."
 
 #@ yarpp
 #: narpp_options.php:68
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "La base de datos NARPP tuvo un error que no se pudo solucionar."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "La base de datos YARPP tuvo un error que no se pudo solucionar."
 
 #@ yarpp
 #: narpp_options.php:69
@@ -270,8 +270,8 @@ msgstr "Opciones \"Relatedness\""
 #@ yarpp
 #: narpp_options.php:311
 #, php-format
-msgid "NARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "NARPP es diferente a <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previos plugins sobre los que se basa en</a> como si limitara la lista de Publicaciones Relacionadas por: (1) Un número máximo (2) un <em>umbral de combinación</em>."
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP es diferente a <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previos plugins sobre los que se basa en</a> como si limitara la lista de Publicaciones Relacionadas por: (1) Un número máximo (2) un <em>umbral de combinación</em>."
 
 #@ yarpp
 #: narpp_options.php:311
@@ -545,8 +545,8 @@ msgstr "Opciones de Restauración"
 #@ yarpp
 #: template-builtin.php:35
 #, php-format
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f es la combinación NARPP que califica entre la actual entrada y esta entrada relacionada. Estás viendo este valor porque estás dentro de la sesión en WordPress como administrador. No se muestra a los visitantes regulares."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f es la combinación YARPP que califica entre la actual entrada y esta entrada relacionada. Estás viendo este valor porque estás dentro de la sesión en WordPress como administrador. No se muestra a los visitantes regulares."
 
 #@ yarpp
 #: template-metabox.php:12
@@ -555,6 +555,6 @@ msgstr "Estas son las entradas relacionadas para esta Entrada. Actualizar esta P
 
 #@ yarpp
 #: template-metabox.php:25
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Que estas Entradas Relacionadas sean actualmente visualizadas y cómo sean visualizadas, depende de tus opcioens de visualización NARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Que estas Entradas Relacionadas sean actualmente visualizadas y cómo sean visualizadas, depende de tus opcioens de visualización YARPP."
 

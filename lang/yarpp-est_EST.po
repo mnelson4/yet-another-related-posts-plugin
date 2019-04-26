@@ -21,8 +21,8 @@ msgstr ""
 
 # @ yarpp
 #: includes.php:149 includes.php:194 includes.php:215
-msgid "Related Posts (NARPP)"
-msgstr "Seotud ametikohta (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Seotud ametikohta (YARPP)"
 
 # @ yarpp
 #: includes.php:376
@@ -33,11 +33,11 @@ msgstr "seotud ametikohta"
 #: template-builtin.php:35
 #, php-format
 msgid ""
-"%f is the NARPP match score between the current entry and this related "
+"%f is the YARPP match score between the current entry and this related "
 "entry. You are seeing this value because you are logged in to WordPress as "
 "an administrator. It is not shown to regular visitors."
 msgstr ""
-"% f on NARPP mängu punktisumma vahel senise kande ja seda kirjet. Näete seda "
+"% f on YARPP mängu punktisumma vahel senise kande ja seda kirjet. Näete seda "
 "väärtust, sest olete sisse logitud WordPress ülemana. Ei ole tõestatud, et "
 "regulaarne külastajad."
 
@@ -48,7 +48,7 @@ msgid ""
 "Related posts brought to you by <a href='%s'>Yet Another Related Posts "
 "Plugin</a>."
 msgstr ""
-"Nimekiri seotud ametikohta Plugin pakutakse teile <a href='%s'> NARPP </ a>."
+"Nimekiri seotud ametikohta Plugin pakutakse teile <a href='%s'> YARPP </ a>."
 
 # @ yarpp
 #: narpp_options.php:54
@@ -63,13 +63,13 @@ msgstr ""
 #: narpp_options.php:63
 #, php-format
 msgid ""
-"NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
+"YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
 "require your <code>%s</code> table to use the <a href='http://dev.mysql.com/"
 "doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the "
 "table seems to be using the <code>%s</code> engine. These two options have "
 "been disabled."
 msgstr ""
-"Kasutades võimalusi NARPP \"päiseid\" ja \"Mõtle tekst\" eeldab, et oma laua "
+"Kasutades võimalusi YARPP \"päiseid\" ja \"Mõtle tekst\" eeldab, et oma laua "
 "<code>% s </ code> kasutatud mootori <a href = 'http://dev.mysql.com/doc/"
 "refman/5.0/en / panipaik engines.html \"> MyISAM </ a>, kuid tabelis kasutab "
 "mootor ilmselt <code>% s </ code>. Need kaks võimalust on keelatud."
@@ -104,13 +104,13 @@ msgstr "Usu mind. Lubage mul kasutada MyISAM."
 
 # @ yarpp
 #: narpp_options.php:83
-msgid "The NARPP database had an error but has been fixed."
-msgstr "NARPP andmebaas sisaldas vigu, kuid neid parandada."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP andmebaas sisaldas vigu, kuid neid parandada."
 
 # @ yarpp
 #: narpp_options.php:85
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "NARPP andmebaas sisaldab viga, mida ei saa parandada."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP andmebaas sisaldab viga, mida ei saa parandada."
 
 # @ yarpp
 #: options-meta-boxes.php:45 options-meta-boxes.php:63
@@ -131,8 +131,8 @@ msgstr "ravitud lisaraskusega"
 
 # @ yarpp
 #: narpp_options.php:178
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Valikud NARPP"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Valikud YARPP"
 
 # @ yarpp
 #: options-meta-boxes.php:118
@@ -336,8 +336,8 @@ msgstr "Kuvar vaikimisi kui tühi:"
 
 # @ yarpp
 #: includes.php:257 options-meta-boxes.php:203 options-meta-boxes.php:268
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Aidata edendada pistik NARPP?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Aidata edendada pistik YARPP?"
 
 # @ yarpp
 #: options-meta-boxes.php:205 options-meta-boxes.php:269
@@ -481,7 +481,7 @@ msgid ""
 "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
-"Uus beeta (% s) pistik NARPP. Saate <a href=\"%s\"> alla laadida siit </ a> "
+"Uus beeta (% s) pistik YARPP. Saate <a href=\"%s\"> alla laadida siit </ a> "
 "omal riisikol."
 
 # @ yarpp
@@ -516,10 +516,10 @@ msgstr ""
 #: template-metabox.php:25
 msgid ""
 "Whether all of these related entries are actually displayed and how they are "
-"displayed depends on your NARPP display options."
+"displayed depends on your YARPP display options."
 msgstr ""
 "Kas kõik kõnealused seotud kanded tegelikult kuvatakse ja kuidas neid "
-"kuvatakse sõltub teie NARPP kuvamise võimalused."
+"kuvatakse sõltub teie YARPP kuvamise võimalused."
 
 # @ yarpp
 #: includes.php:28 includes.php:39 template-metabox.php:27
@@ -565,7 +565,7 @@ msgstr ""
 # @ yarpp
 #: options-meta-boxes.php:124
 msgid ""
-"NARPP limits the related posts list by (1) a maximum number and (2) a "
+"YARPP limits the related posts list by (1) a maximum number and (2) a "
 "<em>match threshold</em>."
 msgstr ""
 
@@ -578,22 +578,22 @@ msgstr ""
 
 # @ yarpp
 #: options-meta-boxes.php:283
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 # @ yarpp
 #: options-meta-boxes.php:284
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 # @ yarpp
 #: options-meta-boxes.php:285
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 # @ yarpp
 #: options-meta-boxes.php:292
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 # @ default

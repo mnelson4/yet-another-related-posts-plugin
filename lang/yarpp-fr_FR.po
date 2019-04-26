@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:72
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "NARPP (Entrées similaires)"
+msgid "Related Posts (YARPP)"
+msgstr "YARPP (Entrées similaires)"
 
 #: class-admin.php:78
 #@ yarpp
@@ -45,8 +45,8 @@ msgstr "Questions fréquentes (en&nbsp;anglais)"
 #: class-admin.php:102
 #: class-admin.php:138
 #@ yarpp
-msgid "Developing with NARPP"
-msgstr "Coder avec NARPP (en&nbsp;anglais)"
+msgid "Developing with YARPP"
+msgstr "Coder avec YARPP (en&nbsp;anglais)"
 
 #: class-admin.php:107
 #@ yarpp
@@ -56,34 +56,34 @@ msgstr "Envoi de données (facultatif)"
 #: class-admin.php:143
 #, php-format
 #@ yarpp
-msgid "With your permission, NARPP will send information about NARPP's settings, usage, and environment back to a central server at %s."
+msgid "With your permission, YARPP will send information about YARPP's settings, usage, and environment back to a central server at %s."
 msgstr "Si vous le permettez, vos données de configuration, de réglages et d’usage seront transmises à un serveur situé à l’adresse %s."
 
 #: class-admin.php:144
 #@ yarpp
-msgid "This information will be used to improve NARPP in the future and help decide future development decisions for NARPP."
-msgstr "Ces informations contribueront à l’évolution du code de l’extension NARPP et à l’amélioration des versions futures."
+msgid "This information will be used to improve YARPP in the future and help decide future development decisions for YARPP."
+msgstr "Ces informations contribueront à l’évolution du code de l’extension YARPP et à l’amélioration des versions futures."
 
 #: class-admin.php:145
 #@ yarpp
-msgid "Contributing this data will help make NARPP better for you and for other NARPP users."
-msgstr "Vous contribuerez ainsi à rendre NARPP plus utile et plus performant pour vous-même et pour tous les autres utilisateurs."
+msgid "Contributing this data will help make YARPP better for you and for other YARPP users."
+msgstr "Vous contribuerez ainsi à rendre YARPP plus utile et plus performant pour vous-même et pour tous les autres utilisateurs."
 
 #: class-admin.php:153
 #@ yarpp
-msgid "If you opt-in, the following information is sent back to NARPP:"
-msgstr "Si vous choisissez d’activer l’option, voici les données qui seront transmises à NARPP:"
+msgid "If you opt-in, the following information is sent back to YARPP:"
+msgstr "Si vous choisissez d’activer l’option, voici les données qui seront transmises à YARPP:"
 
 #: class-admin.php:155
 #@ yarpp
-msgid "In addition, NARPP also loads an invisible pixel image with your NARPP results to know how often NARPP is being used."
-msgstr "En outre, NARPP chargera, avec vos résultats d’entrées similaires, une image d’un pixel, indécelable visuellement, afin d’établir la fréquence d’utilisation de l’extension."
+msgid "In addition, YARPP also loads an invisible pixel image with your YARPP results to know how often YARPP is being used."
+msgstr "En outre, YARPP chargera, avec vos résultats d’entrées similaires, une image d’un pixel, indécelable visuellement, afin d’établir la fréquence d’utilisation de l’extension."
 
 #: class-admin.php:159
 #: options-meta-boxes.php:424
 #@ yarpp
-msgid "Send settings and usage data back to NARPP"
-msgstr "Transmettre réglages et données d’utilisation à NARPP"
+msgid "Send settings and usage data back to YARPP"
+msgstr "Transmettre réglages et données d’utilisation à YARPP"
 
 #: class-admin.php:159
 #@ yarpp
@@ -92,8 +92,8 @@ msgstr "Merci!"
 
 #: class-admin.php:188
 #@ yarpp
-msgid "<strong>Help make NARPP better</strong> by sending information about NARPP's settings and usage statistics."
-msgstr "<strong>Aidez NARPP à s’améliorer</strong> en transmettant vos données de réglages et vos statistiques d’utilisation."
+msgid "<strong>Help make YARPP better</strong> by sending information about YARPP's settings and usage statistics."
+msgstr "<strong>Aidez YARPP à s’améliorer</strong> en transmettant vos données de réglages et vos statistiques d’utilisation."
 
 #: class-admin.php:192
 #: options-meta-boxes.php:428
@@ -108,13 +108,13 @@ msgstr "Afficher un exemple du code produit"
 
 #: class-admin.php:264
 #@ yarpp
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
-msgstr "Merci d’avoir installé l’extension <span>NARPP</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "Merci d’avoir installé l’extension <span>YARPP</span>!"
 
 #: class-admin.php:265
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
-msgstr "Pour configurer l’extension, rendez-vous sur <a>la page des réglages NARPP</a>."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+msgstr "Pour configurer l’extension, rendez-vous sur <a>la page des réglages YARPP</a>."
 
 #: class-admin.php:311
 #@ default
@@ -158,8 +158,8 @@ msgstr "Il n’y a pas d’entrée similaire."
 #: options-meta-boxes.php:356
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "La liste des entrées similaires est établie par le module d’extension <a href='%s'>NARPP</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "La liste des entrées similaires est établie par le module d’extension <a href='%s'>YARPP</a>."
 
 #: class-widget.php:92
 #: options-meta-boxes.php:35
@@ -194,8 +194,8 @@ msgstr "Fichier-modèle:"
 #: options-meta-boxes.php:294
 #: options-meta-boxes.php:356
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Aider à la promotion de l’extension NARPP?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Aider à la promotion de l’extension YARPP?"
 
 #: options-meta-boxes.php:7
 #@ yarpp
@@ -209,13 +209,13 @@ msgstr "Cette option est désactivée car votre thème WordPress ne gère pas le
 
 #: options-meta-boxes.php:54
 #@ yarpp
-msgid "This option is disabled because no NARPP templates were found in your theme."
-msgstr "Cette option est désactivée car aucun fichier-modèle NARPP ne se trouve dans votre thème WordPress."
+msgid "This option is disabled because no YARPP templates were found in your theme."
+msgstr "Cette option est désactivée car aucun fichier-modèle YARPP ne se trouve dans votre thème WordPress."
 
 #: options-meta-boxes.php:56
 #@ yarpp
-msgid "Would you like to copy some sample templates bundled with NARPP into your theme?"
-msgstr "Souhaitez-vous importer dans votre thème WordPress des fichiers-modèles fournis avec NARPP?"
+msgid "Would you like to copy some sample templates bundled with YARPP into your theme?"
+msgstr "Souhaitez-vous importer dans votre thème WordPress des fichiers-modèles fournis avec YARPP?"
 
 #: options-meta-boxes.php:56
 #@ yarpp
@@ -295,7 +295,7 @@ msgstr "par titre (en ordre contre-alphabétique)"
 #: options-meta-boxes.php:170
 #@ yarpp
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
-msgstr "Le <em>corpus</em> représente l’ensemble des articles et pages pouvant apparaître dans la liste des entrées similaires établie par l’extension NARPP."
+msgstr "Le <em>corpus</em> représente l’ensemble des articles et pages pouvant apparaître dans la liste des entrées similaires établie par l’extension YARPP."
 
 #: options-meta-boxes.php:173
 #@ yarpp
@@ -340,8 +340,8 @@ msgstr "Le <em>corpus</em>"
 
 #: options-meta-boxes.php:210
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "La liste d’entrées similaires NARPP est déterminée par: 1) un nombre maximum d’entrées; 2) un <em>seuil de similarité</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "La liste d’entrées similaires YARPP est déterminée par: 1) un nombre maximum d’entrées; 2) un <em>seuil de similarité</em>."
 
 #: options-meta-boxes.php:210
 #@ yarpp
@@ -529,38 +529,38 @@ msgstr "Réglages de présentation <small>pour les flux RSS</small>"
 
 #: options-meta-boxes.php:368
 #@ yarpp
-msgid "NARPP Forum"
-msgstr "Forum NARPP"
+msgid "YARPP Forum"
+msgstr "Forum YARPP"
 
 #: options-meta-boxes.php:369
 #@ yarpp
-msgid "NARPP on Twitter"
-msgstr "NARPP sur Twitter"
+msgid "YARPP on Twitter"
+msgstr "YARPP sur Twitter"
 
 #: options-meta-boxes.php:370
 #@ yarpp
-msgid "NARPP on the Web"
-msgstr "NARPP sur le web"
+msgid "YARPP on the Web"
+msgstr "YARPP sur le web"
 
 #: options-meta-boxes.php:371
 #@ yarpp
-msgid "Review NARPP on WordPress.org"
-msgstr "Avis d’utilisateurs NARPP chez WordPress.org"
+msgid "Review YARPP on WordPress.org"
+msgstr "Avis d’utilisateurs YARPP chez WordPress.org"
 
 #: options-meta-boxes.php:405
 #@ yarpp
-msgid "Help Improve NARPP"
-msgstr "Aidez NARPP à s’améliorer"
+msgid "Help Improve YARPP"
+msgstr "Aidez YARPP à s’améliorer"
 
 #: options-meta-boxes.php:427
 #@ yarpp
-msgid "This is entirely optional, but will help improve future versions of NARPP."
-msgstr "Cette option (facultative) contribuera à l’amélioration des versions futures de NARPP."
+msgid "This is entirely optional, but will help improve future versions of YARPP."
+msgstr "Cette option (facultative) contribuera à l’amélioration des versions futures de YARPP."
 
 #: options-meta-boxes.php:432
 #@ yarpp
-msgid "Contact NARPP"
-msgstr "Restez en contact avec NARPP"
+msgid "Contact YARPP"
+msgstr "Restez en contact avec YARPP"
 
 #: narpp_options.php:36
 #, php-format
@@ -571,8 +571,8 @@ msgstr "Une nouvelle version de %1$s est disponible. <a href=\"%2$s\" class=\"th
 #: narpp_options.php:40
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Une nouvelle version beta (%s) du module d’extension NARPP est disponible. Si vous souhaitez l’essayer, vous pouvez <a href=\"%s\">la télécharger ici</a>."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Une nouvelle version beta (%s) du module d’extension YARPP est disponible. Si vous souhaitez l’essayer, vous pouvez <a href=\"%s\">la télécharger ici</a>."
 
 #: narpp_options.php:48
 #@ yarpp
@@ -582,8 +582,8 @@ msgstr "La vérification MyISAM sera ignorée. Vous pouvez maintenant activer le
 #: narpp_options.php:56
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Les options NARPP “Prendre en compte le titre” et “Prendre en compte le contenu” pour le calcul de similarité requièrent que votre table <code>%s</code> utilise le <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>moteur de classement MyISAM</a>, mais votre table utilise apparemment le moteur <code>%s</code>. Ces deux options ont été désactivées."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Les options YARPP “Prendre en compte le titre” et “Prendre en compte le contenu” pour le calcul de similarité requièrent que votre table <code>%s</code> utilise le <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>moteur de classement MyISAM</a>, mais votre table utilise apparemment le moteur <code>%s</code>. Ces deux options ont été désactivées."
 
 #: narpp_options.php:58
 #, php-format
@@ -604,13 +604,13 @@ msgstr "Faites-moi confiance. Laissez-moi utiliser le moteur MyISAM."
 
 #: narpp_options.php:78
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "La base de données NARPP a rencontré une erreur, mais celle-ci a pu être corrigée."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "La base de données YARPP a rencontré une erreur, mais celle-ci a pu être corrigée."
 
 #: narpp_options.php:80
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "La base de données NARPP a rencontré une erreur qui n’a pas pu être corrigée."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "La base de données YARPP a rencontré une erreur qui n’a pas pu être corrigée."
 
 #: narpp_options.php:81
 #, php-format
@@ -625,8 +625,8 @@ msgstr "Réglages enregistrés."
 
 #: narpp_options.php:150
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Réglages NARPP"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Réglages YARPP"
 
 #: narpp_options.php:158
 #, php-format
@@ -642,7 +642,7 @@ msgstr "Enregistrer les réglages"
 #: template-builtin.php:22
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f représente le degré de similarité entre l’entrée considérée et cette entrée similaire. Cette valeur n’est affichée que pour les administrateurs connectés au site; elle n’apparaît pas pour les simples visiteurs."
 
 #: template-metabox.php:12
@@ -652,6 +652,6 @@ msgstr "Voici les entrées similaires à cette entrée. Les modifications ultér
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "La composition finale de la liste des entrées similaires ainsi que sa présentation sur votre site dépendent des options d’affichage NARPP que vous aurez choisies."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "La composition finale de la liste des entrées similaires ainsi que sa présentation sur votre site dépendent des options d’affichage YARPP que vous aurez choisies."
 

@@ -27,7 +27,7 @@ if (have_posts()) {
 		$output .= '</li>';
 	}
 	$output .= '</ol>';
-	$output .= '<p>'.__( 'Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options.' , 'yarpp').'</p>';
+	$output .= '<p>'.__( 'Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options.' , 'yarpp').'</p>';
 } else {
 	$output .= '<p><em>'.__('No related posts.','yarpp').'</em></p>';
 }

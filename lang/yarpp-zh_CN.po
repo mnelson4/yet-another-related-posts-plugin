@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "关联文章 (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "关联文章 (YARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "Related Posts"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "NARPP 中的 %f 是指当前文章和关联文章之间的匹配程度。当您以管理员的身份登录时才能查阅，游客等其他权限是不能查阅的。"
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "YARPP 中的 %f 是指当前文章和关联文章之间的匹配程度。当您以管理员的身份登录时才能查阅，游客等其他权限是不能查阅的。"
 
 #: magic.php:297
 #: options-meta-boxes.php:205
@@ -53,8 +53,8 @@ msgstr "The MyISAM check has been overridden. You may now use the \"consider tit
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,13 +75,13 @@ msgstr "Trust me. Let me use MyISAM features."
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "NARPP 数据库中的错误已被修复。"
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP 数据库中的错误已被修复。"
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "NARPP 数据库中出现一个错误，无法修复。"
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP 数据库中出现一个错误，无法修复。"
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -104,8 +104,8 @@ msgstr "作为主要参考指标"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "关联文章（NARPP）插件设置"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "关联文章（YARPP）插件设置"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -115,7 +115,7 @@ msgstr "全局设置"
 #: options-meta-boxes.php:91
 #@ yarpp
 msgid "\"The Pool\" refers to the pool of posts and pages that are candidates for display as related to the current entry."
-msgstr "您可以在“全局设置”里排除关联某些分类或标签，使其 NARPP 不再关联显示它们。"
+msgstr "您可以在“全局设置”里排除关联某些分类或标签，使其 YARPP 不再关联显示它们。"
 
 #: options-meta-boxes.php:96
 #@ yarpp
@@ -300,8 +300,8 @@ msgstr "无匹配时："
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "帮助推广关联文章（NARPP）插件？"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "帮助推广关联文章（YARPP）插件？"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -465,7 +465,7 @@ msgstr ""
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
 msgstr ""
 
 #: includes.php:28
@@ -499,7 +499,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:161
@@ -525,22 +525,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:42

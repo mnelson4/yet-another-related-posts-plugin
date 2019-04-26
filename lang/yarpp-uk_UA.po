@@ -23,19 +23,19 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Зв'язані пости (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Зв'язані пости (YARPP)"
 
 #: includes.php:376
 #@ yarpp
 msgid "Related Posts"
-msgstr "Зв'язані пости (NARPP)"
+msgstr "Зв'язані пости (YARPP)"
 
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f - это коэффициэнт NARPP текущго поста и связаного с ним. Вы видите это потому, что вы зашли в Wordpress администратором. Это не показывается простым посетителям"
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f - это коэффициэнт YARPP текущго поста и связаного с ним. Вы видите это потому, что вы зашли в Wordpress администратором. Это не показывается простым посетителям"
 
 #: magic.php:297
 #: options-meta-boxes.php:205
@@ -53,8 +53,8 @@ msgstr "Перевірка MyISAM була виконана. Тепер ви м�
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Використання опцій NARPP “Розглядати заголовки” і “Розглядати текст” вимагає, щоб ваша таблиця <code>%s</code> використовувала движок <а href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, але таблиця мабуть використовує движок <code>%s</code>. Ці дві опції відключено."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Використання опцій YARPP “Розглядати заголовки” і “Розглядати текст” вимагає, щоб ваша таблиця <code>%s</code> використовувала движок <а href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, але таблиця мабуть використовує движок <code>%s</code>. Ці дві опції відключено."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,13 +75,13 @@ msgstr "Повірте мені. Дозвольте мені використо�
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "База даних NARPP містила помилки, але вони були виправлені."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "База даних YARPP містила помилки, але вони були виправлені."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "База даних NARPP містить помилку, яка не може бути виправлена."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "База даних YARPP містить помилку, яка не може бути виправлена."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -104,8 +104,8 @@ msgstr "розглядати з додатковою вагою"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Опції NARPP"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Опції YARPP"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -313,8 +313,8 @@ msgstr "За замовчуванням  показувати якщо нема�
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Допомогти просувати плагин NARPP?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Допомогти просувати плагин YARPP?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -436,8 +436,8 @@ msgstr "Показувати тільки пости за останні  NUMBER
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Вийшла нова beta (%s) плагина NARPP. Ви можете <a href=\"%s\">скачать її тут</a> на свій риск."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Вийшла нова beta (%s) плагина YARPP. Ви можете <a href=\"%s\">скачать її тут</a> на свій риск."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -465,8 +465,8 @@ msgstr "Це зв'язані пости для цього поста. Зміна
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Чи відображатимуться всі ці пости і як вони відображатимуться, залежить від ваших настройок відображення NARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Чи відображатимуться всі ці пости і як вони відображатимуться, залежить від ваших настройок відображення YARPP."
 
 #: includes.php:28
 #: includes.php:39
@@ -510,7 +510,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:175
@@ -525,22 +525,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:42

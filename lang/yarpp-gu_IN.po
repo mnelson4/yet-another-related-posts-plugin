@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: NARPP_PT\n"
+"Project-Id-Version: YARPP_PT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
@@ -22,8 +22,8 @@ msgstr ""
 #: includes.php:149
 #: includes.php:194
 #: includes.php:215
-msgid "Related Posts (NARPP)"
-msgstr "સંબંધિત પોસ્ટ્સ (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "સંબંધિત પોસ્ટ્સ (YARPP)"
 
 #@ yarpp
 #: includes.php:376
@@ -33,8 +33,8 @@ msgstr "સંબંધિત પોસ્ટ્સ"
 #@ yarpp
 #: template-builtin.php:35
 #, php-format
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f એફ વર્તમાન પ્રવેશ અને આ સંબંધિત પ્રવેશ વચ્ચે NARPP મેચ સ્કોર છે. તમે આ કિંમત જુએ છે કારણ કે તમે એડમિનિસ્ટ્રેટર તરીકે વર્ડપ્રેસ માટે લોગ થાય છે. તે નિયમિત મુલાકાતીઓ માટે બતાવાઈ નથી."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f એફ વર્તમાન પ્રવેશ અને આ સંબંધિત પ્રવેશ વચ્ચે YARPP મેચ સ્કોર છે. તમે આ કિંમત જુએ છે કારણ કે તમે એડમિનિસ્ટ્રેટર તરીકે વર્ડપ્રેસ માટે લોગ થાય છે. તે નિયમિત મુલાકાતીઓ માટે બતાવાઈ નથી."
 
 #@ yarpp
 #: magic.php:297
@@ -52,8 +52,8 @@ msgstr "આ MyISAM ચેક ફરીથી લખાઈ રહી છે. હ�
 #@ yarpp
 #: narpp_options.php:63
 #, php-format
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPP's \"consider titles\" and \"consider bodies\" relatedness માપદંડ ને તમારા <code>%s</code>માટે ઉપયોગ ટેબલ <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM સંગ્રહ એન્જિન</a> પરંતુ ટેબલ પર <code>% s </ code> એન્જિનનો ઉપયોગ કરીને કરી રહ્યું છે. આ બે વિકલ્પો અક્ષમ કરવામાં આવી છે."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP's \"consider titles\" and \"consider bodies\" relatedness માપદંડ ને તમારા <code>%s</code>માટે ઉપયોગ ટેબલ <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM સંગ્રહ એન્જિન</a> પરંતુ ટેબલ પર <code>% s </ code> એન્જિનનો ઉપયોગ કરીને કરી રહ્યું છે. આ બે વિકલ્પો અક્ષમ કરવામાં આવી છે."
 
 #@ yarpp
 #: narpp_options.php:65
@@ -74,13 +74,13 @@ msgstr "મને વિશ્વાસ કરો. મને MyISAM સુવિ
 
 #@ yarpp
 #: narpp_options.php:83
-msgid "The NARPP database had an error but has been fixed."
-msgstr "આ NARPP ડેટાબેઝ ભૂલ હતી પરંતુ સુધારાઈ ગયેલ છે."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "આ YARPP ડેટાબેઝ ભૂલ હતી પરંતુ સુધારાઈ ગયેલ છે."
 
 #@ yarpp
 #: narpp_options.php:85
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "આ NARPP ડેટાબેઝ ભૂલ કે જે સુધારાઈ કરી શકાઈ નથી ધરાવે છે."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "આ YARPP ડેટાબેઝ ભૂલ કે જે સુધારાઈ કરી શકાઈ નથી ધરાવે છે."
 
 #@ yarpp
 #: options-meta-boxes.php:45
@@ -499,8 +499,8 @@ msgstr "આ આ પ્રવેશ માટે સંબંધિત એન્�
 
 #@ yarpp
 #: template-metabox.php:25
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "શું આ સંબંધિત પ્રવેશો તમામ વાસ્તવમાં દર્શાવવામાં આવે છે અને તેઓ દર્શાવવામાં આવે છે કે કેવી રીતે તમારા NARPP પ્રદર્શન વિકલ્પો પર આધાર રાખે છે."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "શું આ સંબંધિત પ્રવેશો તમામ વાસ્તવમાં દર્શાવવામાં આવે છે અને તેઓ દર્શાવવામાં આવે છે કે કેવી રીતે તમારા YARPP પ્રદર્શન વિકલ્પો પર આધાર રાખે છે."
 
 #@ yarpp
 #: includes.php:169
@@ -519,28 +519,28 @@ msgstr "સંબંધિત પ્રવેશો એકવાર તમે �
 
 #@ yarpp
 #: options-meta-boxes.php:124
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "NARPP (1) મહત્તમ સંખ્યા દ્વારા સંબંધિત પોસ્ટ્સ યાદી મર્યાદિત અને (2) એક <em> મેચ થ્રેશોલ્ડ </ em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP (1) મહત્તમ સંખ્યા દ્વારા સંબંધિત પોસ્ટ્સ યાદી મર્યાદિત અને (2) એક <em> મેચ થ્રેશોલ્ડ </ em>."
 
 #@ yarpp
 #: options-meta-boxes.php:283
-msgid "NARPP Forum"
-msgstr "NARPP ફોરમ"
+msgid "YARPP Forum"
+msgstr "YARPP ફોરમ"
 
 #@ yarpp
 #: options-meta-boxes.php:284
-msgid "NARPP on Twitter"
-msgstr "Twitter પર NARPP"
+msgid "YARPP on Twitter"
+msgstr "Twitter પર YARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:285
-msgid "NARPP on the Web"
-msgstr "વેબ પર NARPP"
+msgid "YARPP on the Web"
+msgstr "વેબ પર YARPP"
 
 #@ yarpp
 #: options-meta-boxes.php:292
-msgid "Contact NARPP"
-msgstr "સંપર્ક NARPP"
+msgid "Contact YARPP"
+msgstr "સંપર્ક YARPP"
 
 #@ default
 #: narpp_options.php:42

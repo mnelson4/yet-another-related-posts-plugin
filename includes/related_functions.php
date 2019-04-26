@@ -11,7 +11,7 @@ function yarpp_related($args = array(), $reference_ID = false, $echo = true) {
 	global $yarpp;
 
 	if (is_array($reference_ID)){
-		_doing_it_wrong( __FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
+		_doing_it_wrong( __FUNCTION__, "This YARPP function now takes \$args first and \$reference_ID second.", '3.5');
 		return;
 	}
 	
@@ -22,7 +22,7 @@ function yarpp_related_exist($args = array(), $reference_ID = false) {
 	global $yarpp;
 
 	if (is_array($reference_ID)) {
-		_doing_it_wrong( __FUNCTION__, "This NARPP function now takes \$args first and \$reference_ID second.", '3.5');
+		_doing_it_wrong( __FUNCTION__, "This YARPP function now takes \$args first and \$reference_ID second.", '3.5');
 		return;
 	}
 	
@@ -48,7 +48,7 @@ if (! function_exists('related_posts')) {
         if (false !== $reference_ID && is_bool($reference_ID)) {
             _doing_it_wrong(
                 __FUNCTION__,
-                "This NARPP function now takes \$args first and \$reference_ID second.",
+                "This YARPP function now takes \$args first and \$reference_ID second.",
                 '3.5'
             );
             return;
@@ -72,7 +72,7 @@ if (! function_exists('related_pages')) {
         if (false !== $reference_ID && is_bool($reference_ID)) {
             _doing_it_wrong(
                 __FUNCTION__,
-                "This NARPP function now takes \$args first and \$reference_ID second.",
+                "This YARPP function now takes \$args first and \$reference_ID second.",
                 '3.5'
             );
             return;
@@ -96,7 +96,7 @@ if (! function_exists('related_entris')) {
         if (false !== $reference_ID && is_bool($reference_ID)) {
             _doing_it_wrong(
                 __FUNCTION__,
-                "This NARPP function now takes \$args first and \$reference_ID second.",
+                "This YARPP function now takes \$args first and \$reference_ID second.",
                 '3.5'
             );
             return;

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: NARPP_DE\n"
+"Project-Id-Version: YARPP_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-17 14:23+0100\n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:182
 #: includes.php:203
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Related Posts (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Related Posts (YARPP)"
 
 #: includes.php:368
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "Ähnliche Beiträge"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f ist die von NARPP ermittelte Übereinstimmung zwischen diesem und dem ähnlichen Artikel (Relevanz-Wert). Sie sehen diesen Wert, weil Sie als WordPress-Administrator eingeloggt sind. Normale Besucher sehen ihn nicht."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f ist die von YARPP ermittelte Übereinstimmung zwischen diesem und dem ähnlichen Artikel (Relevanz-Wert). Sie sehen diesen Wert, weil Sie als WordPress-Administrator eingeloggt sind. Normale Besucher sehen ihn nicht."
 
 #: magic.php:297
 #: narpp_options.php:472
@@ -52,8 +52,8 @@ msgstr "Die MyISAM Überprüfung wurde außer Kraft gesetzt. Sie können nun \"c
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPPs \"Überschriften berücksichtigen\" und \"Textkörper berücksichtigen\" Kriterien zur Relevanz verlangen, dass Ihre <code>%s</code> Tabelle die <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a> verwendet, die Tabelle scheint aber die <code>%s</code>-Engine zu verwenden. Die zwei Einstellungen wurden deaktiviert."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPPs \"Überschriften berücksichtigen\" und \"Textkörper berücksichtigen\" Kriterien zur Relevanz verlangen, dass Ihre <code>%s</code> Tabelle die <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM Storage Engine</a> verwendet, die Tabelle scheint aber die <code>%s</code>-Engine zu verwenden. Die zwei Einstellungen wurden deaktiviert."
 
 #: narpp_options.php:48
 #, php-format
@@ -74,13 +74,13 @@ msgstr "Glauben Sie mir. Lassen Sie mich MyISAM-Features nutzen."
 
 #: narpp_options.php:66
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "Die NARPP-Datenbank hatte einen Fehler, der allerdings behoben werden konnte."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Die YARPP-Datenbank hatte einen Fehler, der allerdings behoben werden konnte."
 
 #: narpp_options.php:68
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "Die NARPP-Datenbank hat einen Fehler, der nicht behoben werden kann."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Die YARPP-Datenbank hat einen Fehler, der nicht behoben werden kann."
 
 #: narpp_options.php:139
 #: narpp_options.php:156
@@ -103,8 +103,8 @@ msgstr "besonders berücksichtigen"
 
 #: narpp_options.php:240
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "NARPP Einstellungen"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "YARPP Einstellungen"
 
 #: narpp_options.php:275
 #@ yarpp
@@ -144,8 +144,8 @@ msgstr "Ähnlichkeitseinstellungen"
 #: narpp_options.php:311
 #, php-format
 #@ yarpp
-msgid "NARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "NARPP funktioniert ein wenig anders als <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">andere Plugins mit ähnlicher Funktionalität</a>: NARPP berücksichtigt nicht nur die von Ihnen angegebene maximale Anzahl von Beiträgen, sondern auch den Wert \"Relevanz\"."
+msgid "YARPP is different than the <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">previous plugins it is based on</a> as it limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP funktioniert ein wenig anders als <a href=\"http://wasabi.pbwiki.com/Related%20Entries\">andere Plugins mit ähnlicher Funktionalität</a>: YARPP berücksichtigt nicht nur die von Ihnen angegebene maximale Anzahl von Beiträgen, sondern auch den Wert \"Relevanz\"."
 
 #: narpp_options.php:311
 #: narpp_options.php:326
@@ -208,7 +208,7 @@ msgstr "Ähnliche Beiträge automatisch anzeigen?"
 #: narpp_options.php:419
 #@ yarpp
 msgid "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files."
-msgstr "Wenn aktiviert, hängt NARPP die Ausgabe ähnlicher Beiträge einfach an den aktuellen Artikel an. Ist sie deaktiviert, müssen Sie sich um die Darstellung im Template mit den Funktionen <code>related_posts()</code> oder Varianten (<code>related_pages()</code> oder <code>related_entries()</code>) selbst kümmern."
+msgstr "Wenn aktiviert, hängt YARPP die Ausgabe ähnlicher Beiträge einfach an den aktuellen Artikel an. Ist sie deaktiviert, müssen Sie sich um die Darstellung im Template mit den Funktionen <code>related_posts()</code> oder Varianten (<code>related_pages()</code> oder <code>related_entries()</code>) selbst kümmern."
 
 #: narpp_options.php:420
 #@ yarpp
@@ -317,8 +317,8 @@ msgstr "Quellcode bei 0 relevanten Artikeln:"
 #: narpp_options.php:470
 #: narpp_options.php:539
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "NARPP dezent bewerben?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "YARPP dezent bewerben?"
 
 #: narpp_options.php:472
 #: narpp_options.php:540
@@ -438,13 +438,13 @@ msgstr "Beispiel Artikel"
 
 #: narpp_options.php:21
 #@ yarpp
-msgid "Please move the NARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
-msgstr "Bitte kopieren Sie die NARPP Template-Dateien in Ihr Design um die Installation zu beenden. Kopieren Sie einfach die Beispieldateien die Sie üblicherweise hier finden: <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) zu Ihrem <code>TEMPLATEPATH</code> Verzeichnis."
+msgid "Please move the YARPP template files into your theme to complete installation. Simply move the sample template files (currently in <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) to the <code>TEMPLATEPATH</code> directory."
+msgstr "Bitte kopieren Sie die YARPP Template-Dateien in Ihr Design um die Installation zu beenden. Kopieren Sie einfach die Beispieldateien die Sie üblicherweise hier finden: <code>wp-content/plugins/yet-another-related-posts-plugin/yarpp-templates/</code>) zu Ihrem <code>TEMPLATEPATH</code> Verzeichnis."
 
 #: narpp_options.php:26
 #@ yarpp
-msgid "No NARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
-msgstr "Es wurden keine NARPP Template-Dateien in Ihrem Design gefunden (<code>TEMPLATEPATH</code>)  aus diesem Grund wurden diese Option deaktiviert."
+msgid "No YARPP template files were found in your theme (<code>TEMPLATEPATH</code>)  so the templating feature has been turned off."
+msgstr "Es wurden keine YARPP Template-Dateien in Ihrem Design gefunden (<code>TEMPLATEPATH</code>)  aus diesem Grund wurden diese Option deaktiviert."
 
 #: narpp_options.php:69
 #@ yarpp
@@ -533,8 +533,8 @@ msgstr "Dies sind ähnliche Beiträge für diesen Artikel. Wenn Sie diesen Artik
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Wie all diese ähnlichen Artikel angezeigt werden hängt von Ihren NARPP Einstellungen ab."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Wie all diese ähnlichen Artikel angezeigt werden hängt von Ihren YARPP Einstellungen ab."
 
 #: includes.php:158
 #@ yarpp

@@ -14,7 +14,7 @@ class NARPP_Meta_Box_Display_Web extends NARPP_Meta_Box {
         echo '><strong>' . __( "Website display code example", 'yarpp' ) . '</strong><br /><small>' . __( "(Update options to reload.)", 'yarpp' ) . "</small><br/><div id='display_demo_web'></div></div>";
 
         echo "<div class='yarpp_form_row yarpp_form_post_types'><div>";
-        echo 'Automatically display related content from NARPP on: ';
+        echo 'Automatically display related content from YARPP on: ';
         echo " <span class='yarpp_help' data-help='" . esc_attr( __( "This option automatically displays related posts right after the content on single entry pages. If this option is off, you will need to manually insert <code>related_posts()</code> or variants (<code>related_pages()</code> and <code>related_entries()</code>) into your theme files.", 'yarpp' ) ) . "'>&nbsp;</span>&nbsp;&nbsp;";
         echo "</div><div>";
         $post_types = yarpp_get_option( 'auto_display_post_types' );
@@ -73,7 +73,7 @@ class NARPP_Meta_Box_Display_Web extends NARPP_Meta_Box {
             'promote_yarpp',
             __( "Help promote Not Another Related Posts Plugin?", 'yarpp' ).
             '<span class="yarpp_help" data-help="'.
-            'This option will add the line &ldquo;powered by NARPP&rdquo; beneath the related posts section. '.
+            'This option will add the line &ldquo;powered by YARPP&rdquo; beneath the related posts section. '.
             'This link is greatly appreciated."></span>'
         );
     }

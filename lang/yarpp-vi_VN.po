@@ -37,8 +37,8 @@ msgstr "Không có bài viết liên quan."
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Bài viết liên quan (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Bài viết liên quan (YARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -67,8 +67,8 @@ msgstr "Chức năng kiểm tra của MyISAM đã được override. Bạn có t
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Chức năng xem xét mức độ liên quan dựa trên \"consider titles\" và \"consider bodies\" của NARPP đòi hỏi bảng <code>%s</code> cần phải dùng <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. Hai chức năng trên tạm thời bị khóa lại."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Chức năng xem xét mức độ liên quan dựa trên \"consider titles\" và \"consider bodies\" của YARPP đòi hỏi bảng <code>%s</code> cần phải dùng <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. Hai chức năng trên tạm thời bị khóa lại."
 
 #: narpp_options.php:65
 #, php-format
@@ -89,13 +89,13 @@ msgstr "Hãy tin tưởng tôi và để tôi sử dụng chức năng của MyI
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "Cơ sở dữ liệu của NARPP có lỗi nhưng đã được sửa."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Cơ sở dữ liệu của YARPP có lỗi nhưng đã được sửa."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "Cơ sở dữ liệu của NARPP gặp lỗi không thể khắc phục."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Cơ sở dữ liệu của YARPP gặp lỗi không thể khắc phục."
 
 #: narpp_options.php:114
 #@ yarpp
@@ -261,8 +261,8 @@ msgstr "Khi bạn chọ tùy chọn \"Thiết lập mối liên quan giữa bài
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Có một version beta mới (%s) của NARPP. Bạn có thể <a href=\"%s\">download ở đây</a> và sử dụng (bạn tự chịu mọi rủi ro phát sinh)"
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Có một version beta mới (%s) của YARPP. Bạn có thể <a href=\"%s\">download ở đây</a> và sử dụng (bạn tự chịu mọi rủi ro phát sinh)"
 
 #: options-meta-boxes.php:212
 #@ yarpp
@@ -485,8 +485,8 @@ msgstr "Reset tùy chọn"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f là điểm đánh dấu mức độ tương đồng(NARPP match score) giữa bài viết hiện tại và bài viết liên quan . Bạn thấy điểm này vì bạn đã login vào WordPress với tư cách là admin. Điểm này sẽ không được hiển thị cho người truy cập bình thường."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f là điểm đánh dấu mức độ tương đồng(YARPP match score) giữa bài viết hiện tại và bài viết liên quan . Bạn thấy điểm này vì bạn đã login vào WordPress với tư cách là admin. Điểm này sẽ không được hiển thị cho người truy cập bình thường."
 
 #: template-metabox.php:12
 #@ yarpp
@@ -495,8 +495,8 @@ msgstr "Bài viết này hiện có bài viết liên quan, cập nhật bài vi
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Việc hiển thị những bài viết có liên quan tùy thuộc vào những tùy chọn hiển thị bạn đã chọn trong NARPP display options."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Việc hiển thị những bài viết có liên quan tùy thuộc vào những tùy chọn hiển thị bạn đã chọn trong YARPP display options."
 
 #: includes.php:169
 #@ yarpp
@@ -515,7 +515,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:140
@@ -525,22 +525,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:42

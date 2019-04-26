@@ -21,8 +21,8 @@ msgstr ""
 
 # @ yarpp
 #: class-admin.php:90 class-widget.php:7 class-widget.php:72
-msgid "Related Posts (NARPP)"
-msgstr "関連記事 (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "関連記事 (YARPP)"
 
 # @ yarpp
 #: class-admin.php:96
@@ -41,8 +41,8 @@ msgstr "よくある質問"
 
 # @ yarpp
 #: class-admin.php:119 class-admin.php:155
-msgid "Developing with NARPP"
-msgstr "NARPP の API"
+msgid "Developing with YARPP"
+msgstr "YARPP の API"
 
 # @ yarpp
 #: class-admin.php:124
@@ -58,44 +58,44 @@ msgstr "よくある質問"
 #: class-admin.php:160
 #, php-format
 msgid ""
-"With your permission, NARPP will send information about NARPP's settings, "
+"With your permission, YARPP will send information about YARPP's settings, "
 "usage, and environment back to a central server at %s."
 msgstr ""
-"NARPP は色々なユーザの設定項目、利用データ、環境設定などを %s サーバで集め始"
+"YARPP は色々なユーザの設定項目、利用データ、環境設定などを %s サーバで集め始"
 "めました。"
 
 # @ yarpp
 #: class-admin.php:161
 msgid ""
-"This information will be used to improve NARPP in the future and help decide "
-"future development decisions for NARPP."
-msgstr "この情報はこれからの NARPP 開発、改善のために使われます。"
+"This information will be used to improve YARPP in the future and help decide "
+"future development decisions for YARPP."
+msgstr "この情報はこれからの YARPP 開発、改善のために使われます。"
 
 # @ yarpp
 #: class-admin.php:162
 msgid ""
-"Contributing this data will help make NARPP better for you and for other "
-"NARPP users."
+"Contributing this data will help make YARPP better for you and for other "
+"YARPP users."
 msgstr " "
 
 # @ yarpp
 #: class-admin.php:170
-msgid "If you opt-in, the following information is sent back to NARPP:"
-msgstr "情報提供に参加すれば、下記のデータが NARPP に送られます。"
+msgid "If you opt-in, the following information is sent back to YARPP:"
+msgstr "情報提供に参加すれば、下記のデータが YARPP に送られます。"
 
 # @ yarpp
 #: class-admin.php:172
 msgid ""
-"In addition, NARPP also loads an invisible pixel image with your NARPP "
-"results to know how often NARPP is being used."
+"In addition, YARPP also loads an invisible pixel image with your YARPP "
+"results to know how often YARPP is being used."
 msgstr ""
-"最後に、情報提供に参加すれば、 NARPP の利用率を知るために関連記事結果とともに"
+"最後に、情報提供に参加すれば、 YARPP の利用率を知るために関連記事結果とともに"
 "見えない画像が読み込まれます。"
 
 # @ yarpp
 #: class-admin.php:176 options-meta-boxes.php:424
-msgid "Send settings and usage data back to NARPP"
-msgstr "設定と利用データを NARPP に提供する"
+msgid "Send settings and usage data back to YARPP"
+msgstr "設定と利用データを YARPP に提供する"
 
 # @ yarpp
 #: class-admin.php:176
@@ -104,10 +104,10 @@ msgstr "ありがとうございます"
 
 #: class-admin.php:205
 msgid ""
-"<strong>Help make NARPP better</strong> by sending information about NARPP's "
+"<strong>Help make YARPP better</strong> by sending information about YARPP's "
 "settings and usage statistics."
 msgstr ""
-"<strong>より良い NARPP の開発のために</strong> NARPP の設定と利用データを提供"
+"<strong>より良い YARPP の開発のために</strong> YARPP の設定と利用データを提供"
 "してください。"
 
 # @ yarpp
@@ -122,13 +122,13 @@ msgstr "コード出力例を表示"
 
 # @ yarpp
 #: class-admin.php:279
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
-msgstr "関連記事プラグイン (NARPP) がインストールされました！"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "関連記事プラグイン (YARPP) がインストールされました！"
 
 # @ yarpp
 #: class-admin.php:280
 msgid ""
-"Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
+"Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
 msgstr "<a>関連記事設定ページ</a>をご覧ください。"
 
 # @ default
@@ -166,7 +166,7 @@ msgid ""
 "Related posts brought to you by <a href='%s'>Yet Another Related Posts "
 "Plugin</a>."
 msgstr ""
-"関連記事は<a href='%s'>NARPP関連記事プラグイン</a>によって表示されています。"
+"関連記事は<a href='%s'>YARPP関連記事プラグイン</a>によって表示されています。"
 
 # @ yarpp
 #: class-widget.php:92 options-meta-boxes.php:35
@@ -195,8 +195,8 @@ msgstr "テンプレートファイル:"
 
 # @ yarpp
 #: class-widget.php:119 options-meta-boxes.php:294 options-meta-boxes.php:356
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "この関連記事プラグイン(NARPP)を宣伝しますか？"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "この関連記事プラグイン(YARPP)を宣伝しますか？"
 
 # @ yarpp
 #: options-meta-boxes.php:7
@@ -217,17 +217,17 @@ msgstr "現在お使いのテーマでは投稿サムネイル機能が無効に
 # @ yarpp
 #: options-meta-boxes.php:54
 msgid ""
-"This option is disabled because no NARPP templates were found in your theme."
+"This option is disabled because no YARPP templates were found in your theme."
 msgstr ""
-"現在お使いのテーマフォルダでは NARPP 用のテンプレートファイルが見つかりません"
+"現在お使いのテーマフォルダでは YARPP 用のテンプレートファイルが見つかりません"
 "でした。"
 
 # @ yarpp
 #: options-meta-boxes.php:56
 msgid ""
-"Would you like to copy some sample templates bundled with NARPP into your "
+"Would you like to copy some sample templates bundled with YARPP into your "
 "theme?"
-msgstr "NARPP テンプレートの使用例をこのテーマのフォルダに移動しますか？"
+msgstr "YARPP テンプレートの使用例をこのテーマのフォルダに移動しますか？"
 
 # @ yarpp
 #: options-meta-boxes.php:56
@@ -352,10 +352,10 @@ msgstr "フィルター設定"
 # @ yarpp
 #: options-meta-boxes.php:210
 msgid ""
-"NARPP limits the related posts list by (1) a maximum number and (2) a "
+"YARPP limits the related posts list by (1) a maximum number and (2) a "
 "<em>match threshold</em>."
 msgstr ""
-"この関連記事プラグイン（NARPP）は各対象記事の関連スコアを計算し、ある関連スコ"
+"この関連記事プラグイン（YARPP）は各対象記事の関連スコアを計算し、ある関連スコ"
 "ア以上の記事だけを表示します。"
 
 # @ yarpp
@@ -557,39 +557,39 @@ msgstr "表示設定 <small>RSS/Atom フィード用</small>"
 
 # @ yarpp
 #: options-meta-boxes.php:368
-msgid "NARPP Forum"
-msgstr "NARPP フォーラム"
+msgid "YARPP Forum"
+msgstr "YARPP フォーラム"
 
 # @ yarpp
 #: options-meta-boxes.php:369
-msgid "NARPP on Twitter"
-msgstr "NARPP Twitter"
+msgid "YARPP on Twitter"
+msgstr "YARPP Twitter"
 
 # @ yarpp
 #: options-meta-boxes.php:370
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr "ウェブサイト"
 
 # @ yarpp
 #: options-meta-boxes.php:371
-msgid "Review NARPP on WordPress.org"
-msgstr "WordPress.org で NARPP の感想を書く"
+msgid "Review YARPP on WordPress.org"
+msgstr "WordPress.org で YARPP の感想を書く"
 
 # @ yarpp
 #: options-meta-boxes.php:405
-msgid "Help Improve NARPP"
-msgstr "より良い NARPP を目指して"
+msgid "Help Improve YARPP"
+msgstr "より良い YARPP を目指して"
 
 # @ yarpp
 #: options-meta-boxes.php:427
 msgid ""
-"This is entirely optional, but will help improve future versions of NARPP."
-msgstr "この情報はこれからの NARPP 開発、改善のために使われます。"
+"This is entirely optional, but will help improve future versions of YARPP."
+msgstr "この情報はこれからの YARPP 開発、改善のために使われます。"
 
 # @ yarpp
 #: options-meta-boxes.php:432
-msgid "Contact NARPP"
-msgstr "NARPP 情報"
+msgid "Contact YARPP"
+msgstr "YARPP 情報"
 
 # @ default
 #: narpp_options.php:31
@@ -609,7 +609,7 @@ msgid ""
 "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
-"関連記事プラグイン（NARPP）の新しいベータ（%s）があります。是非<a href=\"%s"
+"関連記事プラグイン（YARPP）の新しいベータ（%s）があります。是非<a href=\"%s"
 "\">ダウンロード</a>してみてください。"
 
 # @ yarpp
@@ -625,13 +625,13 @@ msgstr ""
 #: narpp_options.php:51
 #, php-format
 msgid ""
-"NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
+"YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria "
 "require your <code>%s</code> table to use the <a href='http://dev.mysql.com/"
 "doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the "
 "table seems to be using the <code>%s</code> engine. These two options have "
 "been disabled."
 msgstr ""
-"NARPPの関連スコア計算の「タイトルを検討する」、「内容を検討する」オプションは"
+"YARPPの関連スコア計算の「タイトルを検討する」、「内容を検討する」オプションは"
 "データベースの <code>%1$s</code> テーブルが <a href='http://dev.mysql.com/"
 "doc/refman/4.1/ja/myisam.html'>MyISAM</a> を使用する必要があります。 <code>"
 "%1$s</code> テーブルは現在 <code>%2$s</code> ストーレージエンジンを使用してい"
@@ -667,13 +667,13 @@ msgstr "MyISAM を使ってます。嘘じゃないから。"
 
 # @ yarpp
 #: narpp_options.php:73
-msgid "The NARPP database had an error but has been fixed."
-msgstr "NARPPのデータベースは修正されました。"
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPPのデータベースは修正されました。"
 
 # @ yarpp
 #: narpp_options.php:75
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "NARPPのデータベースに修正できないエラーが発生しました。"
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPPのデータベースに修正できないエラーが発生しました。"
 
 # @ yarpp
 #: narpp_options.php:76
@@ -688,8 +688,8 @@ msgstr "設定の変更は保存されました。"
 
 # @ yarpp
 #: narpp_options.php:145
-msgid "Not Another Related Posts Plugin Options"
-msgstr "関連記事 (NARPP) 設定"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "関連記事 (YARPP) 設定"
 
 # @ yarpp
 #: narpp_options.php:153
@@ -708,7 +708,7 @@ msgstr ""
 #: template-builtin.php:22
 #, php-format
 msgid ""
-"%f is the NARPP match score between the current entry and this related "
+"%f is the YARPP match score between the current entry and this related "
 "entry. You are seeing this value because you are logged in to WordPress as "
 "an administrator. It is not shown to regular visitors."
 msgstr ""
@@ -726,7 +726,7 @@ msgstr "この投稿の関連記事。投稿を更新すると関連記事も変
 #: template-metabox.php:28
 msgid ""
 "Whether all of these related entries are actually displayed and how they are "
-"displayed depends on your NARPP display options."
+"displayed depends on your YARPP display options."
 msgstr ""
-"関連記事候補が全て表示されるかどうかは NARPP (関連記事) オプションの表示設定"
+"関連記事候補が全て表示されるかどうかは YARPP (関連記事) オプションの表示設定"
 "によって異なります。"

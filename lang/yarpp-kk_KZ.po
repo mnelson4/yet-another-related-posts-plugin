@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Сабақтас оразалар (NARPP)\""
+msgid "Related Posts (YARPP)"
+msgstr "Сабақтас оразалар (YARPP)\""
 
 #: includes.php:376
 #@ yarpp
@@ -34,7 +34,7 @@ msgstr "Сабақтас оразалар"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f - Бұлrоэффициэнт\"Ұқсастық\"Ағымдағыоразаныжәнесабақтасонымен.Сізкөріпжатырсызөйткені, сіз Wordpress әкімгекелдіңіз.\""
 
 #: narpp_options.php:54
@@ -45,8 +45,8 @@ msgstr "Тексеруістелінген MyISAM болды. Ендісізұқ
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPP опциялардың қолдануысы “Бастарды қарау ” и “Мәтінді қарау”Сіздің кестеңіз үшін, талап етеді <code>%s</code> Қозғағышты қолданды <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, Бірақ кесте қозғағыш көрiнедi қолданып жатыр <code>%s</code>. Бұл екі опция айырылған."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP опциялардың қолдануысы “Бастарды қарау ” и “Мәтінді қарау”Сіздің кестеңіз үшін, талап етеді <code>%s</code> Қозғағышты қолданды <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, Бірақ кесте қозғағыш көрiнедi қолданып жатыр <code>%s</code>. Бұл екі опция айырылған."
 
 #: narpp_options.php:65
 #, php-format
@@ -67,13 +67,13 @@ msgstr "Маған сеніңіз. Маған қолдану мүмкіндік 
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "Базасықателердіосы NARPP болды, бірақолардұрысталғанболды."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "Базасықателердіосы YARPP болды, бірақолардұрысталғанболды."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "Базасы дұрысталған мүмкін болу қатені осы NARPP болып жатыр."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "Базасы дұрысталған мүмкін болу қатені осы YARPP болып жатыр."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -96,8 +96,8 @@ msgstr "Қосымша салмақпен қарау керек "
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Опциялар NARPP"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Опциялар YARPP"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -305,8 +305,8 @@ msgstr "Үндемеу бойынша көрсету керек егер бос:
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Көмектесу плагин алға бастыру керек NARPP?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Көмектесу плагин алға бастыру керек YARPP?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -451,8 +451,8 @@ msgstr "Бұл сабақтас посты бұл үшін пост. Өзгер�
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Көрсетіледі барлық бұл посты және олар сияқты көрсетілу болады, бейнеңізден сіздің күйге келтірулеріңізден тәуелді болып жатыр NARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Көрсетіледі барлық бұл посты және олар сияқты көрсетілу болады, бейнеңізден сіздің күйге келтірулеріңізден тәуелді болып жатыр YARPP."
 
 #: includes.php:28
 #: includes.php:39
@@ -504,7 +504,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:175
@@ -519,22 +519,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:86

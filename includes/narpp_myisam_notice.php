@@ -48,7 +48,7 @@ if (!(bool) yarpp_get_option('myisam_override') && (bool) $yarpp->diagnostic_ful
             '<div id="yarpp_fulltext_details" class="hidden">'.
             '<p>'.
             sprintf(
-                'NARPP&#39;s "consider titles" and "consider bodies" relatedness criteria require your <code>%s</code> '.
+                'YARPP&#39;s "consider titles" and "consider bodies" relatedness criteria require your <code>%s</code> '.
                 'table to use the <code>MyISAM</code> engine'.
                 'fulltext indexing feature. Unfortunately your table seems to be using the <code>%s</code> engine. '.
                 'Because fulltext indexing is not supported by your current table engine, these two options have been disabled.',

@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Звязаныя пасты (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Звязаныя пасты (YARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,7 +34,7 @@ msgstr "Звязаныя пасты"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
 msgstr "%f - гэта каэфіцыент \"падобнасці\" паста і звязанага з ім. Вы бачыце гэта таму, што вы зашлі ў Wordpress адміністратарам. Гэта не паказваецца простым наведвальнікам"
 
 #: magic.php:297
@@ -42,8 +42,8 @@ msgstr "%f - гэта каэфіцыент \"падобнасці\" паста �
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Спіс падобных пастоў прадстаўлены вам убудовай <a href='%s'>NARPP</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Спіс падобных пастоў прадстаўлены вам убудовай <a href='%s'>YARPP</a>."
 
 #: narpp_options.php:54
 #@ yarpp
@@ -53,8 +53,8 @@ msgstr "Праверка MyISAM была выкананая. Зараз вы м�
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Выкарыстанне опцый NARPP Разглядаць загалоўкі і Разглядаць тэкст патрабуе, каб ваша табліца <code>%s</code> выкарыстала рухавічок <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, але табліца мабыць выкарыстае рухавічок <code>%s</code>. Гэтыя дзве опцыі адключаныя."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Выкарыстанне опцый YARPP Разглядаць загалоўкі і Разглядаць тэкст патрабуе, каб ваша табліца <code>%s</code> выкарыстала рухавічок <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM</a>, але табліца мабыць выкарыстае рухавічок <code>%s</code>. Гэтыя дзве опцыі адключаныя."
 
 #: narpp_options.php:65
 #, fuzzy, php-format, php-format
@@ -75,13 +75,13 @@ msgstr "Паверце мне. Дазвольце мне выкарыстаць 
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "База дадзеных NARPP утрымоўвала памылкі, але яны былі выпраўленыя."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "База дадзеных YARPP утрымоўвала памылкі, але яны былі выпраўленыя."
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "База дадзеных NARPP утрымоўвае памылку, якая не можа быць выпраўленая."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "База дадзеных YARPP утрымоўвае памылку, якая не можа быць выпраўленая."
 
 #: options-meta-boxes.php:45
 #: options-meta-boxes.php:63
@@ -104,8 +104,8 @@ msgstr "разглядаць з дадатковай вагай"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Опцыі NARPP"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Опцыі YARPP"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -313,8 +313,8 @@ msgstr "Па-змаўчанню паказваць калі пуста:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Дапамагчы прасоўваць убудову NARPP?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Дапамагчы прасоўваць убудову YARPP?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -436,8 +436,8 @@ msgstr "Паказваць толькі пасты за апошнія  NUMBER U
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Выйшла новая beta (%s) убудовы NARPP. Вы можаце <a href=\"%s\">запампаваць яе тут</a> на сваю рызыку."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Выйшла новая beta (%s) убудовы YARPP. Вы можаце <a href=\"%s\">запампаваць яе тут</a> на сваю рызыку."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -465,8 +465,8 @@ msgstr "Гэта звязаныя пасты для гэтага паста. З�
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "Ці будуць адлюстроўвацца ўсе гэтыя пасты і як яны будуць адлюстроўвацца, залежыць ад вашых налад адлюстравання NARPP."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "Ці будуць адлюстроўвацца ўсе гэтыя пасты і як яны будуць адлюстроўвацца, залежыць ад вашых налад адлюстравання YARPP."
 
 #: includes.php:28
 #: includes.php:39
@@ -510,7 +510,7 @@ msgstr ""
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:175
@@ -525,22 +525,22 @@ msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:42

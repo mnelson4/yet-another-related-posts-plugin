@@ -23,8 +23,8 @@ msgstr ""
 #: class-widget.php:7
 #: class-widget.php:56
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "관련 글 (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "관련 글 (YARPP)"
 
 #: class-admin.php:63
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "관련 글"
 #: template-builtin.php:21
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "%f 는 현재 글과 관련 글 사이의 NARPP 매치 점수입니다. 워드프레스의 관리자로 로그인을 하셨기 때문에 이 값을 보시는 것 입니다. 일반 방문자는 볼 수 없습니다."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "%f 는 현재 글과 관련 글 사이의 YARPP 매치 점수입니다. 워드프레스의 관리자로 로그인을 하셨기 때문에 이 값을 보시는 것 입니다. 일반 방문자는 볼 수 없습니다."
 
 #: class-core.php:564
 #: class-core.php:679
@@ -54,8 +54,8 @@ msgstr "MyISAM 전용 기능을 강제로 사용했습니다. \"제목을 검토
 #: narpp_options.php:54
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "NARPP의 \"제목을 검토\", \"내용을 검토\" 옵션은 데이터베이스 <code>%s</code> 테이블이 <a href ='http://dev.mysql.com/doc/refman/4.1/ja/myisam.html'>MyISAM</a>이 아닌 경우에 사용할 수 없습니다. 현재 <code>%s</code> 스토레지엔진를 사용하고 있기 때문에,이 두 옵션은 사용할 수 없습니다."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "YARPP의 \"제목을 검토\", \"내용을 검토\" 옵션은 데이터베이스 <code>%s</code> 테이블이 <a href ='http://dev.mysql.com/doc/refman/4.1/ja/myisam.html'>MyISAM</a>이 아닌 경우에 사용할 수 없습니다. 현재 <code>%s</code> 스토레지엔진를 사용하고 있기 때문에,이 두 옵션은 사용할 수 없습니다."
 
 #: narpp_options.php:56
 #, php-format
@@ -76,13 +76,13 @@ msgstr "믿으세요. 제가 MyISAM 기능을 사용할 수 있게 해주세요.
 
 #: narpp_options.php:76
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "NARPP 데이터베이스에 에러가 있었으나 고쳐졌습니다."
+msgid "The YARPP database had an error but has been fixed."
+msgstr "YARPP 데이터베이스에 에러가 있었으나 고쳐졌습니다."
 
 #: narpp_options.php:78
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
-msgstr "NARPP 데이터베이스에 에러가 있으며 고칠 수가 없습니다."
+msgid "The YARPP database has an error which could not be fixed."
+msgstr "YARPP 데이터베이스에 에러가 있으며 고칠 수가 없습니다."
 
 #: options-meta-boxes.php:47
 #: options-meta-boxes.php:59
@@ -276,8 +276,8 @@ msgstr "만약 결과가 없으면 기본 표시:"
 #: options-meta-boxes.php:226
 #: options-meta-boxes.php:282
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "NARPP 홍보를 도우시겠습니까?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "YARPP 홍보를 도우시겠습니까?"
 
 #: options-meta-boxes.php:228
 #: options-meta-boxes.php:283
@@ -427,8 +427,8 @@ msgstr "이 글에 대한 관련된 글들입니다. 이 글의 업데이트는 
 
 #: template-metabox.php:28
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "NARPP 표시 옵션에 따라서 이 모든 관련된 글들을 표시하는 방법이 다를 수 있습니다."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "YARPP 표시 옵션에 따라서 이 모든 관련된 글들을 표시하는 방법이 다를 수 있습니다."
 
 #: class-admin.php:136
 #@ default
@@ -447,28 +447,28 @@ msgstr "관련이 있는 항목들은 일단 당신의 항목을 저장한 후 �
 
 #: options-meta-boxes.php:153
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
-msgstr "NARPP는 (1) 최대 갯수와 (2) 열 <em> 일치하는 임계값 </ em>으로부터 관련이 있는 글 목록을 제한하고 있습니다."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgstr "YARPP는 (1) 최대 갯수와 (2) 열 <em> 일치하는 임계값 </ em>으로부터 관련이 있는 글 목록을 제한하고 있습니다."
 
 #: options-meta-boxes.php:297
 #@ yarpp
-msgid "NARPP Forum"
-msgstr "NARPP 포럼"
+msgid "YARPP Forum"
+msgstr "YARPP 포럼"
 
 #: options-meta-boxes.php:298
 #@ yarpp
-msgid "NARPP on Twitter"
-msgstr "NARPP 트위터"
+msgid "YARPP on Twitter"
+msgstr "YARPP 트위터"
 
 #: options-meta-boxes.php:299
 #@ yarpp
-msgid "NARPP on the Web"
-msgstr "NARPP 웹"
+msgid "YARPP on the Web"
+msgstr "YARPP 웹"
 
 #: options-meta-boxes.php:336
 #@ yarpp
-msgid "Contact NARPP"
-msgstr "NARPP 연락"
+msgid "Contact YARPP"
+msgstr "YARPP 연락"
 
 #: narpp_options.php:34
 #, php-format
@@ -500,8 +500,8 @@ msgstr "<span>Yet Another Related Posts 플러그인</span>을 설치해주셔�
 
 #: class-admin.php:90
 #@ yarpp
-msgid "Make sure to visit the <a>Related Posts settings page</a> to customize NARPP."
-msgstr "NARPP의 설정을 위해서 <a>관련 글 설정 페이지</a>를 방문하세요."
+msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
+msgstr "YARPP의 설정을 위해서 <a>관련 글 설정 페이지</a>를 방문하세요."
 
 #: options-meta-boxes.php:116
 #, php-format
@@ -511,8 +511,8 @@ msgstr "%s로부터 비허용:"
 
 #: options-meta-boxes.php:300
 #@ yarpp
-msgid "Rate NARPP on WordPress.org"
-msgstr "WordPress.org에서 NARPP 평가"
+msgid "Rate YARPP on WordPress.org"
+msgstr "WordPress.org에서 YARPP 평가"
 
 #: narpp_options.php:176
 #@ default

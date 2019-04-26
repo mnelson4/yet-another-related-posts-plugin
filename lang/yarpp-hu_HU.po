@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: NARPP_DE\n"
+"Project-Id-Version: YARPP_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-17 14:23+0100\n"
 "PO-Revision-Date: \n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes.php:194
 #: includes.php:215
 #@ yarpp
-msgid "Related Posts (NARPP)"
-msgstr "Hasonló bejegyzések (NARPP)"
+msgid "Related Posts (YARPP)"
+msgstr "Hasonló bejegyzések (YARPP)"
 
 #: includes.php:376
 #@ yarpp
@@ -34,8 +34,8 @@ msgstr "Hasonló bejegyzések"
 #: template-builtin.php:35
 #, php-format
 #@ yarpp
-msgid "%f is the NARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
-msgstr "Az %f a NARPP hasonlósági eredményt jelképezi az adott és a hasonló bejegyzés közt- Azért látod ezt mert adminisztrátorként vagy bejelentkezve Wordpress oldaladra. Normál látogatók ezt nem láthatják."
+msgid "%f is the YARPP match score between the current entry and this related entry. You are seeing this value because you are logged in to WordPress as an administrator. It is not shown to regular visitors."
+msgstr "Az %f a YARPP hasonlósági eredményt jelképezi az adott és a hasonló bejegyzés közt- Azért látod ezt mert adminisztrátorként vagy bejelentkezve Wordpress oldaladra. Normál látogatók ezt nem láthatják."
 
 #: magic.php:297
 #: options-meta-boxes.php:205
@@ -53,8 +53,8 @@ msgstr "A MyISAM beállításai felüllíródtak. Most már használhatod a \"c�
 #: narpp_options.php:63
 #, php-format
 #@ yarpp
-msgid "NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
-msgstr "Hibát észleltünk. Több információ: NARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgid "YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
+msgstr "Hibát észleltünk. Több információ: YARPP's \"consider titles\" and \"consider bodies\" relatedness criteria require your <code>%s</code> table to use the <a href='http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html'>MyISAM storage engine</a>, but the table seems to be using the <code>%s</code> engine. These two options have been disabled."
 
 #: narpp_options.php:65
 #, php-format
@@ -75,12 +75,12 @@ msgstr "Bizz meg bennem. Engedd hogy használjam a MyISAM lehetőségét."
 
 #: narpp_options.php:83
 #@ yarpp
-msgid "The NARPP database had an error but has been fixed."
-msgstr "A NARPP adatbázis hibát tartalmazott de ki lett javítva"
+msgid "The YARPP database had an error but has been fixed."
+msgstr "A YARPP adatbázis hibát tartalmazott de ki lett javítva"
 
 #: narpp_options.php:85
 #@ yarpp
-msgid "The NARPP database has an error which could not be fixed."
+msgid "The YARPP database has an error which could not be fixed."
 msgstr "A ZARPP adatbázis hibát tartalmaz melyet nem sikerült kijavítanunk"
 
 #: options-meta-boxes.php:45
@@ -104,8 +104,8 @@ msgstr "különlegesként kezeld"
 
 #: narpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "NARPP beállítások"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "YARPP beállítások"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -313,8 +313,8 @@ msgstr "Alap megjelenítés ha nincs találat:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "A NARPP reklámozása?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "A YARPP reklámozása?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
@@ -450,8 +450,8 @@ msgstr "Csak az előbbi számhalmazokból jelenítsen meg"
 #: narpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Új BETA verzója van a NARPP pluginak. Az új verziót <a href=\"%s\">itt letöltheted</a> saját felelősségedre."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Új BETA verzója van a YARPP pluginak. Az új verziót <a href=\"%s\">itt letöltheted</a> saját felelősségedre."
 
 #: includes.php:248
 #: options-meta-boxes.php:161
@@ -500,8 +500,8 @@ msgstr "Ezek a hasonló bejegyzések ennek a bejegyzésnek. A bejegyzés frissí
 
 #: template-metabox.php:25
 #@ yarpp
-msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your NARPP display options."
-msgstr "A hasonló bejegyzések megjelenítési stílus aés módja a NARPP beállításaitól függ."
+msgid "Whether all of these related entries are actually displayed and how they are displayed depends on your YARPP display options."
+msgstr "A hasonló bejegyzések megjelenítési stílus aés módja a YARPP beállításaitól függ."
 
 #: includes.php:169
 #@ yarpp
@@ -520,27 +520,27 @@ msgstr "Hasonló bejegyzések csak mentés után jelenhetnek meg"
 
 #: options-meta-boxes.php:124
 #@ yarpp
-msgid "NARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
+msgid "YARPP limits the related posts list by (1) a maximum number and (2) a <em>match threshold</em>."
 msgstr ""
 
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "NARPP Forum"
+msgid "YARPP Forum"
 msgstr ""
 
 #: options-meta-boxes.php:284
 #@ yarpp
-msgid "NARPP on Twitter"
+msgid "YARPP on Twitter"
 msgstr ""
 
 #: options-meta-boxes.php:285
 #@ yarpp
-msgid "NARPP on the Web"
+msgid "YARPP on the Web"
 msgstr ""
 
 #: options-meta-boxes.php:292
 #@ yarpp
-msgid "Contact NARPP"
+msgid "Contact YARPP"
 msgstr ""
 
 #: narpp_options.php:42
