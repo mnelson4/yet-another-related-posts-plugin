@@ -69,7 +69,7 @@ class NARPP_Admin {
 		/*
 		 * Setup Admin
 		 */
-        $titleName = 'NARPP';
+        $titleName = 'YARPP';
 		$this->hook = add_options_page($titleName, $titleName, 'manage_options', 'yarpp', array($this, 'options_page'));
 		
 		/**
@@ -122,7 +122,7 @@ class NARPP_Admin {
 
 			$current_screen->add_help_tab(array(
 				'id'        => 'dev',
-				'title'     => __('Developing with NARPP', 'yarpp'),
+				'title'     => __('Developing with YARPP', 'yarpp'),
 				'callback'  => array(&$this, 'help_dev')
 			));
 		}
@@ -149,7 +149,7 @@ class NARPP_Admin {
 	public function help_dev() {
 		if (is_null($this->readme)) $this->readme = file_get_contents(YARPP_DIR.'/readme.txt');
 
-		if (preg_match('!== Developing with NARPP ==(.*?)^==!sm', $this->readme, $matches)) {
+		if (preg_match('!== Developing with YARPP ==(.*?)^==!sm', $this->readme, $matches)) {
 			echo $this->markdown( $matches[1] );
         } else {
 			echo(

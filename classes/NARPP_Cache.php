@@ -435,7 +435,7 @@ abstract class NARPP_Cache {
 			$blackmethods = (array) apply_filters( 'yarpp_blackmethods', $yarpp_blackmethods );
 		}
 		
-		if ( is_array($filter) && is_a( $filter[0], 'NARPP' ) )
+		if ( is_array($filter) && is_a( $filter[0], 'YARPP' ) )
 			return false;
 		if ( is_array($filter) && in_array( $filter[1], $blackmethods ) )
 			return false;

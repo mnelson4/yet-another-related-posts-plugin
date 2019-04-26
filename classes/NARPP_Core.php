@@ -483,7 +483,7 @@ class YARPP {
 	
 	public function get_template_data($file) {
 		$headers = array(
-			'name'          => 'NARPP Template',
+			'name'          => 'YARPP Template',
 			'description'   => 'Description',
 			'author'        => 'Author',
 			'uri'           => 'Author URI',
@@ -979,7 +979,7 @@ class YARPP {
         if ($related_count > 0 && $promote_yarpp && $domain != 'metabox') {
             $output .=
             '<p>'.
-                '<a href="https://github.com/mnelson4/not-another-related-posts-plugin" class="yarpp-promote" target="_blank">Powered by NARPP</a>'.
+                '<a href="https://wordpress.org/plugins/yet-another-related-posts-plugin/" class="yarpp-promote" target="_blank">Powered by YARPP</a>'.
             '</p>';
         }
         $output .= "</div>\n";
