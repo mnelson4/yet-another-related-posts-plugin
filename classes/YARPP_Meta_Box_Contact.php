@@ -1,6 +1,6 @@
 <?php
 
-class JARPP_Meta_Box_Contact extends JARPP_Meta_Box {
+class YARPP_Meta_Box_Contact extends YARPP_Meta_Box {
     public function display() {
 		global $yarpp;
 

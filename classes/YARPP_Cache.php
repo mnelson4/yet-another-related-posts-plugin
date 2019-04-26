@@ -1,6 +1,6 @@
 <?php
 
-abstract class JARPP_Cache {
+abstract class YARPP_Cache {
 
 	protected $core;
     protected $yarpp_time   = false;
@@ -439,7 +439,7 @@ abstract class JARPP_Cache {
 		return !in_array( $filter, $blacklist );
 	}
 	
-	/* FYI, apply_filters_if_white was used here to avoid a loop in apply_filters('the_content') > YARPP::the_content() > YARPP::related() > JARPP_Cache::body_keywords() > apply_filters('the_content').*/
+	/* FYI, apply_filters_if_white was used here to avoid a loop in apply_filters('the_content') > YARPP::the_content() > YARPP::related() > YARPP_Cache::body_keywords() > apply_filters('the_content').*/
 	function apply_filters_if_white($tag, $value) {
 		global $wp_filter, $merged_filters, $wp_current_filter;
 	

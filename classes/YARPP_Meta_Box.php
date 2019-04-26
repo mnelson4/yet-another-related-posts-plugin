@@ -1,6 +1,6 @@
 <?php
 
-class JARPP_Meta_Box {
+class YARPP_Meta_Box {
     protected $template_text = null;
     protected $yarpp         = null;
 

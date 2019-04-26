@@ -1,6 +1,6 @@
 <?php
 
-class JARPP_Meta_Box_Pool extends JARPP_Meta_Box {
+class YARPP_Meta_Box_Pool extends YARPP_Meta_Box {
 	public function exclude($taxonomy, $string) {
 		global $yarpp;
 

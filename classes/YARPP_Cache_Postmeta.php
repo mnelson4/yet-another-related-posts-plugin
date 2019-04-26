@@ -1,6 +1,6 @@
 <?php
 
-class JARPP_Cache_Postmeta extends JARPP_Cache {
+class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 	public $name = "postmeta";
 

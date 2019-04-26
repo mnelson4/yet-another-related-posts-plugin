@@ -2,7 +2,7 @@
 /*----------------------------------------------------------------------------------------------------------------------
 Plugin Name: Yet Another Related Posts Plugin
 Description: Adds related posts to your site and in RSS feeds, based on a powerful, customizable algorithm.
-Version: 5.0.0
+Version: 5.0.1
 Author: Jeff Parker, Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
 Plugin URI: https://github.com/mnelson4/yet-another-related-posts-plugin
@@ -14,7 +14,7 @@ if(!defined('WP_CONTENT_DIR')){
     define('WP_CONTENT_DIR', substr($tr,0,strrpos($tr,'/')));
 }
 
-define('YARPP_VERSION', '5.0.0');
+define('YARPP_VERSION', '5.0.1');
 define('YARPP_DIR', dirname(__FILE__));
 define('YARPP_URL', plugins_url('',__FILE__));
 define('YARPP_NO_RELATED', ':(');
@@ -51,11 +51,11 @@ include_once(YARPP_DIR.'/includes/init_functions.php');
 include_once(YARPP_DIR.'/includes/related_functions.php');
 include_once(YARPP_DIR.'/includes/template_functions.php');
 
-include_once(YARPP_DIR.'/classes/JARPP_Core.php');
-include_once(YARPP_DIR.'/classes/JARPP_Widget.php');
-include_once(YARPP_DIR.'/classes/JARPP_Cache.php');
-include_once(YARPP_DIR.'/classes/JARPP_Cache_Bypass.php');
-include_once(YARPP_DIR.'/classes/JARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE).'.php');
+include_once(YARPP_DIR.'/classes/YARPP_Core.php');
+include_once(YARPP_DIR.'/classes/YARPP_Widget.php');
+include_once(YARPP_DIR.'/classes/YARPP_Cache.php');
+include_once(YARPP_DIR.'/classes/YARPP_Cache_Bypass.php');
+include_once(YARPP_DIR.'/classes/YARPP_Cache_'.ucfirst(YARPP_CACHE_TYPE).'.php');
 
 /* WP hooks ----------------------------------------------------------------------------------------------------------*/
 add_action('init', 'yarpp_init');
