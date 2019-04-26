@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since 3.4 Put everything NARPP into an object, expected to be a singleton global $narpp (and $yarpp for backward-
  * compatibility.)
  */
-class NARPP_Core {
+class YARPP {
 
     /*
      * Here's a list of all the options YARPP uses (except version), as well as their default values,
@@ -693,7 +693,7 @@ class NARPP_Core {
 		}
 		$options['exclude'] = join(',', $exclude_tt_ids);
 
-		update_option('yarpp', $options );
+		update_option( 'yarpp', $options );
 	}
 	
 	public function upgrade_3_4_4b3() {
@@ -1150,7 +1150,7 @@ class NARPP_Core {
                     sprintf(
                         __(
                             "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>.",
-                            'narpp'
+                            'yarpp'
                         ),
                         esc_url('https://github.com/mnelson4/not-another-related-posts-plugin')
                     ).

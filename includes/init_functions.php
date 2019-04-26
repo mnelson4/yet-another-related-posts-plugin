@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function yarpp_init() {
 	global $yarpp, $narpp;
-	$yarpp = new NARPP_Core;
+	$yarpp = new YARPP;
 }
 
 function yarpp_plugin_activate($network_wide) {
