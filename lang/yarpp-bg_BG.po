@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.1.8\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-07-26 10:29+0000\n"
@@ -73,8 +73,8 @@ msgstr "Заглавие:"
 #:  yarpp_options.php:460
 #:  yarpp_options.php:529
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Помогнете в популяризирането на Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Помогнете в популяризирането на Yet Another Related Posts Plugin?"
 
 #: includes.php:489
 #@ yarpp
@@ -90,8 +90,8 @@ msgstr "Примерна публикация"
 #:  yarpp_options.php:462
 #:  yarpp_options.php:530
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Сродни публикации с помоща на <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Сродни публикации с помоща на <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #:  yarpp_options.php:10
 #@ yarpp
@@ -201,18 +201,18 @@ msgstr "вземи в предивид с по-голяма тежест"
 
 #:  yarpp_options.php:188
 #@ yarpp
-msgid "Not Another Related Posts Plugin version history (RSS 2.0)"
-msgstr "Not Another Related Posts Plugin история на версиите (RSS 2.0)"
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
+msgstr "Yet Another Related Posts Plugin история на версиите (RSS 2.0)"
 
 #:  yarpp_options.php:242
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Not Another Related Posts Plugin Настройки"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Plugin Настройки"
 
 #:  yarpp_options.php:255
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
-msgstr "Следвай <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin на Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Следвай <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin на Twitter</a>"
 
 #:  yarpp_options.php:271
 #:  yarpp_options.php:304
@@ -337,13 +337,13 @@ msgstr "Показвай само предишни публикации?"
 
 #:  yarpp_options.php:388
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Има нова бета (%s) на Not Another Related Posts Plugin. Можете да я <a href=\"%s\">свалите тук</a> на ваш собствен риск."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Има нова бета (%s) на Yet Another Related Posts Plugin. Можете да я <a href=\"%s\">свалите тук</a> на ваш собствен риск."
 
 #:  yarpp_options.php:390
 #@ yarpp
-msgid "There is a new version (VERSION) of Not Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "Има нова версия (VERSION) на Not Another Related Posts Plugin! Можете да я <A>свалите тук</a>."
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Има нова версия (VERSION) на Yet Another Related Posts Plugin! Можете да я <A>свалите тук</a>."
 
 #:  yarpp_options.php:404
 #@ yarpp

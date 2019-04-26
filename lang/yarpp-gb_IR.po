@@ -96,7 +96,7 @@ msgstr "a mheas le meáchan breise"
 
 #: yarpp_options.php:150
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
+msgid "Yet Another Related Posts Plugin Options"
 msgstr "Ach eile Related Poist  Roghanna  Bhreiseáin"
 
 #: options-meta-boxes.php:118
@@ -305,7 +305,7 @@ msgstr "Default taispeáint más rud é gan torthaí:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Cabhair cinn Ach eile Related Poist  Plugin?"
 
 #: options-meta-boxes.php:205
@@ -507,7 +507,7 @@ msgstr ""
 #: magic.php:297
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:124
@@ -518,7 +518,7 @@ msgstr ""
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
 #@ yarpp
-msgid "Related posts brought to you by <a href='http://www.yarpp.com'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='http://www.yarpp.com'>Yet Another Related Posts Plugin</a>."
 msgstr ""
 
 #: options-meta-boxes.php:283
@@ -556,12 +556,12 @@ msgstr ""
 #: yarpp_options.php:251
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 
 #: yarpp_options.php:256
 #, php-format
 #@ yarpp
-msgid "There is a new version (%s) of Not Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
+msgid "There is a new version (%s) of Yet Another Related Posts Plugin available! You can <a href=\"%s\">download it here</a>."
 msgstr ""
 

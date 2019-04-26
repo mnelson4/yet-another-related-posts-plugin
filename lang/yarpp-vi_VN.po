@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0.8\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-08-03 09:51+0700\n"
@@ -56,8 +56,8 @@ msgstr "Bài viết mẫu"
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Chức năng \"bài viết có liên quan\" được mang đến cho bạn bởi <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Chức năng \"bài viết có liên quan\" được mang đến cho bạn bởi <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: yarpp_options.php:54
 #@ yarpp
@@ -152,8 +152,8 @@ msgstr "xem xét với mức độ quan trọng đặc biệt"
 
 #: yarpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr " Tùy chọn của Not Another Related Posts Plugin"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr " Tùy chọn của Yet Another Related Posts Plugin"
 
 #: options-meta-boxes.php:118
 #@ yarpp
@@ -422,8 +422,8 @@ msgstr "Hiển thị mặc định nếu không có kết quả:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Giúp giới thiệu về  Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Giúp giới thiệu về  Yet Another Related Posts Plugin?"
 
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269

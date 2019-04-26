@@ -2,7 +2,7 @@
 Contributors: mitcho, jeffparker, mnelson4
 Author: Michael Nelson
 Author URI: https://cmljnelson.wordpress.com
-Tags: feeds, pages, posts, related, rss, narpp, multisite, multilingual, thumbnails, related posts, related content
+Tags: feeds, pages, posts, related, rss, yarpp, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
 Tested up to: 5.1
 Stable tag: 4.4
@@ -30,7 +30,7 @@ This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FA
 
 = Auto display on your website =
 
-1. Copy the folder `narpp` into the directory `wp-content/plugins/` and activate the plugin.
+1. Copy the folder `yarpp` into the directory `wp-content/plugins/` and activate the plugin.
 2. (optionally) copy the sample template files inside the `yarpp-templates` folder into your active theme.
 3. Go to the "Related Posts (NARPP)" settings page to customize NARPP.
 

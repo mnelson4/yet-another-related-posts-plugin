@@ -43,7 +43,7 @@ msgstr "%f 는 현재 글과 관련 글 사이의 YARPP 매치 점수입니다. 
 #: options-meta-boxes.php:283
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr "관련 글은 <a href='%s'>Yet Another Related Posts 플러그인</a>에 의해 제공됩니다."
 
 #: yarpp_options.php:46
@@ -104,7 +104,7 @@ msgstr "신중히 검토함"
 
 #: yarpp_options.php:139
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
+msgid "Yet Another Related Posts Plugin Options"
 msgstr "Yet Another Related Posts 플러그인 옵션"
 
 #: options-meta-boxes.php:147
@@ -384,8 +384,8 @@ msgstr "이전 NUMBER UNITS 에서의 글만 보기"
 #: yarpp_options.php:38
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Not Another Related Posts Plugin의 베타 (%s) 버전이 있습니다! <a href=\"%s\">여기에서 다운로드받으세요</a>."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Yet Another Related Posts Plugin의 베타 (%s) 버전이 있습니다! <a href=\"%s\">여기에서 다운로드받으세요</a>."
 
 #: class-widget.php:72
 #: options-meta-boxes.php:17
@@ -495,7 +495,7 @@ msgstr "구성"
 
 #: class-admin.php:89
 #@ yarpp
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr "<span>Yet Another Related Posts 플러그인</span>을 설치해주셔서 감사합니다!"
 
 #: class-admin.php:90

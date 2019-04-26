@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v2.1.6\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v2.1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2008-12-04 01:32-0200\n"
@@ -42,8 +42,8 @@ msgstr "%f é a pontuação do YARPP entre o artigo atual e este artigo relacion
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Posts relacionados trazidos a você pelo <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Posts relacionados trazidos a você pelo <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: yarpp_options.php:54
 #@ yarpp
@@ -138,7 +138,7 @@ msgstr "considerar com peso extra"
 
 #: yarpp_options.php:178
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
+msgid "Yet Another Related Posts Plugin Options"
 msgstr "Opções do Plugin Yet Another Related Posts"
 
 #: options-meta-boxes.php:118
@@ -352,7 +352,7 @@ msgstr "Mostragem padrão sem resultados:"
 #: options-meta-boxes.php:203
 #: options-meta-boxes.php:268
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "Ajudar a promover o plugin Yet Another Related Posts?"
 
 #: options-meta-boxes.php:205
@@ -436,8 +436,8 @@ msgstr "Mostrar posts apenas dos últimos NUMBER UNITS"
 #: yarpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Há uma nova beta (%s) do Not Another Related Posts Plugin. Você pode <a href=\"%s\">baixá-la</a> sob a sua própria responsabilidade."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Há uma nova beta (%s) do Yet Another Related Posts Plugin. Você pode <a href=\"%s\">baixá-la</a> sob a sua própria responsabilidade."
 
 #: includes.php:248
 #: options-meta-boxes.php:161

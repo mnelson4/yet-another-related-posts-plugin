@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin\n"
+"Project-Id-Version: Yet Another Related Posts Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-02-10 17:27+0100\n"
@@ -41,8 +41,8 @@ msgstr "%f - YARPP este coeficientul similitudinii a postului curent și celui a
 #: options-meta-boxes.php:205
 #: options-meta-boxes.php:269
 #, php-format
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Lista de posturi similare este prezentată de plugin-ul <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Lista de posturi similare este prezentată de plugin-ul <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #@ yarpp
 #: yarpp_options.php:54

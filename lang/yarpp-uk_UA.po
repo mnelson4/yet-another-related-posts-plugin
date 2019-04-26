@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0.9\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-08-18 08:34+0200\n"
@@ -42,8 +42,8 @@ msgstr "%f - это коэффициэнт YARPP текущго поста и с
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Список схожих записів надано вам плагіном <a href='%s'>Not Another Related Posts Plugin</ a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Список схожих записів надано вам плагіном <a href='%s'>Yet Another Related Posts Plugin</ a>."
 
 #: yarpp_options.php:54
 #@ yarpp

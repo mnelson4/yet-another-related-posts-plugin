@@ -42,8 +42,8 @@ msgstr "Az %f a YARPP hasonlósági eredményt jelképezi az adott és a hasonl�
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Hasonló Bejegyzések bitosítva a  <a href='%s'>Not Another Related Posts Plugin</a> segtségével."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Hasonló Bejegyzések bitosítva a  <a href='%s'>Yet Another Related Posts Plugin</a> segtségével."
 
 #: yarpp_options.php:54
 #@ yarpp

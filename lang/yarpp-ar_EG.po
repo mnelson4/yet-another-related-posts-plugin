@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.1.6\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-03-25 01:09+0000\n"
@@ -73,7 +73,7 @@ msgstr ""
 #:  yarpp_options.php:457
 #:  yarpp_options.php:526
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "ساهم في تطوير الإضافة؟"
 
 #: includes.php:440
@@ -90,8 +90,8 @@ msgstr "مثال مشاركة"
 #:  yarpp_options.php:459
 #:  yarpp_options.php:527
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "إضافة المحتويات ذات الصلة مقدم لكم بواسطة <a href='%s'>Not Another Related Posts Plugin</a>. <br /> قام بالترجة للغة العربية <a href='http://www.cdmazika.com'>CDMazika.com</a>"
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "إضافة المحتويات ذات الصلة مقدم لكم بواسطة <a href='%s'>Yet Another Related Posts Plugin</a>. <br /> قام بالترجة للغة العربية <a href='http://www.cdmazika.com'>CDMazika.com</a>"
 
 #:  yarpp_options.php:10
 #@ yarpp
@@ -211,7 +211,7 @@ msgstr "إعدادات إضافة المحتويات ذات الصلة YARPP"
 
 #:  yarpp_options.php:255
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
 msgstr "متابعة <a href=\\\"http://twitter.com/yarpp/\\\">آخر أخبار إضافة المحتويات ذات الصلة على Twitter</a>"
 
 #:  yarpp_options.php:271
@@ -332,7 +332,7 @@ msgstr "عندما  \"توصل بين المشاركات و الصفحات\", س
 
 #:  yarpp_options.php:385
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr "تم إصدار نسخة تجريبية جديدة من إضافة المحتويات المتشابهه (%s). يمكنك <a href=\"%s\">تحميلها من هنا</a> على مسؤوليتك الخاصة."
 
 #:  yarpp_options.php:387

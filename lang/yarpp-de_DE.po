@@ -41,8 +41,8 @@ msgstr "%f ist die von YARPP ermittelte Übereinstimmung zwischen diesem und dem
 #: yarpp_options.php:472
 #: yarpp_options.php:540
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Ähnliche Artikel bereitgestellt von <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Ähnliche Artikel bereitgestellt von <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: yarpp_options.php:37
 #@ yarpp
@@ -453,8 +453,8 @@ msgstr "Bitte aktualisieren Sie die <A>SQL-Datenbank manuell</a>."
 
 #: yarpp_options.php:255
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
-msgstr "Folge <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin auf Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
+msgstr "Folge <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin auf Twitter</a>"
 
 #: yarpp_options.php:291
 #@ yarpp
@@ -478,13 +478,13 @@ msgstr "Zeige nur in der Vergangenheit liegende Artikel"
 
 #: yarpp_options.php:394
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Es steht eine neue Beta (%s) von Not Another Related Posts Plugin zur Verfügung. Sie können sie <a href=\"%s\">hier heruntergeladen</a> Dies geschieht auf eigene Gefahr."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Es steht eine neue Beta (%s) von Yet Another Related Posts Plugin zur Verfügung. Sie können sie <a href=\"%s\">hier heruntergeladen</a> Dies geschieht auf eigene Gefahr."
 
 #: yarpp_options.php:399
 #@ yarpp
-msgid "There is a new version (VERSION) of Not Another Related Posts Plugin available! You can <A>download it here</a>."
-msgstr "Es steht eine neue Version (Version) von Not Another Related Posts Plugin zur Verfügung! Sie können sie <A>hier herunterladen</a> ."
+msgid "There is a new version (VERSION) of Yet Another Related Posts Plugin available! You can <A>download it here</a>."
+msgstr "Es steht eine neue Version (Version) von Yet Another Related Posts Plugin zur Verfügung! Sie können sie <A>hier herunterladen</a> ."
 
 #: includes.php:236
 #: yarpp_options.php:424

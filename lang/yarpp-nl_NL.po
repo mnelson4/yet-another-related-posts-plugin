@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.5.2b3\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.5.2b3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-08-24 10:22:57+0000\n"
@@ -42,8 +42,8 @@ msgstr "Voorbeeld bijdrage"
 #: options-meta-boxes.php:284
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Gerelateerde bijdragen mogelijk gemaakt door <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Gerelateerde bijdragen mogelijk gemaakt door <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: yarpp_options.php:46
 #@ yarpp
@@ -120,8 +120,8 @@ msgstr "overweeg met extra gewicht"
 
 #: yarpp_options.php:141
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Not Another Related Posts Plugin opties"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Yet Another Related Posts Plugin opties"
 
 #: options-meta-boxes.php:147
 #@ yarpp
@@ -204,8 +204,8 @@ msgstr "Bijdragen: "
 #: yarpp_options.php:38
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Er is een nieuwe beta (%s) van Not Another Related Posts Plugin. Je kunt het <a href=\"%s\">Hier downloaden</a> op eigen risico."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Er is een nieuwe beta (%s) van Yet Another Related Posts Plugin. Je kunt het <a href=\"%s\">Hier downloaden</a> op eigen risico."
 
 #: options-meta-boxes.php:236
 #@ yarpp
@@ -341,8 +341,8 @@ msgstr "Standaard tonen indien geen resultaten:"
 #: options-meta-boxes.php:227
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Help Not Another Related Posts Plugin promoten?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Help Yet Another Related Posts Plugin promoten?"
 
 #: options-meta-boxes.php:229
 #: options-meta-boxes.php:284
@@ -495,7 +495,7 @@ msgstr ""
 
 #: class-admin.php:89
 #@ yarpp
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr ""
 
 #: class-admin.php:90

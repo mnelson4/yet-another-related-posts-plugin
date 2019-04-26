@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.5.1\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-03-04 10:58+0000\n"
@@ -38,8 +38,8 @@ msgstr ""
 
 #: class-admin.php:89
 #@ yarpp
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
-msgstr "Děkuji, že jste si nainstalovali <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "Děkuji, že jste si nainstalovali <span>Yet Another Related Posts Plugin</span>!"
 
 #: class-admin.php:90
 #@ yarpp
@@ -85,8 +85,8 @@ msgstr "Žádné podobné články."
 #: options-meta-boxes.php:284
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Podobné články vám přináší <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Podobné články vám přináší <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: class-widget.php:69
 #@ default
@@ -110,8 +110,8 @@ msgstr "Soubor se šablonou:"
 #: options-meta-boxes.php:227
 #: options-meta-boxes.php:283
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
-msgstr "Chcete pomoci propagovat Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
+msgstr "Chcete pomoci propagovat Yet Another Related Posts Plugin?"
 
 #: options-meta-boxes.php:17
 #: options-meta-boxes.php:113
@@ -450,8 +450,8 @@ msgstr ""
 #: yarpp_options.php:38
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "K dispozici je nová beta verze (%s) pluginu Not Another Related Posts Plugin. Můžete si ji <a href=\"%s\">stáhnout zde</a>, na vlastní nebezpečí."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "K dispozici je nová beta verze (%s) pluginu Yet Another Related Posts Plugin. Můžete si ji <a href=\"%s\">stáhnout zde</a>, na vlastní nebezpečí."
 
 #: yarpp_options.php:46
 #@ yarpp
@@ -504,8 +504,8 @@ msgstr "Nastavení uloženo!"
 
 #: yarpp_options.php:141
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
-msgstr "Nastavení Not Another Related Posts Plugin"
+msgid "Yet Another Related Posts Plugin Options"
+msgstr "Nastavení Yet Another Related Posts Plugin"
 
 #: yarpp_options.php:149
 #, php-format

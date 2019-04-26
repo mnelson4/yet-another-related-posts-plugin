@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0.5\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2011-03-17 22:55+0400\n"
@@ -42,7 +42,7 @@ msgstr "%f არის მიმდინარე და მსგავსი
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr "მსგავსი ჩანაწერები შეგიძლიათ ნახოთ <a href='%s'>მსგავსი ჩანაწერებისთვის ჩაშენებული პროგრამით</a>."
 
 #: yarpp_options.php:54

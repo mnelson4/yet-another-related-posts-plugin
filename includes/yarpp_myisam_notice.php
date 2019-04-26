@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if (isset($_POST['myisam_override'])
-    && check_admin_referer( 'narpp_myisam_override')
+    && check_admin_referer( 'yarpp_myisam_override')
     && current_user_can('manage_options')
 ) {
     yarpp_set_option('myisam_override', true);
@@ -75,7 +75,7 @@ if (!(bool) yarpp_get_option('myisam_override') && (bool) $yarpp->diagnostic_ful
                 $wpdb->posts
             ).
                 '<form method="post" style="display:inline-block;margin:1.5em 1em">'.
-                    wp_nonce_field('narpp_myisam_override', '_wpnonce', true, false) .
+                    wp_nonce_field('yarpp_myisam_override', '_wpnonce', true, false) .
                     "<input type='submit' class='button' name='myisam_override' value='Create fulltext indexes'/>".
                 "</form>".
                 '</li>'.

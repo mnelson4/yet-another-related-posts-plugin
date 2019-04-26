@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0.5\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-05-06 10:40+0300\n"
@@ -51,7 +51,7 @@ msgstr "%f - وكانت النتيجة مطابقة YARPP بين دخول الح
 #:  yarpp_options.php:462
 #:  yarpp_options.php:530
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
 msgstr "الوظائف ذات الصلة يقدمها لكم من جانب آخر على href='%s'> <aالمشاركات ذات البرنامج المساعد</a>."
 
 #:  yarpp_options.php:26
@@ -113,12 +113,12 @@ msgstr "النظر مع الوزن الزائد"
 
 #:  yarpp_options.php:188
 #@ yarpp
-msgid "Not Another Related Posts Plugin version history (RSS 2.0)"
+msgid "Yet Another Related Posts Plugin version history (RSS 2.0)"
 msgstr "بعد إصدار آخر ذات الوظائف البرنامج المساعد التاريخ (RSS 2.0)"
 
 #:  yarpp_options.php:242
 #@ yarpp
-msgid "Not Another Related Posts Plugin Options"
+msgid "Yet Another Related Posts Plugin Options"
 msgstr "بعد آخر على الوظائف ذات المساعد الخيارات"
 
 #:  yarpp_options.php:274
@@ -332,7 +332,7 @@ msgstr "إذا لم يكن العرض الافتراضي النتائج :"
 #:  yarpp_options.php:460
 #:  yarpp_options.php:529
 #@ yarpp
-msgid "Help promote Not Another Related Posts Plugin?"
+msgid "Help promote Yet Another Related Posts Plugin?"
 msgstr "تساعد على تعزيز آخر على الوظائف ذات البرنامج المساعد؟"
 
 #:  yarpp_options.php:462
@@ -448,7 +448,7 @@ msgstr "سبيل المثال وظيفة"
 
 #:  yarpp_options.php:255
 #@ yarpp
-msgid "Follow <a href=\"http://twitter.com/yarpp/\">Not Another Related Posts Plugin on Twitter</a>"
+msgid "Follow <a href=\"http://twitter.com/yarpp/\">Yet Another Related Posts Plugin on Twitter</a>"
 msgstr "يتبع<a href=\"http://twitter.com/yarpp/\">بعد آخر على الوظائف ذات المساعد على التغريد</a>"
 
 #:  yarpp_options.php:290

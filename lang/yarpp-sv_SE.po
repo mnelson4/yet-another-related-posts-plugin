@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0b6\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0b6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-24 15:37+0100\n"
 "PO-Revision-Date: 2012-01-24 15:47+0100\n"
@@ -36,8 +36,8 @@ msgstr "Ställ in"
 
 # @ yarpp
 #: class-admin.php:89
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
-msgstr "Tack för att du installerat <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
+msgstr "Tack för att du installerat <span>Yet Another Related Posts Plugin</span>!"
 
 #: class-admin.php:90
 msgid "Make sure to visit the <a>Related Posts settings page</a> to customize YARPP."
@@ -82,8 +82,8 @@ msgstr "Inga relaterade inlägg."
 #: options-meta-boxes.php:228
 #: options-meta-boxes.php:283
 #, php-format
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Relaterade inlägg tack vare <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Relaterade inlägg tack vare <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 # @ default
 #: class-widget.php:66
@@ -445,8 +445,8 @@ msgstr "Det finns en ny version av %1$s. <a href=\"%2$s\" class=\"thickbox\" tit
 # @ yarpp
 #: yarpp_options.php:38
 #, php-format
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "Det finns en ny beta (%s) av Not Another Related Posts Plugin. Du kan <a href=\"%s\">hämta den här</a> på egen risk."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "Det finns en ny beta (%s) av Yet Another Related Posts Plugin. Du kan <a href=\"%s\">hämta den här</a> på egen risk."
 
 # @ yarpp
 #: yarpp_options.php:46

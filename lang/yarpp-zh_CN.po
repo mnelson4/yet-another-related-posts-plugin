@@ -42,8 +42,8 @@ msgstr "YARPP 中的 %f 是指当前文章和关联文章之间的匹配程度�
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "以上关联文章由 <a href='%s'>Not Another Related Posts Plugin</a> 提供支持。"
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "以上关联文章由 <a href='%s'>Yet Another Related Posts Plugin</a> 提供支持。"
 
 #: yarpp_options.php:54
 #@ yarpp
@@ -436,8 +436,8 @@ msgstr "仅关联显示 NUMBER UNITS 内的文章。"
 #: yarpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
-msgstr "新的测试版本发布了！<a href=\"%s\">点击下载</a> Not Another Related Posts Plugin (%s) 。（测试版使用有风险，请注意备份。）"
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgstr "新的测试版本发布了！<a href=\"%s\">点击下载</a> Yet Another Related Posts Plugin (%s) 。（测试版使用有风险，请注意备份。）"
 
 #: includes.php:248
 #: options-meta-boxes.php:161

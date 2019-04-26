@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.0.5\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2013-03-25 13:12+0100\n"
@@ -478,7 +478,7 @@ msgstr "Näita ainult postitusi viimasest  NUMBER UNITS"
 #: yarpp_options.php:46
 #, php-format
 msgid ""
-"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 "Uus beeta (% s) pistik YARPP. Saate <a href=\"%s\"> alla laadida siit </ a> "

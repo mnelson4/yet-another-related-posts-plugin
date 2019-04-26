@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.5.4b4\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.5.4b4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2012-09-30 05:09+0100\n"
@@ -50,9 +50,9 @@ msgstr "FAQ"
 
 # @ yarpp
 #: class-admin.php:167
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr ""
-"Hvala što ste instalirali <span>Not Another Related Posts Plugin</span>!"
+"Hvala što ste instalirali <span>Yet Another Related Posts Plugin</span>!"
 
 # @ yarpp
 #: class-admin.php:168
@@ -96,7 +96,7 @@ msgid ""
 "Related posts brought to you by <a href='%s'>Yet Another Related Posts "
 "Plugin</a>."
 msgstr ""
-"Vezane članke je omogućio <a href='%s'>Not Another Related Posts Plugin</a>."
+"Vezane članke je omogućio <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 # @ default
 #: class-widget.php:69
@@ -497,10 +497,10 @@ msgstr ""
 #: yarpp_options.php:35
 #, php-format
 msgid ""
-"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
-"Postoji nova beta (%s) dodatka Not Another Related Posts Plugin. Možete ju "
+"Postoji nova beta (%s) dodatka Yet Another Related Posts Plugin. Možete ju "
 "<a href=\"%s\">preuzeti ovdje</a> na svoj rizik."
 
 # @ yarpp

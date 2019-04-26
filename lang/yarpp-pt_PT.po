@@ -42,8 +42,8 @@ msgstr "%f é a concordância determinada pelo YARPP entre este artigo e o artig
 #: options-meta-boxes.php:269
 #, php-format
 #@ yarpp
-msgid "Related posts brought to you by <a href='%s'>Not Another Related Posts Plugin</a>."
-msgstr "Artigos parecidos fornecidos por <a href='%s'>Not Another Related Posts Plugin</a>."
+msgid "Related posts brought to you by <a href='%s'>Yet Another Related Posts Plugin</a>."
+msgstr "Artigos parecidos fornecidos por <a href='%s'>Yet Another Related Posts Plugin</a>."
 
 #: yarpp_options.php:54
 #@ yarpp
@@ -450,7 +450,7 @@ msgstr ""
 #: yarpp_options.php:46
 #, php-format
 #@ yarpp
-msgid "There is a new beta (%s) of Not Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
+msgid "There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 
 #: includes.php:248

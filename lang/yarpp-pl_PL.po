@@ -109,7 +109,7 @@ msgstr "Pokaż przykładowy kod"
 
 # @ yarpp
 #: ../class-admin.php:279
-msgid "Thank you for installing <span>Not Another Related Posts Plugin</span>!"
+msgid "Thank you for installing <span>Yet Another Related Posts Plugin</span>!"
 msgstr "Dziękujemy za zainstalowanie wtyczki<span>Powiązane wpisy</span>!"
 
 #: ../class-admin.php:280
@@ -605,7 +605,7 @@ msgstr ""
 #: ../options.php:35
 #, php-format
 msgid ""
-"There is a new beta (%s) of Not Another Related Posts Plugin. You can <a "
+"There is a new beta (%s) of Yet Another Related Posts Plugin. You can <a "
 "href=\"%s\">download it here</a> at your own risk."
 msgstr ""
 "Istnieje nowa wersja beta (%s) wtyczki Yet Another Related Posts. Możesz <a "

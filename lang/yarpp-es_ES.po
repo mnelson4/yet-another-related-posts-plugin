@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Not Another Related Posts Plugin v3.2.1\n"
+"Project-Id-Version: Yet Another Related Posts Plugin v3.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2011-02-25 00:23+0100\n"
