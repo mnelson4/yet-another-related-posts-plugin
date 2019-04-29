@@ -35,7 +35,7 @@
 
 <div class='yarpp_form_row yarpp_form_checkbox'>
     <div>
-        <input type='checkbox' name='recent_only' value='true' <?php checked((bool) $recent_number) ?> />
+        <input type='checkbox' name='recent_only' value='true' <?php checked((bool) $recent) ?> />
         <?php echo str_replace('NUMBER', $recent_number_html, str_replace('UNITS', $recent_units, __("Show only posts from the past NUMBER UNITS", 'yarpp'))); ?>
     </div>
 </div>

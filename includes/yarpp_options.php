@@ -128,7 +128,7 @@ if (isset($_POST['update_yarpp'])
             : 'month';
         $new_options['recent'] =  $recent_number . ' ' .  $recent_units;
     } else {
-        $new_options['recent'] = '0 month';
+        $new_options['recent'] = false;
     }
 
 
