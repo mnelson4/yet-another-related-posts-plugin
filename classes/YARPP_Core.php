@@ -306,17 +306,20 @@ class YARPP {
 
 		/* Temporarily ensure that errors are not displayed: */
 		$previous_value = $wpdb->hide_errors();
-
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` (`post_title`)");
-		if (!empty($wpdb->last_error)){
-            $this->disable_fulltext();
-            return false;
+        if( ! $this->diagnostic_fulltext_title_index()) {
+            $wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_title` (`post_title`)");
+            if (! empty($wpdb->last_error)) {
+                $this->disable_fulltext();
+                return false;
+            }
         }
 
-		$wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` (`post_content`)");
-		if (!empty($wpdb->last_error)){
-            $this->disable_fulltext();
-            return false;
+        if( ! $this->diagnostic_fulltext_content_index()) {
+            $wpdb->query("ALTER TABLE $wpdb->posts ADD FULLTEXT `yarpp_content` (`post_content`)");
+            if (! empty($wpdb->last_error)) {
+                $this->disable_fulltext();
+                return false;
+            }
         }
 		
 		/* Restore previous setting */
@@ -350,6 +353,18 @@ class YARPP {
 		$wpdb->get_results("SHOW INDEX FROM {$wpdb->posts} WHERE Key_name = 'yarpp_title' OR Key_name = 'yarpp_content'");
 		return ($wpdb->num_rows >= 2);
 	}
+
+	protected function diagnostic_fulltext_title_index() {
+        global $wpdb;
+        $wpdb->get_results("SHOW INDEX FROM {$wpdb->posts} WHERE Key_name = 'yarpp_title'");
+        return ($wpdb->num_rows >= 1);
+    }
+
+    protected function diagnostic_fulltext_content_index() {
+        global $wpdb;
+        $wpdb->get_results("SHOW INDEX FROM {$wpdb->posts} WHERE Key_name = 'yarpp_content'");
+        return ($wpdb->num_rows >= 1);
+    }
 
 	public function diagnostic_hidden_metaboxes() {
 		global $wpdb;
