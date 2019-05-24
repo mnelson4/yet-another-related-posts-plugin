@@ -2,8 +2,7 @@ jQuery(function($) {
 	var loaded_metabox = false;
 	var display = $('#yarpp-related-posts');
 	function metabox_display() {
-		if ( !$('#yarpp_relatedposts .inside').is(':visible') ||
-			 !display.length ||
+		if ( !display.length ||
 			 !$('#post_ID').val() )
 			return;
 		if ( !loaded_metabox ) {
