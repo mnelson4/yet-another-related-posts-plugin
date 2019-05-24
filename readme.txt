@@ -284,6 +284,8 @@ YARPP is currently localized in the following languages:
 
 = 5.0.1 =
 * Revert name back to YARPP
+* When attempting to re-add indexes, if they already exist consider it successful
+* Fixed related posts in Gutenberg editor
 
 = 5.0 =
 * NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
