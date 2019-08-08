@@ -926,7 +926,7 @@ class YARPP {
         if ($cache_status !== YARPP_NO_RELATED) {
             $orders = explode(' ', $order);
             $wp_query->query(
-                apply_filters('yarpp_wp_query', array(
+                apply_filters('yarpp_display_related_wp_query', array(
                     'p'         => $reference_ID,
                     'orderby'   => $orders[0],
                     'order'     => $orders[1],
