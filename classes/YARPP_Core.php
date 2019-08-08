@@ -926,13 +926,13 @@ class YARPP {
         if ($cache_status !== YARPP_NO_RELATED) {
             $orders = explode(' ', $order);
             $wp_query->query(
-                array(
+                apply_filters('yarpp_display_related_wp_query', array(
                     'p'         => $reference_ID,
                     'orderby'   => $orders[0],
                     'order'     => $orders[1],
                     'showposts' => $limit,
-                    'post_type' => (isset($args['post_type']) ? $args['post_type'] : $this->get_post_types())
-                )
+                    'post_type' => (isset($args['post_type']) ? $args['post_type'] : $this->get_post_types()),
+                ), $args)
             );
         }
 
