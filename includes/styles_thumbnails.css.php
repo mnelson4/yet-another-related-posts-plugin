@@ -1,6 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+// FYI this page is intended to be accessed directly.
 /**
  * Dynamic styles for YARPP's built-in thumbnails template
  * @since 4.0
