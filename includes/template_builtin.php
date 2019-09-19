@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /*
  * YARPP's built-in "template"
  *
@@ -6,8 +8,8 @@
  * If you want to create a new template, look at yarpp-templates/yarpp-template-example.php as an example.
  * More information on the custom templates is available at http://mitcho.com/blog/projects/yarpp-3-templates/
 */
-
-get_currentuserinfo();
+global $current_user;
+$current_user = wp_get_current_user();
 
 $options = array(
         'before_title',

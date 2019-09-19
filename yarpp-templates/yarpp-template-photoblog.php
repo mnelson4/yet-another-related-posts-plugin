@@ -1,4 +1,8 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
+
 /*
 YARPP Template: Yet Another Photoblog
 Description: Requires the Yet Another Photoblog plugin

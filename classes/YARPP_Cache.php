@@ -170,7 +170,8 @@ abstract class YARPP_Cache {
             'require_tax',
             'exclude',
             'recent',
-            'limit'
+            'limit',
+            'post__not_in',
         );
 
 		extract($this->core->parse_args($args, $options));
@@ -212,8 +213,11 @@ abstract class YARPP_Cache {
 		/*
 		 * Where
 		 */
-	
-		$newsql .= " where post_status in ( 'publish', 'static' ) and ID != '$reference_ID'";
+        $posts_to_exclude = array( $reference_ID );
+        if( $post__not_in ){
+            $posts_to_exclude = array_merge( $posts_to_exclude, $post__not_in );
+        }
+        $newsql .= " where post_status in ( 'publish', 'static' ) and ID NOT IN ('" . implode("','", $posts_to_exclude ) . "')";
 
         /**
          * @since 3.1.8 Revised $past_only option
@@ -456,10 +460,11 @@ abstract class YARPP_Cache {
 	
 		if ( !isset($wp_filter['all']) )
 			$wp_current_filter[] = $tag;
-	
 		// Sort
 		if ( !isset( $merged_filters[ $tag ] ) ) {
-			ksort($wp_filter[$tag]);
+			// Mike edit March 3 2019: remove keysort because `$wp_filter[$tag]` is now an object, not an array.
+			// but it doesn't seem to have broken anything.
+			// ksort($wp_filter[$tag]);
 			$merged_filters[ $tag ] = true;
 		}
 	

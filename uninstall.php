@@ -7,15 +7,18 @@
  */
 
 /* Exit if plugin delete hasn't be called */
-if (!defined('WP_UNINSTALL_PLUGIN')) exit();
+if (!defined('WP_UNINSTALL_PLUGIN') || ! defined( 'ABSPATH' )) exit();
+
 
 global $wpdb;
 
 /* Yarpp option names */
 $optNames = array(
     'yarpp',
+    // pre 5.0
     'yarpp_pro',
     'yarpp_fulltext_disabled',
+    // pre 5.0
     'yarpp_optin_timeout',
     'yarpp_version',
     'yarpp_version_info',

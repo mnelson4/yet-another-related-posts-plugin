@@ -3,7 +3,7 @@
 }
 
 .form-table td {
-  line-height: 11px; /* to match the th's */
+	line-height: 11px; /* to match the th's */
 }
 
 ul.yarpp_contacts li {
@@ -12,7 +12,7 @@ ul.yarpp_contacts li {
 }
 
 body.rtl ul.yarpp_contacts li {
-	padding: 0px 30px 0px 0px;	
+	padding: 0px 30px 0px 0px;
 }
 
 ul.yarpp_contacts li a img {
@@ -65,10 +65,6 @@ body.rtl .icon {
 	background-position: -66px 0;
 }
 
-.icon-pro {
-	background-position: -88px 0;
-}
-
 .icon-facebook {
 	background-position: -110px 0;
 }
@@ -109,11 +105,11 @@ a.info{
 }
 
 .yarpp_help {
-    display: inline-block;
-    background: transparent url('../../../../wp-includes/images/wpicons.png') no-repeat -520px -20px;
-    vertical-align: text-bottom;
-    width: 20px;
-    height: 20px;
+	display: inline-block;
+	background: transparent url('../../../../wp-includes/images/wpicons.png') no-repeat -520px -20px;
+	vertical-align: text-bottom;
+	width: 20px;
+	height: 20px;
 }
 
 a.yarpp_help {
@@ -132,10 +128,6 @@ a.yarpp_help:hover {
 
 .exclude_terms span {
 	display: inline-block;
-}
-
-#yarpp_display_optin.yarpp_attention {
-	border: 2px solid #bbb;
 }
 
 .yarpp_subbox {
@@ -232,7 +224,7 @@ body.rtl .yarpp_code_display {
 	min-height: 25px;
 	max-height: 100px;
 	width: 60%;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 @media all and (max-width:1200px) {
@@ -241,7 +233,7 @@ body.rtl .yarpp_code_display {
 	}
 	.yarpp_code_display {
 		max-width: 60%;
-	}	
+	}
 }
 
 .yarpp_copy_templates_button {
@@ -256,10 +248,6 @@ body.rtl .yarpp_copy_templates_button {
 	float: right;
 }
 
-body.rtl #yarpp-optin-learnmore {
-	float: left;
-}
-
 .template_file_wrap, .template_author_wrap, .template_description_wrap {
 	margin: 3px 0;
 }
@@ -270,11 +258,46 @@ body.rtl #yarpp-optin-learnmore {
 
 .yarpp_subbox input[type=text], .yarpp_subbox input[type=text] {
 	font-family: monospace;
-    width: 35%
+	width: 35%
 }
 
 .yarpp_form_template_buttons {
 	padding: 0px;
+}
+nbr {
+	white-space: nowrap;
+}
+
+a{
+	text-decoration: none;
+	outline: none;
+}
+
+
+.yarpp_warning {
+	 display: none;
+	 color: #F00;
+	 background-color: #ffcfd4;
+	 border: 1px solid #F00;
+	 padding: 2px 6px;
+	 margin-left: 1em;
+	 border-radius: 3px;
+}
+
+#yarpp-display-mode {
+	 margin: 1em 2em;
+}
+
+#yarpp-display-mode label {
+	 margin-right: 1em;
+}
+
+#yarpp-display-mode .spinner{
+	 width: 20px;
+	 height: 20px;
+	 display: inline-block;
+	 float: none;
+	 vertical-align: middle;
 }
 
 .yarpp_template_button {

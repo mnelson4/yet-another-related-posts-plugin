@@ -1,4 +1,8 @@
 <?php
+// @codingStandardsIgnoreStart
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// @codingStandardsIgnoreStart
+
 /*
 YARPP Template: Thumbnails
 Description: Requires a theme which supports post thumbnails

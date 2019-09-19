@@ -1,4 +1,5 @@
 <?php
+// FYI this page is intended to be accessed directly.
 /**
  * Dynamic styles for YARPP's built-in thumbnails template
  * @since 4.0
@@ -19,16 +20,16 @@ header('Content-Type: text/css');
 }
 .yarpp-thumbnails-horizontal .yarpp-thumbnail {
 	border: 1px solid rgba(127,127,127,0.1);
-	width: <?php echo $width_with_margins; ?>px;
-	height: <?php echo $height_with_text; ?>px;
-	margin: <?php echo $margin; ?>px;
+	width: <?php echo (int) $width_with_margins; ?>px;
+	height: <?php echo (int) $height_with_text; ?>px;
+	margin: <?php echo (int) $margin; ?>px;
 	margin-left: 0px;
 	vertical-align: top;
 }
 .yarpp-thumbnail > img, .yarpp-thumbnail-default {
-	width: <?php echo $width; ?>px;
-	height: <?php echo $height; ?>px;
-	margin: <?php echo $margin; ?>px;
+	width: <?php echo (int) $width; ?>px;
+	height: <?php echo (int) $height; ?>px;
+	margin: <?php echo (int) $margin; ?>px;
 }
 .yarpp-thumbnails-horizontal .yarpp-thumbnail > img, .yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
 	display: block;
@@ -37,9 +38,9 @@ header('Content-Type: text/css');
 	font-size: 1em;
 	max-height: 2.8em;
 	line-height: 1.4em;
-	margin: <?php echo $extra_margin; ?>px;
+	margin: <?php echo (int) $extra_margin; ?>px;
 	margin-top: 0px;
-	width: <?php echo $width; ?>px;
+	width: <?php echo (int) $width; ?>px;
 	text-decoration: inherit;
 	overflow: hidden;
 }
@@ -48,6 +49,6 @@ header('Content-Type: text/css');
 	overflow: hidden;
 }
 .yarpp-thumbnail-default > img {
-	min-height: <?php echo $height; ?>px;
-	min-width: <?php echo $width; ?>px;
+	min-height: <?php echo (int) $height; ?>px;
+	min-width: <?php echo (int) $width; ?>px;
 }

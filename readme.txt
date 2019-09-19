@@ -1,39 +1,25 @@
-=== Yet Another Related Posts Plugin (YARPP) ===
-Contributors: jeffparker
-Author: Adknowledge
-Author URI: http://www.yarpp.com/
-Plugin URI: http://www.yarpp.com/
-Tags: feeds, pages, posts, related, rss, yarpp, ads, multisite, multilingual, thumbnails, related posts, related content
+===  (YARPP) ===
+Contributors: mitcho, jeffparker, mnelson4
+Author: Michael Nelson
+Author URI: https://cmljnelson.wordpress.com
+Tags: feeds, pages, posts, related, rss, yarpp, multisite, multilingual, thumbnails, related posts, related content
 Requires at least: 3.3
-Tested up to: 4.2.2
-Stable tag: 4.2.5
+Tested up to: 5.1
+Stable tag: 4.4
 License: GPLv2 or later
 
-Display a list of related posts on your site based on a powerful unique algorithm. Earn money by including sponsored content!
+Display a list of related posts on your site based on a powerful unique algorithm.
 
 == Description ==
 
-Yet Another Related Posts Plugin (YARPP) displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
-[(See current offers and promotions for YARPP Pro users.)](http://www.yarpp.com/offers)
+YARPP displays pages, posts, and custom post types related to the current entry, introducing your readers to other relevant content on your site.
 
-**NEW!** Now you can mix and match **YARPP Basic** and **YARPP Pro** to get the best of both features, beneath articles or in the sidebar! Use the combination that works best for you.
-
-**Enable YARPP Pro for Powerful Enhancements**
------------------------------------------
-* **Customize thumbnail layout** through the user interface.
-* **Pull related content from multiple sites**.
-* **Make money by displaying sponsored content**, at the bottom of your posts, in the sidebar, or both.
-* **Easily promote your product or service** on thousands of blogs and websites.
-* **Get detailed reporting** about your related content list.
-
-[Learn more about the new YARPP Pro enhancements!](http://www.yarpp.com)
-
-**Keep YARPP Basic for Standard Features**
+**Features**
 -------------------------------------------
 * **Thumbnail or list view** of related content.
 * **Related posts, pages, and custom post types.**
 * **Templating**: The YARPP templating system gives you advanced control of how your results are displayed.
-* **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn More.](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)  
+* **An advanced and versatile algorithm**: Using a customizable algorithm considering post titles, content, tags, categories, and custom taxonomies, YARPP finds related content from across your site. [Learn More.](http://wordpress.tv/2011/01/29/michael-%E2%80%9Cmitcho%E2%80%9D-erlewine-the-yet-another-related-posts-plugin-algorithm-explained/)
 * **Related posts in feeds**: Display related posts in RSS feeds with custom display options.
 
 This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FAQ](http://wordpress.org/plugins/yet-another-related-posts-plugin/faq/) for answers to common questions.
@@ -42,7 +28,7 @@ This plugin requires PHP 5, MySQL 4.1, and WordPress 3.3 or greater. See [the FA
 
 = Auto display on your website =
 
-1. Copy the folder `yet-another-related-posts-plugin` into the directory `wp-content/plugins/` and activate the plugin.
+1. Copy the folder `yarpp` into the directory `wp-content/plugins/` and activate the plugin.
 2. (optionally) copy the sample template files inside the `yarpp-templates` folder into your active theme.
 3. Go to the "Related Posts (YARPP)" settings page to customize YARPP.
 
@@ -52,9 +38,9 @@ Make sure the "display related posts in feeds" option is turned on if you would 
 
 = Widget =
 
-Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (YARPP)" widget. Choose to display content from YARPP Basic or YARPP Pro. The widget will only be displayed on single entry (permalink) pages.
+Related posts can also be displayed as a widget. Go to the Appearance > Widgets options page and add the "Related Posts (YARPP)" widget. The widget will only be displayed on single entry (permalink) pages.
 
-The YARPP Basic widget can be used even if the "auto display" option is turned off. The YARPP Pro sidebar widget can be used even if you choose YARPP Basic to display related content at the bottom of your posts.
+The YARPP widget can be used even if the "auto display" option is turned off.
 
 = Custom display through templates =
 
@@ -62,11 +48,11 @@ YARPP allows the advanced user with knowledge of PHP to customize the display of
 
 == Frequently Asked Questions ==
 
-**Common Questions about YARPP Basic**
+**Common Questions about YARPP**
 
-Below are Frequently Asked Questions about YARPP basic. For questions about the new YARPP Pro enhancements, please visit the [YARPP Pro FAQ](http://www.yarpp.com/faq).
+Below are Frequently Asked Questions about YARPP basic.
 
-If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin). We'd also appreciate if you would help us improve YARPP by [answering a few survey questions](http://www.surveymonkey.com/s/Z278L88). Thanks for your feedback!
+If your question isn't here, ask your own question at [the WordPress.org forums](http://wordpress.org/support/plugin/yet-another-related-posts-plugin).
 
 = Many pages list "no related posts." =
 
@@ -74,7 +60,7 @@ Most likely you have "no related posts" right now because the default "match thr
 
 = How can I move the related posts display? =
 
-If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets." (You can choose to display sidebar content from either YARPP Basic or YARPP Pro.)
+If you do not want to show the Related Posts display in its default position (right below the post content), first go to YARPP options and turn off the "automatically display" options in the "website" section. If you would like to instead display it in your sidebar and you have a widget-aware theme, YARPP provides a Related Posts widget which you can add under "Appearance" > "Widgets."
 
 If you would like to add the Related Posts display elsewhere, edit your relevant theme file (most likely something like `single.php`) and add the PHP code `related_posts();` within [The Loop](http://codex.wordpress.org/The_Loop) where you want to display the related posts. (Make sure you don't add `echo related_posts();` or you may end up with duplicates in your related posts section.)
 
@@ -122,8 +108,6 @@ Once you save any CSS changes, empty your browser's cache and reload your page t
 The default YARPP thumbnail size is 120px by 120px. The thumbnail size can be specified programmatically by adding `add_image_size('yarpp-thumbnail', $width, $height, true);` to your theme's `functions.php` file with appropriate width and height variables. In the future I may add some UI to the settings to also set this. Feedback is requested on whether this is a good idea.
 
 Each time you change YARPP's thumbnail dimensions like this, you will probably want to have WordPress regenerate appropriate sized thumbnails for all of your images. I highly recommend the [Regenerate Thumbnails](http://wordpress.org/extend/plugins/regenerate-thumbnails/) plugin for this purpose.
-
-Please note that, by enabling the YARPP Pro enhancements, you can customize the thumbnail display using the admin interface instead of through PHP code.
 
 = I'm using the Thumbnails display. Why aren't the right size thumbnails being served? =
 
@@ -297,6 +281,39 @@ YARPP is currently localized in the following languages:
 * Uzbek (`uz_UZ`) by Ali Safarov of [comfi.com](http://www.comfi.com/)
 
 == Changelog ==
+
+= 5.0.1 =
+* Revert name back to YARPP
+* When attempting to re-add indexes, if they already exist consider it successful
+* Fixed related posts in Gutenberg editor
+
+= 5.0 =
+* NARPP, a fork of YARPP, created. Everything included/enabled (no more Pro-only features), renamed classes (but not database options, constants, hooks, or customizable templates in order to maintain backward compatibility)
+
+= 4.4 =
+* Discontinuing the YARPP Pro service
+
+= 4.3.6 =
+* Removed new file
+
+= 4.3.5 =
+* Fix 'unable to update'
+
+= 4.3.4 =
+* Don't allow new YARPP Pro signups
+* Discontinuing the YARPP Pro service as of 01/31/2017
+
+= 4.3.3 =
+* Fix 'Undefined index' in YARPP_Cache.php (credit to Derrick Hammer/@pcfreak30)
+
+= 4.3.2 =
+* Fix ksort error in YARPP_Cache.php (credit to Derrick Hammer/@pcfreak30)
+* Discontinuing the YARPP Pro service as of 12/31/2016
+
+= 4.3.1 =
+* Tested on WordPress 4.4.
+* Fix $lang missing error in YARPP_Cache.php
+* Fix WP_Widget deprecation PHP error
 
 = 4.2.5 =
 * Tested on WordPress 4.2.2.

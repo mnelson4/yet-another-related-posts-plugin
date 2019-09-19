@@ -141,10 +141,7 @@ jQuery(function($) {
 		$('#tab-link-' + section + ' a').click();
 		$('#contextual-help-link').click();
 	}
-	$('#yarpp-optin-learnmore').click(function() { show_help('optin'); });
 	$('#yarpp-help-cpt').click(function() { show_help('dev'); });
-	if ( location.hash == '#help-optin' )
-		setTimeout( function() { show_help('optin'); } );
 
 	$('.yarpp_help[data-help]').hover(function() {
 		var that = $(this),
@@ -218,28 +215,6 @@ jQuery(function($) {
 	$('#template_file, #rss_template_file')
 		.each(template_info)
 		.change(template_info);
-
-	var loaded_optin_data = false;
-	function _display_optin_data() {
-		if ( !$('#optin_data_frame').is(':visible') || loaded_optin_data )
-			return;
-		loaded_optin_data = true;
-		var frame = $('#optin_data_frame');
-		$.ajax({type:'POST',
-			url: ajaxurl,
-			data: {
-				action: 'yarpp_optin_data',
-				'_ajax_nonce': $('#yarpp_optin_data-nonce').val()
-			},
-			beforeSend:function(){frame.html(loading)},
-			success:function(html){frame.html('<pre>'+html+'</pre>')},
-			dataType:'html'});
-	}
-	function display_optin_data() {
-		setTimeout(_display_optin_data, 0);
-	}
-	$('#yarpp-optin-learnmore, a[aria-controls=tab-panel-optin]').bind('click focus', display_optin_data);
-	display_optin_data();
 	
 	function sync_no_results() {
 		var value = $(this).find('input').attr('value');
